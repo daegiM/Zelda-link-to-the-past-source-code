@@ -169,21 +169,11 @@ As with the file , the file is not yet inserted data file
 
 => Though inserted correctly the data, it is not playable 
 
-1. Open with hex editor both Zelda no Densetsu - Kamigami no Triforce (Japan) (Rev 2).sfc file and 
+=> Below D0000 address some hex values are different between 
 
-   data inserted zel_main.bin file 
-   
-2. compare function each hex value , without header part , you may find around 10 different hex value after 
+Zelda no Densetsu - Kamigami no Triforce (Japan) (Rev 2).sfc and 
 
-   D0000 address  
+data inserted zel_main.bin file 
 
-3. change the different hex value as to Zelda no Densetsu - Kamigami no Triforce (Japan) (Rev 2).sfc from data 
-
-   inserted zel_main.bin file 
-   
-   You now can play rom from snes emulator 
-   
-  Ricoh sf function may be important tool chain for SNES  
-   
-   
+=> You can correct those value and play the rom 
 
