@@ -1,0 +1,3839 @@
+;
+		INCLUDE	zel_label.asm
+;
+;--------------------------------------------------------------------
+;
+;		ZELDA-3		1992.01.22(WED)
+;
+;--------------------------------------------------------------------
+;
+		ORG	04E800H
+;
+;=============================================== (zel_rmdt) =============
+		GLB	DJNBDT,DJNLDT,BASICDT,ITMTBDT,ITMSTP0,ITMSTP1,ITMSTCT
+		GLB	DJNBEN,DJNLEN
+;
+		GLB	REPRDT,HINFDT
+;
+		GLB	WRRSD0
+;=============================================== (zel_bgwt) =============
+		EXT	bmd_not,bmd_b10,bmd_blt,bmd_wr2,bmd_kmb,bmd_ssi
+		EXT	bmd_eyk,bmd_gnn
+;// 03.06.11 //		EXT	bmd_wu0,bmd_wu1,bmd_wu2
+;// 03.06.11 //		EXT	bmd_wl0,bmd_wl1,bmd_wl2
+;// 03.06.11 //		EXT	bmd_wr0,bmd_wr1,bmd_wr2
+;// 03.06.11 //		EXT	bmd_wre,bmd_wle,bmd_wde,bmd_wue
+;// 03.06.11 //		EXT	bmd_wrw,bmd_wlw,bmd_wdw,bmd_wuw
+;// 03.06.11 //		EXT	bmd_mwt,bmd_sdr
+;
+		EXT	inf_not
+		EXT	inf_ee0,inf_ee1,inf_ee2,inf_ee3,inf_ee4
+		EXT	inf_ee5,inf_ee6,inf_ee7,inf_ee8,inf_ee9
+		EXT	inf_bs0,inf_bs1,inf_bs2,inf_bs3,inf_bs4
+		EXT	inf_bs5,inf_bs6,inf_bs7,inf_bs8
+		EXT	inf_ssd,inf_bsd,inf_sd0,inf_sd1,inf_sd3
+		EXT	inf_wdn,inf_wup,inf_wgt,inf_gwr,inf_wre
+		EXT	inf_wle,inf_wde,inf_wue,inf_wrw,inf_cwy
+		EXT	inf_tp0,inf_tp1,inf_tp2,inf_bcw,inf_ebl
+		EXT	inf_stk,inf_cws
+		EXT	inf_et0,inf_et1,inf_et2,inf_et3,inf_et4
+		EXT	inf_et5,inf_et6,inf_et7,inf_et8,inf_et9
+		EXT	inf_tp3,inf_tp4,inf_tp5,inf_tp6,inf_tp7
+		EXT	inf_tp8,inf_tp9,inf_tpA
+		EXT	inf_trt
+		EXT	inf_uss,inf_btk,inf_gnn,inf_bes
+;========================================================================
+;
+		EXTEND
+		MEM8
+;
+;
+;************************************************************************
+;*		Replace  room  data					*
+;************************************************************************
+REPRDT		EQU	$
+		LWORD	bc001		; 0
+		LWORD	bc002,bc003	; 1,2
+		LWORD	bc004,bc005	; 3,4
+		LWORD	bc006		; 5
+		LWORD	bc007,bc008	; 6,7
+		LWORD	bc009,bc00A	; 8,9
+		LWORD	bc00B,bc00C	; A,B
+		LWORD	bc00D,bc00E	; C,D
+		LWORD	bc00F,bc010	; E,F
+		LWORD	bc011,bc012	;10,11
+		LWORD	bc013		;12
+;
+;
+;========================================================================
+;======================  Replace room data  =============================
+bc001         EQU     $        ; MAKE DATE ----  Fri Aug  2 14
+        BYTE     0ACH,038H,HLWK0
+        BYTE     0BCH,050H,HLWK0
+        BYTE     0B0H,070H,HLWK0
+        BYTE     0C8H,070H,HLWK0
+        BYTE     094H,090H,HLWK0
+        BYTE     0B0H,090H,HLWK0
+        BYTE     0C8H,090H,HLWK0
+        BYTE     094H,0A8H,HLWK0
+        BYTE     0DCH,0A8H,HLWK0
+        BYTE     0B8H,0B8H,HLWK0
+        BYTE     0A0H,0D0H,HLWK0
+        BYTE     0D0H,0D0H,HLWK0
+        BYTE     0A4H,0A8H,HLWK0
+        BYTE     0A0H,070H,HLWK0
+        WORD     0FFFFH
+;*end
+bc002         EQU     $        ; MAKE DATE ----  Tue Sep 10 19
+        BYTE     058H,058H,HLWK0
+        BYTE     0A8H,058H,HLWK0
+        BYTE     0C8H,058H,HLWK0
+        BYTE     0C8H,0A0H,HLWK0
+        BYTE     0D8H,0B0H,HLWK0
+        BYTE     0C8H,0C0H,HLWK0
+        BYTE     030H,058H,HLWK0
+        BYTE     048H,058H,HLWK0
+        BYTE     0A0H,0C8H,HLWK0
+        BYTE     0B8H,080H,STPYK
+        BYTE     0C8H,0B0H,STPYK
+        BYTE     018H,048H,STPYK
+        BYTE     0A0H,0D8H,STPYK
+        WORD     0FFFFH
+;*end
+bc003         EQU     $        ; MAKE DATE ----  Tue Sep 10 19
+        BYTE     0B8H,080H,HLWK0
+        BYTE     0C8H,0B0H,HLWK0
+        BYTE     018H,048H,HLWK0
+        BYTE     0A0H,0D8H,HLWK0
+        BYTE     030H,058H,STPYK
+        BYTE     048H,058H,STPYK
+        BYTE     0A0H,0C8H,STPYK
+        BYTE     0C8H,0A0H,STPYK
+        BYTE     0D8H,0B0H,STPYK
+        BYTE     0C8H,0C0H,STPYK
+        BYTE     058H,058H,STPYK
+        BYTE     0A8H,058H,STPYK
+        BYTE     0C8H,058H,STPYK
+        WORD     0FFFFH
+;*end
+bc004         EQU     $        ; MAKE DATE ----  Fri Aug  2 09
+        BYTE     0B8H,038H,HLWK0
+        BYTE     098H,050H,HLWK0
+        BYTE     0D8H,050H,HLWK0
+        BYTE     0B8H,0A0H,HLWK0
+        BYTE     020H,0A0H,HLWK0
+        BYTE     030H,0B0H,HLWK0
+        BYTE     040H,0B0H,HLWK0
+        BYTE     050H,0A0H,HLWK0
+        BYTE     0A0H,070H,STPYK
+        BYTE     0B8H,070H,STPYK
+        BYTE     0D0H,070H,STPYK
+        BYTE     0A0H,0B0H,STPYK
+        BYTE     0D0H,0B0H,STPYK
+        WORD     0FFFFH
+;*end
+bc005         EQU     $        ; MAKE DATE ----  Fri Aug  2 09
+        BYTE     0A0H,070H,HLWK0
+        BYTE     0B8H,070H,HLWK0
+        BYTE     0D0H,070H,HLWK0
+        BYTE     0A0H,0B0H,HLWK0
+        BYTE     0D0H,0B0H,HLWK0
+        BYTE     020H,0A0H,STPYK
+        BYTE     030H,0B0H,STPYK
+        BYTE     040H,0B0H,STPYK
+        BYTE     050H,0A0H,STPYK
+        BYTE     0B8H,038H,STPYK
+        BYTE     098H,050H,STPYK
+        BYTE     0D8H,050H,STPYK
+        BYTE     0B8H,0A0H,STPYK
+        WORD     0FFFFH
+;*end
+bc006         EQU     $        ; MAKE DATE ----  Thu Jun 27 14
+        BYTE     078H,078H,HLWK0
+        WORD     0FFFFH
+;*end
+bc007         EQU     $        ; MAKE DATE ----  Fri Aug  2 11
+        BYTE     028H,09CH,HLWK0
+        BYTE     038H,09CH,HLWK0
+        BYTE     038H,0ACH,HLWK0
+        BYTE     018H,0ACH,HLWK0
+        BYTE     018H,0BCH,HLWK0
+        BYTE     018H,0CCH,HLWK0
+        BYTE     038H,0CCH,HLWK0
+        BYTE     048H,0BCH,HLWK0
+        BYTE     058H,0ACH,HLWK0
+        BYTE     058H,0CCH,HLWK0
+        BYTE     028H,0ACH,STPYK
+        BYTE     028H,0BCH,STPYK
+        BYTE     028H,0CCH,STPYK
+        BYTE     028H,0DCH,STPYK
+        BYTE     048H,0CCH,STPYK
+        BYTE     048H,0DCH,STPYK
+        BYTE     048H,09CH,STPYK
+        WORD     0FFFFH
+;*end
+bc008         EQU     $        ; MAKE DATE ----  Fri Aug  2 11
+        BYTE     028H,0ACH,HLWK0
+        BYTE     028H,0BCH,HLWK0
+        BYTE     028H,0CCH,HLWK0
+        BYTE     028H,0DCH,HLWK0
+        BYTE     048H,0CCH,HLWK0
+        BYTE     048H,0DCH,HLWK0
+        BYTE     048H,09CH,HLWK0
+        BYTE     018H,0ACH,STPYK
+        BYTE     018H,0BCH,STPYK
+        BYTE     018H,0CCH,STPYK
+        BYTE     028H,09CH,STPYK
+        BYTE     038H,09CH,STPYK
+        BYTE     038H,0ACH,STPYK
+        BYTE     038H,0CCH,STPYK
+        BYTE     048H,0BCH,STPYK
+        BYTE     058H,0ACH,STPYK
+        BYTE     058H,0CCH,STPYK
+        WORD     0FFFFH
+;*end
+bc009         EQU     $        ; MAKE DATE ----  Thu Aug  8 22
+        BYTE     030H,068H,HLWK0
+        BYTE     030H,0A0H,HLWK0
+        BYTE     030H,078H,STPYK
+        BYTE     030H,090H,STPYK
+        BYTE     078H,048H,STPYK
+        WORD     0FFFFH
+;*end
+bc00A         EQU     $        ; MAKE DATE ----  Thu Aug  8 22
+        BYTE     030H,078H,HLWK0
+        BYTE     030H,090H,HLWK0
+        BYTE     078H,048H,HLWK0
+        BYTE     030H,068H,STPYK
+        BYTE     030H,0A0H,STPYK
+        WORD     0FFFFH
+;*end
+bc00B         EQU     $        ; MAKE DATE ----  Thu Aug  8 22
+        BYTE     078H,058H,HLWK0
+        BYTE     078H,038H,STPYK
+        WORD     0FFFFH
+;*end
+bc00C         EQU     $        ; MAKE DATE ----  Thu Aug  8 22
+        BYTE     078H,038H,HLWK0
+        BYTE     078H,058H,STPYK
+        WORD     0FFFFH
+;*end
+bc00D         EQU     $        ; MAKE DATE ----  Thu Dec 26 10
+        BYTE     028H,0B0H,HLWK0
+        BYTE     038H,0C8H,HLWK0
+        BYTE     040H,0B0H,STPYK
+        BYTE     050H,0D0H,STPYK
+        BYTE     01CH,058H,HLWK0
+        BYTE     058H,038H,HLWK0
+        BYTE     078H,058H,HLWK0
+        BYTE     0A0H,038H,HLWK0
+        BYTE     038H,038H,STPYK
+        BYTE     058H,048H,STPYK
+        BYTE     0B0H,038H,STPYK
+        BYTE     0D0H,058H,STPYK
+        WORD     0FFFFH
+;*end
+bc00E         EQU     $        ; MAKE DATE ----  Thu Dec 26 10
+        BYTE     040H,0B0H,HLWK0
+        BYTE     050H,0D0H,HLWK0
+        BYTE     028H,0B0H,STPYK
+        BYTE     038H,0C8H,STPYK
+        BYTE     038H,038H,HLWK0
+        BYTE     058H,048H,HLWK0
+        BYTE     0B0H,038H,HLWK0
+        BYTE     0D0H,058H,HLWK0
+        BYTE     01CH,058H,STPYK
+        BYTE     058H,038H,STPYK
+        BYTE     078H,058H,STPYK
+        BYTE     0A0H,038H,STPYK
+        WORD     0FFFFH
+;*end
+bc00F         EQU     $        ; MAKE DATE ----  Thu Aug 29 15
+        BYTE     030H,048H,HLWK0
+        BYTE     040H,048H,HLWK0
+        BYTE     050H,048H,HLWK0
+        BYTE     0A0H,048H,HLWK0
+        BYTE     0B8H,0A8H,HLWK0
+        BYTE     068H,038H,STPYK
+        BYTE     078H,038H,STPYK
+        BYTE     088H,038H,STPYK
+        BYTE     0B8H,038H,STPYK
+        WORD     0FFFFH
+;*end
+bc010         EQU     $        ; MAKE DATE ----  Thu Aug 29 15
+        BYTE     068H,038H,HLWK0
+        BYTE     078H,038H,HLWK0
+        BYTE     088H,038H,HLWK0
+        BYTE     0B8H,038H,HLWK0
+        BYTE     030H,048H,STPYK
+        BYTE     040H,048H,STPYK
+        BYTE     050H,048H,STPYK
+        BYTE     0A0H,048H,STPYK
+        BYTE     0B8H,0A8H,STPYK
+        WORD     0FFFFH
+;*end
+bc011         EQU     $        ; MAKE DATE ----  Sat Aug 31 00
+        BYTE     098H,030H,HLWK0
+        BYTE     098H,048H,HLWK0
+        BYTE     0A0H,0A0H,STPYK
+        BYTE     0B0H,0A0H,STPYK
+        BYTE     0C8H,0D8H,STPYK
+        BYTE     0D8H,0D8H,STPYK
+        WORD     0FFFFH
+;*end
+bc012         EQU     $        ; MAKE DATE ----  Sat Aug 31 00
+        BYTE     098H,030H,STPYK
+        BYTE     098H,048H,STPYK
+        BYTE     0A0H,0A0H,HLWK0
+        BYTE     0B0H,0A0H,HLWK0
+        BYTE     0C8H,0D8H,HLWK0
+        BYTE     0D8H,0D8H,HLWK0
+        WORD     0FFFFH
+;*end
+bc013         EQU     $        ; MAKE DATE ----  Thu Oct  3 20
+        BYTE     020H,020H,HLWK0
+        BYTE     018H,050H,HLWK0
+        BYTE     038H,040H,HLWK0
+        BYTE     038H,058H,HLWK0
+        BYTE     050H,020H,HLWK0
+        BYTE     050H,038H,HLWK0
+        BYTE     058H,050H,HLWK0
+        WORD     0FFFFH
+;*end
+;
+;
+;
+;************************************************************************
+;*		BASIC ROOM  data					*
+;************************************************************************
+BASICDT		EQU	$		; basci unit data
+;			   00    01    02    03    04    05    06    07
+		LWORD	IRM00,IRM01,IRM02,IRM03,IRM04,IRM05,IRM06,IRM07
+;
+;
+;========================================================================
+;======================  Basic Room data  ===============================
+IRM00		EQU	$
+	        BYTE    018H,010H,UPWL0
+	        BYTE    018H,090H,UPWL0
+	        BYTE    018H,068H,DNWL0
+	        BYTE    018H,0E8H,DNWL0
+	        BYTE    008H,018H,LFWL0
+	        BYTE    088H,018H,LFWL0
+	        BYTE    068H,018H,RTWL0
+	        BYTE    0E8H,018H,RTWL0
+;
+	        BYTE    000H,000H,CEILY
+	        BYTE    000H,008H,CEILY
+	        BYTE    000H,078H,CEILY
+	        BYTE    000H,080H,CEILY
+	        BYTE    000H,088H,CEILY
+	        BYTE    000H,0F8H,CEILY
+	        BYTE    000H,000H,CEILT
+	        BYTE    078H,000H,CEILT
+	        BYTE    080H,000H,CEILT
+	        BYTE    0F8H,000H,CEILT
+;
+	        BYTE    0FCH,021H,000H+LUCR0
+	        BYTE    0FEH,021H,000H+LUCR0
+	        BYTE    0FCH,029H,000H+LUCR0
+	        BYTE    0FEH,029H,000H+LUCR0
+	        BYTE    0FCH,026H,080H+LDCR0
+	        BYTE    0FEH,026H,080H+LDCR0
+	        BYTE    0FCH,02EH,080H+LDCR0
+	        BYTE    0FEH,02EH,080H+LDCR0
+	        BYTE    0FDH,0A1H,000H+RUCR0
+	        BYTE    0FFH,0A1H,000H+RUCR0
+	        BYTE    0FDH,0A9H,000H+RUCR0
+	        BYTE    0FFH,0A9H,000H+RUCR0
+	        BYTE    0FDH,0A6H,080H+RDCR0
+	        BYTE    0FFH,0A6H,080H+RDCR0
+	        BYTE    0FDH,0AEH,080H+RDCR0
+	        BYTE    0FFH,0AEH,080H+RDCR0
+;
+		WORD	0FFFFH
+;
+;
+IRM01		EQU	$
+	        BYTE    018H,010H,UPWL0
+	        BYTE    018H,0E8H,DNWL0
+	        BYTE    008H,018H,LFWL0
+	        BYTE    088H,018H,LFWL0
+	        BYTE    068H,018H,RTWL0
+	        BYTE    0E8H,018H,RTWL0
+;
+	        BYTE    000H,000H,CEILY
+	        BYTE    000H,008H,CEILY
+	        BYTE    000H,0F8H,CEILY
+	        BYTE    000H,000H,CEILT
+	        BYTE    078H,000H,CEILT
+	        BYTE    080H,000H,CEILT
+	        BYTE    0F8H,000H,CEILT
+;
+	        BYTE    0FCH,021H,000H+LUCR0
+	        BYTE    0FEH,021H,000H+LUCR0
+	        BYTE    0FCH,02EH,080H+LDCR0
+	        BYTE    0FEH,02EH,080H+LDCR0
+	        BYTE    0FDH,0A1H,000H+RUCR0
+	        BYTE    0FFH,0A1H,000H+RUCR0
+	        BYTE    0FDH,0AEH,080H+RDCR0
+	        BYTE    0FFH,0AEH,080H+RDCR0
+;
+	        WORD    0FFFFH
+;
+;
+IRM02		EQU	$
+	        BYTE    018H,010H,UPWL0
+	        BYTE    01AH,092H,UPWL0
+	        BYTE    01AH,06AH,DNWL0
+	        BYTE    018H,0E8H,DNWL0
+	        BYTE    008H,018H,LFWL0
+	        BYTE    088H,018H,LFWL0
+	        BYTE    068H,018H,RTWL0
+	        BYTE    0E8H,018H,RTWL0
+;
+	        BYTE    000H,000H,CEILY
+	        BYTE    000H,008H,CEILY
+	        BYTE    00BH,07AH,CEILY
+	        BYTE    00BH,082H,CEILY
+	        BYTE    00BH,08AH,CEILY
+	        BYTE    000H,0F8H,CEILY
+	        BYTE    000H,000H,CEILT
+	        BYTE    078H,000H,CEILT
+	        BYTE    080H,000H,CEILT
+	        BYTE    0F8H,000H,CEILT
+;
+	        BYTE    0FCH,021H,000H+LUCR0
+	        BYTE    0FEH,021H,000H+LUCR0
+	        BYTE    0FCH,029H,000H+LUCR0
+	        BYTE    0FCH,026H,080H+LDCR0
+	        BYTE    0FEH,02EH,080H+LDCR0
+	        BYTE    0FCH,02EH,080H+LDCR0
+	        BYTE    0FDH,0A1H,000H+RUCR0
+	        BYTE    0FFH,0A1H,000H+RUCR0
+	        BYTE    0FDH,0A9H,000H+RUCR0
+	        BYTE    0FDH,0A6H,080H+RDCR0
+	        BYTE    0FFH,0AEH,080H+RDCR0
+	        BYTE    0FDH,0AEH,080H+RDCR0
+	        WORD    0FFFFH
+;
+;
+IRM03		EQU	$
+	        BYTE    018H,010H,UPWL0
+	        BYTE    09AH,092H,UPWL0
+	        BYTE    09AH,06AH,DNWL0
+	        BYTE    018H,0E8H,DNWL0
+	        BYTE    008H,018H,LFWL0
+	        BYTE    088H,018H,LFWL0
+	        BYTE    068H,018H,RTWL0
+	        BYTE    0E8H,018H,RTWL0
+;
+	        BYTE    000H,000H,CEILY
+	        BYTE    000H,008H,CEILY
+	        BYTE    08BH,07AH,CEILY
+	        BYTE    08BH,082H,CEILY
+	        BYTE    08BH,08AH,CEILY
+	        BYTE    000H,0F8H,CEILY
+	        BYTE    000H,000H,CEILT
+	        BYTE    078H,000H,CEILT
+	        BYTE    080H,000H,CEILT
+	        BYTE    0F8H,000H,CEILT
+;
+	        BYTE    0FCH,021H,000H+LUCR0
+	        BYTE    0FEH,021H,000H+LUCR0
+	        BYTE    0FEH,029H,000H+LUCR0
+	        BYTE    0FEH,026H,080H+LDCR0
+	        BYTE    0FCH,02EH,080H+LDCR0
+	        BYTE    0FEH,02EH,080H+LDCR0
+	        BYTE    0FDH,0A1H,000H+RUCR0
+	        BYTE    0FFH,0A1H,000H+RUCR0
+	        BYTE    0FFH,0A9H,000H+RUCR0
+	        BYTE    0FFH,0A6H,080H+RDCR0
+	        BYTE    0FDH,0AEH,080H+RDCR0
+	        BYTE    0FFH,0AEH,080H+RDCR0
+;
+	        WORD    0FFFFH
+;
+;
+IRM04		EQU	$
+	        BYTE    018H,010H,UPWL0
+	        BYTE    018H,090H,UPWL0
+	        BYTE    018H,068H,DNWL0
+	        BYTE    018H,0E8H,DNWL0
+	        BYTE    008H,018H,LFWL0
+	        BYTE    0E8H,018H,RTWL0
+;
+	        BYTE    000H,000H,CEILY
+	        BYTE    000H,008H,CEILY
+	        BYTE    000H,078H,CEILY
+	        BYTE    000H,080H,CEILY
+	        BYTE    000H,088H,CEILY
+	        BYTE    000H,0F8H,CEILY
+	        BYTE    000H,000H,CEILT
+	        BYTE    0F8H,000H,CEILT
+;
+	        BYTE    0FCH,021H,000H+LUCR0
+	        BYTE    0FCH,029H,000H+LUCR0
+	        BYTE    0FCH,026H,080H+LDCR0
+	        BYTE    0FCH,02EH,080H+LDCR0
+	        BYTE    0FFH,0A1H,000H+RUCR0
+	        BYTE    0FFH,0A9H,000H+RUCR0
+	        BYTE    0FFH,0A6H,080H+RDCR0
+	        BYTE    0FFH,0AEH,080H+RDCR0
+;
+	        WORD    0FFFFH
+;
+;
+IRM05		EQU	$
+	        BYTE    018H,010H,UPWL0
+	        BYTE    018H,090H,UPWL0
+	        BYTE    018H,068H,DNWL0
+	        BYTE    018H,0E8H,DNWL0
+	        BYTE    008H,018H,LFWL0
+	        BYTE    08AH,01AH,LFWL0
+	        BYTE    06AH,01AH,RTWL0
+	        BYTE    0E8H,018H,RTWL0
+;
+	        BYTE    000H,000H,CEILY
+	        BYTE    000H,008H,CEILY
+	        BYTE    000H,078H,CEILY
+	        BYTE    000H,080H,CEILY
+	        BYTE    000H,088H,CEILY
+	        BYTE    000H,0F8H,CEILY
+	        BYTE    000H,000H,CEILT
+	        BYTE    07BH,011H,CEILT
+	        BYTE    083H,011H,CEILT
+	        BYTE    0F8H,000H,CEILT
+;
+	        BYTE    0FCH,021H,000H+LUCR0
+	        BYTE    0FEH,021H,000H+LUCR0
+	        BYTE    0FCH,029H,000H+LUCR0
+	        BYTE    0FCH,026H,080H+LDCR0
+	        BYTE    0FEH,026H,080H+LDCR0
+	        BYTE    0FCH,02EH,080H+LDCR0
+	        BYTE    0FDH,0A1H,000H+RUCR0
+	        BYTE    0FFH,0A1H,000H+RUCR0
+	        BYTE    0FFH,0A9H,000H+RUCR0
+	        BYTE    0FDH,0A6H,080H+RDCR0
+	        BYTE    0FFH,0A6H,080H+RDCR0
+	        BYTE    0FFH,0AEH,080H+RDCR0
+;
+	        WORD    0FFFFH
+;
+;
+IRM06		EQU	$
+	        BYTE    018H,010H,UPWL0
+	        BYTE    018H,090H,UPWL0
+	        BYTE    018H,068H,DNWL0
+	        BYTE    018H,0E8H,DNWL0
+	        BYTE    008H,018H,LFWL0
+	        BYTE    08AH,09AH,LFWL0
+	        BYTE    06AH,09AH,RTWL0
+	        BYTE    0E8H,018H,RTWL0
+;
+	        BYTE    000H,000H,CEILY
+	        BYTE    000H,008H,CEILY
+	        BYTE    000H,078H,CEILY
+	        BYTE    000H,080H,CEILY
+	        BYTE    000H,088H,CEILY
+	        BYTE    000H,0F8H,CEILY
+	        BYTE    000H,000H,CEILT
+	        BYTE    07BH,091H,CEILT
+	        BYTE    083H,091H,CEILT
+	        BYTE    0F8H,000H,CEILT
+;
+	        BYTE    0FCH,021H,000H+LUCR0
+	        BYTE    0FCH,029H,000H+LUCR0
+	        BYTE    0FEH,029H,000H+LUCR0
+	        BYTE    0FCH,026H,080H+LDCR0
+	        BYTE    0FCH,02EH,080H+LDCR0
+	        BYTE    0FEH,02EH,080H+LDCR0
+	        BYTE    0FFH,0A1H,000H+RUCR0
+	        BYTE    0FDH,0A9H,000H+RUCR0
+	        BYTE    0FFH,0A9H,000H+RUCR0
+	        BYTE    0FFH,0A6H,080H+RDCR0
+	        BYTE    0FDH,0AEH,080H+RDCR0
+	        BYTE    0FFH,0AEH,080H+RDCR0
+;
+	        WORD    0FFFFH
+;
+;
+IRM07		EQU	$
+	        BYTE    018H,010H,UPWL0
+	        BYTE    018H,0E8H,DNWL0
+	        BYTE    008H,018H,LFWL0
+	        BYTE    0E8H,018H,RTWL0
+;
+	        BYTE    000H,000H,CEILY
+	        BYTE    000H,008H,CEILY
+	        BYTE    000H,0F8H,CEILY
+	        BYTE    000H,000H,CEILT
+	        BYTE    0F8H,000H,CEILT
+;
+	        BYTE    0FCH,021H,000H+LUCR0
+	        BYTE    0FCH,02EH,080H+LDCR0
+	        BYTE    0FFH,0A1H,000H+RUCR0
+	        BYTE    0FFH,0AEH,080H+RDCR0
+;
+	        WORD    0FFFFH
+;
+;
+;
+;
+;
+;************************************************************************
+;*		Water rewrite data					*
+;************************************************************************
+WRRSD0		EQU	$
+        BYTE     01BH,0A1H,WATR1
+        BYTE     051H,0A1H,WATR1
+        BYTE     092H,0A1H,WATR1
+        BYTE     0A1H,033H,WATR1
+        BYTE     0A1H,072H,WATR1
+        WORD     0FFFFH
+;
+;
+;
+;
+;
+;************************************************************************
+;*		Block  data						*
+;************************************************************************
+DJNBDT		EQU	$
+BLK001		EQU	$
+		WORD	0010BH
+		WORD	0193AH
+;
+BLK002		EQU	$
+		WORD	0010BH
+		WORD	0193EH
+;
+BLK003		EQU	$
+		WORD	000A8H
+		WORD	016E0H+02000H
+;
+BLK004		EQU	$
+		WORD	00063H
+		WORD	0162AH
+;
+BLK005		EQU	$
+		WORD	00083H
+		WORD	01514H
+;
+BLK006		EQU	$
+		WORD	000CAH
+		WORD	016B2H+04000H
+;
+BLK007		EQU	$
+		WORD	000CAH
+		WORD	016BAH+04000H
+;
+BLK008		EQU	$
+		WORD	00034H
+		WORD	01722H+04000H
+;
+BLK009		EQU	$
+		WORD	00034H
+		WORD	0172AH+04000H
+;
+BLK010		EQU	$
+		WORD	00034H
+		WORD	01826H+04000H
+;
+BLK011		EQU	$
+		WORD	00034H
+		WORD	01926H+04000H
+;
+BLK012		EQU	$
+		WORD	00054H
+		WORD	0082AH+04000H
+;
+BLK013		EQU	$
+		WORD	00054H
+		WORD	0084AH+04000H
+;
+BLK014		EQU	$
+		WORD	00054H
+		WORD	0142AH+04000H
+;
+BLK015		EQU	$
+		WORD	00066H
+		WORD	0183CH+02000H
+;
+BLK016		EQU	$
+		WORD	00011H
+		WORD	0065EH+04000H
+;
+BLK017		EQU	$
+		WORD	0002CH
+		WORD	00814H+02000H
+;
+BLK018		EQU	$
+		WORD	0002AH
+		WORD	01328H
+;
+BLK019		EQU	$
+		WORD	0010BH
+		WORD	01942H
+;
+BLK020		EQU	$
+		WORD	0001FH
+		WORD	01B52H+04000H
+;
+BLK021		EQU	$
+		WORD	00019H
+		WORD	0100CH
+;
+BLK022		EQU	$
+		WORD	0010DH
+		WORD	00718H+04000H
+;
+BLK023		EQU	$
+		WORD	0010DH
+		WORD	00724H+04000H
+;
+BLK024		EQU	$
+		WORD	0010DH
+		WORD	00918H+04000H
+;
+BLK025		EQU	$
+		WORD	0010DH
+		WORD	0091CH+04000H
+;
+BLK026		EQU	$
+		WORD	0010DH
+		WORD	00924H+04000H
+;
+BLK027		EQU	$
+		WORD	0010DH
+		WORD	00A18H+04000H
+;
+BLK028		EQU	$
+		WORD	0010DH
+		WORD	00A20H+04000H
+;
+BLK029		EQU	$
+		WORD	0001EH
+		WORD	0185EH+04000H
+;
+BLK030		EQU	$
+		WORD	0009EH
+		WORD	013A4H
+;
+BLK031		EQU	$
+		WORD	0009EH
+		WORD	01858H
+;
+BLK032		EQU	$
+		WORD	0009EH
+		WORD	0179CH
+;
+BLK033		EQU	$
+		WORD	0009EH
+		WORD	01CA4H
+;
+BLK034		EQU	$
+		WORD	00097H
+		WORD	01418H+04000H
+;
+BLK035		EQU	$
+		WORD	00097H
+		WORD	01424H+04000H
+;
+BLK036		EQU	$
+		WORD	00097H
+		WORD	00A18H+04000H
+;
+BLK037		EQU	$
+		WORD	00097H
+		WORD	00A24H+04000H
+;
+BLK038		EQU	$
+		WORD	00097H
+		WORD	00B18H+04000H
+;
+BLK039		EQU	$
+		WORD	00097H
+		WORD	00B24H+04000H
+;
+BLK03A		EQU	$
+		WORD	00097H
+		WORD	00C18H+04000H
+;
+BLK03B		EQU	$
+		WORD	00097H
+		WORD	00C24H+04000H
+;
+BLK03C		EQU	$
+		WORD	00126H
+		WORD	01868H+04000H
+;
+BLK03D		EQU	$
+		WORD	0001FH
+		WORD	01A52H+04000H
+;
+BLK03E		EQU	$
+		WORD	0008DH
+		WORD	00AEEH+04000H
+;
+BLK03F		EQU	$
+		WORD	00004H
+		WORD	01A5EH+04000H
+;
+BLK040		EQU	$
+		WORD	0000BH
+		WORD	01760H+04000H
+;
+BLK041		EQU	$
+		WORD	0004BH
+		WORD	00960H+04000H
+;
+BLK042		EQU	$
+		WORD	000F8H
+		WORD	00522H+04000H
+;
+BLK043		EQU	$
+		WORD	000F8H
+		WORD	0049EH+04000H
+;
+BLK044		EQU	$
+		WORD	000F8H
+		WORD	00B1EH+04000H
+;
+BLK045		EQU	$
+		WORD	000F8H
+		WORD	00B22H+04000H
+;
+BLK046		EQU	$
+		WORD	000F8H
+		WORD	00AEEH+04000H
+;
+BLK047		EQU	$
+		WORD	000F8H
+		WORD	00BE6H+04000H
+;
+BLK048		EQU	$
+		WORD	000F8H
+		WORD	00BEAH+04000H
+;
+BLK049		EQU	$
+		WORD	000F8H
+		WORD	00CEEH+04000H
+;
+BLK04A		EQU	$
+		WORD	00046H
+		WORD	00624H
+;
+BLK04B		EQU	$
+		WORD	000C0H
+		WORD	00710H
+;
+BLK04C		EQU	$
+		WORD	000D0H
+		WORD	01C16H
+;
+BLK04D		EQU	$
+		WORD	0007DH
+		WORD	00938H
+;
+BLK04E		EQU	$
+		WORD	000B2H
+		WORD	0175EH
+;
+BLK04F		EQU	$
+		WORD	000FFH
+		WORD	01A60H+04000H
+;
+BLK050		EQU	$
+		WORD	0009EH
+		WORD	01764H+04000H
+;
+BLK051		EQU	$
+		WORD	0008BH
+		WORD	00860H
+;
+BLK052		EQU	$
+		WORD	000B6H
+		WORD	00A96H
+;
+BLK053		EQU	$
+		WORD	0008DH
+		WORD	01718H+04000H
+;
+BLK054		EQU	$
+		WORD	0006BH
+		WORD	0060CH
+;
+BLK055		EQU	$
+		WORD	0009DH
+		WORD	00914H+04000H
+;
+BLK056		EQU	$
+		WORD	0008CH
+		WORD	01414H+04000H
+;
+BLK057		EQU	$
+		WORD	000B6H
+		WORD	00AA6H
+;
+BLK058		EQU	$
+		WORD	0008DH
+		WORD	01720H+04000H
+;
+BLK059		EQU	$
+		WORD	0008DH
+		WORD	01824H+04000H
+;
+BLK05A		EQU	$
+		WORD	0008DH
+		WORD	01918H+04000H
+;
+BLK05B		EQU	$
+		WORD	0008DH
+		WORD	01920H+04000H
+;
+BLK05C		EQU	$
+		WORD	0003AH
+		WORD	00E60H+04000H
+;
+BLK05D		EQU	$
+		WORD	0011DH
+		WORD	0183CH+04000H
+;
+BLK05E		EQU	$
+		WORD	0011DH
+		WORD	01840H+04000H
+;
+BLK05F		EQU	$
+		WORD	0011DH
+		WORD	01A34H+04000H
+;
+BLK060		EQU	$
+		WORD	0011DH
+		WORD	01A38H+04000H
+;
+BLK061		EQU	$
+		WORD	0011DH
+		WORD	01A3CH+04000H
+;
+BLK062		EQU	$
+		WORD	0011DH
+		WORD	01A44H+04000H
+;
+BLK063		EQU	$
+		WORD	0011DH
+		WORD	01A48H+04000H
+;
+BLK064		EQU	$
+		WORD	0011DH
+		WORD	01B40H+04000H
+;
+BLK065		EQU	$
+		WORD	0011DH
+		WORD	01B44H+04000H
+;
+;
+BLK066		EQU	$
+		WORD	00097H
+		WORD	01518H+04000H
+;
+BLK067		EQU	$
+		WORD	00097H
+		WORD	01524H+04000H
+;
+BLK068		EQU	$
+		WORD	00097H
+		WORD	01618H+04000H
+;
+BLK069		EQU	$
+		WORD	00097H
+		WORD	01624H+04000H
+;
+BLK06A		EQU	$
+		WORD	00126H
+		WORD	01460H+04000H
+;
+BLK06B		EQU	$
+		WORD	00126H
+		WORD	01468H+04000H
+;
+BLK06C		EQU	$
+		WORD	00126H
+		WORD	0155CH+04000H
+;
+BLK06D		EQU	$
+		WORD	00126H
+		WORD	01860H+04000H
+;
+BLK06E		EQU	$
+		WORD	00126H
+		WORD	0156CH+04000H
+;
+BLK06F		EQU	$
+		WORD	00126H
+		WORD	01660H+04000H
+;
+BLK070		EQU	$
+		WORD	00126H
+		WORD	01668H+04000H
+;
+BLK071		EQU	$
+		WORD	00126H
+		WORD	01670H+04000H
+;
+BLK072		EQU	$
+		WORD	00126H
+		WORD	0175CH+04000H
+;
+BLK073		EQU	$
+		WORD	0004DH
+		WORD	01BA0H+04000H
+;
+BLK074		EQU	$
+		WORD	0004DH
+		WORD	01BB0H+04000H
+;
+BLK075		EQU	$
+		WORD	0004DH
+		WORD	01CA8H+04000H
+;
+;					: Block end
+;
+DJNBED		EQU	$
+DJNBEN		EQU	DJNBED-DJNBDT
+;
+;
+;
+;************************************************************************
+;*		LAMP  data						*
+;************************************************************************
+DJNLDT		EQU	$
+LMP001		EQU	$
+		WORD	00043H			
+		WORD	003AAH,003B6H,009AAH,009B6H			
+		WORD	0FFFFH			; (end)
+;
+LMP002		EQU	$
+		WORD	000CAH
+		WORD	014B2H,016AAH,018B2H
+		WORD	0FFFFH			; (end)
+;
+LMP003		EQU	$
+		WORD	00099H
+		WORD	013BEH,01CAAH,01CD2H
+		WORD	0FFFFH			; (end)
+;
+LMP004		EQU	$
+		WORD	00000H
+		WORD	00CCAH+08000H,00CF2H+08000H
+		WORD	0FFFFH			; (end)
+;
+LMP005		EQU	$
+		WORD	00074H
+		WORD	007B8H,007C4H
+		WORD	0FFFFH			; (end)
+;
+LMP006		EQU	$
+		WORD	0008DH
+		WORD	00470H,00E72H,01970H,01B4CH
+		WORD	0FFFFH			; (end)
+;
+LMP007		EQU	$
+		WORD	00021H
+		WORD	00C92H,00CEAH,0138AH,01C8AH
+		WORD	0FFFFH			; (end)
+;
+LMP008		EQU	$
+		WORD	00022H
+		WORD	013CCH,01CCCH
+		WORD	0FFFFH			; (end)
+;
+LMP009		EQU	$
+		WORD	00053H
+		WORD	008E2H,01368H,01864H
+		WORD	0FFFFH			; (end)
+;
+LMP010		EQU	$
+		WORD	00073H
+		WORD	00C8AH,00CB2H
+		WORD	0FFFFH			; (end)
+;
+LMP011		EQU	$
+		WORD	0000BH
+		WORD	01814H,01828H,01854H,01864H
+		WORD	0FFFFH			; (end)
+;
+LMP012		EQU	$
+		WORD	00032H
+		WORD	00B8AH,00BF2H,00FF2H
+		WORD	0FFFFH			; (end)
+;
+LMP013		EQU	$
+		WORD	00042H
+		WORD	007B6H,007F2H
+		WORD	0FFFFH			; (end)
+;
+LMP014		EQU	$
+		WORD	00083H
+		WORD	01914H,0191EH,01928H
+		WORD	0FFFFH			; (end)
+;
+LMP015		EQU	$
+		WORD	0006AH
+		WORD	003CAH,003F2H
+		WORD	0FFFFH			; (end)
+;
+LMP016		EQU	$
+		WORD	000C0H
+		WORD	006D8H,006E4H,00D24H,01518H,01A10H
+		WORD	0FFFFH			; (end)
+;
+LMP017		EQU	$
+		WORD	000D0H
+		WORD	00A1EH,00D24H,01012H
+		WORD	0FFFFH			; (end)
+;
+LMP018		EQU	$
+		WORD	00055H
+		WORD	01850H
+		WORD	0FFFFH			; (end)
+;
+LMP019		EQU	$
+		WORD	00041H
+		WORD	0053EH,00E70H,01590H
+		WORD	0FFFFH			; (end)
+;
+LMP020		EQU	$
+		WORD	00049H
+		WORD	0055CH,00FCEH,00FEEH,01870H
+		WORD	0FFFFH			; (end)
+;
+LMP021		EQU	$
+		WORD	00087H
+		WORD	01850H,0186CH,01B50H,01B6CH
+		WORD	0FFFFH			; (end)
+;
+LMP022		EQU	$
+		WORD	000C7H
+		WORD	00932H,0094AH,00DB2H,00DCAH
+		WORD	0FFFFH			; (end)
+;
+LMP023		EQU	$
+		WORD	00096H
+		WORD	00420H,00B0CH,00B32H,01220H
+		WORD	0FFFFH			; (end)
+;
+LMP024		EQU	$
+;;;;;;;;		WORD	000C0H
+;;;;;;;;		WORD	00658H,00664H,00A58H,00A64H
+		WORD	0FFFFH
+		WORD	0FFFFH			; (end)
+;
+LMP025		EQU	$
+		WORD	000C1H
+		WORD	0140CH,01430H,01C0CH,01C30H
+		WORD	0FFFFH			; (end)
+;
+LMP026		EQU	$
+		WORD	00097H
+		WORD	00C0CH,00C30H,0140CH,01430H
+		WORD	0FFFFH			; (end)
+;
+LMP027		EQU	$
+		WORD	0009CH
+		WORD	00550H
+		WORD	0FFFFH			; (end)
+;
+LMP028		EQU	$
+		WORD	0009DH
+		WORD	0150CH,01668H
+		WORD	0FFFFH			; (end)
+;
+LMP029		EQU	$
+		WORD	0003DH
+		WORD	0154CH,01570H,01C50H,01C6CH
+		WORD	0FFFFH			; (end)
+;
+;
+DJNLED		EQU	$
+DJNLEN		EQU	DJNLED-DJNLDT
+;
+;
+;************************************************************************
+;*		Item init. data						*
+;************************************************************************
+ITMTBDT		EQU	$
+;			 ITEMR01   ITEMR02   ITEMR03    BMBCNT
+		BYTE	00000001B,00000001B,00000001B,000000050
+;			 ITEMR05   ITEMR06   ITEMR07   ITEMR08
+		BYTE	000000002,00000001B,00000001B,00000001B
+;			 ITEMR09   ITEMR10   ITEMR11   ITEMR12
+		BYTE	00000001B,00000001B,00000001B,00000001B
+;			 ITEMR13   ITEMR14   ITEMR15   ITEMR16
+		BYTE	000000003,000000001,00000001B,000000003
+;			 ITEMR17   ITEMR18   ITEMR19   ITEMR20
+		BYTE	000000001,000000001,00000001B,000000002
+;			 ITEMR21   ITEMR22   ITEMR23   ITMTBL4
+		BYTE	000000002,00000001B,00000001B,00000001B
+;			 ITMTBL5   ITMTBL6   ITMTBL7   ITMTBL8
+		BYTE	00000000B,00000001B,00000001B,00000000B
+;			 BINCT0    BINCT1    BINCT2    BINCT3
+		BYTE	000000006,000000003,000000004,000000005
+;			 CONCNT    CONCNT+1  CONPRT    CONPRT+1
+		BYTE	000000255,000000000,000000255,00000000B
+;			 ITMTBLA   ITMTBLA    KEYCNT   KEYCNT+1
+		BYTE	00000000B,00000000H,00000000B,10000000B
+;			  MAPCNT   MAPCNT+1  ITEMR43   ITEMR44
+		BYTE	00000000B,00000000B,00000000B,00000000B
+;			  LFITCT    LFNWCT    MPNWCT   ITMTBL9
+		BYTE	00000078H,00000078H,00000080H,000000000
+;			  ITEMR49   ITEMR50   UPLFCT    UPMPCT
+		BYTE	000000007,000000007,00000000B,00000000B
+;			 ITEMR53   UPBMCT    UPAWCT    ARWCNT
+		BYTE	00000000B,00000000B,00000000B,000000050
+;			 ITMTBL1  ITMTBL1+1  ITMTBL3    MPLVFG
+		BYTE	00000000B,11111110B,000000000B,000000000
+;
+;
+;
+ITMTBDT1	EQU	$
+;			 ITEMR01   ITEMR02   ITEMR03   ITEMR04
+		BYTE	00000000B,00000000B,00000000B,00000000B
+;			 ITEMR05   ITEMR06   ITEMR07   ITEMR08
+		BYTE	00000000B,00000000B,00000000B,00000000B
+;			 ITEMR09   ITEMR10   ITEMR11   ITEMR12
+		BYTE	00000000B,00000000B,00000000B,00000000B
+;			 ITEMR13   ITEMR14   ITEMR15   ITEMR16
+		BYTE	00000000B,00000000B,00000000B,00000000B
+;			 ITEMR17   ITEMR18   ITEMR19   ITEMR20
+		BYTE	00000000B,00000000B,00000000B,00000000B
+;			 ITEMR21   ITEMR22   ITEMR23   ITMTBL4
+		BYTE	00000000B,00000000B,00000000B,00000000B
+;			 ITMTBL5   ITMTBL6   ITMTBL7   ITMTBL8
+		BYTE	00000000B,00000000B,00000000B,00000000B
+;			 BINCT0    BINCT1    BINCT2    BINCT3 
+		BYTE	00000000B,00000000B,00000000B,00000000B
+;			 CONCNT    CONCNT+1  CONPRT    CONPRT+1
+		BYTE	00000000B,00000000B,00000000B,00000000B
+;			 ITMTBLA   ITMTBLA    KEYCNT   KEYCNT+1
+		BYTE	00000000B,00000000H,00000000B,00000000B
+;			  MAPCNT   MAPCNT+1  ITEMR43   ITEMR44
+		BYTE	00000000B,00000000B,00000000B,00000000B
+;			  LFITCT    LFNWCT    MPNWCT   ITMTBL9
+		BYTE	00000018H,00000018H,00000000B,00000000B
+;			  ITEMR49   ITEMR50   UPLFCT    UPMPCT
+		BYTE	00000000B,00000000B,00000000B,00000000B
+;			 ITEMR53   UPBMCT    UPAWCT    ARWCNT
+		BYTE	00000000B,00000000B,00000000B,00000000B
+;			 ITMTBL1  ITMTBL1+1  ITMTBL3    MPLVFG
+		BYTE	00000000B,11111000B,00000000B,00000000B
+;
+;
+;
+;
+ITMSTP0		EQU	ITMTBDT-ITMTBDT
+ITMSTP1		EQU	ITMTBDT1-ITMTBDT
+;
+ITMSTCT		EQU	(ITMTBDT1-ITMTBDT-2)/2
+;
+;
+;
+;========================================================================
+;++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+;************************************************************************
+;*		House  information  data				*
+;************************************************************************
+HINFDT		EQU	$
+		WORD	HID000,HID001,HID002,HID003,HID004,HID005,HID006,HID007
+		WORD	HID008,HID009,HID00A,HID00B,HID00C,HID00D,HID00E,HID00F
+;
+		WORD	HID010,HID011,HID012,HID013,HID014,HID015,HID016,HID017
+		WORD	HID018,HID019,HID01A,HID01B,HID01C,HID01D,HID01E,HID01F
+;
+		WORD	HID020,HID021,HID022,HID023,HID024,HID025,HID026,HID027
+		WORD	HID028,HID029,HID02A,HID02B,HID02C,HID02D,HID02E,HID02F
+;
+		WORD	HID030,HID031,HID032,HID033,HID034,HID035,HID036,HID037
+		WORD	HID038,HID039,HID03A,HID03B,HID03C,HID03D,HID03E,HID03F
+;
+		WORD	HID040,HID041,HID042,HID043,HID044,HID045,HID046,HID047
+		WORD	HID048,HID049,HID04A,HID04B,HID04C,HID04D,HID04E,HID04F
+;
+		WORD	HID050,HID051,HID052,HID053,HID054,HID055,HID056,HID057
+		WORD	HID058,HID059,HID05A,HID05B,HID05C,HID05D,HID05E,HID05F
+;
+		WORD	HID060,HID061,HID062,HID063,HID064,HID065,HID066,HID067
+		WORD	HID068,HID069,HID06A,HID06B,HID06C,HID06D,HID06E,HID06F
+;
+		WORD	HID070,HID071,HID072,HID073,HID074,HID075,HID076,HID077
+		WORD	HID078,HID079,HID07A,HID07B,HID07C,HID07D,HID07E,HID07F
+;
+		WORD	HID080,HID081,HID082,HID083,HID084,HID085,HID086,HID087
+		WORD	HID088,HID089,HID08A,HID08B,HID08C,HID08D,HID08E,HID08F
+;
+		WORD	HID090,HID091,HID092,HID093,HID094,HID095,HID096,HID097
+		WORD	HID098,HID099,HID09A,HID09B,HID09C,HID09D,HID09E,HID09F
+;
+		WORD	HID0A0,HID0A1,HID0A2,HID0A3,HID0A4,HID0A5,HID0A6,HID0A7
+		WORD	HID0A8,HID0A9,HID0AA,HID0AB,HID0AC,HID0AD,HID0AE,HID0AF
+;
+		WORD	HID0B0,HID0B1,HID0B2,HID0B3,HID0B4,HID0B5,HID0B6,HID0B7
+		WORD	HID0B8,HID0B9,HID0BA,HID0BB,HID0BC,HID0BD,HID0BE,HID0BF
+;
+		WORD	HID0C0,HID0C1,HID0C2,HID0C3,HID0C4,HID0C5,HID0C6,HID0C7
+		WORD	HID0C8,HID0C9,HID0CA,HID0CB,HID0CC,HID0CD,HID0CE,HID0CF
+;
+		WORD	HID0D0,HID0D1,HID0D2,HID0D3,HID0D4,HID0D5,HID0D6,HID0D7
+		WORD	HID0D8,HID0D9,HID0DA,HID0DB,HID0DC,HID0DD,HID0DE,HID0DF
+;
+		WORD	HID0E0,HID0E1,HID0E2,HID0E3,HID0E4,HID0E5,HID0E6,HID0E7
+		WORD	HID0E8,HID0E9,HID0EA,HID0EB,HID0EC,HID0ED,HID0EE,HID0EF
+;
+		WORD	HID0F0,HID0F1,HID0F2,HID0F3,HID0F4,HID0F5,HID0F6,HID0F7
+		WORD	HID0F8,HID0F9,HID0FA,HID0FB,HID0FC,HID0FD,HID0FE,HID0FF
+;
+;
+		WORD	HID100,HID101,HID102,HID103,HID104,HID105,HID106,HID107
+		WORD	HID108,HID109,HID10A,HID10B,HID10C,HID10D,HID10E,HID10F
+;
+		WORD	HID110,HID111,HID112,HID113,HID114,HID115,HID116,HID117
+		WORD	HID118,HID119,HID11A,HID11B,HID11C,HID11D,HID11E,HID11F
+;
+		WORD	HID120,HID121,HID122,HID123,HID124,HID125,HID126,HID127
+		WORD	HID128,HID129,HID12A,HID12B,HID12C,HID12D,HID12E,HID12F
+;
+		WORD	HID130,HID131,HID132,HID133,HID134,HID135,HID136,HID137
+		WORD	HID138,HID139,HID13A,HID13B,HID13C,HID13D,HID13E,HID13F
+;
+;
+;
+;
+;========================================================================
+;======================  Information data  ==============================
+HID000		EQU	$		; house-000
+		BYTE	g2+b0+r1
+		BYTE	c21,bc13,oc22
+		BYTE	bmd_gnn		; BG. move data
+		BYTE	inf_gnn,inf_not	; house information
+;
+;			      s4s3s2s1hl
+		WORD	0000000000000000B
+		BYTE	010H
+;
+HID001		EQU	$		;      -001
+		BYTE	g6+b0+r0
+		BYTE	c00,bc0,oc4
+		BYTE	bmd_not		; BG. move data
+		BYTE	inf_not,inf_not	; house information
+;
+;			      s4s3s2s1hl
+		WORD	0000000000000000B
+		BYTE	000H
+		BYTE	072H,000H,050H,052H
+;
+HID002		EQU	$		;      -002
+		BYTE	g6+b0+r0
+		BYTE	c1D,bc4,oc6
+		BYTE	bmd_not		; BG. move data
+		BYTE	inf_ssd,inf_not	; house information
+;
+;			      s4s3s2s1hl
+		WORD	0000000000000000B
+		BYTE	000H
+		BYTE	011H
+;
+;;;;HID003		EQU	$		;      -003
+;;;;;
+HID004		EQU	$		;      -004
+		BYTE	g0+b0+r0
+		BYTE	c18,bcD,oc26
+		BYTE	bmd_not		; BG. move data
+		BYTE	inf_ebl,inf_ssd	; house information
+;
+;			      s4s3s2s1hl
+		WORD	0000000000000000B
+		BYTE	000H
+		BYTE	0B5H
+;
+HID005		EQU	$		;      -005
+;
+HID006		EQU	$		;      -006
+		BYTE	g0+b0+r0
+		BYTE	c08,bc8,oc14
+		BYTE	bmd_not		; BG. move data
+		BYTE	inf_bcw,inf_not	; house information
+;
+;
+HID007		EQU	$		;      -007
+		BYTE	g1+b0+r0
+		BYTE	c06,bc5,ocC
+		BYTE	bmd_not		; BG. move data
+		BYTE	inf_bcw,inf_not	; house information
+;
+;			      s4s3s2s1hl
+		WORD	0000000000000000B
+		BYTE	017H
+		BYTE	017H
+;
+HID008		EQU	$		;      -008
+		BYTE	g6+b0+r0
+		BYTE	c07,bc6,oc7
+		BYTE	bmd_not		; BG. move data
+		BYTE	inf_not,inf_not	; house information
+;
+HID009		EQU	$		;      -009
+		BYTE	g0+b0+r0
+		BYTE	c0F,bc7,oc19
+		BYTE	bmd_not		; BG. move data
+		BYTE	inf_stk,inf_not	; house information
+;
+;			      s4s3s2s1hl
+		WORD	0000000000000000B
+		BYTE	04BH
+		BYTE	04AH,04AH
+;
+HID00A		EQU	$		;      -00A
+		BYTE	g0+b0+r0
+		BYTE	c0F,bc7,oc19
+		BYTE	bmd_not		; BG. move data
+		BYTE	inf_stk,inf_not	; house information
+;
+;			      s4s3s2s1hl
+		WORD	0000000000000000B
+		BYTE	009H
+		BYTE	03AH
+;
+HID00B		EQU	$		;      -00B
+		BYTE	g0+b0+r1
+		BYTE	c0F,bc7,oc19
+		BYTE	bmd_not		; BG. move data
+		BYTE	inf_ee2,inf_not	; house information
+;
+;			      s4s3s2s1hl
+		WORD	0000000000000000B
+		BYTE	06AH
+		BYTE	01BH
+;
+HID00C		EQU	$		;      -00C
+		BYTE	g6+b0+r0
+		BYTE	c28,bcE,oc13
+		BYTE	bmd_not		; BG. move data
+		BYTE	inf_not,inf_not	; house information
+;
+;			      s4s3s2s1hl
+		WORD	0000000000000000B
+		BYTE	000H
+		BYTE	06BH,08CH,08CH
+;
+HID00D		EQU	$		;      -00D
+		BYTE	g2+b0+r0
+		BYTE	c1B,bcE,oc18
+		BYTE	bmd_ssi		; BG. move data
+		BYTE	inf_uss,inf_not	; house information
+;
+HID00E		EQU	$		;      -00E
+		BYTE	g0+b0+r0
+		BYTE	c13,bcB,oc1C
+		BYTE	bmd_not		; BG. move data
+		BYTE	inf_ee7,inf_not	; house information
+;
+;			      s4s3s2s1hl
+		WORD	0000000000000000B
+		BYTE	000H
+		BYTE	01EH
+;
+HID00F		EQU	$		;      -00F
+;
+HID010		EQU	$		; house-010
+		BYTE	g0+b0+r0
+		BYTE	c21,bc13,oc22
+		BYTE	bmd_not		; BG. move data
+		BYTE	inf_not,inf_not	; house information
+;
+HID011		EQU	$		;      -011
+		BYTE	g0+b0+r0
+		BYTE	c01,bc1,oc1
+		BYTE	bmd_not		; BG. move data
+		BYTE	inf_not,inf_not	; house information
+;
+;			      s4s3s2s1hl
+		WORD	0000000000001000B
+		BYTE	000H
+		BYTE	002H
+;
+HID012		EQU	$		;      -012
+		BYTE	g6+b0+r0	; church !! (kyoukai)
+		BYTE	c1D,bc4,oc6
+		BYTE	bmd_not		; BG. move data
+		BYTE	inf_not,inf_not	; house information
+;
+HID013		EQU	$		;      -013
+HID023		EQU	$		;      -023
+		BYTE	g0+b0+r0
+		BYTE	c18,bcD,oc26
+		BYTE	bmd_not		; BG. move data
+		BYTE	inf_not,inf_not	; house information
+;
+HID0B7		EQU	$		;      -0B7
+HID0C6		EQU	$		;      -0C6
+HID0D6		EQU	$		;      -0D6
+		BYTE	g0+b0+r0
+		BYTE	c18,bcD,oc1E
+		BYTE	bmd_not		; BG. move data
+		BYTE	inf_not,inf_not	; house information
+;
+HID014		EQU	$		;      -014
+		BYTE	g1+b0+r0
+		BYTE	c18,bcD,oc26
+		BYTE	bmd_not		; BG. move data
+		BYTE	inf_not,inf_not	; house information
+;
+HID015		EQU	$		;      -015
+		BYTE	g6+b0+r0
+		BYTE	c18,bcD,oc26
+		BYTE	bmd_not		; BG. move data
+		BYTE	inf_not,inf_not	; house information
+;
+;			      s4s3s2s1hl
+		WORD	0000000000000000B
+		BYTE	000H
+		BYTE	0B6H
+;
+HID016		EQU	$		;      -016
+		BYTE	g4+b4+r0
+		BYTE	c08,bc8,oc11
+		BYTE	bmd_wr2		; BG. move data
+		BYTE	inf_not,inf_not	; house information
+;
+;			      s4s3s2s1hl
+		WORD	0000000000000000B
+		BYTE	000H
+		BYTE	066H
+;
+HID017		EQU	$		;      -017
+		BYTE	g1+b0+r0
+		BYTE	c06,bc5,oc19
+		BYTE	bmd_not		; BG. move data
+		BYTE	inf_tp5,inf_not	; house information
+;
+;			      s4s3s2s1hl
+		WORD	0000000000000000B
+		BYTE	027H
+		BYTE	007H,027H
+;
+;;;;HID018		EQU	$		;      -018
+;
+HID019		EQU	$		;      -019
+		BYTE	g0+b0+r1
+		BYTE	c0F,bc7,oc19
+		BYTE	bmd_not		; BG. move data
+		BYTE	inf_not,inf_not	; house information
+;
+HID01A		EQU	$		;      -01A
+		BYTE	g0+b0+r0
+		BYTE	c0F,bc7,oc19
+		BYTE	bmd_not		; BG. move data
+		BYTE	inf_sd0,inf_not	; house information
+;
+;			      s4s3s2s1hl
+		WORD	0000000000000000B
+		BYTE	000H
+		BYTE	06AH,06AH
+;
+HID01B		EQU	$		;      -01B
+		BYTE	g3+b2+r0
+		BYTE	c0F,bc7,oc8
+		BYTE	bmd_not		; BG. move data
+		BYTE	inf_ee2,inf_wre	; house information
+;
+;			      s4s3s2s1hl
+		WORD	0000000000000000B
+		BYTE	000H
+		BYTE	00BH
+;
+HID01C		EQU	$		;      -01C
+		BYTE	g0+b0+r0
+		BYTE	c1A,bcE,oc9
+		BYTE	bmd_not		; BG. move data
+		BYTE	inf_ee3,inf_bes	; house information
+;
+;			      s4s3s2s1hl
+		WORD	0000000000000000B
+		BYTE	000H
+		BYTE	08CH
+;
+HID01D		EQU	$		;      -01D
+		BYTE	g0+b0+r0
+		BYTE	c1B,bcE,oc18
+		BYTE	bmd_not		; BG. move data
+		BYTE	inf_not,inf_not	; house information
+;
+;			      s4s3s2s1hl
+		WORD	0000000000000000B
+		BYTE	000H
+		BYTE	04CH
+;
+HID01E		EQU	$		;      -01E
+		BYTE	g1+b0+r0
+		BYTE	c13,bcB,oc1C
+		BYTE	bmd_not		; BG. move data
+		BYTE	inf_sd1,inf_not	; house information
+;
+;			      s4s3s2s1hl
+		WORD	0000000000000000B
+		BYTE	03EH
+		BYTE	00EH
+;
+HID01F		EQU	$		;      -01F
+		BYTE	g0+b0+r0
+		BYTE	c13,bcB,oc29
+		BYTE	bmd_not		; BG. move data
+		BYTE	inf_sd1,inf_not	; house information
+;
+;			      s4s3s2s1hl
+		WORD	0000000000000000B
+		BYTE	000H
+		BYTE	03FH
+;
+;
+;
+HID020		EQU	$		; house-020
+		BYTE	g1+b0+r0
+		BYTE	c0C,bc2,oc12
+		BYTE	bmd_not		; BG. move data
+		BYTE	inf_bsd,inf_bcw	; house information
+;
+HID021		EQU	$		;      -021
+;;;;		BYTE	g0+b0+r1
+;;;;		BYTE	c01,bc1,oc1
+;;;;		BYTE	bmd_not		; BG. move data
+;;;;		BYTE	inf_not,inf_not	; house information
+;;;;;
+HID022		EQU	$		;      -022
+		BYTE	g0+b0+r1
+		BYTE	c01,bc1,oc1
+		BYTE	bmd_not		; BG. move data
+		BYTE	inf_not,inf_not	; house information
+;
+;;;;HID023		EQU	$		;      -023
+;;;;		BYTE	g0+b0+r0
+;;;;		BYTE	c18,bcD,oc1E
+;;;;		BYTE	bmd_not		; BG. move data
+;;;;		BYTE	inf_not,inf_not	; house information
+;;;;;
+HID024		EQU	$		;      -024
+		BYTE	g0+b0+r0
+		BYTE	c18,bcD,oc26
+		BYTE	bmd_not		; BG. move data
+		BYTE	inf_ee0,inf_not	; house information
+;
+HID025		EQU	$		;      -025
+;
+HID026		EQU	$		;      -026
+		BYTE	g0+b0+r0
+		BYTE	c0A,bc8,oc11
+		BYTE	bmd_not		; BG. move data
+		BYTE	inf_sd0,inf_not	; house information
+;
+;			      s4s3s2s1hl
+		WORD	0000000000000000B
+		BYTE	000H
+		BYTE	076H,076H,076H
+;
+HID027		EQU	$		;      -027
+		BYTE	g1+b0+r0
+		BYTE	c06,bc5,oc19
+		BYTE	bmd_not		; BG. move data
+		BYTE	inf_tp6,inf_not	; house information
+;
+;			      s4s3s2s1hl
+		WORD	0000000000000000B
+		BYTE	031H
+		BYTE	017H,031H
+;
+HID028		EQU	$		;      -028
+		BYTE	g4+b0+r0
+		BYTE	c0A,bc8,oc11
+		BYTE	bmd_not		; BG. move data
+		BYTE	inf_et9,inf_gwr	; house information
+;
+;			      s4s3s2s1hl
+		WORD	0000000000000000B
+		BYTE	000H
+		BYTE	038H
+;
+HID029		EQU	$		;      -029
+		BYTE	g6+b3+r0
+		BYTE	c0E,bc9,oc1A
+		BYTE	bmd_blt		; BG. move data
+		BYTE	inf_bcw,inf_not	; house information
+;
+HID02A		EQU	$		;      -02A
+		BYTE	g0+b0+r0
+		BYTE	c0F,bc7,oc19
+		BYTE	bmd_not		; BG. move data
+		BYTE	inf_not,inf_not	; house information
+;
+HID02B		EQU	$		;      -02B
+		BYTE	g6+b0+r0
+		BYTE	c0F,bc7,oc2B
+		BYTE	bmd_not		; BG. move data
+		BYTE	inf_sd0,inf_not	; house information
+;
+;			      s4s3s2s1hl
+		WORD	0000000000000000B
+		BYTE	000H
+		BYTE	03BH
+;
+;;;;HID02C		EQU	$		;      -02C
+;;;;;
+HID02D		EQU	$		;      -02D
+;
+HID02E		EQU	$		;      -02E
+		BYTE	g0+b0+r0
+		BYTE	c13,bcB,oc1C
+		BYTE	bmd_not		; BG. move data
+		BYTE	inf_et1,inf_not	; house information
+;
+HID003		EQU	$		;      -003
+HID02F		EQU	$		;      -02F
+		BYTE	g6+b0+r0
+		BYTE	c07,bc6,oc19
+		BYTE	bmd_not		; BG. move data
+		BYTE	inf_not,inf_not	; house information
+;
+;
+HID030		EQU	$		; house-030
+		BYTE	g0+b0+r0
+		BYTE	c0C,bc2,oc12
+		BYTE	bmd_not		; BG. move data
+		BYTE	inf_not,inf_not	; house information
+;
+;			      s4s3s2s1hl
+		WORD	0000000000000000B
+		BYTE	000H
+		BYTE	040H
+;
+HID031		EQU	$		;      -031
+		BYTE	g1+b0+r0
+		BYTE	c06,bc5,oc19
+		BYTE	bmd_not		; BG. move data
+		BYTE	inf_tp7,inf_ee3	; house information
+;
+;			      s4s3s2s1hl
+		WORD	0000000000100010B
+		BYTE	077H
+		BYTE	027H,077H
+;
+;
+HID032		EQU	$		;      -032
+		BYTE	g0+b0+r1
+		BYTE	c01,bc1,oc1
+		BYTE	bmd_not		; BG. move data
+		BYTE	inf_not,inf_not	; house information
+;
+;			      s4s3s2s1hl
+		WORD	0000000000000000B
+		BYTE	000H
+		BYTE	042H
+;
+HID033		EQU	$		;      -033
+		BYTE	g0+b0+r0
+		BYTE	c04,bc5,ocB
+		BYTE	bmd_not		; BG. move data
+		BYTE	inf_bsd,inf_bcw	; house information
+;
+HID034		EQU	$		;      -034
+		BYTE	g4+b0+r0
+		BYTE	c0A,bc8,oc11
+		BYTE	bmd_not		; BG. move data
+		BYTE	inf_not,inf_not	; house information
+;
+;			      s4s3s2s1hl
+		WORD	0000000000000000B
+		BYTE	000H
+		BYTE	054H
+;
+HID035		EQU	$		;      -035
+HID037		EQU	$		;      -037
+		BYTE	g4+b0+r0
+		BYTE	c0A,bc8,oc11
+		BYTE	bmd_not		; BG. move data
+		BYTE	inf_not,inf_wup	; house information
+;
+HID036		EQU	$		;      -036
+		BYTE	g4+b0+r0
+		BYTE	c0A,bc8,oc11
+		BYTE	bmd_not		; BG. move data
+		BYTE	inf_not,inf_not	; house information
+;
+;;;;HID037		EQU	$		;      -037
+;;;;		BYTE	g4+b0+r0
+;;;;		BYTE	c0A,bc8,oc11
+;;;;		BYTE	bmd_not		; BG. move data
+;;;;		BYTE	inf_not,inf_wup	; house information
+;;;;;
+HID038		EQU	$		;      -038
+		BYTE	g4+b0+r0
+		BYTE	c0A,bc8,oc11
+		BYTE	bmd_not		; BG. move data
+		BYTE	inf_not,inf_not	; house information
+;
+;			      s4s3s2s1hl
+		WORD	0000000000000000B
+		BYTE	000H
+		BYTE	028H
+;
+HID039		EQU	$		;      -039
+		BYTE	g1+b0+r0
+		BYTE	c0D,bc9,oc13
+		BYTE	bmd_not		; BG. move data
+		BYTE	inf_not,inf_not	; house information
+;
+;			      s4s3s2s1hl
+		WORD	0000000000000000B
+		BYTE	029H
+;
+HID03A		EQU	$		;      -03A
+		BYTE	g1+b0+r0
+		BYTE	c0F,bc7,oc19
+		BYTE	bmd_not		; BG. move data
+		BYTE	inf_not,inf_not	; house information
+;
+;			      s4s3s2s1hl
+		WORD	0000000000000000B
+		BYTE	00AH
+		BYTE	00AH
+;
+HID03B		EQU	$		;      -03B
+		BYTE	g0+b0+r0
+		BYTE	c0F,bc7,oc8
+		BYTE	bmd_not		; BG. move data
+		BYTE	inf_not,inf_not	; house information
+;
+;			      s4s3s2s1hl
+		WORD	0000000000000000B
+		BYTE	000H
+		BYTE	02BH
+;
+HID03C		EQU	$		;      -03C
+		BYTE	g0+b0+r0
+		BYTE	c07,bc6,oc13
+		BYTE	bmd_not		; BG. move data
+		BYTE	inf_not,inf_not	; house information
+;
+HID03D		EQU	$		;      -03D
+		BYTE	g1+b0+r0
+		BYTE	c1A,bcE,ocC
+		BYTE	bmd_not		; BG. move data
+		BYTE	inf_sd3,inf_not	; house information
+;
+;			      s4s3s2s1hl
+		WORD	0000000000000000B
+		BYTE	096H
+		BYTE	096H
+;
+HID03E		EQU	$		;      -03E
+		BYTE	g6+b3+r0
+		BYTE	c13,bcB,oc29
+		BYTE	bmd_blt		; BG. move data
+		BYTE	inf_ee1,inf_not	; house information
+;
+;			      s4s3s2s1hl
+		WORD	0000000000000000B
+		BYTE	000H
+		BYTE	01EH
+;
+HID03F		EQU	$		;      -03F
+		BYTE	g0+b0+r0
+		BYTE	c13,bcB,oc29
+		BYTE	bmd_not		; BG. move data
+		BYTE	inf_stk,inf_ssd	; house information
+;
+;			      s4s3s2s1hl
+		WORD	0000000000000000B
+		BYTE	000H
+		BYTE	01FH,05FH
+;
+;
+;
+HID040		EQU	$		;      -040
+		BYTE	g6+b0+r0
+		BYTE	c00,bc2,oc27
+		BYTE	bmd_not		; BG. move data
+		BYTE	inf_not,inf_not	; house information
+;
+;			      s4s3s2s1hl
+		WORD	0000000000000000B
+		BYTE	000H
+		BYTE	030H,0B0H
+;
+HID041		EQU	$		;      -041
+		BYTE	g0+b0+r1
+		BYTE	c00,bc0,oc2
+		BYTE	bmd_not		; BG. move data
+		BYTE	inf_bs8,inf_not	; house information
+;
+;			      s4s3s2s1hl
+		WORD	0000000000000000B
+		BYTE	000H
+		BYTE	042H
+;
+HID042		EQU	$		;      -042
+		BYTE	g0+b0+r1
+		BYTE	c01,bc1,oc1
+		BYTE	bmd_not		; BG. move data
+		BYTE	inf_not,inf_not	; house information
+;
+;			      s4s3s2s1hl
+		WORD	0000000000000000B
+		BYTE	000H
+		BYTE	041H,032H
+;
+HID043		EQU	$		;      -043
+		BYTE	g3+b2+r0
+		BYTE	c04,bc5,ocA
+		BYTE	bmd_not		; BG. move data
+		BYTE	inf_not,inf_wle	; house information
+;
+HID044		EQU	$		;      -044
+		BYTE	g0+b0+r0
+		BYTE	c17,bcA,oc1B
+		BYTE	bmd_not		; BG. move data
+		BYTE	inf_ee0,inf_not	; house information
+;
+HID045		EQU	$		;      -045
+		BYTE	g3+b0+r0
+		BYTE	c17,bcA,oc1B
+		BYTE	bmd_not		; BG. move data
+		BYTE	inf_ee0,inf_not	; house information
+;
+;			      s4s3s2s1hl
+		WORD	0000000000000000B
+		BYTE	000H
+		BYTE	0BCH
+;
+HID046		EQU	$		;      -046
+		BYTE	g0+b0+r0
+		BYTE	c0A,bc8,oc11
+		BYTE	bmd_not		; BG. move data
+		BYTE	inf_btk,inf_not	; house information
+;
+HID047		EQU	$		;      -047
+;.'91/.8/29.[THU]			BYTE	g1+b0+r0
+;.'91/.8/29.[THU]			BYTE	c06,bc5,oc19
+;.'91/.8/29.[THU]			BYTE	bmd_not		; BG. move data
+;.'91/.8/29.[THU]			BYTE	inf_tp7,inf_ee3	; house information
+;.'91/.8/29.[THU]	;
+;.'91/.8/29.[THU]	;			      s4s3s2s1hl
+;.'91/.8/29.[THU]			WORD	0000000000100010B
+;.'91/.8/29.[THU]			BYTE	077H
+;.'91/.8/29.[THU]			BYTE	027H,077H
+;
+HID048		EQU	$		;      -048
+;
+HID049		EQU	$		;      -049
+		BYTE	g0+b0+r0
+		BYTE	c0D,bc9,oc13
+		BYTE	bmd_not		; BG. move data
+		BYTE	inf_sd3,inf_tp4	; house information
+;
+HID04A		EQU	$		;      -04A
+		BYTE	g0+b0+r0
+		BYTE	c0F,bc7,oc19
+		BYTE	bmd_not		; BG. move data
+		BYTE	inf_sd1,inf_not	; house information
+;
+;			      s4s3s2s1hl
+		WORD	0000000000000000B
+		BYTE	000H
+		BYTE	009H,009H
+;
+HID04B		EQU	$		;      -04B
+		BYTE	g0+b0+r0
+		BYTE	c0F,bc7,oc8
+		BYTE	bmd_not		; BG. move data
+		BYTE	inf_ee0,inf_not	; house information
+;
+;			      s4s3s2s1hl
+		WORD	0000000000000000B
+		BYTE	009H
+;
+HID04C		EQU	$		;      -04C
+		BYTE	g0+b0+r0
+		BYTE	c1A,bcE,ocC
+		BYTE	bmd_not		; BG. move data
+		BYTE	inf_not,inf_not	; house information
+;
+;			      s4s3s2s1hl
+		WORD	0000000000000000B
+		BYTE	000H
+		BYTE	01DH
+;
+;
+HID04D		EQU	$		;      -04D
+		BYTE	g1+b0+r0
+		BYTE	c1A,bcE,ocC
+		BYTE	bmd_not		; BG. move data
+		BYTE	inf_et9,inf_bes	; house information
+;
+;			      s4s3s2s1hl
+		WORD	0000000000000000B
+		BYTE	0A6H
+		BYTE	0A6H
+;
+HID04E		EQU	$		;      -04E
+		BYTE	g0+b0+r0
+		BYTE	c13,bcB,oc29
+		BYTE	bmd_not		; BG. move data
+		BYTE	inf_sd1,inf_not	; house information
+;
+;			      s4s3s2s1hl
+		WORD	0000000000000000B
+		BYTE	000H
+		BYTE	06EH
+;
+HID04F		EQU	$		;      -04F
+		BYTE	g0+b0+r0
+		BYTE	c13,bcB,oc1C
+		BYTE	bmd_not		; BG. move data
+		BYTE	inf_not,inf_not	; house information
+;
+;			      s4s3s2s1hl
+		WORD	0000000000000000B
+		BYTE	0BEH
+;
+;
+HID050		EQU	$		; house-050
+		BYTE	g6+b0+r0
+		BYTE	c00,bc0,oc4
+		BYTE	bmd_not		; BG. move data
+		BYTE	inf_not,inf_not	; house information
+;
+;			      s4s3s2s1hl
+		WORD	0000000000000000B
+		BYTE	000H
+		BYTE	000H,000H,001H,001H
+;
+HID051		EQU	$		;      -051
+		BYTE	g6+b0+r0
+		BYTE	c00,bc0,oc3
+		BYTE	bmd_not		; BG. move data
+		BYTE	inf_not,inf_not	; house information
+;
+;			      s4s3s2s1hl
+		WORD	0000000000000000B
+		BYTE	000H
+		BYTE	061H
+;
+HID052		EQU	$		;      -052
+		BYTE	g6+b0+r0
+		BYTE	c00,bc0,oc4
+		BYTE	bmd_not		; BG. move data
+		BYTE	inf_not,inf_not	; house information
+;
+;			      s4s3s2s1hl
+		WORD	0000000000000000B
+		BYTE	000H
+		BYTE	000H,000H,001H,001H
+;
+HID053		EQU	$		;      -053
+		BYTE	g6+b0+r0
+		BYTE	c04,bc5,ocA
+		BYTE	bmd_not		; BG. move data
+		BYTE	inf_ee2,inf_not	; house information
+;
+;			      s4s3s2s1hl
+		WORD	0000000000000000B
+		BYTE	000H
+		BYTE	063H
+;
+HID054		EQU	$		;      -054
+		BYTE	g1+b0+r0
+		BYTE	c0A,bc8,oc11
+		BYTE	bmd_not		; BG. move data
+		BYTE	inf_not,inf_not	; house information
+;
+;			      s4s3s2s1hl
+		WORD	0000000000000000B
+		BYTE	034H
+		BYTE	034H
+;
+HID055		EQU	$		;      -055
+		BYTE	g0+b0+r1
+		BYTE	c01,bc10,ocD
+		BYTE	bmd_not		; BG. move data
+		BYTE	inf_not,inf_not	; house information
+;
+HID056		EQU	$		;      -056
+		BYTE	g0+b0+r0
+		BYTE	c0D,bc9,oc13
+		BYTE	bmd_not		; BG. move data
+		BYTE	inf_tp2,inf_not	; house information
+;
+HID057		EQU	$		;      -057
+		BYTE	g0+b0+r0
+		BYTE	c0D,bc9,oc13
+		BYTE	bmd_not		; BG. move data
+		BYTE	inf_sd0,inf_not	; house information
+;
+HID058		EQU	$		;      -058
+		BYTE	g0+b0+r0
+		BYTE	c0D,bc9,oc13
+		BYTE	bmd_not		; BG. move data
+		BYTE	inf_tp0,inf_cws	; house information
+;
+HID059		EQU	$		;      -059
+		BYTE	g6+b0+r0
+		BYTE	c0D,bc9,oc13
+		BYTE	bmd_not		; BG. move data
+		BYTE	inf_not,inf_not	; house information
+;
+HID05A		EQU	$		;      -05A
+		BYTE	g0+b0+r0
+		BYTE	c10,bc7,oc15
+		BYTE	bmd_not		; BG. move data
+		BYTE	inf_bcw,inf_not	; house information
+;
+HID05B		EQU	$		;      -05B
+		BYTE	g6+b0+r0
+		BYTE	c1B,bcE,ocA
+		BYTE	bmd_not		; BG. move data
+		BYTE	inf_sd1,inf_not	; house information
+;
+HID05C		EQU	$		;      -05C
+		BYTE	g0+b0+r0
+		BYTE	c1B,bcE,ocA
+		BYTE	bmd_not		; BG. move data
+		BYTE	inf_not,inf_not	; house information
+;
+;			      s4s3s2s1hl
+		WORD	0000000000000000B
+		BYTE	000H
+		BYTE	05DH
+;
+HID05D		EQU	$		;      -05D
+		BYTE	g0+b0+r0
+		BYTE	c24,bcE,oc23
+		BYTE	bmd_not		; BG. move data
+		BYTE	inf_ee8,inf_not	; house information
+;
+;			      s4s3s2s1hl
+		WORD	0000000000000000B
+		BYTE	000H
+		BYTE	05CH
+;
+HID05E		EQU	$		;      -05E
+		BYTE	g1+b0+r0
+		BYTE	c13,bcB,oc1C
+		BYTE	bmd_not		; BG. move data
+		BYTE	inf_not,inf_not	; house information
+;
+;			      s4s3s2s1hl
+		WORD	0000000000000000B
+		BYTE	07EH
+		BYTE	07EH
+;
+HID05F		EQU	$		;      -05F
+		BYTE	g0+b0+r0
+		BYTE	c13,bcB,oc1C
+		BYTE	bmd_not		; BG. move data
+		BYTE	inf_stk,inf_not	; house information
+;
+;			      s4s3s2s1hl
+		WORD	0000000000000000B
+		BYTE	000H
+		BYTE	03FH,07FH
+;
+;
+;
+HID060		EQU	$		; house-060
+HID062		EQU	$		;      -062
+		BYTE	g6+b0+r0
+		BYTE	c00,bc0,oc4
+		BYTE	bmd_not		; BG. move data
+		BYTE	inf_not,inf_not	; house information
+;
+HID061		EQU	$		;      -061
+		BYTE	g6+b0+r0
+		BYTE	c00,bc0,oc4
+		BYTE	bmd_not		; BG. move data
+		BYTE	inf_not,inf_not	; house information
+;
+;			      s4s3s2s1hl
+		WORD	0000000000001000B
+		BYTE	000H
+		BYTE	051H
+;
+;;;;HID062		EQU	$		;      -062
+;;;;		BYTE	g6+b0+r0
+;;;;		BYTE	c00,bc0,oc4
+;;;;		BYTE	bmd_not		; BG. move data
+;;;;		BYTE	inf_not,inf_not	; house information
+;;;;;
+HID063		EQU	$		;      -063
+		BYTE	g0+b0+r0
+		BYTE	c09,bc5,ocA
+		BYTE	bmd_not		; BG. move data
+		BYTE	inf_bs2,inf_not	; house information
+;
+;			      s4s3s2s1hl
+		WORD	0000000000000000B
+		BYTE	000H
+		BYTE	053H
+;
+HID064		EQU	$		;      -064
+		BYTE	g7+b0+r0
+		BYTE	c23,bcA,oc21
+		BYTE	bmd_not		; BG. move data
+		BYTE	inf_sd1,inf_not	; house information
+;
+;			      s4s3s2s1hl
+		WORD	0000000000000000B
+		BYTE	000H
+		BYTE	0ABH
+;
+HID065		EQU	$		;      -065
+		BYTE	g7+b0+r0
+		BYTE	c23,bcA,oc21
+		BYTE	bmd_not		; BG. move data
+		BYTE	inf_not,inf_not	; house information
+;
+;			      s4s3s2s1hl
+		WORD	0000000000000000B
+		BYTE	0ACH
+;
+HID066		EQU	$		;      -055
+		BYTE	g6+b0+r0
+		BYTE	c0A,bc8,oc11
+		BYTE	bmd_not		; BG. move data
+		BYTE	inf_btk,inf_not	; house information
+;
+;			      s4s3s2s1hl
+		WORD	0000000000000000B
+		BYTE	000H
+		BYTE	016H
+;
+HID067		EQU	$		;      -067
+		BYTE	g0+b0+r0
+		BYTE	c0D,bc9,oc13
+		BYTE	bmd_not		; BG. move data
+		BYTE	inf_tp1,inf_not	; house information
+;
+HID068		EQU	$		;      -068
+		BYTE	g0+b0+r0
+		BYTE	c0D,bc9,oc13
+		BYTE	bmd_not		; BG. move data
+		BYTE	inf_not,inf_not	; house information
+;
+HID069		EQU	$		;      -069
+;
+HID06A		EQU	$		;      -06A
+		BYTE	g0+b0+r1
+		BYTE	c0F,bc7,oc19
+		BYTE	bmd_not		; BG. move data
+		BYTE	inf_not,inf_not	; house information
+;
+;			      s4s3s2s1hl
+		WORD	0000000000000000B
+		BYTE	000H
+		BYTE	01AH,01AH
+;
+HID06B		EQU	$		;      -06B
+		BYTE	g0+b0+r0
+		BYTE	c1B,bcE,ocA
+		BYTE	bmd_not		; BG. move data
+		BYTE	inf_ee7,inf_bs0	; house information
+;
+;			      s4s3s2s1hl
+		WORD	0000000000000000B
+		BYTE	000H
+		BYTE	00CH
+;
+HID06C		EQU	$		;      -06C
+		BYTE	g0+b0+r0
+		BYTE	c24,bcE,oc23
+		BYTE	bmd_not		; BG. move data
+		BYTE	inf_ee2,inf_bes	; house information
+;
+;			      s4s3s2s1hl
+		WORD	0000000000000000B
+		BYTE	000H
+		BYTE	0A5H
+;
+HID06D		EQU	$		;      -06D
+		BYTE	g0+b0+r0
+		BYTE	c24,bcE,oc23
+		BYTE	bmd_not		; BG. move data
+		BYTE	inf_ee4,inf_not	; house information
+;
+HID06E		EQU	$		;      -06E
+		BYTE	g0+b0+r0
+		BYTE	c13,bcB,oc1C
+		BYTE	bmd_not		; BG. move data
+		BYTE	inf_ee1,inf_not	; house information
+;
+;			      s4s3s2s1hl
+		WORD	0000000000000000B
+		BYTE	000H
+		BYTE	04EH
+;
+HID06F		EQU	$		;      -06F
+;
+;
+HID070		EQU	$		; house-070
+		BYTE	g0+b0+r0
+		BYTE	c01,bc1,oc4
+		BYTE	bmd_not		; BG. move data
+		BYTE	inf_not,inf_not	; house information
+;
+;			      s4s3s2s1hl
+		WORD	0000000000001000B
+		BYTE	000H
+		BYTE	071H,080H
+;
+HID071		EQU	$		;      -071
+		BYTE	g6+b0+r0
+		BYTE	c01,bc1,oc4
+		BYTE	bmd_not		; BG. move data
+		BYTE	inf_ee7,inf_not	; house information
+;
+;			      s4s3s2s1hl
+		WORD	0000000000000000B
+		BYTE	000H
+		BYTE	070H
+;
+;
+HID072		EQU	$		;      -072
+;			      s4s3s2s1hl
+		BYTE	g6+b0+r0
+		BYTE	c01,bc1,oc4
+		BYTE	bmd_not		; BG. move data
+		BYTE	inf_not,inf_not	; house information
+;
+;			      s4s3s2s1hl
+		WORD	0000000000001000B
+		BYTE	000H
+		BYTE	001H
+;
+HID073		EQU	$		;      -073
+		BYTE	g0+b0+r0
+		BYTE	c09,bc5,ocA
+		BYTE	bmd_not		; BG. move data
+		BYTE	inf_sd1,inf_not	; house information
+;
+HID074		EQU	$		;      -074
+		BYTE	g0+b0+r0
+		BYTE	c09,bc5,ocA
+		BYTE	bmd_not		; BG. move data
+		BYTE	inf_stk,inf_not	; house information
+;
+HID075		EQU	$		;      -075
+		BYTE	g0+b0+r0
+		BYTE	c09,bc5,ocA
+		BYTE	bmd_not		; BG. move data
+		BYTE	inf_ee0,inf_not	; house information
+;
+HID076		EQU	$		;      -076
+		BYTE	g4+b0+r0
+		BYTE	c0A,bc8,oc11
+		BYTE	bmd_not		; BG. move data
+		BYTE	inf_not,inf_wdn	; house information
+;
+;			      s4s3s2s1hl
+		WORD	0000000000000000B
+		BYTE	000H
+		BYTE	026H,026H,026H
+;
+HID077		EQU	$		;      -077
+		BYTE	g6+b0+r0
+		BYTE	c06,bc5,oc19
+		BYTE	bmd_not		; BG. move data
+		BYTE	inf_not,inf_not	; house information
+;
+;			      s4s3s2s1hl
+		WORD	0000000000000000B
+		BYTE	0A7H
+		BYTE	031H,087H,087H
+;
+HID078		EQU	$		;      -078
+;
+HID079		EQU	$		;      -079
+;
+HID07A		EQU	$		;      -07A
+;
+HID07B		EQU	$		;      -07B
+		BYTE	g0+b0+r0
+		BYTE	c28,bcE,oc13
+		BYTE	bmd_not		; BG. move data
+		BYTE	inf_ee2,inf_tp8	; house information
+;
+;			      s4s3s2s1hl
+		WORD	0000000000000000B
+		BYTE	09DH
+;
+HID07C		EQU	$		;      -07C
+		BYTE	g0+b0+r0
+		BYTE	c28,bcE,oc13
+		BYTE	bmd_not		; BG. move data
+		BYTE	inf_cwy,inf_not	; house information
+;
+HID07D		EQU	$		;      -07D
+		BYTE	g0+b0+r0
+		BYTE	c28,bcE,oc13
+		BYTE	bmd_not		; BG. move data
+		BYTE	inf_ee3,inf_btk	; house information
+;
+;			      s4s3s2s1hl
+		WORD	0000000000000000B
+		BYTE	09BH
+;
+HID07E		EQU	$		;      -07E
+		BYTE	g1+b0+r0
+		BYTE	c13,bcB,oc1C
+		BYTE	bmd_not		; BG. move data
+		BYTE	inf_et2,inf_sd1	; house information
+;
+;			      s4s3s2s1hl
+		WORD	0000000000000000B
+		BYTE	09EH
+		BYTE	05EH
+;
+HID07F		EQU	$		;      -07F
+		BYTE	g0+b0+r0
+		BYTE	c13,bcB,oc1C
+		BYTE	bmd_not		; BG. move data
+		BYTE	inf_not,inf_not	; house information
+;
+;			      s4s3s2s1hl
+		WORD	0000000000000000B
+		BYTE	000H
+		BYTE	05FH
+;
+;
+;
+HID080		EQU	$		; house-080
+		BYTE	g3+b0+r0
+		BYTE	c01,bc1,oc4
+		BYTE	bmd_not		; BG. move data
+		BYTE	inf_not,inf_not	; house information
+;
+;			      s4s3s2s1hl
+		WORD	0000000000000000B
+		BYTE	000H
+		BYTE	070H
+;
+HID081		EQU	$		;      -081
+;;;;		BYTE	g6+b0+r0
+;;;;		BYTE	c01,bc1,oc4
+;;;;		BYTE	bmd_not		; BG. move data
+;;;;		BYTE	inf_not,inf_not	; house information
+;;;;;
+HID082		EQU	$		;      -082
+		BYTE	g6+b0+r0
+		BYTE	c01,bc1,oc4
+		BYTE	bmd_not		; BG. move data
+		BYTE	inf_not,inf_not	; house information
+;
+HID083		EQU	$		;      -083
+		BYTE	g0+b0+r0
+		BYTE	c09,bc5,ocA
+		BYTE	bmd_not		; BG. move data
+		BYTE	inf_bs2,inf_not	; house information
+;
+HID084		EQU	$		;      -084
+		BYTE	g0+b0+r0
+		BYTE	c09,bc5,ocA
+		BYTE	bmd_not		; BG. move data
+		BYTE	inf_not,inf_not	; house information
+;
+HID085		EQU	$		;      -085
+		BYTE	g0+b0+r0
+		BYTE	c09,bc5,ocA
+		BYTE	bmd_not		; BG. move data
+		BYTE	inf_ee1,inf_not	; house information
+;
+HID086		EQU	$		;      -086
+;
+HID087		EQU	$		;      -087
+		BYTE	g0+b0+r0
+		BYTE	c06,bc5,oc19
+		BYTE	bmd_not		; BG. move data
+		BYTE	inf_trt,inf_ee0	; house information
+;
+;			      s4s3s2s1hl
+		WORD	0000000000101000B
+		BYTE	000H
+		BYTE	077H,077H
+;
+HID088		EQU	$		;      -088
+;
+HID089		EQU	$		;      -089
+		BYTE	g0+b0+r0
+		BYTE	c0B,bc5,oc8
+		BYTE	bmd_not		; BG. move data
+		BYTE	inf_not,inf_not	; house information
+;
+;			      s4s3s2s1hl
+		WORD	0000000000000010B
+		BYTE	0A9H
+;
+HID08A		EQU	$		;      -08A
+;
+HID08B		EQU	$		;      -08B
+		BYTE	g0+b0+r0
+		BYTE	c28,bcE,oc13
+		BYTE	bmd_not		; BG. move data
+		BYTE	inf_tp9,inf_bs1	; house information
+;
+HID08C		EQU	$		;      -08C
+		BYTE	g1+b0+r0
+		BYTE	c28,bcE,oc13
+		BYTE	bmd_not		; BG. move data
+		BYTE	inf_sd0,inf_not	; house information
+;
+;			      s4s3s2s1hl
+		WORD	0000000000101000B
+		BYTE	01CH
+		BYTE	00CH,00CH,01CH
+;
+HID08D		EQU	$		;      -08D
+		BYTE	g0+b0+r0
+		BYTE	c28,bcE,oc13
+		BYTE	bmd_not		; BG. move data
+		BYTE	inf_sd3,inf_et0	; house information
+;
+HID08E		EQU	$		;      -08E
+		BYTE	g0+b0+r0
+		BYTE	c13,bcB,oc1C
+		BYTE	bmd_not		; BG. move data
+		BYTE	inf_not,inf_not	; house information
+;
+;			      s4s3s2s1hl
+		WORD	0000000000000000B
+		BYTE	000H
+		BYTE	0AEH
+;
+HID08F		EQU	$		;      -08F
+;
+;
+;
+HID090		EQU	$		; house-090
+		BYTE	g4+b0+r0
+		BYTE	c12,bcC,oc16
+		BYTE	bmd_not		; BG. move data
+		BYTE	inf_bcw,inf_not	; house information
+;
+HID091		EQU	$		;      -091
+		BYTE	g0+b0+r0
+		BYTE	c11,bcC,oc1C
+		BYTE	bmd_not		; BG. move data
+		BYTE	inf_not,inf_not	; house information
+;
+;			      s4s3s2s1hl
+		WORD	0000000000000000B
+		BYTE	000H
+		BYTE	0A0H
+;
+HID092		EQU	$		;      -092
+		BYTE	g0+b0+r1
+		BYTE	c11,bcC,oc1C
+		BYTE	bmd_not		; BG. move data
+		BYTE	inf_not,inf_not	; house information
+;
+HID093		EQU	$		;      -093
+		BYTE	g0+b0+r1
+		BYTE	c11,bcC,oc1C
+		BYTE	bmd_not		; BG. move data
+		BYTE	inf_sd0,inf_not	; house information
+;
+;			      s4s3s2s1hl
+		WORD	0000000000001000B
+		BYTE	000H
+		BYTE	0A2H
+;
+HID094		EQU	$		;      -094
+;
+HID095		EQU	$		;      -095
+		BYTE	g0+b0+r0
+		BYTE	c25,bcE,oc24
+		BYTE	bmd_not		; BG. move data
+		BYTE	inf_not,inf_not	; house information
+;
+HID096		EQU	$		;      -096
+		BYTE	g0+b0+r0
+		BYTE	c25,bcE,oc24
+		BYTE	bmd_not		; BG. move data
+		BYTE	inf_sd3,inf_not	; house information
+;
+;			      s4s3s2s1hl
+		WORD	0000000000000000B
+		BYTE	000H
+		BYTE	03DH
+;
+HID097		EQU	$		;      -097
+		BYTE	g3+b2+r0
+		BYTE	c11,bcC,oc1D
+		BYTE	bmd_not		; BG. move data
+		BYTE	inf_wre,inf_not	; house information
+;
+;			      s4s3s2s1hl
+		WORD	0000000000000000B
+		BYTE	0D1H
+		BYTE	0D1H
+;
+HID098		EQU	$		;      -098
+		BYTE	g0+b0+r0
+		BYTE	c11,bcC,oc1C
+		BYTE	bmd_not		; BG. move data
+		BYTE	inf_not,inf_not	; house information
+;
+;			      s4s3s2s1hl
+		WORD	0000000000000000B
+		BYTE	000H
+		BYTE	0D2H
+;
+HID099		EQU	$		;      -099
+		BYTE	g0+b0+r1
+		BYTE	c0B,bc5,oc8
+		BYTE	bmd_not		; BG. move data
+		BYTE	inf_not,inf_not	; house information
+;
+;			      s4s3s2s1hl
+		WORD	0000000000000000B
+		BYTE	000H
+		BYTE	0DAH
+;
+HID09A		EQU	$		;      -09A
+;
+HID09B		EQU	$		;      -09B
+		BYTE	g0+b0+r0
+		BYTE	c28,bcE,oc13
+		BYTE	bmd_not		; BG. move data
+		BYTE	inf_not,inf_not	; house information
+;
+;			      s4s3s2s1hl
+		WORD	0000000000000000B
+		BYTE	07DH
+;
+HID09C		EQU	$		;      -09C
+		BYTE	g0+b0+r0
+		BYTE	c28,bcE,oc13
+		BYTE	bmd_eyk		; BG. move data
+		BYTE	inf_not,inf_not	; house information
+;
+HID09D		EQU	$		;      -09D
+		BYTE	g0+b0+r0
+		BYTE	c28,bcE,oc13
+		BYTE	bmd_eyk		; BG. move data
+		BYTE	inf_not,inf_tpA	; house information
+;
+;			      s4s3s2s1hl
+		WORD	0000000000000000B
+		BYTE	07BH
+;
+HID09E		EQU	$		;      -09E
+		BYTE	g1+b0+r0
+		BYTE	c13,bcB,oc1C
+		BYTE	bmd_not		; BG. move data
+		BYTE	inf_not,inf_not	; house information
+;
+;			      s4s3s2s1hl
+		WORD	0000000000000000B
+		BYTE	0BEH
+		BYTE	0BEH
+;
+HID09F		EQU	$		;      -09F
+		BYTE	g0+b0+r0
+		BYTE	c13,bcB,oc1C
+		BYTE	bmd_not		; BG. move data
+		BYTE	inf_sd1,inf_not	; house information
+;
+;
+;
+HID0A0		EQU	$		; house-0A0
+		BYTE	g0+b0+r0
+		BYTE	c12,bcC,oc1D
+		BYTE	bmd_not		; BG. move data
+		BYTE	inf_not,inf_not	; house information
+;
+;			      s4s3s2s1hl
+		WORD	0000000000000000B
+		BYTE	000H
+		BYTE	091H
+;
+HID0A1		EQU	$		;      -0A1
+HID0A3		EQU	$		;      -0A3
+		BYTE	g0+b0+r0
+		BYTE	c11,bcC,oc1D
+		BYTE	bmd_not		; BG. move data
+		BYTE	inf_not,inf_not	; house information
+;
+HID0A2		EQU	$		;      -0A2
+		BYTE	g6+b0+r0
+		BYTE	c11,bcC,oc1D
+		BYTE	bmd_not		; BG. move data
+		BYTE	inf_not,inf_not	; house information
+;
+;			      s4s3s2s1hl
+		WORD	0000000000000000B
+		BYTE	000H
+		BYTE	093H
+;
+;;;;HID0A3		EQU	$		;      -0A3
+;;;;		BYTE	g0+b0+r0
+;;;;		BYTE	c11,bcC,oc1D
+;;;;		BYTE	bmd_not		; BG. move data
+;;;;		BYTE	inf_not,inf_not	; house information
+;;;;;
+HID0A4		EQU	$		;      -0A4
+		BYTE	g3+b0+r0
+		BYTE	c19,bcD,oc17
+		BYTE	bmd_kmb		; BG. move data
+		BYTE	inf_bcw,inf_not	; house information
+;
+;
+HID0A5		EQU	$		;      -0A5
+		BYTE	g0+b0+r0
+		BYTE	c25,bcE,oc24
+		BYTE	bmd_not		; BG. move data
+		BYTE	inf_ee6,inf_not	; house information
+;
+;			      s4s3s2s1hl
+		WORD	0000000000000000B
+		BYTE	000H
+		BYTE	06CH
+;
+HID0A6		EQU	$		;      -0A6
+		BYTE	g0+b0+r0
+		BYTE	c25,bcE,oc24
+		BYTE	bmd_not		; BG. move data
+		BYTE	inf_not,inf_not	; house information
+;
+;			      s4s3s2s1hl
+		WORD	0000000000000000B
+		BYTE	000H
+		BYTE	04DH
+;
+HID0A7		EQU	$		;      -0A7
+		BYTE	g0+b0+r0
+		BYTE	c06,bc5,oc19
+		BYTE	bmd_not		; BG. move data
+		BYTE	inf_not,inf_not	; house information
+;
+;			      s4s3s2s1hl
+		WORD	0000000000000000B
+		BYTE	017H
+;
+HID0A8		EQU	$		;      -0A8
+		BYTE	g6+b0+r0
+		BYTE	c0B,bc5,oc8
+		BYTE	bmd_not		; BG. move data
+		BYTE	inf_ee2,inf_not	; house information
+;
+HID0A9		EQU	$		;      -0A9
+		BYTE	g6+b0+r0
+		BYTE	c0B,bc5,oc8
+		BYTE	bmd_not		; BG. move data
+		BYTE	inf_sd1,inf_not	; house information
+;
+;			      s4s3s2s1hl
+		WORD	0000000000000000B
+		BYTE	089H
+;
+HID0AA		EQU	$		;      -0AA
+		BYTE	g6+b0+r0
+		BYTE	c0B,bc5,oc8
+		BYTE	bmd_not		; BG. move data
+		BYTE	inf_sd1,inf_not	; house information
+;
+HID0AB		EQU	$		;      -0AB
+		BYTE	g0+b0+r0
+		BYTE	c17,bcA,oc1B
+		BYTE	bmd_not		; BG. move data
+		BYTE	inf_not,inf_not	; house information
+;
+;			      s4s3s2s1hl
+		WORD	0000000000000000B
+		BYTE	000H
+		BYTE	064H
+;
+HID0AC		EQU	$		;      -0AC
+		BYTE	g7+b0+r0
+		BYTE	c17,bcA,oc20
+		BYTE	bmd_not		; BG. move data
+		BYTE	inf_bcw,inf_not	; house information
+;
+HID0AD		EQU	$		;      -0AD
+HID0AE		EQU	$		;      -0AE
+		BYTE	g0+b0+r0
+		BYTE	c13,bcB,oc1C
+		BYTE	bmd_not		; BG. move data
+		BYTE	inf_stk,inf_not	; house information
+;
+;			      s4s3s2s1hl
+		WORD	0000000000000000B
+		BYTE	000H
+		BYTE	08EH
+;
+HID0AF		EQU	$		;      -0AF
+		BYTE	g0+b0+r0
+		BYTE	c13,bcB,oc1C
+		BYTE	bmd_not		; BG. move data
+		BYTE	inf_not,inf_not	; house information
+;
+;
+;
+HID0B0		EQU	$		; house-0B0
+		BYTE	g0+b0+r0
+		BYTE	c26,bc2,oc21
+		BYTE	bmd_not		; BG. move data
+		BYTE	inf_ee4,inf_ee1	; house information
+;
+;			      s4s3s2s1hl
+		WORD	0000000000001000B
+		BYTE	000H
+		BYTE	040H,0C0H
+;
+HID0B1		EQU	$		;      -0B1
+		BYTE	g0+b0+r0
+		BYTE	c11,bcC,oc1D
+		BYTE	bmd_not		; BG. move data
+		BYTE	inf_not,inf_not	; house information
+;
+;			      s4s3s2s1hl
+		WORD	0000000000000010B
+		BYTE	0B2H
+;
+HID0B2		EQU	$		;      -0B2
+		BYTE	g6+b0+r0
+		BYTE	c11,bcC,oc1D
+		BYTE	bmd_not		; BG. move data
+		BYTE	inf_ee2,inf_bs3	; house information
+;
+HID0B3		EQU	$		;      -0B3
+		BYTE	g6+b0+r0
+		BYTE	c11,bcC,oc1D
+		BYTE	bmd_not		; BG. move data
+		BYTE	inf_stk,inf_not	; house information
+;
+HID0B4		EQU	$		;      -0B4
+		BYTE	g0+b0+r0
+		BYTE	c19,bcD,oc17
+		BYTE	bmd_not		; BG. move data
+		BYTE	inf_not,inf_not	; house information
+;
+;			      s4s3s2s1hl
+		WORD	0000000000000000B
+		BYTE	000H
+		BYTE	0C4H
+;
+HID0B5		EQU	$		;      -0B5
+		BYTE	g0+b0+r1
+		BYTE	c18,bcD,oc25
+		BYTE	bmd_not		; BG. move data
+		BYTE	inf_sd1,inf_not	; house information
+;
+;			      s4s3s2s1hl
+		WORD	0000000000000000B
+		BYTE	000H
+		BYTE	004H
+;
+HID0B6		EQU	$		;      -0B6
+		BYTE	g0+b0+r0
+		BYTE	c18,bcD,oc1E
+		BYTE	bmd_not		; BG. move data
+		BYTE	inf_ee3,inf_btk	; house information
+;
+;			      s4s3s2s1hl
+		WORD	0000000000000000B
+		BYTE	000H
+		BYTE	015H
+;
+;;;;HID0B7		EQU	$		;      -0B7
+;;;;		BYTE	g0+b0+r0
+;;;;		BYTE	c18,bcD,oc1E
+;;;;		BYTE	bmd_not		; BG. move data
+;;;;		BYTE	inf_not,inf_not	; house information
+;;;;;
+HID0B8		EQU	$		;      -0B8
+		BYTE	g0+b0+r0
+		BYTE	c0B,bc5,oc8
+		BYTE	bmd_not		; BG. move data
+		BYTE	inf_stk,inf_not	; house information
+;
+HID0B9		EQU	$		;      -0B9
+		BYTE	g6+b0+r0
+		BYTE	c0B,bc5,oc8
+		BYTE	bmd_not		; BG. move data
+		BYTE	inf_not,inf_not	; house information
+;
+HID0BA		EQU	$		;      -0BA
+		BYTE	g0+b0+r1
+		BYTE	c0B,bc5,oc8
+		BYTE	bmd_not		; BG. move data
+		BYTE	inf_sd1,inf_not	; house information
+;
+HID0BB		EQU	$		;      -0BB
+		BYTE	g2+b0+r0
+		BYTE	c17,bcA,oc1B
+		BYTE	bmd_not		; BG. move data
+		BYTE	inf_not,inf_not	; house information
+;
+HID0BC		EQU	$		;      -0BC
+		BYTE	g0+b0+r0
+		BYTE	c17,bcA,oc1B
+		BYTE	bmd_not		; BG. move data
+		BYTE	inf_sd1,inf_not	; house information
+;
+;			      s4s3s2s1hl
+		WORD	0000000000000000B
+		BYTE	000H
+		BYTE	045H
+;
+HID0BD		EQU	$		;      -0BD
+;
+HID0BE		EQU	$		;      -0BE
+		BYTE	g0+b0+r0
+		BYTE	c13,bcB,oc29
+		BYTE	bmd_not		; BG. move data
+		BYTE	inf_sd0,inf_not	; house information
+;
+;			      s4s3s2s1hl
+		WORD	0000000000000000B
+		BYTE	04FH
+		BYTE	09EH
+;
+HID0BF		EQU	$		;      -0BF
+		BYTE	g0+b0+r0
+		BYTE	c13,bcB,oc29
+		BYTE	bmd_not		; BG. move data
+		BYTE	inf_not,inf_not	; house information
+;
+;
+HID0C0		EQU	$		; house-0C0
+		BYTE	g0+b0+r1
+		BYTE	c00,bc2,oc27
+		BYTE	bmd_not		; BG. move data
+		BYTE	inf_ee1,inf_bs4	; house information
+;
+;			      s4s3s2s1hl
+		WORD	0000000000000000B
+		BYTE	000H
+		BYTE	0B0H,0D0H
+;
+HID0C1		EQU	$		;      -0C1
+		BYTE	g0+b0+r0
+		BYTE	c11,bcC,oc1D
+		BYTE	bmd_not		; BG. move data
+		BYTE	inf_sd3,inf_not	; house information
+;
+HID0C2		EQU	$		;      -0C2
+		BYTE	g6+b0+r0
+		BYTE	c11,bcC,oc1D
+		BYTE	bmd_not		; BG. move data
+		BYTE	inf_stk,inf_not	; house information
+;
+HID0C3		EQU	$		;      -0C3
+		BYTE	g6+b0+r0
+		BYTE	c11,bcC,oc1D
+		BYTE	bmd_not		; BG. move data
+		BYTE	inf_not,inf_not	; house information
+;
+HID0C4		EQU	$		;      -0C4
+		BYTE	g0+b0+r0
+		BYTE	c18,bcD,oc25
+		BYTE	bmd_not		; BG. move data
+		BYTE	inf_not,inf_not	; house information
+;
+;			      s4s3s2s1hl
+		WORD	0000000000000000B
+		BYTE	000H
+		BYTE	0B4H
+;
+HID0C5		EQU	$		;      -0C5
+HID0D5		EQU	$		;      -0D5
+		BYTE	g0+b0+r0
+		BYTE	c18,bcD,oc25
+		BYTE	bmd_not		; BG. move data
+		BYTE	inf_not,inf_not	; house information
+;
+;;;;HID0C6		EQU	$		;      -0C6
+;;;;		BYTE	g0+b0+r0
+;;;;		BYTE	c18,bcD,oc1E
+;;;;		BYTE	bmd_not		; BG. move data
+;;;;		BYTE	inf_not,inf_not	; house information
+;;;;;
+HID0C7		EQU	$		;      -0C7
+		BYTE	g0+b0+r0
+		BYTE	c18,bcD,oc1E
+		BYTE	bmd_not		; BG. move data
+		BYTE	inf_sd3,inf_not	; house information
+;
+HID0C8		EQU	$		;      -0C8
+		BYTE	g0+b0+r0
+		BYTE	c0B,bc5,oc9
+		BYTE	bmd_not		; BG. move data
+		BYTE	inf_bsd,inf_bcw	; house information
+;
+HID0C9		EQU	$		;      -0C9
+		BYTE	g0+b0+r0
+		BYTE	c0B,bc5,oc8
+		BYTE	bmd_not		; BG. move data
+		BYTE	inf_sd1,inf_not	; house information
+;
+HID0CA		EQU	$		;      -0CA
+;
+HID0CB		EQU	$		;      -0CB
+;;;;		BYTE	g6+b0+r0
+;;;;		BYTE	c17,bcA,oc1B
+;;;;		BYTE	bmd_not		; BG. move data
+;;;;		BYTE	inf_not,inf_not	; house information
+;;;;;
+HID0CC		EQU	$		;      -0CC
+HID0DB		EQU	$		;      -0DB
+HID0DC		EQU	$		;      -0DC
+		BYTE	g6+b0+r0
+		BYTE	c17,bcA,oc1B
+		BYTE	bmd_not		; BG. move data
+		BYTE	inf_not,inf_not	; house information
+;
+HID0CD		EQU	$		;      -0CD
+;
+HID0CE		EQU	$		;      -0CE
+		BYTE	g1+b0+r0
+		BYTE	c13,bcB,oc29
+		BYTE	bmd_not		; BG. move data
+		BYTE	inf_ssd,inf_not	; house information
+;
+;			      s4s3s2s1hl
+		WORD	0000000000000000B
+		BYTE	0DEH
+;
+HID0CF		EQU	$		;      -0CF
+;
+;
+HID0D0		EQU	$		; house-0D0
+		BYTE	g0+b0+r1
+		BYTE	c00,bc2,oc21
+		BYTE	bmd_not		; BG. move data
+		BYTE	inf_bs4,inf_not	; house information
+;
+;			      s4s3s2s1hl
+		WORD	0000000000000000B
+		BYTE	000H
+		BYTE	0C0H,0E0H
+;
+HID0D1		EQU	$		;      -0D1
+		BYTE	g0+b0+r0
+		BYTE	c11,bcC,oc1D
+		BYTE	bmd_not		; BG. move data
+		BYTE	inf_not,inf_not	; house information
+;
+;			      s4s3s2s1hl
+		WORD	0000000000000000B
+		BYTE	0B1H
+		BYTE	097H
+;
+HID0D2		EQU	$		;      -0D2
+		BYTE	g0+b0+r0
+		BYTE	c11,bcC,oc1D
+		BYTE	bmd_not		; BG. move data
+		BYTE	inf_ee9,inf_not	; house information
+;
+;			      s4s3s2s1hl
+		WORD	0000000000000000B
+		BYTE	000H
+		BYTE	098H
+;
+HID0D3		EQU	$		;      -0D3
+;
+HID0D4		EQU	$		;      -0D4
+;
+;;;;HID0D5		EQU	$		;      -0D5
+;;;;		BYTE	g0+b0+r0
+;;;;		BYTE	c18,bcD,oc25
+;;;;		BYTE	bmd_not		; BG. move data
+;;;;		BYTE	inf_not,inf_not	; house information
+;;;;;
+;;;;HID0D6		EQU	$		;      -0D6
+;;;;		BYTE	g0+b0+r0
+;;;;		BYTE	c18,bcD,oc1E
+;;;;		BYTE	bmd_not		; BG. move data
+;;;;		BYTE	inf_not,inf_not	; house information
+;;;;;
+HID0D7		EQU	$		;      -0D7
+;
+HID0D8		EQU	$		;      -0D8
+		BYTE	g0+b0+r0
+		BYTE	c0B,bc5,oc8
+		BYTE	bmd_not		; BG. move data
+		BYTE	inf_ee5,inf_not	; house information
+;
+HID0D9		EQU	$		;      -0D9
+		BYTE	g0+b0+r0
+		BYTE	c0B,bc5,oc8
+		BYTE	bmd_not		; BG. move data
+		BYTE	inf_sd1,inf_not	; house information
+;
+HID0DA		EQU	$		;      -0DA
+		BYTE	g0+b0+r0
+		BYTE	c0B,bc5,oc8
+		BYTE	bmd_not		; BG. move data
+		BYTE	inf_sd1,inf_not	; house information
+;
+;			      s4s3s2s1hl
+		WORD	0000000000000000B
+		BYTE	000H
+		BYTE	099H
+;
+;;;;HID0DB		EQU	$		;      -0DB
+;;;;		BYTE	g6+b0+r0
+;;;;		BYTE	c17,bcA,oc1B
+;;;;		BYTE	bmd_not		; BG. move data
+;;;;		BYTE	inf_not,inf_not	; house information
+;;;;;
+;;;;HID0DC		EQU	$		;      -0DC
+;;;;		BYTE	g6+b0+r0
+;;;;		BYTE	c17,bcA,oc1B
+;;;;		BYTE	bmd_not		; BG. move data
+;;;;		BYTE	inf_not,inf_not	; house information
+;;;;;
+HID0DD		EQU	$		;      -0DD
+;
+HID0DE		EQU	$		;      -0DE
+		BYTE	g7+b0+r0
+		BYTE	c14,bcB,oc16
+		BYTE	bmd_not		; BG. move data
+		BYTE	inf_bcw,inf_not	; house information
+;
+HID0DF		EQU	$		;      -0DF
+		BYTE	g6+b0+r0
+		BYTE	c20,bc6,oc13
+		BYTE	bmd_not		; BG. move data
+		BYTE	inf_not,inf_not	; house information
+;
+;			      s4s3s2s1hl
+		WORD	0000000000000000B
+		BYTE	000H
+		BYTE	0EFH
+;
+;
+HID0E0		EQU	$		; house-0E0
+		BYTE	g0+b0+r0
+		BYTE	c26,bc2,oc21
+		BYTE	bmd_not		; BG. move data
+		BYTE	inf_ee0,inf_et1	; house information
+;
+;			      s4s3s2s1hl
+		WORD	0000000000000000B
+		BYTE	000H
+		BYTE	0D0H
+;
+HID0E1		EQU	$		;      -0E1 -mori no ki no naka
+		BYTE	g6+b0+r0
+		BYTE	c07,bc6,oc28
+		BYTE	bmd_not		; BG. move data
+		BYTE	inf_not,inf_not	; house information
+;
+HID0E2		EQU	$		;      -0E2
+		BYTE	g0+b0+r0
+		BYTE	c20,bc6,oc13
+		BYTE	bmd_not		; BG. move data
+		BYTE	inf_not,inf_not	; house information
+;
+HID0E3		EQU	$		;      -0E3
+		BYTE	g6+b0+r0
+		BYTE	c20,bc6,oc9
+		BYTE	bmd_not		; BG. move data
+		BYTE	inf_not,inf_not	; house information
+;
+HID0E4		EQU	$		;      -0E4
+;;;;		BYTE	g0+b0+r1
+;;;;		BYTE	c07,bc14,oc1
+;;;;		BYTE	bmd_not		; BG. move data
+;;;;		BYTE	inf_not,inf_not	; house information
+;;;;;
+HID0E5		EQU	$		;      -0E5
+		BYTE	g0+b0+r1
+		BYTE	c07,bc14,oc1
+		BYTE	bmd_not		; BG. move data
+		BYTE	inf_not,inf_not	; house information
+;
+HID0E6		EQU	$		;      -0E6
+;;;;		BYTE	g0+b0+r1
+;;;;		BYTE	c07,bc6,oc1
+;;;;		BYTE	bmd_not		; BG. move data
+;;;;		BYTE	inf_not,inf_not	; house information
+;;;;;
+HID0E7		EQU	$		;      -0E7
+HID0F0		EQU	$		;      -0F0
+HID0F1		EQU	$		;      -0F1
+		BYTE	g0+b0+r1
+		BYTE	c07,bc6,oc1
+		BYTE	bmd_not		; BG. move data
+		BYTE	inf_not,inf_not	; house information
+;
+HID0E8		EQU	$		;      -0E8
+		BYTE	g1+b0+r0
+		BYTE	c07,bc6,oc13
+		BYTE	bmd_not		; BG. move data
+		BYTE	inf_not,inf_not	; house information
+;
+;			      s4s3s2s1hl
+		WORD	0000000000000000B
+		BYTE	0F8H
+		BYTE	0F8H,0F8H,0F8H,0F8H
+;
+HID0E9		EQU	$		;      -0E9
+;.'91/.8/22.[THU]			BYTE	g0+b0+r0
+;.'91/.8/22.[THU]			BYTE	c07,bc6,oc8
+;.'91/.8/22.[THU]			BYTE	bmd_not		; BG. move data
+;.'91/.8/22.[THU]			BYTE	inf_not,inf_not	; house information
+;
+HID0EA		EQU	$		;      -0EA
+		BYTE	g1+b0+r0
+		BYTE	c20,bc6,oc13
+		BYTE	bmd_not		; BG. move data
+		BYTE	inf_not,inf_not	; house information
+;
+;			      s4s3s2s1hl
+		WORD	0000000000000000B
+		BYTE	0FAH
+		BYTE	0FAH
+;
+HID0EB		EQU	$		;      -0EB
+		BYTE	g1+b0+r0
+		BYTE	c07,bc6,oc19
+		BYTE	bmd_not		; BG. move data
+		BYTE	inf_not,inf_not	; house information
+;
+;			      s4s3s2s1hl
+		WORD	0000000000000000B
+		BYTE	0FBH
+		BYTE	0FBH
+;
+HID0EC		EQU	$		;      -0EC
+;.'91/.8/22.[THU]			BYTE	g0+b0+r0
+;.'91/.8/22.[THU]			BYTE	c07,bc6,oc8
+;.'91/.8/22.[THU]			BYTE	bmd_not		; BG. move data
+;.'91/.8/22.[THU]			BYTE	inf_not,inf_not	; house information
+;.'91/.8/22.[THU]	;
+;.'91/.8/22.[THU]	;			      s4s3s2s1hl
+;.'91/.8/22.[THU]			WORD	0000000000000000B
+;.'91/.8/22.[THU]			BYTE	000H
+;.'91/.8/22.[THU]			BYTE	0FCH
+;
+HID0ED		EQU	$		;      -0ED
+		BYTE	g1+b0+r0
+		BYTE	c20,bc6,oc13
+		BYTE	bmd_not		; BG. move data
+		BYTE	inf_not,inf_not	; house information
+;
+;			      s4s3s2s1hl
+		WORD	0000000000000000B
+		BYTE	0FDH
+		BYTE	0FDH,0FDH
+;
+HID0EE		EQU	$		;      -0EE
+		BYTE	g1+b0+r0
+		BYTE	c20,bc6,oc13
+		BYTE	bmd_not		; BG. move data
+		BYTE	inf_not,inf_not	; house information
+;
+;			      s4s3s2s1hl
+		WORD	0000000000000000B
+		BYTE	0FEH
+;
+HID0EF		EQU	$		;      -0EF
+		BYTE	g1+b0+r0
+		BYTE	c20,bc6,oc13
+		BYTE	bmd_not		; BG. move data
+		BYTE	inf_ee1,inf_not	; house information
+;
+;			      s4s3s2s1hl
+		WORD	0000000000001000B
+		BYTE	0FFH
+		BYTE	0DFH,0FFH
+;
+;
+;;;;HID0F0		EQU	$		; house-0F0
+;;;;		BYTE	g0+b0+r1
+;;;;		BYTE	c07,bc6,oc1
+;;;;		BYTE	bmd_not		; BG. move data
+;;;;		BYTE	inf_not,inf_not	; house information
+;;;;;
+;;;;HID0F1		EQU	$		;      -0F1
+;;;;		BYTE	g0+b0+r1
+;;;;		BYTE	c07,bc6,oc1
+;;;;		BYTE	bmd_not		; BG. move data
+;;;;		BYTE	inf_not,inf_not	; house information
+;;;;;
+HID0F2		EQU	$		;      -0F2
+HID0F3		EQU	$		;      -0F3
+		BYTE	g0+b0+r0
+		BYTE	c02,bc3,oc5
+		BYTE	bmd_not		; BG. move data
+;		BYTE	inf_not,inf_not	; house information
+;;;;;
+HID0F4		EQU	$		;      -0F4
+;;;;		BYTE	g0+b0+r0
+;;;;		BYTE	c02,bc3,ocF
+;;;;		BYTE	bmd_not		; BG. move data
+;;;;		BYTE	inf_not,inf_not	; house information
+;;;;;
+HID0F5		EQU	$		;      -0F5
+		BYTE	g0+b0+r0
+		BYTE	c02,bc3,ocF
+		BYTE	bmd_not		; BG. move data
+		BYTE	inf_not,inf_not	; house information
+;
+HID0F6		EQU	$		;      -0F6
+;.'91/.8/22.[THU]	;;;;		BYTE	g0+b0+r0
+;.'91/.8/22.[THU]	;;;;		BYTE	c07,bc6,oc8
+;.'91/.8/22.[THU]	;;;;		BYTE	bmd_not		; BG. move data
+;.'91/.8/22.[THU]	;;;;		BYTE	inf_not,inf_not	; house information
+;
+HID0F7		EQU	$		;      -0F7
+;.'91/.8/22.[THU]			BYTE	g0+b0+r0
+;.'91/.8/22.[THU]			BYTE	c07,bc6,oc8
+;.'91/.8/22.[THU]			BYTE	bmd_not		; BG. move data
+;.'91/.8/22.[THU]			BYTE	inf_not,inf_not	; house information
+;
+HID0F8		EQU	$		;      -0F8
+		BYTE	g0+b0+r0
+		BYTE	c07,bc6,oc13
+		BYTE	bmd_not		; BG. move data
+		BYTE	inf_not,inf_not	; house information
+;
+;			      s4s3s2s1hl
+		WORD	0000000000000000B
+		BYTE	000H
+		BYTE	0E8H,0E8H,0E8H,0E8H
+;
+HID0F9		EQU	$		;      -0F9
+HID0FE		EQU	$		;      -0FE
+		BYTE	g0+b0+r0
+		BYTE	c20,bc6,oc13
+		BYTE	bmd_not		; BG. move data
+		BYTE	inf_not,inf_not	; house information
+;
+HID0FA		EQU	$		;      -0FA
+		BYTE	g6+b0+r0
+		BYTE	c20,bc6,oc13
+		BYTE	bmd_not		; BG. move data
+		BYTE	inf_not,inf_not	; house information
+;
+;			      s4s3s2s1hl
+		WORD	0000000000000000B
+		BYTE	000H
+		BYTE	0EAH
+;
+HID0FB		EQU	$		;      -0FB
+		BYTE	g0+b0+r0
+		BYTE	c07,bc6,oc19
+		BYTE	bmd_not		; BG. move data
+		BYTE	inf_not,inf_not	; house information
+;
+;			      s4s3s2s1hl
+		WORD	0000000000000000B
+		BYTE	000H
+		BYTE	0EBH
+;
+HID0FC		EQU	$		;      -0FC
+;.'91/.8/22.[THU]			BYTE	g0+b0+r0
+;.'91/.8/22.[THU]			BYTE	c07,bc6,oc8
+;.'91/.8/22.[THU]			BYTE	bmd_not		; BG. move data
+;.'91/.8/22.[THU]			BYTE	inf_not,inf_not	; house information
+;.'91/.8/22.[THU]	;
+;.'91/.8/22.[THU]	;			      s4s3s2s1hl
+;.'91/.8/22.[THU]			WORD	0000000000000000B
+;.'91/.8/22.[THU]			BYTE	000H
+;.'91/.8/22.[THU]			BYTE	0ECH
+;
+HID0FD		EQU	$		;      -0FD
+		BYTE	g0+b0+r0
+		BYTE	c20,bc6,oc13
+		BYTE	bmd_not		; BG. move data
+		BYTE	inf_not,inf_not	; house information
+;
+;			      s4s3s2s1hl
+		WORD	0000000000000000B
+		BYTE	000H
+		BYTE	0EDH,0EDH
+;
+;;;;HID0FE		EQU	$		;      -0FE
+;;;;		BYTE	g0+b0+r0
+;;;;		BYTE	c20,bc14,oc13
+;;;;		BYTE	bmd_not		; BG. move data
+;;;;		BYTE	inf_not,inf_not	; house information
+;;;;;
+HID0FF		EQU	$		;      -0FF
+		BYTE	g0+b0+r0
+		BYTE	c07,bc6,oc5
+		BYTE	bmd_not		; BG. move data
+		BYTE	inf_not,inf_not	; house information
+;
+;			      s4s3s2s1hl
+		WORD	0000000000000000B
+		BYTE	000H
+		BYTE	0EFH
+;
+;
+;
+;
+HID100		EQU	$		;
+		BYTE	g0+b0+r0
+		BYTE	c05,bc3,oc28
+		BYTE	bmd_not		; BG. move data
+		BYTE	inf_not,inf_not	; house information
+;
+HID10F		EQU	$		;
+HID110		EQU	$		;
+HID11C		EQU	$		;
+		BYTE	g0+b0+r0
+		BYTE	c1F,bc3,oc5
+		BYTE	bmd_not		; BG. move data
+		BYTE	inf_not,inf_not	; house information
+;
+HID101		EQU	$		;
+		BYTE	g0+b0+r0
+		BYTE	c02,bc3,ocF
+		BYTE	bmd_not		; BG. move data
+		BYTE	inf_not,inf_not	; house information
+;
+HID102		EQU	$		;
+		BYTE	g0+b0+r0
+		BYTE	c15,bc3,ocD
+		BYTE	bmd_not		; BG. move data
+		BYTE	inf_not,inf_not	; house information
+;
+HID103		EQU	$		;
+HID118		EQU	$		;
+		BYTE	g0+b0+r0
+		BYTE	c05,bc3,ocF
+		BYTE	bmd_not		; BG. move data
+		BYTE	inf_not,inf_not	; house information
+;
+HID104		EQU	$		;
+		BYTE	g0+b0+r1
+		BYTE	c15,bc3,ocD
+		BYTE	bmd_not		; BG. move data
+		BYTE	inf_not,inf_not	; house information
+;
+HID105		EQU	$		;
+		BYTE	g0+b0+r0
+		BYTE	c1C,bcF,oc10
+		BYTE	bmd_not		; BG. move data
+		BYTE	inf_not,inf_not	; house information
+;
+HID106		EQU	$		;
+		BYTE	g0+b0+r0
+		BYTE	c1F,bc3,ocF
+		BYTE	bmd_not		; BG. move data
+		BYTE	inf_not,inf_not	; house information
+;
+HID107		EQU	$		;
+		BYTE	g0+b0+r0
+		BYTE	c02,bc3,oc1
+		BYTE	bmd_not		; BG. move data
+		BYTE	inf_not,inf_not	; house information
+;
+HID108		EQU	$		;
+		BYTE	g0+b0+r0
+		BYTE	c02,bc3,ocE
+		BYTE	bmd_not		; BG. move data
+		BYTE	inf_not,inf_not	; house information
+;
+HID109		EQU	$		;
+		BYTE	g0+b0+r1
+		BYTE	c05,bc3,oc5
+		BYTE	bmd_not		; BG. move data
+		BYTE	inf_not,inf_not	; house information
+;
+HID10A		EQU	$		;
+		BYTE	g0+b0+r1
+		BYTE	c07,bc6,oc10
+		BYTE	bmd_not		; BG. move data
+		BYTE	inf_not,inf_not	; house information
+;
+HID10B		EQU	$		;
+		BYTE	g4+b0+r0
+		BYTE	c0A,bc8,oc8
+		BYTE	bmd_not		; BG. move data
+		BYTE	inf_not,inf_wgt	; house information
+;
+HID10C		EQU	$		;
+		BYTE	g0+b0+r0
+		BYTE	c27,bc6,oc8
+		BYTE	bmd_not		; BG. move data
+		BYTE	inf_ee2,inf_not	; house information
+;
+HID10D		EQU	$		;      -ura pyramid
+		BYTE	g0+b0+r0
+		BYTE	c0A,bc8,oc11
+		BYTE	bmd_not		; BG. move data
+		BYTE	inf_not,inf_not	; house information
+;
+HID10E		EQU	$		;
+		BYTE	g0+b0+r0
+		BYTE	c07,bc14,oc5
+		BYTE	bmd_not		; BG. move data
+		BYTE	inf_not,inf_not	; house information
+;
+;;;;HID10F		EQU	$		;
+;;;;;
+;;;;HID110		EQU	$		;
+;;;;		BYTE	g0+b0+r0
+;;;;		BYTE	c07,bc6,oc8
+;;;;		BYTE	bmd_not		; BG. move data
+;;;;		BYTE	inf_not,inf_not	; house information
+;;;;;
+HID111		EQU	$		;
+HID121		EQU	$		;
+HID122		EQU	$		;
+		BYTE	g0+b0+r0
+		BYTE	c1E,bc11,oc5
+		BYTE	bmd_not		; BG. move data
+		BYTE	inf_not,inf_not	; house information
+;
+HID112		EQU	$		;
+		BYTE	g0+b0+r0
+		BYTE	c07,bc14,oc5
+		BYTE	bmd_not		; BG. move data
+		BYTE	inf_not,inf_not	; house information
+;
+HID113		EQU	$		;
+		BYTE	g0+b0+r0
+		BYTE	c03,bc10,oc8
+		BYTE	bmd_not		; BG. move data
+		BYTE	inf_not,inf_not	; house information
+;
+HID018		EQU	$		;      -018
+HID02C		EQU	$		;      -02C
+HID114		EQU	$		;
+HID115		EQU	$		;
+		BYTE	g0+b0+r0
+		BYTE	c07,bc6,oc7
+		BYTE	bmd_not		; BG. move data
+		BYTE	inf_not,inf_not	; house information
+;
+HID116		EQU	$		;
+		BYTE	g0+b0+r0
+		BYTE	c22,bc12,oc7
+		BYTE	bmd_not		; BG. move data
+		BYTE	inf_not,inf_not	; house information
+;
+HID117		EQU	$		;
+		BYTE	g0+b0+r0
+		BYTE	c20,bc14,oc5
+		BYTE	bmd_not		; BG. move data
+		BYTE	inf_not,inf_not	; house information
+;
+;;;;HID118		EQU	$		;
+;;;;		BYTE	g6+b0+r0
+;;;;		BYTE	c00,bc0,oc1
+;;;;		BYTE	bmd_not		; BG. move data
+;;;;		BYTE	inf_not,inf_not	; house information
+;;;;;
+HID119		EQU	$		;
+		BYTE	g7+b0+r0
+		BYTE	c23,bcA,ocF
+		BYTE	bmd_not		; BG. move data
+		BYTE	inf_not,inf_not	; house information
+;
+;			      s4s3s2s1hl
+		WORD	0000000000000000B
+		BYTE	000H
+		BYTE	01DH
+;
+HID11A		EQU	$		;
+		BYTE	g0+b0+r0
+		BYTE	c1C,bcF,oc5
+		BYTE	bmd_not		; BG. move data
+		BYTE	inf_not,inf_not	; house information
+;
+HID11B		EQU	$		;
+		BYTE	g6+b0+r0
+		BYTE	c07,bc6,oc8
+		BYTE	bmd_not		; BG. move data
+		BYTE	inf_not,inf_not	; house information
+;
+;;;;HID11C		EQU	$		;
+;;;;;---- ura bakudanya
+;;;;		BYTE	g0+b0+r0
+;;;;		BYTE	c1F,bc3,oc5
+;;;;		BYTE	bmd_not		; BG. move data
+;;;;		BYTE	inf_not,inf_not	; house information
+;;;;;
+HID11D		EQU	$		;
+		BYTE	g0+b0+r0
+		BYTE	c23,bcA,ocF
+		BYTE	bmd_not		; BG. move data
+		BYTE	inf_not,inf_not	; house information
+;
+;			      s4s3s2s1hl
+		WORD	0000000000000000B
+		BYTE	000H
+		BYTE	019H
+;
+HID11E		EQU	$		;
+HID127		EQU	$		;
+		BYTE	g0+b0+r0
+		BYTE	c20,bc6,oc2A
+		BYTE	bmd_not		; BG. move data
+		BYTE	inf_not,inf_not	; house information
+;
+HID11F		EQU	$		;
+		BYTE	g0+b0+r0
+		BYTE	c05,bc3,oc5
+		BYTE	bmd_not		; BG. move data
+		BYTE	inf_not,inf_not	; house information
+;
+;
+HID120		EQU	$		;
+		BYTE	g0+b0+r0
+		BYTE	c13,bc6,oc13
+		BYTE	bmd_not		; BG. move data
+		BYTE	inf_not,inf_not	; house information
+;
+;;;;HID121		EQU	$		;
+;;;;HID122		EQU	$		;
+;;;;		BYTE	g0+b0+r0
+;;;;		BYTE	c1E,bc11,oc5
+;;;;		BYTE	bmd_not		; BG. move data
+;;;;		BYTE	inf_not,inf_not	; house information
+;;;;;
+HID123		EQU	$		;
+		BYTE	g0+b0+r0
+		BYTE	c07,bc6,oc28
+		BYTE	bmd_not		; BG. move data
+		BYTE	inf_ee2,inf_not	; house information
+;
+HID124		EQU	$		;
+HID125		EQU	$		;
+HID126		EQU	$		;
+		BYTE	g0+b0+r0
+		BYTE	c07,bc6,oc28
+		BYTE	bmd_not		; BG. move data
+		BYTE	inf_not,inf_not	; house information
+;
+;;;;HID127		EQU	$		;
+;
+HID128		EQU	$		;
+;
+HID129		EQU	$		;
+;
+HID12A		EQU	$		;
+;
+HID12B		EQU	$		;
+;
+HID12C		EQU	$		;
+;
+HID12D		EQU	$		;
+;
+HID12E		EQU	$		;
+;
+HID12F		EQU	$		;
+;
+HID130		EQU	$		;
+;
+HID131		EQU	$		;
+;
+HID132		EQU	$		;
+;
+HID133		EQU	$		;
+;
+HID134		EQU	$		;
+;
+HID135		EQU	$		;
+;
+HID136		EQU	$		;
+;
+HID137		EQU	$		;
+;
+HID138		EQU	$		;
+;
+HID139		EQU	$		;
+;
+HID13A		EQU	$		;
+;
+HID13B		EQU	$		;
+;
+HID13C		EQU	$		;
+;
+HID13D		EQU	$		;
+;
+HID13E		EQU	$		;
+;
+HID13F		EQU	$		;
+;
+;
+;
+;
+;
+;\\\\\\\\\\\\\\\\\\\\\\\\  House Information  \\\\\\\\\\\\\\\\\\\\\\\\\\\
+;
+g0		EQU	00000000B	; BG.1 nothing
+g1		EQU	00100000B	;      down (small)
+g2		EQU	01000000B	;      down (2kai date)
+g3		EQU	01100000B	;      up
+g4		EQU	10000000B	;      up (gamen plus)
+g5		EQU	10100000B	;
+g6		EQU	11000000B	;      down
+g7		EQU	11100000B	;      up (gamen plus)
+;
+b0		EQU	00000000B	; BG2
+b1		EQU	00000100B	; BG2,BG1
+b2		EQU	00001000B	; auto-scroll (BG2,BG1)
+b3		EQU	00001100B	; beltconver  (BG2,BG1)
+b4		EQU	00010000B	; 
+b5		EQU	00010100B	; 
+b6		EQU	00011000B	; 
+;
+r0		EQU	00000000B	; CG. normal
+r1		EQU	00000001B	; CG. dark
+;
+;
+c00		EQU	00000000B	; danjyon color - 00 : shiro
+c01		EQU	00000001B	;                 01 : shiro-chika , chapel
+c02		EQU	00000010B	;                 02 : minka
+c03		EQU	00000011B	;                 03 : omote shinden boss
+c04		EQU	00000100B	;                 04 : omote sabaku boss
+c05		EQU	00000101B	;                 05 : obaba shop & house
+c06		EQU	00000110B	;                 06 : omote yama tower
+c07		EQU	00000111B	;                 07 : doukutu 
+c08		EQU	00001000B	;                 08 : ura hokora boss
+c09		EQU	00001001B	;                 09 : omote sabaku danjon
+c0A		EQU	00001010B	;                 0A : ura hokora danjon
+c0B		EQU	00001011B	;                 0B : omote shinden danjon
+c0C		EQU	00001100B	;                 0C : omote shisai tower
+c0D		EQU	00001101B	;                 0D : ura mori danjon
+c0E		EQU	00001110B	;                 0E : ura mori boss
+c0F		EQU	00001111B	;                 0F : ura shinden danjon
+c10		EQU	00010000B	;                 10 : ura shinden boss
+c11		EQU	00010001B	;                 11 : ura numa danjon
+c12		EQU	00010010B	;                 12 : ura numa boss
+c13		EQU	00010011B	;                 13 : ura koori danjon 
+c14		EQU	00010100B	;                 14 : ura koori boss
+c15		EQU	00010101B	;                 15 : link house
+c16		EQU	00010110B	;                 16 : ura machi no shita danjon
+c17		EQU	00010111B	;                 17 : ura machi no shita boss
+c18		EQU	00011000B	;                 18 : ura kame iwa danjon
+c19		EQU	00011001B	;                 19 : ura kame iwa danjon boss
+c1A		EQU	00011010B	;                 1A : ura tower danjon B1F 1F 2F 6F 
+c1B		EQU	00011011B	;                 1B : ura tower danjon 3F
+c1C		EQU	00011100B	;                 1C : shinden yoko ojiji house
+c1D		EQU	00011101B	;                 1D : chapel
+c1E		EQU	00011110B	;                 1E : uranai & kajiya & jyouhouya
+c1F		EQU	00011111B	;                 1F : bomb ya 
+c20		EQU	00100000B	;                 20 : devil-room
+c21		EQU	00100001B	;                 21 : ganon
+c22		EQU	00100010B	;                 22 : piramiddo megami
+c23		EQU	00100011B	;                 23 : ura machi no sita mouse 
+c24		EQU	00100100B	;                 24 : ura tower danjon 4F
+c25		EQU	00100101B	;                 25 : ura tower danjon 5F
+c26		EQU	00100110B	;                 26 : 
+c27		EQU	00100111B	;                 27 : 
+c28		EQU	00101000B	;                 28 : 
+c29		EQU	00101001B	;                 29 : 
+c2A		EQU	00101010B	;                 2A : 
+c2B		EQU	00101011B	;                 2B : 
+c2C		EQU	00101100B	;                 2C : 
+c2D		EQU	00101101B	;                 2D : 
+c2E		EQU	00101110B	;                 2E : 
+c2F		EQU	00101111B	;                 2F : 
+;
+bc0		EQU	00000000B	; BG. character - 00 : shiro
+bc1		EQU	00000001B	;                 01 : shiro chika
+bc2		EQU	00000010B	;                 02 : shiro shisai
+bc3		EQU	00000011B	;                 03 : minka
+bc4		EQU	00000100B	;                 04 : chapel
+bc5		EQU	00000101B	;                 05 : sabaku & shinden
+bc6		EQU	00000110B	;                 06 : doukutu
+bc7		EQU	00000111B	;                 07 : ura shinden
+bc8		EQU	00001000B	;                 08 : ura mizu hiki
+bc9		EQU	00001001B	;                 09 : ura mori no shita
+bcA		EQU	00001010B	;                 0A : ura machi no shita
+bcB		EQU	00001011B	;                 0B : ura koori tower
+bcC		EQU	00001100B	;                 0C : ura numa
+bcD		EQU	00001101B	;                 0D : ura kame iwa
+bcE		EQU	00001110B	;                 0E : ura tower
+bcF 		EQU	00001111B	;                 0F : shinden ojiji
+bc10		EQU	00010000B	;                 10 : shiro nukemichi
+bc11		EQU	00010001B	;                 11 : uranai & kajiya
+bc12		EQU	00010010B	;                 12 : sabaku
+bc13		EQU	00010011B	;                 13 : piramiddo no naka
+bc14		EQU	00010100B	;                 14 : doukutu jijii
+; 
+;
+oc0		EQU	00000000B	; OBJ character - 0
+oc1		EQU	00000001B	;                 1
+oc2		EQU	00000010B	;                 2
+oc3		EQU	00000011B	;                 3
+oc4		EQU	00000100B	;                 4
+oc5		EQU	00000101B	;                 5
+oc6		EQU	00000110B	;                 6
+oc7		EQU	00000111B	;                 7
+oc8		EQU	00001000B	;                 8
+oc9		EQU	00001001B	;                 9
+ocA		EQU	00001010B	;                 A
+ocB		EQU	00001011B	;                 B
+ocC		EQU	00001100B	;                 C
+ocD		EQU	00001101B	;                 D
+ocE		EQU	00001110B	;                 E
+ocF		EQU	00001111B	;                 F
+oc10		EQU	00010000B	;               -10
+oc11		EQU	00010001B	;                 1
+oc12		EQU	00010010B	;                 2
+oc13		EQU	00010011B	;                 3
+oc14		EQU	00010100B	;                 4
+oc15		EQU	00010101B	;                 5
+oc16		EQU	00010110B	;                 6
+oc17		EQU	00010111B	;                 7
+oc18		EQU	00011000B	;                 8
+oc19		EQU	00011001B	;                 9
+oc1A		EQU	00011010B	;                 A
+oc1B		EQU	00011011B	;                 B
+oc1C		EQU	00011100B	;                 C
+oc1D		EQU	00011101B	;                 D
+oc1E		EQU	00011110B	;                 E
+oc1F		EQU	00011111B	;                 F
+oc20		EQU	00100000B	;               -20
+oc21		EQU	00100001B	;                 1
+oc22		EQU	00100010B	;                 2
+oc23		EQU	00100011B	;                 3
+oc24		EQU	00100100B	;                 4
+oc25		EQU	00100101B	;                 5
+oc26		EQU	00100110B	;                 6
+oc27		EQU	00100111B	;                 7
+oc28		EQU	00101000B	;                 8
+oc29		EQU	00101001B	;                 9
+oc2A		EQU	00101010B	;                 A
+oc2B		EQU	00101011B	;                 B
+oc2C		EQU	00101100B	;                 C
+oc2D		EQU	00101101B	;                 D
+oc2E		EQU	00101110B	;                 E
+oc2F		EQU	00101111B	;                 F
+oc30		EQU	00110000B	;               -30
+oc31		EQU	00110001B	;                 1
+oc32		EQU	00110010B	;                 2
+oc33		EQU	00110011B	;                 3
+oc34		EQU	00110100B	;                 4
+oc35		EQU	00110101B	;                 5
+oc36		EQU	00110110B	;                 6
+oc37		EQU	00110111B	;                 7
+oc38		EQU	00111000B	;                 8
+oc39		EQU	00111001B	;                 9
+oc3A		EQU	00111010B	;                 A
+oc3B		EQU	00111011B	;                 B
+oc3C		EQU	00111100B	;                 C
+oc3D		EQU	00111101B	;                 D
+oc3E		EQU	00111110B	;                 E
+oc3F		EQU	00111111B	;                 F
+;
+;
+;
+;
+;
+		END

@@ -1,0 +1,2779 @@
+;
+		INCLUDE	zel_ram.asm
+;
+;------------------------------------------------------------------------
+;
+;		ZELDA-3			1991.10.06(SUN)
+;
+;------------------------------------------------------------------------
+;
+		ORG	0AB750H
+;
+;=============================================== (zel_gmap) =============
+		GLB	GMAPDP,MPWARP,MPDP200,MPDP880,MWRP900,MWRPB00,MWRPC40
+;
+		GLB	SCRNDT,HDMABF0
+;=============================================== (zel_main) =============
+		EXT	JSRSUB,VRAMCL,BLANKING
+;
+		EXT	MD_tdemo
+;=============================================== (zel_vma) ==============
+		EXT	bgw7,bgw15
+;=============================================== (zel_data0) ============
+		EXT	BITCD0
+;=============================================== (zel_init) =============
+		EXT	GNDRWT2,GNDRWT3,KCOLSET
+		EXT	p2_mprs,p3_warp
+;=============================================== (zel_isub) =============
+		EXT	IIT5000,IIT5800
+;=============================================== (zel_bgwt) =============
+		EXT	CGEDP0
+;=============================================== (zel_bg3) ==============
+		EXT	MTRDSP
+;=============================================== (zel_char) =============
+		EXT	CHSCHNG,M7CHST,SPOJCNG,WTRCBFS1,PLCGCN0
+		EXT	spoj7,C_1W0,C_1X0
+;=============================================== (zel_exst) =============
+		EXT	WARPINT1
+		EXT	WAPMV
+;=============================================== (zel_enmy) =============
+		EXT	ENEMY
+;=============================================== (zel_endt) =============
+		EXT	HYUSET
+;========================================================================
+;
+		EXTEND
+		MEM8
+		IDX8
+;
+;
+;
+;************************************************************************
+;*		Map warp				(MPWARP)	*
+;************************************************************************
+MPWARP		EQU	$
+		LDA	!MAPDMD
+		JSL	>JSRSUB
+		WORD	MPDP000		; 0 : fade out
+		WORD	MWRP100		; 1 : init. display
+		WORD	MPDPC00		; 2 : Obj. set
+		WORD	MPDP400		; 3 : fade in
+		WORD	MWRP150		; 4 : wait
+		WORD	MWRP200		; 5 : play
+		WORD	MPDP800		; 6 : fade out
+		WORD	MWRP900		; 7 : game BG. display
+		WORD	MWRPB00		; 8 : ground rewrite
+		WORD	MWRPC00		; 9 : fade in
+;
+;
+;----------------------------------------INIT
+MWRP100		EQU	$
+		STZ	MEMSTT		; INIT
+		JSL	>MPDP200	; ura map check
+		RTL
+;
+;
+;----------------------------------------WAIT
+MWRP150		EQU	$
+		LDA	#010H
+		STA	<CWORK0
+		INC	!MAPDMD
+		RTL
+;
+;
+;----------------------------------------WARP 
+MAPPOTCT	EQU	$		;OBJ E
+		BYTE	07FH,079H,06CH,06DH,06EH,06FH,07CH,07DH
+MAPPOTXL	EQU	$
+		BYTE	080H,0CFH,010H,0B8H,030H,070H,070H,0F0H
+;		BYTE	000H,000H,000H,000H,000H,000H,000H,000H
+MAPPOTXH	EQU	$
+		BYTE	006H,00CH,002H,008H,00FH,000H,007H,00EH
+;		BYTE	000H,000H,000H,000H,000H,000H,000H,000H
+MAPPOTYL	EQU	$
+		BYTE	05BH,098H,0C0H,020H,050H,0B0H,030H,080H
+;		BYTE	000H,000H,000H,000H,000H,000H,000H,000H
+MAPPOTYH	EQU	$
+		BYTE	003H,005H,007H,00BH,00BH,00FH,00FH,00FH
+;		BYTE	000H,000H,000H,000H,000H,000H,000H,000H
+;
+MAPBITDT	EQU	$
+		BYTE	10000000B
+		BYTE	01000000B
+		BYTE	00100000B
+		BYTE	00010000B
+		BYTE	00001000B
+		BYTE	00000100B
+		BYTE	00000010B
+		BYTE	00000001B
+;
+MWRP200		EQU	$
+		LDA	<CWORK0
+		BNE	MPDPW05		; wait end ?
+;					; yes
+		LDA	<KEYA1L
+		ORA	<KEYA1
+		AND	#11000000B
+		BEQ	MPDPW10		; [Y][X]key on ?
+;					; yes
+		INC	!MAPDMD
+		RTL
+;
+MPDPW05		EQU	$
+		DEC	<CWORK0
+MPDPW10		EQU	$
+		LDY	#007H
+		LDX	MEMSTT
+MPDPW80		EQU	$
+;		LDA	>MAPPPS1
+;		AND	>MAPBITDT,X
+		BRA	MPDPW90		;		BNE	MPDPW90
+		TXA
+		INC	A
+		AND	#007H
+		TAX
+		DEY
+		BPL	MPDPW80
+MPDPW90		EQU	$
+		STX	MEMSTT
+		LDA	<KEYA2
+		AND	#00AH
+		BEQ	MPDPW60
+		DEC	MEMSTT		;LEFT
+		LDA	#020H
+		STA	SOUND3
+MPDPW60		EQU	$
+		LDA	<KEYA2
+		AND	#005H
+		BEQ	MPDPW70
+		INC	MEMSTT		;RIGHT
+		LDA	#020H
+		STA	SOUND3
+MPDPW70		EQU	$
+		LDA	MEMSTT		;8---> 0
+		AND	#007H
+		STA	MEMSTT
+;
+		LDA	<FRCNT
+		AND	#010H
+		BEQ	MPDPW40
+;
+		JSR	M7TESTST
+		BCC	MPDPW40
+		LDA	<WORKE
+		SEC
+		SBC	#004H
+		STA	<WORKE
+		LDA	<WORKF
+		SEC
+		SBC	#004H
+		STA	<WORKF
+		LDA	#000H			;E SET
+		STA	<WORKD
+		LDA	#03EH			;A SET
+		STA	<WORKC
+		LDA	#002H			;SB SET
+		STA	<WORKB
+		LDX	#010H			;INDEX
+		JSR	M7OBJST			;obj set
+MPDPW40		EQU	$
+		LDA	>PLYPRM
+		PHA
+		LDA	>PLYPRM+1
+		PHA
+		LDA	>PLXPRM
+		PHA
+		LDA	>PLXPRM+1
+		PHA
+;
+		LDX	#00FH-8H		;INDEX
+;
+MPDPW30		EQU	$
+;		LDA	>MAPPPS1		;? POINT SET
+;		AND	>MAPBITDT,X
+;		BEQ	MPDPWA0
+;
+		CPX	MEMSTT
+		BNE	MPDPW50
+;
+		LDA	>MAPPOTXL,X		;POINT SET
+		STA	MEMXPSL,X
+		STA	>PLXPRM
+;
+		LDA	>MAPPOTXH,X
+		STA	MEMXPSH,X
+		STA	>PLXPRM+1
+;
+		LDA	>MAPPOTYL,X
+		STA	MEMYPSL,X
+		STA	>PLYPRM
+;
+		LDA	>MAPPOTYH,X
+		STA	MEMYPSH,X
+		STA	>PLYPRM+1
+;
+		PHX
+		JSR	M7TESTST
+		PLX
+		BCC	MPDPW20
+		LDA	>MAPPOTCT,X
+		STA	<WORKD			;E SET
+		LDA	<FRCNT			;A SET
+		AND	#006H
+		ORA	#030H
+		STA	<WORKC
+		LDA	#000H			;SB SET
+		STA	<WORKB
+		PHX
+		JSR	M7OBJST			;obj set
+		PLX
+;
+MPDPWA0		EQU	$
+		BRA	MPDPW20
+MPDPW50		EQU	$
+		LDA	>MAPPOTXL,X		;POINT SET
+		STA	MEMXPSL,X
+		STA	>PLXPRM
+;
+		LDA	>MAPPOTXH,X
+		STA	MEMXPSH,X
+		STA	>PLXPRM+1
+;
+		LDA	>MAPPOTYL,X
+		STA	MEMYPSL,X
+		STA	>PLYPRM
+;
+		LDA	>MAPPOTYH,X
+		STA	MEMYPSH,X
+		STA	>PLYPRM+1
+;
+		PHX
+		JSR	M7TESTST
+		PLX
+		BCC	MPDPW20
+		LDA	>MAPPOTCT,X
+		STA	<WORKD			;E SET
+		LDA	#032H			;A SET
+		STA	<WORKC
+		LDA	#000H			;SB SET
+		STA	<WORKB
+		PHX
+		JSR	M7OBJST			;obj set
+		PLX
+;
+MPDPW20		EQU	$
+		DEX
+		BMI	MPDPWB0
+		JMP	MPDPW30
+;
+MPDPWB0		EQU	$
+		PLA
+		STA	>PLXPRM+1
+		PLA
+		STA	>PLXPRM
+		PLA
+		STA	>PLYPRM+1
+		PLA
+		STA	>PLYPRM
+;MPDP890		EQU	$
+		RTL
+;
+;
+;
+;---------------------------------------; game BG. display
+MWRP900		EQU	$
+		LDA	>GNDTBL+03BH
+		AND	#11011111B
+		STA	>GNDTBL+03BH
+		LDA	>GNDTBL+03BH+040H
+		AND	#11011111B
+		STA	>GNDTBL+03BH+040H
+;
+		LDA	>DJNTBL+10BH*2
+		AND	#01111111B
+		STA	>DJNTBL+10BH*2
+		LDA	>DJNTBL+028H*2+1
+		AND	#11111110B
+		STA	>DJNTBL+028H*2+1
+;
+;
+		JSL	>IIT5000	; warp point reset
+		JSL	>IIT5800	; CG. set
+;
+		LDY	#C_1W0
+		LDA	<MPDTNO
+		AND	#10111111B
+		CMP	#003H
+		BEQ	MWRP940		; yama ?
+;					; no
+		CMP	#005H
+		BEQ	MWRP940		; yama ?
+;					; no
+		CMP	#007H
+		BEQ	MWRP940		; yama ?
+;					; no
+		LDY	#C_1X0
+MWRP940		EQU	$
+		JSL	>WTRCBFS1	; water character buffer set
+;
+;// 03.07.31 //		MEM16
+;// 03.07.31 //		IDX16
+;// 03.07.31 //		REP	#00110000B	; memory,index 16bit mode
+;// 03.07.31 //;
+;// 03.07.31 //		LDX	#04C26H
+;// 03.07.31 //		LDY	#08C4CH
+;// 03.07.31 //		LDA	<MPDTNO
+;// 03.07.31 //		CMP	#00003H
+;// 03.07.31 //		BEQ	MWRP960		; yama ?
+;// 03.07.31 //;					; no
+;// 03.07.31 //		CMP	#00005H
+;// 03.07.31 //		BEQ	MWRP960		; yama ?
+;// 03.07.31 //;					; no
+;// 03.07.31 //		CMP	#00007H
+;// 03.07.31 //		BEQ	MWRP960		; yama ?
+;// 03.07.31 //;					; no
+;// 03.07.31 //		LDX	#04A26H
+;// 03.07.31 //		LDY	#0874AH
+;// 03.07.31 //		CMP	#00043H
+;// 03.07.31 //		BEQ	MWRP960		; yama ?
+;// 03.07.31 //;					; no
+;// 03.07.31 //		CMP	#00045H
+;// 03.07.31 //		BEQ	MWRP960		; yama ?
+;// 03.07.31 //;					; no
+;// 03.07.31 //		CMP	#00047H
+;// 03.07.31 //		BEQ	MWRP960		; yama ?
+;// 03.07.31 //;					; no
+;// 03.07.31 //		CMP	#0005BH
+;// 03.07.31 //		BNE	MWRP970		; piramido ?
+;// 03.07.31 //;					; yes
+;// 03.07.31 //		LDX	#04F33H
+;// 03.07.31 //		LDY	#0894FH
+;// 03.07.31 //MWRP960		EQU	$
+;// 03.07.31 //		STX	<WD2132R
+;// 03.07.31 //		STY	<WD2132G
+;// 03.07.31 //;
+;// 03.07.31 //		LDA	#00000H
+;// 03.07.31 //		STA	>CGWORK+000H
+;// 03.07.31 //		STA	>CGRAM+000H
+;// 03.07.31 //MWRP970		EQU	$
+;// 03.07.31 //		MEM8
+;// 03.07.31 //		IDX8
+;// 03.07.31 //		SEP	#00110000B	; memory,index 8bit mode
+		JSL	>KCOLSET	; kote-color set
+;
+;
+		STZ	!CGSTPT+1	; (CGRAM) set
+		STZ	!BG3BGC
+;// 03.07.11 //		LDA	#00000010B
+;// 03.07.11 //		STA	2101H
+		JSL	>CHSCHNG	; charracter set
+;// 03.05.29 //		JSL	>CHRCBS0	; character buffer set
+;
+;// 03.07.31 //		INC	<CGVMAF
+;
+		INC	!MAPDMD
+;
+		STZ	<XSTCNT
+;-- ENMY SET
+;
+;		JSL	>HYUSET
+;
+;-- ENMY SET END
+;
+		JSL	>GNDRWT3	; BG.1 write
+;
+		LDA	#010H
+		STA	!SOUND3		; <sound>
+;
+;// 03.09.05 //		LDX	#004H
+		LDA	<MPDTNO
+		AND	#10111111B
+;// 03.09.05 //		CMP	#003H
+;// 03.09.05 //		BEQ	MWRP980		; yama ?
+;// 03.09.05 //;					; no
+;// 03.09.05 //		CMP	#005H
+;// 03.09.05 //		BEQ	MWRP980		; yama ?
+;// 03.09.05 //;					; no
+;// 03.09.05 //		CMP	#007H
+;// 03.09.05 //		BEQ	MWRP980		; yama ?
+;// 03.09.05 //;					; no
+;// 03.09.05 //		LDX	#007H
+;// 03.09.05 //		CMP	#018H
+;// 03.09.05 //		BEQ	MWRP980		; machi ?
+;// 03.09.05 //;					; no
+;// 03.09.05 //		LDX	#002H
+		LDX	#002H
+		CMP	#018H
+		BNE	MWRP980		; machi ?
+;					; yes
+		LDA	>MODTBL0
+		CMP	#003H
+		BCS	MWRP980		; kou-han ?
+;					; no
+		LDX	#007H
+MWRP980		EQU	$
+		CPX	!SVSND0
+		BNE	MWRP990		; sound reset ?
+;					; yes
+		LDX	#0F3H
+		STX	!SOUND0
+		RTL
+;
+MWRP990		EQU	$
+		STX	!SOUND0
+;// 03.09.16 //		STX	!SVSND0		; <sound0>
+		RTL
+;
+;
+;---------------------------------------; BG.2 write
+MWRPB00		EQU	$
+		MEM16
+		REP	#00100000B	; memory 16bit mode
+;
+		LDA	<SLMODE
+		PHA			; (A) push
+		LDA	!MAPDMD
+		PHA			; (A) push
+;
+		MEM8
+		SEP	#00100000B	; memory 8bit mode
+;
+		JSL	>GNDRWT2
+;
+		MEM16
+		REP	#00100000B	; memory 16bit mode
+;
+		PLA			; (A) pull
+		INC	A
+		STA	!MAPDMD
+		PLA			; (A) pull
+		STA	<SLMODE
+;
+		MEM8
+		SEP	#00100000B	; memory 8bit mode
+		RTL
+;
+;
+;---------------------------------------; fade in
+MWRPC00		EQU	$
+		INC	<BLKFLG
+		LDA	<BLKFLG
+		CMP	#00FH
+		BNE	MWRPC80		; fade-in end ?
+;					; yes
+MWRPC40		EQU	$
+		STZ	!MAPDMD
+		STZ	<JRSBPT
+		LDA	!NXSLMD
+		STA	<SLMODE
+		STZ	<GAMEMD
+;
+		LDA	>BKWD420C
+		STA	<WD420C
+;
+		LDY	#004H
+		LDA	#WAPMV
+		JSL	>WARPINT1
+MWRPC80		EQU	$
+		JSL	>ENEMY		; enemy
+		RTL
+;
+;
+;
+;
+;
+;
+;************************************************************************
+;*		Ground Map display			(GMAPDP)	*
+;************************************************************************
+GMAPDP		EQU	$
+		LDA	!MAPDMD
+		JSL	>JSRSUB
+		WORD	MPDP000		; 0 : fade out
+		WORD	MPDP200		; 1 : init. display
+		WORD	MPDP300		; 2 : ura map check
+		WORD	MPDPC00		; 3 : Obj. set
+		WORD	MPDP400		; 4 : fade in
+		WORD	MPDP600		; 5 : play
+		WORD	MPDP800		; 6 : fade out
+		WORD	MPDP900		; 7 : game BG. display
+;
+;
+;
+;---------------------------------------; fade out
+MPDP080		EQU	$
+		RTL
+;
+;
+MPDP000		EQU	$
+		DEC	<BLKFLG
+		BNE	MPDP080		; fade out ?
+;					; yes
+		LDA	<WD420C
+		STA	>BKWD420C
+		JSL	>BLANKING	; blanking on & H-DMA disable
+;// 03.09.17 //		LDA	#10000000B
+;// 03.09.17 //		STA	2100H
+;// 03.09.17 //		STA	<BLKFLG		; blanking on
+;// 03.09.17 //		STZ	420CH
+;// 03.09.17 //		STZ	<WD420C		; H-DMA off
+;
+		LDA	#00000011B
+		STA	<MD2106		; mozaiku off
+;
+		INC	!MAPDMD
+;
+		MEM16
+		REP	#00100000B	; memory 16bit mode
+;
+		LDA	<DPMAIN
+		STA	>BKDPMN
+;;;;;;;;		LDA	<DPSUB
+;;;;;;;;		STA	>BKDPSB		; DPMAIN,DPSUB push
+;
+		LDA	<SCCH1
+		STA	>BKSCH1
+		LDA	<SCCH2
+		STA	>BKSCH2
+		LDA	<SCCV1
+		STA	>BKSCV1
+		LDA	<SCCV2
+		STA	>BKSCV2		; SCCH,V push
+		STZ	<SCCH1
+		STZ	<SCCH2
+		STZ	<SCCH3
+		STZ	<SCCV1
+		STZ	<SCCV2
+		STZ	<SCCV3		; SCCH,V clear
+;
+		LDA	<WD2130
+		STA	>BKWD2130
+;
+		LDA	#000FEH*2
+		STA	!PCHPT0		; map PLAYER char. point
+;
+		LDX	<MPDTNO
+		CPX	#080H
+		BCS	MPDP020		; spot ?
+;					; no
+		LDA	<PLYPS1
+		STA	>PLYPRM
+		LDA	<PLXPS1
+		STA	>PLXPRM
+MPDP020		EQU	$
+		MEM8
+		SEP	#00100000B	; memory 8bit mode
+;
+		LDA	>MODTBL0
+		CMP	#002H
+		BCS	MPDP040		; zenhan ?
+;					; yes
+		LDA	#080H
+		STA	<WD2130
+		LDA	#061H
+		STA	<WD2131
+MPDP040		EQU	$
+		LDA	#010H
+		STA	!SOUND3		; <sound3>
+		LDA	#0F2H
+		STA	!SOUND0		; <sound0>
+;
+		LDA	#00000111B
+		STA	2105H
+		STA	<MD2105		; mode<7> set
+		LDA	#10000000B
+		STA	211AH		; mode-7 init. set
+		RTL
+;
+;
+;---------------------------------------; init. display
+MPDP200		EQU	$
+		JSR	VRAMCL7		; Vram clear
+;
+		LDA	#00010001B
+		STA	<DPMAIN
+		STZ	<DPSUB
+;
+;
+;// 03.07.11 //		LDA	#00000010B
+;// 03.07.11 //		STA	2101H
+		JSL	>M7CHST		; mode<7> charcter set
+;
+		JSR	GHDMAIT		; H-DMA init.
+;
+		PHB
+		LDA	#BANK CGDATA
+		PHA
+		PLB			; (DBR) set
+;
+		MEM16
+		IDX16
+		REP	#00110000B	; memory,index 16bit mode
+;
+;// 03.01.09 //		LDX	#SCRNDEN-SCRNDT-2
+;// 03.01.09 //MPDP220		EQU	$
+;// 03.01.09 //		LDA	>SCRNDT,X
+;// 03.01.09 //		STA	!WBGBUF,X
+;// 03.01.09 //		DEX
+;// 03.01.09 //		DEX
+;// 03.01.09 //		BPL	MPDP220		; set end ?
+;// 03.01.09 //;					; yes
+		LDX	#CGDTEN-CGDATA1-2
+		LDY	#CGDATA1-CGDATA-2
+		LDA	<MPDTNO
+		AND	#00040H
+		BEQ	MPDP240		; ura ?
+;					; yes
+		LDY	#CGDTEN-CGDATA-2
+MPDP240		EQU	$
+		LDA	CGDATA,Y
+		STA	>CGWORK,X
+		DEY
+		DEY
+		DEX
+		DEX
+		BPL	MPDP240		; set end ?
+;					; yes
+		MEM8
+		IDX8
+		SEP	#00110000B	; memory,index 8bit mode
+;
+		PLB			; (DBR) reset
+;
+		JSL	>PLCGCN0	; player CG. reset
+;
+		INC	<CGVMAF
+		LDA	#bgw7
+		STA	<BGWTFG
+		STZ	<BLKFLG		; blanking off
+		INC	!GMAPDF		; ground-map display flag on
+		INC	!MAPDMD
+		RTL
+;
+;
+;---------------------------------------; ura map check
+MPDP300		EQU	$
+		LDA	<MPDTNO
+		AND	#01000000B
+		BEQ	MPDP380		; ura map ?
+;					; yes
+		MEM16
+		IDX16
+		REP	#00110000B	; memory,index 16bit mode
+;
+		LDX	#SCRD1EN-SCRND1-2
+MPDP310		EQU	$
+		LDA	>SCRND1,X
+		STA	!WBGBUF,X
+		DEX
+		DEX
+		BPL	MPDP310		; data buffer set end ?
+;					; yes
+		MEM8
+		IDX8
+		SEP	#00110000B	; memory,index 8bit mode
+;
+		LDA	#bgw15
+		STA	<BGWTFG
+MPDP380		EQU	$
+		INC	!MAPDMD
+		RTL
+;
+;
+;---------------------------------------; Ob. character set
+MPDPC00		EQU	$
+		LDA	#spoj7+1
+		STA	!SPOJFG
+		JSL	>SPOJCNG	;
+		STZ	!SPOJFG
+		INC	!MAPDMD
+		RTL
+;
+;
+;---------------------------------------; fade in
+MPDP400		EQU	$
+		INC	<BLKFLG
+		LDA	<BLKFLG
+		CMP	#00FH
+		BNE	MPDP440		; fade in end ?
+;					; yes
+		INC	!MAPDMD
+MPDP440		EQU	$
+		RTL
+;
+;
+;---------------------------------------; play
+HDMCP		EQU	$-1
+		BYTE	01EH,000H,01EH
+HDMAD		EQU	$-1
+		BYTE	002H,0FEH,002H
+;
+ZOOMCP		EQU	$
+		BYTE	000H,080H,002H,080H
+ZOOMAD		EQU	$
+		BYTE	000H,001H,0FFH,001H
+ZOOMDT		EQU	$
+		BYTE	021H,00CH
+;
+ADDATA		EQU	$
+		WORD	00000H,00000H,00001H,00002H,0FFFFH,0FFFEH,00001H,00002H
+LMDATA		EQU	$
+;;;;;;;;		WORD	00000H,00000H,00110H,002B0H,0FF80H,0FE50H
+		WORD	00000H,00000H,000E0H,001E0H,0FFB8H,0FF20H
+;
+HDMAPTD		EQU	$
+		WORD	HDMADR0,HDMADR1
+;
+;
+MPDP600		EQU	$
+		LDA	!SCRNO
+		ASL	A
+		BCC	MPDP610		; zoom change ?
+;					; yes
+		TAX
+		LSR	A
+		STA	!SCRNO
+		LDA	>HDMAPTD,X
+		STA	4362H
+		STA	4372H		; H-DMA A-bus addess (L,H)
+MPDP610		EQU	$
+		LDA	!SCRNO
+		BNE	MPDP620		; end check ok ?
+;					; yes
+		LDA	<KEYA2L
+		AND	#01000000B
+		BEQ	MPDP620		; [X]key on ?
+;					; yes
+		INC	!MAPDMD
+		RTL
+;
+MPDP620		EQU	$
+		LDA	<XSTCNT
+		BEQ	MPDP630		; key check ok ?
+;					; no
+		DEC	<XSTCNT
+		JMP	MPDP700
+;
+MPDP630		EQU	$
+		LDA	<KEYA2L
+;// 03.09.29 //		ORA	<KEYA2
+;// 03.09.29 //		AND	#11110000B
+		AND	#01110000B
+;// 03.09.29 //		BEQ	MPDP700		; [A],[B],[X],[Y],[L],[R] ?
+		BEQ	MPDP700		; [X],[L],[R] ?
+;					; yes
+		LDA	#024H
+		STA	!SOUND3		; <sound3>
+;
+		LDA	#008H
+		STA	<XSTCNT		; check timer set
+;
+		LDA	!SCRNO
+		EOR	#00000001B
+		TAX
+		ORA	#10000000B
+		STA	!SCRNO
+		LDA	>ZOOMDT,X
+		STA	!ZOOM
+		CMP	#00CH
+		BNE	MPDP660		; zoom ?
+;					; yes
+		MEM16
+		REP	#00100000B	; memory 16bit mode
+;
+		LDA	>PLYPRM
+		LSR	A
+		LSR	A
+		LSR	A
+		LSR	A
+		SEC
+		SBC	#00048H
+		AND	#0FFFEH
+		STA	<SCCV1
+		CLC
+		ADC	#00100H
+		STA	!CENTY
+;
+		LDA	>PLXPRM			;X pos
+		LSR	A
+		LSR	A
+		LSR	A
+		LSR	A
+		SEC
+		SBC	#00080H
+		STA	<WORK2
+		BPL	MPDP640		; (-) ?
+;					; yes
+		EOR	#0FFFFH
+		INC	A
+MPDP640		EQU	$
+		STA	<WORK0
+		ASL	A
+		ASL	A
+		CLC
+		ADC	<WORK0
+		LSR	A
+		LDX	<WORK3
+		BPL	MPDP650		; (-) ?
+;					; yes
+		EOR	#0FFFFH
+		INC	A
+MPDP650		EQU	$
+		CLC
+		ADC	#00080H
+		BRA	MPDP680
+;
+MPDP660		EQU	$
+		MEM16
+		REP	#00100001B	; memory 16bit mode & CLC
+;
+		LDA	#000C8H
+		STA	<SCCV1
+		ADC	#00100H
+		STA	!CENTY
+		LDA	#00080H
+MPDP680		EQU	$
+		AND	#0FFFEH
+		STA	<SCCH1
+MPDP700		EQU	$
+		MEM8
+		SEP	#00100000B	; memory 8bit mode
+;
+		LDA	!SCRNO
+		BEQ	MPDP780		; scroll ?
+;					; yes
+		LDA	<KEYA1
+		AND	#00001100B
+		TAX
+;
+		MEM16
+		REP	#00100000B	; memory 16bit mode
+;
+		LDA	<SCCV1
+		CMP	>LMDATA,X
+		BEQ	MPDP720		; limit ?
+;					; no
+		CLC
+		ADC	>ADDATA,X
+		STA	<SCCV1
+		CLC
+		ADC	#00100H
+		STA	!CENTY
+MPDP720		EQU	$
+		MEM8
+		SEP	#00100000B	; memory 8bit mode
+;
+		LDA	<KEYA1
+		AND	#00000011B
+		ASL	A
+		INC	A
+		ASL	A
+		TAX
+;
+		MEM16
+		REP	#00100000B	; memory 16bit mode
+;
+		LDA	<SCCH1
+		CMP	>LMDATA,X
+		BEQ	MPDP740		; limit ?
+;					; no
+		CLC
+		ADC	>ADDATA,X
+		STA	<SCCH1
+MPDP740		EQU	$
+		MEM8
+		SEP	#00100000B	; memory 8bit mode
+MPDP780		EQU	$
+		JSR	M7TEST		; LINK position set
+MPDP790		EQU	$
+		RTL
+;
+;
+;---------------------------------------; fade out
+MPDP800		EQU	$
+		DEC	<BLKFLG
+		BNE	MPDP790		; fade out ?
+;					; yes
+		JSL	>BLANKING	; blanking on & H-DMA disable
+;// 03.09.17 //		LDA	#10000000B
+;// 03.09.17 //		STA	<BLKFLG		; blanking on
+		INC	!MAPDMD
+;
+		MEM16
+		REP	#00100000B	; memory 16bit mode
+;
+		LDX	#000H
+MPDP820		EQU	$
+		LDA	>CGRAM+000H,X
+		STA	>CGWORK+000H,X
+		LDA	>CGRAM+080H,X
+		STA	>CGWORK+080H,X
+		LDA	>CGRAM+100H,X
+		STA	>CGWORK+100H,X
+		LDA	>CGRAM+180H,X
+		STA	>CGWORK+180H,X
+		INX
+		INX
+		CPX	#080H
+		BNE	MPDP820		; (CGWROK) clear end ?
+;					; yes
+		LDA	>BKWD2130
+		STA	<WD2130
+;
+		STZ	<SCCH3
+		STZ	<SCCV3
+		LDA	>BKSCH1
+		STA	<SCCH1
+		LDA	>BKSCH2
+		STA	<SCCH2
+		LDA	>BKSCV1
+		STA	<SCCV1
+		LDA	>BKSCV2
+		STA	<SCCV2		; SCCH,V pull
+;
+		LDA	>BKDPMN
+		STA	<DPMAIN
+;;;;;;;;		LDA	>BKDPSB
+;;;;;;;;		STA	>DPSUB		; DPMAIN,DPSUB pull
+;
+MPDP880		EQU	$
+		LDA	#HDMADR2
+		STA	4372H		;     A-bus addess (L,H)
+		LDX	#BANK HDMADR2
+		STX	4374H		;                  (B)
+;
+		LDX	#BANK HDMABF
+		STX	4377H		;     data bank set
+;
+		MEM8
+		IDX8
+		SEP	#00110000B	; memory,index 8bit mode
+;
+		LDA	#10000000B
+		STA	<WD420C
+		LDA	#00001001B
+		STA	2105H
+		STA	<MD2105		; mode<1> set
+		STZ	!GMAPDF		; ground-map display flag off
+		RTL
+;
+;
+;
+;---------------------------------------; game BG. display
+MPDP900		EQU	$
+;// 03.01.31 //		JSL	>VRAMCL		; VCL
+		STZ	!CGSTPT+1	; (CGRAM) set
+		STZ	!BG3BGC
+;// 03.07.11 //		LDA	#00000010B
+;// 03.07.11 //		STA	2101H
+		JSL	>CHSCHNG	; charracter set
+;// 03.05.29 //		JSL	>CHRCBS0	; character buffer set
+;
+;// 03.01.31 //		JSL	>MTRDSP		; mater display
+;
+;// 03.01.31 //		LDA	>CGEDP0+3
+;// 03.01.31 //		STA	>CCNGED
+;// 03.01.31 //		LDA	#000H
+;// 03.01.31 //		STA	>CCNGCT
+;// 03.01.31 //		LDA	#002H
+;// 03.01.31 //		STA	>CCNGFG
+;
+		INC	<CGVMAF
+;
+		STZ	<XSTCNT
+		STZ	!MAPDMD
+		STZ	<JRSBPT
+		LDA	!NXSLMD
+		STA	<SLMODE
+		LDA	#p2_mprs
+		STA	<GAMEMD
+		STZ	!VRAMD
+		STZ	!VRAMD+1
+;
+		LDA	>BKWD420C
+		STA	<WD420C
+MPDP940		EQU	$
+		MEM8
+		SEP	#00100000B	; memory 8bit mode
+;-- ENMY SET
+;
+;		JSL	>HYUSET
+;
+;-- ENMY SET END
+;
+		LDA	#010H
+		STA	!SOUND3		; <sound3>
+		LDA	#0F3H
+		STA	!SOUND0		; <sound0> set
+		RTL
+;
+;
+;
+;
+;
+;************************************************************************
+;*		Ground  H-DMA init.			(GHDMAIT)	*
+;************************************************************************
+GHDMAIT		EQU	$
+		MEM16
+		REP	#00100000B	; memory 16bit mode
+;
+		LDA	#00080H
+		STA	<SCCH1
+		LDA	#000C8H
+		STA	<SCCV1
+		ADC	#00100H
+		STA	!CENTY
+		LDA	#00100H
+		STA	!CENTX
+;
+		LDA	#01B42H
+		STA	4360H
+		LDA	#01E42H
+		STA	4370H		; DMA control parameter & B-bus address set
+;
+		MEM8
+		SEP	#00100000B	; memory 8bit mode
+;
+		STZ	<WD2123
+		STZ	<WD2124
+		STZ	<WD2125
+		STZ	<WDMAIN
+		STZ	<WDSUB
+;
+		STZ	211CH
+		STZ	211CH		; matrix parameter(B) 
+		STZ	211DH
+		STZ	211DH		;                 (C)
+;
+		STZ	211FH
+		LDA	#001H
+		STA	211FH		; center position X0
+		STZ	2120H
+		STA	2120H		; center position Y0
+;
+		LDA	<SLMODE
+		CMP	#MD_tdemo
+		BEQ	GHDI100		; title-demo ?
+;					; no
+		LDA	<GAMEMD
+		CMP	#p3_warp
+		BNE	GHDI020		; map display ?
+;					; no
+		JMP	GHDI200
+;
+GHDI020		EQU	$
+		LDA	#004H
+		STA	!HDMNO
+		LDA	#00CH
+		STA	!ZOOM
+		LDA	#001H
+		STA	!SCRNO
+;
+		MEM16
+		REP	#00100001B	; memory 16bit mode & CLC
+;
+		LDA	>PLYPRM
+		LSR	A
+		LSR	A
+		LSR	A
+		LSR	A
+		SEC
+		SBC	#00048H
+		AND	#0FFFEH
+		CLC
+		ADC	>ADDATA
+		STA	<SCCV1
+		CLC
+		ADC	#00100H
+		STA	!CENTY
+;
+;
+		LDA	>PLXPRM			;X pos
+		LSR	A
+		LSR	A
+		LSR	A
+		LSR	A
+		SEC
+		SBC	#00080H
+		STA	<WORK2
+		BPL	GHDI040		; (-) ?
+;					; yes
+		EOR	#0FFFFH
+		INC	A
+GHDI040		EQU	$
+		STA	<WORK0
+		ASL	A
+		ASL	A
+		CLC
+		ADC	<WORK0
+		LSR	A
+		LDX	<WORK3
+		BPL	GHDI080		; (-) ?
+;					; yes
+		EOR	#0FFFFH
+		INC	A
+GHDI080		EQU	$
+		CLC
+		ADC	#00080H
+		AND	#0FFFEH
+		STA	<SCCH1
+;
+;
+		LDA	#HDMADR1
+		STA	4362H
+		STA	4372H		;     A-bus addess (L,H)
+		LDX	#BANK HDMADR1
+		STX	4364H
+		STX	4374H		;                  (B)
+;
+		LDX	#BANK HDMABF1
+		BRA	GHDI300
+;
+;
+		MEM8
+GHDI100		EQU	$
+		MEM16
+		REP	#00100001B	; memory 16bit mode & CLC
+;
+		LDA	#HDMADR2
+		STA	4362H
+		STA	4372H		;     A-bus addess (L,H)
+		LDX	#BANK HDMADR2
+		STX	4364H
+		STX	4374H		;                  (B)
+;
+		LDX	#BANK HDMABF
+		BRA	GHDI300
+;
+;
+		MEM8
+GHDI200		EQU	$
+		LDA	#004H
+		STA	!HDMNO
+		LDA	#021H
+		STA	!ZOOM
+		STZ	!SCRNO
+;
+		MEM16
+		REP	#00100001B	; memory 16bit mode & CLC
+;
+		LDA	#HDMADR0
+		STA	4362H
+		STA	4372H		;     A-bus addess (L,H)
+		LDX	#BANK HDMADR0
+		STX	4364H
+		STX	4374H		;                  (B)
+;
+		LDX	#BANK HDMABF0
+GHDI300		EQU	$
+		STX	4367H
+		STX	4377H		;     data bank set
+;
+		MEM8
+		SEP	#00100000B	; memory 8bit mode
+;
+		LDA	#11000000B
+		STA	<WD420C		; H-DMA ch"ON'
+		RTS
+;
+;
+;
+;
+;************************************************************************
+;*		Mode<7> VRAM clear			(VRAMCL7)	*
+;************************************************************************
+VRAMCL7		EQU	$
+		MEM16
+		REP	#00100000B	; memory 16bit mode
+;
+		LDA	#000EFH
+		STA	<WORK		; (WORK0) <-- clear char. no.
+		STZ	2115H
+;
+		STZ	2116H		; Vram address (00000H ~)
+;
+		LDA	#01808H
+		STA	4310H		; B-bus address & DMA control paramater set
+		STZ	4314H		; A-bus address (B)
+		LDA	#WORK
+		STA	4312H		;               (L,H)
+		LDA	#04000H
+		STA	4315H		; data count
+;
+		LDY	#00000010B
+		STY	420BH		; DMA ch "ON"
+;
+		MEM8
+		SEP	#00100000B	; memory 8bit mode
+		RTS
+;
+;
+;
+;
+;
+;=============  H-DMA parameter  =======================================
+HDMADR0		EQU	$		; nomal H-DMA
+		BYTE	080H+070H
+		WORD	HDMABF0
+		BYTE	080H+070H
+		WORD	HDMABF0+070H*2
+		BYTE	000H
+;
+HDMADR1		EQU	$		; zoom-up H-DMA
+		BYTE	080H+070H
+		WORD	HDMABF1
+		BYTE	080H+070H
+		WORD	HDMABF1+070H*2
+		BYTE	000H
+;
+HDMADR2		EQU	$		; game H-DMA
+		BYTE	080H+070H
+		WORD	HDMABF
+		BYTE	080H+070H
+		WORD	HDMABF+070H*2
+		BYTE	000H
+;
+;
+;
+;
+;********************************************************************
+;*                                                                  *
+;********************************************************************
+M7PADX0		EQU	$
+		WORD	007FFH,002C0H,00D00H,00F31H,0006DH,007E0H,00F40H,00F40H,008DCH
+M7PADY0		EQU	$
+		WORD	00730H,006A0H,00710H,00620H,00070H,00640H,00620H,00620H,00030H
+;
+M7PADX1		EQU	$
+		WORD	0FF00H,0FF00H,0FF00H,008D0H,0FF00H,0FF00H,0FF00H,00082H,0FF00H
+M7PADY1		EQU	$
+		WORD	0FF00H,0FF00H,0FF00H,00080H,0FF00H,0FF00H,0FF00H,000B0H,0FF00H
+;
+M7PADX2		EQU	$
+		WORD	0FF00H,0FF00H,0FF00H,00108H,0FF00H,0FF00H,0FF00H,00F11H,0FF00H
+M7PADY2		EQU	$
+		WORD	0FF00H,0FF00H,0FF00H,00D70H,0FF00H,0FF00H,0FF00H,00103H,0FF00H
+;
+M7PADX3		EQU	$
+		WORD	0FF00H,0FF00H,0FF00H,0006DH,0FF00H,0FF00H,0FF00H,001D0H,0FF00H
+M7PADY3		EQU	$
+		WORD	0FF00H,0FF00H,0FF00H,00070H,0FF00H,0FF00H,0FF00H,00780H,0FF00H
+;
+M7PADX4		EQU	$
+		WORD	0FF00H,0FF00H,0FF00H,0FF00H,0FF00H,0FF00H,0FF00H,00100H,0FF00H
+M7PADY4		EQU	$
+		WORD	0FF00H,0FF00H,0FF00H,0FF00H,0FF00H,0FF00H,0FF00H,00CA0H,0FF00H
+;
+M7PADX5		EQU	$
+		WORD	0FF00H,0FF00H,0FF00H,0FF00H,0FF00H,0FF00H,0FF00H,00CA0H,0FF00H
+M7PADY5		EQU	$
+		WORD	0FF00H,0FF00H,0FF00H,0FF00H,0FF00H,0FF00H,0FF00H,00DA0H,0FF00H
+;
+M7PADX6		EQU	$
+		WORD	0FF00H,0FF00H,0FF00H,0FF00H,0FF00H,0FF00H,0FF00H,00759H,0FF00H
+M7PADY6		EQU	$
+		WORD	0FF00H,0FF00H,0FF00H,0FF00H,0FF00H,0FF00H,0FF00H,00ED0H,0FF00H
+;
+;
+M7PADC0		EQU	$
+		WORD	00000H,00000H,00000H,06038H,06234H,06632H,06434H,06434H,06632H
+M7PADC1		EQU	$
+		WORD	00000H,00000H,00000H,06032H,00000H,00000H,00000H,06434H,00000H
+M7PADC2		EQU	$
+		WORD	00000H,00000H,00000H,06034H,00000H,00000H,00000H,06434H,00000H
+M7PADC3		EQU	$
+		WORD	00000H,00000H,00000H,06234H,00000H,00000H,00000H,06434H,00000H
+M7PADC4		EQU	$
+		WORD	00000H,00000H,00000H,00000H,00000H,00000H,00000H,06434H,00000H
+M7PADC5		EQU	$
+		WORD	00000H,00000H,00000H,00000H,00000H,00000H,00000H,06434H,00000H
+M7PADC6		EQU	$
+		WORD	00000H,00000H,00000H,00000H,00000H,00000H,00000H,06434H,00000H
+M7TENE		EQU	$
+		BYTE	068H,069H,078H,069H	;E NO DATA
+;
+M7POTA		EQU	$
+		BYTE	034H,074H,0F4H,0B4H
+;
+M7TEST		EQU      $
+		LDA	<FRCNT
+		AND	#010H
+		BEQ	M7ENMY10
+;
+		JSR	M7TESTST
+		BCC	M7ENMY10
+		LDA	<WORKE
+		SEC
+		SBC	#004H
+		STA	<WORKE
+		LDA	<WORKF
+		SEC
+		SBC	#004H
+		STA	<WORKF
+		LDA	#000H			;E SET
+		STA	<WORKD
+		LDA	#03EH			;A SET
+		STA	<WORKC
+		LDA	#002H			;SB SET
+		STA	<WORKB
+		LDX	#000H
+		JSR	M7OBJST			;obj set
+M7ENMY10	EQU	$
+		LDA	>PLYPRM
+		PHA
+		LDA	>PLYPRM+1
+		PHA
+		LDA	>PLXPRM
+		PHA
+		LDA	>PLXPRM+1
+		PHA
+;
+		LDA	MPDTNO
+		CMP	#040H
+		BCS	M7MEMMY20
+		LDX	#00FH			;INDEX(YOSEI)
+		LDA	MEMXPSL,X
+		ORA	MEMXPSH,X
+		ORA	MEMYPSL,X
+		ORA	MEMYPSH,X
+		BEQ	M7MEMMY20
+;
+		LDA	<FRCNT
+		BNE	M7MEMMY16
+		LDA	MEMSTT,X
+		INC	A
+		STA	MEMSTT,X
+M7MEMMY16	EQU	$
+		LDA	MEMXPSL,X
+		STA	>PLXPRM
+		LDA	MEMXPSH,X
+		STA	>PLXPRM+1
+		LDA	MEMYPSL,X
+		STA	>PLYPRM
+		LDA	MEMYPSH,X
+		STA	>PLYPRM+1
+		
+		JSR	M7TESTST
+		BCC	M7MEMMY20
+		LDA	#06AH
+		STA	<WORKD			;E SET
+		LDA	<FRCNT
+		LSR	A
+		AND	#003H
+		TAX
+		LDA	>M7POTA,X		;A SET
+		STA	<WORKC
+		LDA	#002H			;SB SET
+		STA	<WORKB
+		LDX	#00FH			;INDEX
+		JSR	M7OBJST			;obj set
+M7MEMMY20	EQU	$
+		LDA	>GNDTBL+05BH
+		AND	#020H
+		BNE	M7MEMMY2F
+		LDA	>MODTBL2
+		CMP	#006H
+		ROL	A
+		EOR	URAFLG
+		AND	#001H
+		BEQ	M7MEMMY2C
+M7MEMMY2F	EQU	$
+		JMP	M7MEMMY90
+;
+M7MEMMY2C	EQU	$
+		LDX	#000H
+		JSR	M7CLS3
+		BCS	M7MEMMY30
+		JSR	M7CLS7
+		BCS	M7MEMMY30
+		LDA	>MODTBL2
+		ASL	A
+		TAX
+;
+		LDA	>M7PADX0+1,X
+		BMI	M7MEMMY30
+		STA	>PLXPRM+1
+;
+		LDA	>M7PADX0,X
+		STA	>PLXPRM
+;
+		LDA	>M7PADY0+1,X
+		STA	>PLYPRM+1
+;
+		LDA	>M7PADY0,X
+		STA	>PLYPRM
+;
+		LDA	>M7PADC0+1,X
+		BEQ	M7MEMMY27
+		CMP	#064H
+		BEQ	M7MEMMY28
+		LDA	<FRCNT
+		AND	#010H
+		BNE	M7MEMMY30
+M7MEMMY28	EQU	$
+		JSR	M7PSUB
+M7MEMMY27	EQU	$
+;
+		LDX	#00EH			;INDEX
+		JSR	M7TESTST
+		BCC	M7MEMMY30
+;
+		LDA	>MODTBL2
+		ASL	A
+		TAX
+		LDA	>M7PADC0+1,X		;E SET
+		BEQ	M7MEMMY23
+		STA	<WORKD
+		LDA	>M7PADC0,X		;A SET
+		STA	<WORKC
+		LDA	#002H			;SB SET
+		BRA	M7MEMMY25
+;
+M7MEMMY23	EQU	$
+		LDA	<FRCNT
+		LSR	A
+		LSR	A
+		LSR	A
+		AND	#003H
+		TAX
+		LDA	>M7TENE,X
+		STA	<WORKD			;E SET
+		LDA	#032H			;A SET
+		STA	<WORKC
+		LDA	#000H			;SB SET
+M7MEMMY25	EQU	$
+		STA	<WORKB
+		LDX	#00EH			;INDEX
+		JSR	M7OBJST			;obj set
+M7MEMMY30	EQU	$
+;
+		LDX	#001H
+		JSR	M7CLS3
+		BCS	M7MEMMY40
+		JSR	M7CLS7
+		BCS	M7MEMMY40
+		LDA	>MODTBL2
+		ASL	A
+		TAX
+;
+		LDA	>M7PADX1+1,X
+		BMI	M7MEMMY40
+		STA	>PLXPRM+1
+;
+		LDA	>M7PADX1,X
+		STA	>PLXPRM
+;
+		LDA	>M7PADY1+1,X
+		STA	>PLYPRM+1
+;
+		LDA	>M7PADY1,X
+		STA	>PLYPRM
+;
+		LDA	>M7PADC1+1,X
+		BEQ	M7MEMMY37
+		CMP	#064H
+		BEQ	M7MEMMY38
+		LDA	<FRCNT
+		AND	#010H
+		BNE	M7MEMMY40
+M7MEMMY38	EQU	$
+		JSR	M7PSUB
+M7MEMMY37	EQU	$
+;
+		JSR	M7TESTST
+		BCC	M7MEMMY40
+		LDA	>MODTBL2
+		ASL	A
+		TAX
+		LDA	>M7PADC1+1,X		;E SET
+		BEQ	M7MEMMY33
+		STA	<WORKD
+		LDA	>M7PADC1,X		;A SET
+		STA	<WORKC
+		LDA	#002H			;SB SET
+		BRA	M7MEMMY35
+;
+M7MEMMY33	EQU	$
+		LDA	<FRCNT
+		LSR	A
+		LSR	A
+		LSR	A
+		AND	#003H
+		TAX
+		LDA	>M7TENE,X
+		STA	<WORKD			;E SET
+		LDA	#032H			;A SET
+		STA	<WORKC
+		LDA	#000H			;SB SET
+M7MEMMY35	EQU	$
+		STA	<WORKB
+		LDX	#00DH			;INDEX
+		JSR	M7OBJST			;obj set
+M7MEMMY40	EQU	$
+;
+		LDX	#002H
+		JSR	M7CLS3
+		BCS	M7MEMMY50
+		JSR	M7CLS7
+		BCS	M7MEMMY50
+		LDA	>MODTBL2
+		ASL	A
+		TAX
+;
+		LDA	>M7PADX2+1,X
+		BMI	M7MEMMY50
+		STA	>PLXPRM+1
+;
+		LDA	>M7PADX2,X
+		STA	>PLXPRM
+;
+		LDA	>M7PADY2+1,X
+		STA	>PLYPRM+1
+;
+		LDA	>M7PADY2,X
+		STA	>PLYPRM
+;
+		LDA	>M7PADC2+1,X
+		BEQ	M7MEMMY47
+		CMP	#064H
+		BEQ	M7MEMMY48
+		LDA	<FRCNT
+		AND	#010H
+		BNE	M7MEMMY50
+M7MEMMY48	EQU	$
+		JSR	M7PSUB
+M7MEMMY47	EQU	$
+;
+		LDX	#00CH			;INDEX
+		JSR	M7TESTST
+		BCC	M7MEMMY50
+		LDA	>MODTBL2
+		ASL	A
+		TAX
+		LDA	>M7PADC2+1,X		;E SET
+		BEQ	M7MEMMY43
+		STA	<WORKD
+		LDA	>M7PADC2,X		;A SET
+		STA	<WORKC
+		LDA	#002H			;SB SET
+		BRA	M7MEMMY45
+;
+M7MEMMY43	EQU	$
+		LDA	<FRCNT
+		LSR	A
+		LSR	A
+		LSR	A
+		AND	#003H
+		TAX
+		LDA	>M7TENE,X
+		STA	<WORKD			;E SET
+		LDA	#032H			;A SET
+		STA	<WORKC
+		LDA	#000H			;SB SET
+M7MEMMY45	EQU	$
+		STA	<WORKB
+		LDX	#00CH			;INDEX
+		JSR	M7OBJST			;obj set
+M7MEMMY50	EQU	$
+;
+		LDX	#003H
+		JSR	M7CLS7
+		BCS	M7MEMMY60
+		LDA	>MODTBL2
+		ASL	A
+		TAX
+;
+		LDA	>M7PADX3+1,X
+		BMI	M7MEMMY60
+		STA	>PLXPRM+1
+;
+		LDA	>M7PADX3,X
+		STA	>PLXPRM
+;
+		LDA	>M7PADY3+1,X
+		STA	>PLYPRM+1
+;
+		LDA	>M7PADY3,X
+		STA	>PLYPRM
+;
+		LDA	>M7PADC3+1,X
+		BEQ	M7MEMMY57
+		CMP	#064H
+		BEQ	M7MEMMY58
+		LDA	<FRCNT
+		AND	#010H
+		BNE	M7MEMMY60
+M7MEMMY58	EQU	$
+		JSR	M7PSUB
+M7MEMMY57	EQU	$
+;
+		LDX	#00BH			;INDEX
+		JSR	M7TESTST
+		BCC	M7MEMMY60
+		LDA	>MODTBL2
+		ASL	A
+		TAX
+		LDA	>M7PADC3+1,X		;E SET
+		BEQ	M7MEMMY53
+		STA	<WORKD
+		LDA	>M7PADC3,X		;A SET
+		STA	<WORKC
+		LDA	#002H			;SB SET
+		BRA	M7MEMMY55
+;
+M7MEMMY53	EQU	$
+		LDA	<FRCNT
+		LSR	A
+		LSR	A
+		LSR	A
+		AND	#003H
+		TAX
+		LDA	>M7TENE,X
+		STA	<WORKD			;E SET
+		LDA	#032H			;A SET
+		STA	<WORKC
+		LDA	#000H			;SB SET
+M7MEMMY55	EQU	$
+		STA	<WORKB
+		LDX	#00BH			;INDEX
+		JSR	M7OBJST			;obj set
+M7MEMMY60	EQU	$
+;
+		LDX	#004H
+		JSR	M7CLS7
+		BCS	M7MEMMY70
+		LDA	>MODTBL2
+		ASL	A
+		TAX
+;
+		LDA	>M7PADX4+1,X
+		BMI	M7MEMMY70
+		STA	>PLXPRM+1
+;
+		LDA	>M7PADX4,X
+		STA	>PLXPRM
+;
+		LDA	>M7PADY4+1,X
+		STA	>PLYPRM+1
+;
+		LDA	>M7PADY4,X
+		STA	>PLYPRM
+;
+		LDA	>M7PADC4+1,X
+		BEQ	M7MEMMY67
+		CMP	#064H
+		BEQ	M7MEMMY68
+		LDA	<FRCNT
+		AND	#010H
+		BNE	M7MEMMY70
+M7MEMMY68	EQU	$
+		JSR	M7PSUB
+M7MEMMY67	EQU	$
+;
+		LDX	#00AH			;INDEX
+		JSR	M7TESTST
+		BCC	M7MEMMY70
+		LDA	>MODTBL2
+		ASL	A
+		TAX
+		LDA	>M7PADC4+1,X		;E SET
+		BEQ	M7MEMMY63
+		STA	<WORKD
+		LDA	>M7PADC4,X		;A SET
+		STA	<WORKC
+		LDA	#002H			;SB SET
+		BRA	M7MEMMY65
+;
+M7MEMMY63	EQU	$
+		LDA	<FRCNT
+		LSR	A
+		LSR	A
+		LSR	A
+		AND	#003H
+		TAX
+		LDA	>M7TENE,X
+		STA	<WORKD			;E SET
+		LDA	#032H			;A SET
+		STA	<WORKC
+		LDA	#000H			;SB SET
+M7MEMMY65	EQU	$
+		STA	<WORKB
+		LDX	#00AH			;INDEX
+		JSR	M7OBJST			;obj set
+M7MEMMY70	EQU	$
+;
+		LDX	#005H
+		JSR	M7CLS7
+		BCS	M7MEMMY80
+		LDA	>MODTBL2
+		ASL	A
+		TAX
+;
+		LDA	>M7PADX5+1,X
+		BMI	M7MEMMY80
+		STA	>PLXPRM+1
+;
+		LDA	>M7PADX5,X
+		STA	>PLXPRM
+;
+		LDA	>M7PADY5+1,X
+		STA	>PLYPRM+1
+;
+		LDA	>M7PADY5,X
+		STA	>PLYPRM
+;
+		LDA	>M7PADC5+1,X
+		BEQ	M7MEMMY77
+		CMP	#064H
+		BEQ	M7MEMMY78
+		LDA	<FRCNT
+		AND	#010H
+		BNE	M7MEMMY80
+M7MEMMY78	EQU	$
+		JSR	M7PSUB
+M7MEMMY77	EQU	$
+;
+		LDX	#009H			;INDEX
+		JSR	M7TESTST
+		BCC	M7MEMMY80
+		LDA	>MODTBL2
+		ASL	A
+		TAX
+		LDA	>M7PADC5+1,X		;E SET
+		BEQ	M7MEMMY73
+		STA	<WORKD
+		LDA	>M7PADC5,X		;A SET
+		STA	<WORKC
+		LDA	#002H			;SB SET
+		BRA	M7MEMMY75
+;
+M7MEMMY73	EQU	$
+		LDA	<FRCNT
+		LSR	A
+		LSR	A
+		LSR	A
+		AND	#003H
+		TAX
+		LDA	>M7TENE,X
+		STA	<WORKD			;E SET
+		LDA	#032H			;A SET
+		STA	<WORKC
+		LDA	#000H			;SB SET
+M7MEMMY75	EQU	$
+		STA	<WORKB
+		LDX	#009H			;INDEX
+		JSR	M7OBJST			;obj set
+M7MEMMY80	EQU	$
+;						;KYOKAI
+		LDX	#006H
+		JSR	M7CLS7
+		BCS	M7MEMMY90
+		LDA	>MODTBL2
+		ASL	A
+		TAX
+;
+		LDA	>M7PADX6+1,X
+		BMI	M7MEMMY90
+		STA	>PLXPRM+1
+;
+		LDA	>M7PADX6,X
+		STA	>PLXPRM
+;
+		LDA	>M7PADY6+1,X
+		STA	>PLYPRM+1
+;
+		LDA	>M7PADY6,X
+		STA	>PLYPRM
+;
+		LDA	>M7PADC6+1,X
+		BEQ	M7MEMMY87
+		CMP	#064H
+		BEQ	M7MEMMY88
+		LDA	<FRCNT
+		AND	#010H
+		BNE	M7MEMMY90
+M7MEMMY88	EQU	$
+		JSR	M7PSUB
+M7MEMMY87	EQU	$
+;
+		LDX	#008H			;INDEX
+		JSR	M7TESTST
+		BCC	M7MEMMY90
+		LDA	>MODTBL2
+		ASL	A
+		TAX
+		LDA	>M7PADC6+1,X		;E SET
+		BEQ	M7MEMMY83
+		STA	<WORKD
+		LDA	>M7PADC6,X		;A SET
+		STA	<WORKC
+		LDA	#002H			;SB SET
+		BRA	M7MEMMY85
+;
+M7MEMMY83	EQU	$
+		LDA	<FRCNT
+		LSR	A
+		LSR	A
+		LSR	A
+		AND	#003H
+		TAX
+		LDA	>M7TENE,X
+		STA	<WORKD			;E SET
+		LDA	#032H			;A SET
+		STA	<WORKC
+		LDA	#000H			;SB SET
+M7MEMMY85	EQU	$
+		STA	<WORKB
+		LDX	#008H			;INDEX
+		JSR	M7OBJST			;obj set
+M7MEMMY90	EQU	$
+;
+		PLA
+		STA	>PLXPRM+1
+		PLA
+		STA	>PLXPRM
+		PLA
+		STA	>PLYPRM+1
+		PLA
+		STA	>PLYPRM
+		RTS
+M7TESTST	EQU	$
+		LDA	!SCRNO			;UP
+		BNE	M7TESF0
+;
+		MEM16
+		IDX16
+		REP	#00110000B
+;
+		LDA	>PLYPRM			;Y pos
+		LSR	A
+		LSR	A
+		LSR	A
+		LSR	A
+		EOR	#0FFFFH
+		INC	A
+		ADC	CENTY
+		SEC
+		SBC	#0C0H
+;		CMP	#00128H
+;;
+;		BCC	M7TESE0
+;		JMP	M7TES10
+M7TESE0		EQU	$
+;
+		TAX
+;
+		MEM8
+		IDX16
+		SEP	#00100000B
+;
+		LDA	>M7YPOS,X		;obj y pos set
+		STA	<WORKF
+;
+		MEM8
+		IDX8
+		SEP	#00110000B
+;
+		XBA
+		LDA	#00DH
+		JSR	M7MUL
+		JSR	M7LSR
+		STA	<WORKF
+		MEM16
+		IDX16
+		REP	#00110000B
+;
+		LDA	>PLXPRM			;X pos
+		LSR	A
+		LSR	A
+		LSR	A
+		LSR	A
+;
+		MEM8
+		IDX8
+		SEP	#00110000B
+;
+		SEC
+		SBC	#080H
+		PHP
+		BPL	M7TES40
+		EOR	#0FFH
+M7TES40		EQU	$
+;
+		PHA
+;
+		LDA	<WORKF
+		CMP	#0E0H
+		BCC	M7TES50
+		LDA	#000H
+M7TES50		EQU	$
+		XBA
+		LDA	#054H
+		JSR	M7MUL
+		XBA
+		CLC
+		ADC	#0B2H
+		XBA
+;
+		PLA
+;
+		JSR	M7MUL			;a=a*b
+		XBA
+;
+		PLP
+		BCS	M7TES20			;y pos > 80h
+;
+		STA	<WORK0
+		LDA	#080H
+		SEC
+		SBC	<WORK0			;n
+		BRA	M7TES30
+M7TES20		EQU	$
+		CLC				;y
+		ADC	#080H
+M7TES30		EQU	$
+		SEC
+		SBC	<SCCH1
+		STA	<WORKE
+;		LDA	#000H
+;		SBC	<SCCH1+1
+;		BEQ	M7TES12
+;		JMP	M7TES10
+M7TES12		EQU	$
+		LDA	<WORKE
+		CLC
+		ADC	#080H
+		STA	<WORKE
+		LDA	<WORKF
+		CLC
+		ADC	#00CH
+		STA	<WORKF
+		JMP	M7TES60
+;
+M7TESF0		EQU	$
+		MEM16
+		IDX16
+		REP	#00110000B
+;
+		LDA	>PLYPRM			;Y pos
+		LSR	A
+		LSR	A
+		LSR	A
+		LSR	A
+		EOR	#0FFFFH
+		INC	A
+		CLC
+		ADC	CENTY
+		SEC
+		SBC	#00080H
+		CMP	#00100H
+		BCC	M7TES14
+		JMP	M7TES10
+;
+M7TES14		EQU	$
+		MEM8
+		IDX8
+		SEP	#00110000B
+;
+		XBA
+		LDA	#025H
+		JSR	M7MUL
+		JSR	M7LSR
+;
+		MEM8
+		IDX16
+		REP	#00010000B
+;
+		TAX
+		CPX	#00333
+		BCC	M7TES18
+		JMP	M7TES10
+;
+M7TES18		EQU	$
+		LDA	>M7YPOS,X		;obj y pos set
+		STA	<WORKF
+;
+		MEM16
+		REP	#00100000B
+;
+		LDA	>PLXPRM			;X pos
+		SEC
+		SBC	#07F8H
+		PHP
+		BPL	M7TES45
+		EOR	#0FFFFH
+		INC	A
+M7TES45		EQU	$
+;
+		PHA
+;
+		MEM8
+		SEP	#00100000B
+;
+		LDA	<WORKF
+		CMP	#0E2H
+		BCC	M7TES55
+		LDA	#000H
+M7TES55		EQU	$
+		XBA
+		LDA	#054H
+		JSR	M7MUL
+		XBA
+		CLC
+		ADC	#0B2H
+		STA	<WORK0
+		XBA
+;
+		PLA
+;
+		JSR	M7MUL			;a=a*b
+		XBA
+		STA	<WORK1
+		PLA
+		XBA
+		LDA	<WORK0
+		JSR	M7MUL
+		CLC
+		ADC	<WORK1
+		XBA
+		ADC	#00
+		XBA
+;
+		MEM16
+;;;;		REP	#00100000B
+;
+		PLP
+		BCS	M7TES25			;y pos > 80h
+;
+		STA	<WORK0
+		LDA	#0800H
+		SEC
+		SBC	<WORK0			;n
+		BRA	M7TES35
+M7TES25		EQU	$
+		CLC				;y
+		ADC	#0800H
+M7TES35		EQU	$
+		SEC
+		SBC	#0800H
+		BCS	M7TES70
+		EOR	#0FFFFH
+		INC	A
+M7TES70		EQU	$
+;
+		MEM8
+		SEP	#00100000B
+;
+		PHP
+		XBA
+		PHA
+		LDA	#02DH
+		JSR	M7MUL
+		XBA
+		STA	<WORK0
+		PLA
+		XBA
+		LDA	#02DH
+		JSR	M7MUL
+		CLC
+		ADC	<WORK0
+		XBA
+		ADC	#00
+		XBA
+;;		JSR	M7LSR
+		PLP
+		BCS	M7TES80
+		STA	<WORK0
+		LDA	#080H
+		SEC
+		SBC	<WORK0
+		XBA
+		STA	<WORK0
+		LDA	#000H
+		SBC	<WORK
+		XBA
+		BRA	M7TES90
+M7TES80		EQU	$
+		CLC
+		ADC	#080H
+		XBA
+		ADC	#000H
+		XBA
+M7TES90		EQU	$
+		PHA
+		SEC
+		SBC	<SCCH1
+		STA	<WORKE
+		PLA
+		MEM16
+		IDX16
+		REP	#00110000B
+		SEC
+		SBC	#0FF80H
+		SEC
+		SBC	<SCCH1
+		MEM8
+		IDX8
+		SEP	#00110000B
+		XBA
+		BNE	M7TES10
+		LDA	<WORKE
+		CLC
+		ADC	#081H
+		STA	<WORKE
+		LDA	<WORKF
+		CLC
+		ADC	#010H
+		STA	<WORKF
+;
+M7TES60		EQU	$
+		MEM8
+		IDX8
+		SEP	#00110000B
+;
+		SEC		;OBJ SET ON
+		RTS
+;
+M7TES10		EQU	$
+		MEM8
+		IDX8
+		SEP	#00110000B
+;
+		CLC		;OBJ SET OFF
+		RTS
+;
+;
+;
+MOJSTDT		EQU	$-8
+		BYTE	079H,06EH,06FH,06DH,07CH,06CH,07FH
+;
+M7OBJST		EQU	$
+;		LDA	SCRNO
+;		BNE	M7OBJST1
+		LDA	<FRCNT
+		LSR	A
+		LSR	A
+		LSR	A
+		LSR	A
+		AND	#001H
+		BNE	MOJST10
+		LDA	<WORKD
+		CMP	#064H
+		BNE	MOJST10
+		LDA	>MOJSTDT,X
+		STA	<WORKD		;CHAR
+		LDA	#032H
+		STA	<WORKC		;ATR
+		STZ	OAMSB,X		;SB
+		TXA
+		ASL	A
+		ASL	A
+		TAX
+		LDA	<WORKE		;X
+		STA	OAM+0,X
+		LDA	<WORKF		;Y
+		STA	OAM+1,X
+		BRA	MOJST20
+MOJST10		EQU	$
+		LDA	<WORKB
+		STA	OAMSB,X
+		TXA
+		ASL	A
+		ASL	A
+		TAX
+		LDA	<WORKE
+		SEC
+		SBC	#004H
+		STA	OAM+0,X
+;
+		LDA	<WORKF
+		SEC
+		SBC	#004H
+		STA	OAM+1,X
+;
+MOJST20		EQU	$
+		LDA	<WORKD
+		STA	OAM+02,X
+;
+		LDA	<WORKC
+		STA	OAM+03,X
+;
+M7OBJST1	EQU	$
+		RTS
+;
+;
+M7MUL		EQU	$			;a*b
+		STA	04202H
+		XBA
+		STA	04203H
+		NOP
+		NOP
+		NOP
+		NOP
+		LDA	04217H
+		XBA
+		LDA	04216H
+;
+		RTS
+;
+M7LSR		EQU	$
+		MEM16
+		IDX16
+		REP	#00110000B
+;
+		LSR	A
+		LSR	A
+		LSR	A
+		LSR	A
+;
+		MEM8
+		IDX8
+		SEP	#00110000B
+		RTS
+;
+;
+M7PSUB		EQU	$
+		MEM16
+		REP	#00100000B
+		LDA	>PLXPRM
+		SEC
+		SBC	#00004H
+		STA	>PLXPRM
+		LDA	>PLYPRM
+		SEC
+		SBC	#00004H
+		STA	>PLYPRM
+		MEM8
+		SEP	#00100000B
+		RTS
+;
+;
+		MEM8
+		IDX8
+M7CLS3DT	EQU	$
+		BYTE	004H,001H,002H
+;
+M7CLS3		EQU	$
+		LDA	>MODTBL2
+		CMP	#003H
+		BNE	M7CLS310
+		LDA	>ITEMR53
+		AND	>M7CLS3DT,X
+		BEQ	M7CLS310
+		SEC
+		RTS
+M7CLS310	EQU	$
+		CLC
+		RTS
+;
+;
+M7CLS7DT	EQU	$
+		BYTE	002H,040H,008H,020H,001H,004H,010H
+;
+M7CLS7		EQU	$
+		LDA	>MODTBL2
+		CMP	#007H
+		BNE	M7CLS310
+		LDA	>ITMTBL3
+		AND	>M7CLS7DT,X
+		BEQ	M7CLS310
+		SEC
+		RTS
+;
+;
+M7YPOS		EQU	$
+	BYTE	0E0H,0E0H,0E0H,0E0H,0E0H,0E0H,0E0H,0E0H
+	BYTE	0E0H,0E0H,0E0H,0E0H,0E0H,0E0H,0E0H,0DFH
+	BYTE	0DEH,0DDH,0DCH,0DBH,0DAH,0D8H,0D7H,0D6H
+	BYTE	0D5H,0D4H,0D3H,0D2H,0D1H,0D0H,0CFH,0CEH
+	BYTE	0CDH,0CCH,0CBH,0CAH,0C9H,0C7H,0C6H,0C5H
+	BYTE	0C4H,0C3H,0C2H,0C1H,0C0H,0BFH,0BEH,0BDH
+	BYTE	0BCH,0BBH,0BAH,0B9H,0B8H,0B7H,0B6H,0B5H
+	BYTE	0B4H,0B3H,0B2H,0B1H,0B0H,0AFH,0AEH,0ADH
+	BYTE	0ACH,0ABH,0AAH,0A9H,0A8H,0A7H,0A6H,0A5H
+	BYTE	0A4H,0A3H,0A2H,0A1H,0A0H,09FH,09EH,09DH
+	BYTE	09CH,09BH,09BH,09AH,099H,098H,097H,096H
+	BYTE	095H,094H,093H,092H,091H,090H,08FH,08EH
+	BYTE	08DH,08CH,08BH,08BH,08AH,089H,088H,087H
+	BYTE	086H,085H,084H,083H,082H,081H,081H,080H
+	BYTE	07FH,07EH,07DH,07CH,07BH,07AH,079H,079H
+	BYTE	078H,077H,076H,075H,074H,073H,072H,072H
+	BYTE	071H,070H,06FH,06EH,06DH,06CH,06CH,06BH
+	BYTE	06AH,069H,068H,067H,067H,066H,065H,064H
+	BYTE	063H,062H,062H,061H,060H,05FH,05EH,05DH
+	BYTE	05DH,05CH,05BH,05AH,059H,059H,058H,057H
+	BYTE	056H,055H,055H,054H,053H,052H,051H,051H
+	BYTE	050H,04FH,04EH,04EH,04DH,04CH,04BH,04AH
+	BYTE	04AH,049H,048H,047H,047H,046H,045H,044H
+	BYTE	044H,043H,042H,041H,041H,040H,03FH,03EH
+	BYTE	03EH,03DH,03CH,03CH,03BH,03AH,039H,039H
+	BYTE	038H,037H,036H,036H,035H,034H,034H,033H
+	BYTE	032H,032H,031H,030H,02FH,02FH,02EH,02DH
+	BYTE	02DH,02CH,02BH,02BH,02AH,029H,029H,028H
+	BYTE	027H,027H,026H,025H,025H,024H,023H,023H
+	BYTE	022H,021H,021H,020H,01FH,01FH,01EH,01DH
+	BYTE	01DH,01CH,01CH,01BH,01AH,01AH,019H,018H
+	BYTE	018H,017H,017H,016H,015H,015H,014H,014H
+	BYTE	013H,012H,012H,011H,010H,010H,00FH,00FH
+	BYTE	00EH,00EH,00DH,00CH,00CH,00BH,00BH,00AH
+	BYTE	009H,009H,008H,008H,007H,007H,006H,005H
+	BYTE	005H,004H,004H,003H,003H,002H,001H,001H
+	BYTE	000H,000H,000H,000H,0FFH,0FEH,0FEH,0FDH
+	BYTE	0FCH,0FCH,0FBH,0FBH,0FAH,0F9H,0F9H,0F8H
+	BYTE	0F7H,0F7H,0F6H,0F5H,0F4H,0F4H,0F3H,0F2H
+	BYTE	0F2H,0F1H,0F0H,0EFH,0EEH,0EEH,0EDH,0ECH
+	BYTE	0EBH,0EAH,0E9H,0E8H,0E8H,0E7H,0E6H,0E5H
+	BYTE	0E4H,0E3H,0E2H,0E1H,0E0H
+;
+;;;;	BYTE	0F0H,0EEH,0EDH,0ECH,0EBH,0EAH,0E9H,0E8H
+;;;;	BYTE	0E7H,0E6H,0E5H,0E4H,0E2H,0E1H,0E0H,0DFH
+;;;;	BYTE	0DEH,0DDH,0DCH,0DBH,0DAH,0D9H,0D8H,0D7H
+;;;;	BYTE	0D6H,0D5H,0D4H,0D3H,0D1H,0D0H,0CFH,0CEH
+;;;;	BYTE	0CDH,0CCH,0CBH,0CAH,0C9H,0C8H,0C7H,0C6H
+;;;;	BYTE	0C5H,0C4H,0C3H,0C2H,0C1H,0C0H,0BFH,0BEH
+;;;;	BYTE	0BDH,0BCH,0BBH,0BAH,0B9H,0B8H,0B7H,0B6H
+;;;;	BYTE	0B5H,0B4H,0B3H,0B2H,0B1H,0B0H,0AFH,0AEH
+;;;;	BYTE	0ADH,0ACH,0ABH,0AAH,0A9H,0A8H,0A7H,0A6H
+;;;;	BYTE	0A5H,0A4H,0A3H,0A2H,0A1H,0A0H,0A0H,09FH
+;;;;	BYTE	09EH,09DH,09CH,09BH,09AH,099H,098H,097H
+;;;;	BYTE	096H,095H,094H,093H,092H,091H,091H,090H
+;;;;	BYTE	08FH,08EH,08DH,08CH,08BH,08AH,089H,088H
+;;;;	BYTE	087H,087H,086H,085H,084H,083H,082H,081H
+;;;;	BYTE	080H,07FH,07EH,07EH,07DH,07CH,07BH,07AH
+;;;;	BYTE	079H,078H,077H,077H,076H,075H,074H,073H
+;;;;	BYTE	072H,071H,071H,070H,06FH,06EH,06DH,06CH
+;;;;	BYTE	06CH,06BH,06AH,069H,068H,067H,066H,066H
+;;;;	BYTE	065H,064H,063H,062H,062H,061H,060H,05FH
+;;;;	BYTE	05EH,05DH,05DH,05CH,05BH,05AH,059H,059H
+;;;;	BYTE	058H,057H,056H,055H,055H,054H,053H,052H
+;;;;	BYTE	052H,051H,050H,04FH,04EH,04EH,04DH,04CH
+;;;;	BYTE	04BH,04BH,04AH,049H,048H,048H,047H,046H
+;;;;	BYTE	045H,045H,044H,043H,042H,042H,041H,040H
+;;;;	BYTE	03FH,03FH,03EH,03DH,03CH,03CH,03BH,03AH
+;;;;	BYTE	039H,039H,038H,037H,037H,036H,035H,034H
+;;;;	BYTE	034H,033H,032H,032H,031H,030H,030H,02FH
+;;;;	BYTE	02EH,02EH,02DH,02CH,02BH,02BH,02AH,029H
+;;;;	BYTE	029H,028H,027H,027H,026H,025H,025H,024H
+;;;;	BYTE	023H,023H,022H,021H,021H,020H,01FH,01FH
+;;;;	BYTE	01EH,01EH,01DH,01CH,01CH,01BH,01AH,01AH
+;;;;	BYTE	019H,018H,018H,017H,017H,016H,015H,015H
+;;;;	BYTE	014H,013H,013H,012H,012H,011H,010H,010H
+;;;;	BYTE	00FH,00FH,00EH,00DH,00DH,00CH,00CH,00BH
+;;;;	BYTE	00AH,00AH,009H,009H,008H,008H,007H,006H
+;;;;	BYTE	006H,005H,005H,004H,004H,003H,002H,002H
+;;;;	BYTE	001H,001H,000H,000H,0FFH,0FFH,0FEH,0FEH
+;;;;	BYTE	0FDH,0FCH,0FCH,0FBH,0FBH
+;
+;
+;
+;
+;
+;
+;************************************************************************
+;************************************************************************
+;************************************************************************
+SCRNDT		EQU	$		; screen DATA
+		HEX	028,028,028,028,028,028,028,028,028,028,028,028,028,028,028,028
+		HEX	028,028,028,028,028,02C,009,008,028,028,028,028,028,028,028,028
+		HEX	028,028,028,028,028,028,028,008,029,028,028,028,028,028,028,028
+		HEX	028,028,028,028,028,028,02A,028,028,028,028,028,028,028,028,028
+		HEX	028,028,028,028,028,028,028,028,02C,009,008,009,028,028,028,028
+		HEX	028,028,028,028,028,008,029,028,028,028,028,028,028,028,028,028
+		HEX	028,028,028,028,028,028,028,028,028,02C,02D,02C,009,028,028,028
+		HEX	028,028,028,028,008,028,02C,009,008,028,028,028,028,028,028,008
+		HEX	028,028,028,028,028,028,028,028,028,028,02C,028,02B,009,028,028
+		HEX	028,028,028,008,028,028,028,02A,028,028,028,028,028,028,008,028
+		HEX	028,028,028,028,028,028,028,028,028,028,028,028,02B,02A,028,028
+		HEX	028,028,028,028,028,028,028,028,028,028,028,028,028,028,028,028
+		HEX	028,028,028,028,028,028,028,028,028,029,028,028,02A,028,028,028
+		HEX	028,028,028,028,028,028,028,028,028,028,028,028,028,028,028,028
+		HEX	028,028,008,029,028,028,028,028,028,02C,029,028,028,028,028,028
+		HEX	028,008,028,028,028,028,028,028,028,028,028,028,028,028,028,028
+		HEX	028,008,028,02C,009,008,028,028,028,028,02B,009,008,029,008,029
+		HEX	008,028,028,028,028,028,028,028,028,028,028,028,028,028,028,028
+		HEX	008,028,028,028,02A,028,028,028,028,028,02B,02E,02D,02C,02D,02C
+		HEX	02D,028,028,028,028,028,028,028,028,028,028,028,028,028,028,028
+		HEX	028,028,028,028,028,028,028,028,028,028,02C,02C,02C,028,02C,028
+		HEX	02C,028,028,028,028,028,028,028,028,028,028,028,008,029,028,02F
+		HEX	028,028,028,028,028,028,028,028,028,028,028,028,028,028,028,028
+		HEX	028,028,028,028,028,028,028,028,028,008,009,008,028,02C,009,01B
+		HEX	028,028,028,028,028,028,028,028,028,028,028,029,028,028,028,028
+		HEX	028,02F,028,028,028,028,028,028,008,028,02C,02D,028,028,02B,019
+		HEX	028,028,028,028,028,028,028,028,028,028,028,02C,029,028,02F,028
+		HEX	02F,01B,01A,028,02F,028,02F,008,028,028,028,02C,028,028,02C,02E
+		HEX	028,028,028,028,028,028,028,028,028,028,028,028,02C,038,01B,01C
+		HEX	01D,01F,01E,01A,01B,01C,01D,01A,028,02F,028,02F,028,028,028,02B
+		HEX	028,028,028,028,028,028,028,028,028,028,028,028,028,02E,019,01E
+		HEX	01F,014,014,01E,01F,01E,01F,01E,01A,01B,03B,03C,03B,028,028,028
+		HEX	028,028,028,028,008,029,008,029,028,028,028,028,028,02B,02E,00B
+		HEX	026,027,014,014,014,0A5,014,026,024,025,056,035,05B,073,074,028
+		HEX	028,028,028,008,028,02C,028,02B,009,008,029,028,028,02C,02E,01B
+		HEX	036,037,014,014,014,014,014,015,034,0A7,064,05B,090,073,073,052
+		HEX	028,028,028,028,028,028,028,02C,02E,02D,02C,009,028,02F,01B,01F
+		HEX	014,014,014,014,014,014,014,015,0A7,034,0E4,090,082,083,083,083
+		HEX	028,028,028,028,028,028,028,028,02C,02E,02D,02A,029,02C,019,014
+		HEX	0A5,014,014,014,0A5,014,014,015,0A7,0B6,0DF,082,0B2,093,0D6,0D6
+		HEX	009,028,028,028,028,028,028,028,028,02C,02A,028,02C,009,01B,014
+		HEX	014,0A5,014,014,014,014,014,015,034,0A7,082,0B2,0D6,093,093,093
+		HEX	02B,009,008,029,028,028,028,028,028,028,028,028,028,02B,019,014
+		HEX	014,014,014,014,0A5,014,0A5,036,005,034,0B0,0D6,0D6,082,083,083
+		HEX	02C,02A,028,02B,02D,028,028,028,028,028,028,028,028,02C,02B,00B
+		HEX	0A5,014,014,0A5,014,0A5,014,014,015,033,033,033,090,0B2,0D6,093
+		HEX	028,028,028,02C,02E,02D,008,028,028,028,028,028,028,028,02F,01B
+		HEX	014,014,0A5,0A5,014,014,014,0A5,015,0A6,0FB,034,082,083,083,083
+		HEX	028,028,028,028,02C,02A,028,028,028,028,008,029,008,029,01B,01F
+		HEX	026,027,026,027,026,024,024,0D5,025,034,034,034,0B0,093,071,093
+		HEX	028,028,028,028,028,028,028,028,028,02F,028,02C,028,02C,019,014
+		HEX	015,013,015,013,015,033,040,041,033,0BF,034,034,030,023,081,023
+		HEX	028,028,028,028,028,028,028,028,02F,01B,01A,028,028,02F,01B,014
+		HEX	015,013,015,013,015,0BC,0BD,0A6,0A7,034,041,033,040,034,0C0,034
+		HEX	029,028,028,028,028,008,02D,028,028,019,00A,028,02F,01B,01F,014
+		HEX	015,013,015,013,036,005,0D0,0D0,0D0,0D0,0D0,0D0,0D0,0D0,0C3,0D0
+		HEX	02C,009,028,028,008,028,02B,02D,028,02C,028,02F,01B,01F,014,014
+		HEX	015,023,025,023,024,025,0C0,0A6,0FB,0A7,0A6,000,06A,03D,06E,08B
+		HEX	028,02C,009,008,028,028,02C,02E,02D,008,029,01B,01F,0A5,014,026
+		HEX	025,031,0B6,0E4,0FD,0FE,0C0,010,012,0A6,0FB,010,012,04D,07E,09B
+		HEX	028,028,02A,029,028,028,028,02C,02A,028,02C,019,014,014,0A5,015
+		HEX	034,041,033,033,033,033,0C0,010,012,0A7,0FB,020,022,0CD,0A7,03E
+		HEX	028,028,028,02C,02D,028,028,028,028,028,028,02B,00B,0A5,014,015
+		HEX	034,0F6,089,06B,06C,089,0F6,010,012,0FB,0FB,000,002,0CD,034,03E
+		HEX	028,028,028,028,028,028,028,028,028,028,028,028,028,028,028,028
+		HEX	028,028,028,028,028,028,028,028,028,028,028,028,028,028,028,028
+		HEX	028,028,028,028,028,028,028,028,028,028,028,028,028,028,028,028
+		HEX	028,028,028,028,008,029,028,028,028,028,028,028,028,028,028,028
+		HEX	028,028,008,028,008,029,028,028,028,028,028,028,028,028,028,028
+		HEX	028,028,028,008,028,02C,009,028,028,028,028,028,028,028,028,028
+		HEX	009,008,028,008,028,02C,009,028,028,028,028,028,028,029,008,029
+		HEX	008,029,008,028,028,028,02B,009,028,028,028,028,028,028,028,028
+		HEX	02C,02D,028,028,028,028,02B,009,028,028,008,028,028,02C,02D,02C
+		HEX	02D,02C,02D,028,028,028,02C,02E,009,028,028,028,028,028,028,028
+		HEX	028,02C,028,028,028,028,02C,02E,009,008,028,028,028,028,02C,028
+		HEX	02C,028,02C,028,028,028,028,02B,02A,029,028,028,028,028,028,028
+		HEX	028,028,028,028,028,028,028,02B,02A,028,028,028,028,028,028,028
+		HEX	028,028,028,028,028,028,028,008,009,02C,009,028,028,028,028,028
+		HEX	028,028,028,028,028,028,028,008,028,028,028,028,028,028,028,028
+		HEX	028,028,028,028,028,028,008,028,02C,028,02B,009,028,028,028,028
+		HEX	028,028,028,028,028,028,028,028,028,028,028,028,028,028,028,028
+		HEX	028,028,028,028,028,028,028,028,028,028,02C,02E,02D,028,028,028
+		HEX	028,028,028,028,028,028,028,028,028,028,028,028,028,028,028,028
+		HEX	028,028,028,028,028,028,028,028,028,028,028,02B,02A,02D,028,028
+		HEX	028,028,028,028,028,028,02F,028,028,028,028,028,028,028,028,028
+		HEX	028,028,028,028,028,028,028,028,028,028,028,02A,028,02C,028,028
+		HEX	01A,028,008,029,008,029,01B,01A,028,028,028,028,028,028,028,028
+		HEX	028,028,028,028,028,028,028,028,028,028,028,028,028,028,028,028
+		HEX	00A,008,02D,02C,02D,01B,01F,00A,028,028,028,02F,028,028,028,028
+		HEX	028,028,028,028,028,028,028,028,028,028,028,028,028,028,028,028
+		HEX	02D,028,02C,028,02C,019,00A,028,028,028,02F,01B,01A,028,028,028
+		HEX	028,028,028,028,028,028,028,028,028,028,028,028,028,028,028,028
+		HEX	02E,028,008,029,028,02C,02D,028,028,028,02C,019,00A,028,028,028
+		HEX	028,028,028,028,028,028,028,008,029,008,028,028,028,028,028,028
+		HEX	02C,098,042,02C,009,028,02C,028,028,008,029,02C,028,028,028,028
+		HEX	028,028,028,028,028,028,008,028,02C,02D,028,028,028,028,028,028
+		HEX	072,099,063,073,073,074,02C,072,073,073,073,0A1,0A0,073,073,074
+		HEX	028,028,028,028,028,028,028,028,028,02C,028,028,028,028,028,028
+		HEX	052,09A,070,0A0,073,091,009,090,073,073,0A1,084,090,073,073,091
+		HEX	028,028,028,028,028,028,028,028,028,028,028,028,028,028,028,028
+		HEX	083,083,084,082,083,052,052,083,083,083,084,0B3,090,0A1,083,084
+		HEX	03B,028,028,028,028,028,028,028,028,028,028,028,028,028,028,028
+		HEX	093,093,094,092,093,094,072,093,093,093,0B3,0A1,082,084,093,0A2
+		HEX	04A,03B,008,028,028,028,028,028,028,028,028,028,028,028,028,028
+		HEX	0D6,093,094,092,093,094,082,093,082,083,083,084,0B4,094,006,054
+		HEX	035,04C,028,028,028,028,028,028,028,028,028,028,028,028,028,028
+		HEX	083,084,0B3,0B2,093,094,0B4,090,0B2,093,093,0B3,0CA,0B7,095,054
+		HEX	048,03B,028,028,028,028,028,028,028,028,028,028,008,029,028,028
+		HEX	093,0B3,073,0A1,083,052,062,090,073,073,073,091,09F,006,022,054
+		HEX	05C,04A,03B,028,028,028,028,028,028,028,028,008,028,02C,009,008
+		HEX	083,083,083,084,093,094,0CA,082,083,083,083,084,0A9,016,002,054
+		HEX	058,056,04A,03B,008,028,028,028,028,028,008,028,028,028,02B,02D
+		HEX	093,093,093,0A4,093,0A4,0CA,0B4,093,093,093,0B7,011,011,012,054
+		HEX	035,058,056,04C,029,028,028,028,028,028,028,028,028,028,02C,02E
+		HEX	024,024,024,025,000,085,006,021,021,021,021,021,021,021,022,054
+		HEX	039,03A,039,028,02C,02D,028,028,028,028,028,028,028,028,028,02C
+		HEX	0B6,080,080,0B6,020,007,095,0A6,0A6,0F6,0A7,044,045,041,031,054
+		HEX	03B,028,028,028,028,02C,028,028,028,028,028,028,028,028,028,028
+		HEX	0D0,0D0,0D0,0D0,0D0,010,006,077,07B,07B,07B,043,07A,07B,08D,08E
+		HEX	04A,03B,028,028,028,028,028,028,028,028,028,028,028,028,028,008
+		HEX	08C,06E,03F,08A,002,010,012,054,057,09D,09D,09D,09D,09D,0C8,0C9
+		HEX	035,04C,028,028,028,028,028,028,028,028,028,028,028,028,008,028
+		HEX	09C,07E,04F,010,012,010,012,054,0C7,057,056,048,035,089,089,05C
+		HEX	035,03B,028,028,028,028,028,028,028,028,028,028,028,008,028,028
+		HEX	05E,0A7,0CE,010,012,052,052,054,0C7,0EE,0EF,058,09D,09D,09D,05C
+		HEX	048,04A,03B,028,028,028,028,028,028,028,028,028,028,028,028,028
+		HEX	05E,034,0CE,010,0F3,0F4,022,054,0C7,089,049,056,057,09D,056,05C
+		HEX	05C,035,04C,028,029,028,028,028,028,028,028,028,028,028,028,028
+		HEX	028,028,028,028,02B,02D,028,028,028,028,028,02C,02A,00B,014,015
+		HEX	034,0B6,034,03E,05E,088,088,010,012,0FB,0A6,010,012,0CD,034,03E
+		HEX	028,028,028,028,02C,02E,02D,008,009,028,028,028,02F,02A,00B,015
+		HEX	088,088,0BC,0BD,0BC,0BD,0F6,010,012,0BC,0BD,010,012,05D,04E,07D
+		HEX	028,028,028,028,028,02C,02A,028,02B,009,028,028,028,02F,01B,025
+		HEX	034,0A7,034,034,034,034,0A7,020,022,033,033,010,016,001,001,050
+		HEX	028,028,028,028,028,028,028,028,02C,02A,028,028,02F,03C,04B,066
+		HEX	0CF,004,004,0CB,004,0BB,0C0,003,004,004,004,0DB,0E6,021,021,060
+		HEX	028,028,028,028,028,028,028,028,028,028,008,009,008,05A,035,035
+		HEX	069,024,024,027,026,025,0C0,013,026,024,024,027,015,0A7,0FB,0FB
+		HEX	009,028,028,028,028,028,028,028,028,028,028,02C,02D,02B,03A,035
+		HEX	055,034,034,013,015,0E4,033,013,015,0FB,0A7,013,015,0A7,0FB,0FB
+		HEX	02B,009,028,028,028,028,028,028,028,028,028,028,02C,02F,03C,035
+		HEX	055,033,031,023,025,033,0F6,013,015,0A7,0FB,013,015,0A7,0A6,034
+		HEX	02C,02E,009,008,029,028,028,028,028,02C,009,028,02F,03C,04B,035
+		HEX	07A,07B,07B,0A3,0D2,07B,07C,023,036,005,003,037,015,0A7,041,033
+		HEX	028,02C,02A,028,02C,009,028,028,028,028,02C,009,03C,04B,035,057
+		HEX	09D,09D,0C5,09D,09D,056,055,0A6,023,025,023,024,025,034,044,066
+		HEX	028,028,028,028,028,02B,02D,028,028,028,028,02C,05A,035,035,0C7
+		HEX	035,0DE,0CC,0DE,057,05C,047,066,045,0D0,0D0,0D0,0C3,034,0AF,067
+		HEX	028,028,028,028,028,02B,02A,028,028,028,028,028,02C,03A,035,0C7
+		HEX	057,09D,078,09D,059,058,056,035,07A,07B,07C,0A7,034,0B1,0AD,0B6
+		HEX	028,028,028,028,02F,02A,028,028,028,028,028,028,028,02C,03A,0C7
+		HEX	0C7,086,0DC,057,059,086,058,056,035,035,07A,07B,07B,0D3,0AC,0BF
+		HEX	028,028,028,028,028,028,028,028,028,028,008,009,008,029,03C,0C7
+		HEX	0C7,086,058,059,086,086,086,05C,057,056,057,056,057,065,0B6,0B6
+		HEX	028,028,028,028,028,028,028,028,028,028,028,02C,02D,03C,04B,0C7
+		HEX	059,086,086,086,086,086,086,05C,0C7,064,065,054,055,0B6,0B6,0B6
+		HEX	028,028,028,028,028,028,028,028,028,028,028,028,02C,05A,035,0C7
+		HEX	086,086,086,086,086,086,086,058,0C2,07F,06F,0C1,065,0B6,079,0F5
+		HEX	028,028,028,028,028,028,028,028,028,028,028,008,029,02C,03A,0C7
+		HEX	066,049,086,086,086,086,086,086,05C,047,046,055,0B6,0B6,0B6,0B6
+		HEX	028,028,028,028,028,028,028,028,008,029,008,028,02C,009,03C,047
+		HEX	066,066,066,066,066,066,066,066,046,035,035,047,066,066,066,066
+		HEX	028,028,028,028,028,028,028,028,028,02C,009,028,028,02B,05A,039
+		HEX	03A,039,03A,035,035,039,03A,048,066,066,049,039,03A,035,035,039
+		HEX	028,028,028,028,028,028,028,028,028,028,02C,028,028,02C,02C,02D
+		HEX	02C,028,02C,03A,039,02F,03C,05C,039,03A,039,028,02C,03A,039,028
+		HEX	028,028,028,028,028,028,028,028,028,028,028,028,028,028,028,02C
+		HEX	028,028,028,02C,028,02C,05A,046,03B,02C,02D,028,028,02C,02D,028
+		HEX	028,028,028,028,028,028,028,008,029,028,028,028,028,028,028,028
+		HEX	028,028,028,028,028,028,03C,035,04A,03B,02C,02D,028,028,02C,028
+		HEX	028,028,028,028,028,028,028,028,02C,009,008,029,028,028,028,028
+		HEX	028,028,028,028,028,008,05A,035,035,04A,03B,03C,03B,008,029,028
+		HEX	028,028,028,028,028,028,028,028,028,02C,02D,02C,009,028,028,028
+		HEX	028,028,028,028,008,028,02C,03A,039,03A,04A,04B,04C,028,02C,009
+		HEX	028,028,028,028,028,028,028,028,028,028,02C,028,02B,009,008,029
+		HEX	028,028,028,008,028,028,028,02A,028,02C,03A,039,028,028,028,008
+		HEX	028,028,028,028,028,028,028,028,028,028,028,028,02B,02A,028,02C
+		HEX	028,028,028,028,028,028,028,028,028,028,02B,02D,028,028,028,028
+		HEX	028,028,028,028,028,028,028,028,028,028,028,028,02A,028,028,028
+		HEX	028,028,028,028,028,028,028,028,028,028,02C,02E,02D,028,028,028
+		HEX	028,028,028,028,028,028,028,028,028,028,028,028,028,028,028,028
+		HEX	028,028,028,028,028,028,028,028,028,028,028,02C,02E,028,028,028
+		HEX	028,028,028,028,028,028,028,028,028,028,028,028,028,028,028,028
+		HEX	028,028,028,028,028,028,028,028,028,028,028,028,028,028,028,028
+		HEX	028,028,028,028,028,028,028,028,028,028,028,028,028,028,028,028
+		HEX	028,028,028,028,028,028,028,028,028,028,028,028,028,028,028,028
+		HEX	028,028,028,028,028,028,028,028,028,028,028,028,028,028,028,028
+		HEX	028,028,028,028,028,028,028,028,028,028,028,028,028,028,028,028
+		HEX	028,028,028,028,028,028,028,028,028,028,028,028,028,028,028,028
+		HEX	028,028,028,028,028,028,028,028,028,028,028,028,028,028,028,028
+		HEX	028,028,028,028,028,028,028,028,028,028,028,028,028,028,028,028
+		HEX	028,028,028,028,028,028,028,028,028,028,028,028,028,028,028,028
+		HEX	05E,034,0CE,010,012,0FC,0FC,05C,0C7,09D,059,058,059,089,058,05C
+		HEX	058,039,028,028,02C,02D,028,028,008,029,028,028,028,028,028,028
+		HEX	06D,04E,05F,020,022,0FC,0FC,05C,0C7,067,056,089,057,067,067,05C
+		HEX	039,028,028,028,028,02B,02D,008,028,02C,02D,028,028,028,028,028
+		HEX	051,001,001,001,002,0FC,0FC,05C,055,09E,064,067,065,0FB,0A7,054
+		HEX	03B,028,028,008,028,028,02C,028,028,028,02C,028,028,028,028,028
+		HEX	061,021,021,007,012,0FC,0FC,05C,055,077,07B,07B,07B,07B,07C,054
+		HEX	04A,03B,008,028,028,028,028,028,028,028,028,028,028,028,028,028
+		HEX	0FB,0A7,0C0,010,012,0FC,0FC,05C,055,064,067,056,057,067,065,054
+		HEX	048,04C,028,028,028,028,028,028,028,028,028,028,028,028,028,028
+		HEX	0FB,0B6,0C0,010,012,034,034,064,065,0A6,0A6,054,055,031,044,046
+		HEX	058,03B,028,02F,028,028,028,028,028,028,028,028,028,028,028,028
+		HEX	0B6,0F6,0C0,010,016,050,051,001,001,001,001,068,055,041,064,056
+		HEX	048,04A,03B,03C,03B,028,028,028,02F,028,028,028,028,028,028,028
+		HEX	033,033,0C3,020,021,060,061,0AB,097,097,0BE,068,07A,07B,07B,043
+		HEX	05C,035,04A,04B,04A,03B,008,029,03C,03B,028,028,028,028,028,028
+		HEX	066,045,044,066,045,034,034,064,0AE,0AE,0A9,068,057,0C6,067,056
+		HEX	058,056,035,035,035,04C,02F,03C,04B,04C,028,028,028,028,028,028
+		HEX	067,065,064,056,075,076,096,001,017,011,011,0B8,053,001,002,054
+		HEX	035,058,039,03A,039,028,028,05A,039,028,028,028,028,028,028,028
+		HEX	0B6,0B6,0B6,054,055,010,006,007,087,097,0BE,08F,09F,006,012,054
+		HEX	035,039,028,02C,02D,028,028,02C,02D,028,028,028,028,028,028,008
+		HEX	0BF,0B6,0B6,054,055,010,016,017,0B9,0C6,0BA,08F,09F,012,012,054
+		HEX	035,03B,008,028,02C,028,028,028,02C,028,028,028,028,028,008,028
+		HEX	0B6,0B6,0B6,054,047,0AA,011,011,016,096,017,08F,09F,012,022,054
+		HEX	035,04C,02D,028,028,028,028,028,028,028,028,028,028,028,028,028
+		HEX	0B6,030,033,054,057,0F2,011,011,011,011,011,0A8,0A9,095,002,054
+		HEX	039,028,02C,02D,028,028,008,029,008,029,028,028,028,028,028,028
+		HEX	0B6,032,034,064,065,010,011,011,006,021,007,011,011,006,022,054
+		HEX	03B,028,028,02C,028,028,028,02C,028,02C,028,028,028,028,028,028
+		HEX	030,040,034,0B6,034,020,021,021,022,034,0B6,034,034,034,0B6,054
+		HEX	039,028,028,028,028,028,028,028,028,028,028,028,028,028,028,028
+		HEX	066,066,066,066,066,066,066,066,066,066,066,066,066,066,066,046
+		HEX	03B,028,028,028,028,028,028,028,028,028,028,028,028,028,028,028
+		HEX	03A,048,066,066,066,049,048,049,039,03A,035,035,039,03A,035,035
+		HEX	039,02D,028,028,028,028,028,028,028,028,028,028,028,028,028,028
+		HEX	02C,03A,039,03A,035,047,046,039,028,02C,03A,039,028,02C,03A,039
+		HEX	028,02C,028,028,028,028,028,028,028,028,028,028,028,008,029,008
+		HEX	028,02C,02D,02C,03A,035,039,028,028,028,02C,008,029,028,02C,028
+		HEX	028,028,028,028,028,028,028,028,028,028,028,028,008,028,02C,02D
+		HEX	028,028,02C,028,02C,039,028,028,028,028,028,028,02B,009,008,029
+		HEX	028,028,028,028,008,029,028,028,028,028,028,028,028,028,028,02C
+		HEX	028,028,028,028,008,029,028,028,028,028,028,028,02C,02A,028,02C
+		HEX	009,028,028,008,028,02C,009,028,028,028,028,028,028,028,028,028
+		HEX	028,028,028,008,028,02C,02D,028,028,028,028,028,028,028,028,028
+		HEX	008,029,008,028,028,028,02B,009,028,028,028,028,028,028,028,028
+		HEX	029,028,008,028,028,028,02C,028,028,028,028,028,028,028,028,028
+		HEX	028,02C,02D,028,028,028,02C,02E,009,028,028,028,028,028,028,028
+		HEX	02C,02D,028,028,028,028,028,028,028,028,028,028,028,028,028,028
+		HEX	028,028,02C,028,028,028,028,02B,02A,029,028,028,028,028,028,028
+		HEX	028,02C,028,028,028,028,028,028,028,028,028,028,028,028,028,028
+		HEX	028,028,028,028,028,028,028,008,009,02C,009,028,028,028,028,028
+		HEX	028,028,028,028,028,028,028,028,028,028,028,028,028,028,028,028
+		HEX	028,028,028,028,028,028,008,028,028,028,02B,009,028,028,028,028
+		HEX	028,028,028,028,028,028,028,028,028,028,028,028,028,028,028,028
+		HEX	028,028,028,028,028,008,028,028,028,028,02C,02E,02D,028,028,028
+		HEX	028,028,028,028,028,028,028,028,028,028,028,028,028,028,028,028
+		HEX	028,028,028,028,028,028,028,028,028,028,028,02B,02A,028,028,028
+		HEX	028,028,028,028,028,028,028,028,028,028,028,028,028,028,028,028
+		HEX	028,028,028,028,028,028,028,028,028,028,028,02A,028,028,028,028
+		HEX	028,028,028,028,028,028,028,028,028,028,028,028,028,028,028,028
+		HEX	028,028,028,028,028,028,028,028,028,028,028,028,028,028,028,028
+		HEX	028,028,028,028,028,028,028,028,028,028,028,028,028,028,028,028
+		HEX	028,028,028,028,028,028,028,028,028,028,028,028,028,028,028,028
+SCRNDEN		EQU	$
+;
+;
+SCRND1		EQU	$		; URA screen DATA
+		HEX	026,027,014,014,014,0A5,014,026,024,025,056,035,05B,073,074,028
+		HEX	072,099,063,073,073,074,02C,072,073,073,073,0A1,0A0,073,073,074
+		HEX	036,037,014,014,014,014,014,015,034,0A7,064,05B,090,073,073,073
+		HEX	073,09A,070,0A0,073,091,009,090,073,073,0A1,084,090,073,0FF,091
+		HEX	014,014,014,014,014,014,014,015,0A7,034,0E4,090,082,083,083,083
+		HEX	083,083,084,082,083,083,083,083,083,083,084,0B3,082,083,083,084
+		HEX	0A5,014,014,014,0A5,014,014,015,0A7,0B6,0DF,082,0B2,093,093,093
+		HEX	093,093,094,092,093,094,072,093,093,093,0B3,091,0B4,093,093,0A2
+		HEX	014,0A5,014,014,014,014,014,015,034,0A7,082,0B2,093,093,093,093
+		HEX	093,093,094,092,093,094,082,093,082,083,083,084,0CA,0CA,0CA,08F
+		HEX	014,014,014,014,0A5,014,0A5,036,005,034,0B0,0D6,093,082,083,083
+		HEX	083,084,0B3,0B2,093,0B3,0B4,090,0B2,093,093,0B3,0BE,011,095,054
+		HEX	0A5,014,014,0A5,014,0A5,014,014,015,033,033,033,090,0B2,093,093
+		HEX	093,0B3,073,0A1,083,084,011,090,073,073,073,091,09F,006,022,054
+		HEX	014,014,0A5,0A5,014,014,014,0A5,015,0A6,0FB,034,082,083,083,083
+		HEX	083,083,083,084,093,094,0CA,082,083,083,083,084,0A9,016,002,054
+		HEX	026,027,026,027,026,024,024,0D5,025,034,034,034,0B0,093,0D6,093
+		HEX	093,093,093,0A4,093,0A4,0CA,0B4,093,093,093,0B7,011,011,012,054
+		HEX	015,013,015,013,015,033,040,041,033,0BF,034,034,030,0FB,0C0,023
+		HEX	024,024,024,025,000,017,006,021,021,021,021,021,021,021,022,054
+		HEX	015,013,015,013,015,0BC,0BD,0A6,0A7,034,041,033,040,034,0C0,034
+		HEX	0B6,080,080,0B6,020,007,095,0A6,0A6,0F6,0A7,044,045,034,041,054
+		HEX	015,013,015,013,036,005,0D0,0D0,0D0,0D0,0D0,0D0,0D0,0D0,0C3,0D0
+		HEX	0D0,0D0,0D0,0D0,0D0,010,006,077,07B,07B,07B,043,07A,07B,08D,08E
+		HEX	015,023,025,023,024,025,0C0,0A6,0FB,0A7,0A6,000,0EA,0E8,0E8,0E8
+		HEX	0E9,0E9,0E9,0EB,002,010,012,054,057,09D,09D,09D,09D,09D,0C8,0C9
+		HEX	025,031,0B6,034,06E,06E,0C0,010,012,0A7,0A6,010,0C4,0D9,0D9,0D7
+		HEX	0E7,0DA,0DA,0D4,012,010,012,054,0C7,0E2,0E2,0E2,0E2,0F1,089,054
+		HEX	034,041,033,033,033,033,0C0,010,012,0A6,0F6,010,0C4,0D9,0D7,0D8
+		HEX	0EC,0E7,0DA,0D4,012,010,012,054,0C7,0E2,0E2,0E2,0E2,0E1,0F1,054
+		HEX	034,0F6,089,06B,06C,089,0F6,010,012,0FB,0FB,010,0C4,0D7,0EC,0D8
+		HEX	0D8,0D8,0E7,0D4,0F3,0F4,022,054,0C7,0E2,0E1,0E1,0E2,0E1,0F1,054
+		HEX	034,0B6,034,03E,05E,088,088,010,012,0A6,0A6,010,0D1,0D8,0D8,0EC
+		HEX	0EC,0D8,0D8,0E5,012,0FC,0FC,05C,0C7,0E0,06D,07D,0E0,0E1,0F1,054
+		HEX	088,088,0E3,0BD,0E3,0BD,0F6,010,012,0E3,0BD,010,012,034,0A7,089
+		HEX	089,0A7,034,020,022,0FC,0FC,05C,0C7,0E2,0E1,0E2,0E2,0F1,089,054
+		HEX	034,0A7,034,034,034,034,0A7,020,022,033,033,010,016,001,001,001
+		HEX	001,001,001,001,002,0FC,0FC,05C,055,0F0,089,0F0,0F0,0FB,0A7,054
+		HEX	0CF,004,004,0CB,004,0BB,0C0,003,004,004,004,0DB,0E6,021,021,021
+		HEX	021,021,021,007,012,0FC,0FC,05C,055,077,07B,07B,07B,07B,07C,054
+		HEX	069,024,024,027,026,025,0C0,013,026,024,024,027,015,0A7,0FB,0FB
+		HEX	0FB,0A7,0C0,010,012,0FC,0FC,05C,055,064,067,056,057,067,065,054
+		HEX	055,034,034,013,015,033,033,013,015,0FB,0A7,013,015,0A7,0FB,0FB
+		HEX	0FB,0B6,0C0,010,012,034,034,064,065,0A6,0A6,054,055,031,044,046
+		HEX	055,033,031,023,025,033,0F6,013,015,0A7,0FB,013,015,0A7,0A6,034
+		HEX	0B6,0F6,0C0,010,016,002,000,096,001,001,001,068,055,041,064,056
+		HEX	07A,07B,07B,07B,07B,07B,07C,023,036,005,003,037,015,0A7,041,033
+		HEX	033,033,0C3,020,021,022,020,0AB,097,097,0BE,068,07A,07B,07B,043
+		HEX	09D,09D,09D,09D,09D,056,055,0A6,023,025,023,024,025,034,044,066
+		HEX	066,045,044,066,045,034,034,064,0AE,0AE,0A9,068,057,0C6,067,056
+		HEX	09F,0DD,0DD,0DD,011,08F,047,066,045,0D0,0D0,0D0,0C3,034,0AF,067
+		HEX	067,065,064,056,075,076,001,001,017,011,011,0B8,053,096,002,054
+		HEX	09F,011,011,011,011,0A8,056,035,055,077,07C,0A7,034,0B1,0AD,0B6
+		HEX	0B6,0B6,0B6,054,055,010,011,011,011,011,011,08F,09F,006,012,054
+		HEX	09F,0ED,0ED,011,0ED,011,0A8,056,07A,043,07A,07B,07B,0D3,0AC,0BF
+		HEX	0BF,0B6,0B6,054,055,010,011,011,0F7,0F8,011,08F,09F,012,022,054
+		HEX	09F,0ED,011,011,011,0ED,011,054,057,056,057,056,057,065,0B6,0B6
+		HEX	0B6,0B6,0B6,054,047,0AA,011,011,0F9,0FA,011,08F,09F,012,034,054
+		HEX	0A9,011,011,0ED,011,011,011,054,055,064,065,054,055,0B6,0B6,0B6
+		HEX	0B6,030,033,054,057,0F2,011,011,011,011,011,0A8,0A9,095,002,054
+		HEX	011,011,0ED,011,011,0ED,011,054,07A,07F,06F,0C1,065,0B6,079,0F5
+		HEX	0B6,032,034,064,065,020,007,011,011,011,011,011,006,021,022,054
+		HEX	021,007,011,0ED,011,0ED,006,054,035,047,046,055,0B6,0B6,0B6,0B6
+		HEX	030,040,034,0B6,034,034,010,011,011,011,006,021,022,034,0B6,054
+SCRD1EN		EQU	$
+;
+;
+CGDATA		EQU	$		; CG. DATA (omote)
+		HEX	000,000,04B,009,063,015,003,012,095,029,0DF,05B,091,021,037,02E
+		HEX	01F,07C,037,06F,059,073,07A,077,09B,07B,0BD,07F,000,000,000,000
+		HEX	000,000,000,001,000,000,000,000,09B,07B,0B6,011,09B,01A,0FF,05F
+		HEX	095,029,094,06E,0D6,076,039,07F,07B,07F,0BD,07F,000,000,000,000
+		HEX	000,000,000,001,074,01D,0F9,067,0E9,01E,08E,033,044,061,06A,07E
+		HEX	044,00A,01F,07C,044,061,0EB,022,0CA,03D,0D2,05E,0DA,07F,06A,031
+		HEX	000,000,000,001,0CC,014,010,019,095,029,03A,03E,063,019,0E3,015
+		HEX	0F5,025,037,02E,0E3,015,0EB,022,044,061,033,07E,099,05D,01D,077
+		HEX	000,000,0EC,00C,0EB,022,0B1,02F,070,01D,037,02E,0F5,025,077,03E
+		HEX	03A,047,044,061,06A,07E,0E3,015,00B,02E,054,053,0FF,07F,0A6,016
+		HEX	000,000,000,001,0C5,015,0A6,016,0E9,01E,04D,02F,0F5,025,077,03E
+		HEX	03A,047,054,053,0E3,015,0EB,022,018,029,01F,04A,07F,03F,01F,07C
+		HEX	000,000,000,001,063,015,003,012,0E9,01E,0B0,02F,070,01D,037,02E
+		HEX	03A,047,044,061,0E3,015,0EB,022,070,01D,037,02E,03F,04F,0BD,07F
+		HEX	000,000,000,000,000,000,000,000,000,000,000,000,000,000,0F5,025
+		HEX	06A,031,0D2,05E,0FF,07F,0E3,015,03A,047,018,029,01D,077,000,000
+CGDATA1		EQU	$		; CG. DATA (ura)
+		HEX	000,000,0C6,018,048,009,08A,011,0CF,025,0BF,057,071,019,018,02A
+		HEX	01F,07C,0D8,052,0F9,05A,01A,05F,03B,063,05C,06B,000,000,000,000
+		HEX	000,000,0C6,018,005,000,0FC,045,03B,063,0CE,01D,094,036,018,047
+		HEX	0CF,025,040,01D,0EA,034,06F,061,01B,077,0D6,026,018,02B,05A,02F
+		HEX	000,000,0C6,018,071,025,0DA,063,032,02A,094,03A,040,01D,080,025
+		HEX	01F,07C,01F,07C,0C0,00C,0CC,01E,035,031,0CE,01D,018,047,094,036
+		HEX	000,000,0C6,018,0E7,014,06C,021,0D0,025,075,03A,069,021,00E,02E
+		HEX	0D6,021,018,02A,071,019,032,02A,040,01D,080,025,07A,059,0FE,072
+		HEX	000,000,0C6,018,032,02A,094,03A,071,021,038,032,0F6,029,078,042
+		HEX	0DB,04E,040,01D,0CD,035,0AB,015,08E,019,054,032,01F,073,0D4,01E
+		HEX	000,000,0C6,018,06A,001,0CE,021,032,02A,094,03A,0F6,029,078,042
+		HEX	0DB,04E,040,01D,071,019,032,02A,06C,049,010,05A,05F,03B,01F,07C
+		HEX	000,000,0C6,018,048,009,08A,011,02E,022,0F2,032,051,019,018,02A
+		HEX	01B,043,040,01D,071,019,032,02A,0D4,021,018,02A,01F,04B,09D,07B
+		HEX	000,000,01F,07C,01F,07C,01F,07C,01F,07C,031,02E,0E4,000,069,021
+		HEX	00E,02E,0F1,042,01F,07C,01F,07C,01F,07C,01D,04A,03F,04E,05F,05A
+CGDTEN		EQU	$
+;
+;
+;
+HDMABF0		EQU	$		; normal H-DMA DATA
+		WORD	0177H,0176H,0175H,0175H,0174H,0173H,0173H,0172H,0171H,0171H,0170H,016FH,016FH,016EH,016DH,016DH
+		WORD	016CH,016BH,016BH,0169H,0169H,0168H,0167H,0167H,0166H,0165H,0165H,0164H,0163H,0163H,0162H,0162H
+		WORD	0161H,0160H,0160H,015FH,015FH,015EH,015DH,015DH,015CH,015CH,015BH,015AH,015AH,0159H,0159H,0158H
+		WORD	0157H,0157H,0156H,0156H,0155H,0155H,0154H,0153H,0153H,0152H,0152H,0151H,0151H,0150H,014FH,014FH
+		WORD	014EH,014EH,014DH,014DH,014CH,014CH,014BH,014BH,014AH,014AH,0148H,0147H,0147H,0146H,0146H,0145H
+		WORD	0145H,0144H,0144H,0143H,0143H,0142H,0142H,0141H,0141H,0140H,0140H,013FH,013FH,013EH,013EH,013DH
+		WORD	013DH,013CH,013CH,013BH,013BH,013AH,013AH,0139H,0139H,0138H,0138H,0137H,0137H,0136H,0136H,0135H
+		WORD	0135H,0135H,0134H,0134H,0133H,0133H,0132H,0132H,0131H,0131H,0130H,0130H,012FH,012FH,012FH,012EH
+		WORD	012EH,012DH,012DH,012CH,012CH,012BH,012BH,012BH,012AH,012AH,0129H,0129H,0127H,0127H,0126H,0126H
+		WORD	0126H,0125H,0125H,0124H,0124H,0124H,0123H,0123H,0122H,0122H,0121H,0121H,0121H,0120H,0120H,011FH
+		WORD	011FH,011FH,011EH,011EH,011DH,011DH,011DH,011CH,011CH,011BH,011BH,011BH,011AH,011AH,0119H,0119H
+		WORD	0119H,0118H,0118H,0117H,0117H,0117H,0116H,0116H,0116H,0115H,0115H,0114H,0114H,0114H,0113H,0113H
+		WORD	0113H,0112H,0112H,0111H,0111H,0111H,0110H,0110H,0110H,010FH,010FH,010FH,010EH,010EH,010DH,010DH
+		WORD	010DH,010CH,010CH,010CH,010BH,010BH,010BH,010AH,010AH,010AH,0109H,0109H,0109H,0108H,0108H,0108H
+;
+HDMABF1		EQU	$		; zoo-up H-DMA DATA
+		WORD	0088H,0088H,0087H,0087H,0087H,0087H,0087H,0086H,0086H,0086H,0085H,0085H,0085H,0085H,0084H,0084H
+		WORD	0084H,0084H,0084H,0083H,0083H,0083H,0082H,0082H,0082H,0082H,0082H,0081H,0081H,0081H,0081H,0081H
+		WORD	0080H,0080H,0080H,007FH,007FH,007FH,007FH,007FH,007EH,007EH,007EH,007EH,007EH,007DH,007DH,007DH
+		WORD	007CH,007CH,007CH,007CH,007CH,007CH,007BH,007BH,007BH,007BH,007BH,007AH,007AH,007AH,0079H,0079H
+		WORD	0079H,0079H,0079H,0079H,0078H,0078H,0078H,0078H,0078H,0078H,0077H,0077H,0077H,0076H,0076H,0076H
+		WORD	0076H,0076H,0076H,0075H,0075H,0075H,0075H,0075H,0075H,0074H,0074H,0074H,0074H,0073H,0073H,0073H
+		WORD	0073H,0073H,0073H,0072H,0072H,0072H,0072H,0072H,0072H,0071H,0071H,0071H,0071H,0070H,0070H,0070H
+		WORD	0070H,0070H,0070H,0070H,006FH,006FH,006FH,006FH,006FH,006FH,006EH,006EH,006EH,006EH,006EH,006DH
+		WORD	006DH,006DH,006DH,006DH,006DH,006CH,006CH,006CH,006CH,006CH,006CH,006CH,006BH,006BH,006BH,006BH
+		WORD	006BH,006AH,006AH,006AH,006AH,006AH,006AH,006AH,0069H,0069H,0069H,0069H,0069H,0069H,0069H,0068H
+		WORD	0068H,0068H,0068H,0068H,0067H,0067H,0067H,0067H,0067H,0067H,0067H,0067H,0066H,0066H,0066H,0066H
+		WORD	0066H,0066H,0066H,0065H,0065H,0065H,0065H,0065H,0065H,0064H,0064H,0064H,0064H,0064H,0064H,0064H
+		WORD	0064H,0063H,0063H,0063H,0063H,0063H,0063H,0063H,0063H,0062H,0062H,0062H,0062H,0062H,0061H,0061H
+		WORD	0061H,0061H,0061H,0061H,0061H,0061H,0061H,0060H,0060H,0060H,0060H,0060H,0060H,0060H,0060H,0060H
+;
+;
+;
+;
+		END
+
+

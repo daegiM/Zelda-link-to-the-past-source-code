@@ -1,0 +1,459 @@
+;
+		INCLUDE zel_ram.asm
+;------------------------------------------------------------------------
+;
+;		ZELDA-3			1991.11.29(FRI)
+;
+;------------------------------------------------------------------------
+;
+		ORG	04FB40H
+;
+;=============================================== (zel_sindt) ============
+		GLB	SINDT2,CRHMZR,SLEEPCS,DBUGSB,SSERCH,SSERCH2,PTMZCSL
+;========================================================================
+;========================================= (zel_char) =========
+		EXT     spoj5,spoj0,prnc1
+;=============================================== (zel_enmy4) ===========
+		EXT	ENIDSH,PSERC2L
+;=============================================== (zel_enmy3) ===========
+		EXT	ICEFLST,ENALFL,TKTAMST,ASMZST,ENPLATR,KEMRIST
+;=============================================== (zel_enmy2) ===========
+		EXT	EVCHCKE,ENXSDN,ENYSDN,ENMSG2L,ENMSGEL,ENMSGSL
+		EXT	SETOAML,SETOAML2,ENMKIST,BSITEM,EFLCHK,ENMDST
+		EXT	HEIS0CS2,ASIMZST,Z2TMSTL,SETOAML22,H0SER00L
+;=============================================== (zel_enmy) ============
+		EXT	EPXYCK2,EPXCHK2,EPYCHK2,PLFLSTL,PSSAVE2,PSERC2L,PKNCRS2
+                EXT     EBAKU,EMOVE,RNDSET,BGDTRD2,ENDMST2,CROJCK2,ENCRST2,BIKRST2
+		EXT	ENBGCKL,CRENPLL,CRKNKNL,CRKNENL,OCHECKL,ENCLER,ENMAINL
+		EXT	ALOMCKL,SADWSTL,SADWS2L,CRENPL2L,OAMENT3,OAMENT1
+		EXT	PSERCHL,EN1CSTL,ESERCHL,CACHCKL,ENBDSBL
+		EXT	ENENSET,EN1CSSL,OAMENT2,EFLSST,ENDMST3,ENDMST4,EHOLE,OAMCHKL
+		EXT	CRENPL3L,MSGSET,BOMBST,EEXYCKL,ITGSDT,ENFLIS2,ENMVCLL
+;--- enmyno --
+		EXT	GAYK0,GAYK1,GAYK2,GAYK3,USAG0,HYUUU
+		EXT	SKHED,SHTAM,HBTAM,BAAR0,BABUL,TEKI0,TEKI1,AMEBA,MDARM
+		EXT	OCTA1,OCTA2,OCTA3,NYORO,OCTBL,OCTSS,CHFIR,BIGKO,TEKTA
+		EXT	TARUH,TARUV,SKEL2,PATA0,PATA1,SDEMO,KAMBS,KAMBR,KAMBB
+		EXT	KWAUS,KWAU1,SHIGE,SEKZ4,PONPK,EYEBS,EYETM,EYEBM
+		EXT	REBA1,ZOOL1,ENMY4,NAMAZ,CTBOS,DOOMO
+		EXT	JIJII,BABAA,HEITI,PENKI,NOKOG,KUTUU,GAKII,GAKI1
+		EXT	NOPPO,ONNAA,HIGEE,MAJOO,JIJI2,KIANA,BUBUU
+		EXT	YATAM,MURON,MURYA,MURMK,LINE0,LINE1,LINE2,LINE3,BABA1,ESW03,HEIS0
+		EXT	TAIHO,HEIS1,HEYA0,HEYA1,HEYA2,KTOBJ,HEIS2,NEZU0,HEBI0
+		EXT	KOMO0,HEBO0,OYAGI,ZAKO0,HEIS1,PLCHK
+		EXT	HEIS3,SUNA0,USAG0,HEYA3,HANA0,HANA1,TAMA0,DOZOO
+		EXT	BOUSI,SYOBY,HELP0,ESW12,RANEM,ZORAS,NOMOS,KINOK
+		EXT	SUKAS,MJSY1,JITON,ESW04,ZORA2,MEDUS,UTUWA,ARI00,ARI01
+		EXT	JOHBB,ENMY3,HACHI,POLIW,RINGO,BABU2,HELP1,BKFIR,HARI0,D_0_9
+		EXT	MOTAM,MEMER,MAGIC,ICBOS,DOKN0,DOKN1,DOKN2,DOKN3,BEE00,ABATA
+		EXT	SEKBN,TAKAR,BAKDN,SARKK,TEKBB,DARUM,IZUMI,GANON,GANO2
+		EXT	WOOD1,IWAGO
+;--------------
+		EXT	HEIT1,RINEL
+;-------------- item
+                EXT     HART1,RUPYR,RUPYY,RUPYB,BOMB1,BOMB2,BOMB3 
+                EXT     TUBO1,TUBO2,UTUBK
+                EXT     YAAA1,YAAA2,YOSEI
+;--------------
+		EXT	HART1,PORT1,PORT2,ICTAM
+		EXT	ESET0,ESET1,ESET2
+		EXT	EFAIL,ECACH,EWATR,EICE,EICFL
+;=============================================== (zel_endt) ============
+									
+		EXT	EXSTRA,ENEMY2,ENBTON,EFLCHK2,ENCLST,ENIDPS
+		EXT	BADBRST
+;=============================================== (zel_main) ============
+;		EXT	DTSAVE
+		EXT	TGBLKWT
+		EXT	GDCHCK,JSRSUB,MGMCGRS2,MGMCGCNG
+;
+		EXT	MD_title,MD_djint,MD_djply,MD_gdint,MD_gdply
+		EXT	MD_fdout,MD_fdin,MD_etcpl
+		EXT	MD_wpout,MD_wpin
+;=============================================== (zel_play) ============
+		EXT 	DASCLR1,DASHON,PLOTCK
+		EXT 	EATSET
+		EXT 	YAMOV
+		EXT	YAIMIT,ITMCBFST
+		EXT	ATMSIT
+		EXT	OMS000
+		EXT	PLOTCK1
+		EXT	WPMSCK
+;///////		EXT	RDCHCK
+;=============================================== (zel_bg3) =============
+		EXT	MTRSUB,ITEM0ST,ICECGCNG,LAMPOFF0,LAMPOFF1
+;=============================================== (grnd) =============
+		EXT	MKDRPLY,PRMDHST
+;=============================================== (zel_init) =============
+		EXT	p3_msge,DJEXTCK,PLRSET,RESTTST,THCGCN0,THCGCN1,THCGCN2
+		EXT	KMBBCG0,KMBRCG0
+		EXT	KMBBCG1,KMBRCG1
+;================================================(end2)=================
+		EXT	GRNDCHK,KURORCS,SDLRCE,SDLRCP,MAGICCS,ICMANCS,TEKI0CS,SKEL2CS
+		EXT	MGTAMCS,PBBANCS,PATA0CS,CRHCEN,LIKE0CS,ICBOSCS
+		EXT	SDLRE1,SDLRE2,SDLRE3
+;================================================(endt)=================
+		EXT 	GRENST,EST0SB
+;================================================(char)=================
+		EXT 	OPTCBFST,PWTRCGS2
+;================================================(bms1)=================
+		EXT	PLKTINT
+;================================================(exst)=================
+                EXT     BEAM1,BEAM2,BUME1,BOMBM,YAMOV,DTMOV     ;;;;,BOMBR
+                EXT     DTMV1,DTMV2,OPMOV,WTMV0,HIBA2,SCPMV,DTMV3
+                EXT     RAOPIT,BOGN,KNSP,TPHDIT
+		EXT	nashi,prnce,jjmov,jjwat,jjsmv,mesmv,babaa,bbwat
+		EXT	kajya,hnoji
+;================================================(POLYGON)=================
+;-----< obj_poly >-------------------------------------------------------
+
+		extern		INITIAL_POLYGON
+
+;------------------------------------------------------------------------
+		extern		polygon_flag
+		extern		shading_switch
+		extern		object_size
+		extern		object_type
+		extern		rotate_angle_x
+		extern		rotate_angle_y
+		extern		center_point_x
+		extern		center_point_y
+		extern		center_point_z
+		extern		stack_pointer
+		extern		transfer_flag
+;
+;================================================(msge)=================
+;---------------MSGE NO.-----------------
+		EXT	MS_0490,MS_0491,MS_04D0,MS_04D1,MS_04D2,MS_04D3
+		EXT	MS_0530,MS_0560,MS_0561,MS_05B7
+		EXT	MS_0461,MS_0590,MS_05B0
+		EXT	MS_00E0,MS_00E1,MS_00E2,MS_00E3,MS_00E4,MS_00E5
+		EXT	MS_05F4,MS_05F5,MS_05F6,MS_05F7,MS_05F8
+;
+		EXTEND
+		MEM8
+		IDX8
+		EXTEND
+		MEM8
+		IDX8
+;
+;
+;
+;************************************************************************
+;*									*
+;************************************************************************
+SINDT2		EQU	$
+; 0--127
+		WORD	0000H,0003H,0006H,0009H,000CH,000FH,0012H,0015H
+		WORD	0019H,001CH,001FH,0022H,0025H,0028H,0028H,002EH
+		WORD	0031H,0035H,0038H,003BH,003EH,0041H,0044H,0047H
+		WORD	004AH,004DH,0050H,0053H,0056H,0059H,005CH,005FH
+		WORD	0061H,0064H,0067H,006AH,006DH,0070H,0073H,0075H
+		WORD	0078H,007BH,007EH,0080H,0083H,0086H,0088H,008BH
+		WORD	008EH,0090H,0093H,0095H,0098H,009BH,009DH,009FH
+		WORD	00A2H,00A4H,00A7H,00A9H,00ABH,00AEH,00B0H,00B2H
+		WORD	00B5H,00B7H,00B9H,00BBH,00BDH,00BFH,00C1H,00C3H
+		WORD	00C5H,00C7H,00C9H,00CBH,00CDH,00CFH,00D1H,00D3H
+		WORD	00D4H,00D6H,00D8H,00D9H,00DBH,00DDH,00DEH,00E0H
+		WORD	00E1H,00E3H,00E4H,00E6H,00E7H,00E8H,00EAH,00EBH
+		WORD	00ECH,00EDH,00EEH,00EFH,00F1H,00F2H,00F3H,00F4H
+		WORD	00F4H,00F5H,00F6H,00F7H,00F8H,00F9H,00F9H,00FAH
+		WORD	00FBH,00FBH,00FCH,00FCH,00FDH,00FDH,00FEH,00FEH
+		WORD	00FEH,00FFH,00FFH,00FFH,00FFH,00FFH,00FFH,00FFH
+;128--255
+		WORD	0100H
+		WORD	00FFH,00FFH,00FFH,00FFH,00FFH,00FFH,00FFH,00FEH
+		WORD	00FEH,00FEH,00FDH,00FDH,00FCH,00FCH,00FBH,00FBH
+		WORD	00FAH,00F9H,00F9H,00F8H,00F7H,00F6H,00F5H,00F4H
+		WORD	00F4H,00F3H,00F2H,00F1H,00EFH,00EEH,00EDH,00ECH
+		WORD	00EBH,00EAH,00E8H,00E7H,00E6H,00E4H,00E3H,00E1H
+		WORD	00E0H,00DEH,00DDH,00DBH,00D9H,00D8H,00D6H,00D4H
+		WORD	00D3H,00D1H,00CFH,00CDH,00CBH,00C9H,00C7H,00C5H
+		WORD	00C3H,00C1H,00BFH,00BDH,00BBH,00B9H,00B7H,00B5H
+		WORD	00B2H,00B0H,00AEH,00ABH,00A9H,00A7H,00A4H,00A2H
+		WORD	009FH,009DH,009BH,0098H,0095H,0093H,0090H,008EH
+		WORD	008BH,0088H,0086H,0083H,0080H,007EH,007BH,0078H
+		WORD	0075H,0073H,0070H,006DH,006AH,0067H,0064H,0061H
+		WORD	005FH,005CH,0059H,0056H,0053H,0050H,004DH,004AH
+		WORD	0047H,0044H,0041H,003EH,003BH,0038H,0035H,0031H
+		WORD	002EH,002BH,0028H,0025H,0022H,001FH,001CH,0019H
+		WORD	0015H,0012H,000FH,000CH,0009H,0006H,0003H
+;----		
+;=============================================================
+SLEECDX		EQU	-05
+SLEECDY		EQU	003
+SLEPCD		EQU	$
+		WORD	00000+SLEECDX,00000+SLEECDY
+		BYTE	0A6H,000H,000H,002H
+		WORD	00008+SLEECDX,00000+SLEECDY
+		BYTE	0A7H,000H,000H,002H
+		WORD	00000+SLEECDX,00000+SLEECDY
+		BYTE	0A6H,000H,000H,002H
+		WORD	00008+SLEECDX,00000+SLEECDY
+		BYTE	0A7H,000H,000H,002H
+;
+		WORD	00000+SLEECDX,00000+SLEECDY
+		BYTE	0ABH,000H,000H,000H
+		WORD	00008+SLEECDX,00000+SLEECDY
+		BYTE	0A7H,000H,000H,002H
+		WORD	00000+SLEECDX,00000+SLEECDY
+		BYTE	0A6H,000H,000H,002H
+		WORD	00008+SLEECDX,00000+SLEECDY
+		BYTE	0A7H,000H,000H,002H
+;
+		WORD	00010+SLEECDX,-0014+SLEECDY
+		BYTE	08AH,000H,000H,002H
+		WORD	00000+SLEECDX,00000+SLEECDY
+		BYTE	0ABH,000H,000H,000H
+		WORD	00008+SLEECDX,00000+SLEECDY
+		BYTE	088H,000H,000H,002H
+		WORD	00000+SLEECDX,00000+SLEECDY
+		BYTE	0A6H,000H,000H,002H
+;
+SLEEPCS		EQU	$
+		PHB
+		PHK
+		PLB
+		LDA	#004H		;TFR KAZU
+		STA	<WORK6
+		STZ	<WORK7
+
+		LDA	ENCHPT,X	;ADD SET
+		ASL	A
+		ASL	A
+		ASL	A
+		ASL	A
+		ASL	A
+		ADC	#LOW  SLEPCD
+		STA	<WORK8
+		LDA	#HIGH SLEPCD
+		ADC	#000H
+		STA	<WORK9
+		JSL	>SETOAML
+		PLB
+		RTL
+;----------------------------------------
+;=============================================================
+CRHMZR		EQU	$		; Zirai vs HANMMER !
+		LDA	AITMBT
+		AND	#00001010B
+		BEQ	CHz090
+;
+		LDA	<KNCRYP
+		CMP	#80H
+		BEQ	CHz090
+;
+		JSL	>PKNCRS2
+;
+		JSL	>ENCRST2
+;
+		JSL	>CROJCK2
+		RTL
+CHz090		EQU	$
+		CLC
+		RTL
+;----		
+;=====================================================
+DBUGSB		EQU	$
+		LDA	<KEYA1L
+		AND	#00010000B
+		BNE	DBTEST1		
+;
+		JMP	DBTEST
+;
+DBTEST1		EQU	$
+		MEM16
+		REP	#20H
+		LDA	>BUNAME
+		CMP	#0AFH
+		BNE	DBTEST
+		LDA	>BUNAME+2
+		CMP	#010AH
+		BNE	DBTEST
+		LDA	>BUNAME+4
+		CMP	#010AH
+		BNE	DBTEST
+		LDA	>BUNAME+6
+		CMP	#010AH
+		BNE	DBTEST		; ŸM..?
+;
+		MEM8
+		SEP	#20H
+;
+		STA	>MPLVFG
+;
+		LDA	<KEYA2L
+		JSL	>DBT010
+;
+		LDA	>ITMTBL6
+		CMP	#04H
+		BNE	DBT090		; Max ken ?
+;					; yes !
+		LDA	#03H
+		STA	>ITMTBL7	; Max seeld
+		DEC	A
+		STA	>ITMTBL8	; Max suets
+DBT090		EQU	$
+		LDA	<KEYA2
+		BPL	DBT0A0
+;
+		LDA	BGOFFG
+		EOR	#01H
+		STA	BGOFFG		; BG inchiki !
+DBT0A0		EQU	$
+		BIT	<KEYA2
+		BVC	DTB0B0
+;
+		LDA	#0FFH
+		STA	>UPLFCT
+		STA	>UPMPCT
+		STA	>UPBMCT
+		STA	>UPAWCT
+;
+		CLC
+		ADC	>CONCNT
+		STA	>CONCNT
+;
+		LDA	>CONCNT+1
+		ADC	#00H
+		STA	>CONCNT+1
+;
+		LDA	#09H
+		STA	>ITMTBL9
+DTB0B0		EQU	$
+		RTL
+;-------------------------------------
+DBTEST		EQU	$
+		MEM8
+		SEP	#20H
+;
+		LDA	<KEYB1L
+		AND	#00010000B
+		BEQ	EEE0		; Debug mode power up !
+		LDA	<KEYB2L
+DBT010		EQU	$
+		BPL	EEE0
+;- - ken - -
+		LDA	>ITMTBL6
+		INC	A
+		CMP	#05H
+		BCC	EEEF
+		LDA	#01H
+EEEF		EQU	$
+		STA	>ITMTBL6
+;- - fuku - -
+		LDA	>ITMTBL8
+		INC	A
+		CMP	#03H
+		BNE	EEEE
+;
+		LDA	#00H
+EEEE		EQU	$
+		STA	>ITMTBL8
+;- - tate - - 
+		LDA	>ITMTBL7
+		INC	A
+		CMP	#04H
+		BNE	EEEE1
+;
+		LDA	#01H
+EEEE1		EQU	$
+		STA	>ITMTBL7
+EEE0		EQU	$
+		RTL
+;----		
+;%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+;%          Enemy -> Player Speed calc 						 %
+;%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+SSERCH		EQU	$	; for player sub 
+		LDX	#00H
+		LDA	ENXPSL,X
+		PHA
+		LDA	ENXPSH,X
+		PHA
+		LDA	ENYPSL,X
+		PHA
+		LDA	ENYPSH,X
+		PHA
+		LDA	<WORK0
+		STA	ENXPSL,X
+		LDA	<WORK1
+		STA	ENXPSH,X
+		LDA	<WORK2
+		STA	ENYPSL,X
+		LDA	<WORK3
+		STA	ENYPSH,X
+		TYA
+		JSL	>PSERC2L
+		PLA
+		STA	ENYPSH,X
+		PLA
+		STA	ENYPSL,X
+		PLA
+		STA	ENXPSH,X
+		PLA
+		STA	ENXPSL,X
+		RTL
+;=====================================================
+SSERCH2		EQU	$	; for player sub 
+		PHB
+		PHK
+		PLB
+		JSL	>PSERC2L
+		PLB
+		RTL
+;=================================================
+PTMZCD		EQU	$
+		WORD	0FFF6H,0000EH
+		HEX	C0,00,00,02
+		WORD	0FFFBH,00010H
+		HEX	C0,40,00,02
+		WORD	0FFFEH,00012H
+		HEX	C0,00,00,02
+		WORD	00002H,00012H
+		HEX	C0,40,00,02
+		WORD	00005H,00010H
+		HEX	C0,00,00,02
+		WORD	0000AH,0000EH
+		HEX	C0,40,00,02
+;
+PTMZMK		EQU	$
+		HEX	04,44
+;
+PTMZCSL		EQU	$
+		PHB
+		PHK
+		PLB
+;
+		LDA	ENCLOR,X
+		PHA
+		LDA	ENCONT,X
+		LSR	A
+;;		NOP
+		AND	#01H
+		TAY
+		LDA	PTMZMK,Y
+		STA	ENCLOR,X
+		LDA	#04H*6
+;
+		LDA	ENFLCL,X
+		AND	#0F0H
+		STA	ENFLCL,X
+;
+		JSL	>OAMENT3
+;
+		MEM16
+		REP	#20H
+		LDA	#PTMZCD
+		STA	<WORK8
+		MEM8
+		SEP	#20H
+		LDA	#06H
+		JSL	>SETOAML22
+		PLA
+		STA	ENCLOR,X
+		PLB
+		RTL
+;===========================================
+		END
+;

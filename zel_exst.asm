@@ -1,0 +1,20857 @@
+;
+		INCLUDE	zel_ram.asm
+;
+;--------------------------------------------------------------------
+;
+;		ZELDA-3		1991.09.16(MON)
+;
+;--------------------------------------------------------------------
+;
+		ORG	088000H
+;
+;=============================================== (zel_enmy) =========
+		EXT	BGDTRD2,EXBCHK2,ENRMCL,ENEMY,RNDSET,ITMGET
+		EXT	ENCRST2,OAMENT1,OAMENT2,SSERCH2,ESERCHL
+		EXT	CROJCK2,SSERCH,ENDMST,ENDMST2,OAMENT3,CRTLCK
+		EXT	ALENDM,OAMENT4,OAMENT5,OAMENT6,ENIDSH,BURVSE
+		EXT	EINIT,EMOVE,EICE,ENDMST3
+;--- Enmyno --
+		EXT	TTN01,SKL01,SKHED,ESW01,PATAM
+		EXT	OCTA1,OCTA2,OCTA3,OCTBL,BATTA,HBTAM
+		EXT	IWAOO,NYORO,SEKZ1,FOOD1,FOOD2,FOOD3,FOOD4
+		EXT	KWAUS,KWAU1,SHIGE,SARU3,BARI0,YASAN
+		EXT	MOTSB,BIGBL,YOSEI,TAAMA,YATAM,NIWAT,BABA1
+;
+;
+		EXT	HART1,OOISU,ITEMN,LINE0,MOTSB,HANDS
+;
+;=============================================== (zel_enmy3) ========
+		EXT	PLYAFL
+;=============================================== (zel_end2) ========
+		EXT	SDLRCK,SDLRCP,SDLRCB,ENMDST,KEMRIST
+;=============================================== (zel_exst) =========
+		GLB	EXSTRA,BMCRDT
+		GLB	BEAMST,BEAMS2,BLPHMOV,BMITOC
+		GLB	OKZSDT,BOBFLM1,BMBCKL,KNDTINX,KNMDDAT,MS_FFFF
+		GLB	YOUSMV,BMBCKL1,BMYXST31,ITMPSTL
+		GLB	GMOVMV,HAKAMOV1,CRBMEN1
+		GLB	SPBMINT,BOALINT,OPPLSH,ENMVSH1,ENPSTS
+		GLB	BEAM1,BEAM2,BUME1,BOMBM,YAMOV,DTMOV     ;;;;,BOMBR
+		GLB	OPMOV,WTMV0,HIBA2,SCPMV,DTMV3
+		GLB	SODMV,SPBMV,KONMV,HIBA3,JISMV,YURMV,TKFLM,BM1FL
+		GLB	KMRMV,FTMOV,FUTON,IBIKI,TAKARA,OPBMV,TORK1,MCIMM
+		GLB	TORKM,HAKMV,KNTMV,WAPMV,TKNAG,TKDOW,BOLCG,TPHDM
+		GLB	KNSOM,BOLMV,KANTR,SBAMV,BRSEN,OKARN,KAZMV,KONRM
+		GLB	CDKMV,HIBA1,BRSEN,KBBOM,LVUBR,DTED0,BHMOV,YAEND
+		GLB	PGKMV,RDBOM,BOMBA,PORIG,BOLM2,ICEFL,BMNO
+		GLB	JPKM0,JPKF0,KNSEN
+		GLB	pinpn,atckh,mono0,jisin,bomb1,bomb0,yasd0,usag0
+		GLB	usag1,tate0,kins0,kona0,frod1,dobn1,fires,hakas
+		GLB	bsfan
+;=============================================== (zel_bms1) =========
+		EXT	TORIINT,BLLIINT,OPBKINT,BHIMIT,ITBGCK,ITBGCK1
+		EXT	BHBINT,PUBNIT,RAOPIT,KTFRINT,PUYAIT,BMKRINT
+		EXT	RDBMINT,BMCLER,BMCLER2,BHBIT1,MESWIT,PGKRITL
+		EXT	BMLRDT,TAKAATR,TAKASBD,BALBKIT,RNDSKM
+		EXT	OPTIM,OTIM
+		EXT	prnce,jjmov,jjwat,jjsmv,mesmv,prnc1,kajya,hnoji
+		EXT	nashi,kajy1,bakud,takar,monky,monwt,mesm1,edcod
+;=============================================== (zel_main) =========
+		EXT	JSRSUB
+		EXT	MD_djply,MD_etcpl,MD_gdply,MD_wpout
+		EXT	GDCHCK
+;///////		EXT	RDCHCK
+;=============================================== (zel_bgwt) =========
+		EXT	BDRCHCK,LAMPPL
+;=============================================== (zel_char) =========
+		EXT	PWTRCGS1,OPTCBFST,PGRVCGST,CHITEMS0,PLCGSET
+		EXT	PLCGCN0,PLCGCN1,PLCGCN2,THCGCN0,THCGCN1
+		EXT	THCGCN2,TTCBFST,KNCBFST,ITMCBFST,ITMCBFST1
+;
+		EXT	spoj0,spoj1,spoj2,spoj3,spoj4
+		EXT	spoj5,spoj6,spoj7,spoj8,spoj9
+;================================================ (zel_play) ========
+		EXT	BGCHCKA,ATMSIT,PLOTCK,DASCLR1,MGPTSB2,PLJTCK
+		EXT	PLYCLR1,DONSCCK,CINCNS
+		EXT	LNMD,SWMD,ATDM,BOGN,JWMV,RABT,MCAGE,DAMGI,MNSR
+		EXT	MNBB,JNSP,BBSP,SDSP
+		EXT	BKYTD0,DAMGI,DAMG3
+;================================================ (zel_ply1) ========
+		EXT	BMIDSH,KNENIT1,JPKNMV,JPKNFL,RNDMDT,KNBMCHK
+		EXT	ENYHDT,ENXHDT,ENCSDT,ENSIDT,BLBKYP,BLBKXP
+		EXT	BLBKCRD,BLBKATD
+;================================================ (zel_pysb) ========
+		EXT	OMS000
+;================================================ (zel_grnd) =========
+		EXT	KZBDERS
+		EXT	gif2,gif3,gif4,gif5
+;================================================ (zel_bg3) =========
+		EXT	ITEM0ST
+;================================================ (zel_init) ========
+		EXT	PLRPDY,PLRPDX,UT4RWT,DJEXTCK,UDJBITD
+		EXT	ut4p03,ut4p04,ut4p05,ut4p06,ut4p09
+		EXT	p1_mcng,p1_mcg1,p1_sls0,p1_sls1,p1_kstp,p1_bmbd
+		EXT	p1_ltwp,p1_plgn,p1_sdop,p2_kiri
+		EXT	p3_msge,p3_warp,p3_sitm
+;=============================================== (zel_comn) =========
+		EXT	TBKCHK
+;================================================ (zel_msge) ========
+		EXT	MS_0044,MS_0045,MS_0046,MS_0047,MS_004C
+		EXT	MS_00B1,MS_00B2,MS_00B3,MS_00B4
+		EXT	MS_00B5,MS_00B6,MS_00B7,MS_00B8,MS_00B9
+		EXT	MS_00BA,MS_00BB,MS_00BC,MS_00BD,MS_00BE
+		EXT	MS_00BF,MS_00C0,MS_00C1,MS_00C2,MS_00C3
+		EXT	MS_00C4,MS_00C5,MS_00C6,MS_00C7,MS_00C8
+		EXT	MS_00C9,MS_00CA,MS_00CB,MS_00CC,MS_00CD
+		EXT	MS_00CE,MS_00CF,MS_00D0,MS_00D1,MS_00D2
+		EXT	MS_00D3,MS_00D4,MS_00D5,MS_00D6,MS_00D7
+		EXT	MS_00D8,MS_00D9,MS_00DA,MS_00DB,MS_00DC
+		EXT	MS_00DF,MS_00E6,MS_00E7
+		EXT	MS_0146,MS_0147,MS_0148,MS_0149,MS_014A
+		EXT	MS_0150,MS_0151,MS_0152,MS_0154,MS_0146
+		EXT	MS_0383,MS_03F1
+		EXT	MS_0452,MS_04C9
+		EXT	MS_0520,MS_0521,MS_0522,MS_0523,MS_0524
+;====================================================================
+;
+		EXTEND
+;
+		MEM8
+		IDX8
+;
+;===============================================================
+SDLRP1		EQU	$
+		JSR	SDLRSB
+		STA	SOUND1	;(S)
+		RTS
+SDLRP2		EQU	$
+		JSR	SDLRSB
+		STA	SOUND2	;(S)
+		RTS
+SDLRP3		EQU	$
+		JSR	SDLRSB
+		STA	SOUND3	;(S)
+		RTS
+;- - - - - - - - - - - - - - - - - - - - - - - -
+SDLRSB		EQU	$
+		STA	ENHELP3
+		JSL	>SDLRCP
+		ORA	ENHELP3
+		RTS
+;===============================================================
+SDLRB1		EQU	$
+		JSR	SDLRBB
+		STA	SOUND1	;(S)
+		RTS
+SDLRB2		EQU	$
+		JSR	SDLRBB
+		STA	SOUND2	;(S)
+		RTS
+SDLRB3		EQU	$
+		JSR	SDLRBB
+		STA	SOUND3	;(S)
+		RTS
+;- - - - - - - - - - - - - - - - - - - - - - - -
+SDLRBB		EQU	$
+		STA	ENHELP3
+		JSL	>SDLRCB
+		ORA	ENHELP3
+		RTS
+;===============================================================
+;===============================================================
+;===============================================================
+B1STX1		EQU	$
+		BYTE	000H,000H,0F8H,010H
+B1STX0		EQU	$
+		BYTE	000H,000H,0FFH,000H
+B1STY1		EQU	$
+		BYTE	0F8H,010H,003H,003H
+B1STY0		EQU	$
+		BYTE	0FFH,000H,000H,000H
+B1STXS		EQU	$
+		BYTE	000H,000H,0D8H,028H	; (2)
+		BYTE	000H,000H,0D0H,030H	; (3)
+		BYTE	000H,000H,0C0H,040H	; (4)
+B1STYS		EQU	$
+		BYTE	0D8H,028H,000H,000H	; (2)
+		BYTE	0D0H,030H,000H,000H	; (3)
+		BYTE	0C0H,040H,000H,000H	; (4)
+B1STXS1		EQU	$
+		HEX	000,000,0C0,040
+B1STYS1		EQU	$
+		HEX	0C0,040,000,000
+BMITOC		EQU	$
+;;;
+		BYTE	4*2	;1
+		BYTE	4*3	;2
+		BYTE	4*4	;3
+		BYTE	4*4	;4
+		BYTE	4*1	;5
+		BYTE	4*4	;6
+		BYTE	4*6	;7
+		BYTE	4*2	;8
+		BYTE	4*2	;9
+		BYTE	4*2	;A
+		BYTE	4*0	;B
+		BYTE	4*5	;C
+		BYTE	4*0	;D
+		BYTE	4*4	;E
+		BYTE	4*0AH	;F
+		BYTE	4*6	;10
+		BYTE	4*4	;11
+		BYTE	4*4	;12
+		BYTE	4*4	;13
+		BYTE	4*4	;14
+		BYTE	4*3	;15
+		BYTE	4*2	;16
+		BYTE	4*2	;17
+		BYTE	4*14H	;18
+		BYTE	4*0	;19
+		BYTE	4*4	;1a
+		BYTE	4*2	;1b
+		BYTE	4*10H	;1c
+		BYTE	4*0	;1d
+		BYTE	4*3	;1e
+		BYTE	4*9	;1f
+		BYTE	4*4	;20
+		BYTE	4*3	;21
+		BYTE	4*2	;22
+		BYTE	4*4	;23
+		BYTE	4*4	;24
+		BYTE	4*1	;25
+		BYTE	4*3	;26
+		BYTE	4*7	;27
+		BYTE	4*0	;28
+		BYTE	4*4	;29
+		BYTE	4*5	;2A
+		BYTE	4*5	;2B
+		BYTE	4*4	;2C
+		BYTE	4*2	;2D
+		BYTE	4*8	;2E
+		BYTE	4*4	;2F
+		BYTE	4*4	;30
+		BYTE	4*4	;31
+;
+		BYTE	4*1	;32
+		BYTE	4*0	;33
+		BYTE	4*20H	;34
+		BYTE	4*4	;35
+		BYTE	4*1	;36
+		BYTE	4*0CH	;37
+		BYTE	4*5	;38
+		BYTE	4*4	;39
+		BYTE	4*0	;3A
+		BYTE	4*4	;3B
+		BYTE	4*0	;3C
+		BYTE	4*0	;3D
+		BYTE	4*2	;3E
+		BYTE	4*0	;3F
+		BYTE	4*4	;40
+		BYTE	4*2	;41
+		BYTE	4*1EH	;42
+		BYTE	4*20H	;43
+;;;;;;;;		BYTE	4*28H	;44
+;;;
+;;BM00		WORD	BEAM1MV		;1 Ken beam 
+;;BM01		WORD	BEAM2MV		;2 fire rod 
+;;BM02		WORD	BEAM3MV		;3
+;;;;;;;;;;;;;BM03		WORD	BOMBRMV		;
+;;B1FL		WORD	BEAM1FL         ;4 beam 1 flash
+;;BME0		WORD	BURN1MV         ;5 bumeran
+;;HBA0		WORD	HBAN1MV		;6 bumeran hibana
+;;BOM0		WORD	BOMBMOV		;7 bomb
+;;BOM1		WORD	BMKRMOV		;8 bomb
+;;YAM0		WORD	YAMOVE0		;9 ya
+;;YAM1		WORD	YAENDMV		;A ya end move
+;;DTM0		WORD	DTMOVE0		;B dot beam (ice) move 0
+;;JPKM		WORD	JPKNMV0		;C kaiten beam  en jump move
+;;JPKF		WORD	JPKNFL0		;D kaiten beam start move
+;;;;DTM4		WORD	DTMOVE3		;E dot beam move 3
+;;;;DTM5		WORD	DTMOVE4		;F dot beam move (fire tame magic)
+;;;;DTM6		WORD	DTMOVE5		;10 dot beam move (ice tame magic)
+;;DTM1		WORD	DTENDM0		;11 dot beam (ice) end 0
+;;;;DTE0		WORD	DTENDM1		;12 dot beam (fire tame magic) end 1
+;;ICFL		WORD	ICEFLMV		;13 ice beam flash
+;;;;OPMV		WORD	ONPMOVE		;14 onpu move
+;;WTM0		WORD	WATJMD0		;15 water jump move
+;;HBA1		WORD	HBAN2MV		;16 scop hibana move
+;;SCPM		WORD	SCOPMOV		;17 scop suna move
+;;SDM0		WORD	SDERMOV		;18 special magic (sunder)
+;;SDM1		WORD	SPBOMOV		;19 special magic (bomber)
+;;KANA		WORD	KONAMOV		;1a kona maki move
+;;HBA2		WORD	HBAN3MV		;1b ken hibana move
+;;SDM2		WORD	JISNMOV		;1c special magic (jishin)
+;;YURE		WORD	YUREMOV		;1d dash atari yure move
+;;DAKM		WORD	KMRIMOV		;1e dash kemuri move
+;;FTS0		WORD	FOTSMOV		;1f foot shot move
+;;FUTN		WORD	FUTONST		;20 futon set
+;;IBIK		WORD	IBIKIST		;21 ibiki set
+;;TAKA		WORD	TAKARST		;22 takara set
+;;TTKM		WORD	TORAKST		;23 toraiforse kemuri
+;;HAKA		WORD	HAKAMOV		;24 haka move 
+;;;;WTM1		WORD	WATJMD1		;25 water move 
+;;KNTN		WORD	KENFLAH		;26 ken tenmetsu move 
+;;WPMV		WORD	WARPMOV		;27 okarina warp move 
+;;TTNG		WORD	TAKNAGE		;28 takara nage move
+;;TTRK		WORD	TAKDOWN		;29 takara down move
+;;KNSM		WORD	KNSOMON		;2A ken soromon move
+;;KNEN		WORD	ENKNMV		;2B ken soromon en move
+;;BOAL		WORD	BOALMOV		;2C boal move
+;;BOA1		WORD	BALEDMV		;2D boal shometsu move
+;;BOA2		WORD	BALBKMV		;2E boal bakuhatsu move
+;;KANT		WORD	KNTEAMV		;2F kantera fire move
+;;SBAR		WORD	SBARIMV		;30 soromon bariya move
+;;BREN		WORD	BRENMV		;31 soromon bariya en move
+;;;
+;;BHMV		WORD	BKHMOVE		;32 kabe bomb hahen move
+;;KBDM		WORD	KBDMMOV		;33 kabe bomb move
+;;RDDM		WORD	RDDMMOV		;34 rod bomb move
+;;TKFL		WORD	TKKNMV		;35 takara ken flash move
+;;OKRN		WORD	OKARINA		;36 okarina shutsugen move
+;;KZMV		WORD	KAZAMOV		;37 kazamirori shometsu move
+;;TORI		WORD	TORIMOV		;38 kazamirori jump move
+;;BOCG		WORD	BLLIMOV		;39 boal chenge move
+;;OPBK		WORD	OPBKMOV		;3A option bakuhatsu  move
+;;CDKN		WORD	CDKNMOV		;3B clear demo ken flash move
+;;LVBR		WORD	LVUBRMV		;3C level up bumeran (kirakira) move
+;;WTM2		WORD	WATJMD2		;3D aitem water move
+;;PORG		WORD	PRGUPMV		;3E porigon up move
+;;KKRM		WORD	KONKRMV		;3F kona kemuri move
+;;TTK1		WORD	TORAKS1		;40 option triforce kemuri move
+;;TPHI		WORD	TPHDMOV		;41 taki player hed water move
+;;MCIM		WORD	MCIMNMV		;42 megami coin nage move
+;;PGKM		WORD	PLGKTMV		;43 poligon kaiten move
+;;;;KMKM		WORD	KMEKMMV		;44 kameiwa kemuri move
+;---------------------------------------------------
+BEAMS2		EQU	$
+		LDY	#01H
+;
+BEAMST		EQU	$
+		STA	<WORK0
+		JSL	>BMIDSH
+		BPL	BMS008
+		LDA	<WORK0
+		CMP	#BEAM1
+		BEQ	BMS002
+		LDX	#000H
+		JSL	>MGPTSB2
+BMS002		EQU	$
+		BRL	BMS0A0
+;
+BMS008		EQU	$
+		PHB
+		PHK
+		PLB
+		PHX
+;
+		LDA	<WORK0
+		CMP	#BEAM1
+		BEQ	BMS010
+		PHY
+;;		JSL	>SDLRCP		; sound (L,R) check
+;;		ORA	#frod0
+;;		STA	!SOUND2		; <sound>
+		LDA	#frod0
+		JSR	SDLRP2		;<sound>
+		PLY
+BMS010		EQU	$
+		LDA	<WORK0
+		STA	BMMODE,Y
+		TAX
+		LDA	BMITOC-1,X
+		STA	BMOMNO,Y
+		LDA	#03H
+		STA	BMTIM0,Y
+		LDA	#00H
+		STA	BMSTAT,Y
+		STA	BMCONT,Y
+		STA	BMCRFG,Y
+		STA	BMCRTM,Y
+		LDA	<PLMKCH
+		LSR	A
+		STA	BMMUKI,Y
+		TAX
+;
+		PHY
+		PHX
+		TYX
+		JSL	>ITBGCK		; init. BG check sub
+		PLX
+		PLY
+		BCS	BMS100
+;
+		LDA	PLXPS1
+		CLC
+		ADC	B1STX1,X
+		STA	BMXPSL,Y
+		LDA	PLXPS0
+		ADC	B1STX0,X
+		STA	BMXPSH,Y
+;
+		LDA	PLYPS1
+		CLC
+		ADC     B1STY1,X
+		STA	BMYPSL,Y
+		LDA	PLYPS0
+		ADC	B1STY0,X
+		STA	BMYPSH,Y
+;
+		LDA	BMMODE,Y
+		CMP	#BEAM1
+		BEQ	B1S004
+		LDA	B1STXS1,X
+		STA	BMXSPD,Y
+		LDA	B1STYS1,X
+		BRA	B1S020
+;
+B1S004		EQU	$
+		LDA	>ITMTBL6
+		DEC	A
+		DEC	A
+		ASL	A
+		ASL	A
+		STA	<WORKF
+		TXA
+		CLC
+		ADC	<WORKF
+		TAX
+		LDA	B1STXS,X
+		STA	BMXSPD,Y
+		LDA	B1STYS,X
+B1S020		EQU	$
+		STA	BMYSPD,Y
+;
+		LDA	PLBGCKF
+		STA	BMPRIO,Y
+		LDA	CDBGCKF
+		STA	BMCDPR,Y
+BMS090		EQU	$
+		PLX
+		PLB
+BMS0A0		EQU	$
+		RTL
+;
+BMS100		EQU	$
+		LDA	BMMODE,Y
+		CMP	#BEAM1
+		BNE	BMS140
+		LDA	#BM1FL
+		STA	BMMODE,Y
+		LDA	#007H
+		STA	BMTIM0,Y
+		LDA	#04H*4
+		STA	BMOMNO,Y
+		BRA	BMS160
+;
+BMS140		EQU	$
+		LDA	#001H
+		STA	BMSTAT,Y
+		LDA	#01FH
+		STA	BMTIM0,Y
+		LDA	#002H*4
+		STA	BMOMNO,Y
+;;;;;;;;		JSL	>SDLRCB
+;;;;;;;;		ORA	#fires
+;;;;;;;;		STA	!SOUND2
+		LDA	#fires
+		JSR	SDLRB2
+BMS160		EQU	$
+		PLX
+		PLB
+		RTL
+;========Soromon tama bakuhatsu set ===
+SRSTXL		EQU	$
+		HEX	F8,F8,F7,FC
+SRSTYL		EQU	$
+		HEX	F1,FC,F8,F8
+;
+SOROBR		EQU	$
+		LDA	#03H
+		STA	ENHELP
+;
+		LDA	BMZPSL,X
+		CMP	#0FFH
+		BNE	SRS008
+		LDA	#000H
+SRS008		EQU	$
+		STA	<WORK5
+;
+		LDA	BMXPSL,X
+		STA	<WORK0
+		LDA	BMXPSH,X
+		STA	<WORK1
+		LDA	BMYPSL,X
+		SEC
+		SBC	<WORK5
+		STA	<WORK2
+		LDA	BMYPSH,X
+		SBC	#00H
+		STA	<WORK3
+		LDA	BMPRIO,X
+		STA	<WORK4
+;
+SRS010		EQU	$
+		LDY	#04H
+		LDA	#BEAM1
+		JSL	>BMIDSH
+		BMI	SRS0A0
+;
+		PHX
+		LDA	#BEAM1
+		STA	BMMODE,Y
+		TAX
+		LDA	BMITOC-1,X
+		STA	BMOMNO,Y
+		LDA	#04H
+		STA	BMSTAT,Y
+		LDA	#00H
+		STA	BMCONT,Y	; Color 3
+		STA	BMCRFG,Y
+;
+		LDX	ENHELP
+		TXA
+		STA	BMMUKI,Y
+		LDA	<WORK0
+		CLC
+		ADC	SRSTXL,X
+		STA	BMXPSL,Y
+		LDA	<WORK1
+		ADC	#0FFH
+		STA	BMXPSH,Y
+;
+		LDA	<WORK2
+		CLC
+		ADC	SRSTYL,X
+		STA	BMYPSL,Y
+		LDA	<WORK3
+		ADC	#0FFH
+		STA	BMYPSH,Y
+;
+		JSL	>KNBMCHK
+;
+		LDA	B1STXS,X
+		STA	BMXSPD,Y
+		LDA	B1STYS,X
+		STA	BMYSPD,Y
+;
+		LDA	<WORK4
+		STA	BMPRIO,Y
+		LDA	CDBGCKF
+		STA	BMCDPR,Y
+;
+		PLX
+SRS0A0		EQU	$
+		DEC	ENHELP
+		BPL	SRS010
+;
+		RTS
+;
+;
+;;;;;;;;		STY	<WORKF
+;;;;;;;;BIS020		EQU	$
+;;;;;;;;		LDA	BMMODE,Y
+;;;;;;;;		BEQ	BIS090
+;;;;;;;;		DEY
+;;;;;;;;		BPL	BIS020
+;;;;;;;;BIS030		EQU	$
+;;;;;;;;		DEC	BMSTCT
+;;;;;;;;		BPL	BIS050
+;;;;;;;;;;		LDA	#05H-1
+;;;;;;;;		LDA	<WORKF
+;;;;;;;;		STA	BMSTCT
+;;;;;;;;BIS050		EQU	$
+;;;;;;;;		LDY	BMSTCT
+;;;;;;;;		LDA	BMMODE,Y
+;;;;;;;;		CMP	#ICEFL
+;;;;;;;;		BEQ	BIS090		; yaend => set ok !
+;;;;;;;;		CMP	#YAEND
+;;;;;;;;		BEQ	BIS090		; yaend => set ok !
+;;;;;;;;		DEY
+;;;;;;;;		BPL	BIS030
+;;;;;;;;BIS090		EQU	$
+;;;;;;;;		RTL
+;;
+;;		PHX
+;;		JSR	BMIS00
+;;		PLX
+;;		TYA
+;;		RTL
+;;BMIS00		EQU	$
+;;;;;		LDX	#BMNO-1
+;;		LDX	#05H-1
+;;		LDA	BMMODE,Y
+;;		BEQ	BMIS90
+;;		DEY
+;;		BPL	BMIS00
+;;BMIS08		EQU	$
+;;		DEC	BMSTCT
+;;		BPL	BMIS10
+;;;;;		LDA	#BMNO-1
+;;		LDA	#05H-1
+;;		STA	BMSTCT
+;;BMIS10		EQU	$
+;;		LDY	BMSTCT
+;;		LDA	BMMODE,Y
+;;		BEQ	BMIS90
+;;		CMP	#ICEFL
+;;		BEQ	BMIS90		; yaend => set ok !
+;;		CMP	#YAEND
+;;		BEQ	BMIS90		; yaend => set ok !
+;;		DEX
+;;		BPL	BMIS08
+;;		TXY
+;;BMIS90		EQU	$
+;;		RTS
+;*******************************************************************
+;*			EXSTRA SUB    							(		)		*
+;********************************************************************
+EXSTRA		EQU	$
+		PHB
+		PHK
+		PLB
+		JSR	FLASH
+		JSR	PLBEAM
+		PLB
+		RTL
+;============================================
+SSERCH3		EQU	$
+		LDA	PLXPS1
+		PHA
+		LDA	PLXPS0
+		PHA
+		LDA	PLYPS1
+		PHA
+		LDA	PLYPS0
+		PHA
+		LDA	<WORK4
+		STA	PLXPS1
+		LDA	<WORK5
+		STA	PLXPS0
+		LDA	<WORK6
+		STA	PLYPS1
+		LDA	<WORK7
+		STA	PLYPS0
+;
+		TYA			; base speed !
+		JSL	>SSERCH2
+		PLA
+		STA	PLYPS0
+		PLA
+		STA	PLYPS1
+		PLA
+		STA	PLXPS0
+		PLA
+		STA	PLXPS1
+		RTS
+;==============================================
+CRBOEN		EQU	$
+		LDY	#ENNO-1
+CBOE10		EQU	$
+		TYA
+		EOR	<FRCNT
+		AND	#03H
+		ORA	ENFLSH,Y
+		ORA	ENNOCR,Y
+		BEQ	CBOE11	
+;
+CBOE108		EQU	$
+		JMP	CBOE20
+;
+CBOE11		EQU	$		; yes !
+		LDA	ENKAIF,Y
+		CMP	BMPRIO,X
+		BNE	CBOE108
+;		
+		LDA	ENMODE,Y
+		CMP	#EMOVE
+		BCC	CBOE20
+;
+		LDA	BMXPSL,X
+		SEC
+		SBC	#18H
+		STA	<WORK0
+		LDA	BMXPSH,X
+		SBC	#00H
+		STA	<WORK8
+;
+		LDA	BMYPSL,X
+		SEC
+		SBC	#18H
+		PHP
+		SEC
+		SBC	BMZPSL,X
+		STA	<WORK1
+		LDA	BMYPSH,X
+		SBC	#00H
+		PLP
+		SBC	#00H
+		STA	<WORK9
+;
+		LDA	#30H
+		STA	<WORK2
+		STA	<WORK3
+;
+		PHX
+		TYX
+		JSL	>ENCRST2
+		PLX
+		JSL	>CROJCK2
+		BCC	CBOE20
+;
+		LDA	ENMYNO,Y
+		CMP	#MOTSB
+		BNE	CBOE12		; Boss motos ?
+;					; yes !
+		LDA	ENWRK2,Y
+		CMP	#03H
+		BCS	CBOE20		; On mask ?
+CBOE12		EQU	$		; yes !
+		LDA	BMXPSL,X
+		STA	<WORK4
+		LDA	BMXPSH,X
+		STA	<WORK5
+		LDA	BMYPSL,X
+		STA	<WORK6
+		LDA	BMYPSH,X
+		STA	<WORK7
+		PHX
+		PHY
+		LDA	BMMODE,X
+		TYX
+		JSL	>ENDMST2
+		LDY	#40H
+		JSR	SSERCH3
+		PLY
+		PLX		
+		LDA	<WORK0
+		EOR	#0FFH
+		INC	A
+		STA	ENHNYS,Y
+		LDA	<WORK1
+		EOR	#0FFH
+		INC	A
+		STA	ENHNXS,Y
+CBOE20		EQU	$
+		DEY
+		BMI	CBOE30
+		JMP	CBOE10
+CBOE30		EQU	$
+		RTS
+;##########################################################
+;#     		Beam 					  #
+;#  index 0~4:beam 5~:another                             #
+;##########################################################
+PLBEAM		EQU	$
+		LDX	#BMNO-1
+PB0010		EQU	$
+		STX	ENINDX
+;
+		LDA	BMMODE,X
+		BEQ	PB0020
+;
+		JSR	BMMAIN
+PB0020		EQU	$
+		DEX
+		BPL	PB0010
+		RTS
+;================================================
+BMMAIN		EQU	$
+		PHA
+;
+		CPX	#05H+1
+		BCS	BMM008		; 0~50h oam use ?
+;					; Yes !
+                LDA     BMOMNO,X
+                LDY     OAMTYP
+                BEQ     BMM003
+                LDY     BMPRIO,X
+                BNE     BMM002
+                JSL     >OAMENT4
+                BRA     BMM005
+BMM002          EQU     $
+                JSL     >OAMENT6
+                BRA     BMM005
+BMM003          EQU     $
+                JSL     >OAMENT1
+BMM005          EQU     $
+		TYA
+		STA	BMOMID,X	; use oam index entry!
+;
+BMM008		EQU	$
+		LDY	<GAMEMD
+		BNE	BMM010
+;
+		LDY	BMTIM0,X
+		BEQ	BMM010
+;
+		DEC	BMTIM0,X
+BMM010		EQU	$
+		PLA
+		DEC	A
+		ASL	A
+		TAY
+		LDA	!BMDTBL,Y
+		STA	<WORK0
+		LDA	!BMDTBL+1,Y
+		STA	<WORK1
+		JMP	(WORK0)
+;;;;;;;;;		JSL	>JSRSUB
+BMDTBL		EQU	$
+BM00		WORD	BEAM1MV		;1 Ken beam 
+BM01		WORD	BEAM2MV		;2
+BM02		WORD	BEAM3MV		;3
+;;;;;;;;;;;BM03		WORD	BOMBRMV		;
+B1FL		WORD	BEAM1FL         ;4 beam 1 flash
+BME0		WORD	BURN1MV         ;5 bumeran
+HBA0		WORD	HBAN1MV		;6 hibana
+BOM0		WORD	BOMBMOV		;7 bomb
+BOM1		WORD	BMKRMOV		;8 bomb
+YAM0		WORD	YAMOVE0		;9 ya
+YAM1		WORD	YAENDMV		;A ya end move
+DTM0		WORD	DTMOVE0		;B dot beam (ice) move 0
+JPKM		WORD	JPKNMV0		;C soromon ken en jump move
+JPKF		WORD	JPKNFL0		;D kaiten beam start move
+DTM4		WORD	DTMOVE3		;E dot beam move 3
+DTM5		WORD	DTMOVE4		;F dot beam move (fire tame magic)
+DTM6		WORD	DTMOVE5		;10 dot beam move (ice tame magic)
+DTM1		WORD	DTENDM0		;11 dot beam (ice) end 0
+DTE0		WORD	DTENDM1		;12 dot beam (fire tame magic) end 1
+ICFL		WORD	ICEFLMV		;13 ice beam flash
+OPMV		WORD	ONPMOVE		;14 onpu move
+WTM0		WORD	WATJMD0		;15 water jump move
+HBA1		WORD	HBAN2MV		;16 scop hibana move
+SCPM		WORD	SCOPMOV		;17 scop suna move
+SDMV		WORD	SDERMOV		;18 special magic (sunder)
+SDM1		WORD	SPBOMOV		;19 special magic (bomber)
+KANA		WORD	KONAMOV		;1a kona maki move
+HBA2		WORD	HBAN3MV		;1b ken hibana move
+SDM2		WORD	JISNMOV		;1c special magic (jishin)
+YURE		WORD	YUREMOV		;1d dash atari yure move
+DAKM		WORD	KMRIMOV		;1e dash kemuri move
+FTS0		WORD	FOTSMOV		;1f foot shot move 
+FUTN		WORD	FUTONST		;20 futon set
+IBIK		WORD	IBIKIST		;21 ibiki set
+TAKA		WORD	TAKARST		;22 takara set
+TTKM		WORD	TORAKST		;23 toraiforse kemuri
+HAKA		WORD	HAKAMOV		;24 haka move 
+WTM1		WORD	WATJMD1		;25 water move 
+KNTN		WORD	KENFLAH		;26 ken tenmetsu move 
+WPMV		WORD	WARPMOV		;27 okarina warp move 
+TTNG		WORD	TAKNAGE		;28 takara nage move
+TTRK		WORD	TAKDOWN		;29 takara down move
+KNSM		WORD	KNSOMON		;2A ken soromon move
+KNEN		WORD	ENKNMV		;2B ken soromon en move
+BOAL		WORD	BOALMOV		;2C boal move
+BOA1		WORD	BALEDMV		;2D boal shometsu move
+BOA2		WORD	BALBKMV		;2E boal bakuhatsu move
+KANT		WORD	KNTEAMV		;2F kantera fire move
+SBAR		WORD	SBARIMV		;30 soromon bariya move
+BREN		WORD	BRENMV		;31 soromon bariya en move
+;
+BHMV		WORD	BKHMOVE		;32 kabe bomb hahen move
+KBDM		WORD	KBDMMOV		;33 kabe bomb move
+RDDM		WORD	RDDMMOV		;34 rod bomb move
+TKFL		WORD	TKKNMV		;35 takara ken flash move
+OKRN		WORD	OKARINA		;36 okarina shutsugen move
+KZMV		WORD	KAZAMOV		;37 kazamirori shometsu move
+TORI		WORD	TORIMOV		;38 kazamirori jump move
+BOCG		WORD	BLLIMOV		;39 boal chenge move
+OPBK		WORD	OPBKMOV		;3A option bakuhatsu  move
+CDKN		WORD	CDKNMOV		;3B clear demo ken flash move
+LVBR		WORD	LVUBRMV		;3C level up bumeran move
+WTM2		WORD	WATJMD2		;3D aitem water move
+PORG		WORD	PRGUPMV		;3E porigon up move
+KKRM		WORD	KONKRMV		;3F kona kemuri move
+TTK1		WORD	TORAKS1		;40 option triforce kemuri move
+TPHI		WORD	TPHDMOV		;41 taki player hed water move
+MCIM		WORD	MCIMNMV		;42 megami coin nage move
+PGKM		WORD	PLGKTMV		;43 poligon kaiten move
+;;;;KMKM		WORD	KMEKMMV		;43 kameiwa kemuri move
+;
+BEAM1		EQU	(BM00-BM00)/2+1
+BEAM2		EQU	(BM01-BM00)/2+1
+BEAM3		EQU	(BM02-BM00)/2+1
+;;;BOMBR		EQU     (BM03-BM00)/2+1
+BM1FL		EQU	(B1FL-BM00)/2+1
+BUME1		EQU	(BME0-BM00)/2+1
+HIBA1		EQU	(HBA0-BM00)/2+1
+BOMBM		EQU	(BOM0-BM00)/2+1
+BOMBA		EQU	(BOM1-BM00)/2+1
+YAMOV		EQU	(YAM0-BM00)/2+1
+YAEND		EQU	(YAM1-BM00)/2+1
+DTMOV		EQU	(DTM0-BM00)/2+1
+JPKM0		EQU	(JPKM-BM00)/2+1
+JPKF0		EQU	(JPKF-BM00)/2+1
+DTMV3		EQU	(DTM4-BM00)/2+1
+DTMV4		EQU	(DTM5-BM00)/2+1
+DTMV5		EQU	(DTM6-BM00)/2+1
+DTED0		EQU	(DTM1-BM00)/2+1
+DTED1		EQU	(DTE0-BM00)/2+1
+ICEFL           EQU	(ICFL-BM00)/2+1
+OPMOV           EQU	(OPMV-BM00)/2+1
+WTMV0		EQU	(WTM0-BM00)/2+1
+HIBA2		EQU	(HBA1-BM00)/2+1
+SCPMV		EQU	(SCPM-BM00)/2+1
+SODMV		EQU	(SDMV-BM00)/2+1
+SPBMV		EQU	(SDM1-BM00)/2+1
+KONMV		EQU	(KANA-BM00)/2+1
+HIBA3		EQU	(HBA2-BM00)/2+1
+JISMV		EQU	(SDM2-BM00)/2+1
+YURMV		EQU	(YURE-BM00)/2+1
+KMRMV		EQU	(DAKM-BM00)/2+1
+FTMOV		EQU	(FTS0-BM00)/2+1
+FUTON		EQU	(FUTN-BM00)/2+1
+IBIKI		EQU	(IBIK-BM00)/2+1
+TAKARA		EQU	(TAKA-BM00)/2+1
+TORKM		EQU	(TTKM-BM00)/2+1
+HAKMV		EQU	(HAKA-BM00)/2+1
+WTMV1		EQU	(WTM1-BM00)/2+1
+KNTMV		EQU	(KNTN-BM00)/2+1
+WAPMV		EQU	(WPMV-BM00)/2+1
+TKNAG		EQU	(TTNG-BM00)/2+1
+TKDOW		EQU	(TTRK-BM00)/2+1
+KNSOM		EQU	(KNSM-BM00)/2+1
+KNSEN		EQU	(KNEN-BM00)/2+1
+BOLMV		EQU	(BOAL-BM00)/2+1
+BOLM1		EQU	(BOA1-BM00)/2+1
+BOLM2		EQU	(BOA2-BM00)/2+1
+KANTR		EQU	(KANT-BM00)/2+1
+SBAMV		EQU	(SBAR-BM00)/2+1
+BRSEN		EQU	(BREN-BM00)/2+1
+;
+BHMOV		EQU	(BHMV-BM00)/2+1
+KBBOM		EQU	(KBDM-BM00)/2+1
+RDBOM		EQU	(RDDM-BM00)/2+1
+TKFLM		EQU	(TKFL-BM00)/2+1
+OKARN		EQU	(OKRN-BM00)/2+1
+KAZMV		EQU	(KZMV-BM00)/2+1
+TORIM		EQU	(TORI-BM00)/2+1
+BOLCG		EQU	(BOCG-BM00)/2+1
+OPBMV		EQU	(OPBK-BM00)/2+1
+CDKMV		EQU	(CDKN-BM00)/2+1
+LVUBR		EQU	(LVBR-BM00)/2+1
+WTMV2		EQU	(WTM2-BM00)/2+1
+PORIG		EQU	(PORG-BM00)/2+1
+KONRM		EQU	(KKRM-BM00)/2+1
+TORK1		EQU	(TTK1-BM00)/2+1
+TPHDM		EQU	(TPHI-BM00)/2+1
+MCIMM		EQU	(MCIM-BM00)/2+1
+PGKMV		EQU	(PGKM-BM00)/2+1
+;;;;KMKMV		EQU	(KMKM-BM00)/2+1
+;===========================================
+;;ICFLCD		EQU	$
+;;		BYTE	08FH,08FH,08FH,0AAH,0A3H,0B2H,0B3H,0A2H
+ICFLXD		EQU	$
+		BYTE	002H,007H,006H,001H
+		BYTE	001H,007H,007H,001H
+		BYTE	000H,007H,008H,001H
+		BYTE	004H,009H,004H,0FFH
+ICFLYD		EQU	$
+		BYTE	002H,003H,008H,007H
+		BYTE	001H,001H,007H,007H
+		BYTE	001H,000H,007H,008H
+		BYTE	0FFH,004H,009H,004H
+ICFLCD		EQU	$
+		BYTE	083H,083H,083H,083H
+		BYTE	0B6H,080H,0B6H,080H
+		BYTE	0B7H,0B6H,0B7H,0B6H
+		BYTE	0B7H,0B6H,0B7H,0B6H
+;
+;
+;
+;;		BYTE	083H,083H,083H,083H
+;;		BYTE	05BH,080H,05BH,080H
+;;		BYTE	05CH,05BH,05CH,05BH
+;;		BYTE	05CH,05BH,05CH,05BH
+;-------------------------------------------------
+ICEFLMV		EQU	$
+		LDA	BMTIM0,X
+		BNE	ICF010
+		STZ	BMMODE,X
+ICF010		EQU	$
+		LDA	<GAMEMD
+		BNE	ICF020
+;
+		JSR	BMXCLC
+		JSR	BMYCLC
+ICF020		EQU	$
+		JSR	BMOMST
+;
+		LDY	#004H
+		LDA	#DTMOV
+ICF021		EQU	$
+		CMP	BMMODE,Y
+		BEQ	ICF022
+		DEY
+		BPL	ICF021
+;
+ICF022		EQU	$
+		LDA	BMCRFG,Y
+		BEQ	ICF024
+		LDA	#030H
+		STA	<WORK4
+ICF024		EQU	$
+		LDA	#04H*4
+		LDY	OAMTYP
+		BEQ	ICF110
+;
+		LDY	BMPRIO,X		
+		BNE	ICF108
+;		
+		JSL	>OAMENT4
+		BRA	ICF112
+ICF108		EQU	$
+		JSL	>OAMENT5
+		BRA	ICF112
+ICF110		EQU	$
+		JSL	>OAMENT1
+;
+ICF112		EQU	$
+		LDY	#000H
+		LDA	#03H
+		STA	<WORK5
+		LDA	BMTIM0,X
+		AND	#00011100B
+		STA	<WORK6
+		PHX
+ICF030		EQU	$
+		LDA	<WORK5
+		ORA	<WORK6
+		TAX
+		LDA	<WORK0
+		CLC
+		ADC	ICFLXD,X
+		STA	(<OAMADR),Y
+		INY
+		LDA	<WORK1
+		CLC
+		ADC	ICFLYD,X
+		STA	(<OAMADR),Y
+		INY
+		LDA	ICFLCD,X
+		STA	(<OAMADR),Y
+		INY
+		LDA	<WORK4
+		ORA	#00000100B
+		STA	(<OAMADR),Y
+		INY
+		PHY
+		TYA
+		SEC
+		SBC	#004H
+		LSR	A
+		LSR	A
+		TAY
+		LDA	#00H
+		STA	(<OSBADR),Y
+		PLY
+		DEC	<WORK5
+		BPL	ICF030
+		PLX
+ICF090		EQU	$
+		RTS
+;-----------------------------------------
+ICFSYS		EQU	$
+		BYTE	0FCH,004H,000H,000H
+;;		BYTE	03H,0FDH,03H,0FDH
+;;		BYTE	0FCH,0FCH,0FCH,0FCH
+;;		BYTE	04H,04H,04H,04H
+ICFSXS		EQU	$
+		BYTE	000H,000H,0FCH,004H
+;;		BYTE	0FCH,0FCH,0FCH,0FCH
+;;		BYTE	04H,04H,04H,04H
+;;		BYTE	03H,03H,0FDH,0FDH
+;;		BYTE	03H,03H,0FDH,0FDH
+ICFSXD		EQU	$
+;;		BYTE	02H,08H,06H,00H
+ICFSYD		EQU	$
+;;		BYTE	00H,02H,08H,06H
+;- - - - - - - - - - - 
+ICEFLST		EQU	$
+		LDA	<GAMEMD
+		BNE	ICS090
+;
+;;;;;;;;91/10/4;;;YABAA !!?		JSR	CRBMEN		; teki cross ? [YES:DTMV180] 
+;
+		DEC	BMWRK0,X
+		BPL	ICS090
+		LDA	#05H
+		STA	BMWRK0,X
+;
+		LDY	#BMNO-1
+;;		LDY	#04H
+ICS010		EQU	$
+		LDA	BMMODE,Y
+		BEQ	ICS030
+		DEY
+		BPL	ICS010
+ICS090		EQU	$
+		RTS
+;
+ICS030		EQU	$
+		LDA	#ICEFL
+		STA	BMMODE,Y
+		LDA	#0FH
+		STA	BMTIM0,Y
+		LDA	BMMUKI,X
+		PHX
+		TAX
+		LDA	ICFSXS,X
+		STA	BMXSPD,Y
+		LDA	ICFSYS,X
+		STA	BMYSPD,Y
+		PLX
+		LDA	BMXPSL,X
+		STA	BMXPSL,Y
+		LDA	BMYPSL,X
+		STA	BMYPSL,Y
+		LDA	BMPRIO,X
+		STA	BMPRIO,Y
+;
+		LDA	#00H
+		STA	BMOMNO,Y
+		RTS
+;
+;
+;---------------------------------------------
+BM1TMD		EQU	$
+		BYTE	07H,03H,01H,00H,00H,00H
+;
+BEAM1MV		EQU	$
+		LDA	<GAMEMD
+		BNE	BM1MA0
+;
+		LDY	BMSTAT,X
+		LDA	<FRCNT
+		AND	BM1TMD,Y
+		BNE	BM1M30
+		JSR	BMXCLC
+		JSR	BMYCLC
+BM1M30		EQU	$
+		LDA	BMTIM0,X
+		BNE	BM1M80
+		LDA	#03H
+		STA	BMTIM0,X
+		LDA	BMSTAT,X
+		INC	A
+		CMP	#06H
+		BCC	BM1M70
+		LDA	#04H
+BM1M70		EQU	$
+		STA	BMSTAT,X
+BM1M80		EQU	$
+		JSR	CRBMEN
+		BCS	BM1M90
+;
+		JSR	BMBGCK2
+		BCC	BM1MA0
+;
+BM1M90		EQU	$
+		LDA	#BM1FL
+		STA	BMMODE,X	; Test !
+		LDA	#07H
+		STA	BMTIM0,X
+		LDA	#04H*4
+		STA	BMOMNO,X
+BM1MA0		EQU	$
+		BRL	BEAM1CS
+;
+;-----------------------------------------
+BMCDT0		EQU	$
+		BYTE	050H,050H,044H,044H,052H,052H
+		BYTE	050H,050H,044H,044H,051H,051H
+		BYTE	043H,043H,042H,042H,041H,041H
+		BYTE	043H,043H,042H,042H,040H,040H
+BMCDT1		EQU	$
+		BYTE	050H,050H,044H,044H,051H,051H
+		BYTE	050H,050H,044H,044H,052H,052H
+		BYTE	043H,043H,042H,042H,040H,040H
+		BYTE	043H,043H,042H,042H,041H,041H
+BMADT0		EQU	$
+		BYTE	0C0H,0C0H,0C0H,0C0H,080H,0C0H
+		BYTE	040H,040H,040H,040H,000H,040H
+		BYTE	040H,040H,040H,040H,040H,0C0H
+		BYTE	000H,000H,000H,000H,000H,080H
+BMADT1		EQU	$
+		BYTE	080H,080H,080H,080H,080H,0C0H
+		BYTE	000H,000H,000H,000H,000H,040H
+		BYTE	0C0H,0C0H,0C0H,0C0H,040H,0C0H
+		BYTE	080H,080H,080H,080H,000H,080H
+BMXAD0		EQU	$
+		BYTE	000H,000H,000H,000H,004H,004H
+		BYTE	000H,000H,000H,000H,004H,004H
+		BYTE	000H,000H,000H,000H,000H,000H
+		BYTE	000H,000H,000H,000H,000H,000H
+BMXAD1		EQU	$
+		BYTE	008H,008H,008H,008H,004H,004H
+		BYTE	008H,008H,008H,008H,004H,004H
+		BYTE	000H,000H,000H,000H,008H,008H
+		BYTE	000H,000H,000H,000H,008H,008H
+BMYAD0		EQU	$
+		BYTE	080H,000H,000H,000H,000H,000H
+		BYTE	000H,000H,000H,000H,000H,000H
+		BYTE	000H,000H,000H,000H,004H,004H
+		BYTE	000H,000H,000H,000H,004H,004H
+BMYAD1		EQU	$
+		BYTE	000H,000H,000H,000H,008H,008H
+		BYTE	080H,000H,000H,000H,008H,008H
+		BYTE	080H,008H,008H,008H,004H,004H
+		BYTE	080H,008H,008H,008H,004H,004H
+BM1EN2  	EQU	$
+		PLA
+		PLA
+BM1END		EQU	$
+		STZ	BMMODE,X
+		RTS	
+;---------------------------------------
+B1ATDT		EQU	$
+		BYTE	020H,010H
+BMOMST		EQU	$
+		LDY	BMPRIO,X
+		LDA	B1ATDT,Y
+		STA	<WORK4
+		LDY	BMOMID,X
+		LDA	BMXPSL,X
+		SEC
+		SBC	<SCCH2
+		CMP	#0F4H
+		BCS	BM1EN2
+		STA	<WORK0
+		LDA	BMYPSL,X
+		SEC
+		SBC	<SCCV2
+		CMP	#0F0H
+		BCS	BM1EN2
+		STA	<WORK1
+		RTS
+;===========================================
+B1CLDT		EQU	$
+		HEX	02,06
+;
+BEAM1CS		EQU	$
+		JSR	BMOMST
+;
+		LDY	BMCONT,X
+		LDA	<WORK4
+		ORA	B1CLDT,Y
+		STA	<WORK4
+		LDA	BMCRFG,X
+		BEQ	B1C008
+		LDA	#030H
+		TSB	<WORK4
+;
+B1C008		EQU	$
+		LDY	#00H
+		LDA	BMMUKI,X
+		ASL	A
+		ASL	A
+		ADC	BMMUKI,X
+		ADC	BMMUKI,X
+		ADC	BMSTAT,X
+		TAX
+;
+		LDA	BMXAD0,X
+		CLC
+		ADC	<WORK0
+		STA	(<OAMADR),Y
+		LDA	BMXAD1,X
+		CLC
+		ADC	<WORK0
+		LDY	#04H
+		STA	(<OAMADR),Y
+;
+		LDA	BMYAD0,X
+		BMI	B1C010
+		CLC
+		ADC	<WORK1
+		LDY	#01H
+		STA	(<OAMADR),Y
+B1C010		EQU	$
+		LDA	BMYAD1,X
+		BMI	B1C020
+		CLC
+		ADC	<WORK1
+		LDY	#05H
+		STA	(<OAMADR),Y
+;
+B1C020		EQU	$	
+		LDA	BMCDT0,X
+		CLC
+		ADC	#082H
+		LDY	#002H
+		STA	(<OAMADR),Y
+		LDA	BMCDT1,X
+		CLC
+		ADC	#082H
+		LDY	#006H
+		STA	(<OAMADR),Y
+;
+		LDA	BMADT0,X
+		ORA	<WORK4
+		LDY	#003H
+		STA	(<OAMADR),Y
+		LDA	BMADT1,X
+		ORA	<WORK4
+		LDY	#007H
+		STA	(<OAMADR),Y
+;
+		LDY	#000H
+		TYA
+		STA	(<OSBADR),Y
+		INY
+		STA	(<OSBADR),Y
+		BRL	KBMV900
+;=================================================
+BEAM2MV		EQU	$
+		LDA	BMSTAT,X
+		BEQ	BM2010
+		JMP	BEAM2FL
+;
+BM2010		EQU	$
+		LDA	<GAMEMD
+		BNE	BM2050
+;
+		STZ	HIBSTAT,X
+		JSR	BMXCLC
+		JSR	BMYCLC
+		JSR	CRBMEN
+		BCS	BM2018
+;
+		LDA	BMMUKI,X
+		ORA	#00001000B
+		STA	BMMUKI,X
+		JSR	BMBGCK
+		PHP
+		LDA	BMBGNO,X
+		STA	HIBSTAT,X
+		PLP
+		BCS	BM2018
+		LDA	BMMUKI,X
+		ORA	#00001100B
+		STA	BMMUKI,X
+		LDA	BMCRTM,X
+		STA	<BMWORK+2
+		JSR	BMBGCK
+		PHP
+		LDA	<BMWORK+2
+		STA	BMCRTM,X
+		PLP
+		BCC	BM2020
+;
+BM2018		EQU	$
+		INC	BMSTAT,X
+		LDA	#01FH
+		STA	BMTIM0,X
+		LDA	#02H*4
+		STA	BMOMNO,X
+;;;;;;;;		JSL	>SDLRCB
+;;;;;;;;		ORA	#fires
+;;;;;;;;		STA	!SOUND2
+		LDA	#fires
+		JSR	SDLRB2
+;
+BM2020		EQU	$
+		INC	BMCONT,X
+;
+		LDA	BMMUKI,X
+		AND	#11110011B
+		STA	BMMUKI,X
+		LDA	HIBSTAT,X
+		STA	FIRENO
+		AND	#0F0H
+		CMP	#0C0H
+		BEQ	BM2030
+		LDA	BMBGNO,X
+		STA	FIRENO
+		AND	#0F0H
+		CMP	#0C0H
+		BNE	BM2050
+BM2030		EQU	$
+		PHX
+		JSL	>LAMPPL
+		PLX
+BM2050		EQU	$
+		JSR	BEAM2CS
+		RTS
+;=======================================
+;;BM2CDT		EQU	$
+;;		BYTE	0A0H,0A2H,0A0H,0A2H
+;;BM2ADT		EQU	$
+;;		BYTE	000H,000H,0C0H,0C0H
+BM2XAD		EQU	$
+		BYTE	07H,00H,08H,0
+		BYTE	08H,04H,00H,0
+		BYTE	02H,08H,00H,0
+		BYTE	01H,04H,09H,0
+BM2YAD		EQU	$
+		BYTE	01H,04H,09H,0
+		BYTE	07H,00H,08H,0
+		BYTE	08H,04H,00H,0
+		BYTE	02H,08H,00H,0
+BM2CDT		EQU	$
+		BYTE	08DH,09DH,09CH
+;
+BEAM2CS		EQU	$
+		JSR	BMOMST
+;
+		LDA	BMCRFG,X
+		BEQ	BM2C008
+		LDA	#030H
+		TSB	<WORK4
+;
+BM2C008		EQU	$
+		LDA	BMCONT,X
+		AND	#00001100B
+		STA	<WORK2
+		PHX
+		LDX	#02H
+		LDY	#00H
+BM2C10		EQU	$
+		STX	<WORK3
+		TXA
+		ORA	<WORK2
+		TAX
+		LDA	<WORK0
+		CLC
+		ADC	BM2XAD,X
+		STA	(<OAMADR),Y
+		LDA	<WORK1
+		CLC
+		ADC	BM2YAD,X
+		INY
+		STA	(<OAMADR),Y
+		LDX	<WORK3
+		LDA	BM2CDT,X
+		INY
+		STA	(<OAMADR),Y
+		LDA	<WORK4
+		ORA	#00000010B
+		INY
+		STA	(<OAMADR),Y
+		PHY
+		TYA
+		LSR	A
+		LSR	A
+		TAY
+		LDA	#00H
+		STA	(<OSBADR),Y
+		PLY
+;;		INY
+;;		INY
+;;		INY
+		INY
+		DEX
+		BPL	BM2C10
+;
+		PLX
+		RTS
+;;		JSR	BMOMST
+;;		LDA	<WORK0
+;;		STA	OAM+00H,Y
+;;		LDA	<WORK1
+;;		STA	OAM+01H,Y
+;;		LDA	BMCONT,X
+;;		LSR	A
+;;		LSR	A
+;;		AND	#03H
+;;		TAX
+;;		LDA	BM2CDT,X
+;;		STA	OAM+02H,Y
+;;		LDA	BM2ADT,X
+;;		ORA	#00001100B
+;;		ORA	<WORK4
+;;		STA	OAM+03H,Y
+;;		TYA
+;;		LSR	A
+;;		LSR	A
+;;		TAY
+;;		LDA	#02H
+;;		STA	OAMSB+00H,Y
+;;		LDX	ENINDX
+		RTS	
+;____________________________________________
+BM2END		EQU	$
+		LDA	BMMODE,X
+		STZ	BMMODE,X
+		CMP	#KANTR
+		BEQ	BM2ED10
+		LDA	<MPDTNO
+		CMP	#040H
+		BNE	BM2ED10
+		LDA	BMBGNO,X
+		CMP	#043H
+		BNE	BM2ED10
+		PHX
+		JSL	>RDBMINT
+		PLX
+BM2ED10		EQU	$
+		RTS
+;--------------------------------------
+B2FLCD		EQU	$
+		BYTE	0A2H,0A0H,08EH
+BEAM2FL		EQU	$
+		JSR	CRBLEN		; teki cross check sub
+;
+		JSR	BMOMST
+		LDY	#00H
+		LDA	BMTIM0,X
+		BEQ	BM2END
+		LSR     A
+		LSR	A
+		LSR	A
+		BEQ	B2FL10
+;
+		TAX
+		LDA	<WORK0
+		STA	(<OAMADR),Y
+		LDA	<WORK1
+		INY
+		STA	(<OAMADR),Y
+		LDA	B2FLCD-1,X
+		INY
+		STA	(<OAMADR),Y
+		LDA	#00000010B
+		ORA	<WORK4
+		INY
+		STA	(<OAMADR),Y
+		LDA	#02H
+		STA	(<OSBADR) 
+		BRL	KBMV900
+;- - - - - - - - - - - - - - - - - - - - - - - 
+B2FL10		EQU	$
+		TYA
+		STA	(<OSBADR),Y
+		INY
+		STA	(<OSBADR),Y
+;
+		DEY
+		LDA	<WORK0
+		STA	(<OAMADR),Y
+		CLC
+		ADC	#08H
+		LDY	#04H
+		STA	(<OAMADR),Y
+;
+		LDA	<WORK1
+		CLC
+		ADC	#0FDH
+		LDY	#01H
+		STA	(<OAMADR),Y
+		LDY	#05H
+		STA	(<OAMADR),Y
+;
+		LDA	#0A4H
+		LDY	#02H
+		STA	(<OAMADR),Y
+		INC	A
+		LDY	#06H
+		STA	(<OAMADR),Y
+;
+		LDA	#00000010B
+		ORA	<WORK4
+		LDY	#03H
+		STA	(<OAMADR),Y
+		LDY	#07H
+		STA	(<OAMADR),Y
+BEAM3MV		EQU	$
+		RTS
+;=================================================
+;;==================================================
+;BOMBRMV		EQU	$
+;		LDA	BMTIM0,X
+;		BNE	BBM090
+;		LDA	BMCONT,X
+;		CLC
+;		ADC	BMSTAT,X
+;		STA	BMCONT,X
+;		LDA     <FRCNT
+;		AND	#03H
+;		BNE	BBM030
+;		INC	BMSTAT,X
+;BBM030		EQU	$
+;		JSR	BMXCLC
+;		LDA	BMCONT,X
+;		BMI	BBM050
+;		STZ	BMCONT,X
+;		LDA	BMSTAT,X
+;		LSR	A
+;		EOR	#0FFH
+;		INC	A
+;		STA	BMSTAT,X
+;		BNE	BBM050
+;		STZ	BMXSPD,X
+;		LDA	#0F0H
+;		STA	BMTIM0,X
+;BBM050		EQU	$
+;		JSR	BOMBRCS
+;		RTS
+;BBM090		EQU	$
+;		CMP	#40H
+;		BCS	BBM050
+;		JSR	BOMBOM
+;		RTS
+;;------------------------------------------
+;BOMBRCS		EQU	$
+;		STZ	<WORK1
+;		STZ	<WORK0
+;		LDA	BMTIM0,X
+;		DEC	A
+;		CMP	#70H
+;		BCS	BBCS10
+;		AND	#00011100B
+;		LSR	A
+;		STA	<WORK0
+;BBCS10		EQU	$
+;		LDY	BMOMID,X
+;		LDA	BMXPSL,X
+;		SEC
+;		SBC	<SCCH2
+;		STA	OAM+00H,Y
+;		LDA	BMXPSH,X
+;		SBC	<SCCH2+1
+;		BNE	BBCS90
+;;
+;		LDA	BMYPSL,X
+;		SEC
+;		SBC	<SCCV2
+;		STA	<WORK1
+;		LDA	BMYPSH,X
+;		SBC	<SCCV2+1
+;		BNE	BBCS90
+;		LDA	<WORK1
+;		STA	OAM+01H,Y
+;
+;		LDA	#09EH
+;		STA	OAM+02H,Y
+;		LDA	#00100100B
+;		EOR	<WORK0
+;		STA	OAM+03H,Y
+;		TYA
+;		LSR	A
+;		LSR	A
+;		TAY
+;		LDA	#00H
+;		STA	OAMSB+00H,Y
+;		RTS		
+;;==================================================
+;BMBMXD		EQU	$
+;		BYTE	0FCH,0FCH,0FCH,0FCH
+;		BYTE	0F4H,04H,0F4H,04H
+;		BYTE	
+;BOMBOM		EQU	$
+;		LDA	BMTIM0,X
+;		LSR	A
+;		LSR	A
+;		LSR	A
+;		STA	<WORK3
+;		LDA	#03H
+;		STA	<WORK2
+;		LDY	BMOMID,X
+;BMBM10		EQU	$
+;		LDA	BMXPSL,X
+;		SEC
+;		SBC	<SCCH2
+;		STA	<WORK0
+;		LDA	BMYPSL,X
+;		SEC
+;		SBC	<SCCV2
+;		STA	<WORK1
+;		LDA	<WORK2
+;		ASL	A
+;		ASL	A
+;		ASL	A
+;		ADC	<WORK3
+;		TAX
+;		LDA	<WORK0
+;		CLC
+;		ADC	BMBMXD,X
+;		STA	OAM+00H,Y
+;		LDA	<WORK1
+;		CLC
+;		CLC
+;		ADC	BMBMYD,X
+;		STA	OAM+01H,Y
+;		LDA	BMBMCD,X
+;		STA	OAM+02H,Y
+;		LDA	BMBMAD,X
+;		ORA	#00001011B
+;		STA	OAM+03H,Y
+;		TYA
+;		PHY
+;		LSR	A
+;		LSR	A
+;		TAY
+;		LDA	#02H
+;		STA	OAMSB+00H,Y
+;		PLY
+;		LDX	ENINDX
+;		DEC	<WORK2
+;		BPL	BMBM10
+;		RTS
+;==================================================
+BMCRDT		EQU	$
+; 			0 1 2 3 4 5 6 7 8 9 A B C D E F
+		HEX	0,1,0,3,0,0,0,0,0,0,3,0,0,0,0,0	; 0
+		HEX	1,1,1,1,0,0,0,0,2,2,2,2,0,3,3,3	; 1
+		HEX	0,0,0,0,0,0,1,1,4,4,4,4,4,4,4,4	; 2
+		HEX	1,1,1,1,1,1,1,1,0,0,0,0,0,3,3,3	; 3
+		HEX	0,0,0,1,0,0,0,0,0,0,0,0,4,4,4,4	; 4
+		HEX	0,0,0,0,0,0,0,0,1,1,1,1,1,1,0,0	; 5
+		HEX	0,0,0,1,0,0,0,0,0,0,0,0,1,1,1,1	; 6
+		HEX	1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1	; 7
+		HEX	0,0,0,0,0,0,0,0,1,1,1,1,1,1,0,1	; 8
+		HEX	0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0	; 9
+		HEX	0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0	; A
+		HEX	0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0	; B
+		HEX	1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1	; C
+		HEX	0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0	; D
+		HEX	0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0	; E
+		HEX	1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1	; F
+BMBCYL		EQU	$
+		BYTE	000H,010H,005H,005H	; beam
+		BYTE	000H,010H,004H,004H	; ya
+		BYTE	004H,00CH,005H,005H	; fire rod 1
+		BYTE	004H,00CH,00CH,00CH	; fire rod 2
+		BYTE	000H,000H,000H,000H	; bomb,tama
+BMBCXL		EQU	$
+		BYTE	008H,008H,000H,010H
+		BYTE	004H,004H,000H,010H
+		BYTE	004H,004H,004H,00CH
+		BYTE	00CH,00CH,004H,00CH
+		BYTE	000H,000H,000H,000H
+BMBGCK2		EQU	$
+		TXA
+		EOR	<FRCNT
+		LSR	A   
+		BCC	BBCFF0
+BMBGCK		EQU	$
+;;		JSR	BMYXCHK		; scrool ? 
+;;		BCC	BBC000
+;;		CLC
+;;		RTS
+;;BBC000		EQU	$
+		LDA	<GMMODE		; chijoo check !!
+		BNE	BBC001
+;
+		LDA	BMCRFG,X	; BG check ? [yea:BBC000]
+		BEQ	BBC001
+		STZ	BMBGNO,X	; BG no clear !!
+BBCFF0		EQU	$
+		CLC
+		RTS
+;
+BBC001		EQU	$
+		LDA	BGALCKF
+		BEQ	BBC090		;  2 Of BG check ?
+;;		TXA			; 
+;;		EOR	FRCNT
+;;		LSR	A
+;;		BCC	BBC090
+;
+		CMP	#03H
+		MEM16
+		REP	#00100000B
+		BCC	BBC003
+		STZ	<WORK0
+		STZ	<WORK2
+		BRA	BBC005
+BBC003		EQU	$
+		LDA	<SCCH1
+		SEC
+		SBC	<SCCH2
+		STA	<WORK0
+		LDA	<SCCV1
+		SEC
+		SBC	<SCCV2
+		STA	<WORK2
+BBC005		EQU	$
+		MEM8
+		SEP	#00100000B
+;
+		LDA	BMXPSL,X
+		PHA
+		CLC
+		ADC	<WORK0
+		STA	BMXPSL,X
+		LDA	BMXPSH,X
+		PHA
+		ADC	<WORK1
+		STA	BMXPSH,X
+;
+		LDA	BMYPSL,X
+		PHA
+		CLC
+		ADC	<WORK2
+		STA	BMYPSL,X
+		LDA	BMYPSH,X
+		PHA
+		ADC	<WORK3
+		STA	BMYPSH,X
+;
+		LDA	#01H
+		STA	BMPRIO,X
+		JSR	BBC090		;;;;;;;;;;;
+;
+		STZ	BMPRIO,X
+		PLA
+		STA	BMYPSH,X
+		PLA
+		STA	BMYPSL,X
+		PLA
+		STA	BMXPSH,X
+		PLA
+		STA	BMXPSL,X
+		LDY	#00H
+		BCC	BBC010
+		INY			; scroll BG hit flag on !
+BBC010		EQU	$
+;;		RTS
+		PHY
+		PHP
+		JSR	BBC090
+		PLA
+		AND	#01H		; (c)
+		ROL	A
+		CMP	#01H
+		PLY
+		RTS
+;-----------------------------------------------------------
+BBC090		EQU	$
+		LDY	BMMUKI,X
+		LDA	BMYPSL,X
+		CLC
+		ADC	BMBCYL,Y
+		STA	<WORK0
+		LDA	BMYPSH,X
+		ADC	#000H
+		STA     <WORK1
+		LDA	BMXPSL,X
+		CLC
+		ADC	BMBCXL,Y
+		STA	<WORK2
+		LDA	BMXPSH,X
+		ADC	#000H
+		STA	<WORK3
+;
+BBC098		EQU	$
+		MEM16
+		REP	#00100000B
+		LDA	<WORK0
+		SEC
+		SBC	<SCCV2
+		CMP	#00E0H		; ? ? ? ? ? ? ? ?......
+		MEM8
+		SEP	#00100000B
+		BCS	BNR140
+;
+		MEM16
+		REP	#00100000B
+		LDA	<WORK2
+		SEC
+		SBC	<SCCH2
+		CMP	#0100H
+		MEM8
+		SEP	#00100000B
+		BCS	BNR800		; display in ?
+;					; yes !
+		LDA	<GMMODE
+		BNE	BNR004		; ground ?
+;					; yes
+		MEM16
+		REP	#00100000B
+		LSR	<WORK2
+		LSR	<WORK2
+		LSR	<WORK2
+;
+		PHX
+		JSL	>GDCHCK
+		PLX
+		MEM8
+		BRA	BNR006
+;
+BNR004		EQU	$
+		LDA	BMPRIO,X
+		JSL	>BGDTRD2
+;
+BNR006		EQU	$
+		STA	BMBGNO,X
+;
+		TAY
+		LDA	!BMCRDT,Y	; 0:no 1:ATARI
+		STA	<WORKF
+;
+		LDA	BMMODE,X	; fire rod ? [NO:BNR010]
+		CMP	#BEAM2
+		BNE	BNR010
+;;;;;;;;		CPY	#027H
+;;;;;;;;		BEQ	BNR008
+		TYA
+		AND	#11110000B
+		CMP	#0C0H
+		BNE	BNR010
+BNR008		EQU	$
+		STZ	<WORKF		; no atari set
+;
+BNR010		EQU	$
+		LDA	BMCRFG,X
+		BNE	BNR200
+;
+		LDA	<WORKF
+		BEQ	BNR800
+;
+		CMP	#001H		; atari check !!
+		BEQ	BNR900
+;
+		CMP	#002H		; saka check !!
+		BNE	BNR100
+		JSL	>EXBCHK2
+		RTS
+;
+BNR100		EQU	$
+		CMP	#003H		; kaidan check
+		BNE	BNR200
+		LDY	BMCDPR,X
+		BNE	BNR900
+BNR140		EQU	$
+		BRA	BNR800
+;
+BNR200		EQU	$
+		DEC	BMCRTM,X
+		BPL	BNR800
+		STZ	BMCRTM,X
+;
+		LDA	<WORKF
+		CMP	#004H		; gake check !!
+		BNE	BNR800
+;
+		LDA	#006H
+		STA	BMCRTM,X
+		LDA	BMCRFG,X
+		EOR	#00000001B
+		STA	BMCRFG,X
+		BRA	BNR800
+;
+BNR800		EQU	$
+		CLC
+		RTS
+;
+BNR900		EQU	$
+		LDY	#00H
+		SEC
+OTOSET		EQU	$
+		LDA	#03H
+		STA	OTOFLG
+		RTS
+;==================================================
+BMCRDT1		EQU	$
+; 			0 1 2 3 4 5 6 7 8 9 A B C D E F
+		HEX	0,1,0,0,1,0,0,0,0,0,3,0,0,0,0,0	; 0
+		HEX	1,1,1,1,0,0,0,0,2,2,2,2,0,3,3,3	; 1
+		HEX	0,0,0,0,0,0,1,1,4,4,4,4,4,4,4,4	; 2
+		HEX	1,1,1,1,1,1,1,1,0,0,0,0,0,3,3,3	; 3
+		HEX	0,0,0,1,0,0,0,0,0,0,0,0,4,4,4,4	; 4
+		HEX	0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0	; 5
+		HEX	0,0,0,0,0,0,0,0,0,0,0,0,1,1,1,1	; 6
+		HEX	0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0	; 7
+		HEX	1,1,1,1,1,1,1,1,1,1,1,1,1,1,0,1	; 8
+		HEX	1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1	; 9
+		HEX	1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1	; A
+		HEX	0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0	; B
+		HEX	0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0	; C
+		HEX	0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0	; D
+		HEX	0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0	; E
+		HEX	1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1	; F
+BMBCYL1		EQU	$
+		BYTE	0F8H,008H,000H,000H
+BMBCYH1		EQU	$
+		BYTE	0FFH,000H,000H,000H
+BMBCXL1		EQU	$
+		BYTE	000H,000H,0F8H,008H
+BMBCXH1		EQU	$
+		BYTE	000H,000H,0FFH,000H
+BMBGCK3		EQU	$
+		LDA	BGALCKF
+		BEQ	BMCK500		;  2 Of BG check ?
+;
+		CMP	#03H
+		MEM16
+		REP	#00100000B
+		BCC	BMCK200
+		STZ	<WORK0
+		STZ	<WORK2
+		BRA	BMCK300
+BMCK200		EQU	$
+		LDA	<SCCH1
+		SEC
+		SBC	<SCCH2
+		STA	<WORK0
+		LDA	<SCCV1
+		SEC
+		SBC	<SCCV2
+		STA	<WORK2
+BMCK300		EQU	$
+		MEM8
+		SEP	#00100000B
+;
+		LDA	BMXPSL,X
+		PHA
+		CLC
+		ADC	<WORK0
+		STA	BMXPSL,X
+		LDA	BMXPSH,X
+		PHA
+		ADC	<WORK1
+		STA	BMXPSH,X
+;
+		LDA	BMYPSL,X
+		PHA
+		CLC
+		ADC	<WORK2
+		STA	BMYPSL,X
+		LDA	BMYPSH,X
+		PHA
+		ADC	<WORK3
+		STA	BMYPSH,X
+;
+		LDA	#01H
+		STA	BMPRIO,X
+		JSR	BMCK500		;;;;;;;;;;;
+;
+		STZ	BMPRIO,X
+		PLA
+		STA	BMYPSH,X
+		PLA
+		STA	BMYPSL,X
+		PLA
+		STA	BMXPSH,X
+		PLA
+		STA	BMXPSL,X
+		LDY	#00H
+		BCC	BMCK400
+		INY			; scroll BG hit flag on !
+BMCK400		EQU	$
+		PHY
+		PHP
+		JSR	BMCK500
+		PLA
+		AND	#01H		; (c)
+		ROL	A
+		CMP	#01H
+		PLY
+		RTS
+;-----------------------------------------------------------
+BMCK500		EQU	$
+		LDY	BMMUKI,X
+		LDA	BMYPSL,X
+		CLC
+		ADC	BMBCYL1,Y
+		STA	<WORK0
+		LDA	BMYPSH,X
+		ADC	BMBCYH1,Y
+		STA     <WORK1
+		LDA	BMXPSL,X
+		CLC
+		ADC	BMBCXL1,Y
+		STA	<WORK2
+		LDA	BMXPSH,X
+		ADC	BMBCXH1,Y
+		STA	<WORK3
+;
+		MEM16
+		REP	#00100000B
+		LDA	<WORK0
+		SEC
+		SBC	<SCCV2
+		CMP	#00E0H		; ? ? ? ? ? ? ? ?......
+		MEM8
+		SEP	#00100000B
+		BCS	BMCKC00
+;
+		MEM16
+		REP	#00100000B
+		LDA	<WORK2
+		SEC
+		SBC	<SCCH2
+		CMP	#0100H
+		MEM8
+		SEP	#00100000B
+		BCS	BMCKC00		; display in ?
+;					; yes !
+		LDA	<GMMODE
+		BNE	BMCK600		; ground ?
+;					; yes
+		MEM16
+		REP	#00100000B
+		LSR	<WORK2
+		LSR	<WORK2
+		LSR	<WORK2
+;
+		PHX
+		JSL	>GDCHCK
+		PLX
+		MEM8
+		BRA	BMCK700
+;
+BMCK600		EQU	$
+		LDA	BMPRIO,X
+		JSL	>BGDTRD2
+;
+BMCK700		EQU	$
+		STA	BMBGNO,X
+;
+		CMP	#03H
+		BNE	BMCK800
+		LDY	BMCDPR,X
+		BNE	BMCKC00
+BMCK800		EQU	$
+		TAY
+		LDA	!BMCRDT1,Y	; 0:no 1:ATARI
+		BEQ	BMCKC00
+;
+		CMP	#002H		; saka check !!
+		BNE	BMCKA00
+		JSL	>EXBCHK2
+		RTS
+;
+BMCKA00		EQU	$
+		CMP	#004H
+		BNE	BMCKB00
+		LDA	BMCDPR,X
+		BNE	BMCKD00
+		LDA	#00000001B
+		STA	BMCRFG,X
+		BRA	BMCKC00
+;
+BMCKB00		EQU	$
+		CMP	#003H		; kaidan check
+		BNE	BMCKD00
+		LDY	BMCDPR,X
+		BNE	BMCKD00
+;
+BMCKC00		EQU	$
+		CLC
+		RTS
+;
+BMCKD00		EQU	$
+		LDY	#00H
+		SEC
+		RTS
+;===================================================
+B1FLXA		EQU	$
+		BYTE	0F4H,014H,0F4H,014H
+		BYTE	0F8H,010H,0F8H,010H
+		BYTE	0FCH,00CH,0FCH,00CH
+		BYTE	000H,008H,000H,008H	
+B1FLYA		EQU	$
+		BYTE	0F4H,0F4H,014H,014H
+		BYTE	0F8H,0F8H,010H,010H
+		BYTE	0FCH,0FCH,00CH,00CH
+		BYTE	000H,000H,008H,008H
+B1FLCD		EQU	$
+		BYTE	053H,053H,053H,053H
+		BYTE	053H,053H,053H,053H
+		BYTE	053H,053H,053H,053H
+		BYTE	054H,054H,054H,054H
+B1FLAT		EQU	$
+		BYTE	040H,000H,0C0H,080H
+		BYTE	040H,000H,0C0H,080H
+		BYTE	040H,000H,0C0H,080H
+		BYTE	000H,040H,080H,0C0H		
+;- - - - - - - - - - - - - - - - - - - - - - - - - 
+BEAM1FL		EQU	$
+		JSR	BMOMST
+		LDA	BMTIM0,X
+		BNE	B1FL00
+;
+		BRL	BOMV0A0		; to end
+;
+B1FL00		EQU	$
+		LSR	A
+		STA	<WORK2
+;
+		LDX	#03H
+		LDY	#00H
+B1FC00		EQU	$
+		STX	<WORK3
+		LDA	<WORK2
+		ASL	A
+		ASL	A
+		ADC	<WORK3
+		TAX
+;
+		LDA	<WORK0
+		CLC
+		ADC	B1FLXA,X
+		STA	(<OAMADR),Y
+;
+		LDA	<WORK1
+		CLC
+		ADC	B1FLYA,X
+		INY
+		STA	(<OAMADR),Y
+;
+		LDA	B1FLCD,X
+		CLC
+		ADC	#82H
+		INY
+		STA	(<OAMADR),Y
+;
+		LDA	B1FLAT,X
+		ORA	#00000010B
+		ORA	<WORK4
+		INY
+		STA	(<OAMADR),Y
+		INY
+		LDX	<WORK3
+		DEX
+		BPL	B1FC00
+;
+		LDX	ENINDX
+		LDY	#00H
+		LDA	#03H
+		BRL	BMALCK
+;
+;$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+CRBMEN		EQU	$
+;;		LDA	BMCRFG,X	; teki no check ? 
+;;		BNE	CBM040		; [yes:CBM040]
+;
+		LDY	#ENNO-1
+CBM010		EQU	$
+;;		LDA	ENNOCR,Y
+;;		BNE	CBM020
+;
+		LDA	BMMODE,X
+		CMP	#YAMOV
+		BEQ	CBM018
+		CMP	#FTMOV
+		BEQ	CBM018
+;
+		TYA
+		EOR	<FRCNT
+		AND	#03H
+		ORA	ENDSPL,Y
+;;		ORA	ENNOCR,Y
+		BNE	CBM020
+;
+CBM018		EQU	$
+		LDA	ENMODE,Y
+		CMP	#EMOVE
+		BCC	CBM020
+;
+		LDA	ENMOD5,Y
+		AND	#00000010B
+		BNE	CBM019		; teki ? (not item?)
+;					; yes !
+		LDA	BMCRFG,X	; teki no check ? 
+		BNE	CBM020		; [yes:CBM040]
+CBM019		EQU	$
+		LDA	BMPRIO,X
+		CMP	ENKAIF,Y
+		BNE	CBM020
+;
+CBM01A		EQU	$
+;;		LDA	ENFLSH,Y
+;;		BNE	CBM020
+;
+		JSR	CBMSUB
+CBM020		EQU	$
+		DEY
+		BPL	CBM010
+CBM040		EQU	$
+		CLC
+		RTS
+;-------------------------------------
+CRBMEN1		EQU	$
+		PHB
+		PHK
+		PLB
+		JSR	CRBMEN
+		PLB
+		RTL
+;-------------------------------------
+BMMKCK		EQU	$
+		BYTE	2,3,0,1
+;-------------------------------------
+CBMSUB		EQU	$
+;;		LDA	BMXPSL,X
+;;		STA	<WORK0
+;;		LDA	BMXPSH,X
+;;		STA	<WORK1
+;;		LDA	BMYPSL,X
+;;		STA	<WORK2
+;;		LDA	BMYPSH,X
+;;		STA	<WORK3
+;;		LDA	ENXPSL,Y
+;;		STA	<WORK4
+;;		LDA	ENXPSH,Y
+;;		STA	<WORK5
+;;		LDA	ENYPSL,Y
+;;		STA	<WORK6
+;;		LDA	ENYPSH,Y
+;;		STA	<WORK7
+;;		MEM16
+;;		REP	#00100000B
+;;		LDA	<WORK0
+;;		SEC
+;;		SBC	<WORK4
+;;		CLC
+;;		ADC	#000AH
+;;		CMP	#0014H
+;;		BCS	CBM080
+;;;
+;;		LDA	<WORK2
+;;		SEC
+;;		SBC	<WORK6
+;;		CLC
+;;		ADC	#000AH
+;;		CMP	#0014H
+;;		BCS	CBM080
+;;		MEM8
+;;		SEP	#00100000B
+		JSR	BMCRST
+;
+		PHY
+		PHX
+		TYX
+		JSL	>ENCRST2
+		PLX
+		PLY
+		JSL	>CROJCK2
+		BCS	CBM080J
+;
+		JMP	CBM080
+;
+CBM080J		EQU	$
+		LDA	ENMOD7,Y
+		AND	#00001000B
+		BEQ	CBM001
+;
+		LDA	BMMODE,X
+		CMP	#YAMOV
+		BNE	CBM001
+;
+		LDA	ENMYNO,Y
+		CMP	#YATAM
+		BEQ	CBM0011		; YA vs YA !!
+;
+CBM0010		EQU	$
+		JSL	>PLYAFL
+		CLC
+		RTS
+;
+CBM0011		EQU	$
+		LDA	>ITEMR01
+		CMP	#03H
+		BCC	CBM0012
+		JSR	CBM001
+		CLC
+		RTS
+CBM0012		EQU	$
+		JSR	CBM0010
+;- -		
+CBM001		EQU	$
+;;		LDA	ENMYNO,Y
+;;		CMP	#BARI0
+		LDA	ENMOD5,Y
+		AND	#00010000B
+		BEQ	CBM014		; Barikade heishi ?
+;					; Sheld check ?
+		LDA	BMMUKI,X	; yes !
+		AND	#03H
+		STA	BMMUKI,X					; yes !
+;
+		PHY
+		LDA	ENMUKI,Y
+		TAY
+		LDA	BMMKCK,Y
+		PLY
+		CMP	BMMUKI,X
+		BEQ	CBM078		; seeld muki check !	
+;
+CBM014		EQU	$
+		LDA	BMMODE,X
+;;;		CMP	#BEAM1		; TEST !
+		CMP	#BUME1
+		BEQ	CBM155
+		CMP	#FTMOV
+		BNE	CBM045
+;--- kuttsuki check ----
+		LDA	ENMYNO,Y
+		CMP	#PATAM
+		BEQ	CBM016
+;
+CBM155		EQU	$
+		LDA	ENFLSH,Y
+		BNE	CBM078
+;
+;;		LDA	ENMYNO,Y
+;;		CMP	#HART1
+;;		BCC	CBM055
+;;		CMP	#ITEMN
+;;		BCS	CBM055
+		LDA	ENMOD5,Y
+		AND	#00000010B
+		BEQ	CBM055
+;
+CBM016		EQU	$
+;;		PHY
+;;		PHX
+;;		TYX
+;;		JSL	>ITMGET
+;;		PLX
+;;		PLY
+		TXA
+		INC	A
+		STA	ENWRK1,Y
+		BRA	CBM070
+CBM045		EQU	$
+;;		CMP	#DTMOV		; TEST !
+;;		BNE	CBM055		; ICE beam ?
+;;;					; yes !
+;;		LDA	ENMOD0,Y
+;;		AND	#01000000B
+;;		BNE	CBM055		; ice chenge ?
+;;;					; yes !
+;;		LDA	ENMODE,Y
+;;		CMP	#EICE
+;;		BEQ	CBM070
+;;;
+;;		LDA	#EICE
+;;		STA	ENMODE,Y
+;;		LDA	#40H
+;;		STA	ENTIM0,Y
+;;		BRA	CBM070
+;
+CBM055		EQU	$
+		LDA	ENNOCR,Y
+		BNE	CBM080
+;
+		LDA	ENMYNO,Y
+		CMP	#MOTSB
+		BNE	CBME12		; Boss motos ?
+;					; yes !
+		LDA	ENWRK2,Y
+		CMP	#03H
+		BCC	CBM078		; Hadaka ?
+CBME12		EQU	$		; yes !
+		PHX
+		LDA	BMMUKI,X
+		AND	#03H
+		TAX
+		LDA	BMHNXS,X
+		STA	ENHNXS,Y
+		LDA	BMHNYS,X
+		STA	ENHNYS,Y
+		PLX
+;
+;;		LDA	BMXSPD,X
+;;		ASL	A
+;;		STA	ENHNXS,Y
+;;		LDA	BMYSPD,X
+;;		ASL	A
+;;		STA	ENHNYS,Y
+;
+;;		LDA	#1FH
+;;		STA	ENHNFG,Y
+;;		LDA	#18H
+;;		STA	ENFLSH,Y
+;
+;;		LDA	BMMODE,X
+;;		CMP	#BUME1
+;;		BEQ	CBM070
+;;		STZ	BMMODE,X
+		PHX
+		LDA	BMMODE,X
+		STX	ENHELP2		; Beam index save !
+		TYX
+		PHY
+		JSL	>ENDMST2		; Life down & fail check !
+		PLY
+		PLX
+CBM070		EQU	$
+		LDA	BMMODE,X
+		STA	ENCRTM,Y
+CBM078		EQU	$
+		PLA
+		PLA
+		JSR	OTOSET
+		SEC
+		RTS
+CBM080		EQU	$
+;;		MEM8
+;;		SEP	#00100000B
+		CLC
+		RTS
+;-----------------------------
+BMHNXS		EQU	$
+		HEX	00,00,C0,40
+BMHNYS		EQU	$
+		HEX	C0,40,00,00
+;============================================
+BMCRXL		EQU	$
+;;		BYTE	001H,001H,002H,002H
+		HEX	4,4,4,4
+		BYTE	003H,003H,002H,00BH
+		HEX	F0,F0,FF,F8
+BMCRXA		EQU	$
+;;		BYTE	006H,006H,0CH,0CH
+		HEX	8,8,8,8
+		BYTE	001H,001H,01H,01H
+		HEX	20,20,08,08
+BMCRYL		EQU	$
+;;		BYTE	0FEH,002H,001H,001H
+		HEX	4,4,4,4
+		BYTE	002H,00BH,003H,003H
+		HEX	FF,F8,F0,F0
+;BMCRYH		EQU	$
+;;;		BYTE	0FFH,000H,000H,000H
+;		HEX	0,0,0,0
+;		BYTE	000H,000H,000H,000H
+;		HEX	FF,FF,FF,FF
+BMCRYA		EQU	$
+;;		BYTE	10H,0CH,006H,006H
+		HEX	8,8,8,8
+		BYTE	01H,01H,001H,001H
+		HEX	08,08,20,20
+;- - - - - - - - - - - - - - -
+BMCRST		EQU	$
+		STZ	<WORK9
+		PHY
+		LDY	BMMUKI,X
+		LDA	BMMODE,X
+		CMP	#0CH 	; Spin ken beam ?
+		BNE	BMCRS0
+;
+		DEC	<WORK9
+		TYA
+		ORA	#08H	; Yes !
+		TAY
+;;;;;;;;		TYA
+;;;;;;;;		AND	#00000011B
+;;;;;;;;		ORA	#004H
+;;;;;;;;		TAY
+BMCRS0		EQU	$
+		LDA	BMXPSL,X
+		CLC
+		ADC	BMCRXL,Y
+		STA	<WORK0
+		LDA	BMXPSH,X
+;;		ADC	#00H
+		ADC	<WORK9
+		STA	<WORK8
+;
+		LDA	BMYPSL,X
+		CLC
+		ADC	BMCRYL,Y
+		STA	<WORK1
+		LDA	BMYPSH,X
+;;		ADC	BMCRYH,Y
+		ADC	<WORK9
+;;ADC	#00H
+		STA	<WORK9
+;
+		LDA	BMCRXA,Y
+		STA	<WORK2
+		LDA	BMCRYA,Y
+		STA	<WORK3
+		PLY
+		RTS
+;;		LDA	BMXPSL,X
+;;		STA	<WORK0
+;;		LDA	BMYPSL,X
+;;		CLC
+;;		ADC	#08H
+;;		STA	<WORK1
+;;		LDA	BMYPSH,X
+;;		ADC	#00H
+;;		STA	<WORK9
+;;		LDA	#10H
+;;		STA	<WORK2
+;;		LDA	#0CH
+;;		STA	<WORK3
+;;		LDA	BMXPSH,X
+;;		STA	<WORK8
+		RTS
+;%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+;%          Enemy -> Player Speed calc 						 %
+;%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+BMPLSH		EQU	$
+		STA	<WORK1
+		PHX
+		PHY
+;
+		JSR	BPYCHK
+		STY	<WORK2
+;
+		LDA	<WORKE
+		BPL	BS00
+		EOR	#0FFH
+		INC	A
+BS00		EQU	$
+		STA	<WORKC
+;
+		JSR	BPXCHK
+		STY	<WORK3
+;
+		LDA	<WORKF
+		BPL	BS10
+		EOR	#0FFH
+		INC	A
+BS10		EQU	$
+		STA	<WORKD
+;
+		LDY	#00H
+		LDA	<WORKD
+		CMP	<WORKC
+		BCS	BS20
+		INY
+		PHA
+		LDA	<WORKC
+		STA	<WORKD
+		PLA
+		STA	<WORKC
+BS20		EQU	$
+		STZ	<WORKB
+		STZ	<WORK0
+;
+		LDX	<WORK1		; Base speed
+BS30		EQU	$
+		LDA	<WORKB
+		CLC
+		ADC	<WORKC
+		CMP	<WORKD
+		BCC	BS40
+;
+		SBC	<WORKD
+		INC	<WORK0
+BS40		EQU	$
+		STA	<WORKB
+		DEX
+		BNE	BS30
+;
+		TYA
+		BEQ	BS50
+;
+		LDA	<WORK0
+		PHA
+		LDA	<WORK1
+		STA	<WORK0
+		PLA
+		STA	<WORK1
+BS50		EQU	$
+		LDA	<WORK0
+		LDY	<WORK2
+		BEQ	BS60
+		EOR	#0FFH
+ 		INC	A
+		STA	<WORK0
+BS60		EQU	$
+		LDA	<WORK1
+		LDY	<WORK3
+		BEQ	BS70
+		EOR	#0FFH
+		INC	A
+		STA	<WORK1
+BS70		EQU	$
+		PLY
+		PLX
+		RTS
+;=============================================
+BPXCHK		EQU	$
+		LDY	#00H
+		LDA	<PLXPS1
+		SEC
+		SBC	BMXPSL,X
+		STA	<WORKF
+		LDA	<PLXPS0
+		SBC	BMXPSH,X
+		BPL	BPX010
+		INY
+BPX010		EQU	$
+		RTS
+;
+;=================================================================
+BPYCHK		EQU	$
+		LDY	#00H
+		LDA	<PLYPS1
+		SEC
+		SBC	BMYPSL,X
+		STA	<WORKE
+		LDA	<PLYPS0
+		SBC	BMYPSH,X
+		BPL	BPY010
+		INY
+BPY010		EQU	$
+FLS0801		EQU	$
+		RTS
+;=================================================
+FLCDAT		EQU	$
+		BYTE	93H,82H,81H
+;;;		BYTE	74H,73H,72H
+FLATDT		EQU	$
+		HEX	22,12,22,22
+;
+FLASH		EQU	$
+		LDA	FLMODE
+		BEQ	FLS0801
+;
+		LDA	#02H
+		STA	OTOFLG
+;
+		DEC	FLTIME
+		BPL	FLS008
+		DEC	FLMODE
+		LDA	#01H
+		STA	FLTIME
+;;		LDA	FLMODE
+;;		CMP	#04H
+;;		BNE	FLS008
+;;		LDA	FLXPOS
+;;		JSL	>SDLRCK
+;;		ORA	#05H
+;;		STA	SOUND2	;(S)
+FLS008		EQU	$
+;;;			DEC		FLMODE
+;;;		LDY	#30H
+;;		LDY	#28H
+;;;		LDY	#50H
+;
+		LDA	#04H*4
+                LDY     OAMTYP
+                BEQ     FLM003
+                LDY     FLCLOR
+                BNE     FLM002
+                JSL     >OAMENT4
+                BRA     FLM005
+FLM002          EQU     $
+                JSL     >OAMENT6
+                BRA     FLM005
+FLM003          EQU     $
+                JSL     >OAMENT1
+FLM005          EQU     $
+;;		LDA	#04H*4
+;		JSL	>OAMENT2
+;
+		LDA	FLXPOS
+		SEC
+		SBC	SCCH2
+		CMP	#0F8H
+		BCS	FLSEND
+		STA	<WORK0
+		LDA	FLYPOS
+		SEC
+		SBC	SCCV2
+		CMP	#0F0H
+		BCS	FLSEND
+		STA	<WORK1
+		LDA	FLMODE
+		CMP	#03H
+		BCC	FLC010
+;
+		LDY	#00H
+		LDA	<WORK0
+		STA	(<OAMADR),Y
+		LDA	<WORK1
+		INY
+		STA	(<OAMADR),Y
+		LDA	#080H
+		LDX	FLMODE
+		CPX	#09H
+		BCS	FLS010
+		LDA	#092H
+FLS010		EQU	$
+		INY
+		STA	(<OAMADR),Y
+		LDX	FLCLOR
+		LDA	>FLATDT,X         
+;;		LDA	#22H         
+		INY
+		STA	(<OAMADR),Y
+		TYA
+		LSR	A
+		LSR	A
+		TAY
+		LDA	#00H
+		STA	(<OSBADR),Y
+		RTS
+;------------------------------------------
+FLSEND		EQU	$
+		STZ	FLMODE
+FLS080		EQU	$
+		RTS
+;------------------------------------------
+FLC010		EQU	$
+		LDA	<WORK0
+		SEC
+		SBC	#04H
+		LDY	#00H
+		STA	(<OAMADR),Y
+		LDY	#08H
+		STA	(<OAMADR),Y
+		CLC
+		ADC	#08H
+		LDY	#04H
+		STA	(<OAMADR),Y
+		LDY	#0CH
+		STA	(<OAMADR),Y
+		LDA	<WORK1
+		SEC
+		SBC	#04H
+		LDY	#01H
+		STA	(<OAMADR),Y
+		LDY	#05H
+		STA	(<OAMADR),Y
+		CLC
+		ADC	#08H
+		LDY	#09H
+		STA	(<OAMADR),Y
+		LDY	#0DH
+		STA	(<OAMADR),Y
+		LDX	FLCLOR
+		LDA	>FLATDT,X         
+;;		LDA	#22H         
+		LDY	#03H
+		STA	(<OAMADR),Y
+		ORA	#40H
+		LDY	#07H
+		STA	(<OAMADR),Y
+		ORA	#80H
+		LDY	#0FH
+		STA	(<OAMADR),Y
+		EOR	#40H
+		LDY	#0BH
+		STA	(<OAMADR),Y
+;
+		LDX	FLMODE
+;;;			LSR		A
+;;;			LSR		A
+;;;		TAX
+		LDA	FLCDAT,X
+		LDY	#02H
+		STA	(<OAMADR),Y
+		LDY	#06H
+		STA	(<OAMADR),Y
+		LDY	#0AH
+		STA	(<OAMADR),Y
+		LDY	#0EH
+		STA	(<OAMADR),Y
+;
+		LDY	#00H
+		LDA	#00H
+		STA	(<OSBADR),Y
+		INY
+		STA	(<OSBADR),Y
+		INY
+		STA	(<OSBADR),Y
+		INY
+		STA	(<OSBADR),Y
+		RTS
+;
+;=================================================
+BMXCLC		EQU	$
+		TXA
+		CLC
+		ADC	#BMNO
+		TAX
+		JSR	BMYCLC
+		BRL	KBMV900
+;============================================
+BMYCLC		EQU     $
+		LDA	BMYSPD,X
+		ASL	A
+		ASL	A
+		ASL	A
+		ASL	A
+		CLC
+		ADC	BMYSDR,X
+		STA	BMYSDR,X
+;
+		LDY	#00H
+		LDA	BMYSPD,X
+		PHP
+		LSR	A
+		LSR	A
+		LSR	A
+		LSR	A
+		PLP
+		BPL	BMCY60
+;
+		ORA	#11110000B
+		DEY
+BMCY60		EQU	$
+		ADC	BMYPSL,X
+		STA	BMYPSL,X
+;
+		TYA
+		ADC	BMYPSH,X
+		STA	BMYPSH,X
+		RTS
+;
+;=================================================
+BMZCLC		EQU	$
+		LDA	BMZSPD,X
+		ASL	A
+		ASL	A
+		ASL	A
+		ASL	A
+		CLC
+		ADC	BMZSDR,X
+		STA	BMZSDR,X
+;
+		LDY	#000H
+		LDA	BMZSPD,X
+		PHP
+		LSR	A
+		LSR	A
+		LSR	A
+		LSR	A
+		PLP
+		BPL	BMCZ60
+;
+		ORA	#11110000B
+		DEY
+BMCZ60		EQU	$
+		ADC	BMZPSL,X
+		STA	BMZPSL,X
+;
+		RTS
+;
+;**************************************************************
+;*		Bumeran move 			(BURN1MV)     *
+;**************************************************************
+BUINTY1		EQU	$		; bumeran int y-pos data
+		WORD	0FFF0H,00006H,00000H,00000H
+		WORD	0FFF8H,00008H,0FFF8H,00008H
+BUINTX1		EQU	$		; bumeran int x-pos data
+		WORD	00000H,00000H,0FFF8H,00008H
+		WORD	00008H,00008H,0FFF8H,0FFF8H
+BURN1MV		EQU	$
+		LDY	#004H
+BURM000		EQU	$
+		LDA	BMMODE,Y
+		CMP	#TAKARA
+		BEQ	BURM008
+		DEY
+		BPL	BURM000
+		LDA	<GAMEMD		; purse ? [YES:BURM400]
+		BNE	BURM008
+;
+;************   bumeran sound set
+		LDA	<FCNT
+		AND	#00000111B
+		BNE	BURM004
+		LDA	#bumer
+		JSR	SDLRB2
+;
+;************   buemran wait check
+BURM004		EQU	$
+		LDA	BMFLFG,X
+		BNE	BURM00E
+		LDA	<KENMD
+		CMP	#009H
+		BCS	BURM00C
+		LDA	AITMMD
+		BNE	BURM00C
+		LDA	RABFLG
+		BNE	BURM002
+		LDA	<DIEFG
+		BEQ	BURM008
+BURM002		EQU	$
+		BRL	PLIT080		; bumeran clear !!
+;
+BURM008		EQU	$
+		BRL	BURM400
+;
+BURM00C		EQU	$
+		LDA	BMYINX,X
+		TAY
+		MEM16
+		REP	#00100000B
+		LDA	<PLYPS1		; bumeran y-pos set 
+		CLC
+		ADC	#08H
+		CLC
+		ADC	!BUINTY1,Y
+		STA	<WORK0
+		LDA	<PLXPS1		; bumeran x-pos set
+		CLC
+		ADC	!BUINTX1,Y
+		STA	<WORK2
+		MEM8
+		SEP	#00100000B
+		LDA	<WORK0
+		STA	BMYPSL,X
+		LDA	<WORK1
+		STA	BMYPSH,X
+		LDA	<WORK2
+		STA	BMXPSL,X
+		LDA	<WORK3
+		STA	BMXPSH,X
+		INC	BMFLFG,X
+;
+;************   y,x speed shori
+BURM00E		EQU	$
+		LDA	HBFLEM,X
+		BEQ	BURM030
+		LDA	<FCNT
+		AND	#00000001B
+		BNE	BURM030
+		PHX
+		JSL	>PUBNIT
+		PLX
+BURM030		EQU	$
+		LDA	BMCONT,X	; hanekaeri ? [NO:BURM100]
+		BEQ	BURM100
+;
+		LDA	BUADSB,X	; gensoku kaishi
+		BEQ	BURM040
+		INC	A
+		STA	BUADSB,X
+BURM040		EQU	$
+		MEM16
+		REP	#00100000B
+		LDA	<PLYPS1		; player y-pos push
+		STA	BUPLYL,X
+		CLC
+		ADC	#0008H
+		STA	<PLYPS1
+		MEM8
+		SEP	#00100000B
+;
+		LDA	YABGCK,X	; speed hozon ram
+		JSR	BMPLSH		; player surch sub
+		JSL	>BURVSE
+		LDA	<WORK0		; Y-speed set
+		STA	BMYSPD,X
+		LDA	<WORK1		; X-speed set
+		STA	BMXSPD,X
+;
+		MEM16			; player y-pos pop
+		REP	#00100000B
+		LDA	BUPLYL,X
+		STA	<PLYPS1
+		MEM8
+		SEP	#00100000B
+;
+BURM100		EQU	$
+		LDA	BMYSPD,X	; Y-speed 0 ? [YES;BURM120]
+		BEQ	BURM120
+		CLC			; add,sub speed set
+		ADC	BUADSB,X
+		STA	BMYSPD,X
+BURM120		EQU	$
+		JSR	BMYCLC		; bumeran y-speed idou sub
+;
+		LDA	BMXSPD,X	; x-speed 0 ? [YES:BURM140]
+		BEQ	BURM140
+		CLC
+		ADC	BUADSB,X
+		STA	BMXSPD,X
+BURM140		EQU	$
+		JSR	BMXCLC		; bumeran x-speed idou sub
+;
+;************   teki,BG check
+		JSR	CRBMEN		; teki cross shori
+		LDY	#00H
+		BCC	BURM180
+		INY
+BURM180		EQU	$
+		LDA	BMCONT,X	; kaeri ? [YES:BURM300]
+		BNE	BURM300
+;
+		CPY	#01H		; teki cross ? [YES:BURM200]
+		BEQ	BURM200
+		JSR	BMBGCK		; BG check !
+		BCC	BURM1C0
+;
+;************   atari shori
+		PHX
+		JSL	>BHBINT
+		PLX
+		LDY	#tate0
+		LDA	BMBGNO,X
+		CMP	#0F0H
+		BEQ	BURM1A0
+		LDY	#kins0
+BURM1A0		EQU	$
+		TYA
+;;;;;;;;		JSL	>SDLRCB		; sound (L,R) check
+;;;;;;;;		ORA	<BMWORK+0
+;;;;;;;;		STA	!SOUND2		; <sound>
+		JSR	SDLRB2
+		BRA	BURM200
+;
+;************   saidai kyori check shori
+BURM1C0		EQU	$
+		JSR	BRGNGK		; gamen gai check !!
+		BCS	BURM200
+;
+		DEC	BMSTAT,X	; saidai kyori ?
+		LDA	BMSTAT,X
+		BEQ	BURM200
+		CMP	#005H
+		BCS	BURM400
+;
+		DEC	BUADSB,X	; gensoku kaishi
+		BRA	BURM400
+;
+BURM200		EQU	$
+		LDA	BMCONT,X	; houkou chenge
+		EOR	#01H
+		STA	BMCONT,X
+		BRA	BURM400
+;
+;************   return shori
+BURM300		EQU	$
+		LDA	BMCRFG,X
+		PHA
+		LDA	BMPRIO,X
+		PHA
+		STZ	BMPRIO,X
+		JSR	BMBGCK
+		PLA
+		STA	BMPRIO,X
+		PLA
+		STA	BMCRFG,X
+		JSR	PLITCK		; player atari check sub
+;
+;************   oam set
+BURM400		EQU	$
+		BRL	JMOMST		; oam set
+;
+;**************************************************************
+;*		BG check sub long 0		(BMBCKL)      *
+;**************************************************************
+BMBCKL		EQU	$
+		PHB
+		PHK
+		PLB
+;
+		JSR	BMBGCK
+;
+		PLB
+		RTL
+;
+;**************************************************************
+;*		BG check sub long 1		(BMBCKL1)    *
+;**************************************************************
+BMBCKL1		EQU	$
+		PHB
+		PHK
+		PLB
+;
+		JSR	BMBGCK3
+;
+		PLB
+		RTL
+;
+;**************************************************************
+;*		gamen gai check sub 		(BRGNGK)      *
+;**************************************************************
+BRGNGK		EQU	$
+		LDA	BMYPSL,X
+		STA	<WORK0
+		LDA	BMYPSH,X
+		STA	<WORK1
+		LDA	BMXPSL,X
+		STA	<WORK2
+		LDA	BMXPSH,X
+		STA	<WORK3
+		MEM16
+		IDX16
+		REP	#00110000B
+		LDY	#0000H
+		LDA	HBMUKI
+		AND	#0003H
+		BEQ	BRGN200
+		AND	#0001H
+		BEQ	BRGN100
+		LDY	#0010H
+BRGN100		EQU	$
+		TYA
+		CLC
+		ADC	<WORK2
+		SEC
+		SBC	<SCCH2
+		STA	<WORK2
+		CMP	#0100H
+		BCS	BRGN400
+;;;;;;;;		BRA	BRGN900
+BRGN200		EQU	$
+		LDY	#0000H
+		LDA	HBMUKI
+		AND	#000CH
+		BEQ	BRGN900
+		AND	#0004H
+		BEQ	BRGN300
+		LDY	#0010H
+BRGN300		EQU	$
+		TYA
+		CLC
+		ADC	<WORK0
+		SEC
+		SBC	<SCCV2
+		STA	<WORK0
+		CMP	#00E2H
+		BCC	BRGN900	
+;
+BRGN400		EQU	$
+		MEM8
+		IDX8
+		SEP	#00110000B
+		SEC
+		RTS
+;
+BRGN900		EQU	$
+		MEM8
+		IDX8
+		SEP	#00110000B
+		CLC
+		RTS
+;
+;**************************************************************
+;*		Player atari check sub		(PLITCK)     *
+;**************************************************************
+PLITCK		EQU	$		; player atari check shori
+		LDA	BMYPSL,X	
+		STA	<WORK4		; bumeran check y-pos (L) set
+		LDA	BMYPSH,X	
+		STA	<WORK5		; bumeran check y-pos (H) set
+		LDA	BMXPSL,X
+		STA	<WORK6		; bumeran check x-pos (L) set
+		LDA	BMXPSH,X
+		STA	<WORK7		; bumeran check x-pos (H) set
+;
+		MEM16
+		REP	#00100000B
+		LDA	<PLYPS1		; player y-pos 0
+		CLC
+		ADC	#0018H
+		STA	<WORK0		; player y-pos 1
+		LDA	<PLXPS1		; player x-pos 0
+		CLC
+		ADC	#0010H
+		STA	<WORK2		; player x-pos 1
+		LDA	<WORK4
+		CLC
+		ADC	#0008H
+		STA	<WORK4
+		LDA	<WORK6
+		CLC
+		ADC	#0008H
+		STA	<WORK6
+;
+		LDA	<WORK4		; bumeran > player y-pos ? [NO:PLIT100]
+		CMP	<PLYPS1
+		BCC	PLIT100
+		CMP	<WORK0		; bumeran < y-pos hani ? [NO:PLIT100}
+		BCS	PLIT100
+;
+		LDA	<WORK6		; bumeran > player x-pos ? [NO:PLIT100]
+		CMP	<PLXPS1
+		BCC	PLIT100
+		CMP	<WORK2		; bumeran < x-pos hani ? [NO:PLIT100]
+		BCS	PLIT100
+;
+PLIT080		EQU	$
+		MEM8
+		SEP	#00100000B
+		STZ	BMMODE,X	; player atari !!
+		STZ	BMRMOV
+		LDA	AITMBT		; player porzu ?
+		AND	#10000000B
+		BEQ	PLIT100
+		STZ	AITMBT
+		LDA	<KENKY
+		AND	#10111111B
+		STA	<KENKY
+		AND	#10000000B
+		BNE	PLIT100
+		LDA	<PYMKFG
+		AND	#11111110B
+		STA	<PYMKFG
+PLIT100		EQU	$
+		MEM8
+		SEP	#00100000B
+		RTS
+;	
+;**************************************************************
+;*		Jump item oam set		(BURN1MV)     *
+;**************************************************************
+JMCRDT		EQU	$		; bumeran atori data
+;			  0   1   2   3
+		HEX	0A4,0E4,064,024	; nomal data (0)
+		HEX	0A2,0E2,062,022	; nomal data (1)
+JMYXPD		EQU	$		; bumeran y,x-pos
+		WORD	00002H,0FFFEH	;0
+		WORD	00002H,00002H	;1
+		WORD	0FFFEH,00002H	;2
+		WORD	0FFFEH,0FFFEH	;3
+JMOMPT		EQU	$		; kotei oam point data
+		WORD	00180H,000D0H
+JPFLDT1		EQU	$		; kaiten flem counter
+		HEX	003,002
+JMOMST		EQU	$
+		JSR	ITMPST		; uusen juni,YXpos set
+;
+		LDA	BMCONT,X	; kaeri ? [YES:BURM300]
+		BEQ	JMOM018
+;
+		LDA	<PLBGCKF
+		STA	BMPRIO,X
+		TAY
+		LDA	!ITUSNDT,Y
+		STA	<PYBGUN1
+JMOM018		EQU	$
+		LDA	BMCRFG,X
+		BEQ	JMOM01C
+		LDA	#030H
+		STA	<PYBGUN1
+;
+JMOM01C		EQU	$
+		LDA	<GAMEMD		; purse ? [YES:JMOM040]
+		BNE	JMOM040
+		LDA	BMFLFG,X	; go ? [NO:JMOM040]
+		BEQ	JMOM040
+;
+		DEC	BUMFLM,X	; bumeran flem
+		BPL	JMOM040
+		LDY	HBFLEM,X
+		LDA	!JPFLDT1,Y
+		STA	BUMFLM,X
+		LDY	BUMODE,X
+		LDA	BMKMHN,X	; bumeran kaiten muki flag ON ?
+		BEQ	JMOM020
+		DEY			; ON !!
+		BRA	JMOM030
+JMOM020		EQU	$
+		INY
+JMOM030		EQU	$
+		TYA
+		AND	#00000011B
+		STA	BUMODE,X
+;
+JMOM040		EQU	$
+		PHX
+		LDA	HBFLEM,X
+		ASL	A
+		ASL	A
+		STA	<BMWORK+0
+		LDA	BUMODE,X
+		ASL	A
+		ASL	A
+		TAY
+		MEM16
+		REP	#00100000B
+		STZ	<BMWORK+2
+		LDA	!JMYXPD,Y
+		CLC
+		ADC	<WORK0
+		STA	<WORK0
+		LDA	!JMYXPD+2,Y
+		CLC
+		ADC	<WORK2
+		STA	<WORK2
+		STA	<WORK4
+;
+		LDA	BMFLFG,X	; go ? [NO:JMOM040]
+		AND	#00FFH
+		BNE	JMOM050
+		LDA	OAMTYP
+		AND	#00FFH
+		ASL	A
+		TAX
+		LDA	!JMOMPT,X
+		PHA
+		LSR	A
+		LSR	A
+		CLC
+		ADC	#OAMSB
+		STA	<OSBADR
+		PLA
+		CLC
+		ADC	#OAM
+		STA	<OAMADR
+;
+JMOM050		EQU	$
+		MEM8
+		SEP	#00100000B
+		TYA
+		LSR	A
+		LSR	A
+		CLC
+		ADC	<BMWORK+0
+		TAX
+;
+		LDY	#000H
+		JSR	BMYXST4
+		LDA	#026H		; chara set
+		STA	(<OAMADR),Y
+		INY
+		LDA	!JMCRDT,X	; atori set
+		AND	#0CFH
+		ORA	<PYBGUN+1
+		STA	(<OAMADR),Y
+		LDA	#002H		; oam sub set
+		ORA	<BMWORK+3
+		STA	(<OSBADR)
+;
+		PLX
+		RTS
+;
+;**************************************************************
+;*		hibana move shori		(HBAN1MV)     *
+;**************************************************************
+HBAN1MV		EQU	$
+		DEC	BUMFLM,X
+		BPL	HB3A200
+;
+		LDA	BMCONT,X
+		INC	A
+		CMP	#005H
+		BEQ	HB3A100
+		STA	BMCONT,X
+		LDA	#001H
+		STA	BUMFLM,X
+		BRA	HB3A200
+;
+;**************************************************************
+;*		hibana move shori		(HBAN3MV)     *
+;**************************************************************
+HBAN3MV		EQU	$
+		JSR	OTOSET
+;
+		DEC	BMFLFG,X
+		BPL	HB3A200
+;
+		LDA	BMCONT,X
+		INC	A
+		CMP	#008H
+		BEQ	HB3A100
+		STA	BMCONT,X
+		LDA	#001H
+		STA	BMFLFG,X
+		BRA	HB3A200
+HB3A100		EQU	$
+		BRL	BOMV0A0		; bmmode <--- 0
+;
+HB3A200		EQU	$
+		BRL	HBOMST
+;
+;**************************************************************
+;*		hibana OAM set			(HBOMST)      *
+;**************************************************************
+HBCRDT		EQU	$
+		HEX	080,000,000,000	;0	; bumeran hibana
+		HEX	092,000,000,000	;1
+		HEX	081,081,081,081	;2
+		HEX	082,082,082,082	;3
+		HEX	093,093,093,093	;4
+		HEX	092,000,000,000	;5	; ken hibana
+		HEX	0B9,000,000,000	;6
+		HEX	090,090,000,000	;7
+HBATDT		EQU	$
+		HEX	032,000,000,000	;0
+		HEX	032,000,000,000	;1
+		HEX	032,072,0B2,0F2	;2
+		HEX	032,072,0B2,0F2	;3
+		HEX	032,072,0B2,0F2	;4
+		HEX	032,000,000,000	;5
+		HEX	072,000,000,000	;6
+		HEX	032,0F2,000,000	;7
+HBYPSD		EQU	$
+		WORD	0FFFCH,00000H,00000H,00000H	;0
+		WORD	0FFFCH,00000H,00000H,00000H	;1
+		WORD	0FFF8H,0FFF8H,00000H,00000H	;2
+		WORD	0FFF8H,0FFF8H,00000H,00000H	;3
+		WORD	0FFF8H,0FFF8H,00000H,00000H	;4
+		WORD	0FFFCH,00000H,00000H,00000H	;5
+		WORD	0FFFCH,00000H,00000H,00000H	;6
+		WORD	0FFF8H,00000H,00000H,00000H	;7
+HBXPSD		EQU	$
+		WORD	0FFFCH,00000H,00000H,00000H	;0
+		WORD	0FFFCH,00000H,00000H,00000H	;1
+		WORD	0FFF8H,00000H,0FFF8H,00000H	;2
+		WORD	0FFF8H,00000H,0FFF8H,00000H	;3
+		WORD	0FFF8H,00000H,0FFF8H,00000H	;4
+		WORD	0FFFCH,00000H,00000H,00000H	;5
+		WORD	0FFFCH,00000H,00000H,00000H	;6
+		WORD	0FFF8H,00000H,00000H,00000H	;7
+HBOMST		EQU	$
+		JSR	ITMPST		; priority,YXpos set
+		MEM16
+		REP	#00100000B
+		LDA	<WORK0		
+		STA	<WORK4
+		LDA	<WORK2
+		STA	<WORK6
+		MEM8
+		SEP	#00100000B
+;
+		LDA	#003H
+		STA	<WORK8
+		PHX
+		LDA	BMCONT,X
+		ASL	A
+		ASL	A
+		TAX
+		LDY	#000H
+HBOM100		EQU	$
+		LDA	!HBCRDT,X
+		BEQ	HBOM200
+;
+		PHX
+		TXA
+		ASL	A
+		TAX
+		MEM16
+		REP	#00100000B
+		LDA	!HBYPSD,X
+		CLC
+		ADC	<WORK4
+		STA	<WORK0
+		LDA	!HBXPSD,X
+		CLC
+		ADC	<WORK6
+		STA	<WORK2
+		MEM8
+		SEP	#00100000B
+		PLX
+		JSR	BMYXST3		; y,x pos set
+		LDA	!HBCRDT,X
+		STA	(<OAMADR),Y
+		INY
+		LDA	!HBATDT,X
+		AND	#0CFH
+		ORA	<PYBGUN+1
+		STA	(<OAMADR),Y
+		INY
+;
+		PHY
+		TYA
+		SEC
+		SBC	#004H
+		LSR	A
+		LSR	A
+		TAY
+		LDA	#000H
+		STA	(<OSBADR),Y
+		PLY
+HBOM200		EQU	$
+		JSR	OAMPLCK		; oam point check
+		INX
+		DEC	<WORK8
+		BPL	HBOM100
+;
+		PLX
+		RTS
+;
+;**************************************************************
+;*		bomb move 			(BOMBMOV)     *
+;**************************************************************
+BOBFLM1		EQU	$		; bomb flem data
+		BYTE	0A0H,006H,004H,004H,004H,004H,004H,006H,006H
+		BYTE	006H,006H
+BOMBMD		EQU	$		; bomb mode data
+		BYTE	000H,001H,002H,003H,002H,003H,004H,005H,006H
+		BYTE	007H,008H,009H
+BOMBMOV		EQU	$
+		LDA	<GAMEMD		; purse ? [YES:BMMV900]
+		BEQ	BMMV040
+		CMP	#p1_mcng
+		BEQ	BMMV010
+		CMP	#p1_mcg1
+		BNE	BMMV020
+BMMV010		EQU	$
+		JSR	BMMTCK		; bomb motsu sub !!
+		BRA	BMMV030
+BMMV020		EQU	$
+		TXA
+		INC	A
+		CMP	BMCHOK
+		BNE	BMMV030
+		LDA	BUADSB,X
+		BEQ	BMMV030
+		CMP	#003H
+		BEQ	BMMV028
+		LDY	#003H
+		JSR	BMMT500
+		JSR	BMMT448
+		LDA	#003H
+		STA	BUADSB,X
+BMMV028		EQU	$
+		JSR	BMMT860
+BMMV030		EQU	$
+		BRL	BMMV900
+;
+BMMV040		EQU	$
+		JSR	BMMTCK		; bomb motsu sub !!
+;
+		JSR	BMMTPH
+		LDA	BMMUKI,X
+		STA	<BMWORK+2
+		LDA	BMCRFG,X
+		STA	<BMWORK+3
+		STZ	BMCRFG,X
+		JSR	BMBGCK3		; BG check !
+		PHP
+		LDA	<GMMODE
+		BEQ	BMMV050
+		LDA	HIBSTAT,X
+		BEQ	BMMV050
+		LDA	BMBGNO,X
+		CMP	#01CH
+		BNE	BMMV050
+		LDA	#001H
+		STA	KMYPMD,X
+BMMV050		EQU	$
+		PLP
+		BCC	BMMV0A0
+;
+;************  BG hit shori
+BMMV060		EQU	$
+		BIT	PYDMBT		; player had ?
+		BPL	BMMV061		; 0 -->bpl 1--> bmi
+		LDA	PYDMBT1
+		BEQ	BMMV0A0
+;
+BMMV061		EQU	$
+		LDA	<BMWORK+3
+		BNE	BMMV090
+		LDA	BMWRK0,X
+		BNE	BMMV090
+		LDA	#001H
+		STA	BMWRK0,X
+;
+		LDA	#004H
+		STA	<WORKE
+		LDY	#0FCH
+		LDA	BMMUKI,X
+		CMP	#001H
+		BNE	BMMV063
+		LDA	#010H
+		STA	<WORKE
+		LDY	#0F0H
+;
+BMMV063		EQU	$
+		LDA	BMYSPD,X
+		BEQ	BMMV070
+		BPL	BMMV064
+		LDY	<WORKE
+BMMV064		EQU	$
+		TYA
+		STA	BMYSPD,X
+BMMV070		EQU	$
+		LDY	#0FCH
+		LDA	BMXSPD,X
+		BEQ	BMMV080
+		BPL	BMMV074
+		LDY	#004H
+BMMV074		EQU	$
+		TYA
+		STA	BMXSPD,X
+BMMV080		EQU	$
+		LDA	BMMUKI,X
+		CMP	#001H
+		BNE	BMMV090
+		LDA	BMZPSL,X
+		BEQ	BMMV090
+		LDA	#0FCH
+		STA	BMYSPD,X
+		LDA	#002H
+		STA	HIBSTAT,X
+BMMV090		EQU	$
+		BRL	BMMV0C0
+;
+;************  BG hit check shori
+BMMV0A0		EQU	$
+		BIT	PYDMBT
+		BMI	BMMV090		; 0 -->bpl 1--> bmi
+;
+		LDA	BMZPSL,X
+		BEQ	BMMV0A2
+		CMP	#0FFH
+		BNE	BMMV090
+;
+BMMV0A2		EQU	$
+		LDA	#010H
+		STA	BMMUKI,X
+		LDA	BMCRFG,X
+		PHA
+		JSR	BMBGCK
+		PLA
+		STA	BMCRFG,X
+;
+		LDA	BMBGNO,X
+		CMP	#026H		; kaidan check !!
+		BEQ	BMMV0A27
+		CMP	#00CH		; belt conbere !!
+		BEQ	BMMV0A28
+		CMP	#01CH		; nuki
+		BEQ	BMMV0A28
+		CMP	#020H		; hole
+		BEQ	BMMV0A4
+		CMP	#008H		; water
+		BEQ	BMMV0A2F
+		CMP	#068H		; move yuka up
+		BEQ	BMMV0A26
+		CMP	#069H		; move yuka down
+		BEQ	BMMV0A26
+		CMP	#06AH		; move yuka lsft
+		BEQ	BMMV0A26
+		CMP	#06BH		; move yuka right
+		BEQ	BMMV0A26
+		CMP	#0B6H		; sen lift
+		BEQ	BMMV0A24
+		CMP	#0BCH		; sen lift
+		BEQ	BMMV0A24
+		AND	#11110000B	; sen lift 
+		CMP	#0B0H
+		BEQ	BMMV0A4
+BMMV0A24	EQU	$
+		STZ	BMTIM0,X
+		LDA	HIBSTAT,X
+		BNE	BMMV090
+		LDA	#002H
+		STA	BMTIM0,X
+BMMV0A25	EQU	$
+		BRL	BMMV0C0
+BMMV0A26	EQU	$
+		BRL	BMMV0B4
+BMMV0A27	EQU	$
+		BRL	BMMV060
+BMMV0A28	EQU	$
+		BRL	BMMV0A6
+;
+;************  water check
+BMMV0A2F	EQU	$
+		TXA
+		INC	A
+		CMP	BMCHOK
+		BNE	BMMV0A3
+		STZ	BMCHOK
+BMMV0A3		EQU	$
+		LDA	BMTIM0,X
+		BNE	BMMV0A25
+		LDA	BMYPSL,X
+		CLC
+		ADC	#0E8H
+		STA	BMYPSL,X
+		LDA	#0FFH
+		ADC	BMYPSH,X
+		STA	BMYPSH,X
+		BRL	WTIMIT2
+;
+;************  hole check
+BMMV0A4		EQU	$
+		LDA	PYDMBT		; player had ? [YES:BMMV0C0]
+		BMI	BMMV0C0
+		STX	<WORK4
+		LDA	BMCHOK
+		DEC	A
+		CMP	<WORK4
+		BNE	BMMV0A5
+		STZ	BMCHOK
+BMMV0A5		EQU	$
+		LDA	BMTIM0,X
+		BNE	BMMV0A25
+		BRL	BOMV0A0		; bmmode <--- 0
+;
+BMMV0A6		EQU	$
+		LDA	BGALCKF		; beltconbear ? [YES:BMMT7104]
+		CMP	#003H
+		BEQ	BMMV0B0
+		LDA	BMPRIO,X
+		BNE	BMMV0C0
+		LDA	BMZPSL,X
+		BEQ	BMMV0C0
+		CMP	#0FFH
+		BEQ	BMMV0C0
+		LDA	#001H
+		STA	BMPRIO,X
+		BRA	BMMV0C0
+;
+BMMV0B0		EQU	$
+		LDA	!BG1VMC
+		CLC
+		ADC	BMYPSL,X
+		STA	<BMWORK+0
+		LDA	!BG1VMC+1
+		ADC	BMYPSH,X
+		STA	<BMWORK+1
+		LDA	!BG1HMC
+		CLC
+		ADC	BMXPSL,X
+		STA	BMXPSL,X
+		LDA	!BG1HMC+1
+		ADC	BMXPSH,X
+		STA	BMXPSH,X
+		BRA	BMMV0C0
+;
+BMMV0B4		EQU	$
+		JSR	BMMYSR		; move yuka shori !!
+;
+BMMV0C0		EQU	$
+		JSR	BMMTPP
+		LDA	<BMWORK+2
+		STA	BMMUKI,X
+		LDA	<BMWORK+3
+		ORA	BMCRFG,X
+		STA	BMCRFG,X
+;
+		JSR	BMJPCK		; bomb wing check !!
+;
+		DEC	BUMFLM,X	; flem (dec)
+		LDA	BUMFLM,X	; flem (dec)
+		BNE	BMMV800
+;
+		INC	BMCONT,X
+		LDA	BMCONT,X
+		CMP	#001H
+		BNE	BMMV0E0
+		LDA	#bomb1
+		JSR	SDLRB2
+		TXA
+		INC	A
+		CMP	BMCHOK
+		BNE	BMMV0E0
+		STZ	BMCHOK
+		BIT	PYDMBT		; player had ?
+		BPL	BMMV0E0		; 0 -->bpl 1--> bmi
+		STZ	PYDMBT
+		STZ	<PYMKFG
+BMMV0E0		EQU	$
+		LDA	BMCONT,X	; bomb end ? [NO:BMMV200]
+		CMP	#00BH
+		BNE	BMMV200
+		LDY	#000H		; end set
+		LDA	BMSTAT,X
+		BEQ	BMMV100
+		LDY	#BOMBA		; kakera move set
+BMMV100		EQU	$
+		TYA
+		STA	BMMODE,X	 ; item mode clear set
+		RTS
+BMMV200		EQU	$
+		TAY			; next flem set
+		LDA	!BOBFLM1,Y
+		STA	BUMFLM,X
+;
+BMMV800		EQU	$
+		LDA	BMCONT,X	; mode conter = 7 ? [NO:BMMV900]
+		CMP	#07H
+		BNE	BMMV900
+		LDA	BUMFLM,X	; timer < 2 ? [NO:BMMV900]
+		CMP	#02H
+		BNE	BMMV900
+;
+		PHX
+		LDA	BMYPSL,X	; Y-pos
+		STA	<WORK0
+		LDA	BMYPSH,X
+		STA	<WORK1
+		LDA	BMXPSL,X	; X-pos
+		STA	<WORK2
+		LDA	BMXPSH,X
+		STA	<WORK3
+		STX	<WORKE		; bomb 0 or 1 set
+		TXA
+		ASL	A
+		TAX
+		STZ	BCDXPS,X	; bomb kakera x-pos
+		STZ	BCDXPS+1,X
+		JSL	>BDRCHCK	; bomb door check
+		PLX
+		TXY			; (PHX)
+		TXA
+		ASL	A
+		TAX
+		LDA	BCDXPS,X	; bomb kakera x-pos = 0 ? [NO:BMMV840]
+		ORA	BCDXPS+1,X
+		BEQ	BMMV840
+		TYX			; (PLX)
+		LDA	#01H		; kakera move start
+		STA	BMSTAT,X
+BMMV840		EQU	$
+		TYX			; (PLX)
+;
+BMMV900		EQU	$
+		JSR	BOBOMST		; bomb oam set sub
+BMMVF00		EQU	$
+		RTS
+;
+;**************************************************************
+;*		move yuka shori 		(BMMYSR)      *
+;**************************************************************
+BMMYSD		EQU	$
+		HEX	0F8,008,000,000
+BMMXSD		EQU	$
+		HEX	000,000,0F8,008
+;
+BMMYSR		EQU	$
+		LDA	BMBGNO,X
+		SEC
+		SBC	#068H
+		TAY
+		LDA	!BMMYSD,Y
+		STA	BMYSPD,X
+		LDA	!BMMXSD,Y
+		STA	BMXSPD,X
+;		
+		JSR	BMYCLC
+		JSR	BMXCLC
+;
+		LDA	BMYPSL,X
+		STA	<BMWORK+0
+		LDA	BMYPSH,X
+		STA	<BMWORK+1
+BMMY400		EQU	$
+		RTS
+;
+;**************************************************************
+;*		bomb wind check			(BMJPCK)      *
+;**************************************************************
+BMSPED		EQU	$		; speed data
+;			   0	4    8    C   10   14	18   1C
+		BYTE	020H,020H,020H,020H,020H,020H,01CH,01CH
+;			  20   24   28   2C   30   34	38   3C
+		BYTE	01CH,01CH,01CH,01CH,018H,018H,018H,018H
+BOZSPD		EQU	$		; z speed data
+;			   0	4    8    C   10   14	18   1C
+		BYTE	010H,010H,010H,010H,010H,010H,00CH,00CH
+;			  20   24   28   2C   30   34	38   3C
+		BYTE	00CH,00CH,008H,008H,008H,008H,008H,008H
+BMHANE		EQU	$		; kyori data
+;			   0	4    8    C   10   14	18   1C
+		BYTE	020H,020H,020H,020H,020H,020H,018H,018H
+;			  20   24   28   2C   30   34	38   3C
+		BYTE	018H,018H,018H,018H,010H,010H,010H,010H
+BMDMGD		EQU	$		; bomb damege data
+		HEX	008,004,002
+BMJPCK		EQU	$
+		LDA	BMCONT,X
+		BEQ	BMJP080
+		CMP	#009H
+		BCS	BMJP080
+;
+		JSR	CRBOEN		; teki check sub
+;
+BMJP040		EQU	$
+		LDA	MRTKFG		; muteki on ? [YES:BMMV900]
+		BEQ	BMJP100
+		TXA
+		INC	A
+		CMP	BMCHOK
+		BNE	BMMVF00
+		LDA	PYDMBT
+		AND	#10000000B
+		BEQ	BMMVF00
+		LDA	PYDMBT
+		AND	#01111111B
+		STA	PYDMBT
+		STZ	<PYMKFG
+BMJP080		EQU	$
+		BRL	BMMVF00
+;
+BMJP100		EQU	$
+		LDA	<DIEFG		; die flag on ? [YES:BMMVC00]
+		BNE	BMJP080
+		LDA	<HANEFG		; hanekaeri flag on ?[YES:BMMVC00]
+		BNE	BMJP080
+		LDA	BMPRIO,X
+		CMP	<PLBGCKF
+		BNE	BMJP080
+;
+		LDA	<PLXPS1		; player x-pos (L) set
+		STA	<WORK0
+		LDA	<PLXPS0		; player x-pos (H) set
+		STA	<WORK8
+		LDA	<PLYPS1		; player y-pos (L) set
+		STA	<WORK1
+		LDA	<PLYPS0		; player y-pos (H) set
+		STA	<WORK9
+		LDA	#010H		; player x-hani
+		STA	<WORK2
+		LDA	#018H		; player y-hani
+		STA	<WORK3
+;
+		LDA	BMXPSL,X
+		STA	<WORK4
+		LDA	BMXPSH,X
+		STA	<WORK5
+		LDA	BMYPSL,X
+		STA	<WORK6
+		LDA	BMYPSH,X
+		STA	<WORK7
+;
+		MEM16
+		REP	#00100000B
+		LDA	<WORK4		; bomb point surch
+		CLC
+		ADC	#0FFF0H
+		STA	<WORK4
+		LDA	<WORK6
+		CLC
+		ADC	#0FFF0H
+		STA	<WORK6
+		MEM8
+		SEP	#00100000B
+;
+		LDA	<WORK5		; bomb x-pos (H)
+		STA	<WORKA
+		LDA	<WORK6		; bomb y-pos (L)
+		STA	<WORK5
+		LDA	<WORK7		; bomb y-pos (H)
+		STA	<WORKB
+;
+		LDA	#020H		; bomb x-hani
+		STA	<WORK6
+		STA	<WORK7
+		JSL	>CROJCK2	; oam atari check
+		BCC	BMJPF00		; hit ? [NO:BMJPF00]
+;
+		LDA	BMXPSL,X
+		CLC
+		ADC	#0F8H
+		STA	<WORK0
+		LDA	BMXPSH,X
+		ADC	#0FFH
+		STA	<WORK1
+		LDA	BMYPSL,X
+		CLC
+		ADC	#0F4H
+		STA	<WORK2
+		LDA	BMYPSH,X
+		ADC	#0FFH
+		STA	<WORK3
+;
+		PHX
+		JSR	BBDTSRC		; data surch sub
+		LDA	!BMSPED,Y
+		TAY
+		JSL	>SSERCH		; speed shori sub
+		PLX
+;
+		LDA	PYFLASH		; flashing ? [YES:BMJPF00]
+		BNE	BMJPF00
+		LDA	BSFLFG
+		CMP	#002H
+		BEQ	BMJPF00
+;
+		LDA	<WORK0		; y-speed set
+		STA	<PLYSPD
+		LDA	<WORK1		; x-speed set
+		STA	<PLXSPD
+		JSR	BBDTSRC		; data surch sub
+		LDA	!BOZSPD,Y
+		STA	<PLZSPD		; z-speed
+		STA	PLZSPD1		; hozon z-speed
+		LDA	!BMHANE,Y
+		STA	<HANEFG		; kyori flag
+		LDA	#001H
+		STA	<DIEFG		; die flag
+		LDA	#DAMGI
+		STA	PYFLASH		; flashing ? [YES:BMJPF00]
+;
+		LDA	!EMYSTT+1	; hart flag on ?
+		AND	#080H
+		BNE	BMJPF00
+;
+		LDA	>ITMTBL8
+		TAY
+		LDA	!BMDMGD,Y	; 
+		STA	DAMEFG		; dameege count
+;
+BMJPF00		EQU	$
+		RTS
+;
+;**************************************************************
+;*		bomb mochiage check		(BMMTCK)      *
+;**************************************************************
+BCHYD		EQU	$		; mochiage y-pos
+;			    up   down   left  right
+		WORD	00010H,00008H,00004H,00004H	;(0)
+		WORD	00008H,00002H,0FFFFH,0FFFFH	;(1)
+		WORD	00002H,00002H,0FFFFH,0FFFFH	;(2)
+BCHXD		EQU	$		;mochiage x-pos
+;			    up   down   left  right
+		WORD	00008H,00008H,0FFFCH,00014H	;(0)
+		WORD	00008H,00008H,00008H,00008H	;(1)
+		WORD	00008H,00008H,00008H,00008H	;(2)
+BCHFMD		EQU	$		; mochiage flem data
+		HEX	010,008,009
+BYMVDT		EQU	$		; bomb move y-pos data
+		WORD	0FFFEH,0FFFFH,00000H,0FFFEH,0FFFFH,00000H
+BYSPDT		EQU	$
+		HEX	0E0,020,000,000		; stop
+BXSPDT		EQU	$
+		HEX	000,000,0E0,020		; stop
+BYSPMD		EQU	$
+		HEX	008,008,000,000		; stop (0)
+		HEX	004,004,000,000		; stop (1)
+BXSPMD		EQU	$
+		HEX	000,000,008,008		; stop (0)
+		HEX	000,000,004,004		; stop (1)
+BZSPMD		EQU	$
+		HEX	010,010,010,010		; stop (0)
+		HEX	008,008,008,008		; stop (1)
+MKCKDT		EQU	$
+		HEX	000,002,004,006
+;
+BMMTCK		EQU	$
+		LDA	BMDEFG,X
+		BNE	BMMT078
+		LDA	HIBSTAT,X
+		BEQ	BMMT040
+		BRL	BMMT700
+BMMT040		EQU	$
+		STX	<WORK0
+		LDA	BMCHOK
+		BEQ	BMMT080
+		DEC	A
+		CMP	<WORK0
+		BEQ	BMMT060
+		RTS
+BMMT060		EQU	$
+		LDY	MRTKFG
+		BNE	BMMT062
+		LDA	<HANEFG
+		BNE	BMMT064
+;
+BMMT062		EQU	$
+		LDA	TRCACH
+		BNE	BMMT064
+		LDA	<DIEFG
+		CMP	#001H
+		BNE	BMMT070
+BMMT064		EQU	$
+		LDA	#001H
+		STA	BMDEFG,X
+		STZ	BMZSPD,X
+		STZ	BMCHOK
+		STZ	BMWRK0,X
+		BRA	BMMT078
+BMMT070		EQU	$
+		LDA	PYDMBT
+		BPL	BMMT080
+		BRL	BMMT400
+BMMT078		EQU	$
+		BRL	BMMTB00
+;
+;************** bomb player check shori
+BMMT080		EQU	$
+		STZ	BMCHOK
+		LDA	BMCONT,X	; bakuha ? [YES:BMMT300]
+		BNE	BMMT300
+		LDA	PYDMBT
+		BNE	BMMT300
+;
+		LDY	#000H
+		JSR	PYHICK		; player hani check
+		BCC	BMMT300
+;
+		LDA	BMPRIO,X
+		CMP	<PLBGCKF
+		BNE	BMMT300
+;
+		LDA	<WORK8
+		CMP	#010H
+		BCS	BMMT0A0
+		LDA	<WORKA
+		CMP	#00CH
+		BCC	BMMT200
+BMMT0A0		EQU	$
+		LDA	<WORK8
+		CMP	<WORKA
+		BCC	BMMT0E0
+		LDY	#000H
+		LDA	<WORK4
+		BPL	BMMT100
+		INY
+		BRA	BMMT100
+;
+BMMT0E0		EQU	$
+		LDY	#002H
+		LDA	<WORK6
+		BPL	BMMT100
+		INY
+;
+BMMT100		EQU	$
+		LDA	!MKCKDT,Y
+		CMP	<PLMKCH
+		BNE	BMMT300
+BMMT200		EQU	$
+		TXA
+		INC	A
+		STA	BMCHOK
+		STZ	BUADSB,X
+		LDA	!BCHFMD
+		STA	BMFLFG,X
+		STZ	HIBSTAT,X
+		STZ	BMZPSL,X
+;
+BMMT300		EQU	$
+		RTS
+;
+;************** bomb chachi !!
+BMMT400		EQU	$
+		LDA	PYDMBT1
+		CMP	#002H
+		BEQ	BMMT600
+		LDA	BMCHOK		; chachi ok ? [NO:BMMT600]
+		BEQ	BMMT600
+		LDY	BUADSB,X
+		CPY	#003H
+		BEQ	BMMT600
+;
+		CPY	#000H
+		BNE	BMMT440
+		LDA	BMFLFG,X
+		CMP	#010H
+		BNE	BMMT440
+		LDA	#01DH		; <sound>
+		JSR	SDLRB2
+BMMT440		EQU	$
+		DEC	BMFLFG,X
+		BPL	BMMT500
+		INY
+		TYA
+		STA	BUADSB,X
+		LDA	!BCHFMD,Y
+		STA	BMFLFG,X
+		CPY	#003H
+		BNE	BMMT500
+BMMT448		EQU	$
+		LDA	#011H
+		STA	BMZPSL,X
+		LDA	BMYPSL,X
+		CLC
+		ADC	#011H
+		STA	BMYPSL,X
+		LDA	BMYPSH,X
+		ADC	#000H
+		STA	BMYPSH,X
+		STZ	BMCRFG,X
+		BRA	BMMT580
+;
+BMMT500		EQU	$
+		TYA
+		ASL	A
+		ASL	A
+		ASL	A
+		CLC
+		ADC	<PLMKCH
+		TAY
+		LDA	<PLYPS1
+		CLC
+		ADC	!BCHYD,Y
+		STA	BMYPSL,X
+		LDA	<PLYPS0
+		ADC	!BCHYD+1,Y
+		STA	BMYPSH,X
+		LDA	<PLXPS1
+		CLC
+		ADC	!BCHXD,Y
+		STA	BMXPSL,X
+		LDA	<PLXPS0
+		ADC	!BCHXD+1,Y
+		STA	BMXPSH,X
+BMMT580		EQU	$
+		RTS
+;
+;************** bomb nage shori !!
+BMMT600		EQU	$
+		LDA	BUADSB,X
+		CMP	#003H
+		BNE	BMMT580
+		LDA	PYDMBT1
+		CMP	#002H
+		BEQ	BMMT620
+		LDA	<GAMEMD
+		BNE	BMMT610
+		LDA	<KEYA2L
+		ORA	<KEYA2
+		AND	#10000000B
+		BNE	BMMT620
+BMMT610		EQU	$
+		BRL	BMMT800
+;
+BMMT620		EQU	$
+		LDA	<PLMKCH
+		LSR	A
+		STA	BMMUKI,X
+		TAY
+		LDA	#018H
+		STA	BMZSPD,X
+		LDA	!BYSPDT,Y
+		STA	BMYSPD,X
+		LDA	!BXSPDT,Y
+		STA	BMXSPD,X
+		LDA	#002H
+		STA	PYDMBT1
+		DEC	A
+		STA	HIBSTAT,X
+		STZ	BMCHOK
+		STZ	BMWRK0,X
+		STZ	BUADSB,X
+		STZ	BMCRFG,X
+		LDA	#mono0
+		JSR	SDLRB3
+;
+BMMT700		EQU	$
+		LDA	BMCONT,X	; bakuhastu ? [YES:BMMT740]
+		BEQ	BMMT708
+		RTS
+;
+BMMT708		EQU	$
+		LDA	BMZSPD,X
+		SEC
+		SBC	#002H
+		STA	BMZSPD,X
+		JSR	BMYCLC		; y-speed set
+		JSR	BMXCLC		; x-speed set
+		LDA	BMZPSL,X
+		STA	<WORK0
+		JSR	BMZCLC		; z-speed ste
+;
+;************   shita muki BG hit shori 
+		LDA	BMWRK0,X	; under BG hit ?
+		BEQ	BMMT710
+		LDA	BMMUKI,X
+		CMP	#001H
+		BNE	BMMT710
+;
+		LDA	BMYPSL,X
+		STA	<WORKC
+		LDA	BMYPSH,X
+		STA	<WORKD
+		LDA	BMZPSL,X
+		BMI	BMMT710
+		SEC
+		SBC	<WORK0
+		STA	<WORKE
+		MEM16
+		REP	#00100000B
+		LDA	<WORKE
+		AND	#000FFH
+		CMP	#00080H
+		BCC	BMMT709
+		ORA	#0FF00H
+BMMT709		EQU	$
+		CLC
+		ADC	<WORKC
+		STA	<WORKC
+		MEM8
+		SEP	#00100000B
+		LDA	<WORKC
+		STA	BMYPSL,X
+		LDA	<WORKD
+		STA	BMYPSH,X
+;
+;************   bomb,tama baund shori 
+BMMT710		EQU	$
+		LDA	BMZPSL,X	; baund check !!
+		CMP	#080H
+		BCS	BMMT711
+BMMT7108	EQU	$
+		RTS
+;
+BMMT711		EQU	$
+		CMP	#0FFH
+		BCS	BMMT7108
+		STZ	BMZPSL,X
+;
+BMMT7114	EQU	$		; baund shori
+		LDA	#021H
+		JSR	SDLRB2
+;
+		INC	HIBSTAT,X
+		LDA	HIBSTAT,X
+		CMP	#003H
+		BEQ	BMMT720
+		SEC
+		SBC	#002H
+		ASL	A
+		ASL	A
+		CLC
+		ADC	BMMUKI,X
+		TAY
+;
+		LDY	#000H
+		LDA	BMYSPD,X
+		BPL	BMMT7118
+		LDY	#001H
+		EOR	#0FFH
+		INC	A
+BMMT7118	EQU	$
+		LSR	A
+		CPY	#001H
+		BNE	BMMT711A
+		EOR	#0FFH
+		INC	A
+BMMT711A	EQU	$
+		STA	BMYSPD,X
+;
+		LDY	#000H
+		LDA	BMXSPD,X
+		BPL	BMMT711C
+		LDY	#001H
+		EOR	#0FFH
+		INC	A
+BMMT711C	EQU	$
+		LSR	A
+		CPY	#001H
+		BNE	BMMT711E
+		EOR	#0FFH
+		INC	A
+BMMT711E	EQU	$
+		STA	BMXSPD,X
+;
+		LDA	!BZSPMD,Y
+		STA	BMZSPD,X
+		LDA	BMWRK0,X
+		BEQ	BMMT740
+		STZ	BMWRK0,X
+		RTS
+;
+BMMT720		EQU	$
+		STZ	BMZPSL,X
+		STZ	HIBSTAT,X
+		STZ	BMWRK0,X
+		STZ	<PYSPFG
+		STZ	BMYSPD,X
+		STZ	BMXSPD,X
+		STZ	BMZSPD,X
+		LDA	KMYPMD,X
+		BEQ	BMMT740
+		STA	BMPRIO,X
+		STZ	KMYPMD,X
+;
+BMMT740		EQU	$
+		RTS
+;
+;************** bomb player move shori !!
+BMMT800		EQU	$
+		LDA	BMCONT,X	; bakuhastu ? [YES:BMMTF00]
+		BNE	BMMTA00
+;
+		LDA	<HOLEFG2
+		CMP	#002H
+		BCC	BMMT840
+		STZ	<PYSPFG
+		TXA
+		INC	A
+		CMP	BMCHOK
+		BNE	BMMT820
+		STZ	BMCHOK
+		STZ	BMMODE,X
+BMMT820		EQU	$
+		RTS
+;
+BMMT840		EQU	$
+		LDA	WATRFG
+		ORA	RABFLG
+		BEQ	BMMT860
+		STZ	PYDMBT
+		BRL	BMMT620		; nage shori
+;
+BMMT860		EQU	$
+		LDA	<PYCRCH
+		ASL	A
+		TAY
+;
+		LDA	#00CH
+		STA	<PYSPFG
+		LDA	<PLBGCKF
+		STA	BMPRIO,X
+		LDA	CDBGCKF
+		STA	BMCDPR,X
+		MEM16
+		REP	#00100000B
+		LDA	<PLZPS1
+		CMP	#0FFFFH
+		BNE	BMMT880
+		LDA	#00000H
+BMMT880		EQU	$
+		EOR	#0FFFFH
+		INC	A
+		CLC
+		ADC	<PLYPS1
+		CLC
+		ADC	!BYMVDT,Y
+		CLC
+		ADC	#0012H
+		STA	<WORK0
+		LDA	<PLXPS1
+		CLC
+		ADC	#0008H
+		STA	<WORK2
+		MEM8
+		SEP	#00100000B
+		LDA	<WORK0
+		STA	BMYPSL,X
+		LDA	<WORK1
+		STA	BMYPSH,X
+		LDA	<WORK2
+		STA	BMXPSL,X
+		LDA	<WORK3
+		STA	BMXPSH,X
+;
+BMMTA00		EQU	$
+		RTS
+;
+;************** bomb player die shori !!
+BMMTB00		EQU	$
+		LDA	BMCONT,X
+		BNE	BMMTA00
+;
+		LDA	BUADSB,X
+		CMP	#003H
+		BNE	BMMTC80
+;
+		LDA	BMZSPD,X
+		SEC
+		SBC	#002H
+		STA	BMZSPD,X
+		JSR	BMZCLC		; z-speed ste
+		LDA	BMZPSL,X
+		BEQ	BMMTB80
+		CMP	#0FCH
+		BCC	BMMTF00
+BMMTB80		EQU	$
+		STZ	BMZPSL,X
+		INC	BMDEFG,X
+		LDA	BMDEFG,X
+		CMP	#003H
+		BEQ	BMMTC00
+		LDA	#018H
+		STA	BMZSPD,X
+		BRA	BMMTF00
+;
+BMMTC00		EQU	$
+		STZ	BMZPSL,X
+		STZ	BUADSB,X
+BMMTC80		EQU	$
+		STZ	BMDEFG,X
+		STZ	<PYSPFG
+;
+BMMTF00		EQU	$
+		RTS
+;
+;**************************************************************
+;*		bomb mochiage y,x pos push	(BMMTPH)      *
+;**************************************************************
+BMMTPH		EQU	$
+		LDA	BMYPSL,X
+		STA	<BMWORK+0
+		LDA	BMYPSH,X
+		STA	<BMWORK+1
+		STZ	<WORKD
+		STZ	<WORKC
+		LDA	BMMUKI,X
+		ASL	A
+		TAY
+		CMP	#002H
+		BNE	BMPH100
+		LDA	BMZPSL,X
+		STA	<WORKC
+		BPL	BMPH100
+		LDA	#0FFH
+		STA	<WORKD
+BMPH100		EQU	$
+		MEM16
+		REP	#00100000B
+		LDA	<WORKC
+		CMP	#0FFFFH
+		BNE	BMPH200
+		LDA	#00000H
+BMPH200		EQU	$
+		EOR	#0FFFFH
+		INC	A
+		CLC
+		ADC	<BMWORK+0
+		STA	<WORKE
+		MEM8
+		SEP	#00100000B
+		LDA	<WORKE
+		STA	BMYPSL,X
+		LDA	<WORKF
+		STA	BMYPSH,X
+		RTS
+;
+;**************************************************************
+;*		bomb mochiage y,x pos pop	(BMMTPP)      *
+;**************************************************************
+BMMTPP		EQU	$
+		LDA	<BMWORK+1
+		STA	BMYPSH,X
+		LDA	<BMWORK+0
+		STA	BMYPSL,X
+		RTS
+;
+;**************************************************************
+;*		bomb data surch sub   (X)	(BBDTSRC)     *
+;**************************************************************
+BBDTSRC		EQU	$		; data surch sub
+		LDA	BMXPSL,X
+		STA	<WORK6
+		LDA	BMXPSH,X
+		STA	<WORK7
+		LDA	BMYPSL,X
+		STA	<WORK4
+		LDA	BMYPSH,X
+		STA	<WORK5
+		MEM16
+		REP	#00100000B
+		LDA	<PLXPS1		; player x-pos (L) set
+		CLC
+		ADC	#00008H
+		SEC
+		SBC	<WORK6
+		BPL	BBDT100
+		EOR	#0FFFFH
+		INC	A
+BBDT100		EQU	$
+		STA	<WORKA
+		LDA	<PLYPS1		; player y-pos (L) set
+		CLC
+		ADC	#0000CH
+		SEC
+		SBC	<WORK4
+		BPL	BBDT200
+		EOR	#0FFFFH
+		INC	A
+BBDT200		EQU	$
+		CLC
+		ADC	<WORKA
+		AND	#00FCH
+		LSR	A
+		LSR	A
+		TAY
+		MEM8
+		SEP	#00100000B
+		RTS		
+;
+;**************************************************************
+;*		bomb oam set 			(BOBOMST)     *
+;**************************************************************
+BOBCRDT		EQU	$		; bomb chara data
+		WORD	0266EH,0FFFFH,0FFFFH,0FFFFH,0FFFFH,0FFFFH	;0
+		WORD	0228CH,0628CH,0A28CH,0E28CH,0FFFFH,0FFFFH	;1
+		WORD	02284H,06284H,0A284H,0E284H,0FFFFH,0FFFFH	;2
+		WORD	02288H,06288H,0A288H,0E288H,0FFFFH,0FFFFH	;3
+		WORD	02286H,02288H,06288H,0A288H,0E288H,0FFFFH	;4
+		WORD	02286H,06286H,0E286H,0E286H,0FFFFH,0FFFFH	;5
+		WORD	0E286H,02286H,02286H,06286H,0A286H,0A286H	;6
+		WORD	0A28AH,0628AH,0228AH,0628AH,0628AH,0E28AH	;7
+		WORD	0229BH,0A29BH,0629BH,0E29BH,0A29BH,0229BH	;8
+BOBYXD		EQU	$		; Y,X pos set
+		WORD	0FFF8H,0FFF8H	;0 (0)
+		WORD	00000H,00000H	;  (1)
+		WORD	00000H,00000H	;  (2)
+		WORD	00000H,00000H	;  (3)
+		WORD	00000H,00000H	;  (4)
+		WORD	00000H,00000H	;  (5)
+		WORD	0FFF8H,0FFF8H	;1 (0)
+		WORD	0FFF8H,00000H	;  (1)
+		WORD	00000H,0FFF8H	;  (2)
+		WORD	00000H,00000H	;  (3)
+		WORD	00000H,00000H	;  (4)
+		WORD	00000H,00000H	;  (5)
+		WORD	0FFF0H,0FFF0H	;2 (0)
+		WORD	0FFF0H,00000H	;  (1)
+		WORD	00000H,0FFF0H	;  (2)
+		WORD	00000H,00000H	;  (3)
+		WORD	00000H,00000H	;  (4)
+		WORD	00000H,00000H	;  (5)
+		WORD	0FFF0H,0FFF0H	;3 (0)
+		WORD	0FFF0H,00000H	;  (1)
+		WORD	00000H,0FFF0H	;  (2)
+		WORD	00000H,00000H	;  (3)
+		WORD	00000H,00000H	;  (4)
+		WORD	00000H,00000H	;  (5)
+		WORD	0FFF8H,0FFF8H	;4 (0)
+		WORD	0FFEBH,0FFEAH	;  (1)
+		WORD	0FFEBH,00008H	;  (2)
+		WORD	00009H,0FFEAH	;  (3)
+		WORD	00009H,00008H	;  (4)
+		WORD	00000H,00000H	;  (5)
+		WORD	0FFFAH,0FFF1H	;5 (0)
+		WORD	00000H,0FFFFH	;  (1)
+		WORD	0FFF0H,0FFFEH	;  (2)
+		WORD	0FFF8H,0FFF9H	;  (3)
+		WORD	00000H,00000H	;  (4)
+		WORD	00000H,00000H	;  (5)
+		WORD	0FFF7H,0FFFCH	;6 (0)
+		WORD	0FFEBH,0FFFBH	;  (1)
+		WORD	0FFF4H,0FFEEH	;  (2)
+		WORD	0FFF5H,00007H	;  (3)
+		WORD	00000H,0FFF1H	;  (4)
+		WORD	00004H,0FFFEH	;  (5)
+		WORD	0FFF7H,0FFFCH	;7 (0)
+		WORD	0FFEAH,0FFFBH	;  (1)
+		WORD	0FFF3H,0FFECH	;  (2)
+		WORD	0FFF5H,00008H	;  (3)
+		WORD	00001H,0FFF0H	;  (4)
+		WORD	00005H,0FFFEH	;  (5)
+		WORD	0FFECH,00004H	;8 (0)
+		WORD	0FFF4H,0FFEDH	;  (1)
+		WORD	0FFF7H,00010H	;  (2)
+		WORD	0FFFBH,0FFFEH	;  (3)
+		WORD	00002H,0FFF7H	;  (4)
+		WORD	0000AH,00006H	;  (5)
+BOBSUB		EQU	$
+BO000		BYTE	002H,001H,001H,001H,001H,001H	;0
+BO001		BYTE	000H,000H,000H,000H,001H,001H	;1
+BO002		BYTE	002H,002H,002H,002H,001H,001H	;2
+BO003		BYTE	002H,002H,002H,002H,001H,001H	;3
+BO004		BYTE	002H,002H,002H,002H,002H,001H	;4
+BO005		BYTE	002H,002H,002H,002H,001H,001H	;5
+BO006		BYTE	002H,002H,002H,002H,002H,002H	;6
+BO007		BYTE	002H,002H,002H,002H,002H,002H	;7
+BO008		BYTE	000H,000H,000H,000H,000H,000H	;8
+BOBINDX		EQU	$		; bomb index data
+		BYTE	BO000-BO000,BO001-BO000,BO002-BO000
+		BYTE	BO003-BO000,BO004-BO000,BO005-BO000
+                BYTE	BO006-BO000,BO007-BO000,BO008-BO000
+BBENDT		EQU	$
+;			  0   1   2   3   4   5   6   7   8
+		HEX	001,004,004,004,004,004,005,004,006
+;			  9   A
+		HEX	006,006
+;
+BOBOMST		EQU	$
+		JSR	ITMPST1		; priority,YXpos set
+;
+		MEM16
+		REP	#00100000B
+		LDA	BMZPSL,X
+		AND	#000FFH
+		CMP	#00080H
+		BCC	BOBM002
+		ORA	#0FF00H
+BOBM002		EQU	$
+		STA	<WORK4
+		BEQ	BOBM004
+		CMP	#0FFFFH
+		BEQ	BOBM004
+		LDA	BUADSB,X
+		AND	#000FFH
+		CMP	#00003H
+		BEQ	BOBM004
+		LDA	BMCRFG,X
+		AND	#000FFH
+		BEQ	BOBM004
+		LDA	#03000H
+		STA	<PYBGUN
+BOBM004		EQU	$
+;;;;;;;;		LDA	BUADSB,X
+;;;;;;;;		AND	#000FFH
+;;;;;;;;		CMP	#00003H
+;;;;;;;;		BNE	BOBM008
+;;;;;;;;		LDA	BMDEFG,X
+;;;;;;;;		AND	#00FFH
+;;;;;;;;		BNE	BOBM008
+;;;;;;;;		LDA	<PLZPS1
+;;;;;;;;		CMP	#0FFFFH
+;;;;;;;;		BNE	BOBM010
+BOBM008		EQU	$
+		LDA	#00000H
+BOBM010		EQU	$
+		CLC
+		ADC	<WORK4
+		EOR	#0FFFFH
+		INC	A
+		CLC
+		ADC	<WORK0
+		STA	<WORK0
+		MEM8
+		SEP	#00100000B
+;
+		LDY	BMCONT,X
+		LDA	!BOMBMD,Y
+		TAY
+		LDA	!BOBINDX,Y
+		ASL	A	
+		TAY			; chara index
+		ASL	A
+		STA	<WORK4		; y,x data index
+		STZ	<WORK5
+;
+		STZ	<WORKA		; atori (L) clear ! 
+		LDA	#00000010B
+		STA	<WORKB		; atori (H) clear !
+		LDA	BMCONT,X
+		BNE	BOBM040
+		LDA	#00000100B	; bomb atori set
+		STA	<WORKB
+		LDA	BUMFLM,X	; timer < 10 ? [NO:BOBM040]
+		CMP	#020H
+		BCS	BOBM040
+		AND	#00001110B
+		STA	<WORKB		; atori (H) set
+;
+BOBM040		EQU	$
+		PHX
+		PHY
+		LDA	BMCONT,X	; bakuhastu ? [YES:BOBM100]
+		STA	<WORK8
+		BNE	BOBM200
+;
+		LDA	HIBSTAT,X
+		BNE	BOBM100
+BOBM060		EQU	$
+		LDA	ENMYNO+0
+		CMP	#MOTSB
+		BEQ	BOBM070
+		TXY
+		INY
+		CPY	BMCHOK
+		BNE	BOBM100
+BOBM070		EQU	$
+		LDA	PYDMBT		; mochiage ? [NO:BOBM080]
+		AND	#10000000B
+		BEQ	BOBM0C0
+		LDA	BUADSB,X
+		CMP	#003H
+		BEQ	BOBM100
+BOBM080		EQU	$
+		LDA	<PLMKCH
+		BNE	BOBM100
+;
+BOBM0C0		EQU	$
+		LDA	#04H*03H
+		JSR	OMUNDR		; player under oam point set
+		BRA	BOBM200
+;
+BOBM100		EQU	$
+		LDA	OAMTYP
+		BEQ	BOBM200
+		LDA	BMPRIO,X
+		BEQ	BOBM200
+		LDA	HIBSTAT,X
+		BNE	BOBM140
+		TXY
+		INY
+		CPY	BMCHOK
+		BNE	BOBM200
+		LDA	PYDMBT
+		BPL	BOBM200
+BOBM140		EQU	$
+		MEM16
+		REP	#00100000B
+		LDA	#00D0H
+		CLC
+		ADC	#OAM
+		STA	<OAMADR
+		LDA	#0034H
+		CLC
+		ADC	#OAMSB
+		STA	<OSBADR
+		MEM8
+		SEP	#00100000B
+;
+BOBM200		EQU	$
+		LDA	<WORK0		; y-pos work chenge
+		STA	<WORKC
+		LDA	<WORK1
+		STA	<WORKD
+		LDA	<WORK2		; x-pos work chenge
+		STA	<WORKE
+		LDA	<WORK3
+		STA	<WORKF
+		STZ	<WORK6		; loop counter
+		LDX	<WORK8
+		LDA	!BBENDT,X
+		STA	<WORK8
+;
+;************** bomb oam set !!
+		PLX
+		LDY	#000H
+		JSR	BOMOMST
+		PLX
+;
+;************** bomb kage oam set !!
+		LDA	BMCONT,X	; bakuhastu ? [YES:BOBM100]
+		BNE	BBKG700
+;
+		STZ	<WORKA
+		LDA	BMZPSL,X
+		CMP	#002H
+		BCC	BBKG300
+		CMP	#0FCH
+		BCS	BBKG300
+		LDA	#002H
+		STA	<WORKA
+;
+BBKG300		EQU	$
+		LDA	BUADSB,X
+		AND	#00000010B
+		BNE	BBKG700
+;
+		MEM16
+		REP	#00100000B
+		LDA	BMZPSL,X
+		AND	#000FFH
+		CMP	#00080H
+		BCC	BBKG400
+		ORA	#0FF00H
+BBKG400		EQU	$
+		CLC
+		ADC	<WORKC
+		CLC
+		ADC	#0002H
+		STA	<WORK0
+		LDA	<WORKE
+		CLC
+		ADC	#0FFF8H
+		STA	<WORK2
+		MEM8
+		SEP	#00100000B
+		LDA	<PYBGUN+1
+		STA	<WORK4
+		LDX	<WORKA
+		JSR	KGOAMSB
+		LDX	ENINDX
+;
+BBKG700		EQU	$
+		RTS
+
+;
+;**************************************************************
+;*		kakera move 			(BMKRMOV)     *
+;**************************************************************
+BMKRMOV		EQU	$		; kaera move sub
+		JSR	BMKROMT		; kakera oam set
+;
+		DEC	BCDFLM,X	; flem < 0 ? [NO:BMKR200]
+		BPL	BMKR900
+		LDA	#007H		; next flem counter set
+		STA	BCDFLM,X
+;
+		INC	BCDMNO,X	; next mode set
+		LDA	BCDMNO,X	; end ? [NO:BMKR100]
+		CMP	#004H
+		BNE	BMKR900
+		STZ	BMMODE,X	 ; item mode clear set
+;
+BMKR900		EQU	$
+		RTS
+;
+;**************************************************************
+;*		kakera oam set 			(BMKROMT)     *
+;**************************************************************
+BMKRYX		EQU	$		; kakera y,x pos data
+		WORD	00004H,00007H,00003H,00011H	; up	0
+		WORD	00008H,00008H,00007H,00011H	;	1
+		WORD	0000BH,00007H,0000AH,00010H	;	2
+		WORD	00010H,00007H,00011H,00011H	;	3
+		WORD	00014H,00007H,00015H,00011H	; down	0
+		WORD	00010H,00008H,00011H,00011H	;	1
+		WORD	0000DH,00007H,0000EH,00010H	;	2
+		WORD	00008H,00007H,00007H,00011H	;	3
+		WORD	00007H,00004H,00011H,00003H	; left	0
+		WORD	00008H,00008H,00011H,00007H	;	1
+		WORD	00007H,0000BH,00010H,0000AH	;	2
+		WORD	00007H,00010H,00011H,00011H	;	3
+		WORD	00007H,00014H,00011H,00015H	; right	0
+		WORD	00008H,00010H,00011H,00011H	;	1
+		WORD	00007H,0000DH,00010H,0000EH	;	2
+		WORD	00007H,00008H,00011H,00007H	;	3
+KRCRDT		EQU	$		; chara data
+		WORD	0205EH,0E05EH	;up	0
+		WORD	0A05EH,0605EH	;	1
+		WORD	0204FH,0204FH	;	2
+		WORD	0204FH,0204FH	;	3
+		WORD	0605EH,0605EH	;down	0
+		WORD	0205EH,0E05EH	;	1
+		WORD	0604FH,0604FH	;	2
+		WORD	0604FH,0604FH	;	3
+		WORD	0205EH,0E05EH	;left	0
+		WORD	0A05EH,0605EH	;	1
+		WORD	0204FH,0E04FH	;	2
+		WORD	0204FH,0204FH	;	3
+		WORD	0605EH,0605EH	;right	0
+		WORD	0205EH,0E05EH	;	1
+		WORD	0604FH,0604FH	;	2
+		WORD	0604FH,0604FH	;	3
+BMKROMT		EQU	$		; kaera move sub
+		JSR	ITMPST1		; priority,YXpos set
+;
+		TXA
+		ASL	A
+		TAY
+		MEM16
+		REP	#00100000B
+		LDA	BCDYPS,Y
+		SEC
+		SBC	<SCCV2		; Y-scr hosei
+		STA	<WORKC
+		LDA	BCDXPS,Y
+		SEC
+		SBC	<SCCH2		; X-scr hosei
+		STA	<WORKE
+		MEM8
+		SEP	#00100000B
+;
+		PHX
+		STZ	<WORK6		; loop counter
+		LDA	BCDMNO,X
+		ASL	A
+		ASL	A
+		STA	<WORK4
+		STA	<WORK8
+		LDA	BCDMKI,X
+		ASL	A
+		ASL	A
+		ASL	A
+		ASL	A
+		STA	<WORKA
+		CLC
+		ADC	<WORK4
+		TAX
+		LDY	#000H
+;
+KROM100		EQU	$
+		PHX
+		LDA	<WORKA
+		ASL	A
+		STA	<WORK4
+		LDA	<WORK8
+		ASL	A
+		CLC
+		ADC	<WORK4
+		STA	<WORK4
+		LDA	<WORK6
+		ASL	A
+		ASL	A
+		CLC
+		ADC	<WORK4
+		TAX
+		MEM16
+		REP	#00100000B
+		LDA	!BMKRYX,X
+		CLC
+		ADC	<WORKC
+		STA	<WORK0
+		LDA	!BMKRYX+2,X
+		CLC
+		ADC	<WORKE
+		STA	<WORK2
+		MEM8
+		SEP	#00100000B
+		PLX
+;
+		JSR	BMYXST3
+;
+		LDA	!KRCRDT,X
+		STA	(<OAMADR),Y
+		INY
+		LDA	!KRCRDT+1,X
+		AND	#0C0H
+		ORA	<PYBGUN+1
+		STA	(<OAMADR),Y
+		INY
+		PHY
+		TYA
+		SEC
+		SBC	#004H
+		LSR	A
+		LSR	A
+		TAY
+		LDA	#000H
+		STA	(<OSBADR),Y
+		PLY
+;
+		JSR	OAMPLCK		; oam point check
+		INX
+		INX
+		LDA	<WORK6
+		INC	A
+		STA	<WORK6
+		CMP	#0002H
+		BNE	KROM100
+;
+		PLX
+		RTS
+;
+;;;;;
+;;;;;**************************************************************
+;;;;;*		bomb move 			(BOMBMOV)     *
+;;;;;**************************************************************
+;;;;;BOBFMD		EQU	$		; bomb flem data
+;;;;;		BYTE	03BH,003H,007H,007H,003H
+;;;;BOSBYX		EQU	$		; bomb sub y,x-pos data
+;;;;;				  low		 hi
+;;;;		WORD	00000H,0FFF2H,00000H,00000H	; 0
+;;;;		WORD	0FFF2H,0FFF0H,0000AH,00018H	; 1
+;;;;		WORD	0FFF0H,0FFF6H,00012H,0FFF6H	; 2	
+;;;;		WORD	0001EH,0FFF0H,0FFF0H,00016H	; 3
+;;;;		WORD	00000H,00012H,00000H,00000H	; 4
+;;;;		WORD	0FFF0H,0000AH,00012H,0000AH	; 5
+;;;;		WORD	0FFF0H,0FFF6H,0001AH,00006H	; 6
+;;;;		WORD	00000H,00000H,0000CH,0FFF0H	; 7
+;;;;;
+;;;;		WORD	00000H,0FFEEH,00000H,00000H	; 0
+;;;;		WORD	0FFEEH,0FFF6H,0FFEEH,0000AH	; 1	
+;;;;		WORD	00000H,00012H,00000H,00000H	; 2
+;;;;		WORD	00012H,0FFF6H,00012H,0000AH	; 3
+;;;;;
+;;;;		WORD	00000H,0FFEEH,00000H,00000H	; 0
+;;;;		WORD	0FFEBH,0FFDBH,0000FH,00024H	; 1
+;;;;		WORD	0FFEEH,0FFF6H,00012H,0FFF6H	; 2	
+;;;;		WORD	0001EH,0FFE6H,0FFE2H,00016H	; 3
+;;;;		WORD	00000H,00012H,00000H,00000H	; 4
+;;;;		WORD	0FFEEH,0000AH,00012H,0000AH	; 5
+;;;;		WORD	0FFCEH,0FFF6H,00024H,00006H	; 6
+;;;;		WORD	00000H,00000H,0000CH,0FFE0H	; 7
+;;;;;
+;;;;BOMBMOV		EQU	$		; bomb move shori
+;;;;		LDA	<GAMEMD		; purse ? [YES:BMMV700]
+;;;;		BNE	BMMV700
+;;;;;
+;;;;		DEC	BUMFLM		; timer < 0 ? [NO:BMMVC00]
+;;;;		BPL	BMMV700
+;;;;;
+;;;;		LDA	BMCONT,X
+;;;;		LDY	BUMODE
+;;;;		BEQ	BMMV200
+;;;;		DEC	BUMODE
+;;;;		EOR	#01H
+;;;;		BRA	BMMV300
+;;;;BMMV200		EQU	$
+;;;;		INC	A
+;;;;BMMV300		EQU	$
+;;;;		TAY
+;;;;		LDA	!BOBFMD,Y
+;;;;		STA	BUMFLM
+;;;;		TYA
+;;;;		STA	BMCONT,X
+;;;;;
+;;;;		LDA	BUMODE		; bakuhatsu return check !
+;;;;		BNE	BMMV400
+;;;;;
+;;;;		CPY	#02H		 ; kurikaeshi ? [NO:BMMV400]
+;;;;		BNE	BMMV400
+;;;;		LDA	#07H		 ; bomb kurikaeshi set
+;;;;		STA	BUMODE
+;;;;BMMV400		EQU	$
+;;;;		CPY	#05H
+;;;;		BNE	BMMV700
+;;;;		LDA	<KENKY
+;;;;		AND	#10111111B
+;;;;		STA	<KENKY
+;;;;		STZ	BMMODE,X	 ; item mode set
+;;;;		RTS
+;;;;BMMV700		EQU	$
+;;;;		LDA	BMCONT,X	; oam sub set
+;;;;		ASL	A
+;;;;		ASL	A
+;;;;		TAY
+;;;;		LDA	!BOOMSB,Y
+;;;;		STA	OAMSB+0CH
+;;;;		STA	OAMSB+0DH
+;;;;		STA	OAMSB+0EH
+;;;;		STA	OAMSB+0FH
+;;;;		LDA	#030H
+;;;;		STA	BOMINX
+;;;;		STZ	<WORK6
+;;;;		STZ	<WORK7
+;;;;		STZ	<WORK8
+;;;;		STZ	<WORK9
+;;;;;
+;;;;		LDA	BMCONT,X
+;;;;		CMP	#02H
+;;;;		BEQ	BMMV740
+;;;;		CMP	#03H
+;;;;		BNE	BMMV790
+;;;;;
+;;;;BMMV740		EQU	$
+;;;;		LDA	<FCNT
+;;;;		AND	#07H
+;;;;		ASL	A
+;;;;		ASL	A
+;;;;		ASL	A
+;;;;		TAY
+;;;;		MEM16
+;;;;		REP	#00100000B
+;;;;		LDA	!BOSBYX+0,Y
+;;;;		STA	<WORK6
+;;;;		LDA	!BOSBYX+2,Y
+;;;;		STA	<WORK8
+;;;;		MEM8
+;;;;		SEP	#00100000B
+;;;;BMMV790		EQU	$
+;;;;		PHX
+;;;;		JSR	BOOMST		; bomb oam set sub
+;;;;		PLX
+;;;;		LDA	BMCONT,X
+;;;;		CMP	#02H
+;;;;		BEQ	BMMV800
+;;;;		CMP	#03H
+;;;;		BNE	BMMV900
+;;;;BMMV800		EQU	$
+;;;;		PHX
+;;;;		LDA	#010H
+;;;;		STA	BOMINX
+;;;;		LDA	#002H
+;;;;		STA	OAMSB+04H
+;;;;		STA	OAMSB+05H
+;;;;		STA	OAMSB+06H
+;;;;		STA	OAMSB+07H
+;;;;		LDA	<FCNT
+;;;;		AND	#07H
+;;;;		ASL	A
+;;;;		ASL	A
+;;;;		ASL	A
+;;;;		TAY
+;;;;		MEM16
+;;;;		REP	#00100000B
+;;;;		LDA	!BOSBYX+4,Y
+;;;;		STA	<WORK6
+;;;;		LDA	!BOSBYX+6,Y
+;;;;		STA	<WORK8
+;;;;		MEM8
+;;;;		SEP	#00100000B
+;;;;		JSR	BOOMST
+;;;;		PLX
+;;;;BMMV900		EQU	$
+;;;;		RTS
+;;;;
+;
+;**************************************************************
+;*		YA move 			(YAMOVE0)     *
+;**************************************************************
+YAYHDT		EQU	$		; ya BG hit y-hosei data
+		WORD	0FFFCH,00002H,00000H,00000H
+YAXHDT		EQU	$		; ya BG hit x-hosei data
+		WORD	00000H,00000H,0FFFCH,00004H
+YAMOVE0		EQU	$
+		LDA	<GAMEMD		; purse ? [YES:YAMV400]
+		BEQ	YAMV100
+		BRL	YAMV400
+;
+YAMV100		EQU	$
+		DEC	BMCONT,X	; timer < 0 ? [NO:YAMV400]
+		LDA	BMCONT,X
+		BMI	YAMV200		; 
+		CMP	#004H
+		BCC	YAMV240
+		BRL	YAMV300
+;
+YAMV200		EQU	$
+		LDA	#0FFH
+		STA	BMCONT,X
+;
+YAMV240		EQU	$
+		JSR	BMYCLC		; ya y-speed idou sub
+		JSR	BMXCLC		; ya x-speed idou sub
+;
+		LDA	>ITEMR01
+		AND	#00000100B
+		BEQ	YAMV248
+		LDA	<FCNT
+		AND	#00000001B
+		BNE	YAMV248
+		PHX
+		JSL	>PUYAIT
+		PLX
+;
+YAMV248		EQU	$
+		LDA	#0FFH
+		STA	BMKMHN,X	; bumeran kaiten muki flag
+		JSR	CRBMEN		; teki cross
+		BCS	YAMV260
+		JSR	BMBGCK		; BG check !
+		BCS	YAMV250		; BG atari ? [NO;YAMV400]
+		BRL	YAMV400
+YAMV250		EQU	$
+		TYA			; BG check shori
+		STA	YABGCK,X
+;
+		LDA	BMMUKI,X
+		AND	#00000011B
+		ASL	A
+		TAY
+		LDA	!YAYHDT,Y
+		CLC
+		ADC	BMYPSL,X
+		STA	BMYPSL,X
+		LDA	!YAYHDT+1,Y
+		ADC	BMYPSH,X
+		STA	BMYPSH,X
+		LDA	!YAXHDT,Y
+		CLC
+		ADC	BMXPSL,X
+		STA	BMXPSL,X
+		LDA	!YAXHDT+1,Y
+		ADC	BMXPSH,X
+		STA	BMXPSH,X
+		STZ	YAHTCT		; YA game hit count reset owattaaaa !!
+		BRA	YAMV280
+;
+YAMV260		EQU	$
+		LDA	BMXPSL,X
+		SEC
+		SBC	ENXPSL,Y
+		STA	BMXSPD,X
+		LDA	BMYPSL,X
+		SEC
+		SBC	ENYPSL,Y
+		CLC
+		ADC	ENZPSL,Y
+		STA	BMYSPD,X
+		TYA
+		STA	BMKMHN,X	; bumeran kaiten muki flag
+;
+		LDA	ENMYNO,Y
+		CMP	#YASAN
+		BNE	YAMV278		; YA GAME MATO ?
+;					; YES !
+		LDA	ENWRK0,Y
+		CMP	#01H
+		BNE	YAMV277		; ATARI ?
+;					; YES !
+		LDA	#2DH
+		STA	SOUND3	;(S)
+;
+		LDA	#80H
+		STA	ENTIM2,Y
+;
+		STA	ENTIM3+00H	; Spech prot.
+;;		LDA	#10H
+;;		STA	ENZSPD,Y
+;
+		LDA	YAHTCT
+		CMP	#09H		; max 90
+		BCS	YAMV276
+;
+		INC	YAHTCT
+YAMV276		EQU	$
+		LDA	YAHTCT
+		STA	ENWRK1,Y
+;
+		LDA	ENCTCT,Y
+		INC	A
+		STA	ENCTCT,Y
+;
+		BRA	YAMV280
+YAMV277		EQU	$
+		LDA	#04H
+		STA	ENTUTM,Y
+YAMV278		EQU	$
+;;		LDA	#3CH
+;;		STA	SOUND2	;(S)
+		STZ	YAHTCT		; YA game hit count reset owattaaaa !!
+;- - - - -- - - - - - - - - - - - - - - -
+YAMV280		EQU	$
+		LDA	ENMYNO,Y
+		CMP	#YATAM		; Enemy alow !
+		BEQ	YM0001
+;
+;;;;;;;;		JSL	>SDLRCB		; sound (L,R) check
+;;;;;;;;		ORA	#yasd1
+;;;;;;;;		STA	!SOUND2		; <sound>
+		LDA	#yasd1
+		JSR	SDLRB2
+YM0001		EQU	$
+;
+		STZ	BMCONT,X
+		LDA	#YAEND
+		STA	BMMODE,X
+		LDA	#01H		; flem counter set
+		STA	BMFLFG,X
+;
+		LDA	YABGCK,X	; auto scrool bg hit ? [NO:YAOM010]
+		BEQ	YAMV400
+;
+		MEM16
+		REP	#00100000B
+		LDA	<SCCH1
+		SEC
+		SBC	<SCCH2
+		CLC
+		ADC	BMXPSL,X
+		STA	<WORK0
+		LDA	<SCCV1
+		SEC
+		SBC	<SCCV2
+		CLC
+		ADC	BMYPSL,X
+		STA	<WORK2
+		MEM8
+		SEP	#00100000B
+		LDA	<WORK0
+		STA	BMXPSL,X
+		LDA	<WORK2
+		STA	BMYPSL,X
+		BRA	YAMV400
+YAMV300		EQU	$
+		RTS
+YAMV400		EQU	$
+		BRL	YAOMST		; oam set
+;	
+;**************************************************************
+;*		YA item oam set			(YAOMST)      *
+;**************************************************************
+YACRDT		EQU	$		; YA chara data
+		WORD	0A42BH,0A42AH	;0
+		WORD	0242AH,0242BH	;1
+		WORD	0643DH,0643AH	;2
+		WORD	0243AH,0243DH	;3
+		WORD	0A42BH,0FFFFH	;4
+		WORD	0242BH,0FFFFH	;5
+		WORD	0643DH,0FFFFH	;6
+		WORD	0243DH,0FFFFH	;7
+YACRDT1		EQU	$
+		WORD	0A43CH,0A42CH	;8 [up]
+		WORD	0A43CH,0A42AH	;9	
+		WORD	0A43CH,0E42CH	;A
+		WORD	0A43CH,0A42AH	;B
+		WORD	0242CH,0243CH	;C [down]
+		WORD	0242AH,0243CH	;D
+		WORD	0642CH,0243CH	;E
+		WORD	0242AH,0243CH	;F
+		WORD	0643BH,0642DH	;10 [left]
+		WORD	0643BH,0E43AH	;11
+		WORD	0643BH,0E42DH	;12
+		WORD	0643BH,0E43AH	;13
+		WORD	0242DH,0243BH	;14 [right]
+		WORD	0243AH,0A43BH	;15
+		WORD	0A42DH,0243BH	;16
+		WORD	0243AH,0A43BH	;17
+YAYXDT		EQU	$		; y,x pos set
+;				    Y		  X
+		WORD	00000H+00000H,00000H+00000H	;0
+		WORD	00000H+00008H,00000H+00000H
+		WORD	00000H+00000H,00000H+00000H	;1
+		WORD	00000H+00008H,00000H+00000H
+		WORD	00000H+00000H,00000H+00000H	;2
+		WORD	00000H+00000H,00000H+00008H
+		WORD	00000H+00000H,00000H+00000H	;3
+		WORD	00000H+00000H,00000H+00008H
+		WORD	00000H+00000H,00000H+00000H	;4
+		WORD	00000H+00000H,00000H+00000H
+		WORD	00000H+00000H,00000H+00000H	;5
+		WORD	00000H+00000H,00000H+00000H
+		WORD	00000H+00000H,00000H+00000H	;6
+		WORD	00000H+00000H,00000H+00000H
+		WORD	00000H+00000H,00000H+00000H	;7
+		WORD	00000H+00000H,00000H+00000H
+;
+		WORD	00000H+00000H,00001H+00000H	;8 [up]
+		WORD	00000H+00008H,00001H+00000H
+		WORD	00000H+00000H,00000H+00000H	;9
+		WORD	00000H+00008H,00000H+00000H
+		WORD	00000H+00000H,0FFFFH+00000H	;A
+		WORD	00000H+00008H,0FFFEH+00000H
+		WORD	00000H+00000H,00000H+00000H	;B
+		WORD	00000H+00008H,00000H+00000H
+		WORD	00000H+00000H,00001H+00000H	;C [down]
+		WORD	00000H+00008H,00001H+00000H
+		WORD	00000H+00000H,00000H+00000H	;D
+		WORD	00000H+00008H,00000H+00000H
+		WORD	00000H+00000H,0FFFEH+00000H	;E
+		WORD	00000H+00008H,0FFFFH+00000H
+		WORD	00000H+00000H,00000H+00000H	;F
+		WORD	00000H+00008H,00000H+00000H
+		WORD	0FFFFH+00000H,00000H+00000H	;10 [left]
+		WORD	0FFFFH+00000H,00000H+00008H
+		WORD	00000H+00000H,00000H+00000H	;11
+		WORD	00000H+00000H,00000H+00008H
+		WORD	00000H+00000H,00000H+00000H	;12
+		WORD	00001H+00000H,00000H+00008H
+		WORD	00000H+00000H,00000H+00000H	;13
+		WORD	00000H+00000H,00000H+00008H
+		WORD	0FFFFH+00000H,00000H+00000H	;14 [right]
+		WORD	0FFFFH+00000H,00000H+00008H
+		WORD	00000H+00000H,00000H+00000H	;15
+		WORD	00000H+00000H,00000H+00008H
+		WORD	00001H+00000H,00000H+00000H	;16
+		WORD	00000H+00000H,00000H+00008H
+		WORD	00000H+00000H,00000H+00000H	;17
+		WORD	00000H+00000H,00000H+00008H
+YAOMST		EQU	$
+		JSR	ITMPST1		; priority,YXpos set
+		LDA	BMCRFG,X
+		BEQ	YAOM008
+		LDA	#030H
+		STA	<PYBGUN1
+;
+YAOM008		EQU	$
+		MEM16
+		REP	#00100000B
+		LDA	<WORK0
+		STA	<WORKC
+		LDA	<WORK2
+		STA	<WORKE
+		STA	<WORK4
+;
+		LDA	YABGCK,X	; auto scrool bg hit ? [NO:YAOM010]
+		AND	#00FFH
+		BEQ	YAOM010
+;
+		LDA	<SCCV2
+		SEC
+		SBC	<SCCV1
+		CLC
+		ADC	<WORKC
+		STA	<WORKC
+		LDA	<SCCH2
+		SEC
+		SBC	<SCCH1
+		CLC
+		ADC	<WORKE
+		STA	<WORKE
+		STA	<WORK4
+;
+YAOM010		EQU	$
+		MEM8
+		SEP	#00100000B
+		LDA	BMCONT,X
+		STA	<WORK7
+;
+		LDA	BMMUKI,X	; ya houkou 
+		AND	#11111011B
+		TAY
+		LDA	BMMODE,X	; bg atari ?
+		CMP	#YAEND
+		BNE	YAOM040		;[NO:YAOM040]
+;
+		LDA	BMCONT,X
+		AND	#00001000B
+		BEQ	YAOM020
+		LDA	#001H
+		BRA	YAOM030
+YAOM020		EQU	$
+		LDA	BMCONT,X
+		AND	#00000011B
+YAOM030		EQU	$
+		STA	<WORKA
+		TYA
+		ASL	A
+		ASL	A
+		CLC
+		ADC	#008H
+		CLC
+		ADC	<WORKA
+		TAY
+		BRA	YAOM080
+;
+YAOM040		EQU	$
+		LDA	BMCONT,X
+		BMI	YAOM080
+		TYA
+		ORA	#00000100B
+		TAY
+;
+YAOM080		EQU	$
+		PHX
+		TYA			; y reji * 8
+		ASL	A
+		ASL	A
+		TAX
+		LDY	#002H		; atoribuut set
+		LDA	>ITEMR01
+		AND	#00000100B
+		BNE	YAOM0C0
+		LDY	#004H
+YAOM0C0		EQU	$
+		STY	<BMWORK+2
+;
+		LDY	#000H
+		STZ	<WORK6		; loop counter
+;
+YAOM100		EQU	$
+		LDA	!YACRDT,X
+		CMP	#0FFH
+		BEQ	YAOM200
+		STA	<BMWORK+0
+;
+		PHX
+		TXA
+		ASL	A
+		TAX
+		MEM16
+		REP	#00100000B
+		LDA	!YAYXDT,X	; y-hosei set
+		CLC
+		ADC	<WORKC
+		STA	<WORK0
+		LDA	!YAYXDT+2,X	; x-hosei set
+		CLC
+		ADC	<WORKE
+		STA	<WORK2
+		MEM8
+		SEP	#00100000B
+		JSR	BMYXST3		; beam Y,X pos OAM set sub
+		PLX
+;
+		LDA	<BMWORK+0
+		STA	(<OAMADR),Y
+		INY
+		LDA	!YACRDT+1,X
+		AND	#0C1H
+		ORA	<BMWORK+2
+		ORA	<PYBGUN1
+		STA	(<OAMADR),Y
+		INY
+		PHY
+		TYA
+		SEC
+		SBC	#004H
+		LSR	A
+		LSR	A
+		TAY
+		LDA	#000H
+		STA	(<OSBADR),Y
+		PLY
+;
+YAOM200		EQU	$
+		INX
+		INX
+		INC	<WORK6
+		LDA	<WORK6
+		CMP	#02H
+		BEQ	YAOM400
+		BRL	YAOM100
+;
+YAOM400		EQU	$
+		PLX
+		LDY	#001H
+		LDA	(<OAMADR),Y	; x-pos (h) = 0 ? [NO:YAOM500]
+		CMP	#0F0H
+		BNE	YAOM500
+		LDY	#005H
+		LDA	(<OAMADR),Y	;
+		CMP	#0F0H
+		BNE	YAOM500
+		BRL	YAEN300		; ya end !! set
+;
+YAOM500		EQU	$
+		RTS
+;
+;**************************************************************
+;*		YA end move 			(YAENDMV)     *
+;**************************************************************
+YAENDMV		EQU	$
+		LDY	BMKMHN,X	; bumeran kaiten muki flag
+		BMI	YAEN0C0
+;
+		LDA	ENMODE,Y
+		CMP	#EMOVE
+		BCC	YAEN300
+;
+		LDA	ENZPSL,Y
+		BMI	YAEN300
+		LDA	ENNOCR,Y
+		BNE	YAEN300
+;
+;;;;;;;;		LDA	ENMYNO,Y
+;;;;;;;;		CMP	#TAAM1		; suisho tama check !!
+;;;;;;;;		BEQ	YAEN300
+;
+		LDA	ENMOD5,Y
+		AND	#00000010B
+		BNE	YAEN300		; tsukanai ? (ITEM)
+;					; no 
+		STZ	<WORK0
+		LDA	BMXSPD,X
+		BPL	YAEN040
+		DEC	<WORK0
+YAEN040		EQU	$
+		CLC
+		ADC	ENXPSL,Y
+		STA	BMXPSL,X
+		LDA	ENXPSH,Y
+		ADC	<WORK0
+		STA	BMXPSH,X
+;
+		STZ	<WORK0
+		LDA	BMYSPD,X
+		BPL	YAEN080
+		DEC	<WORK0
+YAEN080		EQU	$
+		CLC
+		ADC	ENYPSL,Y
+		PHP
+		SEC
+		SBC	ENZPSL,Y
+		STA	BMYPSL,X
+		LDA	ENYPSH,Y
+		SBC	#00H
+		PLP
+		ADC	<WORK0
+		STA	BMYPSH,X
+;
+YAEN0C0		EQU	$
+		LDA	<GAMEMD		; purse ? [YES:YAMV400]
+		BEQ	YAEN100
+		BRA	YAEN200
+;
+YAEN100		EQU	$
+		DEC	BMFLFG,X
+		LDA	BMFLFG,X
+		BNE	YAEN200
+;
+		LDA	#02H
+		STA	BMFLFG,X
+		INC	BMCONT,X	; timer < 0 ? [NO:YAMV400]
+		LDA	BMCONT,X		
+		CMP	#09H		; ya time up ? [YES:YAEN300]
+		BEQ	YAEN300
+		AND	#00001000B
+		BEQ	YAEN200
+;
+		LDA	#0A0H		; end timer set
+		STA	BMFLFG,X
+;		
+YAEN200		EQU	$
+		JMP	>YAOMST		; oam set
+YAEN300		EQU	$
+		BRL	BOMV0A0		; bmmode <--- 0
+;
+;**************************************************************
+;*		DOT move 			(DTMOVE0)     *
+;**************************************************************
+DTMOVE0		EQU	$
+		LDA	<GAMEMD		; purse ? [YES:DTMV400]
+		BEQ	DTMV100
+		BRA	DTMV200		;ice beam flash OAM sub
+;
+DTMV100		EQU	$
+		DEC	BMFLFG,X
+		BPL	DTMV160
+;
+		LDA	BMCONT,X	; next mode inc 
+		INC	A
+		STA	BMCONT,X
+		AND	#11111110B
+		BEQ	DTMV140
+;
+		LDA	#01H		; move start set
+		STA	BMSTAT,X
+		LDA	BMCONT,X		
+		AND	#00000111B
+		ORA	#00000100B
+		STA	BMCONT,X
+;
+DTMV140		EQU	$
+		LDA	#03H
+		STA	BMFLFG,X
+DTMV160		EQU	$
+		LDA	BMSTAT,X	; dot beam move ? [NO:DTMV200]
+		BEQ	DTMV200
+;
+		JSR	BMOMST
+		JSR	BMYCLC		; dot beam y-speed idou sub
+		JSR	BMXCLC		; dot beam x-speed idou sub
+;
+		JSR	CRBMEN		; teki cross ? [YES:DTMV180] 
+		BCS	DTMV180
+;
+		JSR	BMBGCK		; BG check sub
+		BCC	DTMV200		; BG atari ? [NO:DTMV200]
+;
+DTMV180		EQU	$
+		LDA	#DTED0
+		STA	BMMODE,X	; end dot beam set
+		TAY
+		LDA	!BMITOC-1,Y	; dot beam oam suu set
+		STA	BMOMNO,X
+		STZ	BMCONT,X
+		LDA	#004H
+		STA	BMFLFG,X
+DTMV200		EQU	$
+		BRL	ICEFLST		;ice beam flash OAM sub
+;
+;**************************************************************
+;*		DOT END move 			(DTENDM0)     *
+;**************************************************************
+DTENDM0		EQU	$
+		DEC	BMFLFG,X
+		BPL	DTED100
+		LDA	#007H
+		STA	BMFLFG,X
+		INC	BMCONT,X
+		LDA	BMCONT,X
+		CMP	#02H
+		BNE	DTED100
+		STZ	BMMODE,X
+		RTS
+DTED100		EQU	$
+		BRL	DTOMST
+;
+;**************************************************************
+;*		DOT beam oam set		(DTOMST)      *
+;**************************************************************
+DTCRDT		EQU	$		; dot chara data
+		WORD	024CFH,024CFH,024CFH,024CFH	;0 [end chara]
+		WORD	024DFH,024DFH,024DFH,024DFH	;1
+DTYXDT		EQU	$		; y,x pos set
+DTYX00		EQU	$
+;			  y   x   y   x   y   x   y   x	
+		HEX	000,000,000,008,008,000,008,008	;0 [end chara]
+		HEX	0F8,0F8,0F8,010,010,0F8,010,010	;1
+;
+DTOMST		EQU	$
+		JSR	ITMPST		; priority,YXpos set
+;
+		PHX
+		LDA	BMOMNO,X
+		JSR	BMOMPT		; oam point set sub
+;
+		LDA	BMCONT,X
+		ASL	A
+		ASL	A
+		ASL	A
+		TAX
+		LDY	#000H
+		STZ	<WORK4		; loop counter
+;
+DTOM100		EQU	$
+		MEM16
+		REP	#00100000B
+		LDA	!DTYXDT,X	; y-hosei set
+		AND	#00FFH
+		CMP	#0080H
+		BCC	DTOM120
+		ORA	#0FF00H
+DTOM120		EQU	$
+		CLC
+		ADC	<WORK0
+		STA	<WORK8
+;
+		LDA	!DTYXDT+1,X	; x-hosei set
+		AND	#00FFH
+		CMP	#0080H
+		BCC	DTOM130
+		ORA	#0FF00H
+DTOM130		EQU	$
+		CLC
+		ADC	<WORK2
+		STA	<WORKA
+		MEM8
+		SEP	#00100000B
+;
+		PHX
+		LDX	#0F0H
+		LDA	<WORK9
+		BNE	DTOM140
+		LDA	<WORKB
+		BNE	DTOM140
+		LDA	<WORKA		; X-pos set
+		STA	(<OAMADR),Y
+		LDA	<WORK8		; Y-pos set
+		CMP	#0F0H
+		BCS	DTOM140
+		TAX
+DTOM140		EQU	$
+		INY
+		TXA
+		STA	(<OAMADR),Y
+		INY
+		PLX
+;
+		LDA	!DTCRDT,X
+		STA	(<OAMADR),Y
+		INY
+		LDA	!DTCRDT+1,X
+		AND	#0CFH
+		ORA	<PYBGUN+1
+		STA	(<OAMADR),Y
+		INY
+;
+		PHY
+		TYA
+		SEC
+		SBC	#004H
+		LSR	A
+		LSR	A
+		TAY
+		LDA	#000H
+		STA	(<OSBADR),Y
+		PLY
+		JSR	OAMPLCK		; oam point check
+DTOM200		EQU	$
+		INX
+		INX
+		INC	<WORK4
+		LDA	<WORK4
+		CMP	#04H
+		BEQ	DTOM400
+		BRL	DTOM100
+;
+DTOM400		EQU	$
+		PLX
+		LDY	#001H
+		LDA	(<OAMADR),Y	; x-pos (h) = 0 ? [NO:YAOM500]
+		CMP	#0F0H
+		BNE	DTOM500
+		LDY	#005H
+		LDA	(<OAMADR),Y	;
+		CMP	#0F0H
+		BNE	DTOM500
+		STZ	BMMODE,X	; end dot beam set
+;
+DTOM500		EQU	$
+		RTS
+;
+;**************************************************************
+;*		DOT Beam move 1			(DTMOVE1)     *
+;**************************************************************
+;;;;;;;;;;DTFLM1		EQU	$		; flem counter
+;;;;;;;;;;		HEX	001H,001H,001H,001H,001H,001H,002H,004H
+DTMOVE1		EQU	$
+;;;;;;;;;;		LDA	<GAMEMD		; purse ? [YES:DTMV400]
+;;;;;;;;;;		BEQ	DTMA100
+;;;;;;;;;;		BRA	DTMA900		; dot beam oam set
+;;;;;;;;;;;
+;;;;;;;;;;DTMA100		EQU	$
+;;;;;;;;;;		DEC	BMFLFG,X
+;;;;;;;;;;		BPL	DTMA800
+;;;;;;;;;;;
+;;;;;;;;;;		LDA	BMSTAT,X
+;;;;;;;;;;		BNE	DTMA200
+;;;;;;;;;;;
+;;;;;;;;;;		LDA	BMCONT,X	; next mode inc 
+;;;;;;;;;;		CMP	#07H
+;;;;;;;;;;		BNE	DTMA180
+;;;;;;;;;;;
+;;;;;;;;;;		DEC	BUMFLM,X
+;;;;;;;;;;		BPL	DTMA300
+;;;;;;;;;;		LDA	#001H
+;;;;;;;;;;		STA	BMSTAT,X
+;;;;;;;;;;		BRA	DTMA300
+;;;;;;;;;;DTMA180		EQU	$
+;;;;;;;;;;		LDA	BMCONT,X
+;;;;;;;;;;		INC	A
+;;;;;;;;;;		STA	BMCONT,X
+;;;;;;;;;;		BRA	DTMA300
+;;;;;;;;;;;
+;;;;;;;;;;DTMA200		EQU	$
+;;;;;;;;;;		DEC	BMCONT,X
+;;;;;;;;;;		BPL	DTMA300
+;;;;;;;;;;		LDA	#002H
+;;;;;;;;;;		STA	TMDTFG
+;;;;;;;;;;		STZ	BMMODE,X
+;;;;;;;;;;		RTS
+;;;;;;;;;;;
+;;;;;;;;;;DTMA300		EQU	$
+;;;;;;;;;;		LDA	BCDMNO,X	; chara hanten flag set
+;;;;;;;;;;		EOR	#00000001B
+;;;;;;;;;;		STA	BCDMNO,X
+;;;;;;;;;;		LDA	BMCONT,X	; next flem counter set
+;;;;;;;;;;		TAY
+;;;;;;;;;;		LDA	!DTFLM1,Y
+;;;;;;;;;;		STA	BMFLFG,X
+;;;;;;;;;;;
+;;;;;;;;;;DTMA800		EQU	$
+;;;;;;;;;;		JSR	CRBMEN		; teki cross sub 
+;;;;;;;;;;;
+;;;;;;;;;;DTMA900		EQU	$
+;;;;;;;;;;		BRL	DTOMST1		; dot beam oam set
+;
+;**************************************************************
+;*		DOT beam oam set		(DTOMST)      *
+;**************************************************************
+;;;;;;;;;;DTATDT		EQU	$		; dot chara data
+;;;;;;;;;;		WORD	0A247H,0E247H	; up
+;;;;;;;;;;		WORD	02247H,06247H	; down
+;;;;;;;;;;		WORD	06245H,0E245H	; left
+;;;;;;;;;;		WORD	02245H,0A245H	; right
+;;;;;;;;;;DTAYXP		EQU	$		; y,x-pos data
+;;;;;;;;;;		BYTE	000H,00BH,016H,021H,02CH,037H,042H,04DH
+;;;;;;;;;;;
+;;;;;;;;;;DTOMST1		EQU	$
+;;;;;;;;;;		LDA	BMCONT,X	; DOT wait !! 
+;;;;;;;;;;		BPL	DTOA040
+;;;;;;;;;;		RTS
+;;;;;;;;;;;
+;;;;;;;;;;DTOA040		EQU	$
+;;;;;;;;;;		JSR	ITMPST		; priority,YXpos set
+;;;;;;;;;;;
+;;;;;;;;;;		PHX
+;;;;;;;;;;		LDA	BMCONT,X
+;;;;;;;;;;		STA	<WORK4
+;;;;;;;;;;		LDA	BMOMNO,X
+;;;;;;;;;;		JSR	BMOMPT		; oam point get sub
+;;;;;;;;;;		LDA	BCDMNO,X	; chara hanten flag clear
+;;;;;;;;;;		ASL	A
+;;;;;;;;;;		STA	<WORK6
+;;;;;;;;;;		LDA	BMMUKI,X	; dot beam houkou set
+;;;;;;;;;;		ASL	A
+;;;;;;;;;;		ASL	A
+;;;;;;;;;;		STA	<WORK7		; muki set
+;;;;;;;;;;		CLC
+;;;;;;;;;;		ADC	<WORK6
+;;;;;;;;;;		TAX
+;;;;;;;;;;		LDY	#000H
+;;;;;;;;;;;
+;;;;;;;;;;DTOA100		EQU	$
+;;;;;;;;;;		PHX
+;;;;;;;;;;		LDX	<WORK4
+;;;;;;;;;;		LDA	!DTAYXP,X	; hosei data set
+;;;;;;;;;;		STA	<WORK8		; (L) set
+;;;;;;;;;;		STZ	<WORK9		; (H) clear
+;;;;;;;;;;;
+;;;;;;;;;;		LDA	<WORK7		; up,down ? [YES:DTOA130]
+;;;;;;;;;;		AND	#00001000B
+;;;;;;;;;;		BEQ	DTOA130
+;;;;;;;;;;;
+;;;;;;;;;;		LDA	<WORK7
+;;;;;;;;;;		AND	#00000100B
+;;;;;;;;;;		BNE	DTOA120
+;;;;;;;;;;;
+;;;;;;;;;;		LDA	<WORK8
+;;;;;;;;;;		BEQ	DTOA120
+;;;;;;;;;;		EOR	#0FFH
+;;;;;;;;;;		INC	A
+;;;;;;;;;;		STA	<WORK8
+;;;;;;;;;;		LDA	#0FFH
+;;;;;;;;;;		STA	<WORK9
+;;;;;;;;;;DTOA120		EQU	$
+;;;;;;;;;;		MEM16
+;;;;;;;;;;		REP	#00100000B
+;;;;;;;;;;		LDA	<WORK2
+;;;;;;;;;;		CLC
+;;;;;;;;;;		ADC	<WORK8
+;;;;;;;;;;		STA	<WORKA
+;;;;;;;;;;		LDA	<WORK0
+;;;;;;;;;;		STA	<WORK8
+;;;;;;;;;;		MEM8
+;;;;;;;;;;		SEP	#00100000B
+;;;;;;;;;;		BRA	DTOA138
+;;;;;;;;;;;
+;;;;;;;;;;DTOA130		EQU	$
+;;;;;;;;;;		LDA	<WORK7
+;;;;;;;;;;		BNE	DTOA134		
+;;;;;;;;;;		LDA	<WORK8
+;;;;;;;;;;		BEQ	DTOA134
+;;;;;;;;;;		EOR	#0FFH
+;;;;;;;;;;		INC	A
+;;;;;;;;;;		STA	<WORK8
+;;;;;;;;;;		LDA	#0FFH
+;;;;;;;;;;		STA	<WORK9
+;;;;;;;;;;DTOA134		EQU	$
+;;;;;;;;;;		MEM16
+;;;;;;;;;;		REP	#00100000B
+;;;;;;;;;;		LDA	<WORK0
+;;;;;;;;;;		CLC
+;;;;;;;;;;		ADC	<WORK8
+;;;;;;;;;;		STA	<WORK8
+;;;;;;;;;;		LDA	<WORK2
+;;;;;;;;;;		STA	<WORKA
+;;;;;;;;;;		MEM8
+;;;;;;;;;;		SEP	#00100000B
+;;;;;;;;;;;
+;;;;;;;;;;DTOA138		EQU	$
+;;;;;;;;;;		PLX
+;;;;;;;;;;		PHX
+;;;;;;;;;;		LDX	#0F0H
+;;;;;;;;;;		LDA	<WORK9
+;;;;;;;;;;		BNE	DTOA140
+;;;;;;;;;;		LDA	<WORKB
+;;;;;;;;;;		BNE	DTOA140
+;;;;;;;;;;		LDA	<WORKA		; X-pos set
+;;;;;;;;;;		STA	(<OAMADR),Y
+;;;;;;;;;;		LDA	<WORK8		; Y-pos set
+;;;;;;;;;;		CMP	#0F0H
+;;;;;;;;;;		BCS	DTOA140
+;;;;;;;;;;		TAX
+;;;;;;;;;;DTOA140		EQU	$
+;;;;;;;;;;		INY
+;;;;;;;;;;		TXA
+;;;;;;;;;;		STA	(<OAMADR),Y
+;;;;;;;;;;		INY
+;;;;;;;;;;		PLX
+;;;;;;;;;;;
+;;;;;;;;;;		LDA	!DTATDT,X
+;;;;;;;;;;		STA	(<OAMADR),Y
+;;;;;;;;;;		INY
+;;;;;;;;;;		LDA	!DTATDT+1,X
+;;;;;;;;;;		AND	#0CFH
+;;;;;;;;;;		ORA	<PYBGUN+1
+;;;;;;;;;;		STA	(<OAMADR),Y
+;;;;;;;;;;		INY
+;;;;;;;;;;		PHY
+;;;;;;;;;;		TYA
+;;;;;;;;;;		SEC
+;;;;;;;;;;		SBC	#004H
+;;;;;;;;;;		LSR	A
+;;;;;;;;;;		LSR	A
+;;;;;;;;;;		TAY
+;;;;;;;;;;		LDA	#002H
+;;;;;;;;;;		STA	(<OSBADR),Y
+;;;;;;;;;;		PLY
+;;;;;;;;;;		JSR	OAMPLCK		; oam point check
+;;;;;;;;;;;
+;;;;;;;;;;		LDA	<WORK6
+;;;;;;;;;;		EOR	#00000010B
+;;;;;;;;;;		STA	<WORK6
+;;;;;;;;;;		CLC
+;;;;;;;;;;		ADC	<WORK7
+;;;;;;;;;;		TAX
+;;;;;;;;;;;
+;;;;;;;;;;		DEC	<WORK4
+;;;;;;;;;;		BMI	DTOA400
+;;;;;;;;;;		BRL	DTOA100
+;;;;;;;;;;;
+;;;;;;;;;;DTOA400		EQU	$
+;;;;;;;;;;		PLX
+;;;;;;;;;;		LDY	#001H
+;;;;;;;;;;		LDA	(<OAMADR),Y	; x-pos (h) = 0 ? [NO:YAOM500]
+;;;;;;;;;;		CMP	#0F0H
+;;;;;;;;;;		BNE	DTOA500
+;;;;;;;;;;		LDY	#005H
+;;;;;;;;;;		LDA	(<OAMADR),Y	;
+;;;;;;;;;;		CMP	#0F0H
+;;;;;;;;;;		BNE	DTOA500
+;;;;;;;;;;		LDY	#009H
+;;;;;;;;;;		LDA	(<OAMADR),Y	;
+;;;;;;;;;;		CMP	#0F0H
+;;;;;;;;;;		BNE	DTOA500
+;;;;;;;;;;		LDY	#00DH
+;;;;;;;;;;		LDA	(<OAMADR),Y	;
+;;;;;;;;;;		CMP	#0F0H
+;;;;;;;;;;		BNE	DTOA500
+;;;;;;;;;;		STZ	BMMODE,X	; end dot beam set
+;;;;;;;;;;;
+;;;;;;;;;;DTOA500		EQU	$
+;;;;;;;;;;		RTS
+;
+;**************************************************************
+;*		DOT move (nomal)		(DTMOVE2)     *
+;**************************************************************
+DTMOVE2		EQU	$
+;;;;;;;;;;		LDA	<GAMEMD		; purse ? [YES:DTMV400]
+;;;;;;;;;;		BEQ	DT2MV10
+;;;;;;;;;;		BRA	DT2MV20		;ice beam flash OAM sub
+;;;;;;;;;;;
+;;;;;;;;;;DT2MV10		EQU	$
+;;;;;;;;;;		LDA	BMCONT,X
+;;;;;;;;;;		CMP	#0FFH
+;;;;;;;;;;		BEQ	DT2MV14
+;;;;;;;;;;;
+;;;;;;;;;;		DEC	BMFLFG,X
+;;;;;;;;;;		BPL	DT2MV16
+;;;;;;;;;;;
+;;;;;;;;;;		LDA	#00H
+;;;;;;;;;;		STA	BMFLFG,X
+;;;;;;;;;;DT2MV14		EQU	$
+;;;;;;;;;;		LDA	BMCONT,X	; next mode inc 
+;;;;;;;;;;		INC	A
+;;;;;;;;;;		STA	BMCONT,X
+;;;;;;;;;;		CMP	#006H
+;;;;;;;;;;		BNE	DT2MV16
+;;;;;;;;;;		STZ	BMCONT,X
+;;;;;;;;;;;
+;;;;;;;;;;DT2MV16		EQU	$
+;;;;;;;;;;		JSR	BMYCLC		; dot beam y-speed idou sub
+;;;;;;;;;;		JSR	BMXCLC		; dot beam x-speed idou sub
+;;;;;;;;;;;
+;;;;;;;;;;		JSR	CRBMEN		; teki cross ? [YES:DTMV180] 
+;;;;;;;;;;		BCS	DT2MV18
+;;;;;;;;;;;
+;;;;;;;;;;		JSR	BMBGCK		; BG check sub
+;;;;;;;;;;		BCC	DT2MV20		; BG atari ? [NO:DTMV200]
+;;;;;;;;;;;
+;;;;;;;;;;DT2MV18		EQU	$
+;;;;;;;;;;		LDA	#DTED0
+;;;;;;;;;;		STA	BMMODE,X	; end dot beam set
+;;;;;;;;;;		TAY
+;;;;;;;;;;		LDA	!BMITOC-1,Y	; dot beam oam suu set
+;;;;;;;;;;		STA	BMOMNO,X
+;;;;;;;;;;		LDA	#000H
+;;;;;;;;;;		STA	BMCONT,X
+;;;;;;;;;;		TAY
+;;;;;;;;;;		LDA	!DTFLM0,Y
+;;;;;;;;;;		STA	BMFLFG,X
+;;;;;;;;;;DT2MV20		EQU	$
+;;;;;;;;;;		BRA	DT2OMST
+;
+;**************************************************************
+;*		DOT move nomal oam set		(DT2OMST)     *
+;**************************************************************
+;;;;;;;;;;DT2YPS		EQU	$			; y-pos data
+;;;;;;;;;;;TYPE			     0      1	   2      3  S
+;;;;;;;;;;		WORD	0FFFDH,00002H,00002H,00007H ;0
+;;;;;;;;;;		WORD	0FFFDH,00001H,00003H,00007H ;1
+;;;;;;;;;;		WORD	0FFFDH,0FFFFH,00005H,00007H ;2
+;;;;;;;;;;		WORD	0FFFEH,0FFFEH,00006H,00006H ;3
+;;;;;;;;;;		WORD	0FFFDH,0FFFFH,00005H,00007H ;4
+;;;;;;;;;;		WORD	0FFFDH,00001H,00003H,00007H ;5
+;;;;;;;;;;DT2XPS		EQU	$			; x-pos data
+;;;;;;;;;;		WORD	00004H,0FFFFH,00009H,00004H
+;;;;;;;;;;		WORD	00003H,00009H,0FFFFH,00005H
+;;;;;;;;;;		WORD	00001H,00009H,0FFFFH,00007H
+;;;;;;;;;;		WORD	00000H,00008H,00000H,00008H
+;;;;;;;;;;		WORD	00007H,0FFFFH,00009H,00001H
+;;;;;;;;;;		WORD	00005H,0FFFFH,00009H,00003H
+;;;;;;;;;;DT2OMST		EQU	$
+;;;;;;;;;;		JSR	ITMPST		; priority,YX pos set
+;;;;;;;;;;;
+;;;;;;;;;;		LDA	<WORK0
+;;;;;;;;;;		STA	<WORK6
+;;;;;;;;;;		LDA	<WORK1
+;;;;;;;;;;		STA	<WORK7
+;;;;;;;;;;;
+;;;;;;;;;;		PHX
+;;;;;;;;;;		LDA	#003H		; loop counter set
+;;;;;;;;;;		STA	<WORK8
+;;;;;;;;;;		LDA	BMCONT,X
+;;;;;;;;;;		ASL	A
+;;;;;;;;;;		ASL	A
+;;;;;;;;;;		ASL	A
+;;;;;;;;;;		TAX
+;;;;;;;;;;		LDY	#000H
+;;;;;;;;;;;
+;;;;;;;;;;DT2OM10		EQU	$
+;;;;;;;;;;		MEM16
+;;;;;;;;;;		REP	#00100000B
+;;;;;;;;;;		LDA	!DT2YPS,X
+;;;;;;;;;;		CLC
+;;;;;;;;;;		ADC	<WORK6
+;;;;;;;;;;		STA	<WORK0
+;;;;;;;;;;		LDA	!DT2XPS,X
+;;;;;;;;;;		CLC
+;;;;;;;;;;		ADC	<WORK4
+;;;;;;;;;;		STA	<WORK2
+;;;;;;;;;;		MEM8
+;;;;;;;;;;		SEP	#00100000B
+;;;;;;;;;;;
+;;;;;;;;;;		JSR	BMYXST3		; beam Y,X pos oam set
+;;;;;;;;;;		LDA	#04CH
+;;;;;;;;;;		STA	(<OAMADR),Y
+;;;;;;;;;;		INY
+;;;;;;;;;;		LDA	#00000100B
+;;;;;;;;;;		ORA	<PYBGUN1
+;;;;;;;;;;		STA	(<OAMADR),Y
+;;;;;;;;;;		INY
+;;;;;;;;;;		PHY
+;;;;;;;;;;		TYA
+;;;;;;;;;;		SEC
+;;;;;;;;;;		SBC	#004H
+;;;;;;;;;;		LSR	A
+;;;;;;;;;;		LSR	A
+;;;;;;;;;;		TAY
+;;;;;;;;;;		LDA	#000H
+;;;;;;;;;;		STA	(<OSBADR),Y
+;;;;;;;;;;		PLY
+;;;;;;;;;;		JSR	OAMPLCK		; oam point check
+;;;;;;;;;;		INX
+;;;;;;;;;;		INX
+;;;;;;;;;;		DEC	<WORK8
+;;;;;;;;;;		BPL	DT2OM10
+;;;;;;;;;;;
+;;;;;;;;;;		PLX
+;;;;;;;;;;		LDY	#001H
+;;;;;;;;;;		LDA	(<OAMADR),Y	; x-pos (h) = 0 ? [NO:YAOM500]
+;;;;;;;;;;		CMP	#0F0H
+;;;;;;;;;;		BNE	DT2OM20
+;;;;;;;;;;		LDY	#005H
+;;;;;;;;;;		LDA	(<OAMADR),Y	;
+;;;;;;;;;;		CMP	#0F0H
+;;;;;;;;;;		BNE	DT2OM20
+;;;;;;;;;;		LDY	#009H
+;;;;;;;;;;		LDA	(<OAMADR),Y	;
+;;;;;;;;;;		CMP	#0F0H
+;;;;;;;;;;		BNE	DT2OM20
+;;;;;;;;;;		LDY	#00DH
+;;;;;;;;;;		LDA	(<OAMADR),Y	;
+;;;;;;;;;;		CMP	#0F0H
+;;;;;;;;;;		BNE	DT2OM20
+;;;;;;;;;;		STZ	BMMODE,X	; end dot beam set
+;;;;;;;;;;;
+;;;;;;;;;;DT2OM20		EQU	$
+;;;;;;;;;;		RTS
+;
+;**************************************************************
+;*		DOT move (common tame magic)	(DTMOVE3)     *
+;**************************************************************
+DTMOVE3		EQU	$
+;;;;;;;;		LDA	<GAMEMD		; purse ? [YES:DT3MF00]
+;;;;;;;;		BEQ	DT3M100
+;;;;;;;;		BRL	DT3MF00
+;;;;;;;;;
+;;;;;;;;DT3M100		EQU	$
+;;;;;;;;		LDA	BCDMNO,X
+;;;;;;;;		CMP	#002H
+;;;;;;;;		BEQ	DT3M170
+;;;;;;;;;
+;;;;;;;;		LDA	TMDTFG		; end code ?
+;;;;;;;;		CMP	#002H
+;;;;;;;;		BEQ	DT3M300
+;;;;;;;;;
+;;;;;;;;		LDA	<DIEFG		; player die jump ? [NO:DT3M140]
+;;;;;;;;		BEQ	DT3M140
+;;;;;;;;DT3M120		EQU	$
+;;;;;;;;		BRL	DT3M4A0
+;;;;;;;;;
+;;;;;;;;DT3M140		EQU	$
+;;;;;;;;		LDA	DKYHZN		; b key off ? [NO:DT3MF00]
+;;;;;;;;		BNE	DT3M180
+;;;;;;;;;
+;;;;;;;;		LDA	BCDMNO,X
+;;;;;;;;		CMP	#002H
+;;;;;;;;		BEQ	DT3M180
+;;;;;;;;		LDA	BCDMNO,X	; meta full check !!
+;;;;;;;;		CMP	#001H
+;;;;;;;;		BEQ	DT3M160
+;;;;;;;;;
+;;;;;;;;		PHX
+;;;;;;;;		JSR	NMBMST		; nomal magic beam set sub
+;;;;;;;;		PLX
+;;;;;;;;;
+;;;;;;;;		BRL	DT3M4A0
+;;;;;;;;;
+;;;;;;;;DT3M160		EQU	$
+;;;;;;;;		LDA	#002H
+;;;;;;;;		STA	BCDMNO,X
+;;;;;;;;		LDA	#0FFH
+;;;;;;;;		STA	BMCONT,X
+;;;;;;;;DT3M170		EQU	$
+;;;;;;;;		BRA	DT3M300
+;;;;;;;;;
+;;;;;;;;DT3M180		EQU	$
+;;;;;;;;		LDA	TMBMCT		; meta full ? [NO:DT3M200]
+;;;;;;;;		AND	#020H
+;;;;;;;;		BEQ	DT3M200
+;;;;;;;;		LDA	BCDMNO,X
+;;;;;;;;		CMP	#001H
+;;;;;;;;		BEQ	DT3M200
+;;;;;;;;		LDA	#001H
+;;;;;;;;		STA	BCDMNO,X	; next mode shoki set
+;;;;;;;;		LDA	#0FFH
+;;;;;;;;		STA	BMCONT,X
+;;;;;;;;;
+;;;;;;;;DT3M200		EQU	$		; magic 0 mode shori
+;;;;;;;;		LDA	BCDMNO,X	; mode 0,1 check !
+;;;;;;;;		BNE	DT3M300
+;;;;;;;;;
+;;;;;;;;		DEC	BMFLFG,X
+;;;;;;;;		BPL	DT3MF00
+;;;;;;;;		LDA	#005H		; next flem set
+;;;;;;;;		STA	BMFLFG,X
+;;;;;;;;;
+;;;;;;;;		LDA	BMCONT,X
+;;;;;;;;		EOR	#0FFH
+;;;;;;;;		STA	BMCONT,X
+;;;;;;;;		BRA	DT3MF00
+;;;;;;;;;
+;;;;;;;;DT3M300		EQU	$		; magic 1 moden shori
+;;;;;;;;		DEC	BMFLFG,X
+;;;;;;;;		BPL	DT3MF00
+;;;;;;;;		LDA	#003H
+;;;;;;;;		STA	BMFLFG,X
+;;;;;;;;;
+;;;;;;;;		LDA	BCDMNO,X
+;;;;;;;;		CMP	#002H
+;;;;;;;;		BEQ	DT3M400
+;;;;;;;;;
+;;;;;;;;		INC	BMCONT,X
+;;;;;;;;		LDA	BMCONT,X
+;;;;;;;;		CMP	#002H
+;;;;;;;;		BNE	DT3MF00
+;;;;;;;;;
+;;;;;;;;		LDA	#0FFH
+;;;;;;;;		STA	BMCONT,X
+;;;;;;;;		BRA	DT3MF00
+;;;;;;;;;
+;;;;;;;;DT3M400		EQU	$
+;;;;;;;;		INC	BMCONT,X
+;;;;;;;;		LDA	BMCONT,X
+;;;;;;;;		BNE	DT3M440
+;;;;;;;;		LDA	#001H
+;;;;;;;;		STA	BMCONT,X
+;;;;;;;;DT3M440		EQU	$
+;;;;;;;;		CMP	#002H
+;;;;;;;;		BNE	DT3M460
+;;;;;;;;;
+;;;;;;;;		PHX
+;;;;;;;;		JSR	TMBMST		; tame beam set sub
+;;;;;;;;		PLX
+;;;;;;;;;
+;;;;;;;;DT3M460		EQU	$
+;;;;;;;;		LDA	BMCONT,X
+;;;;;;;;		CMP	#004H
+;;;;;;;;		BNE	DT3MF00
+;;;;;;;;;					fire move
+;;;;;;;;DT3M4A0		EQU	$
+;;;;;;;;		STZ	BMMODE,X
+;;;;;;;;		RTS
+;;;;;;;;DT3MF00		EQU	$
+;;;;;;;;		BRL	DT3OMST
+;;;;;;;;;
+;;;;;;;;;**************************************************************
+;;;;;;;;;*		DOT move common tame magic oam set(DT3OMST)   *
+;;;;;;;;;**************************************************************
+;;;;;;;;DT3YPS		EQU	$			; y-pos data
+;;;;;;;;;TYPE			    up   down	left  right
+;;;;;;;;		WORD	00002H,00017H,0FFFEH,0FFFEH	; 0
+;;;;;;;;		WORD	00002H,00017H,0FFFDH,0FFFDH	; 1
+;;;;;;;;		WORD	00002H,00017H,0FFFAH,0FFFAH	; 2
+;;;;;;;;		WORD	00002H,00017H,0FFFAH,0FFFAH	; 3
+;;;;;;;;DT3XPS		EQU	$			; x-pos data
+;;;;;;;;		WORD	0FFEEH,0FFFBH,0FFF5H,00012H	; 0
+;;;;;;;;		WORD	0FFEDH,0FFFAH,0FFF5H,00012H	; 1
+;;;;;;;;		WORD	0FFEAH,0FFF7H,0FFF5H,00012H	; 2
+;;;;;;;;		WORD	0FFEAH,0FFF7H,0FFF5H,00012H	; 3
+;;;;;;;;DT3CRD		EQU	$			; chara data
+;;;;;;;;;			     up    down    left   right
+;;;;;;;;		HEX	0FF,0C6,0FF,0C6,0FF,0C4,0FF,0C4	;0
+;;;;;;;;		HEX	0FF,0D6,0FF,0D6,0FF,0D4,0FF,0D4	;1
+;;;;;;;;		HEX	0C7,0D7,0C7,0D7,0C5,0D5,0C5,0D5	;2
+;;;;;;;;		HEX	0FF,0C6,0FF,0C6,0FF,0C4,0FF,0C4	;3
+;;;;;;;;DT3KHD		EQU	$			; lot kihon y,x pos
+;;;;;;;;		WORD	00026H,00026H,00026H,00026H	;0
+;;;;;;;;		WORD	00027H,00027H,00027H,00027H	;1
+;;;;;;;;		WORD	0002EH,0002EH,0002EH,0002EH	;2
+;;;;;;;;		WORD	0002EH,0002EH,0002EH,0002EH	;3
+;;;;;;;;DT3FPD		EQU	$
+;;;;;;;;		WORD	08000H,04000H
+;;;;;;;;DT3COR		EQU	$		; coler data
+;;;;;;;;		BYTE	002H,002H,004H,002H,002H,002H,002H,002,002H
+;;;;;;;;DT3OMST		EQU	$
+;;;;;;;;		LDA	BMCONT,X
+;;;;;;;;		BPL	DT3OM10
+;;;;;;;;		RTS
+;;;;;;;;DT3OM10		EQU	$
+;;;;;;;;		ASL	A		; *8
+;;;;;;;;		ASL	A
+;;;;;;;;		ASL	A
+;;;;;;;;		CLC
+;;;;;;;;		ADC	<PLMKCH
+;;;;;;;;		TAY
+;;;;;;;;		MEM16
+;;;;;;;;		REP	#00100000B
+;;;;;;;;		LDA	<PLYPS1
+;;;;;;;;		CLC
+;;;;;;;;		ADC	!DT3YPS,Y
+;;;;;;;;		STA	<WORK0
+;;;;;;;;		LDA	<PLXPS1
+;;;;;;;;		CLC
+;;;;;;;;		ADC	!DT3XPS,Y
+;;;;;;;;		STA	<WORK2
+;;;;;;;;		MEM8
+;;;;;;;;		SEP	#00100000B
+;;;;;;;;		LDA	<WORK0
+;;;;;;;;		STA	BMYPSL,X
+;;;;;;;;		LDA	<WORK1
+;;;;;;;;		STA	BMYPSH,X
+;;;;;;;;		LDA	<WORK2
+;;;;;;;;		STA	BMXPSL,X
+;;;;;;;;		LDA	<WORK3
+;;;;;;;;		STA	BMXPSH,X
+;;;;;;;;;
+;;;;;;;;		PHY
+;;;;;;;;		JSR	ITMPST		; priority,  now Y,X pos set
+;;;;;;;;		LDY	LOTITM		; coler set
+;;;;;;;;		LDA	!DT3COR,Y
+;;;;;;;;		STA	<BMWORK+0
+;;;;;;;;		PLY
+;;;;;;;;;
+;;;;;;;;		MEM16
+;;;;;;;;		REP	#00100000B
+;;;;;;;;		LDA	<WORK0		; y-pos hozon
+;;;;;;;;		STA	<WORK4
+;;;;;;;;		STA	<WORK8
+;;;;;;;;		LDA	<WORK2		; x-pos hozon
+;;;;;;;;		STA	<WORK6
+;;;;;;;;		STA	<WORKA
+;;;;;;;;		MEM8
+;;;;;;;;		SEP	#00100000B
+;;;;;;;;;
+;;;;;;;;		PHX
+;;;;;;;;		LDX	#000H
+;;;;;;;;		LDA	<PLMKCH
+;;;;;;;;		AND	#00000100B
+;;;;;;;;		BNE	DT3OM20
+;;;;;;;;		LDX	#002H
+;;;;;;;;DT3OM20		EQU	$
+;;;;;;;;		MEM16
+;;;;;;;;		REP	#00100000B
+;;;;;;;;		LDA	<WORK0,X
+;;;;;;;;		CLC
+;;;;;;;;		ADC	!DT3KHD,Y
+;;;;;;;;		SEC
+;;;;;;;;		SBC	#0008H
+;;;;;;;;		STA	<WORK8,X
+;;;;;;;;		LDA	!DT3FPD,X
+;;;;;;;;		STA	<WORKC
+;;;;;;;;		MEM8
+;;;;;;;;		SEP	#00100000B
+;;;;;;;;		PLX
+;;;;;;;;		PHX
+;;;;;;;;;
+;;;;;;;;		LDA	<PLMKCH
+;;;;;;;;		BNE	DT3OM30
+;;;;;;;;;
+;;;;;;;;		PHY
+;;;;;;;;		LDA	#004H
+;;;;;;;;		JSL	>OAMENT3
+;;;;;;;;		PLY
+;;;;;;;;;		
+;;;;;;;;DT3OM30		EQU	$
+;;;;;;;;		TYX
+;;;;;;;;		LDY	#000H
+;;;;;;;;DT3OM38		EQU	$
+;;;;;;;;		LDA	!DT3CRD,X
+;;;;;;;;		CMP	#0FFH
+;;;;;;;;		BEQ	DT3OM40
+;;;;;;;;		JSR	BMYXST3
+;;;;;;;;		LDA	!DT3CRD,X
+;;;;;;;;		STA	(<OAMADR),Y
+;;;;;;;;		INY
+;;;;;;;;		LDA	<BMWORK
+;;;;;;;;		ORA	<PYBGUN1
+;;;;;;;;		STA	(<OAMADR),Y
+;;;;;;;;		INY
+;;;;;;;;		MEM16
+;;;;;;;;		REP	#00100000B
+;;;;;;;;		LDA	<WORK8
+;;;;;;;;		STA	<WORK0
+;;;;;;;;		LDA	<WORKA
+;;;;;;;;		STA	<WORK2
+;;;;;;;;		MEM8
+;;;;;;;;		SEP	#00100000B
+;;;;;;;;		JSR	BMYXST3
+;;;;;;;;		LDA	!DT3CRD,X
+;;;;;;;;		STA	(<OAMADR),Y
+;;;;;;;;		INY
+;;;;;;;;		LDA	<BMWORK
+;;;;;;;;		ORA	<PYBGUN1
+;;;;;;;;		ORA	<WORKD
+;;;;;;;;		STA	(<OAMADR),Y
+;;;;;;;;		INY
+;;;;;;;;;
+;;;;;;;;		PHY
+;;;;;;;;		TYA
+;;;;;;;;		SEC
+;;;;;;;;		SBC	#008H
+;;;;;;;;		LSR	A
+;;;;;;;;		LSR	A
+;;;;;;;;		TAY
+;;;;;;;;		LDA	#000H
+;;;;;;;;		STA	(<OSBADR),Y
+;;;;;;;;		INY
+;;;;;;;;		STA	(<OSBADR),Y
+;;;;;;;;		PLY
+;;;;;;;;		MEM16
+;;;;;;;;		REP	#00100000B
+;;;;;;;;		LDA	<WORK4		; y-pos hozon
+;;;;;;;;		STA	<WORK0
+;;;;;;;;		LDA	<WORK6		; x-pos hozon
+;;;;;;;;		STA	<WORK2
+;;;;;;;;		MEM8
+;;;;;;;;		SEP	#00100000B
+;;;;;;;;;
+;;;;;;;;DT3OM40		EQU	$
+;;;;;;;;		PHY
+;;;;;;;;		LDY	#000H
+;;;;;;;;		LDA	<PLMKCH
+;;;;;;;;		AND	#00000100B
+;;;;;;;;		BNE	DT3OM60
+;;;;;;;;		LDY	#002H
+;;;;;;;;;
+;;;;;;;;DT3OM60		EQU	$
+;;;;;;;;		MEM16
+;;;;;;;;		REP	#00100000B
+;;;;;;;;		LDA	WORK4,Y
+;;;;;;;;		CLC
+;;;;;;;;		ADC	#0008H
+;;;;;;;;		STA	WORK0,Y
+;;;;;;;;		LDA	WORK8,Y
+;;;;;;;;		SEC
+;;;;;;;;		SBC	#0008H
+;;;;;;;;		STA	WORK8,Y
+;;;;;;;;		MEM8
+;;;;;;;;		SEP	#00100000B
+;;;;;;;;		PLY
+;;;;;;;;;
+;;;;;;;;		JSR	BMYXST3
+;;;;;;;;		LDA	!DT3CRD+1,X
+;;;;;;;;		STA	(<OAMADR),Y
+;;;;;;;;		INY
+;;;;;;;;		LDA	<BMWORK
+;;;;;;;;		ORA	<PYBGUN1
+;;;;;;;;		STA	(<OAMADR),Y
+;;;;;;;;		INY
+;;;;;;;;;
+;;;;;;;;		MEM16
+;;;;;;;;		REP	#00100000B
+;;;;;;;;		LDA	<WORK8
+;;;;;;;;		STA	<WORK0
+;;;;;;;;		LDA	<WORKA
+;;;;;;;;		STA	<WORK2
+;;;;;;;;		MEM8
+;;;;;;;;		SEP	#00100000B
+;;;;;;;;		JSR	BMYXST3
+;;;;;;;;		LDA	!DT3CRD+1,X
+;;;;;;;;		STA	(<OAMADR),Y
+;;;;;;;;		INY
+;;;;;;;;		LDA	<BMWORK
+;;;;;;;;		ORA	<PYBGUN1
+;;;;;;;;		ORA	<WORKD
+;;;;;;;;		STA	(<OAMADR),Y
+;;;;;;;;		INY
+;;;;;;;;;
+;;;;;;;;		TYA
+;;;;;;;;		SEC
+;;;;;;;;		SBC	#008H
+;;;;;;;;		LSR	A
+;;;;;;;;		LSR	A
+;;;;;;;;		TAY
+;;;;;;;;		LDA	#000H
+;;;;;;;;		STA	(<OSBADR),Y
+;;;;;;;;		INY
+;;;;;;;;		STA	(<OSBADR),Y
+;;;;;;;;;
+;;;;;;;;DT3OM80		EQU	$
+;;;;;;;;		PLX
+;;;;;;;;		RTS
+;;;;;;;;;
+;;;;;;;;;**************************************************************
+;;;;;;;;;*		DOT nomal beam set sub		  (NMBTST)    *
+;;;;;;;;;**************************************************************
+;;;;;;;;NMBMST		EQU	$		; nomal magic beam set sub
+;;;;;;;;		LDA	LOTITM
+;;;;;;;;		BEQ	NMBMF00
+;;;;;;;;		CMP	#002H
+;;;;;;;;		BEQ	NMBM300
+;;;;;;;;;
+;;;;;;;;		LDA	#BEAM2		; fire nomal magic set
+;;;;;;;;		LDY	#001H
+;;;;;;;;		JSL	>BEAMS2
+;;;;;;;;		BRA	NMBMF00
+;;;;;;;;;
+;;;;;;;;NMBM300		EQU	$
+;;;;;;;;		LDA	#DTMOV		; ice nomal magic set
+;;;;;;;;		LDY	#001H
+;;;;;;;;		JSL	>DTMVIT
+;;;;;;;;;
+;;;;;;;;NMBMF00		EQU	$
+;;;;;;;;		LDA	#002H		; end code set
+;;;;;;;;		STA	TMDTFG
+;;;;;;;;		RTS
+;;;;;;;;;
+;;;;;;;;;**************************************************************
+;;;;;;;;;*		DOT tame beam set sub		  (TMBMST)    *
+;;;;;;;;;**************************************************************
+;;;;;;;;TMBMST		EQU	$		; tame beam set sub
+;;;;;;;;		LDA	LOTITM
+;;;;;;;;		BEQ	TMBMF00
+;;;;;;;;		CMP	#002H
+;;;;;;;;		BEQ	TMBM100
+;;;;;;;;;
+;;;;;;;;		LDA	#DTMV4
+;;;;;;;;		LDY	#001H		; max 2 set
+;;;;;;;;		JSL	>DTMVIT
+;;;;;;;;		LDA	#spoj1
+;;;;;;;;		STA	!SPOJFG
+;;;;;;;;		BRA	TMBMF00
+;;;;;;;;;
+;;;;;;;;TMBM100		EQU	$
+;;;;;;;;		LDA	#DTMV5
+;;;;;;;;		LDY	#001H		; max 2 set
+;;;;;;;;		JSL	>DTMVIT
+;;;;;;;;		LDA	#spoj2
+;;;;;;;;		STA	!SPOJFG
+;;;;;;;;TMBMF00		EQU	$
+;;;;;;;;		RTS
+;
+;**************************************************************
+;*		DOT move (fire tame magic)	(DTMOVE4)     *
+;**************************************************************
+DTMOVE4		EQU	$
+;;;;;;;;		LDA	<GAMEMD		; purse ? [YES:DTMV400]
+;;;;;;;;		BEQ	DT4MV10
+;;;;;;;;		BRL	DT4MVF0		;ice beam flash OAM sub
+;;;;;;;;;
+;;;;;;;;DT4MV10		EQU	$
+;;;;;;;;		LDA	BMCONT,X	; common conter < 0 ? [NO:DT4MV18]
+;;;;;;;;		BPL	DT4MV18
+;;;;;;;;		STZ	BMCONT,X	; common flag clear !
+;;;;;;;;;
+;;;;;;;;DT4MV18		EQU	$
+;;;;;;;;		DEC	BMFLFG,X	; common shori
+;;;;;;;;		BPL	DT4MV20
+;;;;;;;;		LDA	#001H
+;;;;;;;;		STA	BMFLFG,X
+;;;;;;;;		LDA	BMCONT,X
+;;;;;;;;		INC	A
+;;;;;;;;		AND	#00000011B
+;;;;;;;;		STA	BMCONT,X
+;;;;;;;;;
+;;;;;;;;DT4MV20		EQU	$
+;;;;;;;;		LDA	HIBSTAT,X
+;;;;;;;;		AND	#10000000B
+;;;;;;;;		BNE	DT4MV80
+;;;;;;;;;
+;;;;;;;;		DEC	BUMFLM,X	; mode 0 shori
+;;;;;;;;		BPL	DT4MV80
+;;;;;;;;		LDA	#002H
+;;;;;;;;		STA	BUMFLM,X
+;;;;;;;;;
+;;;;;;;;		LDA	HIBSTAT,X
+;;;;;;;;		ORA	BCDMNO,X
+;;;;;;;;		STA	BCDMNO,X
+;;;;;;;;		ASL	HIBSTAT,X
+;;;;;;;;;
+;;;;;;;;DT4MV80		EQU	$
+;;;;;;;;		LDA	BMSTAT,X
+;;;;;;;;		BEQ	DT4MVC0
+;;;;;;;;;
+;;;;;;;;		DEC	HBFLEM,X	; fire dot beam sub shori
+;;;;;;;;		BPL	DT4MVC0
+;;;;;;;;		LDA	#002H		; next flem counter set
+;;;;;;;;		STA	HBFLEM,X
+;;;;;;;;		LDA	#0FEH
+;;;;;;;;		STA	<WORK0
+;;;;;;;;;
+;;;;;;;;		LDY	#006H
+;;;;;;;;		LDA	BCDMNO,X
+;;;;;;;;DT4MV90		EQU	$
+;;;;;;;;		LSR	A
+;;;;;;;;		BCC	DT4MVA0
+;;;;;;;;		LDA	BCDMNO,X
+;;;;;;;;		AND	<WORK0
+;;;;;;;;		STA	BCDMNO,X
+;;;;;;;;		BRA	DT4MVC0
+;;;;;;;;DT4MVA0		EQU	$
+;;;;;;;;		SEC
+;;;;;;;;		ROL	<WORK0
+;;;;;;;;		DEY
+;;;;;;;;		BPL	DT4MV90
+;;;;;;;;;
+;;;;;;;;		LDA	#spoj0
+;;;;;;;;		STA	!SPOJFG
+;;;;;;;;		LDA	#002H		; end code set
+;;;;;;;;		STA	TMDTFG
+;;;;;;;;		STZ	BMMODE,X
+;;;;;;;;;
+;;;;;;;;DT4MVC0		EQU	$
+;;;;;;;;		JSR	BMYCLC		; dot beam y-speed idou sub
+;;;;;;;;		JSR	BMXCLC		; dot beam x-speed idou sub
+;;;;;;;;;
+;;;;;;;;		JSR	CRBMEN		; teki cross ? [YES:DTMV180] 
+;;;;;;;;;
+;;;;;;;;		JSR	BMBGCK		; BG check sub
+;;;;;;;;		BCC	DT4MVF0		; BG atari ? [NO:DTMV200]
+;;;;;;;;;
+;;;;;;;;		LDA	BMSTAT,X
+;;;;;;;;		CMP	#001H
+;;;;;;;;		BEQ	DT4MVF0
+;;;;;;;;;
+;;;;;;;;		PHX
+;;;;;;;;		LDY	#002H		; end set
+;;;;;;;;		LDA	#DTED1
+;;;;;;;;		JSL	>DEIMIT
+;;;;;;;;		PLX
+;;;;;;;;		LDA	#001H		; BG hit flag set
+;;;;;;;;		STA	BMSTAT,X
+;;;;;;;;		LDA	#004H
+;;;;;;;;		STA	HBFLEM,X
+;;;;;;;;;
+;;;;;;;;DT4MVF0		EQU	$
+;;;;;;;;		BRL	DT4OMST
+;;;;;;;;;
+;;;;;;;;;**************************************************************
+;;;;;;;;;*		DOT move fire tame magic oam set  (DT4OMST)   *
+;;;;;;;;;**************************************************************
+;;;;;;;;DT4KHD		EQU	$			; kihon data
+;;;;;;;;		WORD	00000H,0FFF0H,0FFE4H,0FFD4H,0FFC4H,0FFC0H,0FFB0H
+;;;;;;;;		WORD	00000H,0FFF0H,0FFE8H,0FFD8H,0FFC8H,0FFC0H,0FFB0H
+;;;;;;;;		WORD	00000H,0FFF0H,0FFECH,0FFDCH,0FFCCH,0FFC0H,0FFB0H
+;;;;;;;;		WORD	00000H,0FFF0H,0FFF0H,0FFE0H,0FFD0H,0FFC0H,0FFB0H
+;;;;;;;;DT4CRD		EQU	$			; chara data
+;;;;;;;;		HEX	048,0FF,068,0FF,060,060,060,060,060,060,064,0FF,062,0FF	; U
+;;;;;;;;		HEX	048,0FF,068,0FF,060,060,060,060,060,060,064,0FF,062,0FF	; D
+;;;;;;;;		HEX	046,0FF,066,0FF,040,040,040,040,040,040,044,0FF,042,0FF	; L
+;;;;;;;;		HEX	046,0FF,066,0FF,040,040,040,040,040,040,044,0FF,042,0FF	; R
+;;;;;;;;DT4ATD		EQU	$			; atori data
+;;;;;;;;		HEX	080,0FF,080,0FF,080,040,080,040,080,040,080,0FF,080,0FF	; U
+;;;;;;;;		HEX	000,0FF,000,0FF,000,0C0,000,0C0,000,0C0,000,0FF,000,0FF	; D
+;;;;;;;;		HEX	040,0FF,040,0FF,000,0C0,000,0C0,000,0C0,040,0FF,040,0FF	; L
+;;;;;;;;		HEX	000,0FF,000,0FF,000,0C0,000,0C0,000,0C0,000,0FF,000,0FF	; R
+;;;;;;;;DT4INX		EQU	$			; data index
+;;;;;;;;;			  U   D   L   R
+;;;;;;;;		HEX	000,00E,01C,02A
+;;;;;;;;DT4OMPT		EQU	$			; oam point data
+;;;;;;;;		HEX	020,01C,014,00C,004,024,000
+;;;;;;;;DT4OMST		EQU	$
+;;;;;;;;		JSR	ITMPST		; priority,  now Y,X pos set
+;;;;;;;;;
+;;;;;;;;		MEM16
+;;;;;;;;		REP	#00100000B
+;;;;;;;;		LDA	<WORK0
+;;;;;;;;		STA	<WORK4
+;;;;;;;;		LDA	<WORK2
+;;;;;;;;		STA	<WORK6
+;;;;;;;;		MEM8
+;;;;;;;;		SEP	#00100000B
+;;;;;;;;;
+;;;;;;;;		LDA	BMCONT,X
+;;;;;;;;		TAY
+;;;;;;;;		LDA	!DT4INX,Y	; index set
+;;;;;;;;		STA	<WORK8
+;;;;;;;;;
+;;;;;;;;		LDA	BCDMNO,X	; on off bit flag
+;;;;;;;;		STA	<WORK9
+;;;;;;;;		LDA	#006H
+;;;;;;;;		STA	<WORKA		; loop conter flag set
+;;;;;;;;		LDA	BMMUKI,X
+;;;;;;;;		STA	<WORKB
+;;;;;;;;		TAY
+;;;;;;;;		LDA	!DT4INX,Y
+;;;;;;;;		STA	<WORKE
+;;;;;;;;;
+;;;;;;;;		PHX
+;;;;;;;;DT4OM10		EQU	$
+;;;;;;;;		LSR	<WORK9
+;;;;;;;;		BCS	DT4OM14
+;;;;;;;;		BRL	DT4OMD0
+;;;;;;;;;
+;;;;;;;;DT4OM14		EQU	$
+;;;;;;;;		LDX	<WORKA
+;;;;;;;;		LDY	!DT4OMPT,X
+;;;;;;;;		LDA	#0F8H
+;;;;;;;;		STA	<WORKC
+;;;;;;;;		LDA	#0FFH
+;;;;;;;;		STA	<WORKD
+;;;;;;;;		LDX	<WORK8
+;;;;;;;;		JSR	DTYXST		; y,x work set
+;;;;;;;;		JSR	BMYXST3
+;;;;;;;;;
+;;;;;;;;		STZ	<WORKF
+;;;;;;;;		LDX	<WORKE
+;;;;;;;;		LDA	!DT4CRD,X
+;;;;;;;;		STA	(<OAMADR),Y
+;;;;;;;;		AND	#00FH
+;;;;;;;;		BEQ	DT4OM40
+;;;;;;;;		LDA	<FCNT
+;;;;;;;;		AND	#00000100B
+;;;;;;;;		BEQ	DT4OM40
+;;;;;;;;		PHY
+;;;;;;;;		LDY	#080H
+;;;;;;;;		LDA	<WORKB
+;;;;;;;;		AND	#00000010B
+;;;;;;;;		BNE	DT4OM20
+;;;;;;;;		LDY	#040H
+;;;;;;;;DT4OM20		EQU	$
+;;;;;;;;		STY	<WORKF
+;;;;;;;;		PLY
+;;;;;;;;;
+;;;;;;;;DT4OM40		EQU	$
+;;;;;;;;		INY
+;;;;;;;;		LDA	!DT4ATD,X
+;;;;;;;;		ORA	#00000010B
+;;;;;;;;		ORA	<PYBGUN1
+;;;;;;;;		ORA	<WORKF
+;;;;;;;;		STA	(<OAMADR),Y
+;;;;;;;;		INY
+;;;;;;;;		PHY
+;;;;;;;;		TYA
+;;;;;;;;		SEC
+;;;;;;;;		SBC	#004H
+;;;;;;;;		LSR	A
+;;;;;;;;		LSR	A
+;;;;;;;;		TAY
+;;;;;;;;		LDA	#002H
+;;;;;;;;		STA	(<OSBADR),Y
+;;;;;;;;		PLY
+;;;;;;;;;
+;;;;;;;;		LDX	<WORKE
+;;;;;;;;		LDA	!DT4CRD+1,X
+;;;;;;;;		CMP	#0FFH
+;;;;;;;;		BEQ	DT4OMD0
+;;;;;;;;;
+;;;;;;;;		LDA	#008H
+;;;;;;;;		STA	<WORKC
+;;;;;;;;		STZ	<WORKD
+;;;;;;;;		LDX	<WORK8
+;;;;;;;;		JSR	DTYXST
+;;;;;;;;		JSR	BMYXST3
+;;;;;;;;;
+;;;;;;;;		LDX	<WORKE
+;;;;;;;;		LDA	!DT4CRD+1,X
+;;;;;;;;		STA	(<OAMADR),Y
+;;;;;;;;		INY
+;;;;;;;;		LDA	!DT4ATD+1,X
+;;;;;;;;		ORA	#00000010B
+;;;;;;;;		ORA	<PYBGUN1
+;;;;;;;;		STA	(<OAMADR),Y
+;;;;;;;;		INY
+;;;;;;;;		PHY
+;;;;;;;;		TYA
+;;;;;;;;		SEC
+;;;;;;;;		SBC	#004H
+;;;;;;;;		LSR	A
+;;;;;;;;		LSR	A
+;;;;;;;;		TAY
+;;;;;;;;		LDA	#002H
+;;;;;;;;		STA	(<OSBADR),Y
+;;;;;;;;		PLY
+;;;;;;;;		JSR	OAMPLCK		; oam point check
+;;;;;;;;;
+;;;;;;;;DT4OMD0		EQU	$
+;;;;;;;;		INC	<WORK8		; data point set
+;;;;;;;;		INC	<WORK8
+;;;;;;;;		INC	<WORKE
+;;;;;;;;		INC	<WORKE
+;;;;;;;;		DEC	<WORKA
+;;;;;;;;		BMI	DT4OME0
+;;;;;;;;		BRL	DT4OM10
+;;;;;;;;;
+;;;;;;;;DT4OME0		EQU	$
+;;;;;;;;		PLX
+;;;;;;;;;
+;;;;;;;;		PHX
+;;;;;;;;		LDA	#009H
+;;;;;;;;		STA	<WORK0
+;;;;;;;;		LDY	#001H
+;;;;;;;;DT4OME4		EQU	$
+;;;;;;;;		LDA	(<OAMADR),Y
+;;;;;;;;		CMP	#0F0H
+;;;;;;;;		BNE	DT4OMF0
+;;;;;;;;		INY
+;;;;;;;;		INY
+;;;;;;;;		INY
+;;;;;;;;		INY
+;;;;;;;;		DEC	<WORK0
+;;;;;;;;		BPL	DT4OME4
+;;;;;;;;;
+;;;;;;;;		STZ	BMMODE,X		
+;;;;;;;;		LDA	#spoj0
+;;;;;;;;		STA	!SPOJFG
+;;;;;;;;		LDA	#002H		; end code set
+;;;;;;;;		STA	TMDTFG
+;;;;;;;;;
+;;;;;;;;DT4OMF0		EQU	$
+;;;;;;;;		PLX
+;;;;;;;;		RTS
+;;;;;;;;;
+;;;;;;;;;**************************************************************
+;;;;;;;;;*		DOT move fire tame Y,X set        (DTYXST)    *
+;;;;;;;;;**************************************************************
+;;;;;;;;DTYXST		EQU	$
+;;;;;;;;		PHX
+;;;;;;;;		PHY
+;;;;;;;;		TXY
+;;;;;;;;		LDX	#000H
+;;;;;;;;		LDA	<WORKB
+;;;;;;;;		AND	#00000010B
+;;;;;;;;		BEQ	DTYX100
+;;;;;;;;		LDX	#002H
+;;;;;;;;DTYX100		EQU	$
+;;;;;;;;		MEM16
+;;;;;;;;		REP	#00100000B
+;;;;;;;;		LDA	<WORK4
+;;;;;;;;		STA	<WORK0
+;;;;;;;;		LDA	<WORK6
+;;;;;;;;		STA	<WORK2
+;;;;;;;;;
+;;;;;;;;		LDA	!DT4KHD,Y
+;;;;;;;;		STA	<CGBFWK		; WORK+10
+;;;;;;;;		LDA	<WORKB
+;;;;;;;;		AND	#0001H		; down,right ? [YES:DTYX140]
+;;;;;;;;		BNE	DTYX140
+;;;;;;;;		LDA	<CGBFWK		; WORK+10
+;;;;;;;;		EOR	#0FFFFH
+;;;;;;;;		INC	A
+;;;;;;;;		STA	<CGBFWK
+;;;;;;;;DTYX140		EQU	$
+;;;;;;;;		LDA	<CGBFWK		; WORK+10
+;;;;;;;;		CLC
+;;;;;;;;		ADC	<WORK4,X
+;;;;;;;;		STA	<WORK0,X
+;;;;;;;;		LDA	!DT4CRD,Y
+;;;;;;;;		AND	#000FH
+;;;;;;;;		BNE	DTYX200
+;;;;;;;;		TXA
+;;;;;;;;		AND	#00FFH
+;;;;;;;;		EOR	#0002H
+;;;;;;;;		TAX
+;;;;;;;;		LDA	<WORK4,X
+;;;;;;;;		CLC
+;;;;;;;;		ADC	<WORKC
+;;;;;;;;		STA	<WORK0,X
+;;;;;;;;DTYX200		EQU	$
+;;;;;;;;		MEM8
+;;;;;;;;		SEP	#00100000B
+;;;;;;;;		PLY
+;;;;;;;;		PLX
+;;;;;;;;		RTS
+;
+;**************************************************************
+;*		DOT move (ice tame magic)	(DTMOVE5)     *
+;**************************************************************
+;;;;;;;;DT5YPDT		EQU	$
+;;;;;;;;;			   up    down   left  right
+;;;;;;;;		WORD	0FFF0H,00010H,00000H,00000H
+;;;;;;;;DT5XPDT		EQU	$
+;;;;;;;;		WORD	00000H,00000H,0FFE0H,00020H
+;;;;;;;;DT5FLDT		EQU	$	; flem counter data
+;;;;;;;;		HEX	002,002,003,003,003,004,004,004
+DTMOVE5		EQU	$
+;;;;;;;;		LDA	<GAMEMD		; purse ? [YES:DTMV400]
+;;;;;;;;		BEQ	DT5MV10
+;;;;;;;;		BRL	DT5OMST		;ice beam flash OAM sub
+;;;;;;;;;
+;;;;;;;;DT5MV10		EQU	$
+;;;;;;;;		PHX
+;;;;;;;;		STX	<WORK4
+;;;;;;;;		LDA	BMMUKI,X
+;;;;;;;;		STA	<WORK2
+;;;;;;;;		LDA	BMSTAT,X
+;;;;;;;;		STA	<BMWORK+1
+;;;;;;;;		LDA	BCDMNO,X
+;;;;;;;;		STA	<BMWORK
+;;;;;;;;		TAX
+;;;;;;;;DT5MV18		EQU	$
+;;;;;;;;		LDA	KMMODE,X
+;;;;;;;;		CMP	#008H
+;;;;;;;;		BEQ	DT5MV1D
+;;;;;;;;;
+;;;;;;;;		DEC	KMFLEM,X
+;;;;;;;;		BPL	DT5MV1D
+;;;;;;;;;
+;;;;;;;;		LDA	KMMODE,X
+;;;;;;;;		INC	A
+;;;;;;;;		STA	KMMODE,X
+;;;;;;;;		TAY
+;;;;;;;;		LDA	!DT5FLDT,Y
+;;;;;;;;		STA	KMFLEM,X
+;;;;;;;;		LDA	<BMWORK+1
+;;;;;;;;		BNE	DT5MV1D
+;;;;;;;;		CPY	#004H
+;;;;;;;;		BNE	DT5MV1D
+;;;;;;;;		LDA	<BMWORK		; all ice ? [YES:DT%MV20]
+;;;;;;;;		CMP	#002H
+;;;;;;;;		BNE	DT5MV20
+;;;;;;;;;
+;;;;;;;;		PHX			; next point surch
+;;;;;;;;		LDX	#002H
+;;;;;;;;DT5MV1A		EQU	$
+;;;;;;;;		LDA	KMMODE,X
+;;;;;;;;		CMP	#008H
+;;;;;;;;		BEQ	DT5MV1B
+;;;;;;;;		DEX
+;;;;;;;;		BPL	DT5MV1A
+;;;;;;;;;
+;;;;;;;;		PLX
+;;;;;;;;		BRA	DT5MV1D
+;;;;;;;;DT5MV1B		EQU	$
+;;;;;;;;		STZ	KMMODE,X
+;;;;;;;;DT5MV1C		EQU	$
+;;;;;;;;		BRA	DT5MV40
+;;;;;;;;;
+;;;;;;;;DT5MV1D		EQU	$
+;;;;;;;;		BRA	DT5MVF0
+;;;;;;;;;
+;;;;;;;;DT5MV20		EQU	$
+;;;;;;;;		PHX
+;;;;;;;;		INC	<BMWORK
+;;;;;;;;		LDY	<BMWORK
+;;;;;;;;		TYX
+;;;;;;;;		LDA	!DT5FLDT+0
+;;;;;;;;		STA	KMFLEM,Y
+;;;;;;;;;
+;;;;;;;;DT5MV40		EQU	$
+;;;;;;;;		LDA	<BMWORK+1
+;;;;;;;;		BNE	DT5MVF0
+;;;;;;;;;
+;;;;;;;;		LDY	<WORK4
+;;;;;;;;		LDA	BMYPSL,Y
+;;;;;;;;		STA	<WORK6
+;;;;;;;;		LDA	BMYPSH,Y
+;;;;;;;;		STA	<WORK7
+;;;;;;;;		LDA	BMXPSL,Y
+;;;;;;;;		STA	<WORK8
+;;;;;;;;		LDA	BMXPSH,Y
+;;;;;;;;		STA	<WORK9
+;;;;;;;;;
+;;;;;;;;		LDA	<WORK2
+;;;;;;;;		ASL	A
+;;;;;;;;		TAY
+;;;;;;;;		MEM16
+;;;;;;;;		REP	#00100000B
+;;;;;;;;		LDA	<WORK6
+;;;;;;;;		CLC
+;;;;;;;;		ADC	!DT5YPDT,Y
+;;;;;;;;		STA	<WORK6
+;;;;;;;;		LDA	<WORK8
+;;;;;;;;		CLC
+;;;;;;;;		ADC	!DT5XPDT,Y
+;;;;;;;;		STA	<WORK8
+;;;;;;;;		MEM8
+;;;;;;;;		SEP	#00100000B
+;;;;;;;;		TXA
+;;;;;;;;		ASL	A
+;;;;;;;;		TAX
+;;;;;;;;		LDY	<WORK4
+;;;;;;;;		LDA	<WORK6
+;;;;;;;;		STA	BMYPSL,Y
+;;;;;;;;		STA	KMYPMD+0,X
+;;;;;;;;		LDA	<WORK7
+;;;;;;;;		STA	BMYPSH,Y
+;;;;;;;;		STA	KMYPMD+1,X
+;;;;;;;;		LDA	<WORK8
+;;;;;;;;		STA	BMXPSL,Y
+;;;;;;;;		STA	KMXPMD+0,X
+;;;;;;;;		LDA	<WORK9
+;;;;;;;;		STA	BMXPSH,Y
+;;;;;;;;		STA	KMXPMD+1,X
+;;;;;;;;		PLX
+;;;;;;;;;
+;;;;;;;;DT5MVF0		EQU	$
+;;;;;;;;		DEX
+;;;;;;;;		BMI	DT5F100
+;;;;;;;;		BRL	DT5MV18
+;;;;;;;;;
+;;;;;;;;;
+;;;;;;;;DT5F100		EQU	$
+;;;;;;;;		PLX
+;;;;;;;;		JSR	CRBMEN		; teki cross
+;;;;;;;;		JSR	BMBGCK		; bg check sub
+;;;;;;;;		BCC	DT5F200
+;;;;;;;;;
+;;;;;;;;		LDA	#001H
+;;;;;;;;		STA	BMSTAT,X
+;;;;;;;;;
+;;;;;;;;DT5F200		EQU	$
+;;;;;;;;		LDA	KMMODE
+;;;;;;;;		CMP	#008H
+;;;;;;;;		BNE	DT5F400
+;;;;;;;;		LDA	KMMODE+1
+;;;;;;;;		CMP	#008H
+;;;;;;;;		BNE	DT5F400
+;;;;;;;;		LDA	KMMODE+2
+;;;;;;;;		CMP	#008H
+;;;;;;;;		BNE	DT5F400
+;;;;;;;;;
+;;;;;;;;		STZ	BMMODE,X	; end shori
+;;;;;;;;		LDA	#spoj0
+;;;;;;;;		STA	!SPOJFG
+;;;;;;;;		LDA	#002H		; end code set
+;;;;;;;;		STA	TMDTFG
+;;;;;;;;		RTS
+;;;;;;;;DT5F400		EQU	$
+;;;;;;;;		LDA	<BMWORK
+;;;;;;;;		STA	BCDMNO,X
+;;;;;;;;;
+;**************************************************************
+;*		DOT move ice tame magic oam set  (DT5OMST)   *
+;**************************************************************
+DT5OMST		EQU	$
+;;;;;;;;		LDY	BMPRIO,X
+;;;;;;;;		LDA	!ITUSNDT,Y
+;;;;;;;;		STA	<PYBGUN1
+;;;;;;;;		STZ	<PYBGUN
+;;;;;;;;;		
+;;;;;;;;		LDA	BCDMNO,X
+;;;;;;;;		STX	<BMWORK+1
+;;;;;;;;		ASL	A
+;;;;;;;;		TAX
+;;;;;;;;DT5M100		EQU	$
+;;;;;;;;		LDA	KMYPMD+0,X
+;;;;;;;;		STA	<WORK0
+;;;;;;;;		LDA	KMYPMD+1,X
+;;;;;;;;		STA	<WORK1
+;;;;;;;;		LDA	KMXPMD+0,X
+;;;;;;;;		STA	<WORK2
+;;;;;;;;		LDA	KMXPMD+1,X
+;;;;;;;;		STA	<WORK3
+;;;;;;;;;
+;;;;;;;;		MEM16
+;;;;;;;;		REP	#00100000B
+;;;;;;;;		LDA	<WORK0
+;;;;;;;;		SEC
+;;;;;;;;		SBC	<SCCV2
+;;;;;;;;		STA	<WORK0
+;;;;;;;;		STA	<WORK4
+;;;;;;;;		STA	<WORK8
+;;;;;;;;		LDA	<WORK2
+;;;;;;;;		SEC
+;;;;;;;;		SBC	<SCCH2
+;;;;;;;;		STA	<WORK2
+;;;;;;;;		STA	<WORK6
+;;;;;;;;		STA	<WORKA
+;;;;;;;;		MEM8
+;;;;;;;;		SEP	#00100000B
+;;;;;;;;;
+;;;;;;;;		PHX
+;;;;;;;;		PHY
+;;;;;;;;		LDX	<BMWORK+1
+;;;;;;;;		LDA	BMOMNO,X
+;;;;;;;;		JSR	BMOMPT		; beam oam point set
+;;;;;;;;		PLY
+;;;;;;;;		PLX
+;;;;;;;;;
+;;;;;;;;		PHX
+;;;;;;;;		TXA
+;;;;;;;;		LSR	A
+;;;;;;;;		TAX
+;;;;;;;;		LDA	KMMODE,X
+;;;;;;;;		STA	<WORKC
+;;;;;;;;		CMP	#008H
+;;;;;;;;		BEQ	DT5M200
+;;;;;;;;		LDY	#000H
+;;;;;;;;		JSR	KUMOMST		; 1 unit oam set sub
+;;;;;;;;;
+;;;;;;;;		PHY
+;;;;;;;;		LDY	#001H
+;;;;;;;;DT5M180		EQU	$
+;;;;;;;;		LDA	(<OAMADR),Y
+;;;;;;;;		CMP	#0F0H
+;;;;;;;;		BNE	DT5M1C0
+;;;;;;;;		INY
+;;;;;;;;		INY
+;;;;;;;;		INY
+;;;;;;;;		INY
+;;;;;;;;		CPY	#019H
+;;;;;;;;		BNE	DT5M180
+;;;;;;;;		LDX	<BMWORK+1
+;;;;;;;;		LDA	#01H
+;;;;;;;;		STA	BMSTAT,X
+;;;;;;;;DT5M1C0		EQU	$
+;;;;;;;;		PLY
+;;;;;;;;;
+;;;;;;;;DT5M200		EQU	$
+;;;;;;;;		PLX
+;;;;;;;;		DEX
+;;;;;;;;		DEX
+;;;;;;;;		BPL	DT5M100
+;;;;;;;;;
+;;;;;;;;		LDX	<BMWORK+1
+;;;;;;;;		RTS
+;;;;;;;;;
+;**************************************************************
+;*		DOT move ice tame magic 1 unit set (KUMOMST)   *
+;**************************************************************
+;;;;;;;;DT5KHDY		EQU	$		; 1 unit y-pos data
+;;;;;;;;		WORD	00000H,0FFFFH,0FFFFH,0FFFFH,0FFFFH,0FFFFH	;0
+;;;;;;;;		WORD	00000H,00000H,0FFF6H,0FFF6H,0FFFFH,0FFFFH	;1
+;;;;;;;;		WORD	00000H,00000H,0FFF6H,0FFF6H,0FFFFH,0FFFFH	;2
+;;;;;;;;		WORD	0FFFFH,0FFFFH,0FFE7H,0FFE7H,0FFF7H,0FFF7H	;3
+;;;;;;;;		WORD	0FFE7H,0FFF7H,00000H,00000H,0FFFFH,0FFFFH	;4
+;;;;;;;;		WORD	0FFE0H,0FFEAH,0FFF0H,00000H,00000H,0FFFFH	;5
+;;;;;;;;		WORD	0FFE1H,0FFE8H,0FFF1H,00000H,00000H,0FFFFH	;6
+;;;;;;;;		WORD	0FFE2H,0FFEBH,0FFF2H,00000H,00000H,0FFFFH	;7
+;;;;;;;;DT5KHDX		EQU	$		; 1 unit x-pos data
+;;;;;;;;		WORD	00009H,0FFFFH,0FFFFH,0FFFFH,0FFFFH,0FFFFH	;0
+;;;;;;;;		WORD	00000H,00010H,00001H,0000FH,0FFFFH,0FFFFH	;1
+;;;;;;;;		WORD	00000H,00010H,00000H,00010H,0FFFFH,0FFFFH	;2
+;;;;;;;;		WORD	00000H,00010H,00000H,00010H,00000H,00010H	;3
+;;;;;;;;		WORD	00008H,00008H,00000H,00010H,0FFFFH,0FFFFH	;4
+;;;;;;;;		WORD	0000DH,00002H,00009H,00000H,00010H,0FFFFH	;5
+;;;;;;;;		WORD	0000FH,00001H,00009H,00000H,00010H,0FFFFH	;6
+;;;;;;;;		WORD	0000FH,00000H,00009H,00000H,00010H,0FFFFH	;7
+;;;;;;;;DT5CRD0		EQU	$		; 1 unit chara data
+;;;;;;;;		HEX	040,0FF,0FF,0FF,0FF,0FF		;0 
+;;;;;;;;		HEX	064,064,040,040,0FF,0FF		;1
+;;;;;;;;		HEX	044,044,068,068,0FF,0FF		;2
+;;;;;;;;		HEX	042,042,068,068,060,060		;3
+;;;;;;;;		HEX	046,066,044,044,0FF,0FF		;4
+;;;;;;;;		HEX	04A,04A,04A,062,062,0FF		;5
+;;;;;;;;		HEX	04C,04C,04C,048,048,0FF		;6
+;;;;;;;;		HEX	04E,04E,04E,06A,06A,0FF		;7
+;;;;;;;;DT5ATD0		EQU	$		; 1 unit atori data
+;;;;;;;;		HEX	02C,0FF,0FF,0FF,0FF,0FF		;0 
+;;;;;;;;		HEX	02C,06C,06C,02C,0FF,0FF		;1
+;;;;;;;;		HEX	02C,06C,02C,06C,0FF,0FF		;2
+;;;;;;;;		HEX	02C,06C,02C,06C,02C,06C		;3
+;;;;;;;;		HEX	02C,02C,02C,06C,0FF,0FF		;4
+;;;;;;;;		HEX	06C,02C,06C,02C,06C,0FF		;5
+;;;;;;;;		HEX	06C,02C,06C,02C,06C,0FF		;6
+;;;;;;;;		HEX	06C,02C,06C,02C,06C,0FF		;7
+;;;;;;;;DT5INDX		EQU	$		; 1 unit index data
+;;;;;;;;		BYTE	0*6,1*6,2*6,3*6,4*6,5*6,6*6,7*6
+;;;;;;;;;
+;;;;;;;;KUMOMST		EQU	$
+;;;;;;;;		TAX
+;;;;;;;;		LDA	!DT5INDX,X
+;;;;;;;;		TAX
+;;;;;;;;		STZ	<BMWORK
+;;;;;;;;KUMT400		EQU	$
+;;;;;;;;		LDA	!DT5CRD0,X
+;;;;;;;;		CMP	#0FFH
+;;;;;;;;		BEQ	KUMT800
+;;;;;;;;		MEM16
+;;;;;;;;		REP	#00100000B
+;;;;;;;;		PHX
+;;;;;;;;		TXA
+;;;;;;;;		ASL	A
+;;;;;;;;		TAX
+;;;;;;;;		LDA	!DT5KHDY,X
+;;;;;;;;		CLC
+;;;;;;;;		ADC	<WORK4
+;;;;;;;;		STA	<WORK0
+;;;;;;;;		LDA	!DT5KHDX,X
+;;;;;;;;		CLC
+;;;;;;;;		ADC	<WORK6
+;;;;;;;;		STA	<WORK2
+;;;;;;;;		PLX
+;;;;;;;;		MEM8
+;;;;;;;;		SEP	#00100000B
+;;;;;;;;;
+;;;;;;;;		JSR	BMYXST3		; oam y,x set
+;;;;;;;;;
+;;;;;;;;		LDA	!DT5CRD0,X
+;;;;;;;;		STA	(<OAMADR),Y
+;;;;;;;;		INY
+;;;;;;;;		LDA	!DT5ATD0,X
+;;;;;;;;		ORA	#00000100B
+;;;;;;;;		ORA	<PYBGUN1
+;;;;;;;;		STA	(<OAMADR),Y
+;;;;;;;;		INY
+;;;;;;;;;
+;;;;;;;;		PHY
+;;;;;;;;		TYA
+;;;;;;;;		SEC
+;;;;;;;;		SBC	#004H
+;;;;;;;;		LSR	A
+;;;;;;;;		LSR	A
+;;;;;;;;		TAY
+;;;;;;;;		LDA	#002H
+;;;;;;;;		STA	(<OSBADR),Y
+;;;;;;;;		PLY
+;;;;;;;;		JSR	OAMPLCK		; oam point check
+;;;;;;;;KUMT800		EQU	$
+;;;;;;;;		INX
+;;;;;;;;		INC	<BMWORK
+;;;;;;;;		LDA	<BMWORK
+;;;;;;;;		CMP	#006H
+;;;;;;;;		BNE	KUMT400
+;;;;;;;;;
+;;;;;;;;		RTS
+;	
+;**************************************************************
+;*		DOT END move init.		(DEIMIT)      *
+;**************************************************************
+;;;;;;;;;;DTEYPS		EQU	$
+;;;;;;;;;;		WORD	0000EH,00010H,00005H,00005H
+;;;;;;;;;;DTEXPS		EQU	$
+;;;;;;;;;;		WORD	00008H,00008H,00000H,00010H
+;;;;;;;;;;DEFMDT		EQU	$
+;;;;;;;;;;		BYTE	001H
+DEIMIT		EQU	$
+;;;;;;;;;;		PHB
+;;;;;;;;;;		PHK
+;;;;;;;;;;		PLB
+;;;;;;;;;;;
+;;;;;;;;;;		PHA
+;;;;;;;;;;		LDA	BMYPSL,X
+;;;;;;;;;;		STA	<WORK0
+;;;;;;;;;;		LDA	BMYPSH,X
+;;;;;;;;;;		STA	<WORK1
+;;;;;;;;;;		LDA	BMXPSL,X
+;;;;;;;;;;		STA	<WORK2
+;;;;;;;;;;		LDA	BMXPSH,X
+;;;;;;;;;;		STA	<WORK3
+;;;;;;;;;;		PLA
+;;;;;;;;;;;
+;;;;;;;;;;		JSR	JPRMSR		; aki ram surch sub
+;;;;;;;;;;		BCS	DEIM100
+;;;;;;;;;;;
+;;;;;;;;;;		STZ	BMCONT,X
+;;;;;;;;;;		STZ	BMSTAT,X
+;;;;;;;;;;		LDA	BMMODE,X
+;;;;;;;;;;		SEC
+;;;;;;;;;;		SBC	#DTED1
+;;;;;;;;;;		STA	<WORK6
+;;;;;;;;;;		TAY
+;;;;;;;;;;		LDA	!DEFMDT,Y
+;;;;;;;;;;		STA	BMFLFG,X
+;;;;;;;;;;;
+;;;;;;;;;;		LDY	<PLMKCH
+;;;;;;;;;;		MEM16
+;;;;;;;;;;		REP	#00100000B
+;;;;;;;;;;		LDA	!DTEYPS,Y 
+;;;;;;;;;;		CLC
+;;;;;;;;;;		ADC	<WORK0
+;;;;;;;;;;		STA	<WORK0
+;;;;;;;;;;		LDA	!DTEXPS,Y
+;;;;;;;;;;		CLC
+;;;;;;;;;;		ADC	<WORK2
+;;;;;;;;;;		STA	<WORK2
+;;;;;;;;;;		MEM8
+;;;;;;;;;;		SEP	#00100000B
+;;;;;;;;;;;
+;;;;;;;;;;		BRL	BMYXSET
+;;;;;;;;;;DEIM100		EQU	$
+;;;;;;;;;;		PLB
+;;;;;;;;;;		RTL
+;
+;**************************************************************
+;*		DOT END (magic fire)		(DTENDM1)     *
+;**************************************************************
+DTENDM1		EQU	$
+;;;;;;;;;;		DEC	BMFLFG,X
+;;;;;;;;;;		BPL	DTEMF00
+;;;;;;;;;;		LDA	#001H
+;;;;;;;;;;		STA	BMFLFG,X
+;;;;;;;;;;		INC	BMCONT,X
+;;;;;;;;;;		LDA	BMCONT,X
+;;;;;;;;;;		CMP	#003H
+;;;;;;;;;;		BNE	DTEM100
+;;;;;;;;;;		STZ	BMCONT,X
+;;;;;;;;;;;
+;;;;;;;;;;DTEM100		EQU	$
+;;;;;;;;;;		INC	BMSTAT,X
+;;;;;;;;;;		LDA	BMSTAT,X
+;;;;;;;;;;		CMP	#00BH
+;;;;;;;;;;		BNE	DTEMF00
+;;;;;;;;;;		STZ	BMMODE,X
+;;;;;;;;;;		RTS
+;;;;;;;;;;DTEMF00		EQU	$
+;;;;;;;;;;		BRL	DTEDOM1
+;
+;**************************************************************
+;*		DOT END (magic fire) oam set	(DTEDOM1)     *
+;**************************************************************
+;;;;;;;;;;DE1YPS		EQU	$
+;;;;;;;;;;		WORD	0FFF0H,0FFF0H,00000H,00000H	;0
+;;;;;;;;;;		WORD	0FFF0H,0FFF0H,00000H,00000H	;1
+;;;;;;;;;;		WORD	0FFEBH,0FFEBH,00005H,00005H	;2
+;;;;;;;;;;DE1XPS		EQU	$
+;;;;;;;;;;		WORD	0FFF0H,00000H,0FFF0H,00000H	;0
+;;;;;;;;;;		WORD	0FFF0H,00000H,0FFF0H,00000H	;1
+;;;;;;;;;;		WORD	0FFEBH,00005H,0FFEBH,00005H	;2
+;;;;;;;;;;DECHRD		EQU	$
+;;;;;;;;;;		WORD	0024AH,0624AH,0824AH,0C24AH	;0
+;;;;;;;;;;		WORD	0024CH,0624CH,0824CH,0C24CH	;1
+;;;;;;;;;;		WORD	0024EH,0624EH,0824EH,0C24EH	;2
+DTEDOM1		EQU	$
+;;;;;;;;;;		JSR	ITMPST		; priority YX pos set
+;;;;;;;;;;;
+;;;;;;;;;;		MEM16
+;;;;;;;;;;		REP	#00100000B
+;;;;;;;;;;		LDA	<WORK0
+;;;;;;;;;;		STA	<WORK4
+;;;;;;;;;;		LDA	<WORK2
+;;;;;;;;;;		STA	<WORK6
+;;;;;;;;;;		MEM8
+;;;;;;;;;;		SEP	#00100000B
+;;;;;;;;;;		STZ	<WORK9
+;;;;;;;;;;		LDA	BMCONT,X
+;;;;;;;;;;		ASL	A		
+;;;;;;;;;;		ASL	A		
+;;;;;;;;;;		ASL	A
+;;;;;;;;;;		STA	<WORK8
+;;;;;;;;;;		PHX
+;;;;;;;;;;		LDY	#000H
+;;;;;;;;;;DEOM200		EQU	$
+;;;;;;;;;;		LDA	<WORK8
+;;;;;;;;;;		CLC
+;;;;;;;;;;		ADC	<WORK9
+;;;;;;;;;;		TAX
+;;;;;;;;;;		MEM16
+;;;;;;;;;;		REP	#00100000B
+;;;;;;;;;;		LDA	!DE1YPS,X
+;;;;;;;;;;		CLC
+;;;;;;;;;;		ADC	<WORK4
+;;;;;;;;;;		STA	<WORK0
+;;;;;;;;;;		LDA	!DE1XPS,X
+;;;;;;;;;;		CLC
+;;;;;;;;;;		ADC	<WORK6
+;;;;;;;;;;		STA	<WORK2
+;;;;;;;;;;		MEM8
+;;;;;;;;;;		SEP	#00100000B
+;;;;;;;;;;		JSR	BMYXST3
+;;;;;;;;;;;
+;;;;;;;;;;		LDA	!DECHRD,X
+;;;;;;;;;;		STA	(<OAMADR),Y
+;;;;;;;;;;		INY
+;;;;;;;;;;		LDA	!DECHRD+1,X
+;;;;;;;;;;		ORA	<PYBGUN+1
+;;;;;;;;;;		STA	(<OAMADR),Y
+;;;;;;;;;;		INY
+;;;;;;;;;;;
+;;;;;;;;;;		PHY
+;;;;;;;;;;		TYA
+;;;;;;;;;;		SEC
+;;;;;;;;;;		SBC	#004H
+;;;;;;;;;;		LSR	A
+;;;;;;;;;;		LSR	A
+;;;;;;;;;;		TAY
+;;;;;;;;;;		LDA	#002H
+;;;;;;;;;;		STA	(<OSBADR),Y
+;;;;;;;;;;		PLY
+;;;;;;;;;;		JSR	OAMPLCK		; oam point check
+;;;;;;;;;;		LDA	<WORK9
+;;;;;;;;;;		INC	A
+;;;;;;;;;;		INC	A
+;;;;;;;;;;		STA	<WORK9
+;;;;;;;;;;		CMP	#08H
+;;;;;;;;;;		BNE	DEOM200
+;;;;;;;;;;;
+;;;;;;;;;;		PLX
+;;;;;;;;;;		RTS
+;
+;**************************************************************
+;*		kabe bomb demo move		(KBDMMOV)     *
+;**************************************************************
+KBDMMOV		EQU	$		; bomb move shori
+		LDA	<GAMEMD
+		BNE	KBMV300
+		LDA	>KBBMNO,X	; next wait ? [YES:KBMV400]
+		BEQ	KBMV400
+;
+;******* bomb shori
+		LDA	>KBBMFM,X
+		DEC	A
+		STA	>KBBMFM,X
+		BNE	KBMV300
+;
+		LDA	>KBBMNO,X
+		INC	A
+		STA	>KBBMNO,X
+		BEQ	KBMV080
+		CMP	#009H
+		BCS	KBMV080
+		PHX
+		TXA
+		ASL	A
+		ASL	A
+		STA	<WORK4
+		LDY	#00AH
+		LDA	#BHMOV
+		JSL	>BHIMIT		; bomb hahen initial set
+		PLX
+;
+KBMV080		EQU	$
+		LDA	>KBBMNO,X
+		CMP	#00BH
+		BNE	KBMV200
+;
+		LDA	#000H
+		STA	>KBBMNO,X	 ; item mode set
+		STA	>KBBMFM,X
+		BRA	KBMV300
+;
+KBMV200		EQU	$
+		TAY
+		LDA	#03H
+		STA	>KBBMFM,X
+KBMV300		EQU	$
+		BRL	KBMV500
+;
+;******* bomb wait shori
+KBMV400		EQU	$
+		TXA
+		EOR	#00000001B
+		TAX
+		LDA	>KBBMNO,X
+		CMP	#006H
+		BNE	KBMV300
+;
+		LDA	>KBBMFM,X
+		CMP	#02H
+		BNE	KBMV300
+;
+		LDX	BUADSB
+		LDA	BMCONT		; end ? [YES:KBMV500] 
+		INC	A
+		CMP	#007H
+		BCC	KBMV418
+		BRL	KBMV500
+KBMV418		EQU	$
+		STA	BMCONT
+;
+		LDA	#01H
+		STA	>KBBMNO,X
+		LDA	#003H		; flem counter set
+		STA	>KBBMFM,X
+;
+		PHX
+		LDA	#003H		; loop counter set
+		STA	<WORK6
+KBMV420		EQU	$		
+		STZ	<WORK0
+		STZ	<WORK1
+		STZ	<WORK2
+		STZ	<WORK3
+		STX	<WORK4		; x-reji push
+;
+		LDX	#000H		; tate set
+		LDA	>KBMUKI		; tate ? [YES:KBMV440]
+		CMP	#004H
+		BCS	KBMV440
+		LDX	#002H		; yoko set
+;
+KBMV440		EQU	$
+		LDA	#00DH
+		STA	<WORK0,X
+		LDA	<WORK6		; 0 < X ? [NO:KBMV460]
+		AND	#00000010B
+		BEQ	KBMV460
+;
+		LDA	<WORK0,X	; FU set
+		EOR	#0FFH
+		INC	A
+		STA	<WORK0,X
+		LDA	#0FFH
+		STA	<WORK1,X
+;
+KBMV460		EQU	$
+		LDA	<WORK4
+		ASL	A
+		ASL	A
+		ASL	A
+		STA	<WORK8
+		LDA	<WORK6
+		ASL	A
+		CLC
+		ADC	<WORK8
+		TAX
+;
+		MEM16
+		REP	#00100000B
+		LDA	>KABEYP,X	; next y-pos set
+		CLC
+		ADC	<WORK0
+		STA	>KABEYP,X
+		LDA	>KABEXP,X	; next x-pos set
+		CLC
+		ADC	<WORK2
+		STA	>KABEXP,X
+		SEC
+		SBC	<SCCH2
+		STA	<BMWORK+0
+		MEM8
+		SEP	#00100000B
+		LDA	<BMWORK+1
+		BNE	KBMV480
+		LDA	<BMWORK+0
+		JSR	SODLRC		; sound (L,R) set sub
+		ORA	#bomb1
+		STA	!SOUND2		; <sound>
+;
+KBMV480		EQU	$
+		LDX	<WORK4
+		DEC	<WORK6
+		BPL	KBMV420
+		PLX
+;
+;******** kabe bomb oam set shori
+KBMV500		EQU	$
+		LDX	BUADSB
+		LDA	>KBBMNO,X
+		BEQ	KBMV780
+		LDY	#007H
+		CPX	#001H
+		BEQ	KBMV600
+		LDY	#003H
+KBMV600		EQU	$
+		PHY
+		PHX
+		TYA
+		ASL	A
+		TAX
+		MEM16
+		REP	#00100000B
+		LDA	>KABEYP,X
+		STA	<WORK0
+		LDA	>KABEXP,X
+		STA	<WORK2
+		MEM8
+		SEP	#00100000B
+		PLX
+		PLY
+;
+		JSR	KBOAMST		; kabe bomb main oam set
+;
+		MEM8
+		SEP	#00100000B
+KBMV700		EQU	$
+		DEY
+		TYA
+		AND	#00000011B
+		CMP	#00000011B
+		BNE	KBMV600
+;
+;******** kabe bomb end check
+KBMV780		EQU	$
+		LDA	BMCONT
+		CMP	#006H
+		BNE	KBMV900
+;
+		LDX	#001H
+KBMV800		EQU	$
+		LDA	>KBBMNO,X
+		BNE	KBMV900
+		DEX
+		BPL	KBMV800
+		STZ	BMMODE
+		STZ	BMMODE+1
+		STZ	!SPMCFG
+KBMV900		EQU	$
+		LDX	ENINDX		; PLX
+		RTS
+;
+;**************************************************************
+;*		kabe bomb oam set sub		(KBOAMST)     *
+;**************************************************************
+KBOAMST		EQU	$
+		PHX
+		PHY
+		LDA	#030H
+		STA	<PYBGUN1	; bg uusen juni set
+		STZ	<PYBGUN
+;
+		LDA	>KBBMNO,X
+		TAY
+		LDA	!BBENDT,Y
+		STA	<WORK8
+		LDA	!BOMBMD,Y
+		TAY
+		LDA	!BOBINDX,Y
+		ASL	A
+		TAX
+		ASL	A
+		STA	<WORK4
+		STZ	<WORK5
+;
+		STZ	<WORKA		; atori (L) clear ! 
+		LDA	#00110010B
+		STA	<WORKB		; atori (H) clear !
+		STZ	<WORK6		; loop counter
+		STZ	<WORK7		; loop counter
+;
+		LDA	#6*4		; kosuu set
+		LDY	OAMTYP
+		BEQ	KABO060
+		JSL	>OAMENT4
+		BRA	KABO080
+KABO060		EQU	$
+		JSL	>OAMENT1
+;
+KABO080		EQU	$
+		MEM16
+		REP	#00100000B
+		LDA	<WORK0
+		SEC
+		SBC	<SCCV2		; Y-scr hosei
+		STA	<WORKC
+		LDA	<WORK2
+		SEC
+		SBC	<SCCH2		; X-scr hosei
+		STA	<WORKE
+		MEM8
+		SEP	#00100000B
+;
+		LDY	#000H
+		JSR	BOMOMST		; oam set
+;
+;
+KABO100		EQU	$
+KABO200		EQU	$
+		PLY
+		PLX
+		RTS
+;
+;**************************************************************
+;*		kabe bomb oam set sub		(BOMOMST)     *
+;**************************************************************
+BOMOMST		EQU	$		; bomb kyootsu oam set
+BBOM100		EQU	$
+		LDA	!BOBCRDT,X
+		CMP	#0FFH
+		BEQ	BBOM200
+;
+		STX	<BMWORK+0	; PHX
+		MEM16
+		REP	#00100000B
+		STZ	<BMWORK+2
+		LDA	<WORK6
+		ASL	A
+		ASL	A
+		CLC
+		ADC	<WORK4
+		TAX
+		LDA	!BOBYXD,X
+		CLC
+		ADC	<WORKC
+		STA	<WORK0
+		LDA	!BOBYXD+2,X
+		CLC
+		ADC	<WORKE
+		STA	<WORK2
+		MEM8
+		SEP	#00100000B
+		LDX	<BMWORK+0	; PLX
+		JSR	BMYXST4
+;
+		LDA	!BOBCRDT,X
+		STA	(<OAMADR),Y
+		INY
+		LDA	!BOBCRDT+1,X
+		AND	#0C1H
+		ORA	<PYBGUN+1
+		ORA	<WORKA+1	; flash set
+		STA	(<OAMADR),Y
+		INY
+		STY	<BMWORK+0	; PHY
+		STX	<BMWORK+1	; PHX
+		TYA
+		SEC
+		SBC	#004H
+		LSR	A
+		LSR	A
+		TAY
+		TXA
+		LSR	A
+		TAX
+		LDA	!BOBSUB,X	; oam sub set
+		ORA	<BMWORK+3
+		STA	(<OSBADR),Y
+		LDX	<BMWORK+1	; PLX
+		LDY	<BMWORK+0	; PLY
+;
+BBOM200		EQU	$
+		INX
+		INX
+		INC	<WORK6
+		LDA	<WORK6
+		CMP	<WORK8
+		BNE	BBOM100
+BBOM400		EQU	$
+		RTS
+;
+		MEM8
+		IDX8
+;	
+;**************************************************************
+;*		onpu move init.			(OPIMIT)      *
+;**************************************************************
+OPIMIT		EQU	$
+;;;;;;;;		PHB
+;;;;;;;;		PHK
+;;;;;;;;		PLB
+;;;;;;;;;
+;;;;;;;;		JSR	JPRMSR		; aki ram surch sub
+;;;;;;;;		BCS	OPIM100
+;;;;;;;;;
+;;;;;;;;		STZ	BMCONT,X	; onpu conuter
+;;;;;;;;;
+;;;;;;;;		LDA	#0F1H		
+;;;;;;;;		STA	BMYSPD,X
+;;;;;;;;		LDA	#008H
+;;;;;;;;		STA	BMXSPD,X
+;;;;;;;;;
+;;;;;;;;		MEM16
+;;;;;;;;		REP	#00100000B
+;;;;;;;;		LDA	<PLYPS1		; onpu y-pos set 
+;;;;;;;;		CLC
+;;;;;;;;		ADC	#004H
+;;;;;;;;		STA	<WORK0
+;;;;;;;;		LDA	<PLXPS1		; onpu x-pos set
+;;;;;;;;		CLC
+;;;;;;;;		ADC	#010H
+;;;;;;;;		STA	<WORK2
+;;;;;;;;		MEM8
+;;;;;;;;		SEP	#00100000B
+;;;;;;;;;
+;;;;;;;;		LDA	<WORK0
+;;;;;;;;		STA	BMYPSL,X
+;;;;;;;;		LDA	<WORK1
+;;;;;;;;		STA	BMYPSH,X
+;;;;;;;;		LDA	<WORK2
+;;;;;;;;		STA	BMXPSL,X
+;;;;;;;;		LDA	<WORK3
+;;;;;;;;		STA	BMXPSH,X
+;;;;;;;;		PLB
+;;;;;;;;		RTL
+;
+;**************************************************************
+;*		ONPU move 			(ONPMOVE)     *
+;**************************************************************
+;;;;;;;;OPCRSTD		EQU	$
+;;;;;;;;		HEX	047,046,045
+ONPMOVE		EQU	$
+;;;;;;;;		LDA	<GAMEMD		; purse ? [YES:YAMV400]
+;;;;;;;;		BNE	OPMV100
+;;;;;;;;;
+;;;;;;;;		JSR	BMYCLC		; onpu y-speed idou sub
+;;;;;;;;		JSR	BMXCLC		; onpu x-speed idou sub
+;;;;;;;;;
+;;;;;;;;		DEC	BMFLFG,X
+;;;;;;;;		BPL	OPMV080
+;;;;;;;;		LDA	#007H
+;;;;;;;;		STA	BMFLFG,X
+;;;;;;;;		LDY	BMCONT,X
+;;;;;;;;		INY
+;;;;;;;;		CPY	#03H
+;;;;;;;;		BNE	OPMV040
+;;;;;;;;		LDY	#02H
+;;;;;;;;OPMV040		EQU	$
+;;;;;;;;		TYA
+;;;;;;;;		STA	BMCONT,X
+;;;;;;;;;
+;;;;;;;;OPMV080		EQU	$
+;;;;;;;;		LDA	BMYSPD,X
+;;;;;;;;		CLC
+;;;;;;;;		ADC	#001H
+;;;;;;;;		CMP	#00EH
+;;;;;;;;		STA	BMYSPD,X
+;;;;;;;;		BNE	OPMV100
+;;;;;;;;		STZ	BMMODE,X
+;;;;;;;;		RTS
+OPMV100		EQU	$
+;
+;**************************************************************
+;*		ONPU OAM set 			(       )     *
+;**************************************************************
+;;;;;;;;		LDY	BMCONT,X
+;;;;;;;;		LDA	!OPCRSTD,Y	; chara chenge set
+;;;;;;;;		STA	ITMCPT
+;;;;;;;;;
+;;;;;;;;		JSR	ITMPST		; priorty,now y,x pos set
+;;;;;;;;;
+;;;;;;;;		LDY	#000H
+;;;;;;;;		JSR	BMYXST3		; Y,X pos oam set sub
+;;;;;;;;		LDA	#009H		; onpu chara no set
+;;;;;;;;		STA	(<OAMADR),Y
+;;;;;;;;		INY
+;;;;;;;;		LDA	#026H		; onpu atori buuto set
+;;;;;;;;		STA	(<OAMADR),Y
+;;;;;;;;		INY
+;;;;;;;;		TYA
+;;;;;;;;		SEC
+;;;;;;;;		SBC	#004H
+;;;;;;;;		LSR	A
+;;;;;;;;		LSR	A
+;;;;;;;;		TAY
+;;;;;;;;		LDA	#000H
+;;;;;;;;		STA	(<OSBADR),Y
+;;;;;;;;		RTS
+;
+;**************************************************************
+;*		water hahen move 		(WATJMD0)      *
+;**************************************************************
+WATCRD		EQU	$		; water chear set
+		HEX	0AC,0AE
+WATJMD0		EQU	$
+		LDA	<GAMEMD		; purse ? [YES:YAMV400]
+		BNE	WATJ300
+;
+		DEC	BMFLFG,X
+		BPL	WATJ100
+		STZ	BMFLFG,X
+		LDA	#001H
+		STA	BMCONT,X
+WATJ100		EQU	$
+		LDA	BMCONT,X
+		BEQ	WATJ300
+		LDA	BMYSPD,X
+		CLC
+		ADC	#0FCH
+		STA	BMYSPD,X
+		STA	BMXSPD,X
+		CMP	#0E8H
+		BCS	WATJ200
+		STZ	BMMODE,X
+;
+		LDA	RABFLG
+		BNE	WATJ140
+		LDA	<LNMODE
+		CMP	#SWMD
+		BNE	WATJ180
+WATJ140		EQU	$
+		LDA	WATRFG
+		BEQ	WATJ180
+		PHX
+		JSL	>TBKCHK
+		PLX
+WATJ180		EQU	$
+		RTS
+WATJ200		EQU	$
+		JSR	BMYCLC		; water y-speed idou sub
+		JSR	BMXCLC		; water x-speed idou sub
+WATJ300		EQU	$
+;**************************************************************
+;*		water hahen OAM set 		(      )      *
+;**************************************************************
+		JSR	ITMPST		; priorty,now y,x pos set
+;
+		LDA	BMXPSL,X
+		STA	<WORK6
+		LDA	BMXPSH,X
+		STA	<WORK7
+;
+		MEM16
+		REP	#00100000B
+		LDA	<PLXPS1		; player x-pos set
+		SEC
+		SBC	<WORK6
+		STA	<WORK8		; player SA set
+		LDA	<PLXPS1		; player x-pos set
+		CLC
+		ADC	<WORK8
+		SEC
+		SBC	<SCCH2
+		STA	<WORK8		; 2 x-pos set
+;
+		LDA	<WORK6
+		CLC
+		ADC	#000CH
+		SEC
+		SBC	<SCCH2
+		STA	<WORK6
+		MEM8
+		SEP	#00100000B
+;
+		PHX
+		LDA	BMCONT,X
+		STA	<WORKA
+		TAX
+		LDA	#001H
+		STA	<BMWORK+0
+		LDY	#000H
+		STY	<WORKC
+;
+WATJ400		EQU	$
+		JSR	BMYXST3		; Y,X pos oam set sub
+		LDA	!WATCRD,X
+		STA	(<OAMADR),Y
+		INY
+		LDA	#024H
+		ORA	<WORKC
+		STA	(<OAMADR),Y
+		INY
+		PHY
+		TYA
+		SEC
+		SBC	#004H
+		LSR	A
+		LSR	A
+		TAY
+		LDA	#002H
+		STA	(<OSBADR),Y
+		PLY
+		JSR	OAMPLCK		; oam point check
+;		
+		LDA	<WORK8
+		STA	<WORK2
+		LDA	#01000000B	; H-flip set
+		STA	<WORKC
+;
+		DEC	<BMWORK+0
+		BPL	WATJ400
+;
+		LDA	<WORK6
+		STA	<WORK2
+		JSR	BMYXST3
+
+		LDA	#0C0H
+		STA	(<OAMADR),Y
+		INY
+		LDA	#024H		; water atori buuto set
+		STA	(<OAMADR),Y
+		INY
+;
+		TYA
+		SEC
+		SBC	#004H
+		LSR	A
+		LSR	A
+		TAY
+		LDA	#002H
+		STA	(<OSBADR),Y
+;
+		LDA	<WORKA
+		CMP	#01H
+		BNE	WATJ700
+		STA	(<OSBADR),Y
+WATJ700		EQU	$
+		PLX
+		RTS
+;
+;**************************************************************
+;*		water hahen  move init.1        (WTIMIT1)     *
+;**************************************************************
+WTIMIT1		EQU	$
+;;;;;;;;		LDA	#WTMV1
+;;;;;;;;		STA	BMMODE,X
+;;;;;;;;		STZ	BMCONT,X	; water mode counter
+;;;;;;;;		LDA	#005H		; water flem counter
+;;;;;;;;		STA	BMFLFG,X
+;;;;;;;;;
+;;;;;;;;		STZ	BMYSPD,X
+;;;;;;;;		STZ	BMXSPD,X
+;;;;;;;;;
+;;;;;;;;		JSR	>SDLRCP
+;;;;;;;;		ORA	#watr0
+;;;;;;;;		STA	!SOUND2
+;;;;;;;;;
+;;;;;;;;		LDA	BMYPSL,X
+;;;;;;;;		CLC
+;;;;;;;;		ADC	#00CH		; + #0FFF8H + #00014H
+;;;;;;;;		STA	BMYPSL,X
+;;;;;;;;		LDA	BMYPSH,X
+;;;;;;;;		ADC	#000H
+;;;;;;;;		STA	BMYPSH,X
+;;;;;;;;		LDA	BMXPSL,X
+;;;;;;;;		CLC
+;;;;;;;;		ADC	#0F8H
+;;;;;;;;		STA	BMXPSL,X
+;;;;;;;;		LDA	BMXPSH,X
+;;;;;;;;		ADC	#0FFH
+;;;;;;;;		STA	BMXPSH,X
+;;;;;;;;;
+;;;;;;;;;**************************************************************
+;;;;;;;;;*		water hahen move 		(WATJMD1)      *
+;;;;;;;;;**************************************************************
+WATJMD1		EQU	$
+;;;;;;;;		LDA	<GAMEMD		; purse ? [YES:YAMV400]
+;;;;;;;;		BNE	WA1J100
+;;;;;;;;;
+;;;;;;;;		DEC	BMFLFG,X
+;;;;;;;;		BPL	WA1J100
+;;;;;;;;		STZ	BMMODE,X
+;;;;;;;;;
+;;;;;;;;WA1J100		EQU	$
+;;;;;;;;		JSR	ITMPST		; priorty,now y,x pos set
+;;;;;;;;;
+;;;;;;;;		PHX
+;;;;;;;;		LDA	<FCNT
+;;;;;;;;		AND	#00000011B
+;;;;;;;;		BNE	WA1J200
+;;;;;;;;		LDA	BMCONT,X
+;;;;;;;;		EOR	#01000000B
+;;;;;;;;		STA	BMCONT,X
+;;;;;;;;;
+;;;;;;;;WA1J200		EQU	$
+;;;;;;;;		LDA	BMCONT,X
+;;;;;;;;		STA	<WORKC
+;;;;;;;;;
+;;;;;;;;		JSR	BMYXST3		; Y,X pos oam set sub
+;;;;;;;;		LDA	#0C0H
+;;;;;;;;		STA	(<OAMADR),Y
+;;;;;;;;		INY
+;;;;;;;;		LDA	#024H
+;;;;;;;;		ORA	<WORKC
+;;;;;;;;		STA	(<OAMADR),Y
+;;;;;;;;		TYA
+;;;;;;;;		SEC
+;;;;;;;;		SBC	#003H
+;;;;;;;;		LSR	A
+;;;;;;;;		LSR	A
+;;;;;;;;		TAY
+;;;;;;;;		LDA	#002H
+;;;;;;;;		STA	(<OSBADR),Y
+;;;;;;;;;		
+;;;;;;;;		PLX
+;;;;;;;;		RTS
+;
+;**************************************************************
+;*		scop hibana move 		(HBAN2MV)      *
+;**************************************************************
+HBACRD		EQU	$		; hibana chara set
+		HEX	090,091
+HBAN2MV		EQU	$
+		DEC	BUMFLM,X
+		BMI	HBMV080
+		RTS
+HBMV080		EQU	$
+		STZ	BUMFLM,X
+		LDA	<GAMEMD		; purse ? [YES:YAMV400]
+		BNE	HBMV300
+;
+		DEC	BMFLFG,X
+		BPL	HBMV100
+		STZ	BMFLFG,X
+		LDA	#001H
+		STA	BMCONT,X
+HBMV100		EQU	$
+		LDA	BMCONT,X
+		BEQ	HBMV300
+		LDA	BMYSPD,X
+		CLC
+		ADC	#0FCH
+		STA	BMYSPD,X
+		STA	BMXSPD,X
+		CMP	#0E8H
+		BCS	HBMV200
+		STZ	BMMODE,X
+		RTS
+HBMV200		EQU	$
+		JSR	BMYCLC		; water y-speed idou sub
+		JSR	BMXCLC		; water x-speed idou sub
+HBMV300		EQU	$
+;**************************************************************
+;*		scop hibana OAM set 		(      )      *
+;**************************************************************
+		JSR	ITMPST		; priorty,now y,x pos set
+;
+		LDA	BMXPSL,X
+		STA	<WORK6
+		LDA	BMXPSH,X
+		STA	<WORK7
+		LDA	BUPLYL,X
+		STA	<BMWORK+0
+		LDA	BUPLYH,X
+		STA	<BMWORK+1
+;
+		MEM16
+		REP	#00100000B
+		LDA	<BMWORK+0
+		SEC
+		SBC	<WORK6
+		STA	<WORK8		; player SA set
+		LDA	<BMWORK+0		; player x-pos set
+		CLC
+		ADC	<WORK8
+		SEC
+		SBC	#0008H
+		SEC
+		SBC	<SCCH2
+		STA	<WORK8		; 2 x-pos set
+		MEM8
+		SEP	#00100000B
+;
+		LDA	BMSTAT,X	; player up ? [yes:HBMVA00]
+		CMP	#002H
+		BNE	HBMV700
+		LDA	#008H		; oam kosuu set
+		JSR	OMUNDR		; oam uusen juni point under set
+;
+HBMV700		EQU	$
+		PHX
+		LDA	#01H		; loop counter set
+		STA	<BMWORK+0
+		LDA	BMCONT,X
+		TAX
+		LDY	#000H
+		STY	<BMWORK+1
+HBMV800		EQU	$
+		JSR	BMYXST3
+		LDA	!HBACRD,X
+		STA	(<OAMADR),Y
+		INY
+		LDA	#00000100B
+		ORA	<PYBGUN1
+		ORA	<BMWORK+1
+		STA	(<OAMADR),Y
+		INY
+		PHY
+		TYA
+		SEC
+		SBC	#004H
+		LSR	A
+		LSR	A
+		TAY
+		LDA	#000H
+		STA	(<OSBADR),Y
+		PLY
+		JSR	OAMPLC1		; oam point check
+;
+		LDA	#01000000B	; flip set
+		STA	<BMWORK+1
+		LDA	<WORK8		; next y-pos set
+		STA	<WORK2
+		DEC	<BMWORK+0
+		BPL	HBMV800
+;
+		PLX
+		RTS
+;
+;**************************************************************
+;*		scop suna move 		        (SCOPMOV)     *
+;**************************************************************
+SPYXPS		EQU	$
+		WORD	00012H,0FFF3H	; left horu (0)
+		WORD	0FFF7H,00004H	; left horu (1)
+		WORD	00012H,0000DH	; right horu (0)
+		WORD	0FFF7H,0FFF5H	; right horu (1)
+SCPCRD		EQU	$		; chara data
+		HEX	040,050
+SCOPMOV		EQU	$
+		JSR	ITMPST		; priority,YX pos set
+;
+SPMV100		EQU	$
+		LDA	BMTIM0,X
+		BNE	SPMV200
+		LDA	#008H
+		STA	BMTIM0,X
+		INC	BMCONT,X
+		LDA	BMCONT,X
+		CMP	#002H
+		BNE	SPMV200
+		STZ	BMMODE,X
+		RTS
+;
+SPMV200		EQU	$
+		LDA	BMCONT,X
+		STA	<WORKA
+		ASL	A
+		ASL	A
+		STA	<WORK8
+;
+		LDY	#000H
+		LDA	<PLMKCH
+		CMP	#004H
+		BEQ	SPMV280
+		LDY	#008H
+SPMV280		EQU	$
+		TYA
+		CLC
+		ADC	<WORK8
+		TAY
+		MEM16
+		REP	#00100000B
+		LDA	SPYXPS,Y
+		CLC
+		ADC	<WORK0
+		STA	<WORK0
+		LDA	SPYXPS+2,Y
+		CLC
+		ADC	<WORK2
+		STA	<WORK2
+		CLC
+		ADC	#0008H
+		STA	<WORK4
+		MEM8
+		SEP	#00100000B
+;
+		PHX
+		LDY	#000H
+		STY	<BMWORK+0
+;
+SPMV300		EQU	$
+		JSR	BMYXST3		; beam Y,X pos oam set
+;
+		LDX	<WORKA
+		LDA	!SCPCRD,X
+		CLC
+		ADC	<BMWORK+0
+		STA	(<OAMADR),Y
+		INY
+		LDA	#00000100B
+		ORA	<PYBGUN1
+		STA	(<OAMADR),Y
+		INY
+		PHY
+		TYA
+		SEC
+		SBC	#004H
+		LSR	A
+		LSR	A
+		TAY
+		LDA	#000H
+		STA	(<OSBADR),Y
+		PLY
+		JSR	OAMPLCK		; oam point check
+		LDA	<WORK4
+		STA	<WORK2
+		LDA	<WORK5
+		STA	<WORK3
+		INC	<BMWORK+0
+		LDA	<BMWORK+0
+		CMP	#002H
+		BNE	SPMV300
+;
+		PLX	
+		RTS
+;
+;**************************************************************
+;*		bakuhatsu hahen move           (BKHMOVE)      *
+;**************************************************************
+BKHCHRD		EQU	$		; chara no data
+		HEX	09D
+		HEX	09C
+		HEX	08D
+
+BKHMOVE		EQU	$
+		LDA	<GAMEMD		; purse ? [YES:YAMV400]
+		BNE	BKHM100
+;
+		LDA	BMCONT,X
+		CLC
+		ADC	#002H
+		STA	BMCONT,X
+		CLC
+		ADC	BMYSPD,X
+		STA	BMYSPD,X
+		JSR	BMYCLC		; onpu y-speed idou sub
+		JSR	BMXCLC		; onpu x-speed idou sub
+;
+		LDA	>KABEFM,X
+		DEC	A
+		STA	>KABEFM,X
+		BPL	BKHM100
+		STZ	BMMODE,X
+		RTS
+;
+BKHM100		EQU	$
+		LDA	#4*1
+		LDY	OAMTYP
+		BEQ	BKHM120
+		JSL	>OAMENT4
+		BRA	BKHM140
+BKHM120		EQU	$
+		JSL	>OAMENT1
+BKHM140		EQU	$
+		LDY	#000H
+		LDA	>KABEFM,X
+		STA	<WORK6
+		AND	#00001000B
+		BNE	BKHM200
+		LDY	#001H
+		LDA	<WORK6
+		AND	#00000100B
+		BNE	BKHM200
+		LDY	#002H
+BKHM200		EQU	$
+		LDA	!BKHCHRD,Y
+		STA	<WORK6
+;**************************************************************
+;*		bakuhatu hahen OAM set		(       )     *
+;**************************************************************
+		JSR	ITMPST		; priorty,now y,x pos set
+		LDY	#000H
+		JSR	BMYXST3		; Y,X pos oam set sub
+		LDA	<WORK6		; hahen chara no set
+		STA	(<OAMADR),Y
+		INY
+		LDA	#022H		; hahen atoribuute set
+		STA	(<OAMADR),Y
+		LDA	#00H
+		STA	(<OSBADR)
+		RTS
+;
+;**************************************************************
+;*		spcial magic (SOUNDER) move 	    (SDERMOV) *
+;**************************************************************
+SDERMOV		EQU	$
+		LDA	<GAMEMD		; purse ? [YES:SDER300]
+		BEQ	SEMV080
+;
+		BRL	SEMVF00
+SEMV080		EQU	$
+		LDA	BMSTAT,X	; BG coler chenge ?
+		BEQ	SEMV200		; [NO:SEMV200]
+;
+		LDA	KNSPMD+1
+		BNE	SEMV0C0
+		INC	BMWRK0,X
+		LDA	BMWRK0,X
+		AND	#00000100B
+		BEQ	SEMV0E0
+		BRA	SEMV100
+SEMV0C0		EQU	$
+		LDA	KNSPMD+1
+		CMP	#00BH
+		BNE	SEMV100
+SEMV0E0		EQU	$
+		PHX
+		JSL	>PLCGCN1        ; player coler set
+		JSL	>THCGCN0        ; thunder CG. set
+		PLX
+		BRA	SEMV200
+SEMV100		EQU	$
+		PHX
+		JSL	>PLCGCN0        ; player coler reset
+		JSL	>THCGCN1        ; thunder CG. reset
+		PLX
+;
+SEMV200		EQU	$
+		LDA	BMSTAT,X	; mode 2 ?
+		CMP	#002H
+		BNE	SEMV300
+;
+		DEC	BMFLFG,X
+		BPL	SEMV240
+		LDA	#002H
+		STA	BMFLFG,X
+		LDA	BMCONT,X
+		INC	A
+		STA	BMCONT,X
+		CMP	#002H
+		BNE	SEMV240
+		DEC	BMCONT,X
+		LDA	#010H
+		STA	BMXSPD,X
+		LDA	#003H
+		STA	BMSTAT,X
+SEMV240		EQU	$
+		LDA	BMXSPD,X	; kasoku set
+		CLC
+		ADC	#001H
+		STA	BMXSPD,X
+		BRL	SDER800
+;
+SEMV300		EQU	$
+		DEC	BMFLFG,X
+		BPL	SEMV400
+		LDA	#002H
+		STA	BMFLFG,X
+		LDA	BMCONT,X
+		EOR	#00000001B
+		STA	BMCONT,X
+SEMV400		EQU	$
+		LDA	BMSTAT,X
+		BEQ	SEMV500
+		CMP	#001H
+		BEQ	SEMV600
+		CMP	#003H
+		BEQ	SEMV700
+		CMP	#004H
+		BEQ	SEMV620
+		LDA	BMXSPD,X	; 5 mode shori
+		CLC
+		ADC	#010H
+		BPL	SEMV480
+		LDA	#07FH
+SEMV480		EQU	$
+		STA	BMXSPD,X	; kasoku set
+		BRL	SEMV700
+SEMV500		EQU	$		; O mode shori
+		BRA	SDER0MV
+SEMV600		EQU	$		; 1 mode shori
+		BRL	SDER1MV
+SEMV620		EQU	$		; 4 mode shori
+		LDA	>SNTIME
+		DEC	A
+		STA	>SNTIME
+		BNE	SEMV700
+		LDA	#005H
+		STA	BMSTAT,X
+SEMV700		EQU	$		; 3 mode shori
+		BRL	SDER800
+;
+;
+SEMVF00		EQU	$
+		RTS
+;
+;**************************************************************
+;*		(SOUNDER) move inazuma inc shori    (SDER0MV) *
+;**************************************************************
+SDSPDT		EQU	$		; y,x speed data
+		HEX	0E0,000		; 0
+		HEX	0E8,0E8		; 1
+		HEX	000,020		; 2
+		HEX	018,018		; 3
+;
+SDER0MV		EQU	$
+		JSR	BMYCLC		; inazuma y-speed idou sub
+;
+		LDA	BMYPSH,X
+		STA	<WORK1
+		LDA	BMYPSL,X	; Y-pos
+		STA	<WORK0
+		AND	#00F0H
+		CMP	>SHNYPS
+		BEQ	SDER200
+		STA	>SHNYPS
+		INC	BCDMNO,X
+;
+SDER200		EQU	$
+		MEM16
+		REP	#00100000B
+		LDA	<WORK0
+		CMP	#0E000H
+		BCS	SDER300
+		LDA	>SEDYPS
+		CMP	#0E000H
+		BCS	SDER280
+;
+		LDA	>SEDYPS
+		CMP	<WORK0
+		BEQ	SDER280
+		BCS	SDER300
+;
+SDER280		EQU	$
+		MEM8
+		SEP	#00100000B
+		LDA	#001H
+		STA	BMSTAT,X
+SDER300		EQU	$
+		MEM8
+		SEP	#00100000B
+		BRL	SDOMST
+;
+;************** inazuma dec shori
+SDER1MV		EQU	$
+		LDA	BCDMNO,X
+		BMI	SDER600
+;
+		DEC	BUMFLM,X
+		BPL	SDER500
+		LDA	#003H
+		STA	BUMFLM,X
+		DEC	BCDMNO,X
+		BPL	SDER500
+		LDA	#009H
+		STA	BUMFLM,X
+		BRA	SDER600
+SDER500		EQU	$
+		BRL	SDOMST
+;
+SDER600		EQU	$
+		DEC	BUMFLM,X
+		BPL	SDER700
+		LDA	#002H
+		STA	BMSTAT,X
+		STZ	BMYSPD,X
+		LDA	#010H
+		STA	BMXSPD,X
+		STZ	BMCONT,X
+		LDA	#002H
+		STA	BMFLFG,X
+		LDA	KNSPMD+1
+		BEQ	SDER700
+		PHX
+		JSL	>ALENDM		; all enmy dameji sub
+		PLX
+;
+SDER700		EQU	$
+		LDY	#000H
+		BRL	SDOM200
+;
+;************** inazuma en shori
+SDER800		EQU	$
+		LDA	BMSTAT,X
+		CMP	#004H
+		BNE	SDER900
+		LDY	#02AH
+		LDA	<FCNT
+		AND	#00000111B
+		BEQ	SDER840
+		LDY	#0AAH
+		CMP	#004H
+		BEQ	SDER840
+		CMP	#007H
+		BNE	SDER900
+		LDY	#06AH
+SDER840		EQU	$
+		STY	!SOUND3
+;
+SDER900		EQU	$
+		LDA	BMSTAT,X
+		CMP	#004H
+		BEQ	SDERA00
+;
+		LDA	>SNDHAN
+		STA	BMXPSL,X
+		STZ	BMXPSH,X
+		JSR	BMXCLC
+		LDA	BMXPSL,X
+		STA	>SNDHAN
+		CMP	#040H
+		BNE	SDERA00
+		LDA	#004H		; en add stop mode set
+		STA	BMSTAT,X
+;
+SDERA00		EQU	$
+		PHX
+		LDA	BMSTAT,X
+		STA	<BMWORK
+		LDA	BMCONT,X
+		STA	<BMWORK+1
+;
+		LDY	#000H
+		LDX	#007H
+SDERA40		EQU	$
+		LDA	<BMWORK
+		CMP	#002H
+		BEQ	SDERA80
+		CMP	#005H
+		BEQ	SDERA80
+;
+		LDA	>SNENMD,X	; kaiten shori
+		INC	A
+		AND	#03FH
+		STA	>SNENMD,X
+;
+SDERA80		EQU	$
+		LDA	>SNDHAN
+		STA	<WORK8
+		LDA	>SNENMD,X
+		JSR	ENMVSH		; en keisan sub
+;
+		PHX
+		LDA	<BMWORK
+		CMP	#002H
+		BEQ	SDERB00
+		JSR	ENOMST		; oam (0) set
+		BRA	SDERC00
+SDERB00		EQU	$
+		JSR	SNOMST		; oam (1) set
+SDERC00		EQU	$
+		PLX
+;
+		DEX
+		BPL	SDERA40
+		PLX
+;
+		LDA	>SNDHAN
+		CMP	#0F0H
+		BCS	SDERC60
+;
+		LDY	#01H
+SDERC40		EQU	$
+		LDA	(<OAMADR),Y
+		CMP	#0F0H
+		BNE	SDERD00
+		INY
+		INY
+		INY
+		INY
+		CPY	#021H
+		BNE	SDERC40
+;
+SDERC60		EQU	$
+		STZ	BMMODE,X
+		LDA	#spoj0
+		STA	!SPOJFG
+		STZ	KNTMFG
+		STZ	KNSPMD
+		STZ	KNSPMD+1
+		STZ	<PYMKFG
+		STZ	ENSTFG
+		LDA	<MPDTNO
+		CMP	#070H
+		BNE	SDERC70
+		LDA	>GNDTBL+070H
+		AND	#020H
+		BNE	SDERC70
+		LDY	#002H
+		JSR	PYHICK4
+		BCC	SDERC70
+		LDA	#gif3
+		STA	!GDINFF
+		STZ	<JRSBPT
+		STZ	<CWORK0
+SDERC70		EQU	$
+		LDA	<LNMODE
+		CMP	#MNSR
+		BEQ	SDERC90
+;;;;;;;;		STZ	!SPMCFG
+		LDA	#LNMD		; nomal mode set
+		STA	<LNMODE
+		STZ	<KENFM
+		LDY	#000H
+		LDA	<KENMD
+		BEQ	SDERC80
+		LDA	<KEYA1
+		AND	#10000000B
+		TAY
+SDERC80		EQU	$
+		STY	<KENKY
+SDERC90		EQU	$
+		STZ	<PYSPFG
+		STZ	KNTMFG+1
+;;;;;;;;		STZ	OMCLCG		; ken,tate coler reset
+		PHX
+		JSL	>PLCGCN0	; player coler reset
+		JSL	>THCGCN2	; thunder CG. reset
+		PLX
+SDERD00		EQU	$
+		RTS
+;
+;**************************************************************
+;*		EN oam setshori			     (ENOMST) *
+;**************************************************************
+ENCHAR		EQU	$
+		HEX	068H,06AH
+ENOMST		EQU	$
+		MEM16
+		REP	#00100000B
+		PHY
+		LDA	<WORK0
+		LDY	<WORK2
+		BEQ	ENOM100
+		EOR	#0FFFFH
+		INC	A
+ENOM100		EQU	$
+		STA	<WORK8
+		CLC
+		ADC	>SNCYPS		; center y-pos set
+		CLC
+		ADC	#0FFF8H
+		SEC
+		SBC	<SCCV2		; Y-scr hosei
+		STA	<WORK0
+;
+		LDA	<WORK4
+		LDY	<WORK6
+		BEQ	ENOM200
+		EOR	#0FFFFH
+		INC	A
+ENOM200		EQU	$
+		STA	<WORKA
+		CLC
+		ADC	>SNCXPS		; center x-pos set
+		CLC
+		ADC	#0FFF8H
+		SEC
+		SBC	<SCCH2
+		STA	<WORK2
+		PLY
+		MEM8
+		SEP	#00100000B
+;
+		JSR	BMYXST3		; Y,X pos set
+;
+		LDA	<BMWORK+1
+		TAX
+;
+		LDA	!ENCHAR,X
+		STA	(<OAMADR),Y
+		INY
+		LDA	#03CH		; coler set
+		STA	(<OAMADR),Y
+		INY
+;
+		PHY
+		TYA
+		SEC
+		SBC	#004H
+		LSR	A
+		LSR	A
+		TAY
+		LDA	#002H
+		STA	(<OSBADR),Y
+		JSR	OAMPLCK		; oam point check
+		PLY
+		RTS
+;
+;**************************************************************
+;*		EN dengeki oam set		     (SNOMST) *
+;**************************************************************
+STDCHA		EQU	$		; sunder chara data
+;			      0       1       2       3
+		HEX	040,042,066,064,062,060,064,066
+;			      4       5       6       7
+		HEX	042,040,066,064,060,062,064,066
+;			      8       9       A       B
+		HEX	068,042,068,064,068,060,068,064
+;			      C       D       E       F
+		HEX	068,040,068,066,068,062,068,064
+STDATO		EQU	$		; sunder atori data
+;			      0       1       2       3
+		HEX	03C,03C,0FC,0FC,03C,03C,0BC,0BC
+;			      4       5       6       7
+		HEX	03C,03C,03C,03C,03C,03C,07C,07C
+;			      8       9       A       B
+		HEX	03C,07C,03C,03C,03C,0BC,03C,07C
+;			      C       D       E       F
+		HEX	03C,07C,03C,0FC,03C,0BC,03C,0BC
+STDYPS		EQU	$		; sunder y-pos data
+;			     0	    1	   2	  3
+		WORD	00008H,00000H,0FFF8H,0FFF0H
+;			     4	    5	   6	  7
+		WORD	0FFE8H,0FFF0H,0FFF8H,0FFF0H
+;			     8	    9	   A	  B
+		WORD	00008H,00000H,0FFF8H,0FFF0H
+;			     C	    D	   E	  F
+		WORD	0FFE8H,0FFF0H,0FFF8H,00000H
+STDXPS		EQU	$		; sunder x-pos data
+;			     0	    1	   2	  3
+		WORD	0FFF8H,0FFF0H,0FFE8H,0FFF0H
+;			     4	    5	   6	  7
+		WORD	0FFF8H,00000H,00008H,0FFF0H
+;			     8	    9	   A	  B
+		WORD	0FFF8H,0FFF0H,0FFE8H,0FFF0H
+;			     C	    D	   E	  F
+		WORD	0FFF8H,00000H,00008H,00000H
+;
+SNOMST		EQU	$
+		MEM16
+		REP	#00100000B
+		PHY
+		LDA	<WORK0
+		LDY	<WORK2
+		BEQ	SNOM100
+		EOR	#0FFFFH
+		INC	A
+SNOM100		EQU	$
+		STA	<WORK8
+		CLC
+		ADC	>SNCYPS		; center y-pos set
+		CLC
+		ADC	#0FFF8H
+		SEC
+		SBC	<SCCV2		; Y-scr hosei
+		STA	<WORK0
+;
+		LDA	<WORK4
+		LDY	<WORK6
+		BEQ	SNOM200
+		EOR	#0FFFFH
+		INC	A
+SNOM200		EQU	$
+		STA	<WORKA
+		CLC
+		ADC	>SNCXPS		; center x-pos set
+		CLC
+		ADC	#0FFF8H
+		SEC
+		SBC	<SCCH2
+		STA	<WORK2
+		PLY
+		MEM8
+		SEP	#00100000B
+;
+		JSR	BMYXST3		; Y,X pos set
+;
+		LDA	<BMWORK+1
+		ASL	A
+		ASL	A
+		ASL	A
+		ASL	A
+		STA	<WORKE
+		TXA
+		ASL	A
+		CLC
+		ADC	<WORKE
+		TAX
+;
+		LDA	!STDCHA,X
+		STA	(<OAMADR),Y
+		INY
+		LDA	!STDATO,X	; coler set
+		STA	(<OAMADR),Y
+		INY
+;
+		PHY
+		TYA
+		SEC
+		SBC	#004H
+		LSR	A
+		LSR	A
+		TAY
+		LDA	#002H
+		STA	(<OSBADR),Y
+		PLY
+		
+		MEM16
+		REP	#00100000B
+		LDA	<WORK8
+		CLC
+		ADC	>SNCYPS		; center y-pos set
+		CLC
+		ADC	!STDYPS,X
+		SEC
+		SBC	<SCCV2		; Y-scr hosei
+		STA	<WORK0
+;
+		LDA	<WORKA
+		CLC
+		ADC	>SNCXPS		; center x-pos set
+		CLC
+		ADC	!STDXPS,X
+		SEC
+		SBC	<SCCH2
+		STA	<WORK2
+		MEM8
+		SEP	#00100000B
+;
+		PHX
+		JSR	BMYXST3		; Y,X pos set
+		PLX
+;
+		LDA	!STDCHA+1,X
+		STA	(<OAMADR),Y
+		INY
+		LDA	!STDATO+1,X	; coler set
+		STA	(<OAMADR),Y
+		INY
+;
+		PHY
+		TYA
+		SEC
+		SBC	#004H
+		LSR	A
+		LSR	A
+		TAY
+		LDA	#002H
+		STA	(<OSBADR),Y
+		PLY
+		JSR	OAMPLCK		; oam point check
+;
+		RTS
+;
+;**************************************************************
+;*		spcial magic (SOUNDER) oam set       (SDOMST) *
+;**************************************************************
+SDCHAR		EQU	$	; inazuma chara data
+		HEX	040,042	; 0
+		HEX	044,046	; 1
+SDCHAR1		EQU	$	; inazuma tame chara data
+		HEX	048,048,04A,04A		; 0
+		HEX	04C,04C,04E,04E		; 1
+SDATOR1		EQU	$	; inazuma tame coler data
+		HEX	03C,07C,03C,07C		; 0
+		HEX	03C,07C,03C,07C		; 1
+SDOMST		EQU	$
+		JSR	ITMPST
+		LDA	BMCONT,X	; chara count
+		STA	<WORK6
+		STZ	<WORK8
+		PHX
+		LDA	BCDMNO,X
+		TAX
+		LDY	#000H
+SDOM100		EQU	$
+		JSR	BMYXST3		; Y,X pos set
+		PHX
+		LDA	<WORK6
+		ASL	A
+		CLC
+		ADC	<WORK8
+		TAX
+		LDA	!SDCHAR,X
+		STA	(<OAMADR),Y
+		PLX
+		INY
+		LDA	!SDATOR1	; coler set
+		ORA	<PYBGUN1
+		STA	(<OAMADR),Y
+		INY
+		PHY			; oam sub set
+		TYA
+		SEC
+		SBC	#004H
+		LSR	A
+		LSR	A
+		TAY
+		LDA	#002H
+		STA	(<OSBADR),Y
+		PLY
+		MEM16			; next y-pos set
+		REP	#00100000B
+		LDA	<WORK0
+		SEC
+		SBC	#0010H
+		STA	<WORK0
+		MEM8
+		SEP	#00100000B
+		LDA	<WORK8		; chara flag set
+		EOR	#00000001B
+		STA	<WORK8
+		DEX
+		BPL	SDOM100
+;
+		PLX
+		LDA	BMSTAT,X
+		CMP	#001H
+		BEQ	SDOM200
+		RTS
+;
+SDOM200		EQU	$
+		MEM16
+		REP	#00100000B
+		LDA	>SNTYPO
+		CLC
+		ADC	#0FFFFH
+		SEC
+		SBC	<SCCV2
+		STA	<WORK0
+		LDA	>SNTXPO
+		CLC
+		ADC	#0FFF8H
+		SEC
+		SBC	<SCCH2
+		STA	<WORK2
+		STA	<WORK4
+		STZ	<WORK8
+		MEM8
+		SEP	#00100000B
+		PHX
+		LDA	BMCONT,X	; chara count
+		ASL	A
+		ASL	A
+		STA	<WORK6
+SDOM300		EQU	$
+		JSR	BMYXST3
+		LDX	<WORK6
+		LDA	!SDCHAR1,X
+		STA	(<OAMADR),Y
+		INY
+		LDA	!SDATOR1,X
+		STA	(<OAMADR),Y
+		INY
+		PHY
+		TYA
+		SEC
+		SBC	#004H
+		LSR	A
+		LSR	A
+		TAY
+		LDA	#002H
+		STA	(<OSBADR),Y
+		PLY
+		JSR	OAMPLCK		; oam point check
+		MEM16
+		REP	#00100000B
+		LDA	<WORK2		; next x-pos set
+		CLC
+		ADC	#0010H
+		STA	<WORK2
+		INC	<WORK6
+		INC	<WORK8
+		LDA	<WORK8
+		CMP	#0004H
+		BEQ	SDOM500
+		CMP	#0002H
+		BNE	SDOM400
+		LDA	<WORK0
+		CLC
+		ADC	#0010H
+		STA	<WORK0
+		LDA	<WORK4
+		STA	<WORK2
+SDOM400		EQU	$
+		MEM8
+		SEP	#00100000B
+		BRA	SDOM300
+;
+SDOM500		EQU	$
+		MEM8
+		SEP	#00100000B
+		PLX
+SDOM800		EQU	$
+		RTS
+;
+;**************************************************************
+;*		spcial magic (BOMBER) move init.   (SPBMINT)  *
+;**************************************************************
+CNTYPS		EQU	$		; center y-pos data
+		WORD	00010H,00018H,0FF80H,0FFF0H	; 4/5
+;//////// 4/5 ////////		WORD	00080H,00018H,0FF80H,0FFF0H
+CNTXPS		EQU	$		; center x-pos data
+		WORD	0FFF0H,0FF80H,00000H,00080H	; 4/5
+;//////// 4/5 ////////		WORD	00010H,0FF80H,00000H,00080H
+;
+SPBMINT		EQU	$
+		PHB
+		PHK
+		PLB
+;
+		JSR	JPRMSR		; aki ram surch sub
+		BCC	SPBI100
+;
+		BRL	SPBI200
+SPBI100		EQU	$
+		LDA	#003H		; flem counter set
+		STA	>SPBMFM+0
+		STA	>SPBMFM+1
+		STA	>SPBMFM+2
+		STA	>SPBMFM+3
+		STA	>SPBMFM+4
+		STA	>SPBMFM+5
+		STA	>SPBMFM+6
+		STA	>SPBMFM+7
+		STA	>SPBMFM+8
+		STA	>SPBMFM+9
+		STA	>SPBKFM+0
+		STA	>SPBKFM+1
+		STA	>SPBKFM+2
+		STA	>SPBKFM+3
+		STA	>SPBKFM+4
+		STA	>SPBKFM+5
+		STA	>SPBKFM+6
+		STA	>SPBKFM+7
+		LDA	#000H
+		STA	>SPBMMD+0	; chara mode flag set
+		STA	>SPBMMD+1
+		STA	>SPBMMD+2
+		STA	>SPBMMD+3
+ 		STA	>SPBMMD+4
+		STA	>SPBMMD+5
+		STA	>SPBMMD+6
+		STA	>SPBMMD+7
+		STA	>SPBMMD+8
+		STA	>SPBMMD+9
+		STA	>SPBKMD+0
+		STA	>SPBKMD+1
+		STA	>SPBKMD+2
+		STA	>SPBKMD+3
+		STA	>SPBKMD+4
+		STA	>SPBKMD+5
+		STA	>SPBKMD+6
+		STA	>SPBKMD+7
+		STA	>SPMDCG		; mode chnge flag set
+		STA	>SPEDFG		; mode end flag reset
+		LDA	#080H		; mode end flem counter set
+		STA	>SPEDFM
+		LDA	#010H		; 4/5
+		STA	>SPENMD+0	; 4/5
+		LDA	#spoj5		; chara & coler chenge set
+		STA	!SPOJFG
+		LDA	#001H		; spcial magic on !!
+		STA	!SPMCFG
+		STZ	BMSTAT,X
+		STZ	BMCONT,X
+		LDA	#fires
+		JSR	SDLRP2		;<sound>
+;
+		PHX
+		LDY	<FCNT
+		LDA	<PLYPS0
+		STA	>SPBKYP+1
+		LDA	<PLXPS0
+		STA	>SPBKXP+1
+		LDA	!BURN1MV,Y
+		CMP	#0E0H
+		BCC	SPBI120
+		AND	#07FH
+SPBI120		EQU	$		
+		STA	>SPBKYP+0
+		STA	>SPBKXP+0
+;
+		LDX	#000H		; 4/5
+		STX	<BMWORK+0	; 4/5
+SPBI140		EQU	$
+		MEM16
+		REP	#00100000B
+		LDA	<PLYPS1
+		CLC
+		ADC	!CNTYPS,X
+		STA	>SPCNYL,X
+		LDA	<PLXPS1
+		CLC
+		ADC	!CNTXPS,X
+		STA	>SPCNXL,X
+		MEM8
+		SEP	#00100000B
+;
+		PHX
+		TXA
+		LSR	A
+		TAX
+		LDA	#010H		; 4/5
+		STA	<WORK8		; 4/5
+		STA	>SPHNKI		; 4/5
+		LDA	>SPENMD,X	; en mode set
+		PLX
+		JSR	ENMVSH		; en y,x keisan
+		MEM16
+		REP	#00100000B
+		LDA	<WORK0
+		LDY	<WORK2
+		BEQ	SPBI160
+		EOR	#0FFFFH
+		INC	A
+SPBI160		EQU	$
+		CLC
+		ADC	>SPCNYL,X
+		STA	<WORK0
+;
+		LDA	<WORK4
+		LDY	<WORK6
+		BEQ	SNOM180
+		EOR	#0FFFFH
+		INC	A
+SNOM180		EQU	$
+		CLC
+		ADC	>SPCNXL,X
+		STA	<WORK4
+		MEM8
+		SEP	#00100000B
+		PHX
+		LDX	<BMWORK+0
+		LDA	<WORK0
+		STA	>SPBYPL,X	; position hozon set
+		LDA	<WORK1
+		STA	>SPBYPH,X
+		LDA	<WORK4
+		STA	>SPBXPL,X
+		LDA	<WORK5
+		STA	>SPBXPH,X
+		PLX
+		LDA	<BMWORK+0
+		SEC
+		SBC	#010H
+		STA	<BMWORK+0
+		DEX
+		DEX
+		BPL	SPBI140
+		PLX
+;
+SPBI200		EQU	$
+		PLB
+		RTL
+;
+;**************************************************************
+;*		spcial magic (BOMBER) move 	    (SPBOMOV) *
+;**************************************************************
+SPBOMOV		EQU	$
+		LDA	>SPMDCG		; mode chnge flag set
+		BNE	SPBV400
+;
+		LDA	<GAMEMD		; purse ? [YES:SPBVF00]
+		BNE	SPBV100
+;
+		JMP	SPUTMV		; unit move sub
+;
+SPBV100		EQU	$
+		LDY	#000H
+		LDX	#009H		; oam set sub
+SPBV200		EQU	$
+		JSR	SPBOMST
+		DEX
+		BPL	SPBV200
+		RTS
+;
+SPBV400		EQU	$
+		LDA	>SPMDCG		; 4/8
+		CMP	#002H
+		BEQ	SPBV480
+		LDA	<GAMEMD
+		BNE	SPBV100
+		JSR	SPBEDST
+		RTS
+;
+SPBV480		EQU	$
+		LDA	<GAMEMD		; purse ? [YES:SPBVF00]
+		BEQ	SPBV600
+;
+		PHX
+		LDA	BMSTAT,X
+		TAX
+SPBV500		EQU	$
+		JSR	SPBKOM
+		DEX
+		BPL	SPBV500
+		PLX
+SPBVF00		EQU	$
+		RTS
+;
+SPBV600		EQU	$
+		JMP	SPBKMV		; bukaha move set
+;
+;**************************************************************
+;*		(BOMBER)  unit move sub		    (SPUTMV)  *
+;**************************************************************
+SPUTMV		EQU	$		; unit move sub
+		PHX
+		LDA	BMCONT,X
+		STA	<BMWORK+1
+		LDA	BMSTAT,X
+		STA	<BMWORK+0
+		TAX
+		LDY	#000H
+SPUT100		EQU	$
+		LDA	>SPBMMD,X	; end ? [YES:SPUT400]
+		CMP	#00DH
+		BNE	SPUT110
+SPUT108		EQU	$
+		BRL	SPUT400
+;
+SPUT110		EQU	$
+		LDA	>SPBMFM,X
+		DEC	A
+		STA	>SPBMFM,X
+		BMI	SPUT120
+SPUT118		EQU	$
+		BRL	SPUT300
+SPUT120		EQU	$
+		LDA	#03H		; bomber flem counter
+		STA	>SPBMFM,X
+		LDA	>SPBMMD,X
+		INC	A
+		STA	>SPBMMD,X
+		CMP	#00DH		; end ? [YES:SPUT400]
+		BEQ	SPUT108
+		CMP	#002H
+		BNE	SPUT118
+;
+		LDA	<BMWORK+1
+		BNE	SPUT108
+;
+		PHX
+		LDA	<BMWORK+0
+		CMP	#009H
+		BNE	SPUT200
+;
+		LDX	#009H
+SPUT140		EQU	$
+		LDA	>SPBMMD,X
+		CMP	#00DH
+		BNE	SPUT160
+		LDA	#000H
+		STA	>SPBMMD,X
+		BRA	SPUT240
+SPUT160		EQU	$
+		DEX
+		BPL	SPUT140
+;
+SPUT200		EQU	$
+		LDX	<BMWORK+0
+		INX
+		CPX	#00AH
+		BNE	SPUT220
+		LDX	#009H
+SPUT220		EQU	$
+		STX	<BMWORK+0
+;
+SPUT240		EQU	$
+		TXA
+;//////// 4/5 ////////		CLC
+;//////// 4/5 ////////		ADC	#030H
+		CLC			; 4/5
+		ADC	#000H		; 4/5
+		STA	<BMWORK+2
+SPUT250		EQU	$
+		LDA	<BMWORK+2
+		LSR	A
+		LSR	A
+		LSR	A
+		LSR	A
+		TAX
+;//////// 4/5 ////////		LDA	#080H		; hankei set
+;//////// 4/5 ////////		LDA	#080H		; hankei set
+;//////// 4/5 ////////		STA	<WORK8
+		LDA	>SPHNKI		; 4/5
+		CLC			; 4/5
+		ADC	#003H		; 4/5
+		CMP	#0D0H		; 4/5
+		BCC	SPUT258		; 4/5
+		LDA	#0CFH		; 4/5
+SPUT258		EQU	$		; 4/5
+		STA	>SPHNKI		; 4/5
+		STA	<WORK8		; 4/5
+;
+		LDA	>SPENMD,X	; en mode flag set
+		CLC			; 4/5
+		ADC	#006H		; 4/5
+;//////// 4/5 ////////		INC	A
+		STA	>SPENMD,X
+		AND	#00111111B	; 4/5
+		JSR	ENMVSH		; en y,x keisan
+		TXA
+		ASL	A
+		TAX
+		MEM16
+		REP	#00100000B
+		PHY
+		LDA	<WORK0
+		LDY	<WORK2
+		BEQ	SPUT260
+		EOR	#0FFFFH
+		INC	A
+SPUT260		EQU	$
+		CLC
+		ADC	>SPCNYL,X
+		STA	<WORK0
+;
+		LDA	<WORK4
+		LDY	<WORK6
+		BEQ	SPUT280
+		EOR	#0FFFFH
+		INC	A
+SPUT280		EQU	$
+		CLC
+		ADC	>SPCNXL,X
+		STA	<WORK4
+		PLY
+		MEM8
+		SEP	#00100000B
+		LDX	<BMWORK+2
+		LDA	<WORK0
+		STA	>SPBYPL,X	; position hozon set
+		LDA	<WORK1
+		STA	>SPBYPH,X
+		LDA	<WORK4
+		STA	>SPBXPL,X
+		LDA	<WORK5
+		STA	>SPBXPH,X
+		LDA	<BMWORK+2
+		SEC
+		SBC	#010H
+		STA	<BMWORK+2
+		BPL	SPUT250
+		MEM16
+		REP	#00100000B
+		LDA	<WORK4
+		SEC
+		SBC	<SCCH2
+		CLC
+		ADC	#0008H
+		STA	<WORK4
+		MEM8
+		SEP	#00100000B
+		LDA	<WORK5
+		BNE	SPUT2C0
+;
+		LDA	<WORK4
+		LSR	A
+		LSR	A
+		LSR	A
+		LSR	A
+		LSR	A
+		TAX
+		LDA	>BMLRDT,X
+		ORA	#fires
+		STA	!SOUND2
+;
+SPUT2C0		EQU	$
+		PLX
+;
+SPUT300		EQU	$
+		JSR	SPBOMST
+SPUT400		EQU	$
+		DEX
+		BMI	SPUT500
+		BRL	SPUT100
+;
+SPUT500		EQU	$
+		PLX
+		LDA	>SPENMD+0	; angle end ? [YES:SPUT640]
+		CMP	#080H		; 4/5
+		BCS	SPUT640		; 4/5
+		BRA	SPUT700		; 4/5
+;//////// 4/5 ////////		CMP	#020H
+;//////// 4/5 ////////		BEQ	SPUT640
+;//////// 4/5 ////////;
+;//////// 4/5 ////////		TYA
+;//////// 4/5 ////////		INC	A
+;//////// 4/5 ////////		STA	<WORK0
+;//////// 4/5 ////////		LDY	#001H
+;//////// 4/5 ////////SPUT600		EQU	$
+;//////// 4/5 ////////		LDA	(<OAMADR),Y
+;//////// 4/5 ////////		CMP	#0F0H
+;//////// 4/5 ////////		BNE	SPUT700
+;//////// 4/5 ////////		INY
+;//////// 4/5 ////////		INY
+;//////// 4/5 ////////		INY
+;//////// 4/5 ////////		INY
+;//////// 4/5 ////////		CPY	<WORK0
+;//////// 4/5 ////////		BNE	SPUT600
+;
+SPUT640		EQU	$
+		LDA	#001H
+		STA	>SPMDCG		; mode chnge flag set
+;//////// 4/5 ////////		STZ	<BMWORK+0
+;//////// 4/5 ////////		PHX
+;//////// 4/5 ////////		JSL	>ALENDM		; all enmy dameji sub
+;//////// 4/5 ////////		PLX
+;
+SPUT700		EQU	$
+		LDA	<BMWORK+0
+		STA	BMSTAT,X
+		RTS
+;
+;**************************************************************
+;*		spcial magic (BOMBER) END set	    (SPBEDST) *
+;**************************************************************
+SPBEDST		EQU	$
+		PHX
+		LDA	BMSTAT,X
+		TAX
+		LDY	#000H
+SPED100		EQU	$
+		LDA	>SPBMFM,X
+		DEC	A
+		STA	>SPBMFM,X
+		BPL	SPED200
+;
+		LDA	#03H		; bomber flem counter
+		STA	>SPBMFM,X
+		LDA	>SPBMMD,X
+		INC	A
+		STA	>SPBMMD,X
+		CMP	#00DH
+		BCC	SPED200
+		LDA	#00DH
+		STA	>SPBMMD,X
+;
+SPED200		EQU	$
+		JSR	SPBOMST
+;
+		DEX
+		BPL	SPED100
+;
+		LDX	#009H
+SPED300		EQU	$
+		LDA	>SPBMMD,X
+		CMP	#00DH
+		BNE	SPED400
+		DEX
+		BPL	SPED300
+;
+		STZ	<BMWORK+0
+		LDA	#002H
+		STA	>SPMDCG
+;
+		PLX
+;
+		PHX
+		JSL	>ALENDM		; all enmy dameji sub
+		PLX
+;
+		STZ	BMSTAT,X
+		RTS
+;
+SPED400		EQU	$
+		PLX
+		RTS
+;
+;**************************************************************
+;*		spcial magic (BOMBER) OAM set	    (SPBOMST) *
+;**************************************************************
+SPBCHR		EQU	$		; special chara data
+		HEX	040,0FF,0FF	;0
+		HEX	042,044,0FF	;1
+		HEX	042,044,0FF	;2
+		HEX	042,044,0FF	;3
+		HEX	042,044,0FF	;4
+		HEX	040,046,044	;5
+		HEX	04A,04A,048	;6
+		HEX	04C,04C,04A	;7
+		HEX	04E,04C,04A	;8
+		HEX	04E,06A,04C	;9
+		HEX	04E,068,0FF	;A
+		HEX	06A,0FF,0FF	;B
+		HEX	04E,0FF,0FF	;C
+SPBATR		EQU	$		; spcial atori data
+		HEX	03C,0FF,0FF	;0
+		HEX	03C,03C,0FF	;1
+		HEX	03C,03C,0FF	;2
+		HEX	07C,07C,0FF	;3
+		HEX	03C,07C,0FF	;4
+		HEX	03C,03C,03C	;5
+		HEX	0BC,03C,03C	;6
+		HEX	07C,03C,03C	;7
+		HEX	03C,03C,07C	;8
+		HEX	03C,03C,03C	;9
+		HEX	03C,03C,0FF	;A
+		HEX	03C,0FF,0FF	;B
+		HEX	03C,0FF,0FF	;C
+SPBYPS		EQU	$		; spcial y-pos data
+		WORD	00000H,0FFFFH,0FFFFH	;0
+		WORD	00000H,0FFFCH,0FFFFH	;1
+		WORD	00000H,0FFF8H,0FFFFH	;2
+		WORD	00000H,0FFF4H,0FFFFH	;3
+		WORD	00000H,0FFF0H,0FFFFH	;4
+		WORD	00000H,0FFFCH,0FFECH	;5
+		WORD	00000H,0FFF8H,0FFE8H	;6
+		WORD	00000H,0FFF4H,0FFE4H	;7
+		WORD	00000H,0FFF0H,0FFE0H	;8
+		WORD	00000H,0FFF0H,0FFE0H	;9
+		WORD	0FFEEH,0FFDEH,0FFFFH	;A
+		WORD	0FFDDH,0FFFFH,0FFFFH	;B
+		WORD	0FFDCH,0FFFFH,0FFFFH	;C
+SPBXPS		EQU	$		; spcial x-pos data
+		WORD	00000H,0FFFFH,0FFFFH	;0
+		WORD	00000H,00000H,0FFFFH	;1
+		WORD	00000H,00000H,0FFFFH	;2
+		WORD	00000H,00000H,0FFFFH	;3
+		WORD	00000H,00000H,0FFFFH	;4
+		WORD	00000H,00000H,00000H	;5
+		WORD	00000H,00000H,00000H	;6
+		WORD	00000H,00000H,00000H	;7
+		WORD	00000H,00000H,00000H	;8
+		WORD	00000H,00000H,00000H	;9
+		WORD	00000H,00000H,0FFFFH	;A
+		WORD	00001H,0FFFFH,0FFFFH	;B
+		WORD	00002H,0FFFFH,0FFFFH	;C
+;
+SPBOMST		EQU	$
+		TXA
+		CLC
+;//////// 4/5 ////////		ADC	#030H
+		ADC	#000H		; 4/5
+		STA	<BMWORK+3
+		LDA	#4*4
+		JSR	BMOMPT
+		LDY	#000H
+;
+SPBO040		EQU	$
+		PHX
+		LDA	>SPBMMD,X
+		CMP	#00DH
+		BEQ	SPBO500
+SPBO080		EQU	$
+		ASL	A
+		CLC
+		ADC	>SPBMMD,X
+		CLC
+		ADC	#002H
+		TAX
+		STZ	<WORK8
+SPBO100		EQU	$
+		LDA	!SPBCHR,X
+		CMP	#0FFH
+		BEQ	SPBO400
+;
+		PHX
+		LDX	<BMWORK+3
+		LDA	>SPBYPL,X	; position hozon set
+		STA	<WORK0
+		LDA	>SPBYPH,X
+		STA	<WORK1
+		LDA	>SPBXPL,X
+		STA	<WORK2
+		LDA	>SPBXPH,X
+		STA	<WORK3
+		PLX
+;
+		PHX
+		TXA
+		ASL	A
+		TAX
+		MEM16
+		REP	#00100000B
+		LDA	<WORK0
+		CLC
+		ADC	!SPBYPS,X
+		SEC
+		SBC	<SCCV2
+		STA	<WORK0
+		LDA	<WORK2
+		CLC
+		ADC	!SPBXPS,X
+		SEC
+		SBC	<SCCH2
+		STA	<WORK2
+		MEM8
+		SEP	#00100000B
+;
+		JSR	BMYXST3
+		PLX
+		LDA	!SPBCHR,X
+		STA	(<OAMADR),Y
+		INY
+		LDA	!SPBATR,X
+		STA	(<OAMADR),Y
+		INY
+		PHY
+		TYA
+		SEC
+		SBC	#004H
+		LSR	A
+		LSR	A
+		TAY
+		LDA	#002H
+		STA	(<OSBADR),Y
+		PLY
+SPBO400		EQU	$
+		JSR	OAMPLCK		; oam point check
+		DEX
+		INC	<WORK8
+		LDA	<WORK8
+		CMP	#0003H
+		BNE	SPBO100
+;
+SPBO500		EQU	$
+		PLX
+		LDA	<BMWORK+3
+		SEC
+		SBC	#010H
+		STA	<BMWORK+3
+		BMI	SPBO600
+		BRL	SPBO040
+SPBO600		EQU	$
+		RTS
+;
+;**************************************************************
+;*		special bomb bakuhatsu move	(SPBKMV)      *
+;**************************************************************
+SPBKMV		EQU	$
+		PHX
+		LDY	#000H
+		LDA	BMSTAT,X
+		STA	<BMWORK+0
+		TAX
+SPBK100		EQU	$
+		LDA	>SPBKMD,X	; END ?
+		CMP	#008H
+		BEQ	SPBK110
+;
+		LDA	>SPBKFM,X
+		DEC	A
+		STA	>SPBKFM,X
+		BMI	SPBK120
+SPBK110		EQU	$
+		BRL	SPBK600
+SPBK120		EQU	$
+;
+SPBK140		EQU	$
+		LDA	#003H
+		STA	>SPBKFM,X
+		LDA	>SPBKMD,X
+		INC	A
+		STA	>SPBKMD,X
+		CMP	#001H
+		BNE	SPBK110
+;
+		LDA	>SPEDFG
+		BNE	SPBK110
+;
+		PHX
+		LDA	<BMWORK+0
+		CMP	#00FH
+		BEQ	SPBK300
+		LDA	<BMWORK+0
+		INC	A
+		CMP	#010H
+		BNE	SPBK200
+		LDA	#00FH
+SPBK200		EQU	$
+		STA	<BMWORK+0
+		TAX
+		BRA	SPBK500
+;
+SPBK300		EQU	$
+		LDX	#00FH
+SPBK400		EQU	$
+		LDA	>SPBKMD,X
+		CMP	#008H
+		BEQ	SPBK500
+		DEX
+		BPL	SPBK400
+;
+SPBK500		EQU	$
+		LDA	#000H
+		STA	>SPBKMD,X
+		LDA	#003H
+		STA	>SPBKFM,X
+		PHY
+		TXA
+		ASL	A
+		TAY
+		LDA	<FCNT
+		AND	#00111111B
+		TAX
+		LDA	>RNDMDT,X
+		STA	<WORK0
+		STZ	<WORK1
+		LDA	>RNDMDT+3,X
+		STA	<WORK2
+		STZ	<WORK3
+		TYX
+		MEM16
+		REP	#00100000B
+		LDA	<WORK0
+		CLC
+		ADC	<SCCV2
+		STA	>SPBKYP,X
+		LDA	<WORK2
+		CLC
+		ADC	<SCCH2
+		STA	>SPBKXP,X
+		MEM8
+		SEP	#00100000B
+		LDA	>SPBKXP,X
+		LSR	A
+		LSR	A
+		LSR	A
+		LSR	A
+		LSR	A
+		TAX
+		LDA	>BMLRDT,X
+		ORA	#bomb1
+		STA	!SOUND2		; <sound>
+		PLY
+		PLX
+;
+SPBK600		EQU	$
+		JSR	SPBKOM
+SPBK640		EQU	$
+		DEX
+		BMI	SPBK680
+		BRL	SPBK100
+;
+SPBK680		EQU	$
+		LDX	#00FH
+SPBK700		EQU	$
+		LDA	>SPBKMD+0,X
+		CMP	#008H
+		BNE	SPK1000
+		DEX
+		BPL	SPBK700
+;
+		PLX
+		STZ	BMMODE,X
+		LDA	#spoj0
+		STA	!SPOJFG
+		STZ	KNTMFG
+		STZ	KNSPMD
+		STZ	KNSPMD+1
+		STZ	<PYMKFG
+		STZ	ENSTFG
+		LDA	<LNMODE
+		CMP	#MNBB
+		BEQ	SPBKF20
+;;;;;;;;		STZ	!SPMCFG
+		LDA	#LNMD		; nomal mode set
+		STA	<LNMODE
+		STZ	<KENFM
+		LDY	#000H
+		LDA	<KENMD
+		BEQ	SPBKF00
+		LDA	<KEYA1
+		AND	#10000000B
+		TAY
+SPBKF00		EQU	$
+		STY	<KENKY
+SPBKF20		EQU	$
+		STZ	<PYSPFG
+		STZ	KNTMFG+1
+		BRA	SPK1100
+SPK1000		EQU	$
+		PLX
+		LDA	<BMWORK+0
+		STA	BMSTAT,X
+SPK1100		EQU	$
+		LDA	>SPEDFM
+		DEC	A
+		STA	>SPEDFM
+		BNE	SPK1200
+		LDA	#001H
+		STA	>SPEDFG
+		STA	>SPEDFM
+SPK1200		EQU	$
+		RTS
+;
+;**************************************************************
+;*		special bomb bakuhatsu oam set	(SPBKOM)      *
+;**************************************************************
+BKHCHR		EQU	$		; chara data
+		HEX	060,0FF,0FF,0FF		;0
+		HEX	062,062,062,062		;1
+		HEX	064,064,064,064		;2
+		HEX	066,066,066,066		;3
+		HEX	068,068,068,068		;4
+		HEX	068,068,068,068		;5
+		HEX	06A,06A,06A,06A		;6
+		HEX	04E,04E,04E,04E		;7
+BKHATO		EQU	$		; atori data
+		HEX	03C,0FF,0FF,0FF		;0
+		HEX	03C,07C,0BC,0FC		;1
+		HEX	03C,07C,0BC,0FC		;2
+		HEX	03C,07C,0BC,0FC		;3
+		HEX	03C,07C,0BC,0FC		;4
+		HEX	03C,07C,0BC,0FC		;5
+		HEX	03C,07C,0BC,0FC		;6
+		HEX	03C,07C,0BC,0FC		;7
+BKHYPS		EQU	$
+		WORD	0FFF8H,0FFFFH,0FFFFH,0FFFFH	;0
+		WORD	0FFF4H,0FFF4H,0FFFCH,0FFFCH	;1
+		WORD	0FFF0H,0FFF0H,00000H,00000H	;2
+		WORD	0FFF0H,0FFF0H,00000H,00000H	;3
+		WORD	0FFEFH,0FFEFH,00001H,00001H	;4
+		WORD	0FFEDH,0FFEDH,00003H,00003H	;5
+		WORD	0FFEDH,0FFEDH,00003H,00003H	;6
+		WORD	0FFEDH,0FFEDH,00003H,00003H	;7
+BKHXPS		EQU	$
+		WORD	0FFF8H,0FFFFH,0FFFFH,0FFFFH	;0
+		WORD	0FFF4H,0FFFCH,0FFF4H,0FFFCH	;1
+		WORD	0FFF0H,00000H,0FFF0H,00000H	;2
+		WORD	0FFF0H,00000H,0FFF0H,00000H	;3
+		WORD	0FFEFH,00001H,0FFEFH,00001H	;4
+		WORD	0FFEDH,00003H,0FFEDH,00003H	;5
+		WORD	0FFEDH,00003H,0FFEDH,00003H	;6
+		WORD	0FFEDH,00003H,0FFEDH,00003H	;7
+SPBKOM		EQU	$
+		PHX
+		LDA	#003H
+		STA	<WORKC
+		PHX
+		TXA
+		ASL	A
+		TAX
+		LDA	>SPBKYP,X
+		STA	<WORK8
+		LDA	>SPBKYP+1,X
+		STA	<WORK9
+		LDA	>SPBKXP,X
+		STA	<WORKA
+		LDA	>SPBKXP+1,X
+		STA	<WORKB
+		PLX
+		LDA	>SPBKMD,X
+		CMP	#008H
+		BEQ	SPBM300
+		LDA	#4*4
+		JSR	BMOMPT
+		LDY	#000H
+		LDA	>SPBKMD,X
+		ASL	A
+		ASL	A
+		CLC
+		ADC	#003H
+		STA	<BMWORK+1
+		TAX
+SPBM100		EQU	$		
+		LDA	!BKHCHR,X
+		CMP	#0FFH
+		BEQ	SPBM200
+		PHX
+		TXA
+		ASL	A
+		TAX
+		MEM16
+		REP	#00100000B
+		LDA	!BKHYPS,X
+		CLC
+		ADC	<WORK8
+		SEC
+		SBC	<SCCV2
+		STA	<WORK0
+		LDA	!BKHXPS,X
+		CLC
+		ADC	<WORKA
+		SEC
+		SBC	<SCCH2
+		STA	<WORK2
+		MEM8
+		SEP	#00100000B
+		PLX
+;
+		JSR	BMYXST3
+		LDA	!BKHCHR,X
+		STA	(<OAMADR),Y
+		INY
+		LDA	!BKHATO,X
+		STA	(<OAMADR),Y
+		INY
+		PHY
+		TYA
+		SEC
+		SBC	#004H
+		LSR	A
+		LSR	A
+		TAY
+		LDA	#002H
+		STA	(<OSBADR),Y
+		PLY
+SPBM200		EQU	$
+		JSR	OAMPLCK		; oam point check
+		DEX
+		DEC	<WORKC
+		BPL	SPBM100
+;
+SPBM300		EQU	$
+		PLX
+		RTS
+;
+;**************************************************************
+;*		spcial magic (JISHIN) move 	   (JISNMOV)  *
+;**************************************************************
+JISNMOV		EQU	$
+		LDA	<GAMEMD		; purse ? [YES:KONA200]
+		BNE	JISND00
+		LDA	BMSTAT,X
+		CMP	#002H
+		BEQ	JISN100
+		JSR	JNSR200		; gatagata shori
+		JSR	JNMV000		; mode A,B,C move sub
+		BRL	JSMV000		; mode 1,2,3,4 move sub
+JISN100		EQU	$
+		BRA	JINSCR		; end !!
+;
+JISND00		EQU	$		; purse oam set
+		PHX
+		LDX	#004H
+JISNE00		EQU	$
+		LDA	>SPJIMD,X	; end code ? [YES:JNMV600]
+		CMP	!JNENDT,X
+		BEQ	JISNF00
+		JSR	JSNOMS
+JISNF00		EQU	$
+		DEX
+		BPL	JISNF00
+		PLX
+		RTS
+;
+;**************************************************************
+;*		(JISHIN) scrool shori	 	   (JINSCR)   *
+;**************************************************************
+JINSCR		EQU	$
+		PHX
+;;;;;;;;		STX	ENHELP2
+;;;;;;;;		LDX	ENHELP2
+		JSL	>ALENDM		; all enmy dameji sub
+		JSL	>CRTLCK
+		PLX
+;
+		STZ	BMMODE,X
+		LDA	#LNMD		; nomal mode set
+		STA	<LNMODE
+		LDA	#spoj0
+		STA	!SPOJFG
+;;;;;;;;		STZ	!SPMCFG
+		STZ	KNTMFG
+		STZ	KNSPMD
+		STZ	KNSPMD+1
+		STZ	<PYMKFG
+		STZ	<KENFM
+		STZ	ENSTFG
+;
+		STZ	!YUREXD
+		STZ	!YUREXD+1
+		STZ	!YUREYD
+		STZ	!YUREYD+1
+;
+		LDA	<MPDTNO
+		CMP	#047H
+		BNE	JNSR080
+		LDA	>GNDTBL+047H
+		AND	#020H
+		BNE	JNSR080
+		LDY	#003H
+		JSR	PYHICK4
+		BCC	JNSR080
+		LDA	#gif4
+		STA	!GDINFF
+		STZ	<JRSBPT
+		STZ	<CWORK0
+JNSR080		EQU	$
+;;;;;;;;		LDA	#jised
+;;;;;;;;		STA	!SOUND1		; <sound>
+;
+		LDY	#000H
+		LDA	<KENMD
+		BEQ	JNSR100
+		LDA	<KEYA1
+		AND	#10000000B
+		TAY
+JNSR100		EQU	$
+		STY	<KENKY
+		STZ	<PYSPFG
+		STZ	KNTMFG+1
+		RTS
+;
+JNSR200		EQU	$
+		MEM16
+		REP	#00100000B
+		LDA	>SPVSR1
+		STA	!YUREYD
+		EOR	#0FFFFH
+		INC	A
+		STA	>SPVSR1
+		MEM8
+		SEP	#00100000B
+		LDA	<PLYMVC
+		CLC
+		ADC	!YUREYD
+		STA	<PLYMVC
+JNSR400		EQU	$
+		RTS
+;
+;**************************************************************
+;*		JISHIN mode A,B,C move 	 	   (JNMV000)  *
+;**************************************************************
+JNENDT		EQU	$		; end data
+		BYTE	JSN0A,JSN0B,JSN0A,JSN0B,JSN0C
+JNMV000		EQU	$
+		PHX
+;
+		LDA	BMSTAT,X
+		STA	>SPWORK+0
+		LDA	>SPJILP
+		TAX
+JNMV100		EQU	$
+		LDA	>SPJIMD,X	; end code ? [YES:JNMV600]
+		CMP	!JNENDT,X
+		BEQ	JNMV700
+;
+		LDA	>SPJIFM,X
+		DEC	A
+		STA	>SPJIFM,X
+		BPL	JNMV600
+;
+		LDA	#001H
+		STA	>SPJIFM,X
+		LDA	>SPJIMD,X
+		INC	A
+		STA	>SPJIMD,X
+		CMP	!JNENDT,X
+		BEQ	JNMV700
+		TXY
+		BNE	JNMV200
+		CMP	#002H
+		BNE	JNMV200
+		LDA	#00CH		; enmy sound
+		JSR	SDLRP2		;<sound>
+		LDA	#001H
+		STA	>SPJILP
+		BRA	JNMV600
+JNMV200		EQU	$
+		CPX	#001H
+		BNE	JNMV300
+		CMP	#002H
+		BNE	JNMV300
+		LDA	#004H
+		STA	>SPJILP
+		BRA	JNMV600
+JNMV300		EQU	$
+		CPX	#004H
+		BNE	JNMV600
+		CMP	#007H
+		BNE	JNMV600
+		LDA	#001H
+		STA	>SPWORK+0
+;
+JNMV600		EQU	$
+		JSR	JSNOMS
+JNMV700		EQU	$
+		DEX
+		BPL	JNMV100
+;
+;;;;;;;;		LDX	#004H
+;;;;;;;;JNMV800		EQU	$
+;;;;;;;;		LDA	>SPJIMD,X	; end code ? [YES:JNMV600]
+;;;;;;;;		CMP	!JNENDT,X
+;;;;;;;;		BEQ	JNMV900
+;;;;;;;;		BRA	JNMVA00
+;;;;;;;;JNMV900		EQU	$
+;;;;;;;;		DEX
+;;;;;;;;		BPL	JNMV800
+;;;;;;;;;
+;;;;;;;;		LDA	#002H
+;;;;;;;;		STA	>SPWORK+0
+;;;;;;;;;
+;;;;;;;;JNMVA00		EQU	$
+		PLX
+		LDA	>SPWORK+0
+		STA	BMSTAT,X
+		RTS
+;
+;**************************************************************
+;*		JISHIN mode A,B,C oam set 	   (JSNOMS)  *
+;**************************************************************
+JNBNDT		EQU	$		; bigin data
+		BYTE	JSN0D,JSN0E,JSN0D,JSN0E,JSN0F
+JSNOMS		EQU	$
+		PHX
+		LDA	>SPJIMD,X
+		CLC
+		ADC	!JNBNDT,X
+		ASL	A
+		TAY
+		LDA	!JSNINX0,Y
+		STA	<BMWORK+0
+		LDA	!JSNINX0+1,Y
+		STA	<BMWORK+1
+		LDA	!JSNINX0+2,Y
+		STA	<BMWORK+2
+		LDA	!JSNINX0+3,Y
+		STA	<BMWORK+3
+;
+		MEM16
+		REP	#00100000B
+		LDA	<BMWORK+2
+		SEC
+		SBC	<BMWORK+0
+		STA	<BMWORK+2
+		MEM8
+		SEP	#00100000B
+;
+		LDX	#000H
+JSNO100		EQU	$
+		TXY
+;
+		MEM16
+		REP	#00100000B
+		LDA	(<BMWORK+0),Y
+		AND	#00FFH
+		CMP	#0080H
+		BCC	JSNO200
+		ORA	#0FF00H
+JSNO200		EQU	$
+		STA	<WORK2
+		LDA	>SPJIXP
+		CLC
+		ADC	<WORK2
+		SEC
+		SBC	<SCCH2
+		STA	<WORK2
+;
+		INX
+		TXY		
+		LDA	(<BMWORK+0),Y
+		AND	#00FFH
+		CMP	#0080H
+		BCC	JSNO300
+		ORA	#0FF00H
+JSNO300		EQU	$
+		STA	<WORK0
+		LDA	>SPJIYP
+		CLC
+		ADC	<WORK0
+		SEC
+		SBC	<SCCV2
+		STA	<WORK0
+		INX
+		MEM8
+		SEP	#00100000B
+;
+		PHX
+		LDX	#0F0H
+		LDA	<WORK1
+		BNE	JSNO400
+		LDA	<WORK3
+		BNE	JSNO400
+		LDY	#000H
+		LDA	<WORK2
+		STA	(<OAMADR),Y
+		LDA	<WORK0
+		CMP	#0F0H
+		BCS	JSNO400
+		TAX
+JSNO400		EQU	$
+		INC	<OAMADR
+		LDY	#000H
+		TXA
+		STA	(<OAMADR),Y
+		INC	<OAMADR
+		PLX
+;
+		PHX
+		TXY
+		LDA	(<BMWORK+0),Y
+		AND	#00FH
+		TAX
+		LDA	!JSCRNO,X
+		LDY	#000H
+		STA	(<OAMADR),Y
+		INC	<OAMADR
+		PLX
+;
+		TXY
+		LDA	(<BMWORK+0),Y
+		AND	#11000000B
+		ORA	#00111100B	; coler
+		LDY	#000H
+		STA	(<OAMADR),Y
+		INC	<OAMADR
+;
+		LDY	#000H
+		LDA	#002H
+		STA	(<OSBADR),Y
+		INC	<OSBADR
+;
+		INX
+		CPX	<BMWORK+2
+		BEQ	JSNOF00
+		BRL	JSNO100
+;
+JSNOF00		EQU	$
+		PLX
+		RTS
+;
+;**************************************************************
+;*		JISHIN mode 1,2,3,4 move 	   (JSMV000)  *
+;**************************************************************
+JSMV000		EQU	$
+		LDA	BMSTAT,X	; mode 1,2,3,4 start ?
+		CMP	#001H
+		BNE	JSMV100
+;;;;;;;;;
+;;;;;;;;		LDA	BMCONT,X
+;;;;;;;;		CMP	#JSMCT
+;;;;;;;;		BEQ	JSMV100
+;
+		LDA	BMTIM0,X
+		BNE	JSMV200
+;
+		LDA	#002H
+		STA	BMTIM0,X
+		LDA	BMCONT,X
+		INC	A
+		STA	BMCONT,X
+		CMP	#JSMCT
+		BNE	JSMV200
+		LDA	#002H
+		STA	BMSTAT,X
+;
+JSMV100		EQU	$
+		RTS
+;
+JSMV200		EQU	$
+		BRA	JSOMST
+;
+;**************************************************************
+;*		JISHIN mode 1,2,3,4  OAM set 	   (JSOMST)   *
+;**************************************************************
+JSCRNO		EQU	$
+;			  0   1   2   3   4   5   6   7
+		HEX	040,042,044,046,048,04A,04C,04E
+;			  8   9   A   B   C   D   E
+		HEX	060,062,064,066,068,06A,063
+JSOMST		EQU	$
+		PHX
+		LDA	BMCONT,X
+		ASL	A
+		TAY
+		LDA	!JSNINX1,Y
+		STA	<BMWORK+0
+		LDA	!JSNINX1+1,Y
+		STA	<BMWORK+1
+		LDA	!JSNINX1+2,Y
+		STA	<BMWORK+2
+		LDA	!JSNINX1+3,Y
+		STA	<BMWORK+3
+;
+		MEM16
+		REP	#00100000B
+		LDA	<BMWORK+2
+		SEC
+		SBC	<BMWORK+0
+		STA	<BMWORK+2
+		MEM8
+		SEP	#00100000B
+;
+		LDX	#000H
+JSOM100		EQU	$
+		TXY
+		LDA	(<BMWORK+0),Y
+		LDY	#000H
+		STA	(<OAMADR),Y
+		INC	<OAMADR
+		INX
+		TXY
+		LDA	(<BMWORK+0),Y
+		LDY	#000H
+		STA	(<OAMADR),Y
+		INC	<OAMADR
+		INX
+;
+		PHX
+		TXY
+		LDA	(<BMWORK+0),Y
+		AND	#00FH
+		TAX
+		LDA	!JSCRNO,X
+		LDY	#000H
+		STA	(<OAMADR),Y
+		INC	<OAMADR
+		PLX
+;
+		TXY
+		LDA	(<BMWORK+0),Y
+		AND	#11000000B
+		ORA	#00111100B	; coler
+		LDY	#000H
+		STA	(<OAMADR),Y
+		INC	<OAMADR
+;
+		TXY
+		LDA	(<BMWORK+0),Y
+		AND	#00110000B
+		LSR	A
+		LSR	A
+		LSR	A
+		LSR	A
+		LDY	#000H
+		STA	(<OSBADR),Y
+		INC	<OSBADR
+		JSR	OAMPLCK		; oam point check
+;
+		INX
+		CPX	<BMWORK+2
+		BNE	JSOM100
+;
+		PLX
+		RTS
+;
+;**************************************************************
+;*		kona maki move	        	(KONAMOV)      *
+;**************************************************************
+KNMDDAT		EQU	$		; mode data
+		HEX	0D,0E,0F,00,01,02,03,04,05,06	; up
+		HEX	0A,0B,0C,00,01,02,03,04,05,06	; down
+		HEX	10,11,12,00,01,02,03,04,05,06 	; left
+		HEX	07,08,09,00,01,02,03,04,05,06	; right
+KNDTINX		EQU	$		; index data
+		BYTE	000H*00AH,001H*00AH,002H*00AH,003H*00AH
+KONAYP		EQU	$		; kona y-pos data
+		WORD	0FFECH,0FFF1H,0FFF3H,0FFF9H	; 0
+		WORD	0FFEEH,0FFF3H,0FFF3H,0FFF3H	; 1
+		WORD	0FFECH,0FFF3H,0FFF3H,0FFF8H	; 2
+		WORD	0FFECH,0FFF3H,0FFF3H,0FFF8H	; 3
+		WORD	0FFEDH,0FFF4H,0FFF4H,0FFF9H	; 4
+		WORD	0FFEEH,0FFF5H,0FFF5H,0FFFAH	; 5
+		WORD	0FFEFH,0FFF6H,0FFF6H,0FFFBH	; 6
+		WORD	0FFF0H,0FFF2H,0FFF4H,0FFF7H	; 7
+		WORD	0FFEFH,0FFF2H,0FFF4H,0FFF8H	; 8
+		WORD	0FFEEH,0FFF2H,0FFF3H,0FFFAH	; 9
+		WORD	0FFDFH,0FFE1H,0FFE3H,0FFE6H	; A
+		WORD	0FFE4H,0FFE7H,0FFE9H,0FFEDH	; B
+		WORD	0FFEAH,0FFEEH,0FFEFH,0FFF6H	; C
+		WORD	0FFFEH,00000H,00002H,00005H	; D
+		WORD	0FFF7H,0FFFAH,0FFFCH,00000H	; E
+		WORD	0FFF0H,0FFF4H,0FFF5H,0FFFCH	; F
+		WORD	0FFF0H,0FFF2H,0FFF4H,0FFF7H	; 10
+		WORD	0FFEFH,0FFF2H,0FFF4H,0FFF8H	; 11
+		WORD	0FFEEH,0FFF2H,0FFF3H,0FFFAH	; 12
+KONAXP		EQU	$		; kona x-pos data
+		WORD	0FFFBH,0FFF4H,00002H,0FFF7H	; 0
+		WORD	0FFF9H,0FFF6H,0FFFAH,0FFFEH	; 1
+		WORD	0FFFAH,0FFF4H,00001H,0FFFAH	; 2
+		WORD	0FFFAH,0FFF4H,00001H,0FFFAH	; 3
+		WORD	0FFFAH,0FFF4H,00001H,0FFFAH	; 4
+		WORD	0FFFAH,0FFF4H,00001H,0FFFAH	; 5
+		WORD	0FFFAH,0FFF4H,00001H,0FFFAH	; 6
+		WORD	0FFEFH,0FFE9H,0FFF2H,0FFEDH	; 7
+		WORD	0FFF5H,0FFEEH,0FFF7H,0FFF3H	; 8
+		WORD	0FFFCH,0FFF3H,0FFFFH,0FFF8H	; 9
+		WORD	0FFFDH,0FFF7H,00000H,0FFFBH	; A
+		WORD	0FFFDH,0FFF6H,0FFFFH,0FFFBH	; B
+		WORD	0FFFCH,0FFF3H,0FFFFH,0FFF8H	; C
+		WORD	0FFFDH,0FFF7H,00000H,0FFFBH	; D
+		WORD	0FFFDH,0FFF6H,0FFFFH,0FFFBH	; E
+		WORD	0FFFDH,0FFF3H,0FFFFH,0FFF8H	; F
+		WORD	00009H,0000FH,00006H,0000BH	; 10
+		WORD	00003H,0000AH,00001H,00005H	; 11
+		WORD	0FFFCH,00005H,0FFF9H,00000H	; 12
+KONCRD		EQU	$		; kona chara data
+		HEX	009,00A,00A,009	;0~3
+		HEX	009,009,009,009	;4~7
+		HEX	009,009,009,009	;8~B
+		HEX	009,009,009,009	;C~F
+		HEX	009,009,009,009	;10~12
+KONATR		EQU	$		; kona atori data
+		HEX	068,024,0A2,028	;0
+		HEX	068,0E2,028,0A4	;1
+		HEX	068,0E2,0A4,028	;2
+		HEX	022,0A4,0E8,062	;3
+		HEX	024,0A8,0E2,064	;4
+		HEX	028,0A2,0E4,068	;5
+		HEX	022,0A4,0E8,062	;6
+		HEX	0E2,0A4,0E8,064	;7
+		HEX	0E8,0A8,0E4,062	;8
+		HEX	0E4,0A8,0E2,068	;9
+		HEX	0E2,0A4,0E8,064	;A
+		HEX	0E8,0A8,0E4,062	;B
+		HEX	0E4,0A8,0E2,068	;C
+		HEX	0E2,0A4,0E8,064	;D
+		HEX	0E8,0A8,0E4,062	;E
+		HEX	0E4,0A8,0E2,068	;F
+		HEX	0E2,0A4,0E8,064	;10
+		HEX	0E8,0A8,0E4,062	;11
+		HEX	0E4,0A8,0E2,068	;12
+KONAMOV		EQU	$
+		LDA	<GAMEMD		; purse ? [YES:KONA200]
+		BNE	KONA200
+;
+		JSR	CRKOEN		; Kona hit enemy !
+;
+		DEC	BMFLFG,X
+		BPL	KONA200
+		LDA	#001H
+		STA	BMFLFG,X
+		LDY	BMMUKI,X
+		LDA	!KNDTINX,Y
+		STA	<WORK0
+		LDA	BMCONT,X
+		INC	A
+		CMP	#00AH
+		BNE	KONA100
+		STZ	BMMODE,X
+		STZ	FIRENO
+		RTS
+KONA100		EQU	$
+		STA	BMCONT,X
+		CLC
+		ADC	<WORK0
+		TAY
+		LDA	!KNMDDAT,Y
+		STA	BCDMNO,X
+;
+;********** OAM set **************
+KONA200		EQU	$
+		LDA	BMOMNO,X
+		JSR	OMUNDR
+;
+KONA240		EQU	$
+		JSR	ITMPST		; priority y,x pos set sub
+		PHX
+		LDA	<WORK0
+		STA	<WORK6
+		LDA	<WORK1
+		STA	<WORK7
+		LDA	<WORK2
+		STA	<WORK8
+		LDA	<WORK3
+		STA	<WORK9
+		LDA	BCDMNO,X
+		STA	<WORKC
+		ASL	A
+		ASL	A
+		STA	<WORKA
+		ASL	A
+		STA	<WORK4
+		LDA	#003H		; loop counter
+		STA	BMWORK
+		LDY	#000H
+;
+KONA300		EQU	$
+		LDX	<WORK4
+		MEM16
+		REP	#00100000B
+		LDA	<WORK6
+		CLC
+		ADC	!KONAYP,X
+		STA	<WORK0
+		LDA	<WORK8
+		CLC
+		ADC	!KONAXP,X
+		STA	<WORK2
+		MEM8
+		SEP	#00100000B
+		JSR	BMYXST3		; y,x pos oam set
+;
+		LDX	<WORKC
+		LDA	!KONCRD,X
+		STA	(<OAMADR),Y
+		INY
+		LDX	<WORKA
+		LDA	!KONATR,X
+		AND	#11001111B
+		ORA	<PYBGUN+1
+		STA	(<OAMADR),Y
+		INY
+		PHY
+		TYA
+		SEC
+		SBC	#004H
+		LSR	A
+		LSR	A
+		TAY
+		LDA	#000H
+		STA	(<OSBADR),Y
+		PLY
+		INC	<WORK4
+		INC	<WORK4
+		INC	<WORKA
+		DEC	<BMWORK
+		BPL	KONA300
+		PLX
+		RTS
+;=======================================
+CRKOEN		EQU	$		; Magic powder yosei chenge !
+		LDY	#ENNO-1
+CKE010		EQU	$
+		TYA
+		EOR	<FRCNT
+		AND	#03H
+		BNE	CKE090
+;
+		LDA	ENMODE,Y
+		CMP	#EMOVE
+		BNE	CKE090
+;
+;		LDA	ENMYNO,Y
+;		CMP	#BIGBL
+;		BNE	CKE090
+;
+		LDA	ENMOD6,Y
+		AND	#00100000B
+		BNE	CKE090
+;;		BEQ	CKE090
+;
+		JSR	BLCRST
+		PHY
+		PHX
+		TYX
+		JSL	>ENCRST2
+		PLX
+		PLY
+		JSL	>CROJCK2
+		BCC	CKE090
+;
+		LDA	ENMYNO,Y
+		CMP	#NIWAT
+		BNE	CKNF00
+;
+		LDA	<DJFLG
+		BEQ	CKNF00
+;
+		LDA	ERXYCT
+		DEC	A
+		BNE	CKNF00
+;
+		BRA	CKNF80
+CKNF00		EQU	$
+		CMP	#NYORO
+		BNE	CKN000
+;
+		LDA	ENKBMK,Y
+		BNE	CKE090
+;
+CKNF80		EQU	$
+		LDA	#01H
+		STA	ENKBMK,Y
+;
+		PHX
+		PHY
+		TYX
+		JSL	>KEMRIST
+		PLY
+		PLX
+;;		BRA	CKN001
+		BRA	CKN003
+CKN000		EQU	$
+		PHX
+		PHY
+		TYX
+		LDA	#0AH
+		JSL	>ENDMST3
+		PLY
+		PLX
+;
+;;		LDA	#20H
+;;		STA	ENTIM3,Y
+;;		LDA	#YOSEI
+;;		STA	ENMYNO,Y
+;;CKN001		EQU	$
+;;		PHX
+;;		TYX
+;;		PHY
+;;		CMP	#YOSEI
+;;		BNE	CKN002
+;;		JSL	>ENMDST
+;;CKN002		EQU	$
+;;		JSL	>KEMRIST
+;;		PLY
+;;		PLX
+;
+;;;;;;;;		JSL	>SDLRCB
+;;;;;;;;		ORA	#14H
+;;;;;;;;		STA	SOUND2	;(S)
+CKN003		EQU	$
+;;		LDA	#014H
+;;		JSR	SDLRB2
+CKE090		EQU	$
+		DEY
+		BPL	CKE010
+		RTS
+;**************************************************************
+;*		DASH atari yure move	 	   (YUREMOV)   *
+;**************************************************************
+YUREMOV		EQU	$
+		LDA	<GAMEMD
+		BNE	YURE600
+;
+		DEC	BMCONT,X
+		BPL	YURE300
+;
+		STZ	!YUREXD
+		STZ	!YUREXD+1
+		STZ	!YUREYD
+		STZ	!YUREYD+1
+		STZ	BMMODE,X
+		RTS
+;
+YURE300		EQU	$
+;;;;;;;;		LDY	BMMUKI,X
+;;;;;;;;		LDA	HIBSTAT,X
+;;;;;;;;		EOR	#00000001B
+;;;;;;;;		STA	HIBSTAT,X
+;;;;;;;;		STA	!YUREXD,Y
+;;;;;;;;		STA	!YUREXD+1,Y
+;;;;;;;;		BEQ	YURE600
+;
+		JSL	>DONSCCK		; doon scrool check sub
+;
+		LDA	<WORK0
+		STA	!YUREXD,Y
+		LDA	<WORK1
+		STA	!YUREXD+1,Y
+		TYA
+		LSR	A
+		EOR	#00000001B
+		TAY
+		LDA	PLYMVC,Y
+		CLC
+		ADC	<WORK0
+		STA	PLYMVC,Y
+;
+YURE600		EQU	$
+		BRL	OTOSET		; doon !! oto set !
+;
+;**************************************************************
+;*		dash kemuri  move              (KMRIMOV)      *
+;**************************************************************
+KMRIYP		EQU	$		; oam y-pos data
+		WORD	0FFFEH,00000H,0FFFFH	; 0 dash
+		WORD	0FFFDH,0FFFEH,00000H	; 1
+		WORD	0FFFDH,00000H,0FFFFH	; 2
+		WORD	0FFFDH,0FFFFH,0FFFFH	; 3
+		WORD	0FFFEH,0FFFFH,0FFFFH	; 4
+		WORD	0FFFEH,00000H,0FFFFH	; 0 water
+		WORD	0FFFDH,0FFFEH,00000H	; 1
+		WORD	0FFFDH,00000H,0FFFFH	; 2
+		WORD	0FFFDH,0FFFFH,0FFFFH	; 3
+		WORD	0FFFEH,0FFFFH,0FFFFH	; 4
+KMRIXP		EQU	$		; oam y-pos data
+		WORD	0000AH,00005H,0FFFFH	; 0 dash
+		WORD	00000H,0000AH,00005H	; 1
+		WORD	00000H,00005H,0FFFFH	; 2
+		WORD	00000H,0FFFFH,0FFFFH	; 3
+		WORD	00009H,0FFFFH,0FFFFH	; 4
+		WORD	0000AH,00005H,0FFFFH	; 0 water
+		WORD	00000H,0000AH,00005H	; 1
+		WORD	00000H,00005H,0FFFFH	; 2
+		WORD	00000H,0FFFFH,0FFFFH	; 3
+		WORD	00009H,0FFFFH,0FFFFH	; 4
+KMRICRD		EQU	$		; oam chara data
+		HEX	0CF,0A9,0FF	; 0 dash
+		HEX	0A9,0DF,0CF	; 1
+		HEX	0CF,0DF,0FF	; 2
+		HEX	0DF,0FF,0FF	; 3
+		HEX	0A9,0FF,0FF	; 4
+		HEX	0CF,0CF,0FF	; 0  water
+		HEX	0CF,0DF,0CF	; 1
+		HEX	0CF,0DF,0FF	; 2
+		HEX	0DF,0FF,0FF	; 3
+		HEX	0CF,0FF,0FF	; 4
+KMHOSD		EQU	$		; x-pos hosei data
+;			    up   down   left  right
+		WORD	00000H,00000H,00004H,0FFFCH
+;
+KMRIMOV		EQU	$
+		LDA	BMSTAT,X
+		BEQ	KMRI080
+		JSL	>RNDSKM
+		BRA	KMRI100
+KMRI080		EQU	$
+		LDA	BMTIM0,X
+		BNE	KMRI200
+		LDA	#003H
+		STA	BMTIM0,X
+		LDA	BMCONT,X	; kona move counter
+		INC	A
+		STA	BMCONT,X
+		CMP	#005H
+		BEQ	KMRI100
+		CMP	#006H
+		BNE	KMRI200
+		STZ	BMMODE,X
+KMRI100		EQU	$
+		RTS
+;
+;********** OAM set **************
+KMRI200		EQU	$
+		LDA	BMCONT,X
+		CMP	#005H
+		BEQ	KMRI100
+;
+		JSR	ITMPST		; priority y,x pos set sub
+;
+		PHX
+		LDA	<WORK0		; y-pos (L) set
+		STA	<WORK6
+		LDA	<WORK1		; y-pos (H) set
+		STA	<WORK7
+		LDA	<WORK2		; x-pos (L) set
+		STA	<WORK8
+		LDA	<WORK3		; x-pos (H) set
+		STA	<WORK9
+;
+		LDY	<PLMKCH
+		LDA	!KMHOSD,Y
+		STA	<WORKC
+		LDA	!KMHOSD+1,Y
+		STA	<WORKD
+		LDY	#000H
+		LDA	ASWFLG
+		CMP	#001H
+		BNE	KMRI240
+		LDY	#005H
+KMRI240		EQU	$
+		STY	<WORK4
+		LDA	BMCONT,X
+		CLC
+		ADC	<WORK4
+		STA	<WORK4
+		ASL	A
+		CLC
+		ADC	<WORK4
+		STA	<WORK4
+		LDA	#002H
+		STA	<BMWORK
+;
+		LDY	#000H
+KMRI300		EQU	$
+		LDX	<WORK4
+		LDA	!KMRICRD,X
+		CMP	#0FFH
+		BEQ	KMRI600
+		TXA
+		ASL	A
+		TAX
+		MEM16
+		REP	#00100000B
+		LDA	<WORK6
+		CLC
+		ADC	!KMRIYP,X
+		STA	<WORK0
+		LDA	<WORK8
+		CLC
+		ADC	!KMRIXP,X
+		CLC
+		ADC	<WORKC
+		STA	<WORK2
+		MEM8
+		SEP	#00100000B
+		JSR	BMYXST3		; y,x pos oam set
+;
+		LDX	<WORK4
+		LDA	!KMRICRD,X
+		STA	(<OAMADR),Y
+		INY
+		LDA	#00000100B
+		ORA	<PYBGUN+1
+		STA	(<OAMADR),Y
+		INY
+		PHY
+		TYA
+		SEC
+		SBC	#004H
+		LSR	A
+		LSR	A
+		TAY
+		LDA	#000H
+		STA	(<OSBADR),Y
+		PLY
+KMRI600		EQU	$
+		INC	<WORK4
+		DEC	<BMWORK
+		BPL	KMRI300
+		PLX
+		RTS
+;
+;**************************************************************
+;*		fooj shot  move	        	(FOTSMOV)      *
+;**************************************************************
+FTSCRD		EQU	$	; chara data
+		HEX	009,00A,0FF	;0
+		HEX	009,00A,0FF	;1
+		HEX	009,0FF,00A	;2
+		HEX	009,0FF,00A	;3
+FTSATO		EQU	$	; atori data
+		HEX	000,000,0FF	;0
+		HEX	080,080,0FF	;1
+		HEX	040,0FF,040	;2
+		HEX	000,0FF,000	;3
+BOGYPD		EQU	$
+		WORD	00008H,0FFF7H,00000H,00000H
+BOGXPD		EQU	$
+		WORD	00000H,00000H,00008H,0FFF8H
+;;;;;;;;OPCKD0		EQU	$
+;;;;;;;;		BYTE	0FFH,nashi,jjmov,nashi,nashi,nashi,nashi,nashi
+;;;;;;;;		BYTE	nashi,nashi,nashi,nashi,nashi,nashi,nashi
+;;;;;;;;OPCKD1		EQU	$
+;;;;;;;;		BYTE	0FFH,nashi,jjwat,nashi,nashi,nashi,nashi,nashi
+;;;;;;;;		BYTE	nashi,nashi,nashi,nashi,nashi,nashi,nashi
+;
+FOTSMOV		EQU	$
+		LDA	<GAMEMD		; porze ?
+		BNE	FOTM120
+;
+		LDA	BMTIM0,X
+		BNE	FOTM100
+		LDA	#007H
+		STA	BMTIM0,X
+;;;;;;;;		LDA	BMXPSL,X
+;;;;;;;;		JSL	>SDLRCB		; sound (L,R) check
+;;;;;;;;		ORA	#fotst
+;;;;;;;;		STA	!SOUND2		; <sound>
+		LDA	#fotst
+		JSR	SDLRB2
+FOTM100		EQU	$
+		LDA	BOGMOV
+		BNE	FOTM120
+		JSR	BMYCLC		; y-speed set
+		JSR	BMXCLC		; x-speed set
+;
+		LDA	BMSTAT,X
+		BEQ	FOTM200
+		DEC	BMCONT,X
+		BMI	FOTM140
+FOTM120		EQU	$
+		BRL	FOTM500
+;
+FOTM140		EQU	$
+		STZ	BMMODE,X
+FOTM180		EQU	$
+		RTS
+;
+FOTM200		EQU	$
+		LDA	BMCONT,X
+		INC	A
+		STA	BMCONT,X
+		CMP	#020H
+		BNE	FOTM300
+		LDA	#001H
+		STA	BMSTAT,X
+		LDA	BMYSPD,X
+		EOR	#0FFH
+		INC	A
+		STA	BMYSPD,X
+		LDA	BMXSPD,X
+		EOR	#0FFH
+		INC	A
+		STA	BMXSPD,X
+FOTM300		EQU	$
+		JSR	BMYXCHK		; scrool ? 
+		BCC	FOTM308
+		BRL	FOTM500
+FOTM308		EQU	$
+		LDA	HIBSTAT,X
+		BNE	FOTM30A
+		LDA	BMSTAT,X
+		BNE	FOTM30A
+		JSR	CRBMEN		; teki cross ? [YES:DTMV180] 
+		BCC	FOTM30A
+;
+;;;;;;;;		LDA	ENMOD5,Y
+;;;;;;;;		AND	#00100000B
+;;;;;;;;		BNE	FOTM309
+		LDA	BMSTAT,X
+		BNE	FOTM30A
+		LDA	#001H
+		STA	BMSTAT,X
+		LDA	BMYSPD,X
+		EOR	#0FFH
+		INC	A
+		STA	BMYSPD,X
+		LDA	BMXSPD,X
+		EOR	#0FFH
+		INC	A
+		STA	BMXSPD,X
+		BRA	FOTM30A
+;
+FOTM309		EQU	$
+		BRL	FOTM470		; teki check on !!
+;
+FOTM30A		EQU	$
+		JSL	>BGCHCKA	; bg check !!
+;
+;*************  gake bg check !!
+		STZ	<WORK0
+		LDA	<GMMODE		; chijoo ? [YES:FOTM380]
+		BEQ	FOTM380
+		LDY	#001H
+		LDA	BMMUKI,X
+		AND	#00000010B
+		BNE	FOTM310
+		LDA	GAKEFG
+		LSR	A
+		LSR	A
+		LSR	A
+		LSR	A
+		STA	<WORK0
+		LDY	#000H
+FOTM310		EQU	$
+		LDA	GAKEFG,Y
+		ORA	<WORK0
+;;;;;;;;		ORA	WTRSID
+;;;;;;;;		ORA	PWATER
+		AND	#00000011B
+		STA	<WORK0
+		BEQ	FOTM440		
+		BRA	FOTM400
+;
+FOTM380		EQU	$
+		LDA	GAKEFG+1
+		AND	#00000011B
+		ORA	GAKEFG
+		ORA	GAKEFG+3	; gake bg ? [NO:FOTM440]
+		AND	#00110011B
+		BEQ	FOTM440
+;
+FOTM400		EQU	$
+		DEC	HBFLEM,X	; next bg off timer !!
+		BPL	FOTM440
+;
+		LDY	BUADSB,X
+		BEQ	FOTM410
+		LDA	<WORK0
+		AND	#00000011B
+		BNE	FOTM408
+		CPY	<BMWORK+4
+		BEQ	FOTM410
+;
+FOTM408		EQU	$
+		LDA	#002H
+		STA	HBFLEM,X
+		DEC	HIBSTAT,X
+		BPL	FOTM440
+		STZ	HIBSTAT,X
+		BRA	FOTM440
+FOTM410		EQU	$
+		INC	HIBSTAT,X
+		LDA	<BMWORK+4
+		STA	BUADSB,X
+		LDA	#001H
+		STA	HBFLEM,X
+;
+FOTM440		EQU	$
+		LDA	HIBSTAT,X	; gake bit on
+		BNE	FOTM450
+		LDA	HBFLEM,X
+		BMI	FOTM460
+		DEC	HBFLEM,X
+FOTM450		EQU	$
+		BRL	FOTM500
+;
+;*************  atari kaeri bg hit check !!
+FOTM460		EQU	$
+		LDA	<WORKE
+		LSR	A
+		LSR	A
+		LSR	A
+		LSR	A
+		ORA	<WORKE
+		ORA	<KDFGST
+		ORA	<WORKC
+		AND	#00000011B
+		BEQ	FOTM468
+		LDA	BMSTAT,X
+		BNE	FOTM468
+		LDA	#001H
+		STA	BMSTAT,X
+		LDA	BMYSPD,X
+		EOR	#0FFH
+		INC	A
+		STA	BMYSPD,X
+		LDA	BMXSPD,X
+		EOR	#0FFH
+		INC	A
+		STA	BMXSPD,X
+;
+		LDA	FTBGON
+		AND	#00000011B
+		BNE	FOTM468
+		PHX
+		LDY	#001H
+		LDA	#HIBA1
+		JSL	>BHBIT1
+		PLX
+		LDY	#tate0
+		LDA	FTBGON
+		AND	#00110000B
+		BNE	FOTM462
+		LDY	#kins0
+FOTM462		EQU	$
+;;;;;;;;		STY	<BMWORK+0
+;;;;;;;;		JSL	>SDLRCB		; sound (L,R) check
+;;;;;;;;		ORA	<BMWORK+0
+;;;;;;;;		STA	!SOUND2		; <sound>
+		TYA
+		JSR	SDLRB2
+;
+;*************  footshot atari bg hit check !!
+FOTM468		EQU	$
+		LDA	FTBGON		; footshot bg hit ? [NO:FOTM500]
+		AND	#00000011B
+		BEQ	FOTM500
+;
+FOTM470		EQU	$
+		LDA	BMCONT,X	; footshot lengus check !
+		CMP	#004H
+		BCS	FOTM480
+		BRL	FOTM140		; TO end !
+FOTM480		EQU	$
+		LDA	#001H		; BG hit flag on
+		STA	BOGMOV
+		STX	HBMUKI
+;
+;;;;;;;;		LDA	>OPMODE+0
+;;;;;;;;		TAY
+;;;;;;;;		CMP	!OPCKD0,Y
+;;;;;;;;		BNE	FOTM500
+;;;;;;;;		LDA	!OPCKD1,Y
+;;;;;;;;		STA	>OPMODE+0
+;;;;;;;;		LDA	#OPTIM
+;;;;;;;;		STA	OPINDX+3
+;;;;;;;;		LDX	OPINDX+0	; jiisan set
+;;;;;;;;		LDA	OPYPSL,X
+;;;;;;;;		STA	OPJIYP
+;;;;;;;;		LDA	OPYPSH,X
+;;;;;;;;		STA	OPJIYP+1
+;;;;;;;;		LDA	OPXPSL,X
+;;;;;;;;		STA	OPJIXP
+;;;;;;;;		LDA	OPXPSH,X
+;;;;;;;;		STA	OPJIXP+1
+;;;;;;;;		LDA	<PLBGCKF
+;;;;;;;;		STA	OPBGCKF
+;
+;
+;********** OAM set **************
+FOTM500		EQU	$
+		JSR	ITMPST		; priority y,x pos set sub
+		LDA	HIBSTAT,X	; gake bit on
+		BEQ	FOTM580
+		LDA	#030H
+		STA	<PYBGUN+1
+FOTM580		EQU	$
+		MEM16
+		REP	#00100000B
+		LDA	<WORK0
+		STA	<WORK4
+		LDA	<WORK2
+		STA	<WORK6
+		MEM8
+		SEP	#00100000B
+		PHX
+		LDA	BMMUKI,X
+		STA	<WORK8
+		ASL	A
+		CLC
+		ADC	<WORK8
+		STA	<WORKA
+		TAX
+		LDA	#002H
+		STA	<WORK8
+		LDY	#000H
+FOTM600		EQU	$
+		LDX	<WORKA
+		LDA	!FTSCRD,X
+		CMP	#0FFH
+		BEQ	FOTM800
+;
+		JSR	BMYXST3		; y,x pos oam set
+;
+		LDX	<WORKA
+		LDA	!FTSCRD,X
+		STA	(<OAMADR),Y
+		INY
+		LDA	!FTSATO,X
+		ORA	#00000010B	;
+		ORA	<PYBGUN+1
+		STA	(<OAMADR),Y
+		INY
+		PHY
+		TYA
+		SEC
+		SBC	#004H
+		LSR	A
+		LSR	A
+		TAY
+		LDA	#000H
+		STA	(<OSBADR),Y
+		PLY
+FOTM800		EQU	$
+		INC	<WORKA
+		LDA	<WORK2
+		CLC
+		ADC	#008H
+		STA	<WORK2
+;
+		DEC	<WORK8
+		BMI	FOTM900
+;
+		LDA	<WORK8
+		BNE	FOTM600
+		LDA	<WORK0
+		CLC
+		ADC	#008H
+		STA	<WORK0
+		LDA	<WORK6
+		STA	<WORK2
+		BRA	FOTM600
+;
+FOTM900		EQU	$
+		PLX
+		PHX
+		STZ	<WORKA
+		STZ	<WORKB
+		STZ	<WORKC
+		STZ	<WORKD
+		LDA	BMCONT,X
+		LSR	A
+		CMP	#007H
+		BCC	FOTM920
+		SEC
+		SBC	#007H
+		STA	<WORKA
+		STA	<WORKC
+		LDA	#006H
+FOTM920		EQU	$
+		STA	<WORK8
+		BNE	FOTM930
+		BRL	FOTMF00
+;
+FOTM930		EQU	$
+		LDA	BMMUKI,X
+		AND	#00000001B
+		BEQ	FOTM940
+		LDA	<WORKA
+		EOR	#0FFH
+		INC	A
+		STA	<WORKA
+		STA	<WORKC
+		BEQ	FOTM940
+		LDA	#0FFH
+		STA	<WORKB
+		STA	<WORKD
+;
+FOTM940		EQU	$
+		MEM16
+		REP	#00100000B
+		LDA	BMMUKI,X
+		ASL	A
+		AND	#00FFH
+		TAX
+		LDA	!BOGYPD,X
+		BNE	FOTM980
+		LDA	<WORK4
+		CLC
+		ADC	#0004H
+		STA	<WORK4
+FOTM980		EQU	$
+		LDA	!BOGXPD,X
+		BNE	FOTMA00
+		LDA	<WORK6
+		CLC
+		ADC	#0004H
+		STA	<WORK6
+		MEM8
+		SEP	#00100000B
+;
+FOTMA00		EQU	$
+		MEM16
+		REP	#00100000B
+		LDA	!BOGYPD,X
+		BEQ	FOTMB00
+		CLC
+		ADC	<WORKA
+FOTMB00		EQU	$
+		CLC
+		ADC	<WORK4
+		STA	<WORK4
+		STA	<WORK0
+		LDA	!BOGXPD,X
+		BEQ	FOTMC00
+		CLC
+		ADC	<WORKC
+FOTMC00		EQU	$
+		CLC
+		ADC	<WORK6
+		STA	<WORK6
+		STA	<WORK2
+		MEM8
+		SEP	#00100000B
+;
+		JSR	PYHICK1		; hani check
+		BCS	FOTMD00
+;
+		JSR	BMYXST3
+		LDA	#019H
+		STA	(<OAMADR),Y
+		INY
+		LDA	<FCNT
+		AND	#00000010B
+		ASL	A
+		ASL	A
+		ASL	A
+		ASL	A
+		ASL	A
+		ASL	A
+		ORA	#00000010B
+		ORA	<PYBGUN1
+		STA	(<OAMADR),Y
+		INY
+		PHY
+		TYA
+		SEC
+		SBC	#004H
+		LSR	A
+		LSR	A
+		TAY
+		LDA	#000H
+		STA	(<OSBADR),Y
+		PLY
+FOTMD00		EQU	$
+		DEC	<WORK8
+		BPL	FOTMA00
+;
+FOTMF00		EQU	$
+		PLX
+		RTS
+;
+;**************************************************************
+;*		futon set 	 		(FUTONST)     *
+;**************************************************************
+FUTNCRD		EQU	$
+		HEX	00A,00A,00A,00A		;(0)
+		HEX	00C,00C,00A,00A		;(1)
+FUTNATD		EQU	$
+		HEX	000,060,0A0,0E0		;(0)
+		HEX	000,060,0A0,0E0		;(1)
+FUTONST		EQU	$
+		JSR	ITMPST		; priority y,x pos set sub
+		MEM16
+		REP	#00100000B
+		LDA	<WORK0
+		STA	<WORK4
+		LDA	<WORK2
+		STA	<WORK6
+		STA	<WORK8
+		MEM8
+		SEP	#00100000B
+		PHX
+;
+		LDA	OPNGFG
+		BNE	FUTN040
+		LDA	#4*4
+		JSL	>OAMENT2
+		BRA	FUTN080
+FUTN040		EQU	$
+		LDA	#4*4
+		JSL	>OAMENT1
+;
+FUTN080		EQU	$
+		LDA	OPNGFG
+		BEQ	FUTN0C0
+		LDA	#004H
+FUTN0C0		EQU	$
+		TAX
+		LDA	#003H
+		STA	<WORKA
+		LDY	#000H
+FUTN100		EQU	$
+		JSR	BMYXST3		; y,x pos oam set
+;
+		LDA	!FUTNCRD,X
+		STA	(<OAMADR),Y
+		INY
+		LDA	!FUTNATD,X
+		ORA	#00001101B	; 
+		ORA	<PYBGUN+1
+		STA	(<OAMADR),Y
+		INY
+		PHY
+		TYA
+		SEC
+		SBC	#004H
+		LSR	A
+		LSR	A
+		TAY
+		LDA	#002H
+		STA	(<OSBADR),Y
+		PLY
+;
+		INX
+;
+		MEM16
+		REP	#00100000B
+		LDA	<WORK6
+		CLC
+		ADC	#0010H
+		STA	<WORK2
+		MEM8
+		SEP	#00100000B
+;
+		DEC	<WORKA
+		BMI	FUTN900
+		LDA	<WORKA
+		CMP	#001H
+		BNE	FUTN100
+		MEM16
+		REP	#00100000B
+		LDA	<WORK6
+		STA	<WORK2
+		LDA	<WORK4
+		CLC
+		ADC	#0008H
+		STA	<WORK0
+		MEM8
+		SEP	#00100000B
+		BRA	FUTN100
+;
+FUTN900		EQU	$
+		PLX
+		RTS
+;
+;**************************************************************
+;*		IBIKI move 			(IBIKIST)     *
+;**************************************************************
+IBCRST		EQU	$
+		HEX	044,043,042
+IBIKIST		EQU	$
+		DEC	BMFLFG,X
+		BPL	IBIK200
+		LDA	BMCONT,X
+		INC	A
+		CMP	#003H
+		BEQ	IBIK100
+		STA	BMCONT,X
+;
+IBIK100		EQU	$
+		LDA	#007H
+		STA	BMFLFG,X
+;
+IBIK200		EQU	$
+		LDA	BMXSPD,X
+		CLC
+		ADC	BMSTAT,X
+		STA	BMXSPD,X
+		BPL	IBIK300
+		EOR	#0FFH
+		INC	A
+IBIK300		EQU	$
+		CMP	#008H
+		BCC	IBIK400
+		LDA	BMSTAT,X
+		EOR	#0FFH
+		INC	A
+		STA	BMSTAT,X
+;
+IBIK400		EQU	$
+		JSR	BMYCLC		; onpu y-speed idou sub
+		JSR	BMXCLC		; onpu x-speed idou sub
+;
+		LDA	BMYPSL,X
+		STA	<WORK0
+		LDA	BMYPSH,X
+		STA	<WORK1
+;
+		MEM16
+		REP	#00100000B
+		LDA	<PLYPS1
+		SEC
+		SBC	#00018H
+		CMP	<WORK0
+		BCC	IBIK500
+		MEM8
+		SEP	#00100000B
+		STZ	BMMODE,X
+IBIK500		EQU	$
+		MEM8
+		SEP	#00100000B
+;
+;**************************************************************
+;*		ibiki OAM set 			(       )     *
+;**************************************************************
+		LDY	BMCONT,X
+		LDA	!IBCRST,Y	; chara chenge set
+		STA	ITMCPT
+;
+		JSR	ITMPST		; priorty,now y,x pos set
+;
+		LDY	#000H
+		JSR	BMYXST3		; Y,X pos oam set sub
+		LDA	#009H		; ibiki chara no set
+		STA	(<OAMADR),Y
+		INY
+		LDA	#024H		; ibiki atori buuto set
+		STA	(<OAMADR),Y
+		LDA	#000H
+		STA	(<OSBADR)
+		RTS
+;
+;**************************************************************
+;*		clear demo ken flash move 	(CDKNMOV)     *
+;**************************************************************
+CDKNYPD		EQU	$
+		WORD	0FFF9H,00000H,00000H,00000H	;(0)
+		WORD	0FFF5H,0FFF5H,0FFFDH,0FFFDH	;(1)
+		WORD	0FFF9H,0FFF9H,00000H,00000H	;(2)
+		WORD	0FFF9H,00000H,00000H,00000H	;(3)
+CDKNXPD		EQU	$
+		WORD	00010H,00000H,00000H,00000H	;(0)
+		WORD	00008H,00010H,00008H,00010H	;(1)
+		WORD	00009H,0000FH,00000H,00000H	;(2)
+		WORD	0000CH,00000H,00000H,00000H	;(3)
+CDKNCRD		EQU	$
+		HEX	092,0FF,0FF,0FF		;(0)
+		HEX	093,093,093,093		;(1)
+		HEX	0F9,0F9,0FF,0FF		;(2)
+		HEX	080,0FF,0FF,0FF		;(3)
+CDKNATD		EQU	$
+		HEX	000,0FF,0FF,0FF		;(0)
+		HEX	000,040,080,0C0		;(1)
+		HEX	000,040,0FF,0FF		;(2)
+		HEX	000,0FF,0FF,0FF		;(3)
+CDKNMOV		EQU	$
+		LDA	BMFLFG,X
+		BNE	CDKN080
+		DEC	BUMFLM,X
+		BPL	CDKN100
+		LDA	#001H
+		STA	BUMFLM,X
+		INC	BMCONT,X
+		LDA	BMCONT,X
+		CMP	#004H
+		BNE	CDKN100
+		STZ	BMMODE,X
+CDKN080		EQU	$
+		DEC	BMFLFG,X
+		RTS
+;
+CDKN100		EQU	$
+		PHX
+		JSR	ITMPST		; priority y,x pos set sub
+		LDA	#003H
+		STA	<WORK6
+		LDA	BMCONT,X
+		ASL	A
+		ASL	A
+		TAX
+		LDY	#000H
+CDKN200		EQU	$
+		LDA	!CDKNCRD,X
+		CMP	#0FFH
+		BEQ	CDKN300
+		MEM16
+		REP	#00100000B
+		PHX
+		TXA
+		ASL	A
+		TAX
+		LDA	<PLYPS1
+		CLC
+		ADC	!CDKNYPD,X
+		SEC
+		SBC	<SCCV2
+		STA	<WORK0
+		LDA	<PLXPS1
+		CLC
+		ADC	!CDKNXPD,X
+		SEC
+		SBC	<SCCH2
+		STA	<WORK2
+		PLX
+		MEM8
+		SEP	#00100000B
+;
+		JSR	BMYXST3		; y,x pos oam set
+;
+		LDA	!CDKNCRD,X
+		STA	(<OAMADR),Y
+		INY
+		LDA	!CDKNATD,X
+		ORA	#00000100B
+		ORA	<PYBGUN+1
+		STA	(<OAMADR),Y
+		INY
+		PHY
+		TYA
+		SEC
+		SBC	#004H
+		LSR	A
+		LSR	A
+		TAY
+		LDA	#000H
+		STA	(<OSBADR),Y
+		PLY
+CDKN300		EQU	$
+		INX
+		DEC	<WORK6
+		BPL	CDKN200
+;
+		PLX
+		RTS
+;
+;**************************************************************
+;*		level up bumeran move 		(LVUBRMV)     *
+;**************************************************************
+LVUCRD		EQU	$		; chara data
+		HEX	0B7,080,083
+LVUATD		EQU	$		; atori data
+		HEX	004,004,084
+;
+LVUBRMV		EQU	$
+		LDA	<GAMEMD
+		BNE	LVUB100
+;
+		LDA	BMTIM0,X
+		BNE	LVUB100
+;
+		LDA	#004H
+		STA	BMTIM0,X
+;
+		INC	BMCONT,X
+		LDA	BMCONT,X
+		CMP	#003H
+		BNE	LVUB100
+;
+		STZ	BMMODE,X
+		RTS
+;
+LVUB100		EQU	$
+		PHX
+;;;;;;;;		LDY	BMMODE,X
+		LDA	#4*1
+		JSR	BMOMPT
+		TYA
+		STA	BMOMID,X
+;
+		JSR	ITMPST		; priority y,x pos set sub
+		LDA	BMCONT,X
+		TAX
+		LDY	#000H
+;
+		JSR	BMYXST3		; y,x pos oam set
+;
+		LDA	!LVUCRD,X
+		STA	(<OAMADR),Y
+		INY
+		LDA	!LVUATD,X
+		ORA	<PYBGUN+1
+		STA	(<OAMADR),Y
+		LDA	#000H
+		STA	(<OSBADR)
+;
+		PLX
+		RTS
+;;;;;;;;;
+;;;;;;;;;**************************************************************
+;;;;;;;;;*		nusuto(opiton) aitem move 	(NTAITMV)     *
+;;;;;;;;;**************************************************************
+;;;;;;;;NTATCRD		EQU	$
+;;;;;;;;		HEX	00B,01B		; coin
+;;;;;;;;		HEX	063,073		; ya
+;;;;;;;;		HEX	040,0FF		; bomb
+;;;;;;;;NTATATD		EQU	$
+;;;;;;;;		HEX	004,004		; coin
+;;;;;;;;		HEX	001,001		; ya
+;;;;;;;;		HEX	002,0FF		; bomb
+;;;;;;;;NTATSBD		EQU	$
+;;;;;;;;		HEX	000,000		; coin
+;;;;;;;;		HEX	000,000		; ya
+;;;;;;;;		HEX	002,0FF		; bomb
+;;;;;;;;NTYSDT		EQU	$
+;;;;;;;;		HEX	008,0F8,000,000
+;;;;;;;;NTXSDT		EQU	$
+;;;;;;;;		HEX	000,000,008,0F8
+;;;;;;;;NTAITMV		EQU	$
+;;;;;;;;		LDA	<GAMEMD
+;;;;;;;;		BNE	NTAI900
+;;;;;;;;;
+;;;;;;;;		LDA	BMZSPD,X
+;;;;;;;;		SEC
+;;;;;;;;		SBC	#001H
+;;;;;;;;		STA	BMZSPD,X
+;;;;;;;;;
+;;;;;;;;		JSR	BMYCLC
+;;;;;;;;		JSR	BMXCLC
+;;;;;;;;		JSR	BMZCLC
+;;;;;;;;;
+;;;;;;;;		LDA	BMZPSL,X
+;;;;;;;;		CMP	#0E0H
+;;;;;;;;		BCC	NTAI900
+;;;;;;;;		STZ	BMZPSL,X
+;;;;;;;;		LDA	#008H
+;;;;;;;;		STA	BMZSPD,X
+;;;;;;;;		LDY	BMMUKI,X
+;;;;;;;;		LDA	!NTYSDT,Y
+;;;;;;;;		STA	BMYSPD,X
+;;;;;;;;		LDA	!NTXSDT,Y
+;;;;;;;;		STA	BMXSPD,X
+;;;;;;;;		INC	BMSTAT,X
+;;;;;;;;		LDA	BMSTAT,X
+;;;;;;;;		CMP	#002H
+;;;;;;;;		BNE	NTAI900
+;;;;;;;;;
+;;;;;;;;		STZ	BMMODE,X
+;;;;;;;;		RTS
+;;;;;;;;;
+;;;;;;;;NTAI900		EQU	$
+;;;;;;;;		PHX
+;;;;;;;;		JSR	ITMPST		; priority y,x pos set sub
+;;;;;;;;		MEM16
+;;;;;;;;		REP	#00100000B
+;;;;;;;;		LDA	<WORK0
+;;;;;;;;		STA	<WORK4
+;;;;;;;;		LDA	<WORK2
+;;;;;;;;		STA	<WORK6
+;;;;;;;;		LDA	BMZPSL,X
+;;;;;;;;		AND	#00FFH
+;;;;;;;;		CMP	#0080H
+;;;;;;;;		BCC	NTAI980
+;;;;;;;;		ORA	#0FF00H
+;;;;;;;;NTAI980		EQU	$
+;;;;;;;;		EOR	#0FFFFH
+;;;;;;;;		INC	A
+;;;;;;;;		CLC
+;;;;;;;;		ADC	<WORK0
+;;;;;;;;		STA	<WORK0
+;;;;;;;;		MEM8
+;;;;;;;;		SEP	#00100000B
+;;;;;;;;		LDA	#001H
+;;;;;;;;		STA	<WORK8
+;;;;;;;;		LDA	BMCONT,X	; aitem shurui set
+;;;;;;;;		DEC	A
+;;;;;;;;		ASL	A
+;;;;;;;;		TAX
+;;;;;;;;		LDY	#000H
+;;;;;;;;;
+;;;;;;;;NTAIA00		EQU	$
+;;;;;;;;		LDA	!NTATCRD,X
+;;;;;;;;		CMP	#0FFH
+;;;;;;;;		BEQ	NTAIB00
+;;;;;;;;		JSR	BMYXST3		; y,x pos oam set
+;;;;;;;;;
+;;;;;;;;		LDA	!NTATCRD,X
+;;;;;;;;		STA	(<OAMADR),Y
+;;;;;;;;		INY
+;;;;;;;;		LDA	!NTATATD,X
+;;;;;;;;		ASL	A
+;;;;;;;;		ORA	<PYBGUN+1
+;;;;;;;;		STA	(<OAMADR),Y
+;;;;;;;;		INY
+;;;;;;;;		PHY
+;;;;;;;;		TYA
+;;;;;;;;		SEC
+;;;;;;;;		SBC	#004H
+;;;;;;;;		LSR	A
+;;;;;;;;		LSR	A
+;;;;;;;;		TAY
+;;;;;;;;		LDA	!NTATSBD,X
+;;;;;;;;		STA	(<OSBADR),Y
+;;;;;;;;		PLY
+;;;;;;;;		MEM16
+;;;;;;;;		REP	#00100000B
+;;;;;;;;		LDA	<WORK0
+;;;;;;;;		CLC
+;;;;;;;;		ADC	#0008H
+;;;;;;;;		STA	<WORK0
+;;;;;;;;		MEM8
+;;;;;;;;		SEP	#00100000B
+;;;;;;;;NTAIB00		EQU	$
+;;;;;;;;		INX
+;;;;;;;;		DEC	<WORK8
+;;;;;;;;		BPL	NTAIA00
+;;;;;;;;;
+;;;;;;;;		PLX
+;;;;;;;;		PHX			; kage set
+;;;;;;;;		PHY
+;;;;;;;;		LDY	#002H
+;;;;;;;;		LDA	BMZPSL,X
+;;;;;;;;		CMP	#003H
+;;;;;;;;		BCS	NTAIC00
+;;;;;;;;		LDY	#000H
+;;;;;;;;NTAIC00		EQU	$
+;;;;;;;;		STZ	<WORK2
+;;;;;;;;		LDA	BMCONT,X
+;;;;;;;;		CMP	#003H
+;;;;;;;;		BEQ	NTAID00
+;;;;;;;;		LDA	#0FCH
+;;;;;;;;		STA	<WORK2
+;;;;;;;;NTAID00		EQU	$
+;;;;;;;;		MEM16
+;;;;;;;;		REP	#00100000B
+;;;;;;;;		LDA	<WORK4
+;;;;;;;;		CLC
+;;;;;;;;		ADC	#000AH
+;;;;;;;;		STA	<WORK0
+;;;;;;;;		LDA	<WORK2
+;;;;;;;;		AND	#000FFH
+;;;;;;;;		CMP	#00080H
+;;;;;;;;		BCC	NTAIE00
+;;;;;;;;		ORA	#0FF00H
+;;;;;;;;NTAIE00		EQU	$
+;;;;;;;;		CLC
+;;;;;;;;		ADC	<WORK6
+;;;;;;;;		STA	<WORK2
+;;;;;;;;		MEM8
+;;;;;;;;		SEP	#00100000B
+;;;;;;;;		TYX
+;;;;;;;;		PLY
+;;;;;;;;		LDA	<PYBGUN+1
+;;;;;;;;		STA	<WORK4
+;;;;;;;;		JSR	KGOAMSB
+;;;;;;;;		PLX
+;;;;;;;;		RTS
+;
+;**************************************************************
+;*		takara ken flash move 		(TKKNMV)     *
+;**************************************************************
+TKKNYP		EQU	$		; y-pos data
+		WORD	00001H,00001H,00009H,00009H	;0
+		WORD	00001H,00001H,00009H,00009H	;1
+TKKNXP		EQU	$		; x-pos data
+		WORD	0FFFFH,00008H,0FFFFH,00008H	;0
+		WORD	00000H,00007H,00000H,00007H	;1
+TKKNCR		EQU	$		; chara data
+		HEX	086,086,096,096	;0
+		HEX	087,087,097,097	;1
+TKKNAT		EQU	$		; atori data
+		HEX	001,041,001,041	;0
+		HEX	001,041,001,041	;1
+TKKNMV		EQU	$
+		LDA	BMTIM0,X
+		BNE	TKKN060
+		STZ	BMMODE,X
+TKKN040		EQU	$
+		RTS
+;
+TKKN060		EQU	$
+		DEC	BMFLFG,X
+		BPL	TKKN200
+		LDA	BMCONT,X
+		INC	A
+		CMP	#003H
+		BNE	TKKN100
+		LDA	#000H
+TKKN100		EQU	$
+		STA	BMCONT,X
+;
+TKKN200		EQU	$
+		JSR	ITMPST		; priorty,now y,x pos set
+;
+		MEM16
+		REP	#00100000B
+		LDA	<WORK0
+		STA	<WORK4
+		LDA	<WORK2
+		STA	<WORK6
+		MEM8
+		SEP	#00100000B
+		PHX
+		STZ	<WORK8		; loop conuter clear !
+		LDA	BMCONT,X
+		BEQ	TKKN400
+		DEC	A
+		ASL	A
+		ASL	A
+		TAX
+		LDY	#000H
+TKKN300		EQU	$
+		PHX
+		TXA
+		ASL	A
+		TAX
+		MEM16
+		REP	#00100000B
+		LDA	<WORK4
+		CLC
+		ADC	!TKKNYP,X
+		STA	<WORK0
+		LDA	<WORK6
+		CLC
+		ADC	!TKKNXP,X
+		STA	<WORK2
+		MEM8
+		SEP	#00100000B
+		PLX
+		JSR	BMYXST3		; Y,X pos oam set sub
+		LDA	!TKKNCR,X	; chara no set
+		STA	(<OAMADR),Y
+		INY
+		LDA	!TKKNAT,X	; atori set
+		AND	#11001111B
+		ORA	#00000100B
+		ORA	<PYBGUN1
+		STA	(<OAMADR),Y
+		INY
+		PHY
+		TYA
+		SEC
+		SBC	#004H
+		LSR	A
+		LSR	A
+		TAY
+		LDA	#000H
+		STA	(<OSBADR),Y
+		PLY
+		INX
+		INC	<WORK8
+		LDA	<WORK8
+		CMP	#004H
+		BNE	TKKN300
+;
+TKKN400		EQU	$
+		PLX
+		RTS
+;
+;**************************************************************
+;*		takara set 	 		(TAKARST)     *
+;**************************************************************
+TAKAMES		EQU	$		; messege no data
+;		              0       1       2       3
+		WORD	MS_FFFF,MS_00D1,MS_00D9,MS_00B2
+;		              4       5       6       7
+		WORD	MS_FFFF,MS_00DA,MS_00DB,MS_00C3
+;		              8       9       A       B
+		WORD	MS_00C2,MS_00C7,MS_00CA,MS_00B4
+;		              C       D       E       F
+		WORD	MS_00B3,MS_00B7,MS_FFFF,MS_00C5
+;		             10      11      12      13
+		WORD	MS_00C4,MS_00C6,MS_00B1,MS_00B5
+;		             14      15      16      17
+		WORD	MS_00C8,MS_00C9,MS_00CC,MS_00D8
+;		             18      19      1A      1B
+		WORD	MS_00DC,MS_00B6,MS_00CF,MS_00B9
+;		             1C      1D      1E      1F
+		WORD	MS_00CE,MS_00BE,MS_00B8,MS_00BF
+;		             20      21      22      23
+		WORD	MS_FFFF,MS_00D5,MS_00D6,MS_00D7
+;		             24      25      26      27
+		WORD	MS_FFFF,MS_00C0,MS_0523,MS_FFFF
+;		             28      29      2A      2B
+		WORD	MS_00CB,MS_00BD,MS_0146,MS_00D2
+;		             2C      2D      2E      2F
+		WORD	MS_00D3,MS_00D4,MS_00D2,MS_00D3
+;		             30      31      32      33
+		WORD	MS_00D4,MS_00CB,MS_00CD,MS_00C1
+;		             34      35      36      37
+		WORD	MS_FFFF,MS_FFFF,MS_FFFF,MS_00BA
+;			     38      39      3A      3B
+		WORD	MS_00E7,MS_00BB,MS_FFFF,MS_FFFF
+;			     3C      3D      3E      3F
+		WORD	MS_FFFF,MS_FFFF,MS_FFFF,MS_0524
+;			     40      41      42      43
+		WORD	MS_FFFF,MS_FFFF,MS_FFFF,MS_FFFF
+;			     44      45      46      47
+		WORD	MS_FFFF,MS_FFFF,MS_FFFF,MS_FFFF
+;			     48	     49	     4A	     4B
+		WORD	MS_FFFF,MS_0383,MS_00C8,MS_00DF
+;
+MS_FFFF		EQU	0FFFFH		; noting data
+COINVMA		EQU	$
+		HEX	024,025,026
+COINFLM		EQU	$
+		HEX	009,005,005
+KNATDT		EQU	$
+		HEX	005,001,004
+;
+HRTMSD		EQU	$
+		WORD	MS_FFFF,MS_0520,MS_0521,MS_0522
+MONSOD		EQU	$
+;			     38      39
+		WORD	MS_00BC,MS_00E6
+;;;;;;;;TOMSNO		EQU	$
+;;;;;;;;		HEX	02A,005,03B,02C,003
+;;;;;;;;TOMESD		EQU	$
+;;;;;;;;		WORD	MS_0146,MS_0147,MS_0148,MS_0149,MS_014A
+TAKARST		EQU	$
+		LDA	!PYALSP
+		CMP	#002H
+		BEQ	TAKR020
+		LDA	<GAMEMD		; porzu ? [yes:TAKR400]
+		BEQ	TAKR040
+		CMP	#p2_kiri
+		BEQ	TAKR040
+		CMP	#p1_bmbd
+		BEQ	TAKR040
+		CMP	#p3_msge
+		BNE	TAKR020
+		LDA	#010H
+		STA	BMTIM0,X
+TAKR020		EQU	$
+		BRL	TAKR400
+;
+TAKR040		EQU	$
+		INC	!ENSTFG		; teki stop on !!
+		LDA	BMSTAT,X	; aitem move ? [YES:TAKR100]
+		BEQ	TAKR050
+		CMP	#003H
+		BEQ	TAKR050
+		BRL	TAKR100
+;
+TAKR050		EQU	$
+		LDA	BMCONT,X
+		CMP	#001H
+		BNE	TAKR058
+		LDA	BMSTAT,X
+		CMP	#002H
+		BEQ	TAKR058
+		LDA	BMTIM0,X
+		BEQ	TAKR060
+		CMP	#011H
+		BNE	TAKR059
+		MEM16			; option messge set !!
+		REP	#00100000B
+		LDA	#OTIM
+		STA	OPMTIM
+		MEM8
+		SEP	#00100000B
+		LDA	#mesm1
+		STA	>OPMODE+0
+TAKR056		EQU	$
+		BRL	TAKR180
+;
+TAKR058		EQU	$
+		DEC	BMFLFG,X
+		LDA	BMFLFG,X
+		BEQ	TAKR060
+		CMP	#001H
+		BNE	TAKR059
+;
+		LDA	BMCONT,X
+		CMP	#037H
+		BEQ	TAKR0580
+		CMP	#038H
+		BEQ	TAKR0580
+		CMP	#039H
+		BNE	TAKR0583
+TAKR0580	EQU	$
+		LDA	2140H
+		BEQ	TAKR0583
+		INC	BMFLFG,X
+		BRA	TAKR059
+TAKR0583	EQU	$
+		BRL	TAKR056
+TAKR059		EQU	$
+		BRL	TAKR400
+;
+TAKR060		EQU	$
+		LDA	BMCONT,X
+		CMP	#001H
+		BNE	TAKR070
+		LDA	BMSTAT,X
+		BNE	TAKR070
+		LDA	#005H		; sound off
+		STA	!SOUND1
+		LDA	#002H		; ken sound set
+		STA	!SOUND0
+;// 03.09.16 //		STA	!SVSND0
+TAKR070		EQU	$
+		LDY	#LNMD
+		LDA	WATRFG
+		BEQ	TAKR074
+		LDY	#SWMD
+TAKR074		EQU	$
+		STY	<LNMODE
+		STZ	ATMTFG
+		STZ	ATMTHK
+		STZ	MRTKFG		; muteki flag clear
+;
+		JSL	>CINCNS		; coin count sub
+;
+TAKR080		EQU	$
+		STZ	ITMVFG
+		LDA	BMCONT,X	; hart no kakera ?
+		CMP	#017H
+		BNE	TAKR082
+		LDA	>ITEMR44
+		BNE	TAKR082
+		PHX
+		LDY	#026H		; hart utsuwa set
+		JSL	>ATMSIT
+		PLX
+		STZ	BMMODE,X
+		STZ	!ENSTFG
+		RTS
+TAKR082		EQU	$
+		CMP	#026H		; hart utsuwa ? [YES:TAKR083]
+		BEQ	TAKR083
+		CMP	#03FH
+		BEQ	TAKR083
+		CMP	#03EH		; boss hart utsuwa set
+		BNE	TAKR084
+		STZ	!PYALSP
+		LDA	>LFITCT
+		CMP	#0A0H
+		BEQ	TAKR084
+		CLC
+		ADC	#008H
+		STA	>LFITCT
+		LDA	>UPLFCT
+		CLC
+		ADC	#008H
+		STA	>UPLFCT
+		BRA	TAKR0834
+;
+TAKR083		EQU	$
+		LDA	>LFNWCT
+		STA	<WORK0
+		LDA	>LFITCT
+		CMP	#0A0H
+		BEQ	TAKR084
+		CLC
+		ADC	#008H
+		STA	>LFITCT
+		SEC
+		SBC	<WORK0
+		STA	<WORK0
+		LDA	>UPLFCT
+		CLC
+		ADC	<WORK0
+		STA	>UPLFCT
+TAKR0834	EQU	$
+		LDA	#hart0
+		JSR	SDLRP3		;<sound>
+		BRA	TAKR08E
+;
+TAKR084		EQU	$
+		CMP	#042H		; hart 1  ?
+		BNE	TAKR085
+		LDA	>UPLFCT
+		CLC
+		ADC	#008H
+		STA	>UPLFCT
+		BRA	TAKR08E
+TAKR085		EQU	$
+		CMP	#045H		; tsubo smoll ?
+		BNE	TAKR086
+		LDA	>UPMPCT
+		CLC
+		ADC	#016		; 32
+		STA	>UPMPCT
+		BRA	TAKR08E
+TAKR086		EQU	$
+		CMP	#022H
+		BEQ	TAKR088
+		CMP	#023H
+		BNE	TAKR08E
+TAKR088		EQU	$
+		PHX
+		JSL	>PLCGSET
+		PLX
+TAKR08E		EQU	$
+		STZ	BMMODE,X
+		STZ	!ENSTFG
+		LDA	BMSTAT,X
+		CMP	#003H
+		BNE	TAKR090
+		LDY	BMCONT,X	; sunder ? [YES:TAKR090]
+		CPY	!TKDUNT1+0
+		BEQ	TAKR090
+		CPY	!TKDUNT1+5	; bomber ? [YES:TAKR090]
+		BEQ	TAKR090
+		CPY	!TKDUNT1+4	; hart ? [YES:TAKR090]
+		BEQ	TAKR090
+		CPY	!TKDUNT1+6	; poligon ? [YES:TAKR090]
+		BEQ	TAKR090
+		PHA
+		PHX
+		JSL	>DJEXTCK
+		PLX
+		PLA
+TAKR090		EQU	$
+		CMP	#002H
+		BEQ	TRKR0A0
+		STZ	!PYALSP
+TRKR0A0		EQU	$
+		RTS
+;
+;************** aitem move shori !!
+TAKR100		EQU	$
+		DEC	BMFLFG,X
+		LDA	BMFLFG,X
+		BPL	TAKR120
+		BRL	TAKR080
+TAKR120		EQU	$
+		CMP	#000H
+		BEQ	TAKR180
+		CMP	#028H		; fanfale set ? [NO:TAKR1C0]
+		BNE	TAKR130
+;
+		LDA	BMSTAT,X
+		CMP	#002H
+		BEQ	TAKR130
+		JSL	>CINCNS		; coin count sub
+		BCS	TAKR160
+		LDA	BMCONT,X
+		CMP	#017H		; hart kakera ? [NO:TAKR160]
+		BNE	TAKR160
+TAKR130		EQU	$
+		BRL	TAKR1C0
+;
+TAKR160		EQU	$
+		LDA	#atckh
+		JSR	SDLRP3		;<sound>
+		BRA	TAKR130
+;
+;************** aitem messeji set !!
+TAKR180		EQU	$
+		LDA	<GMMODE
+		BEQ	TAKR190
+		MEM16
+		REP	#00100000B
+		LDA	<RMXYCT
+		CMP	#00FFH
+		BEQ	TAKR182
+		CMP	#010FH
+		BEQ	TAKR182
+		CMP	#0110H
+		BEQ	TAKR182
+		CMP	#0112H
+		BEQ	TAKR182
+		CMP	#011FH
+		BNE	TAKR190
+TAKR182		EQU	$
+		MEM8
+		SEP	#00100000B
+		BRA	TAKR1C0
+;
+TAKR190		EQU	$
+		MEM8
+		SEP	#00100000B
+		LDA	BMCONT,X
+		CMP	#038H
+		BEQ	TAKR192
+		CMP	#039H
+		BNE	TAKR19E
+TAKR192		EQU	$
+		TAY
+		LDA	>ITEMR53
+		AND	#00000111B
+		CMP	#00000111B
+		BNE	TAKR1A0
+		TYA
+		SEC
+		SBC	#038H
+		ASL	A
+		TAY
+		MEM16
+		REP	#00100000B
+		LDA	!MONSOD,Y	
+		STA	!MSGENOL
+		MEM8
+		SEP	#00100000B
+		BRA	TAKR1B0
+TAKR19E		EQU	$
+		LDA	BMSTAT,X	; no messeji ? [YES:TAKR400]
+		CMP	#002H
+		BEQ	TAKR400
+		LDA	BMCONT,X	; hart no kakera ? [NO:TAKR1A0]
+		CMP	#017H
+		BNE	TAKR1A0
+		LDA	>ITEMR44
+		ASL	A
+		TAY
+		MEM16
+		REP	#00100000B
+		LDA	!HRTMSD,Y	; messeji set !!
+		CMP	#MS_FFFF
+		BEQ	TAKR400
+		STA	!MSGENOL
+  		MEM8
+		SEP	#00100000B
+		BRA	TAKR1B0
+;
+TAKR1A0		EQU	$
+		LDA	BMCONT,X
+		ASL	A
+		TAY
+		MEM16
+		REP	#00100000B
+		LDA	!TAKAMES,Y
+		CMP	#MS_FFFF
+		BEQ	TAKR400
+		STA	!MSGENOL
+		CMP	#MS_00D1
+		BNE	TAKR1A8
+		MEM8
+		SEP	#00100000B
+		LDA	#009H
+		STA	!SOUND1
+TAKR1A8		EQU	$
+		MEM8
+		SEP	#00100000B
+TAKR1B0		EQU	$
+		JSL	>MESWIT
+		BRA	TAKR400
+;
+;************** aitem move y-pos set !!
+TAKR1C0		EQU	$
+		LDA	BMFLFG,X
+		CMP	#018H
+		BCC	TAKR400
+		LDA	BMYSPD,X
+		CLC
+		ADC	#0FFH
+		CMP	#0F8H
+		BCC	TAKR200
+		STA	BMYSPD,X
+TAKR200		EQU	$
+		JSR	BMYCLC
+;
+;************** porigon check
+TAKR400		EQU	$
+		MEM8
+		SEP	#00100000B
+		LDA	BMCONT,X
+		CMP	#020H
+		BNE	TAKR40C
+;
+		STZ	BMZPSL,X
+		JSR	PGKRIT		; kira kira init.
+;
+		LDA	2140H
+		BNE	TAKR40C
+		LDA	#01AH		; poligon sound set
+		STA	!SOUND0
+		BRL	PRGIMIT		; To porigon up shori
+;
+;************** ken 1 atori set
+TAKR40C		EQU	$
+		MEM8
+		SEP	#00100000B
+		LDA	BMCONT,X
+		CMP	#001H
+		BNE	TAKR430
+		LDA	!KNATDT+0
+		STA	BMWRK0,X
+		LDA	BMSTAT,X
+		CMP	#002H
+		BEQ	TAKR430
+;
+		LDA	BMTIM0,X
+		CMP	#010H
+		BCC	TAKR410
+;
+		DEC	BUMFLM,X
+		BPL	TAKR430
+		LDA	#002H
+		STA	BUMFLM,X
+		LDA	BUMODE,X
+		INC	A
+		CMP	#003H
+		BNE	TAKR420
+TAKR410		EQU	$
+		LDA	#000H
+TAKR420		EQU	$
+		STA	BUMODE,X
+		TAY
+		LDA	!KNATDT,Y
+		STA	BMWRK0,X
+;
+;************** coin vma buffer set
+TAKR430		EQU	$
+		LDA	BMCONT,X	; coin ?
+		CMP	#034H
+		BEQ	TAKR440
+		CMP	#035H		; coin ?
+		BEQ	TAKR440
+		CMP	#036H		; coin ?
+		BNE	TAKR480
+TAKR440		EQU	$
+		DEC	BUMFLM,X
+		BPL	TAKR480
+		INC	BUMODE,X
+		LDA	BUMODE,X
+		CMP	#003H
+		BNE	TAKR450
+		LDA	#000H
+		STA	BUMODE,X
+TAKR450		EQU	$
+		TAY
+		LDA	!COINFLM,Y
+		STA	BUMFLM,X
+		PHX
+		LDA	!COINVMA,Y
+		JSL	>ITMCBFST1
+		PLX
+;
+;************** aitem oam set !!
+TAKR480		EQU	$
+		JSR	ITMPST1		; priority y,x pos set sub
+		MEM16
+		REP	#00100000B
+		LDA	<WORK0
+		CLC
+		ADC	#008H
+		STA	<WORK8
+		MEM8
+		SEP	#00100000B
+;
+TAKR500		EQU	$
+		PHX
+;
+		LDA	BMWRK0,X
+		STA	<BMWORK+2
+		LDA	BMCONT,X
+		TAX
+;
+		LDY	#000H
+		JSR	BMYXST3		; y,x pos oam set
+;
+		LDA	#024H
+		STA	(<OAMADR),Y
+		INY
+;
+		LDA	>TAKAATR,X
+		BPL	TAKR600
+		LDA	<BMWORK+2
+TAKR600		EQU	$
+		ASL	A
+;;;;;;;;		ORA	<PYBGUN+1
+		ORA	#00110000B
+		STA	(<OAMADR),Y
+		INY
+;
+		PHY
+		TYA
+		SEC
+		SBC	#004H
+		LSR	A
+		LSR	A
+		TAY
+		LDA	>TAKASBD,X
+		STA	(<OSBADR),Y
+		PLY
+;
+		CMP	#002H
+		BEQ	TAKR900
+;
+		MEM16
+		REP	#00100000B
+		LDA	<WORK8
+		STA	<WORK0
+		MEM8
+		SEP	#00100000B
+		JSR	BMYXST3		; y,x pos oam set
+;
+		LDA	#034H
+		STA	(<OAMADR),Y
+		INY
+		LDA	>TAKAATR,X
+		BPL	TAKR700
+		LDA	<BMWORK+2
+TAKR700		EQU	$
+		ASL	A
+;;;;;;;;		ORA	<PYBGUN+1
+		ORA	#00110000B
+		STA	(<OAMADR),Y
+		INY
+;
+		PHY
+		TYA
+		SEC
+		SBC	#004H
+		LSR	A
+		LSR	A
+		TAY
+		LDA	#000H
+		STA	(<OSBADR),Y
+		PLY
+;
+TAKR900		EQU	$
+		PLX
+		RTS
+;
+;**************************************************************
+;*		takara nage move 		(TAKNAGE)     *
+;**************************************************************
+TAKNAGE		EQU	$
+		LDA	#4*4
+		JSR	BMOMPT
+;
+		LDA	<GAMEMD
+		BEQ	TAKN080
+		BRL	TAKNF00
+;
+TAKN080		EQU	$
+		LDA	BMTIM0,X
+		BNE	TAKNF00
+;
+		LDA	#002H
+		STA	PYDMBT1
+		STZ	PYDMBT
+;
+		LDA	BMZSPD,X
+		SEC
+		SBC	#002H
+		STA	BMZSPD,X
+		JSR	BMZCLC
+		JSR	BMYCLC
+		JSR	BMXCLC
+;
+		LDA	BMZPSL,X
+		BPL	TAKNF00
+		CMP	#0E4H
+		BCS	TAKNF00
+		LDA	#0E4H
+		STA	BMZPSL,X
+		LDY	BMCONT,X
+		LDA	BMYPSL,X
+		CLC
+		ADC	#012H
+		STA	BMYPSL,X
+		LDA	BMYPSH,X
+		ADC	#000H
+		STA	BMYPSH,X
+		LDA	#008H
+		STA	<WORK0
+		LDA	!TAKASBD,Y
+		BNE	TAKN200
+		LDA	#004H
+		STA	<WORK0
+TAKN200		EQU	$
+		LDA	BMXPSL,X
+		CLC
+		ADC	<WORK0
+		STA	BMXPSL,X
+		LDA	BMXPSH,X
+		ADC	#000H
+		STA	BMXPSH,X
+		BRL	WTIMIT2
+;
+TAKNF00		EQU	$
+		JSR	ITMPST1
+		LDA	BMCONT,X
+		CMP	#001H
+		BNE	TAKNF10
+		LDA	!KNATDT+0
+		STA	BMWRK0,X
+TAKNF10		EQU	$
+		MEM16
+		REP	#00100000B
+		LDA	BMZPSL,X
+		AND	#00FFH
+		CMP	#0080H
+		BCC	TAKNF20
+		ORA	#0FF00H
+TAKNF20		EQU	$
+		STA	<WORK4
+		EOR	#0FFFFH
+		INC	A
+		CLC
+		ADC	<WORK0
+		STA	<WORK0
+		STA	<WORK6
+		CLC
+		ADC	#0008H
+		STA	<WORK8
+		MEM8
+		SEP	#00100000B
+;
+		JSR	TAKR500		; takara oam set
+;
+		LDA	PYDMBT1		; chach ? [YES:TAKNF80]
+		CMP	#002H
+		BNE	TAKNFC0
+;
+		LDA	BMZSPD,X
+		BMI	TAKNF30
+		CMP	#002H
+		BCS	TAKNFC0
+;
+TAKNF30		EQU	$
+;;;;;;;;		LDA	#4*2
+;;;;;;;;		JSL	>OAMENT2
+;
+;;;;;;;;		LDY	#000H
+		PHX
+		LDA	BMCONT,X
+		TAX
+		LDA	!TAKASBD,X
+		TAX
+		MEM16
+		REP	#00100000B
+		LDA	<WORK6
+		CLC
+		ADC	<WORK4
+		CLC
+		ADC	#0028H
+		STA	<WORK0
+		CPX	#002H
+		BEQ	TAKNF34
+		LDA	<WORK2
+		CLC
+		ADC	#0FFFCH
+		STA	<WORK2
+TAKNF34		EQU	$
+		MEM8
+		SEP	#00100000B
+;
+		LDA	#001H
+		CPX	#002H
+		BEQ	TAKNF40
+		LDA	#002H
+TAKNF40		EQU	$
+		TAX
+		LDA	<PYBGUN+1
+		STA	<WORK4
+		JSR	KGOAMSB		; kage oam set sub
+;
+		PLX
+;
+TAKNFC0		EQU	$
+		RTS
+;
+;**************************************************************
+;*		megami coin nage main move	(MCIMNMV)     *
+;**************************************************************
+MCIMNMV		EQU	$
+		LDA	#002H
+		STA	PYDMBT1
+		STZ	PYDMBT
+;
+		LDX	#009H
+MCIM100		EQU	$
+		LDA	>KZMODE,X
+		BEQ	MCIM200
+;
+		PHX
+		JSR	MGCINMV		; move sub
+		PLX
+;
+		LDA	>KZSTAT,X
+		CMP	#002H
+		BNE	MCIM200
+		LDA	#000H
+		STA	>KZMODE,X
+;
+MCIM200		EQU	$
+		DEX
+		BPL	MCIM100
+;
+		LDX	#009H		; end check !!
+MCIM300		EQU	$
+		LDA	>KZMODE,X
+		BNE	MCIM400
+		DEX
+		BPL	MCIM300
+		LDX	ENINDX
+		STZ	BMMODE,X
+		RTS
+;
+MCIM400		EQU	$
+		BRL	KBMV900
+;
+;**************************************************************
+;*		megami coin nage move		(MGCINMV)     *
+;**************************************************************
+MGCINMV		EQU	$
+		LDA	#4*4
+		JSR	BMOMPT
+;
+		PHX
+		LDY	ENINDX
+		JSR	MGHKSB
+		TYX
+;
+		LDA	BMSTAT,X
+		BEQ	MGCI400
+;
+;**********	water move
+		LDA	<GAMEMD
+		BNE	MGCI320
+		LDA	BMTIM0,X
+		BNE	MGCI320
+		LDA	#006H
+		STA	BMTIM0,X
+		INC	BMCONT,X
+		LDA	BMCONT,X
+		CMP	#005H
+		BNE	MGCI320
+		INC	BMSTAT,X
+		BRL	MGCIE40
+;
+MGCI320		EQU	$
+		JSR	WA2J100
+		BRA	MGCIE40
+;
+;***********   coin nage move
+MGCI400		EQU	$
+		LDA	<GAMEMD
+		BNE	MGCIE00
+		LDA	BMTIM0,X
+		BNE	MGCIE00
+;
+		LDA	BMZSPD,X
+		SEC
+		SBC	#002H
+		STA	BMZSPD,X
+		JSR	BMYCLC
+		JSR	BMXCLC
+		JSR	BMZCLC
+		LDA	BMZPSL,X
+		BPL	MGCIE00
+		CMP	#0E4H
+		BCS	MGCIE00
+		LDA	#0E4H
+		STA	BMZPSL,X
+		LDA	BMYPSL,X
+		CLC
+		ADC	#01EH
+		STA	BMYPSL,X
+		LDA	BMYPSH,X
+		ADC	#000H
+		STA	BMYPSH,X
+		LDA	BMXPSL,X
+		CLC
+		ADC	#0FCH
+		STA	BMXPSL,X
+		LDA	BMXPSH,X
+		ADC	#0FFH
+		STA	BMXPSH,X
+		STZ	BMCONT,X
+		LDA	#006H
+		STA	BMTIM0,X
+;;;;;;;;		JSR	>SDLRCB
+;;;;;;;;		ORA	#watr0
+;;;;;;;;		STA	!SOUND2
+		LDA	#watr0
+		JSR	SDLRB2
+		INC	BMSTAT,X
+		BRA	MGCI320
+;
+MGCIE00		EQU	$
+		LDA	#002H
+		STA	BMWRK0,X
+		LDA	#000H
+		STA	BMPRIO,X
+		JSR	TAKNF00		; coin oam set
+;
+MGCIE40		EQU	$
+		TXY
+		PLX
+		JSR	MGHKSB1
+;
+MGCIF00		EQU	$
+		RTS
+;
+;**************************************************************
+;*		megami coin ram henkan sub 	(MGHKSB)     *
+;**************************************************************
+MGHKSB		EQU	$
+		LDA	>KZYPSL,X
+		STA	BMYPSL,Y
+		LDA	>KZYPSH,X
+		STA	BMYPSH,Y
+		LDA	>KZXPSL,X
+		STA	BMXPSL,Y
+		LDA	>KZXPSH,X
+		STA	BMXPSH,Y
+		LDA	>KZZPSL,X
+		STA	BMZPSL,Y
+		LDA	>KZYSPD,X
+		STA	BMYSPD,Y
+		LDA	>KZXSPD,X
+		STA	BMXSPD,Y
+		LDA	>KZZSPD,X
+		STA	BMZSPD,Y
+		LDA	>KZBUFF,X
+		STA	BMYSDR,Y
+		LDA	>KZXBUF,X
+		STA	BMXSDR,Y
+		LDA	>KZZBUF,X
+		STA	BMZSDR,Y
+		LDA	>KZCONT,X
+		STA	BMCONT,Y
+		LDA	>KZSTAT,X
+		STA	BMSTAT,Y
+		LDA	>KZFLEM,X
+		BEQ	MGHK100
+		DEC	A
+MGHK100		EQU	$
+		STA	BMTIM0,Y
+		RTS
+;
+MGHKSB1		EQU	$
+		LDA	BMYPSL,Y
+		STA	>KZYPSL,X
+		LDA	BMYPSH,Y
+		STA	>KZYPSH,X
+		LDA	BMXPSL,Y
+		STA	>KZXPSL,X
+		LDA	BMXPSH,Y
+		STA	>KZXPSH,X
+		LDA	BMZPSL,Y
+		STA	>KZZPSL,X
+		LDA	BMYSPD,Y
+		STA	>KZYSPD,X
+		LDA	BMXSPD,Y
+		STA	>KZXSPD,X
+		LDA	BMZSPD,Y
+		STA	>KZZSPD,X
+		LDA	BMYSDR,Y
+		STA	>KZBUFF,X
+		LDA	BMXSDR,Y
+		STA	>KZXBUF,X
+		LDA	BMZSDR,Y
+		STA	>KZZBUF,X
+		LDA	BMCONT,Y
+		STA	>KZCONT,X
+		LDA	BMTIM0,Y
+		STA	>KZFLEM,X
+		LDA	BMSTAT,Y
+		STA	>KZSTAT,X
+		RTS
+;
+;
+;**************************************************************
+;*		water hahen  move init.1        (WTIMIT2)     *
+;**************************************************************
+WT2CRD		EQU	$
+		HEX	0C0,0FF		;0
+		HEX	0E7,0FF		;1
+		HEX	0AF,0BF		;2
+		HEX	080,080		;3
+		HEX	083,083		;4
+WT2ATD		EQU	$
+		HEX	000,0FF
+		HEX	000,0FF
+		HEX	040,000
+		HEX	040,000
+		HEX	0C0,080
+WT2YPD		EQU	$
+		WORD	00000H,00000H
+		WORD	0FFFAH,00000H
+		WORD	0FFF3H,0FFF8H
+		WORD	0FFEFH,0FFFCH
+		WORD	0FFEFH,0FFFCH
+WT2XPD		EQU	$
+		WORD	00000H,00000H
+		WORD	00000H,00000H
+		WORD	0000BH,0FFFDH
+		WORD	0000FH,0FFF9H
+		WORD	0000FH,0FFF9H
+WT2SBD		EQU	$
+		HEX	002,0FF
+		HEX	002,0FF
+		HEX	000,000
+		HEX	000,000
+		HEX	000,000
+;
+WTIMIT2		EQU	$
+		LDA	#WTMV2
+		STA	BMMODE,X
+		STZ	BMCONT,X	; water mode counter
+		LDA	#006H		; water flem counter
+		STA	BMTIM0,X
+;
+		LDA	BMYPSL,X
+		CLC
+		ADC	#00CH		; + #0FFF8H + #00014H
+		STA	BMYPSL,X
+		LDA	BMYPSH,X
+		ADC	#000H
+		STA	BMYPSH,X
+		LDA	BMXPSL,X
+		CLC
+		ADC	#0F8H
+		STA	BMXPSL,X
+		LDA	BMXPSH,X
+		ADC	#0FFH
+		STA	BMXPSH,X
+;
+;;;;;;;;		JSR	>SDLRCB		; sound on !!
+;;;;;;;;		ORA	#watr0
+;;;;;;;;		STA	!SOUND2
+		LDA	#watr0
+		JSR	SDLRB2
+;
+;**************************************************************
+;*		water hahen move 		(WATJMD2)     *
+;**************************************************************
+WATJMD2		EQU	$
+		LDA	#4*2
+		JSR	BMOMPT
+;
+		LDA	<GAMEMD		; purse ? [YES:YAMV400]
+		BNE	WA2J100
+;
+		LDA	BMTIM0,X
+		BNE	WA2J100
+		LDA	#006H
+		STA	BMTIM0,X
+		INC	BMCONT,X
+		LDA	BMCONT,X
+		CMP	#005H
+		BNE	WA2J100
+		STZ	BMMODE,X
+		RTS
+;
+WA2J100		EQU	$
+		JSR	ITMPST		; priorty,now y,x pos set
+;
+		MEM16
+		REP	#00100000B
+		LDA	<WORK0
+		STA	<WORK4
+		LDA	<WORK2
+		STA	<WORK6
+		MEM8
+		SEP	#00100000B
+;
+		PHX
+		LDY	#000H
+		STZ	<WORKC
+		LDA	BMCONT,X
+		ASL	A
+		TAX
+WA2J200		EQU	$
+		LDA	!WT2CRD,X
+		CMP	#0FFH
+		BEQ	WA2J300
+;
+		PHX
+		TXA
+		ASL	A
+		TAX
+		MEM16
+		REP	#00100000B
+		LDA	!WT2YPD,X
+		CLC
+		ADC	<WORK4
+		STA	<WORK0
+		LDA	!WT2XPD,X
+		CLC
+		ADC	<WORK6
+		STA	<WORK2
+		MEM8
+		SEP	#00100000B
+		PLX
+;
+		JSR	BMYXST3		; Y,X pos oam set sub
+		LDA	!WT2CRD,X
+		STA	(<OAMADR),Y
+		INY
+		LDA	!WT2ATD,X
+		ORA	#024H
+		STA	(<OAMADR),Y
+		INY
+		PHY
+		TYA
+		SEC
+		SBC	#004H
+		LSR	A
+		LSR	A
+		TAY
+		LDA	!WT2SBD,X
+		STA	(<OSBADR),Y
+		PLY
+WA2J300		EQU	$
+		INX
+		INC	<WORKC
+		LDA	<WORKC
+		CMP	#002H
+		BNE	WA2J200
+;
+		PLX
+		RTS
+;
+;**************************************************************
+;*		takara down move 		(TAKDOWN)     *
+;**************************************************************
+TKDUNT1		EQU	$
+		HEX	010,037,039,038,026,00F,020
+TAKDOWN		EQU	$
+		LDA	BMCONT,X	; sunder ? [YES:TAKD020]
+		CMP	!TKDUNT1+0
+		BEQ	TAKD020
+		CMP	!TKDUNT1+5	; bomber ? [YES:TAKD020]
+		BEQ	TAKD020
+;
+		LDA	!EMYSTT+1
+		AND	#040H
+		BNE	TAKD010
+		LDA	!EMYSTT+1
+		AND	#080H
+		BEQ	TAKD008
+		LDA	BSCLTMR
+		BEQ	TAKD040
+		CMP	#001H
+		BNE	TAKD004
+		LDY	#023H
+		LDA	BMCONT,X
+		CMP	!TKDUNT1+6
+		BNE	TAKD002
+		LDA	#00FH
+		STA	!SOUND1
+		LDY	#028H
+TAKD002		EQU	$
+		TYA
+		STA	<BMWORK+0
+		PHX
+		JSL	>ITMCBFST
+		PLX
+TAKD004		EQU	$
+		DEC	BSCLTMR
+TAKD008		EQU	$
+		RTS
+;
+TAKD010		EQU	$
+		STZ	BMMODE,X
+		RTS
+;
+TAKD020		EQU	$
+		LDA	HBFLEM,X	; down timer 
+		BEQ	TAKD060
+		DEC	HBFLEM,X
+		RTS
+;
+TAKD040		EQU	$
+		LDA	BUMFLM,X
+		BNE	TAKD060
+		LDA	BMCONT,X	; poligon ?
+		CMP	!TKDUNT1+6
+		BNE	TAKD060
+		LDA	#001H
+		STA	BUMFLM,X
+		PHX
+		LDA	#004H
+		STA	!CHITEMJC
+		LDA	#002H
+		STA	!CGSTPT+1
+		JSL	>CHITEMS0
+		INC	<CGVMAF
+		PLX
+;
+TAKD060		EQU	$
+		LDA	BMCONT,X	; poligon ?
+		CMP	!TKDUNT1+6
+		BNE	TAKD062
+;
+		JSR	PGKRIT		; kira kira init.
+;
+TAKD062		EQU	$
+		LDA	<GAMEMD
+		BNE	TAKD300
+		LDA	BMZPSL,X
+		CMP	#018H
+		BCS	TAKD080
+		LDY	#002H
+		JSR	PYHICK
+		BCC	TAKD080
+		LDA	BOGMOV		; bogan move ? 
+		BNE	TAKD080
+		LDA	<DIEFG
+		BNE	TAKD080
+		STZ	BMMODE,X
+		LDA	<LNMODE
+		CMP	#MNSR
+		BEQ	TAKD064
+		CMP	#MNBB
+		BNE	TAKD068
+TAKD064		EQU	$
+		STZ	!SPMCFG
+		STZ	!KNPASFG
+		LDA	#LNMD
+		STA	<LNMODE
+TAKD068		EQU	$
+		LDA	#003H
+		STA	ITMVFG
+		PHX
+		LDA	BMCONT,X
+		TAY
+		JSL	>ATMSIT
+		PLX
+		RTS
+;
+TAKD080		EQU	$
+		LDA	BMSTAT,X
+		BEQ	TAKD100
+		CMP	#002H
+		BEQ	TAKD300
+		
+		LDA	BMZSPD,X
+		SEC
+		SBC	#001H
+		STA	BMZSPD,X
+TAKD100		EQU	$
+		JSR	BMZCLC
+		LDA	BMZPSL,X
+		CMP	#0F8H
+		BCC	TAKD300
+		INC	BMSTAT,X
+		LDA	#018H
+		STA	BMZSPD,X
+		STZ	BMZPSL,X
+;
+TAKD300		EQU	$
+		JSR	ITMPST1
+		MEM16
+		REP	#00100000B
+		LDA	BMZPSL,X
+		AND	#00FFH
+		STA	<BMWORK+0
+		LDA	<WORK0
+		STA	<WORK6
+		SEC
+		SBC	<BMWORK+0
+		STA	<WORK0
+		MEM8
+		SEP	#00100000B
+		JSR	TAKR500		; takara oam set
+;
+		PHX
+;
+		DEC	BMFLFG,X
+		BPL	TAKD340
+		LDA	#009H
+		STA	BMFLFG,X
+		INC	HIBSTAT,X
+		LDA	HIBSTAT,X
+		CMP	#003H
+		BNE	TAKD340
+		STZ	HIBSTAT,X
+TAKD340		EQU	$
+		LDA	HIBSTAT,X
+		STA	<BMWORK+0
+;
+		LDA	BMZPSL,X
+		CMP	#000H
+		BNE	TAKD380
+		LDX	#000H
+		LDA	<RMXYCT
+		CMP	#006H
+		BNE	TAKD400
+		LDA	<RMXYCT+1
+		CMP	#000H
+		BNE	TAKD400
+		LDA	<BMWORK+0
+		CLC
+		ADC	#004H
+		TAX
+		BRA	TAKD400
+;
+TAKD380		EQU	$
+		LDX	#001H
+		CMP	#020H
+		BCC	TAKD400
+		INX
+TAKD400		EQU	$
+		MEM16
+		REP	#00100000B
+		LDA	<WORK6
+		CLC
+		ADC	#000CH
+		STA	<WORK0
+		MEM8
+		SEP	#00100000B
+		LDA	#020H
+		STA	<WORK4
+;
+		JSR	KGOAMSB		; kage oam set sub
+;
+		PLX
+		RTS
+;
+;**************************************************************
+;*		porigon up move init	        (PRGIMIT)     *
+;**************************************************************
+PRGIMIT		EQU	$
+		LDA	#PORIG
+		STA	BMMODE,X
+;
+;;;;;;;;		LDA	#024H
+;;;;;;;;		STA	BMFLFG,X
+		STZ	BMYSPD,X
+		STZ	BMXSPD,X
+		STZ	BMYSDR,X	; buff clear !1
+;
+;**************************************************************
+;*		porigon up move 		(PRGUPMV)     *
+;**************************************************************
+PRGUPMV		EQU	$
+		STZ	BMZPSL,X
+		JSR	PGKRIT		; kira kira init.
+;
+		LDA	BMYSPD,X
+		CLC
+		ADC	#0FFH
+		CMP	#0F0H
+		BCS	PRGU0C0
+		LDA	#0F0H
+PRGU0C0		EQU	$
+		STA	BMYSPD,X
+		JSR	BMYCLC
+;
+		LDA	BMYPSL,X
+		STA	<WORK0
+		LDA	BMYPSH,X
+		STA	<WORK1
+		MEM16
+		REP	#00100000B
+		LDA	<WORK0
+		SEC
+		SBC	!SSCCV2
+		CMP	#0049H
+		BCS	PRGU100
+		LDA	#0049H
+		CLC
+		ADC	!SSCCV2
+		STA	<WORK0
+		MEM8
+		SEP	#00100000B
+		LDA	<WORK0
+		STA	BMYPSL,X
+		LDA	<WORK1
+		STA	BMYPSH,X
+;
+		LDA	<GAMEMD
+		BNE	PRGU100
+		PHX
+		LDA	!DJNNO
+		LSR	A
+		TAX
+		LDA	>ITMTBL3
+		ORA	>UDJBITD,X
+		STA	>ITMTBL3	; poly-gon bit on!!
+;
+		LDA	#p1_plgn
+		STA	<GAMEMD
+		STZ	<JRSBPT
+;
+		MEM16
+		REP	#00100000B	; memory 16bit mode
+;
+		LDX	#000H
+		LDA	#00000H
+PRGU080		EQU	$
+		STA	>CGRAM+040H,X
+		STA	>CGRAM+060H,X
+		STA	>CGRAM+080H,X
+		STA	>CGRAM+0A0H,X
+		STA	>CGRAM+0C0H,X
+		STA	>CGRAM+0E0H,X
+		INX
+		INX
+		CPX	#020H
+		BNE	PRGU080		;
+;					;
+		STA	>CCNGCT
+		STA	>CCNGFG
+;
+		MEM8
+		SEP	#00100000B	; memory 8bit mode
+		PLX
+;
+PRGU100		EQU	$
+		MEM8
+		SEP	#00100000B
+;
+		JSR	ITMPST1
+		MEM16
+		REP	#00100000B
+		LDA	<WORK0
+		STA	<WORK6
+		MEM8
+		SEP	#00100000B
+		JSR	TAKR500		; takara oam set
+		RTS
+;
+;**************************************************************
+;*		porigon kirakira init.		 (PGKRIT)     *
+;**************************************************************
+PGKRIT		EQU	$
+		LDA	<FCNT
+		AND	#00000111B
+		BNE	PGKR100
+		PHX
+		JSL	>PUBNIT
+		PLX
+PGKR100		EQU	$
+		RTS
+;
+;**************************************************************
+;*		poligon kaiten move 		(PLGKTMV)     *
+;**************************************************************
+PLGKTMV		EQU	$
+		LDA	BMSTAT,X
+		BNE	PLGK300
+;
+;***********	poligon up move
+		LDA	BMYSPD,X
+		CLC
+		ADC	#0FFH
+		CMP	#0F0H
+		BCS	PLGK100
+		LDA	#0F0H
+PLGK100		EQU	$
+		STA	BMYSPD,X
+		JSR	BMYCLC
+;
+		LDA	BMYPSL,X
+		STA	<WORK0
+		LDA	BMYPSH,X
+		STA	<WORK1
+		LDA	BMXPSL,X
+		STA	<WORK2
+		LDA	BMXPSH,X
+		STA	<WORK3
+		MEM16
+		REP	#00100000B
+		LDA	<WORK0
+		SEC
+		SBC	!SSCCV2
+		CMP	#0038H
+		BCS	PLGK200
+		LDA	#0038H
+		CLC
+		ADC	!SSCCV2
+		STA	<WORK0
+		CLC
+		ADC	#0008H
+		STA	>SNCYPS		; en Y-center pos set
+		LDA	<WORK2
+		CLC
+		ADC	#0008H
+		STA	>SNCXPS		; en X-center pos set
+		MEM8
+		SEP	#00100000B
+		LDA	<WORK0
+		STA	BMYPSL,X
+		LDA	<WORK1
+		STA	BMYPSH,X
+		INC	BMSTAT,X
+		LDA	#005H
+		STA	!SOUND1
+;// 03.09.16 //		STA	!SVSND1
+		LDA	#0F1H
+		STA	!SOUND0
+;
+		MEM16
+		REP	#00100000B
+		LDA	#MS_04C9
+		STA	!MSGENOL
+		MEM8
+		SEP	#00100000B
+		JSL	>MESWIT
+		BRA	PLGK410
+;
+PLGK200		EQU	$
+		MEM8
+		SEP	#00100000B
+;
+;***********	poligon en kakudai move
+PLGK300		EQU	$
+		LDA	BMSTAT,X
+		CMP	#001H
+		BNE	PLGK400
+;
+		LDA	<GAMEMD
+		BNE	PLGK400
+;
+		LDA	#010H
+		STA	BMXSPD,X
+		LDA	BMXPSL,X
+		STA	<BMWORK+0
+		LDA	BMXPSH,X
+		STA	<BMWORK+1
+		LDA	>SNDHAN
+		STA	BMXPSL,X
+		STZ	BMXPSH,X
+		JSR	BMXCLC
+		LDA	BMXPSL,X
+		STA	>SNDHAN
+		LDA	<BMWORK+0
+		STA	BMXPSL,X
+		LDA	<BMWORK+1
+		STA	BMXPSH,X
+		LDA	>SNDHAN		; hankei limmit ?
+		CMP	#030H
+		BCC	PLGK400
+		LDA	#030H
+		STA	>SNDHAN
+		INC	BMSTAT,X
+;
+;***********	poligon en kaiten move
+PLGK400		EQU	$
+		LDA	<GAMEMD
+		BNE	PLGK4C0
+		LDA	BMSTAT,X
+		BNE	PLGK420
+PLGK410		EQU	$
+		LDY	#000H
+		BRL	PLGK800
+;
+PLGK420		EQU	$
+		CMP	#001H
+		BEQ	PLGK4C0
+		CMP	#003H
+		BEQ	PLGK440
+;
+		LDA	>SNTIME
+		DEC	A
+		STA	>SNTIME
+		BNE	PLGK4C0
+;
+		LDA	#gif5
+		STA	!GDINFF
+		STZ	<JRSBPT
+		STZ	<CWORK0
+;
+		INC	BMSTAT,X
+		BRA	PLGK4C0
+;
+PLGK440		EQU	$
+		LDA	#030H
+		STA	BMXSPD,X
+		LDA	BMXPSL,X
+		STA	<BMWORK+0
+		LDA	BMXPSH,X
+		STA	<BMWORK+1
+		LDA	>SNDHAN
+		STA	BMXPSL,X
+		STZ	BMXPSH,X
+		JSR	BMXCLC
+		LDA	BMXPSL,X
+		STA	>SNDHAN
+		LDA	<BMWORK+0
+		STA	BMXPSL,X
+		LDA	<BMWORK+1
+		STA	BMXPSH,X
+		LDA	>SNDHAN		; hankei limmit ?
+		CMP	#0F0H
+		BCC	PLGK4C0
+;
+		PHX
+		LDA	#000H
+		STA	!CHITEMJC
+		LDA	#002H
+		STA	!CGSTPT+1
+		JSL	>CHITEMS0
+		INC	<CGVMAF
+		PLX
+		STZ	BMMODE,X
+		RTS
+;		
+PLGK4C0		EQU	$
+		LDY	#000H
+		LDA	BMSTAT,X
+		STA	<BMWORK+0
+		BEQ	PLGK4E0
+;
+		JSR	POKIOSM		; kira kira oam set
+;
+PLGK4E0		EQU	$
+		LDX	#006H
+PLGK500		EQU	$
+		LDA	<GAMEMD		; porzu ?
+		BNE	PLGK580
+		LDA	<BMWORK+0
+		CMP	#001H
+		BEQ	PLGK580
+;
+		LDA	<FCNT		; timer
+		AND	#00000001B
+		BNE	PLGK580
+;
+		LDA	>SNENMD,X	; kaiten shori
+		INC	A
+		AND	#03FH
+		STA	>SNENMD,X
+;
+PLGK580		EQU	$
+		LDA	>SNDHAN
+		STA	<WORK8
+		LDA	>SNENMD,X
+		JSR	ENMVSH
+;
+;***********	poligon OAM set
+		MEM16
+		REP	#00100000B
+		PHY
+		LDA	<WORK0
+		LDY	<WORK2
+		BEQ	PLGK600
+		EOR	#0FFFFH
+		INC	A
+PLGK600		EQU	$
+		CLC
+		ADC	>SNCYPS
+		CLC
+		ADC	#0FFF8H
+		SEC
+		SBC	!SSCCV2
+		STA	<WORK0
+;
+		LDA	<WORK4
+		LDY	<WORK6
+		BEQ	PLGK700
+		EOR	#0FFFFH
+		INC	A
+PLGK700		EQU	$
+		CLC
+		ADC	>SNCXPS
+		CLC
+		ADC	#0FFF8H
+		SEC
+		SBC	!SSCCH2
+		STA	<WORK2
+		PLY
+		MEM8
+		SEP	#00100000B
+		LDA	<WORK0
+		STA	>KIRYPL,X
+		LDA	<WORK1
+		STA	>KIRYPH,X
+		LDA	<WORK2
+		STA	>KIRXPL,X
+		LDA	<WORK3
+		STA	>KIRXPH,X
+		PHX
+		JSR	KTPOMST		; poligon oam set sub
+		PLX
+		DEX
+		BPL	PLGK500
+;
+PLGK800		EQU	$
+		LDX	ENINDX
+		PHY
+		JSR	ITMPST1
+		PLY
+		LDA	<WORK0
+		STA	>KIRYPL+7
+		LDA	<WORK1
+		STA	>KIRYPH+7
+		LDA	<WORK2
+		STA	>KIRXPL+7
+		LDA	<WORK3
+		STA	>KIRXPH+7
+		JSR	KTPOMST		; poligon oam set sub
+;
+		LDX	ENINDX
+		LDA	BMSTAT,X
+		BNE	PLGK900
+		JSR	PGKRIT		; poligon center kirakira set
+		BRA	PLGKA00
+;
+PLGK900		EQU	$
+		LDA	<GAMEMD
+		BNE	PLGKA00
+		JSR	POKIIT
+		LDX	ENINDX
+PLGKA00		EQU	$
+		RTS
+;
+;**************************************************************
+;*		kaiten poligon oam set sub	(KTPOMST)     *
+;**************************************************************
+KTPOMST		EQU	$
+		JSR	BMYXST4
+		LDA	#024H
+		STA	(<OAMADR),Y
+		INY
+		LDA	#03CH
+		STA	(<OAMADR),Y
+		INY
+;
+		PHY
+		TYA
+		SEC
+		SBC	#004H
+		LSR	A
+		LSR	A
+		TAY
+		LDA	#002H
+		ORA	<BMWORK+3
+		STA	(<OSBADR),Y
+		PLY
+;
+KTPO100		EQU	$
+		RTS
+;
+;**************************************************************
+;*		poligon en kirakira move shori (POKIIT)       *
+;**************************************************************
+POKIIT		EQU	$
+		LDX	#017H
+POKI100		EQU	$
+		LDA	>KIRMOD,X
+		CMP	#0FFH
+		BEQ	POKI200
+		DEX
+		BPL	POKI100
+		BRA	POKI300
+;
+POKI200		EQU	$
+		PHX
+		LDA	#000H
+		STA	>KIRMOD,X
+		LDA	#004H
+		STA	>KRMTIM,X
+		JSL	>RNDSET
+		STA	<WORK8
+		LSR	A
+		LSR	A
+		LSR	A
+		LSR	A
+		STA	<WORK9
+		LDA	<WORK8
+		AND	#00FH
+		STA	<WORK8
+		TXA
+		AND	#007H
+		TAX
+		LDA	>KIRYPL,X
+		CLC
+		ADC	<WORK8
+		STA	<WORK0
+		LDA	>KIRYPH,X
+		ADC	#000H
+		STA	<WORK1
+		LDA	>KIRXPL,X
+		CLC
+		ADC	<WORK9
+		STA	<WORK2
+		LDA	>KIRXPH,X
+		ADC	#000H
+		STA	<WORK3
+		PLX
+		LDA	<WORK0
+		STA	>KRMYPL,X
+		LDA	<WORK1
+		STA	>KRMYPH,X
+		LDA	<WORK2
+		STA	>KRMXPL,X
+		LDA	<WORK3
+		STA	>KRMXPH,X
+;
+POKI300		EQU	$
+		RTS
+;
+POKIOSM		EQU	$
+		LDX	#017H
+POKI400		EQU	$
+		LDA	>KIRMOD,X
+		CMP	#0FFH
+		BEQ	POKI600
+;
+		LDA	>KRMTIM,X
+		DEC	A
+		STA	>KRMTIM,X
+		BPL	POKI500
+		LDA	#004H
+		STA	>KRMTIM,X
+		LDA	>KIRMOD,X
+		INC	A
+		STA	>KIRMOD,X
+		CMP	#003H
+		BNE	POKI500
+		LDA	#0FFH
+		STA	>KIRMOD,X
+		BRA	POKI600
+;
+POKI500		EQU	$
+		PHX
+		LDA	>KRMYPL,X
+		STA	<WORK0
+		LDA	>KRMYPH,X
+		STA	<WORK1
+		LDA	>KRMXPL,X
+		STA	<WORK2
+		LDA	>KRMXPH,X
+		STA	<WORK3
+		LDA	>KIRMOD,X
+		TAX
+		JSR	BMYXST3
+		LDA	!LVUCRD,X
+		STA	(<OAMADR),Y
+		INY
+		LDA	!LVUATD,X
+		ORA	#00110000B
+		STA	(<OAMADR),Y
+		INY
+		PHY
+		TYA
+		SEC
+		SBC	#004H
+		LSR	A
+		LSR	A
+		TAY
+		LDA	#000H
+		STA	(<OSBADR),Y
+		PLY
+		PLX
+POKI600		EQU	$
+		DEX
+		BPL	POKI400
+;
+		RTS
+;
+;**************************************************************
+;*		okarina jump move shori	       (OKARINA)      *
+;**************************************************************
+OKZSDT		EQU	$		; okarina speed set
+		HEX	018,010,00A,000
+OKARINA		EQU	$
+		LDA	<GAMEMD
+		BNE	OKAR300
+		LDA	BMSTAT,X
+		CMP	#003H
+		BEQ	OKAR400
+		LDA	BMZSPD,X
+		SEC
+		SBC	#002H
+		STA	BMZSPD,X
+;
+		JSR	BMXCLC		; x-pos set
+		JSR	BMZCLC		; z-pos set
+		LDA	BMZPSL,X
+		BPL	OKAR300
+		CMP	#0F0H
+		BCC	OKAR300
+OKAR200		EQU	$
+		INC	BMSTAT,X
+		LDY	BMSTAT,X
+		LDA	!OKZSDT,Y
+		STA	BMZSPD,X
+		STZ	BMZPSL,X
+OKAR300		EQU	$
+		BRA	OKAR800
+;
+OKAR400		EQU	$
+		LDY	#002H
+		JSR	PYHICK		; player hani check sub
+		BCC	OKAR800
+		LDA	BOGMOV		; bogan move ?
+		BNE	OKAR800
+		LDA	<DIEFG
+		BNE	OKAR800
+		PHX
+		STZ	BMMODE,X
+		STZ	!ITMVFG
+		LDY	#014H
+		JSL	>ATMSIT		; player item mochiage set sub
+		PLX
+		RTS
+;*************  okarina oam set
+OKAR800		EQU	$
+		JSR	ITMPST1		; priority y,x pos set sub
+;
+		MEM16
+		REP	#00100000B
+		LDA	BMZPSL,X
+		AND	#000FFH
+		CMP	#00080H
+		BCC	OKAR900
+		ORA	#0FF00H
+OKAR900		EQU	$
+		EOR	#0FFFFH
+		INC	A
+		CLC
+		ADC	<WORK0
+		STA	<WORK0
+		MEM8
+		SEP	#00100000B
+		PHX
+		LDY	#000H
+		JSR	BMYXST3		; y,x pos oam set
+;
+		LDA	#024H
+		STA	(<OAMADR),Y
+		INY
+		LDA	#00000100B
+		ORA	<PYBGUN+1
+		STA	(<OAMADR),Y
+		LDA	#002H
+		STA	(<OSBADR)
+;
+		PLX
+		LDY	#001H
+		LDA	(<OAMADR),Y
+		CMP	#0F0H
+		BNE	OKARA00
+		STZ	BMMODE,X
+OKARA00		EQU	$
+		RTS
+;
+;**************************************************************
+;*		kazamirori del move shori      (KAZAMOV)      *
+;**************************************************************
+KAZAMOV		EQU	$
+		MEM16
+		REP	#00100000B
+		LDA	>KZTIM0
+		DEC	A
+		STA	>KZTIM0
+		BNE	KAZA020
+		MEM8
+		SEP	#00100000B
+		INC	A
+		STA	>KZTIM0
+		LDA	>KZTMDS
+		BNE	KAZA040
+		INC	A
+		STA	>KZTMDS
+		LDA	#0F3H
+		STA	!SOUND0
+		BRA	KAZA040
+KAZA020		EQU	$
+		MEM8
+		SEP	#00100000B
+		BRA	OKARA00
+;
+KAZA040		EQU	$
+		DEC	HBFLEM,X	; wait timer !!
+		LDA	HBFLEM,X	; wait timer !!
+		BNE	KAZA020
+		INC	A
+		STA	HBFLEM,X
+		LDA	BUMFLM,X
+		BNE	KAZA080
+		INC	A
+		STA	BUMFLM,X
+;;;;;;;;		JSL	>SDLRCP
+;;;;;;;;		ORA	#bomb1
+;;;;;;;;		STA	!SOUND2
+		LDA	#bomb1
+		JSR	SDLRP2		;<sound>
+;
+KAZA080		EQU	$
+		LDA	BMSTAT,X
+		BNE	KAZA100
+		DEC	BMFLFG,X
+		BPL	KAZA100
+		LDA	#001H
+		STA	BMSTAT,X
+		PHX
+		JSL	>KZBDERS	; BG chenge sub
+		LDY	#000H
+		LDA	#TORIM
+		JSL	>TORIINT
+		PLX
+;
+KAZA100		EQU	$
+		TXA
+		STA	>KZINDX		; x reji set
+		LDA	#000H
+		STA	>KZOMID		; oam index clear
+		LDX	#00BH
+KAZA200		EQU	$
+		LDA	>KZMODE,X
+		CMP	#0FFH
+		BNE	KAZA260
+		BRL	KAZA900
+KAZA260		EQU	$
+		LDA	>KZFLEM,X
+		DEC	A
+		STA	>KZFLEM,X
+		BPL	KAZA300
+		LDA	#001H
+		STA	>KZFLEM,X
+		LDA	>KZMODE,X
+		EOR	#001H
+		STA	>KZMODE,X
+KAZA300		EQU	$
+		PHX
+		LDA	>KZINDX
+		TAY
+		LDA	>KZMODE,X
+		STA	BMCONT,Y
+		LDA	>KZYPSL,X
+		STA	BMYPSL,Y
+		LDA	>KZYPSH,X
+		STA	BMYPSH,Y
+		LDA	>KZXPSL,X
+		STA	BMXPSL,Y
+		LDA	>KZXPSH,X
+		STA	BMXPSH,Y
+		LDA	>KZZPSL,X
+		STA	BMZPSL,Y
+		LDA	>KZYSPD,X
+		STA	BMYSPD,Y
+		LDA	>KZXSPD,X
+		STA	BMXSPD,Y
+		LDA	>KZZSPD,X
+		SEC
+		SBC	#001H
+		STA	>KZZSPD,X
+		STA	BMZSPD,Y
+		TYX
+		JSR	BMYCLC
+		JSR	BMXCLC
+		JSR	BMZCLC
+		STZ	<BMWORK+2
+		LDA	BMZPSL,X
+		CMP	#0F0H
+		BCC	KAZA400
+		LDA	#0FFH
+		STA	<BMWORK+2
+KAZA400		EQU	$
+		JSR	KZOAMST		; oam set sub
+		PLX
+		LDA	<BMWORK+2
+		BPL	KAZA500
+		STA	>KZMODE,X
+KAZA500		EQU	$
+		LDA	>KZINDX
+		TAY
+		LDA	BMYPSL,Y
+		STA	>KZYPSL,X
+		LDA	BMYPSH,Y
+		STA	>KZYPSH,X
+		LDA	BMXPSL,Y
+		STA	>KZXPSL,X
+		LDA	BMXPSH,Y
+		STA	>KZXPSH,X
+		LDA	BMZPSL,Y
+		STA	>KZZPSL,X
+KAZA900		EQU	$
+		DEX
+		BMI	KAZAA00
+		BRL	KAZA200
+;
+;
+KAZAA00		EQU	$
+		LDA	>KZINDX
+		TAY
+		LDX	#00BH
+KAZAB00		EQU	$
+		LDA	>KZMODE,X
+		CMP	#0FFH
+		BNE	KAZAC00
+		DEX
+		BPL	KAZAB00
+;
+		TYX
+		STZ	BMMODE,X
+;
+KAZAC00		EQU	$		
+		TYX
+		RTS
+;
+;**************************************************************
+;*		kazamirori del OAM set shori   (KZOAMST)      *
+;**************************************************************
+KZCRDT		EQU	$
+		HEX	04E,04F
+KZOAMST		EQU	$
+		JSR	ITMPST		; prioryty,now y,x pos set sub
+;
+		MEM16
+		REP	#00100000B
+		LDA	BMZPSL,X
+		AND	#000FFH
+		CMP	#00080H
+		BCC	KZOM080
+		ORA	#0FF00H
+KZOM080		EQU	$
+		EOR	#0FFFFH
+		INC	A
+		CLC
+		ADC	<WORK0
+		STA	<WORK0
+		MEM8
+		SEP	#00100000B
+;
+		LDA	BMCONT,X
+		STA	<BMWORK+0
+		BMI	KZOM100
+		PHX
+		LDA	>KZOMID
+		TAY
+		JSR	BMYXST3
+		LDX	<BMWORK+0
+		LDA	!KZCRDT,X
+		STA	(<OAMADR),Y
+		INY
+		LDA	#00111100B
+		STA	(<OAMADR),Y
+		INY
+		TYA
+		STA	>KZOMID
+		SEC
+		SBC	#004H
+		LSR	A
+		LSR	A
+		TAY
+		LDA	#000H
+		STA	(<OSBADR),Y
+		PLX
+KZOM100		EQU	$
+		RTS
+;
+;**************************************************************
+;*		kazamirori move shori          (TORIMOV)      *
+;**************************************************************
+TRMKDT		EQU	$		; muki flip data
+		HEX	040,000
+TRXSPDT		EQU	$
+		HEX	01C,03C
+
+TORIMOV		EQU	$
+		LDA	<FCNT
+		AND	#00011111B
+		BNE	TORI080
+		LDA	#01EH
+		JSR	SDLRB3
+;
+TORI080		EQU	$
+		DEC	BUMFLM,X	; chara chenge shori !!
+		BPL	TORI100
+		LDA	#003H
+		STA	BUMFLM,X
+		LDA	BUADSB,X
+		EOR	#001H
+		STA	BUADSB,X
+;
+TORI100		EQU	$
+		DEC	BMFLFG,X	; move wait timer
+		LDA	BMFLFG,X
+		BEQ	TORI200
+		BRL	TORIA00
+;
+TORI200		EQU	$
+		LDA	#001H
+		STA	BMFLFG,X
+;
+;************** move set
+		LDA	HIBSTAT,X	; tori en move ? [yes:TORI300]
+		BNE	TORI300
+;
+		DEC	BMCONT,X
+		BMI	TORI280
+		LDY	#0FFH
+		LDA	BMSTAT,X
+		BEQ	TORI220
+		LDY	#001H				
+TORI220		EQU	$
+		TYA
+		CLC
+		ADC	BMZSPD,X
+		STA	BMZSPD,X
+		BPL	TORI230
+		EOR	#0FFH
+		INC	A
+TORI230		EQU	$
+		CMP	#00CH
+		BCC	TORI240
+		LDA	BMSTAT,X
+		EOR	#01H
+		STA	BMSTAT,X
+TORI240		EQU	$
+		BRL	TORIA00
+;
+;************ en init.
+TORI280		EQU	$
+		STZ	BMCONT,X
+		STZ	BMSTAT,X
+		LDA	!TRXSPDT+0
+		STA	BMXSPD,X
+		LDA	#0F0H
+		STA	BMZSPD,X
+		INC	HIBSTAT,X
+		LDA	#003H
+		STA	BMSTAT,X
+;
+;************** en move sub
+TORI300		EQU	$
+		LDY	#0FFH
+		LDA	BMSTAT,X
+		AND	#00000001B
+		BNE	TORI400
+		LDY	#001H
+TORI400		EQU	$
+		TYA
+		CLC
+		ADC	BMXSPD,X
+		STA	BMXSPD,X
+		BPL	TORI500
+		EOR	#0FFH
+		INC	A
+TORI500		EQU	$
+		CMP	#000H
+		BNE	TORI540
+		INC	HIBSTAT,X
+		LDY	HIBSTAT,X
+		CPY	#007H
+		BNE	TORI540
+		PHA
+		LDA	#001H
+		STA	BMKMHN,X
+		PLA
+TORI540		EQU	$
+		LDY	BMKMHN,X
+		CMP	!TRXSPDT,Y
+		BCC	TORI600
+		LDA	BMSTAT,X
+		AND	#00000011B
+		EOR	#00000011B
+		STA	<WORK0
+		LDA	BMSTAT,X
+		AND	#11111100B
+		ORA	<WORK0
+		STA	BMSTAT,X
+;
+TORI600		EQU	$
+		LDY	#003H
+		LDA	BMXSPD,X
+		BPL	TORI640
+		EOR	#0FFH
+		INC	A
+		LDY	#002H
+TORI640		EQU	$
+		STA	<WORK0
+		TYA
+		STA	BMMUKI,X
+;
+		LDY	BMKMHN,X
+		LDA	!TRXSPDT,Y
+		SEC
+		SBC	<WORK0
+		LSR	A
+		STA	<WORK0
+;
+		LDA	BMSTAT,X
+		AND	#00000010B
+		BEQ	TORI700
+		LDA	<WORK0
+		EOR	#0FFH
+		INC	A
+		STA	<WORK0
+;
+TORI700		EQU	$
+		LDA	<WORK0
+		STA	BMZSPD,X
+;
+TORIA00		EQU	$
+		JSR	BMXCLC
+		JSR	BMZCLC
+;
+;************** OAM set
+TORIC00		EQU	$
+		LDY	BUADSB,X
+		LDA	!TORIVMD+1,Y
+		STA	!TORICFG
+;
+		JSR	ITMPST          ; priorty,now y,x pos set sub
+		LDA	BMMUKI,X
+		AND	#00000001B
+		TAY
+		LDA	!TRMKDT,Y
+		STA	<WORK8
+		MEM16
+		REP	#00100000B
+		LDA	BMZPSL,X
+		AND	#00FFH
+		CMP	#0080H
+		BCC	TORID00
+		ORA	#0FF00H
+TORID00		EQU	$
+		EOR	#0FFFFH
+		INC	A
+		STA	<WORK4
+		LDA	<WORK0
+		STA	<WORKA
+		SEC
+		SBC	<WORK4
+		STA	<WORK4
+		LDA	<WORK2
+		STA	<WORK6	
+		MEM8
+		SEP	#00100000B
+		PHX
+		LDY	#000H
+		MEM16
+		REP	#00100000B
+		LDA	!WPYPDT+0
+		AND	#00FFH
+		CLC
+		ADC	<WORK4
+		STA	<WORK0
+		LDA	!WPXPDT+0
+		AND	#00FFH
+		CLC
+		ADC	<WORK6
+		STA	<WORK2
+		MEM8
+		SEP	#00100000B
+		JSR	BMYXST3
+		LDA	!WPCRDT+0
+		STA	(<OAMADR),Y
+		INY
+		LDA	!WPATDT+0
+		ORA	#00110000B
+		ORA	<WORK8
+		STA	(<OAMADR),Y
+		INY
+		PHY
+		TYA
+		SEC
+		SBC	#004H
+		LSR	A
+		LSR	A
+		TAY
+		LDA	#002H
+		STA	(<OSBADR),Y
+		PLY
+		MEM16
+		REP	#00100000B
+		LDA	<WORKA
+		CLC
+		ADC	#0030H
+		STA	<WORK0
+		LDA	<WORK6
+		STA	<WORK2
+		MEM8
+		SEP	#00100000B
+		LDA	#00110000B
+		STA	<WORK4
+		LDX	#001H
+		JSR	KGOAMSB
+		PLX
+		MEM16
+		REP	#00100000B
+		LDA	<WORK6
+		BMI	TORIE00
+		CMP	#00F8H
+		BCC	TORIE00
+		MEM8
+		SEP	#00100000B
+		STZ	BMMODE,X
+		STZ	<GAMEMD
+		LDA	#003H		; warp aitem set
+		STA	>ITEMR13
+TORIE00		EQU	$
+		MEM8
+		SEP	#00100000B
+		RTS
+;
+;**************************************************************
+;*		toraiforce kemuri move		(TORAKST)     *
+;**************************************************************
+TORCRD		EQU	$		; chara no data
+		HEX	086,0A9,09B
+TORSBD		EQU	$		; chara no data
+		HEX	002,000,000
+TORATO		EQU	$		; atori no data
+		HEX	000,0FF,0FF,0FF
+		HEX	040,000,0C0,080
+		HEX	000,040,080,0C0
+TORAYP		EQU	$
+		WORD	00000H,00000H,00000H,00000H
+		WORD	00000H,00000H,00008H,00008H
+		WORD	0FFFCH,0FFFCH,0000CH,0000CH
+TORAXP		EQU	$
+		WORD	00000H,00000H,00000H,00000H
+		WORD	00000H,00008H,00000H,00008H
+		WORD	0FFFCH,0000CH,0FFFCH,0000CH
+;
+TORAKST		EQU	$
+		DEC	BMFLFG,X
+		BPL	TORA100
+		LDA	#007H
+		STA	BMFLFG,X
+		LDA	BMCONT,X
+		INC	A
+		STA	BMCONT,X
+		CMP	#003H
+		BNE	TORA100
+		STZ	BMMODE,X
+		STZ	PYSTOP
+		STZ	<PYMKFG
+		LDA	BMSTAT,X
+		BNE	TORA080
+		STZ	<PYCRCH
+		STZ	<OMSBMD		; player reset
+;
+		LDY	#000H
+		LDA	<MPDTNO
+		AND	#040H
+		BEQ	TORA020
+		INY
+TORA020		EQU	$
+		STY	RABFLG
+		STY	<RABIFG
+		BEQ	TORA040
+;;;;;;;;		LDA	#RABT
+;;;;;;;;		STA	<LNMODE
+		JSL	>PLCGCN2
+		BRA	TORA080
+TORA040		EQU	$
+;;;;;;;;		LDA	#LNMD
+;;;;;;;;		STA	<LNMODE
+		JSL	>PLCGCN0
+TORA080		EQU	$
+		RTS
+;
+;**************************************************************
+;*		toraiforce kemuri OAM set 		      *
+;**************************************************************
+TORA100		EQU	$
+		LDA	OAMTYP
+		BEQ	TORA180
+		LDA	BMPRIO,X
+		BEQ	TORA180
+;
+		LDA	BMRMOV
+		BEQ	TORA140
+		LDA	<FCNT
+		AND	#00000001B
+		BNE	TORA180
+TORA140		EQU	$
+		MEM16
+		REP	#00100000B
+		LDA	#00D0H
+		PHA
+		CLC
+		ADC	#OAM
+		STA	<OAMADR
+		PLA
+		LSR	A
+		LSR	A
+		CLC
+		ADC	#OAMSB
+		STA	<OSBADR
+		MEM8
+		SEP	#00100000B
+;
+TORA180		EQU	$
+		JSR	ITMPST		; priorty,now y,x pos set
+		MEM16
+		REP	#00100000B
+		LDA	<WORK0
+		STA	<WORK4
+		LDA	<WORK2
+		STA	<WORK6
+		MEM8
+		SEP	#00100000B
+;
+		PHX
+		LDY	BMCONT,X
+		LDA	!TORSBD,Y
+		STA	<WORK8
+		LDA	!TORCRD,Y
+		STA	<WORKC
+		TYA
+		ASL	A
+		ASL	A
+		STA	<WORKE
+		LDY	#000H
+		STY	<WORKA
+TORA200		EQU	$
+		LDA	<WORKE
+		CLC
+		ADC	<WORKA
+		ASL	A
+		TAX
+		MEM16
+		REP	#00100000B
+		LDA	<WORK4
+		CLC
+		ADC	!TORAYP,X
+		STA	<WORK0
+		LDA	<WORK6
+		CLC
+		ADC	!TORAXP,X
+		STA	<WORK2
+		MEM8
+		SEP	#00100000B
+;
+		JSR	BMYXST3		; Y,X pos oam set sub
+;
+		LDA	<WORKC
+		STA	(<OAMADR),Y
+		INY
+		TXA
+		LSR	A
+		TAX
+		LDA	!TORATO,X
+		ORA	#004H
+		ORA	<PYBGUN1
+		STA	(<OAMADR),Y
+		INY
+;
+		PHY
+		TYA
+		SEC
+		SBC	#004H
+		LSR	A
+		LSR	A
+		TAY
+		LDA	<WORK8
+		STA	(<OSBADR),Y
+		PLY
+;
+		CMP	#002H
+		BEQ	TORA300
+		INC	<WORKA
+		LDA	<WORKA
+		CMP	#004H
+		BNE	TORA200
+TORA300		EQU	$
+		PLX
+		RTS
+
+;**************************************************************
+;*		option toraiforce kemuri move   (TORAKS1)     *
+;**************************************************************
+TORAKS1		EQU	$
+		DEC	BMFLFG,X
+		BPL	T1RA100
+		LDA	#007H
+		STA	BMFLFG,X
+		LDA	BMCONT,X
+		INC	A
+		STA	BMCONT,X
+		CMP	#003H
+		BNE	T1RA100
+		STZ	BMMODE,X
+		STZ	!OPNOSI
+		RTS
+T1RA100		EQU	$
+		BRL	TORA100
+;
+;
+;**************************************************************
+;*		KONA kemuri move		(KONKRMV)     *
+;**************************************************************
+KNKRDT		EQU	$
+		HEX	086,087,096,097		; 0
+		HEX	0A9,0A9,0A9,0A9		; 1
+		HEX	08A,08B,09A,09B		; 1
+		HEX	09B,09B,09B,09B		; 2
+KNKRAT		EQU	$
+		HEX	000,000,000,000		; 0
+		HEX	000,040,080,0C0		; 1
+		HEX	000,000,000,000		; 2
+		HEX	0C0,080,040,000		; 3
+KNKYPL		EQU	$
+		HEX	000,000,008,008		; 0
+		HEX	000,000,008,008		; 1
+		HEX	000,000,008,008		; 2
+		HEX	0FE,0FE,00A,00A		; 3
+KNKYPH		EQU	$
+		HEX	000,000,000,000		; 0
+		HEX	000,000,000,000		; 1
+		HEX	000,000,000,000		; 2
+		HEX	0FF,0FF,000,000		; 3
+KNKXPL		EQU	$
+		HEX	000,008,000,008		; 0
+		HEX	000,008,000,008		; 1
+		HEX	000,008,000,008		; 2
+		HEX	0FE,00A,0FE,00A		; 3
+KNKXPH		EQU	$
+		HEX	000,000,000,000		; 0
+		HEX	000,000,000,000		; 1
+		HEX	000,000,000,000		; 2
+		HEX	0FF,000,0FF,000		; 3
+KONKRMV		EQU	$
+		LDA	BMTIM0,X
+		BNE	KONK100
+		LDA	#007H
+		STA	BMTIM0,X
+		INC	BMCONT,X
+		LDA	BMCONT,X
+		CMP	#004H
+		BNE	KONK100
+		STZ	BMMODE,X
+		RTS
+;
+KONK100		EQU	$
+		LDA	#4*4
+		JSL	>OAMENT3
+;
+		JSR	ITMPST		; priorty,now y,x pos set
+		LDA	<WORK0
+		STA	<WORK6
+		LDA	<WORK1
+		STA	<WORK7
+		STZ	<WORK8
+		LDY	#000H
+		LDA	BMCONT,X
+		ASL	A
+		ASL	A
+		TAX
+;
+KONK200		EQU	$
+		LDA	<WORK6
+		CLC
+		ADC	!KNKYPL,X
+		STA	<WORK0
+		LDA	<WORK7
+		ADC	!KNKYPH,X
+		STA	<WORK1
+		LDA	<WORK4
+		CLC
+		ADC	!KNKXPL,X
+		STA	<WORK2
+		LDA	<WORK5
+		ADC	!KNKXPH,X
+		STA	<WORK3
+;
+		JSR	BMYXST3		; Y,X pos oam set sub
+;
+		LDA	!KNKRDT,X
+		STA	(<OAMADR),Y
+		INY
+		LDA	!KNKRAT,X
+		ORA	#004H
+		ORA	<PYBGUN1
+		STA	(<OAMADR),Y
+		INY
+;
+		PHY
+		TYA
+		SEC
+		SBC	#004H
+		LSR	A
+		LSR	A
+		TAY
+		LDA	#000H
+		STA	(<OSBADR),Y
+		PLY
+;
+		INX
+		INC	<WORK8
+		LDA	<WORK8
+		CMP	#004H
+		BNE	KONK200
+;
+		BRL	KBMV900
+;
+;**************************************************************
+;*		kameiwa kemuri move		(KMEKMMV)     *
+;**************************************************************
+KMEKMMV		EQU	$
+;;;;;;;;		LDX	#00FH
+;;;;;;;;		LDY	#000H
+;;;;;;;;KMEK100		EQU	$
+;;;;;;;;		LDA	>KMIWTM,X
+;;;;;;;;		DEC	A
+;;;;;;;;		STA	>KMIWTM,X
+;;;;;;;;		BNE	KMEK200
+;;;;;;;;		LDA	#007H
+;;;;;;;;		STA	>KMIWTM,X
+;;;;;;;;		LDA	>KMIWCT,X
+;;;;;;;;		INC	A
+;;;;;;;;		STA	>KMIWCT,X
+;;;;;;;;		CMP	#004H
+;;;;;;;;		BNE	KMEK200
+;;;;;;;;		LDA	#0FFH
+;;;;;;;;		STA	>KMIWCT,X
+;;;;;;;;		BRL	KMEK320
+;;;;;;;;;
+;;;;;;;;KMEK200		EQU	$
+;;;;;;;;		LDA	>KMIWYL,X
+;;;;;;;;		STA	<WORK0
+;;;;;;;;		LDA	>KMIWYH,X
+;;;;;;;;		STA	<WORK1
+;;;;;;;;		LDA	>KMIWXL,X
+;;;;;;;;		STA	<WORK2
+;;;;;;;;		LDA	>KMIWXH,X
+;;;;;;;;		STA	<WORK3
+;;;;;;;;		MEM16
+;;;;;;;;		REP	#00100000B
+;;;;;;;;		LDA	<WORK0
+;;;;;;;;		SEC
+;;;;;;;;		SBC	!SSCCV2
+;;;;;;;;		STA	<WORK6
+;;;;;;;;		LDA	<WORK2
+;;;;;;;;		SEC
+;;;;;;;;		SBC	!SSCCH2
+;;;;;;;;		STA	<WORK4
+;;;;;;;;		MEM8
+;;;;;;;;		SEP	#00100000B
+;;;;;;;;		PHX
+;;;;;;;;		STZ	<WORK8
+;;;;;;;;		LDA	>KMIWCT,X
+;;;;;;;;		ASL	A
+;;;;;;;;		ASL	A
+;;;;;;;;		TAX
+;;;;;;;;;
+;;;;;;;;KMEK300		EQU	$
+;;;;;;;;		LDA	<WORK6
+;;;;;;;;		CLC
+;;;;;;;;		ADC	!KNKYPL,X
+;;;;;;;;		STA	<WORK0
+;;;;;;;;		LDA	<WORK7
+;;;;;;;;		ADC	!KNKYPH,X
+;;;;;;;;		STA	<WORK1
+;;;;;;;;		LDA	<WORK4
+;;;;;;;;		CLC
+;;;;;;;;		ADC	!KNKXPL,X
+;;;;;;;;		STA	<WORK2
+;;;;;;;;		LDA	<WORK5
+;;;;;;;;		ADC	!KNKXPH,X
+;;;;;;;;		STA	<WORK3
+;;;;;;;;;
+;;;;;;;;		JSR	BMYXST3		; Y,X pos oam set sub
+;;;;;;;;;
+;;;;;;;;		LDA	!KNKRDT,X
+;;;;;;;;		STA	(<OAMADR),Y
+;;;;;;;;		INY
+;;;;;;;;		LDA	!KNKRAT,X
+;;;;;;;;		ORA	#034H
+;;;;;;;;		STA	(<OAMADR),Y
+;;;;;;;;		INY
+;;;;;;;;;
+;;;;;;;;		PHY
+;;;;;;;;		TYA
+;;;;;;;;		SEC
+;;;;;;;;		SBC	#004H
+;;;;;;;;		LSR	A
+;;;;;;;;		LSR	A
+;;;;;;;;		TAY
+;;;;;;;;		LDA	#000H
+;;;;;;;;		STA	(<OSBADR),Y
+;;;;;;;;		PLY
+;;;;;;;;;
+;;;;;;;;		INX
+;;;;;;;;		INC	<WORK8
+;;;;;;;;		LDA	<WORK8
+;;;;;;;;		CMP	#004H
+;;;;;;;;		BNE	KMEK300
+;;;;;;;;		PLX
+;;;;;;;;KMEK320		EQU	$
+;;;;;;;;		DEX
+;;;;;;;;		BMI	KMEK400
+;;;;;;;;		BRL	KMEK100
+;;;;;;;;;
+;;;;;;;;KMEK400		EQU	$
+;;;;;;;;		LDX	#00FH
+;;;;;;;;KMEK500		EQU	$
+;;;;;;;;		LDA	>KMIWCT,X
+;;;;;;;;		BPL	KMEK600
+;;;;;;;;		DEX
+;;;;;;;;		BPL	KMEK500
+;;;;;;;;		LDX	ENINDX
+;;;;;;;;		STZ	BMMODE,X
+;;;;;;;;;
+;;;;;;;;KMEK600		EQU	$
+;;;;;;;;		LDX	ENINDX
+;;;;;;;;		RTS
+;
+;**************************************************************
+;*		ken flash move			(KENFLAH)     *
+;**************************************************************
+KNFCRD		EQU	$
+		HEX	0B7,0B7,0FF	; up
+		HEX	080,080,0B7
+		HEX	083,083,080
+		HEX	083,0FF,0FF
+		HEX	0B7,0B7,0FF	; down
+		HEX	080,080,0B7
+		HEX	083,083,080
+		HEX	083,0FF,0FF
+		HEX	0B7,0B7,0FF	; left
+		HEX	080,080,0B7
+		HEX	083,083,080
+		HEX	083,0FF,0FF
+		HEX	0B7,0B7,0FF	; right
+		HEX	080,080,0B7
+		HEX	083,083,080
+		HEX	083,0FF,0FF
+KNFATD		EQU	$
+		HEX	000,000,0FF	; up
+		HEX	000,000,000
+		HEX	080,080,000
+		HEX	080,0FF,0FF
+		HEX	000,000,0FF	; down
+		HEX	000,000,000
+		HEX	080,080,000
+		HEX	080,0FF,0FF
+		HEX	000,000,0FF	; left
+		HEX	000,000,000
+		HEX	080,080,000
+		HEX	080,0FF,0FF
+		HEX	000,000,0FF	; right
+		HEX	000,000,000
+		HEX	080,080,000
+		HEX	080,0FF,0FF
+KNFYPD		EQU	$
+		HEX	0EA,0EE,0FF	; up
+		HEX	0EA,0EE,0EF
+		HEX	0EA,0EE,0EF
+		HEX	0EF,0FF,0FF
+		HEX	023,028,0FF	; down
+		HEX	023,028,025
+		HEX	023,028,025
+		HEX	025,0FF,0FF
+		HEX	002,007,0FF	; left
+		HEX	002,007,013
+		HEX	002,007,013
+		HEX	013,0FF,0FF
+		HEX	002,007,0FF	; right
+		HEX	002,007,013
+		HEX	002,007,013
+		HEX	013,0FF,0FF
+KNFXPD		EQU	$
+		HEX	005,00A,0FF	; up
+		HEX	005,00A,0FC
+		HEX	005,00A,0FC
+		HEX	0FC,0FF,0FF
+		HEX	000,005,0FF	; down
+		HEX	000,005,00E
+		HEX	000,005,00E
+		HEX	00E,0FF,0FF
+		HEX	0E9,0E5,0FF	; left
+		HEX	0E9,0E5,0EA
+		HEX	0E9,0E5,0EA
+		HEX	0EA,0FF,0FF
+		HEX	020,023,0FF	; right
+		HEX	020,023,01E
+		HEX	020,023,01E
+		HEX	01E,0FF,0FF
+KNFINDX		EQU	$
+		HEX	000,00C,018,024
+KENFLAH		EQU	$
+		DEC	BMFLFG,X
+		BPL	KENF300
+		LDA	#000H
+		STA	BMFLFG,X
+		INC	BMCONT,X
+		LDA	BMCONT,X
+		CMP	#004H
+		BNE	KENF300
+		STZ	BMMODE,X
+		RTS
+;
+KENF300		EQU	$
+		PHX
+		LDA	<PLYPS1
+		STA	BMYPSL,X
+		LDA	<PLYPS0
+		STA	BMYPSH,X
+		LDA	<PLXPS1
+		STA	BMXPSL,X
+		LDA	<PLXPS0
+		STA	BMXPSH,X
+		JSR	ITMPST		; priorty,now y,x pos set
+		MEM16
+		REP	#00100000B
+		LDA	<WORK0
+		STA	<WORK4
+		LDA	<WORK2
+		STA	<WORK6
+		MEM8
+		SEP	#00100000B
+;
+		LDA	#002H
+		STA	<WORK8
+		LDY	BMMUKI,X
+		LDA	BMCONT,X
+		ASL	A
+		CLC
+		ADC	BMCONT,X
+		CLC
+		ADC	!KNFINDX,Y
+		TAX
+		LDY	#000H
+;
+KENF400		EQU	$
+		LDA	!KNFCRD,X
+		CMP	#0FFH
+		BEQ	KENF500
+		MEM16
+		REP	#00100000B
+		LDA	!KNFYPD,X
+		AND	#00FFH
+		CMP	#0080H
+		BCC	KENF440
+		ORA	#0FF00H
+KENF440		EQU	$
+		CLC
+		ADC	<WORK4
+		STA	<WORK0
+		LDA	!KNFXPD,X
+		AND	#00FFH
+		CMP	#0080H
+		BCC	KENF480
+		ORA	#0FF00H
+KENF480		EQU	$
+		CLC
+		ADC	<WORK6
+		STA	<WORK2
+		MEM8
+		SEP	#00100000B
+		JSR	BMYXST3		; Y,X pos oam set sub
+;
+		LDA	!KNFCRD,X
+		STA	(<OAMADR),Y
+		INY
+		LDA	!KNFATD,X
+		ORA	#004H
+		ORA	<PYBGUN1
+		STA	(<OAMADR),Y
+		INY
+;
+		PHY
+		TYA
+		SEC
+		SBC	#004H
+		LSR	A
+		LSR	A
+		TAY
+		LDA	#000H
+		STA	(<OSBADR),Y
+		PLY
+;
+KENF500		EQU	$
+		INX
+		DEC	<WORK8
+		BPL	KENF400
+;
+		PLX
+		RTS
+;
+;**************************************************************
+;*		soromon ken move 		(KNSOMON)     *
+;**************************************************************
+KNSFLMD		EQU	$
+		HEX	004,002,003,003,002,001
+;;;;;;;;KNSFLMD1	EQU	$
+;;;;;;;;		HEX	004,002,003,003,002,001
+KNMCRD		EQU	$
+		HEX	092,0FF,0FF,0FF	;0
+		HEX	08C,08C,08C,08C	;1
+		HEX	0D6,0D6,0D6,0D6	;2
+		HEX	093,093,093,093	;3
+		HEX	0D6,0D6,0D6,0D6	;4
+		HEX	0D7,0FF,0FF,0FF	;5
+		HEX	080,0FF,0FF,0FF	;6
+KNMATD		EQU	$
+		HEX	022,0FF,0FF,0FF	;0
+		HEX	022,062,0A2,0E2	;1
+		HEX	024,064,0A4,0E4	;2
+		HEX	022,062,0A2,0E2	;3
+		HEX	022,062,0A2,0E2	;4
+		HEX	022,0FF,0FF,0FF	;5
+		HEX	022,0FF,0FF,0FF	;6
+KNMYPS		EQU	$
+		WORD	0FFFCH,00000H,00000H,00000H	;0
+		WORD	0FFF8H,0FFF8H,00000H,00000H	;1
+		WORD	0FFF8H,0FFF8H,00000H,00000H	;2
+		WORD	0FFF8H,0FFF8H,00000H,00000H	;3
+		WORD	0FFF8H,0FFF8H,00000H,00000H	;4
+		WORD	0FFFCH,00000H,00000H,00000H	;5
+		WORD	0FFFCH,00000H,00000H,00000H	;6
+KNMXPS		EQU	$
+		WORD	0FFFCH,00000H,00000H,00000H	;0
+		WORD	0FFF8H,00000H,0FFF8H,00000H	;1
+		WORD	0FFF8H,00000H,0FFF8H,00000H	;2
+		WORD	0FFF8H,00000H,0FFF8H,00000H	;3
+		WORD	0FFF8H,00000H,0FFF8H,00000H	;4
+		WORD	0FFFCH,00000H,00000H,00000H	;5
+		WORD	0FFFCH,00000H,00000H,00000H	;6
+KNSOMON		EQU	$
+		LDA	<GAMEMD
+		BNE	KNSMF00
+;
+		DEC	BMFLFG,X
+		BPL	KNSMF00
+		STZ	BMFLFG,X
+;
+		LDA	BMTIM0,X
+		BNE	KNSMF00
+		LDA	BMCONT,X
+		INC	A
+		STA	BMCONT,X
+		TAY
+		LDA	!KNSFLMD,Y
+		STA	BMTIM0,X
+;;;;;;;;		LDA	BMSTAT,X
+;;;;;;;;		BEQ	KNSM100
+;;;;;;;;		LDA	!KNSFLMD1,Y
+;;;;;;;;		STA	BMTIM0,X
+KNSM100		EQU	$
+		CPY	#005H
+		BNE	KNSMF00
+		LDA	BMSTAT,X
+		BNE	KNSM200
+		BRL	KNENSIT		; stop tama en move 
+;
+KNSM200		EQU	$
+		JSL	>KNENIT1	; jump tama en move
+		RTS
+;
+KNSMF00		EQU	$
+		LDA	BMCONT,X
+		BEQ	KNSMFF0
+		JSR	ITMPST
+		MEM16
+		REP	#00100000B
+		LDA	<WORK0
+		STA	<WORK6
+		LDA	<WORK2
+		STA	<WORK8
+		MEM8
+		SEP	#00100000B
+		PHX
+		LDY	#000H
+		STY	<WORK4
+		LDA	BMCONT,X
+		DEC	A
+		ASL	A
+		ASL	A
+		TAX
+KNSMF20		EQU	$
+		LDA	!KNMCRD,X
+		CMP	#0FFH
+		BEQ	KNSMF40
+		MEM16
+		REP	#00100000B
+		PHX
+		TXA
+		ASL	A
+		TAX
+		LDA	<WORK6
+		CLC
+		ADC	!KNMYPS,X
+		STA	<WORK0
+		LDA	<WORK8
+		CLC
+		ADC	!KNMXPS,X
+		STA	<WORK2
+		PLX
+		MEM8
+		SEP	#00100000B
+		JSR	BMYXST3
+		LDA	!KNMCRD,X
+		STA	(<OAMADR),Y
+		INY
+		LDA	!KNMATD,X
+		AND	#11001111B
+		ORA	<PYBGUN+1
+		STA	(<OAMADR),Y
+		INY
+		PHY
+		TYA
+		SEC
+		SBC	#004H
+		LSR	A
+		LSR	A
+		TAY
+		LDA	#000H
+		STA	(<OSBADR),Y
+		PLY
+KNSMF40		EQU	$
+		INX
+		INC	<WORK4
+		LDA	<WORK4
+		AND	#00000011B
+		BNE	KNSMF20
+;
+		PLX
+KNSMFF0		EQU	$
+		RTS
+;
+;**************************************************************
+;*		soromon ken en move init.	(KNENSIT)     *
+;**************************************************************
+ENMDDT		EQU	$
+		HEX	021,020,01F,01E		; up
+		HEX	003,002,001,000		; down
+		HEX	012,011,010,00F		; left
+		HEX	031,030,02F,02E		; right
+ENMDYP		EQU	$
+		WORD	0001CH,0FFFEH,00018H,00006H
+ENMDXP		EQU	$
+		WORD	0FFFDH,00015H,00019H,0FFF8H
+KNENSIT		EQU	$
+		LDA	#KNSEN
+		STA	BMMODE,X
+		LDA	<PLMKCH
+		ASL	A
+		TAY
+		LDA	!ENMDDT+0,Y
+		STA	>SNENMD+0	; en mode counter
+		LDA	!ENMDDT+1,Y
+		STA	>SNENMD+1
+		LDA	!ENMDDT+2,Y
+		STA	>SNENMD+2
+		LDA	!ENMDDT+3,Y
+		STA	>SNENMD+3
+		STA	>SNENMD+4
+;
+		LDA	#002H
+		STA	BMFLFG,X
+		LDA	#04CH
+		STA	BMCONT,X
+		LDA	#008H
+		STA	BUMFLM,X
+		STZ	BMSTAT,X
+		STZ	HIBSTAT,X
+		LDA	#0FFH
+		STA	BUMODE,X
+		LDA	#014H
+		STA	>SNDHAN		; hankei
+		LDY	<PLMKCH
+		MEM16
+		REP	#00100000B
+		LDA	<PLYPS1
+		CLC
+		ADC	#000CH
+		STA	>SNCYPS		; center y-pos
+		LDA	<PLXPS1
+		CLC
+		ADC	#0008H
+		STA	>SNCXPS		; center x-pos
+		LDA	<PLYPS1
+		CLC
+		ADC	!ENMDYP,Y
+		STA	<WORK0
+		LDA	<PLXPS1
+		CLC
+		ADC	!ENMDXP,Y
+		STA	<WORK2
+		MEM8
+		SEP	#00100000B
+		LDA	<WORK0
+		STA	BMYPSL,X
+		LDA	<WORK1
+		STA	BMYPSH,X
+		LDA	<WORK2
+		STA	BMXPSL,X
+		LDA	<WORK3
+		STA	BMXPSH,X
+		BRA	ENKNMV
+;
+;**************************************************************
+;*		soromon ken en move 		(ENKNMV)     *
+;**************************************************************
+ENKMCD		EQU	$
+		HEX	0D7,0B7,080,083
+ENKMCD1		EQU	$
+		HEX	0B7,080,083
+ENKNMV		EQU	$
+		LDA	HIBSTAT,X	; en move end ?
+		BEQ	ENKN020
+		BRL	ENKNED
+;
+ENKN020		EQU	$
+		PHX
+		LDA	#002H		; coler set
+		STA	<BMWORK+1
+		LDA	<GAMEMD
+		BNE	ENKN300
+		LDY	#000H
+		LDA	BMCONT,X
+		SEC
+		SBC	#003H
+		STA	BMCONT,X
+		CMP	#00DH
+		BCS	ENKN100
+		PLX
+		LDA	#001H
+		STA	BMFLFG,X
+		STA	HIBSTAT,X
+		STZ	BMCONT,X
+		BRL	ENKNED
+ENKN100		EQU	$
+		CMP	#042H
+		BCS	ENKN120
+		LDY	#003H
+		BRA	ENKN160
+ENKN120		EQU	$
+		CMP	#046H
+		BNE	ENKN140
+		LDY	#001H
+ENKN140		EQU	$
+		CMP	#043H
+		BNE	ENKN160
+		LDY	#002H
+ENKN160		EQU	$
+		TYA
+		STA	BMSTAT,X
+;
+ENKN200		EQU	$
+		DEC	BMFLFG,X
+		BPL	ENKN300
+		LDA	#004H
+		STA	<BMWORK+1
+		LDA	#002H
+		STA	BMFLFG,X
+;
+ENKN300		EQU	$
+		LDY	#000H
+		LDA	BMSTAT,X
+		TAX
+ENKN400		EQU	$
+		STX	<BMWORK+0
+		LDA	<GAMEMD
+		BNE	ENKN440
+		LDA	>SNENMD,X
+		CLC
+;;;;;;;;		ADC	#003H
+		ADC	#004H
+		AND	#03FH
+		STA	>SNENMD,X
+;
+ENKN440		EQU	$
+		PHX
+		PHY
+		LDA	>SNDHAN
+		STA	<WORK8
+		LDA	>SNENMD,X
+		JSR	ENMVSH		; en y,x pos set sub
+		JSL	>ENPSTS		; en potitoin set sub
+;
+		PLY
+		JSR	BMYXST3
+		LDX	<BMWORK+0
+		LDA	!ENKMCD,X
+		STA	(<OAMADR),Y
+		INY
+		LDA	<BMWORK+1	; coler set
+		ORA	<PYBGUN+1	; uusen juni set
+		STA	(<OAMADR),Y
+		INY
+		PHY
+		TYA
+		SEC
+		SBC	#004H
+		LSR	A
+		LSR	A
+		TAY
+		LDA	#000H
+		STA	(<OSBADR),Y
+		PLY
+		PLX
+		DEX
+		BPL	ENKN400
+;
+		PLX
+		PHX
+		LDA	<GAMEMD
+		BNE	ENKN480
+		DEC	BUMFLM,X
+		BPL	ENKN500
+		LDA	#000H
+		STA	BUMFLM,X
+		LDA	BUMODE,X
+		INC	A
+		AND	#00000011B
+		STA	BUMODE,X
+		CMP	#003H
+		BNE	ENKN480
+		LDA	>SNENMD+4
+		CLC
+		ADC	#009H
+		AND	#03FH
+		STA	>SNENMD+4
+;
+ENKN480		EQU	$
+		LDA	BUMODE,X
+		STA	<BMWORK+0
+		CMP	#003H
+		BEQ	ENKN500
+		PHY
+		LDA	>SNDHAN
+		STA	<WORK8
+		LDA	>SNENMD+4
+		JSR	ENMVSH		; en y,x pos set sub
+		JSL	>ENPSTS		; en potitoin set sub
+		PLY
+;
+		JSR	BMYXST3
+		LDX	<BMWORK+0
+		LDA	!ENKMCD1,X
+		STA	(<OAMADR),Y
+		INY
+		LDA	#004H		; coler set
+		ORA	<PYBGUN+1	; uusen juni set
+		STA	(<OAMADR),Y
+		INY
+		TYA
+		SEC
+		SBC	#004H
+		LSR	A
+		LSR	A
+		TAY
+		LDA	#000H
+		STA	(<OSBADR),Y
+ENKN500		EQU	$
+		PLX
+		PHX
+;
+		LDA	BMCONT,X
+		TAX
+		CPX	#007H
+		BNE	ENKN700
+		LDY	#003H
+		LDA	#001H
+		STA	(<OSBADR),Y
+ENKN700		EQU	$
+		PLX
+		RTS
+;
+;**************************************************************
+;*		en potision set sub 		(ENPSTS)     *
+;**************************************************************
+ENPSTS		EQU	$
+		MEM16
+		REP	#00100000B
+		LDA	<WORK0
+		LDY	<WORK2
+		BEQ	ENPS100
+		EOR	#0FFFFH
+		INC	A
+ENPS100		EQU	$
+		CLC
+		ADC	>SNCYPS
+		CLC
+		ADC	#0FFFCH
+		SEC
+		SBC	<SCCV2
+		STA	<WORK0
+;
+		LDA	<WORK4
+		LDY	<WORK6
+		BEQ	ENPS200
+		EOR	#0FFFFH
+		INC	A
+ENPS200		EQU	$
+		CLC
+		ADC	>SNCXPS
+		CLC
+		ADC	#0FFFCH
+		SEC
+		SBC	<SCCH2
+		STA	<WORK2
+		MEM8
+		SEP	#00100000B
+		RTL
+;
+;**************************************************************
+;*		soromon ken end move 		(ENKNED)     *
+;**************************************************************
+ENKNED		EQU	$
+		DEC	BMFLFG,X
+		BPL	ENED100
+		LDA	#001H
+		STA	BMFLFG,X
+		LDA	BMCONT,X
+		INC	A
+		STA	BMCONT,X
+		CMP	#003H
+		BNE	ENED100
+		STZ	BMMODE,X
+ENED100		EQU	$
+		JSR	ITMPST
+		MEM16
+		REP	#00100000B
+		LDA	<WORK0
+		STA	<WORK6
+		LDA	<WORK2
+		STA	<WORK8
+		MEM8
+		SEP	#00100000B
+		PHX
+		LDY	#000H
+		STY	<WORK4
+		LDA	BMCONT,X
+		CLC
+		ADC	#004H		
+		ASL	A
+		ASL	A
+		TAX
+		BRL	KNSMF20
+;
+;**************************************************************
+;*		soromon (BARIYA) move 		(SBARIMV)     *
+;**************************************************************
+SBARCD		EQU	$
+		HEX	092,0FF,0FF,0FF	;1
+		HEX	08C,08C,08C,08C	;2
+		HEX	0D6,0D6,0D6,0D6	;3
+		HEX	093,093,093,093	;4
+SBARAT		EQU	$
+		HEX	022,0FF,0FF,0FF	;1
+		HEX	022,062,0A2,0E2	;2
+		HEX	024,064,0A4,0E4	;3
+		HEX	022,062,0A2,0E2	;4
+SBRYPS		EQU	$
+		WORD	0FFFCH,00000H,00000H,00000H	;1
+		WORD	0FFF8H,0FFF8H,00000H,00000H	;2
+		WORD	0FFF8H,0FFF8H,00000H,00000H	;3
+		WORD	0FFF8H,0FFF8H,00000H,00000H	;4
+SBRXPS		EQU	$
+		WORD	0FFFCH,00000H,00000H,00000H	;1
+		WORD	0FFF8H,00000H,0FFF8H,00000H	;2
+		WORD	0FFF8H,00000H,0FFF8H,00000H	;3
+		WORD	0FFF8H,00000H,0FFF8H,00000H	;4
+SBRYPS1		EQU	$
+		WORD	00005H,00000H,0FFFDH,0FFFAH	; up
+		WORD	0FFF8H,0FFFDH,0000CH,0001CH	; down
+		WORD	00005H,00000H,00008H,00010H	; left
+		WORD	00005H,00000H,00008H,00010H	; right
+SBRXPS1		EQU	$
+		WORD	00003H,00001H,00000H,00000H	; up
+		WORD	0000DH,00010H,0000CH,0000CH	; down
+		WORD	00018H,00007H,0FFFCH,0FFF6H	; left
+		WORD	0FFF8H,00009H,00016H,0001AH	; right
+SBARIMV		EQU	$
+		LDA	<GAMEMD
+		BNE	SBRM100
+;
+		DEC	BMFLFG,X
+		BPL	SBRM100
+		LDA	#001H
+		STA	BMFLFG,X
+		LDA	BMCONT,X
+		INC	A
+		STA	BMCONT,X
+		CMP	#011H
+		BNE	SBRM100
+		BRL	BRENIT		; bariya en move 
+;
+SBRM100		EQU	$
+		LDA	BMCONT,X
+		BNE	SBRM110
+		BRL	SBRM400
+;
+SBRM110		EQU	$
+		LDA	<PLMKCH
+		ASL	A
+		ASL	A
+		STA	<WORK0
+;
+		LDA	AITMMD
+		CMP	#002H
+		BNE	SRBM114
+		TAY
+		LDA	BUMFLM,X
+		DEC	A
+		BPL	SRBM112
+		LDA	#000H
+		LDY	#003H
+SRBM112		EQU	$
+		STA	BUMFLM,X
+		TYA
+SRBM114		EQU	$
+		ASL	A
+		CLC
+		ADC	<WORK0
+		TAY
+		MEM16
+		REP	#00100000B
+		LDA	!SBRYPS1,Y
+		CLC
+		ADC	<PLYPS1
+		STA	<WORK0
+		LDA	!SBRXPS1,Y
+		CLC
+		ADC	<PLXPS1
+		STA	<WORK2
+		MEM8
+		SEP	#00100000B
+		LDA	<WORK0
+		STA	BMYPSL,X
+		LDA	<WORK1
+		STA	BMYPSH,X
+		LDA	<WORK2
+		STA	BMXPSL,X
+		LDA	<WORK3
+		STA	BMXPSH,X
+;
+		JSR	ITMPST
+		MEM16
+		REP	#00100000B
+		LDA	<WORK0
+		STA	<WORK6
+		LDA	<WORK2
+		STA	<WORK8
+		MEM8
+		SEP	#00100000B
+		PHX
+		STZ	<WORKA
+		LDA	BMCONT,X
+		DEC	A
+		AND	#00001111B
+		BEQ	SBRM140
+		CMP	#00001111B
+		BEQ	SBRM120
+		AND	#00000001B
+		INC	A
+		STA	<WORKA
+		BRA	SBRM140
+SBRM120		EQU	$
+		LDA	#003H
+		STA	<WORKA
+SBRM140		EQU	$
+		LDA	<WORKA
+		ASL	A
+		ASL	A
+		TAX
+		LDY	#000H
+		STY	<WORK4
+SBRM200		EQU	$
+		LDA	!SBARCD,X
+		CMP	#0FFH
+		BEQ	SBRM300
+		MEM16
+		REP	#00100000B
+		PHX
+		TXA
+		ASL	A
+		TAX
+		LDA	<WORK6
+		CLC
+		ADC	!SBRYPS,X
+		STA	<WORK0
+		LDA	<WORK8
+		CLC
+		ADC	!SBRXPS,X
+		STA	<WORK2
+		PLX
+		MEM8
+		SEP	#00100000B
+		JSR	BMYXST3
+		LDA	!SBARCD,X
+		STA	(<OAMADR),Y
+		INY
+		LDA	!SBARAT,X
+		AND	#11001111B
+		ORA	<PYBGUN+1
+		STA	(<OAMADR),Y
+		INY
+		PHY
+		TYA
+		SEC
+		SBC	#004H
+		LSR	A
+		LSR	A
+		TAY
+		LDA	#000H
+		STA	(<OSBADR),Y
+		PLY
+SBRM300		EQU	$
+		INX
+		INC	<WORK4
+		LDA	<WORK4
+		AND	#00000011B
+		BNE	SBRM200
+;
+		PLX
+SBRM400		EQU	$
+		RTS
+;
+;**************************************************************
+;*		soromon (bariya) en move init.	(BRENIT)     *
+;**************************************************************
+BRMDDT		EQU	$
+		HEX	034,033,032,031		; up
+		HEX	016,015,014,013		; down
+		HEX	02A,029,028,027		; left
+		HEX	010,00F,00E,00D		; right
+BRENPT		EQU	$		; magic point data
+;			 L1  L2  L3
+		HEX	004,002,001
+BRENIT		EQU	$
+		LDA	#BRSEN
+		STA	BMMODE,X
+		LDA	<PLMKCH
+		ASL	A
+		TAY
+		LDA	!BRMDDT+0,Y
+		STA	>SNENMD+0	; en mode counter
+		LDA	!BRMDDT+1,Y
+		STA	>SNENMD+1
+		LDA	!BRMDDT+2,Y
+		STA	>SNENMD+2
+		LDA	!BRMDDT+3,Y
+		STA	>SNENMD+3
+;
+		LDA	#017H		; 1shyu timer set
+		STA	BMFLFG,X
+		STZ	HBFLEM,X
+		STZ	BMCONT,X
+		LDA	#008H
+		STA	BUMFLM,X
+		STZ	BMSTAT,X
+		STZ	HIBSTAT,X
+		LDA	#002H
+		STA	BUMODE,X
+		LDA	#015H
+		STA	BMTIM0,X
+		DEC	A
+		STA	>SNDHAN		; hankei
+;;;;;;;;		JSR	>SDLRCP
+;;;;;;;;		ORA	#srmbr
+;;;;;;;;		STA	!SOUND3
+		LDA	#srmbr
+		JSR	SDLRP3		;<sound>
+;
+;**************************************************************
+;*		soromon ken en move 		(ENKNMV)     *
+;**************************************************************
+BRENMV		EQU	$
+		PHX
+		LDA	#002H		; coler set
+		STA	<BMWORK+1
+		LDA	<GAMEMD		; porzu ? [YES:BREN300]
+		BEQ	BREN040
+		BRL	BREN300
+;
+BREN040		EQU	$
+		LDA	BPSHMD
+		CMP	#BKYTD0
+		BNE	BREN0C0
+;
+		LDA	#001H
+		STA	MRTKFG
+;
+		DEC	BMFLFG,X
+		LDA	BMFLFG,X
+		BNE	BREN100
+		LDA	#001H
+		STA	BMFLFG,X
+		LDA	>MPLVFG
+		TAY
+		LDA	!BRENPT,Y
+		STA	<WORK0
+		LDA	>MPNWCT
+		BEQ	BREN0C0
+		SEC
+		SBC	<WORK0
+		CMP	#080H
+		BCS	BREN0C0
+		STA	<WORK0
+;
+		DEC	HBFLEM,X
+		BPL	BREN080
+		LDA	#017H
+		STA	HBFLEM,X
+		LDA	<WORK0
+		STA	>MPNWCT
+;
+BREN080		EQU	$
+		BIT	<KEYA2		; 0 -->bvc 1--> bvs
+		BVC	BREN100
+BREN0C0		EQU	$
+		PLX
+		STZ	MRTKFG
+		STZ	BMMODE,X
+		STZ	DAMEFG
+		RTS
+;
+BREN100		EQU	$
+		LDA	BMSTAT,X
+		CMP	#003H
+		BEQ	BREN200
+
+		LDY	#000H
+		INC	BMCONT,X
+		LDA	BMCONT,X
+		CMP	#004H
+		BCC	BREN120
+		LDY	#003H
+		BRA	BREN160
+BREN120		EQU	$
+		CMP	#002H
+		BNE	BREN140
+		LDY	#001H
+BREN140		EQU	$
+		CMP	#003H
+		BNE	BREN160
+		LDY	#002H
+BREN160		EQU	$
+		TYA
+		STA	BMSTAT,X
+;
+BREN200		EQU	$
+		DEC	BUMODE,X
+		BPL	BREN300
+		LDA	#002H
+		STA	BUMODE,X
+		LDA	#004H
+		STA	<BMWORK+1
+;
+BREN300		EQU	$
+		MEM16
+		REP	#00100000B
+		LDA	<PLZPS1		; z-pos set
+		AND	#000FFH
+		CMP	#00080H
+		BCC	BREN340
+		ORA	#0FF00H
+BREN340		EQU	$
+		CMP	#0FFFFH
+		BNE	BREN360
+		LDA	#00000H
+BREN360		EQU	$
+		EOR	#0FFFFH
+		INC	A
+		CLC
+		ADC	<PLYPS1
+		CLC
+		ADC	#000CH
+		STA	>SNCYPS		; center y-pos
+		LDA	<PLXPS1
+		CLC
+		ADC	#0008H
+		STA	>SNCXPS		; center x-pos
+		MEM8
+		SEP	#00100000B
+;
+		LDA	BMTIM0,X
+		BNE	BREN3C0
+		LDA	#015H
+		STA	BMTIM0,X
+		LDA	#srmbr
+		JSR	SDLRP3		;<sound>
+BREN3C0		EQU	$
+		STX	<BMWORK+2
+		LDY	#000H
+		LDA	BMSTAT,X
+		TAX
+BREN400		EQU	$
+		STX	<BMWORK+0
+		LDA	<GAMEMD
+		BNE	BREN440
+		LDA	>SNENMD,X
+		CLC
+		ADC	#003H
+		AND	#03FH
+		STA	>SNENMD,X
+;
+BREN440		EQU	$
+		PHX
+		PHY
+		LDA	>SNDHAN
+		STA	<WORK8
+		LDA	>SNENMD,X
+		JSR	ENMVSH		; en y,x pos set sub
+		JSL	>ENPSTS		; en potitoin set sub
+		PLY
+;
+		JSR	BMYXST3		; en y,x oam set sub
+		LDX	<BMWORK+0
+		LDA	!ENKMCD,X
+		STA	(<OAMADR),Y
+		INY
+		LDA	<BMWORK+1	; coler set
+		ORA	<PYBGUN+1	; uusen juni set
+		STA	(<OAMADR),Y
+		INY
+		PHY
+		TYA
+		SEC
+		SBC	#004H
+		LSR	A
+		LSR	A
+		TAY
+		LDA	#000H
+		STA	(<OSBADR),Y
+;
+		MEM16
+		REP	#00100000B
+		LDA	<WORK0
+		CLC
+		ADC	<SCCV2
+		STA	<WORK4
+		LDA	<WORK2
+		CLC
+		ADC	<SCCH2
+		STA	<WORK6
+		MEM8
+		SEP	#00100000B
+		LDX	<BMWORK+2
+		LDA	<WORK4
+		STA	BMYPSL,X
+		LDA	<WORK5
+		STA	BMYPSH,X
+		LDA	<WORK6
+		STA	BMXPSL,X
+		LDA	<WORK7
+		STA	BMXPSH,X
+		STZ	BMMUKI,X
+		JSR	CRBMEN
+;
+		PLY
+		PLX
+		DEX
+		BPL	BREN400
+;
+BREN700		EQU	$
+		PLX
+		RTS
+;
+;**************************************************************
+;*		soromon ken jump en move	(JPKNMV0)     *
+;**************************************************************
+JPKNMV0		EQU	$
+		JSL	>JPKNMV
+		RTS
+;
+;**************************************************************
+;*		soromon ken jump en move	(JPKNFL0)     *
+;**************************************************************
+JPKNFL0		EQU	$
+		LDA	#4*1
+		JSR	BMOMPT
+		TYA
+		STA	BMOMID,X
+;
+		JSL	>JPKNFL
+		RTS
+;
+;
+;**************************************************************
+;*		warp move			(WARPMOV)     *
+;**************************************************************
+WPCRDT		EQU	$		; chara data
+		HEX	00E,000,002
+WPATDT		EQU	$		; atori data
+		HEX	022,02E,02E
+WPYPDT		EQU	$		; y-pos data
+		HEX	000,00C,014
+WPXPDT		EQU	$		; x-pos data
+		HEX	000,0F7,0F7
+TORIVMD		EQU	$
+		HEX	000,020,040,0E0
+WARPMOV		EQU	$
+		LDA	<GAMEMD
+		BEQ	WPMV080
+		BRL	WPMV400
+;
+WPMV080		EQU	$
+		LDA	BMTIM0,X	; sound wait
+		BEQ	WPMV100
+		MEM16
+		REP	#00100000B
+		LDA	<PLYPS1
+		SEC
+		SBC	#00008H
+		STA	<WORK0
+		LDA	#0FFF0H
+		CLC
+		ADC	<SCCH2
+		STA	<WORK2
+		MEM8
+		SEP	#00100000B
+		LDA	<WORK0
+		STA	BMYPSL,X
+		LDA	<WORK1
+		STA	BMYPSH,X
+		LDA	<WORK2
+		STA	BMXPSL,X
+		LDA	<WORK3
+		STA	BMXPSH,X
+		RTS
+;
+WPMV100		EQU	$
+		DEC	HBFLEM,X
+		BPL	WPMV120
+		LDA	#028H
+		STA	HBFLEM,X
+;;;;;;;;		JSL	>SDLRCB
+;;;;;;;;		ORA	#01EH
+;;;;;;;;		STA	!SOUND3
+		LDA	#01EH
+		JSR	SDLRB3
+WPMV120		EQU	$
+		LDY	HIBSTAT,X
+		BNE	WPMV200
+		LDA	BMSTAT,X
+		BEQ	WPMV300
+		INC	!ENSTFG		; teki stop on !!
+;
+WPMV200		EQU	$
+		LDA	BMZSPD,X
+		CLC
+		ADC	#0FFH
+		STA	BMZSPD,X
+		JSR	BMZCLC
+;
+WPMV300		EQU	$
+		JSR	BMXCLC
+;
+		LDA	HIBSTAT,X
+		BEQ	WPMV308
+		BRL	WPMV380
+WPMV304		EQU	$
+		BRL	WPMV340
+WPMV308		EQU	$
+		LDY	#001H
+		JSR	PYHICK		; player hani check
+		BCC	WPMV304
+		LDA	<SLMODE
+		CMP	#MD_wpout
+		BEQ	WPMV304
+		LDA	<GMMODE
+		BNE	WPMV330
+		LDA	<LNMODE
+		CMP	#JNSP
+		BEQ	WPMV304
+		CMP	#BBSP
+		BEQ	WPMV304
+		CMP	#SDSP
+		BEQ	WPMV304
+		LDA	<HOLEFG2
+		CMP	#002H
+		BEQ	WPMV304
+		LDA	ATMTHK		; aitem chach ?
+		ORA	BOGMOV
+		ORA	!KNPASFG
+		ORA	!MRTKFG
+		BNE	WPMV304
+		BIT	PYDMBT		; 0 -->bpl 1--> bmi
+		BMI	WPMV304
+;
+		PHX
+		LDX	#004H
+WPMV310		EQU	$
+		LDA	BMMODE,X
+		CMP	#KNSOM
+		BEQ	WPMV318
+		CMP	#FTMOV
+		BEQ	WPMV318
+		CMP	#SBAMV
+		BEQ	WPMV318
+		CMP	#BRSEN
+		BEQ	WPMV318
+		CMP	#TPHDM
+		BNE	WPMV320
+WPMV318		EQU	$
+		STZ	BMMODE,X
+WPMV320		EQU	$
+		DEX
+		BPL	WPMV310
+		PLX
+;
+		LDA	>OPMODE+0	; option 
+		CMP	#hnoji
+		BNE	WPMV330
+		LDA	#000H
+		STA	>OPMODE+0
+		STA	!OPNOSI
+;
+WPMV330		EQU	$
+		MEM16
+		REP	#00100000B
+		STZ	PYDMBT
+		STZ	!YUREXD
+		STZ	!YUREYD
+		MEM8
+		SEP	#00100000B
+		JSL	>PLYCLR1	; player jootai clear
+		STZ	WATRFG
+		STZ	!ATHKOK
+		LDA	#OMS000
+		STA	<OMSBMD
+		LDA	#LNMD
+		STA	<LNMODE
+		INC	A		; #001H
+		STA	ATMTHK
+		STA	!PYALSP		; player stop on !!
+		STA	MRTKFG		; muteki set on !!
+		STA	!OPNOSI		; option shouji nashi set
+		INC	A		; #002H
+		STA	BMSTAT,X
+		INC	!ENSTFG		; teki stop on !!
+		STZ	DAMEFG		; damegi flag clear !!
+		LDA	<GMMODE
+		BEQ	WPMV340
+		STA	TRCACH
+WPMV340		EQU	$
+		BRA	WPMV400
+;
+WPMV380		EQU	$
+		LDA	BMXPSL,X
+		STA	<WORK0
+		LDA	BMXPSH,X
+		STA	<WORK1
+		LDA	BMSTAT,X
+		BEQ	WPMV3A0
+		INC	!ENSTFG		; teki stop on !!
+WPMV3A0		EQU	$
+		MEM16
+		REP	#00100000B
+		LDA	<WORK0
+		BMI	WPMV3C0
+		CMP	<PLXPS1
+		BCC	WPMV3C0
+		MEM8
+		SEP	#00100000B
+		LDA	BMSTAT,X
+		BEQ	WPMV400
+		STZ	BMSTAT,X
+		STZ	<OMSBMD
+		STZ	!OPNOSI		; option shouji nashi set
+		STZ	ATMTHK
+		STZ	BMYSPD,X
+		STZ	!PYALSP
+		STZ	MRTKFG
+		STZ	TRCACH
+		LDA	#DAMG3
+		STA	PYFLASH
+		LDA	>OPMODE+0
+		CMP	#bakud
+		BEQ	WPMV3B0
+		CMP	#takar
+		BNE	WPMV3B8
+WPMV3B0		EQU	$
+		LDA	>OPKYFG
+		BNE	WPMV400
+WPMV3B8		EQU	$
+		JSL	>RAOPIT
+		BRA	WPMV400
+WPMV3C0		EQU	$
+		MEM16
+		LDA	<PLXPS1
+		SEC
+		SBC	<WORK0
+		CMP	#0030H
+		BCS	WPMV400
+		LDY	#003H
+		MEM8
+		SEP	#00100000B
+		BRA	WPMV480
+;
+WPMV400		EQU	$
+		MEM8
+		SEP	#00100000B
+		DEC	BUMFLM,X
+		BPL	WPMV440
+		LDA	#003H
+		STA	BUMFLM,X
+		INC	BUADSB,X
+		LDA	BUADSB,X
+		CMP	#003H
+		BNE	WPMV440
+		STZ	BUADSB,X
+WPMV440		EQU	$
+		LDY	BUADSB,X
+WPMV480		EQU	$
+		LDA	!TORIVMD,Y
+		STA	!TORICFG
+;
+		JSR	ITMPST		; priorty,now y,x pos set
+		MEM16
+		REP	#00100000B
+		LDA	BMZPSL,X
+		AND	#000FFH
+		BEQ	WPMV4C0
+		ORA	#0FF00H
+WPMV4C0		EQU	$
+		STA	<WORK4
+		STA	<BMWORK+0
+;
+		LDA	<WORK0		; y-pos set
+		STA	<WORKA
+		CLC
+		ADC	<WORK4
+		STA	<WORK4
+;
+		LDA	<WORK2		; x-pos set
+		STA	<WORK6
+		MEM8
+		SEP	#00100000B
+		PHX
+		LDA	BMSTAT,X
+		INC	A
+		STA	<WORK8
+		LDY	#000H
+		TYX
+WPMVC00		EQU	$
+		MEM16
+		REP	#00100000B
+		LDA	!WPYPDT,X
+		AND	#00FFH
+		CMP	#0080H
+		BCC	WPMVD00
+		ORA	#0FF00H
+WPMVD00		EQU	$
+		CLC
+		ADC	<WORK4
+		STA	<WORK0
+;
+		LDA	!WPXPDT,X
+		AND	#00FFH
+		CMP	#0080H
+		BCC	WPMVE00
+		ORA	#0FF00H
+WPMVE00		EQU	$
+		CLC
+		ADC	<WORK6
+		STA	<WORK2
+		MEM8
+		SEP	#00100000B
+;
+		JSR	BMYXST3		; Y,X pos oam set sub
+;
+		LDA	!WPCRDT,X
+		STA	(<OAMADR),Y
+		INY
+		LDA	!WPATDT,X
+		ORA	#00110000B
+		STA	(<OAMADR),Y
+		INY
+;
+		PHY
+		TYA
+		SEC
+		SBC	#004H
+		LSR	A
+		LSR	A
+		TAY
+		LDA	#002H
+		STA	(<OSBADR),Y
+		PLY
+		INX
+		CPX	<WORK8
+		BNE	WPMVC00
+;
+		MEM16
+		REP	#00100000B
+		LDA	<WORKA
+		CLC
+		ADC	#001CH
+		STA	<WORK0
+		LDA	<WORK6
+		STA	<WORK2
+		MEM8
+		SEP	#00100000B
+		LDA	#00110000B
+		STA	<WORK4
+		LDX	#001H
+		JSR	KGOAMSB		; kage oam set sub
+;
+		LDX	ENINDX
+		LDA	BMSTAT,X
+		BEQ	WPMVE40		
+		MEM16
+		REP	#00100000B
+		LDA	<WORKA
+		CLC
+		ADC	#001CH
+		STA	<WORK0
+		LDA	<WORK6
+		CLC
+		ADC	#0FFF9H
+		STA	<WORK2
+		MEM8
+		SEP	#00100000B
+		LDA	#00110000B
+		STA	<WORK4
+		LDX	#001H
+		JSR	KGOAMSB		; kage oam set sub
+;
+WPMVE40		EQU	$
+		PLX
+		MEM16
+		REP	#00100000B
+		LDA	<WORK6		; x-pos gamen limit check
+		BMI	WPMVF00
+		CMP	#0130H
+		BCC	WPMVF00
+WPMVE80		EQU	$
+		MEM8
+		SEP	#00100000B
+		STZ	BMMODE,X
+		LDA	HIBSTAT,X
+		BNE	WPMVF00
+		LDA	BMSTAT,X
+		BEQ	WPMVF00
+		LDA	#p3_warp
+		STA	<GAMEMD
+		LDA	<SLMODE
+		STA	!NXSLMD
+		LDA	#MD_etcpl
+		STA	<SLMODE
+WPMVF00		EQU	$
+		MEM8
+		SEP	#00100000B
+;
+		RTS
+;
+;**************************************************************
+;*		boal move init.			(BOALINT)     *
+;**************************************************************
+TAMAYPD		EQU	$		; y-pos data
+		WORD	0FFF8H,0001FH,00011H,00011H
+TAMAXPD		EQU	$		; x-pos data
+		WORD	00008H,00008H,0FFF8H,00017H
+BOALINT		EQU	$
+		PHB
+		PHK
+		PLB
+;
+		JSR	JPRMSR
+		BCC	BOAL010
+BOAL008		EQU	$
+		BRL	BOAL100
+;
+BOAL010		EQU	$
+		PHX
+		STX	<WORK0
+		LDX	#004H
+BOAL020		EQU	$
+		CPX	<WORK0
+		BEQ	BOAL040
+		LDA	BMMODE,X
+		CMP	#BOLMV
+		BNE	BOAL040
+		STX	<WORK2
+		LDA	BMCHOK
+		DEC	A
+		CMP	<WORK2
+		BNE	BOAL030
+		STZ	BMCHOK
+BOAL030		EQU	$
+		JSL	>BALBKIT	; bakuha set
+		PLX
+		STZ	BMMODE,X
+		STZ	!SWCHF1		; swchi off
+		LDA	<PYSPFG
+		CMP	#012H
+		BNE	BOAL038
+		STZ	<HANIFG1
+		STZ	<PYSPFG
+BOAL038		EQU	$
+		BRL	BOAL200
+BOAL040		EQU	$
+		DEX
+		BPL	BOAL020
+		PLX
+;
+		LDA	#02AH
+		JSR	SDLRP3		;<sound>
+;
+		STZ	BMSTAT,X	; damegi count
+		STZ	BMYSPD,X
+		STZ	BMXSPD,X
+		STZ	BMCONT,X
+		STZ	BMFLFG,X
+		STZ	BUMFLM,X
+		STZ	BUMODE,X
+		STZ	YABGCK,X
+		LDA	#00CH		; start timer
+		STA	HBFLEM,X
+		LDA	#012H
+		STA	BMTIM0,X
+;
+		STZ	HIBSTAT,X
+		STZ	BMZPSL,X
+		STZ	BUADSB,X
+		STZ	BMDEFG,X
+		STZ	BMWRK0,X
+		LDA	#009H
+		STA	BMKMHN,X
+		STZ	KMYPMD,X
+		LDA	<PLMKCH
+		LSR	A
+		STA	BMMUKI,X
+		JSL	>ITBGCK1
+		BCC	BOAL060
+		MEM16
+		REP	#00100000B
+		LDA	<PLYPS1
+		CLC
+		ADC	#00010H
+		STA	<WORK0
+		LDA	<PLXPS1
+		CLC
+		ADC	#00008H
+		STA	<WORK2
+		MEM8
+		SEP	#00100000B
+		LDA	<WORK0
+		STA	BMYPSL,X
+		LDA	<WORK1
+		STA	BMYPSH,X
+		LDA	<WORK2
+		STA	BMXPSL,X
+		LDA	<WORK3
+		STA	BMXPSH,X
+		BRA	BOAL200
+;
+BOAL060		EQU	$
+		LDY	<PLMKCH
+		LDA	<PLYPS1
+		CLC
+		ADC	!TAMAYPD,Y
+		STA	BMYPSL,X
+		LDA	<PLYPS0
+		ADC	!TAMAYPD+1,Y
+		STA	BMYPSH,X
+		LDA	<PLXPS1
+		CLC
+		ADC	!TAMAXPD,Y
+		STA	BMXPSL,X
+		LDA	<PLXPS0
+		ADC	!TAMAXPD+1,Y
+		STA	BMXPSH,X
+		JSR	LFBLBCK		; lift on BG check sub
+		BRA	BOAL200
+;
+BOAL100		EQU	$
+		LDX	#004H
+		JSL	>MGPTSB2	; magic point add.
+BOAL200		EQU	$
+		PLB
+		RTL
+;
+;*********  init.lift BG check sub ************************************
+LFBPYDT		EQU	$
+		WORD	0FFF0H,0FFF0H,0FFF0H	; up
+		WORD	00010H,00010H,00010H	; down
+		WORD	0FFF8H,00000H,00008H	; left
+		WORD	0FFF8H,00000H,00008H	; right
+LFBPXDT		EQU	$
+		WORD	0FFF8H,00000H,00008H
+		WORD	0FFF8H,00000H,00008H
+		WORD	0FFF0H,0FFF0H,0FFF0H
+		WORD	00010H,00010H,00010H
+LFBLBCK		EQU	$
+		LDA	!SRMNFG		; lift room ? 
+		BEQ	LFBL300
+;		
+		LDY	#LFBPXDT-LFBPYDT-2
+LFBL100		EQU	$
+		LDA	BMYPSL,X
+		CLC
+		ADC	!LFBPYDT,Y
+		STA	<WORK0
+		STA	<BMWORK+0
+		LDA	BMYPSH,X
+		ADC	!LFBPYDT+1,Y
+		STA	<WORK1
+		STA	<BMWORK+1
+		LDA	BMXPSL,X
+		CLC
+		ADC	!LFBPXDT,Y
+		STA	<WORK2
+		STA	<BMWORK+2
+		LDA	BMXPSH,X
+		ADC	!LFBPXDT+1,Y
+		STA	<WORK3
+		STA	<BMWORK+3
+;
+		PHY
+		LDA	BMCRFG,X
+		PHA
+		JSR	BBC098		; BG check !!
+		PLA
+		STA	BMCRFG,X
+		PLY
+		LDA	BMBGNO,X
+		CMP	#0B6H		; lift on ?
+		BEQ	LFBL200
+		CMP	#0BCH
+		BEQ	LFBL200
+		DEY
+		DEY
+		BPL	LFBL100
+		BRA	LFBL300
+;
+LFBL200		EQU	$
+		LDA	<BMWORK+0
+		STA	BMYPSL,X
+		LDA	<BMWORK+1
+		STA	BMYPSH,X
+		LDA	<BMWORK+2
+		STA	BMXPSL,X
+		LDA	<BMWORK+3
+		STA	BMXPSH,X
+		JSL	>BLLIINT	; boal lift chenge sub
+LFBL300		EQU	$
+		RTS
+;
+;$$$Cross boal enemy$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+CRBLEN		EQU	$
+		LDY	#ENNO-1
+CBL010		EQU	$
+		TYA
+		EOR	<FRCNT
+		AND	#03H
+		ORA	ENDSPL,Y
+		ORA	ENFLSH,Y
+		BNE	CBL020
+;
+CBL018		EQU	$
+		LDA	ENMODE,Y
+		CMP	#EMOVE
+		BCC	CBL020
+;
+		LDA	ENMOD5,Y
+		AND	#00000010B
+		BNE	CBL019		; teki ? (not item?)
+;					; yes !
+		LDA	BMCRFG,X	; teki no check ? 
+		BNE	CBL020		; [yes:CBM040]
+CBL019		EQU	$
+		LDA	BMPRIO,X
+		CMP	ENKAIF,Y
+		BNE	CBL020
+;
+		LDA	BMMODE,X	; boal ? [NO:CBL01A]
+		CMP	#BOLMV
+		BNE	CBL01A
+		LDA	ENMYNO,Y	; suishoo ? [YES:CBL020]
+		CMP	#TAAMA
+		BEQ	CBL020
+		CMP	#HANDS
+		BEQ	CBL020
+CBL01A		EQU	$
+		JSR	CBLSUB
+CBL020		EQU	$
+		DEY
+		BPL	CBL010
+CBL040		EQU	$
+		CLC
+		RTS
+;-------------------------------------
+CBLSUB		EQU	$
+		JSR	BLCRST
+		PHY
+		PHX
+		TYX
+		JSL	>ENCRST2
+		PLX
+		PLY
+		JSL	>CROJCK2
+		BCC	CBL080
+;
+		LDA	ENMYNO,Y
+		CMP	#MOTSB
+		BNE	CBLE12		; Boss motos ?
+;					; yes !
+		LDA	ENWRK2,Y
+		CMP	#03H
+		BCC	CBL078		; Hadaka ?
+CBLE12		EQU	$		; yes !
+		LDA	ENMYNO,Y
+		CMP	#HBTAM
+		BNE	CBLS02
+;
+		LDA	ENTIM3,Y
+		BNE	CBLS02
+;
+		LDA	#18H
+		STA	ENTIM3,Y
+;
+		LDA	ENMUKI,Y
+		EOR	#01H
+		STA	ENMUKI,Y
+;
+;;		LDA	ENXSPD,Y
+;;		EOR	#0FFH
+;;		INC	A
+;;		STA	ENXSPD,Y
+;;;
+;;		LDA	ENYSPD,Y
+;;		EOR	#0FFH
+;;		INC	A
+;;		STA	ENYSPD,Y
+CBLS02		EQU	$
+		LDA	ENNOCR,Y
+		BNE	CBL080
+;
+                LDA     BMXPSL,X
+                SEC
+                SBC     #08H
+                STA     <WORK4
+                LDA     BMXPSH,X
+                SBC     #00H
+                STA     <WORK5
+                LDA     BMYPSL,X
+                SEC
+                SBC     #08H
+		PHP
+		SEC
+		SBC	BMZPSL,X
+                STA     <WORK6
+                LDA     BMYPSH,X
+		SBC	#00H 
+		PLP
+                SBC     #00H
+                STA     <WORK7
+;;;
+		LDA	#50H
+		PHY
+		PHX
+		TYX
+		JSL	>ESERCHL
+		PLX
+		PLY
+;
+		LDA	<WORK0
+		EOR	#0FFH
+		STA	ENHNYS,Y
+		LDA	<WORK1
+		EOR	#0FFH
+		STA	ENHNXS,Y
+;
+		PHX
+		LDA	BMMODE,X
+;;		CMP	#KANTR
+;;		LDA	#01H		; Ken equ. !
+;;		BCC	CBLS10
+;;		LDA	#0BH		; Fire !
+;;CBLS10		EQU	$
+		TYX
+		JSL	>ENDMST2		; Life down & fail check !
+		PLX
+CBL078		EQU	$
+		PLA
+		PLA
+		SEC
+		RTS
+CBL080		EQU	$
+		CLC
+		RTS
+;-----------------------------
+BLCRST		EQU	$
+		LDA	BMXPSL,X
+		SEC
+		SBC	#08H
+		STA	<WORK0
+		LDA	BMXPSH,X
+		SBC	#00H
+		STA	<WORK8
+		LDA	BMYPSL,X
+		SEC
+		SBC	#08H
+		PHP
+		SEC
+		SBC	BMZPSL,X
+		STA	<WORK1
+		LDA	BMYPSH,X
+		SBC	#00H
+		PLP
+		SBC	#00H
+		STA	<WORK9
+		LDA	#0FH
+		STA	<WORK2
+		LDA	#0FH
+		STA	<WORK3
+CBL100		EQU	$
+		RTS
+;**************************************************************
+;*		boal move 			(BOALMOV)     *
+;**************************************************************
+BOALATD		EQU	$
+		HEX	000,040,080,0C0	;0
+		HEX	000,040,080,0C0	;1
+		HEX	000,040,080,0C0	;2
+BOALYPD		EQU	$
+		WORD	0FFF8H,0FFF8H,00000H,00000H	;0
+		WORD	00000H,00000H,00000H,00000H	;1
+		WORD	00000H,00000H,00000H,00000H	;2
+BOALXPD		EQU	$
+		WORD	0FFF8H,00000H,0FFF8H,00000H	;0
+		WORD	00000H,00000H,00000H,00000H	;1
+		WORD	00000H,00000H,00000H,00000H	;2
+BOALBY1		EQU	$		; lift BG check data
+		WORD	0FFF8H,00008H,00000H,00000H	;0
+		WORD	00000H,00000H,00000H,00000H	;1
+		WORD	0FFF8H,00008H,0FFF8H,00008H	;2
+BOALBX1		EQU	$
+		WORD	00000H,00000H,0FFF8H,00008H	;0
+		WORD	00000H,00000H,00000H,00000H	;1
+		WORD	00008H,0FFF8H,0FFF8H,00008H	;2
+;
+BOALMOV		EQU	$
+		DEC	HBFLEM,X
+		BPL	CBL100
+		STZ	HBFLEM,X
+		LDA	YABGCK,X	; hanekaeri ? [NO:BLPH008]
+		BNE	BOMC010
+		LDA	<GAMEMD
+		BEQ	BOMC004
+		CMP	#p1_mcng
+		BEQ	BOMC004
+		CMP	#p1_mcg1
+		BNE	BOMC006
+BOMC004		EQU	$
+		JSR	BMMTCK		; mochiage check
+		BRA	BOMC008
+;
+BOMC006		EQU	$
+		TXA
+		INC	A
+		CMP	BMCHOK
+		BNE	BOMC008
+		LDA	BUADSB,X
+		BEQ	BOMC008
+		CMP	#003H
+		BEQ	BOMC007
+		LDY	#003H
+		JSR	BMMT500
+		JSR	BMMT448
+		LDA	#003H
+		STA	BUADSB,X
+BOMC007		EQU	$
+		JSR	BMMT860
+;
+BOMC008		EQU	$
+		LDA	<GMMODE
+		BEQ	BOMC020
+		LDA	BUADSB,X
+		BNE	BOMC010
+		BIT	PYDMBT		; 0 -->bpl 1--> bmi
+		BMI	BOMC010
+		LDA	BMZPSL,X
+		BEQ	BOMC030
+		CMP	#0FFH
+		BEQ	BOMC030
+BOMC010		EQU	$
+		TXA
+		INC	A
+		CMP	BMCHOK
+		BNE	BOMC020
+		STZ	!SWCHF1		;swishi off
+BOMC020		EQU	$
+		BRL	BOMV008
+;
+BOMC030		EQU	$
+		LDA	!SRMNFG		; lift room ? 
+		BEQ	BOMV006
+		LDA	<FCNT
+		AND	#00000011B
+		ASL	A
+		TAY
+BOMC070		EQU	$
+		LDA	BMYPSL,X
+		CLC
+		ADC	!BOALBY1,Y
+		STA	<WORK0
+		STA	<BMWORK+0
+		LDA	BMYPSH,X
+		ADC	!BOALBY1+1,Y
+		STA	<WORK1
+		STA	<BMWORK+1
+		LDA	BMXPSL,X
+		CLC
+		ADC	!BOALBX1,Y
+		STA	<WORK2
+		STA	<BMWORK+2
+		LDA	BMXPSH,X
+		ADC	!BOALBX1+1,Y
+		STA	<WORK3
+		STA	<BMWORK+3
+;
+		PHY
+		LDA	BMCRFG,X
+		PHA
+		JSR	BBC098		; BG check !!
+		PLA
+		STA	BMCRFG,X
+		PLY
+		LDA	BMBGNO,X
+		CMP	#0B6H		; lift on ?
+		BEQ	BOMV000
+		CMP	#0BCH
+		BEQ	BOMV000
+		TYA
+		CLC
+		ADC	#008H
+		TAY
+		CPY	#018H
+		BCS	BOMV008
+		BRA	BOMC070
+;
+BOMV000		EQU	$
+		LDA	<BMWORK+0
+		STA	BMYPSL,X
+		LDA	<BMWORK+1
+		STA	BMYPSH,X
+		LDA	<BMWORK+2
+		STA	BMXPSL,X
+		LDA	<BMWORK+3
+		STA	BMXPSH,X
+		JSL	>BLLIINT	; boal lift chenge sub
+		TXA
+		INC	A
+		CMP	BMCHOK
+		BNE	BOMV004
+		STZ	BMCHOK
+BOMV004		EQU	$
+		RTS
+;
+;*************	BG swichi check
+BOMV006		EQU	$
+		JSR	BLSWCK		; swichi check
+		BCS	BOMV008
+;
+		LDA	BMZPSL,X
+		BEQ	BOMV007
+		CMP	#0FFH
+		BNE	BOMV008
+BOMV007		EQU	$
+		INC	!SWCHF1		; swishi on 
+;
+;*************	BG cross check
+BOMV008		EQU	$
+		JSR	BMMTPH
+		LDA	BMMUKI,X
+		STA	<BMWORK+2
+		LDA	BMCRFG,X
+		STA	<BMWORK+3
+		STZ	BMCRFG,X
+		JSR	BMBGCK3
+		PHP
+		LDA	<GMMODE
+		BEQ	BOMV00A
+		LDA	HIBSTAT,X
+		BEQ	BOMV00A
+		LDA	BMBGNO,X
+		CMP	#01CH
+		BNE	BOMV00A
+		LDA	#001H
+		STA	KMYPMD,X
+BOMV00A		EQU	$
+		PLP
+		BCC	BOMV020
+;
+;************* BG hit shori
+BOMV00C		EQU	$
+		BIT	PYDMBT		; player had ?
+		BPL	BOMV00C2	; 0 -->bpl 1--> bmi
+		LDA	PYDMBT1
+		BEQ	BOMV020
+BOMV00C2	EQU	$
+		LDA	<BMWORK+3
+		BNE	BOMV010
+		LDA	BMWRK0,X
+		BNE	BOMV010
+		LDA	BMZPSL,X
+		BEQ	BOMV010
+		LDA	#001H
+		STA	BMWRK0,X
+		LDA	#004H
+		STA	<WORKE
+		LDA	BMMUKI,X
+		CMP	#001H
+		BNE	BOMV00C4
+		LDA	#010H
+		STA	<WORKE
+		LDY	#0F0H
+		BRA	BOMV00C8
+;
+BOMV00C4	EQU	$
+		LDY	#0FCH
+BOMV00C8	EQU	$
+		LDA	BMYSPD,X
+		BEQ	BOMV00D4
+		BPL	BOMV00D
+		LDY	<WORKE
+BOMV00D		EQU	$
+		TYA
+		STA	BMYSPD,X
+;
+BOMV00D4	EQU	$
+		LDY	#0FCH
+		LDA	BMXSPD,X
+		BEQ	BOMV00DC
+		BPL	BOMV00D8
+		LDY	#004H
+BOMV00D8	EQU	$
+		TYA
+		STA	BMXSPD,X
+;
+BOMV00DC	EQU	$
+		LDA	BMMUKI,X
+		CMP	#001H
+		BNE	BOMV010
+		INC	A
+		STA	HIBSTAT,X
+		LDA	#0FCH
+		STA	BMYSPD,X
+BOMV010		EQU	$
+		BRL	BOMV100
+;
+;************  bg hit check shori
+BOMV020		EQU	$
+		BIT	PYDMBT		; player had ?
+		BMI	BOMV010		; 0 -->bpl 1--> bmi
+;
+		LDA	BMZPSL,X
+		BEQ	BOMV030
+		CMP	#0FFH
+		BNE	BOMV010
+;
+BOMV030		EQU	$
+		LDA	#010H
+		STA	BMMUKI,X
+		LDA	BMCRFG,X
+		PHA
+		JSR	BMBGCK
+		PLA
+		STA	BMCRFG,X
+;
+		LDA	BMBGNO,X
+		CMP	#026H
+		BEQ	BOMV03011
+		CMP	#00CH		; beltconber ?
+		BEQ	BOMV040
+		CMP	#01CH		; nuki ?
+		BEQ	BOMV040
+		CMP	#020H		; hole ?
+		BEQ	BOMV0301
+		CMP	#008H		; water ?
+		BEQ	BOMV032
+		CMP	#068H		; move yuka up
+		BEQ	BOMV03013
+		CMP	#069H		; move yuka down
+		BEQ	BOMV03013
+		CMP	#06AH		; move yuka left
+		BEQ	BOMV03013
+		CMP	#06BH		; move yuka right
+		BEQ	BOMV03013
+		CMP	#0B6H
+		BEQ	BOMV0302
+		CMP	#0BCH
+		BEQ	BOMV0302
+		AND	#11110000B
+		CMP	#0B0H
+		BNE	BOMV0302
+BOMV0301	EQU	$
+		BRL	BOMV080
+BOMV03011	EQU	$
+		BRL	BOMV00C
+BOMV03013	EQU	$
+		BRL	BOMV070
+;
+BOMV0302	EQU	$
+		STZ	BMTIM0,X
+		LDA	HIBSTAT,X
+		ORA	YABGCK,X
+		BNE	BOMV031
+		LDA	#002H
+		STA	BMTIM0,X
+BOMV031		EQU	$
+		BRL	BOMV100
+;
+BOMV032		EQU	$
+		TXA
+		INC	A
+		CMP	BMCHOK
+		BNE	BOMV033
+		STZ	BMCHOK
+BOMV033		EQU	$
+		LDA	BMTIM0,X
+		BNE	BOMV031
+;
+		LDA	BMYPSL,X
+		CLC
+		ADC	#0E8H
+		STA	BMYPSL,X
+		LDA	BMYPSH,X
+		ADC	#0FFH
+		STA	BMYPSH,X
+		BRL	WTIMIT2
+;
+BOMV040		EQU	$
+		LDA	BGALCKF		; beltconbeer ?
+		CMP	#003H
+		BEQ	BOMV060
+		LDA	BMPRIO,X
+		BNE	BOMV100
+		LDA	BMZPSL,X
+		BEQ	BOMV100
+		CMP	#0FFH
+		BEQ	BOMV100
+		LDA	#001H
+		STA	BMPRIO,X
+		BRL	BOMV100
+BOMV060		EQU	$
+		LDA	BMYPSL,X
+		CLC
+		ADC	!BG1VMC
+		STA	<BMWORK+0
+		LDA	BMYPSH,X
+		ADC	!BG1VMC+1
+		STA	<BMWORK+1
+		LDA	BMXPSL,X
+		CLC
+		ADC	!BG1HMC
+		STA	BMXPSL,X
+		LDA	BMXPSH,X
+		ADC	!BG1HMC+1
+		STA	BMXPSH,X
+		BRA	BOMV100
+;
+BOMV070		EQU	$
+		JSR	BMMYSR
+		BRA	BOMV100
+;
+BOMV080		EQU	$
+		LDA	PYDMBT		; player had ? [YES:BOMV100]
+		BMI	BOMV100
+		TXA
+		INC	A
+		CMP	BMCHOK
+		BNE	BOMV090
+		STZ	BMCHOK
+BOMV090		EQU	$
+		LDA	BMTIM0,X
+		BNE	BOMV100
+		LDA	<PYSPFG
+		CMP	#012H
+		BNE	BOMV0A0
+		STZ	<PYSPFG
+		STZ	<HANIFG1
+BOMV0A0		EQU	$
+		STZ	BMMODE,X
+		RTS
+;
+;*************	teki cross check
+BOMV100		EQU	$
+		LDA	<BMWORK+3
+		ORA	BMCRFG,X
+		STA	<BMWORK+3
+;
+		LDA	PYDMBT		; player had ? [YES:BOMV200]
+		BMI	BOMV200
+;
+		DEC	BMKMHN,X
+		LDA	BMKMHN,X
+		BNE	BOMV200
+		INC	BMKMHN,X
+;
+		STZ	BMCRFG,X
+		JSR	CRBLEN		; teki cross ? [NO:BOMV200]
+		BCC	BOMV200
+;
+		LDA	#007H
+		STA	BMKMHN,X
+		LDA	BMSTAT,X
+		INC	A
+		STA	BMSTAT,X
+		CMP	#005H
+		BNE	BOMV200
+		BRL	BALEDIT		; tama shometsu sub
+;
+BOMV200		EQU	$
+		LDA	<BMWORK+2
+		STA	BMMUKI,X
+		LDA	<BMWORK+3
+		STA	BMCRFG,X
+		JSR	BMMTPP
+;
+;*************	OAM set
+BOMV300		EQU	$
+		TXY
+		INY
+		CPY	BMCHOK
+		BNE	BOMV400
+		LDA	PYDMBT
+		BPL	BOMV400
+		LDA	BUADSB,X
+		CMP	#003H
+		BEQ	BOMV400
+		LDA	<PLMKCH		; under oam check !!
+		BNE	BOMV400
+;
+		LDA	BMOMNO,X	; player under oam point set
+		JSR	OMUNDR
+		BRA	BOMV480
+;
+BOMV400		EQU	$
+		LDA	OAMTYP
+		BEQ	BOMV480
+		LDA	BMPRIO,X
+		BEQ	BOMV480
+		LDA	HIBSTAT,X
+		BNE	BOMV420
+		TXY
+		INY
+		CPY	BMCHOK
+		BNE	BOMV480
+		LDA	PYDMBT
+		BPL	BOMV480
+BOMV420		EQU	$
+		MEM16
+		REP	#00100000B
+		LDA	#00D0H
+		CLC
+		ADC	#OAM
+		STA	<OAMADR
+		LDA	#0034H
+		CLC
+		ADC	#OAMSB
+		STA	<OSBADR
+		MEM8
+		SEP	#00100000B
+;
+BOMV480		EQU	$
+		JSR	ITMPST1         ; priority,YX pos set sub
+;
+		MEM16
+		REP	#00100000B
+		LDA	BMZPSL,X
+		AND	#000FFH
+		CMP	#00080H
+		BCC	BOMV4C0
+		ORA	#0FF00H
+BOMV4C0		EQU	$
+		STA	<WORK4
+		BEQ	BOMV500
+		CMP	#0FFFFH
+		BEQ	BOMV500
+;
+		LDA	BUADSB,X	; player had ?
+		AND	#00FFH
+		CMP	#0003H
+		BEQ	BOMV500
+		LDA	BMCRFG,X
+		AND	#00FFH
+		BEQ	BOMV500
+		LDA	#03000H
+		STA	<PYBGUN
+BOMV500		EQU	$
+;;;;;;;;		LDA	BMDEFG,X
+;;;;;;;;		AND	#00FFH
+;;;;;;;;		BNE	BOMVC00
+;;;;;;;;		LDA	BUADSB,X
+;;;;;;;;		AND	#00FFH
+;;;;;;;;		CMP	#0003H
+;;;;;;;;		BNE	BOMVC00
+;;;;;;;;		LDA	<PLZPS1
+;;;;;;;;		AND	#000FFH
+;;;;;;;;		CMP	#000FFH
+;;;;;;;;		BNE	BOMVC40
+BOMVC00		EQU	$
+		LDA	#00000H
+BOMVC40		EQU	$
+		CLC
+		ADC	<WORK4
+		EOR	#0FFFFH
+		INC	A
+		CLC
+		ADC	<WORK0
+		STA	<WORK4
+		LDA	<WORK2
+		STA	<WORK6
+		MEM8
+		SEP	#00100000B
+		STZ	<WORK8
+		PHX
+		LDA	#002H
+		STA	<BMWORK+0
+;
+		LDA	BUMODE,X
+		ASL	A
+		ASL	A
+		TAX
+		LDY	#000H
+BOBVC80		EQU	$
+		MEM16
+		REP	#00100000B
+		STZ	<BMWORK+2
+		PHX
+		TXA
+		ASL	A
+		TAX
+		LDA	<WORK4
+		CLC
+		ADC	!BOALYPD,X
+		STA	<WORK0
+		LDA	<WORK6
+		CLC
+		ADC	!BOALXPD,X
+		STA	<WORK2
+		PLX
+		MEM8
+		SEP	#00100000B
+		JSR	BMYXST4
+		LDA	#0E9H
+		STA	(<OAMADR),Y
+		INY
+		LDA	!BOALATD,X
+		AND	#11001111B
+		ORA	<BMWORK+0
+		ORA	<PYBGUN+1
+		STA	(<OAMADR),Y
+		INY
+		PHY
+		TYA
+		SEC
+		SBC	#004H
+		LSR	A
+		LSR	A
+		TAY
+		LDA	#000H
+		ORA	<BMWORK+3
+		STA	(<OSBADR),Y
+		PLY
+		INX
+		INC	<WORK8
+		LDA	<WORK8
+		AND	#00000011B
+		BNE	BOBVC80
+;;;;;;;;		JSR	BBKG200		; kage set
+;
+		PLX
+;
+		LDA	BUADSB,X		; katsugu ? [YES:BOBVE00]
+		CMP	#003H
+		BEQ	BOBVE00
+;
+		LDY	#001H
+BOBVCA0		EQU	$
+		LDA	(<OAMADR),Y
+		CMP	#0F0H
+		BNE	BOBVCB0
+		INY
+		INY
+		INY
+		INY
+		CPY	#011H
+		BNE	BOBVCA0
+		BRA	BOBVD80
+;
+BOBVCB0		EQU	$
+		LDY	#000H
+BOBVD00		EQU	$
+		LDA	(<OSBADR),Y
+		AND	#00000001B
+		BEQ	BOBVE00
+		INY
+		CPY	#004H
+		BNE	BOBVD00
+;
+BOBVD80		EQU	$
+		STZ	!SWCHF1		;swishi off
+		STZ	BMMODE,X		; end shori
+		TXA
+		INC	A
+		CMP	BMCHOK
+		BNE	BOBVE00
+		STZ	BMCHOK
+		LDA	PYDMBT
+		AND	#10000000B
+		BEQ	BOBVE00
+		STZ	PYDMBT
+;
+BOBVE00		EQU	$
+		RTS
+;
+;**************************************************************
+;*		boal swichi BG check sub	(BLSWCK)     *
+;**************************************************************
+BOALBGY		EQU	$		; swichi BG check data
+		WORD	0FFFCH,00004H,00000H,00000H	;0
+BOALBGX		EQU	$
+		WORD	00000H,00000H,0FFFCH,00004H	;0
+BLSWCK		EQU	$
+		STZ	!SWCHF1
+		STZ	TMSWON,X
+;
+		LDY	#006H
+BLSW100		EQU	$
+		LDA	BMYPSL,X
+		CLC
+		ADC	!BOALBGY,Y
+		STA	<WORK0
+		STA	<BMWORK+0
+		LDA	BMYPSH,X
+		ADC	!BOALBGY+1,Y
+		STA	<WORK1
+		STA	<BMWORK+1
+		LDA	BMXPSL,X
+		CLC
+		ADC	!BOALBGX,Y
+		STA	<WORK2
+		STA	<BMWORK+2
+		LDA	BMXPSH,X
+		ADC	!BOALBGX+1,Y
+		STA	<WORK3
+		STA	<BMWORK+3
+;
+		PHY
+		LDA	BMCRFG,X
+		PHA
+		JSR	BBC098		; BG check !!
+		PLA
+		STA	BMCRFG,X
+		PLY
+		LDA	BMBGNO,X
+		CMP	#023H		; swichi on ?
+		BEQ	BLSW200
+		CMP	#024H
+		BEQ	BLSW200
+		CMP	#025H
+		BEQ	BLSW200
+		CMP	#03BH
+		BNE	BLSW300
+BLSW200		EQU	$
+		INC	TMSWON,X
+BLSW300		EQU	$
+		DEY
+		DEY
+		BPL	BLSW100
+;
+		LDA	TMSWON,X
+		CMP	#004H
+		BNE	BLSW400
+
+		CLC
+		RTS
+;
+BLSW400		EQU	$
+		SEC
+		RTS
+;
+;**************************************************************
+;*		boal push move 			(BLPHMOV)     *
+;**************************************************************
+BOALSPD		EQU	$
+		HEX	010,0F0
+BOAYPD		EQU	$
+		HEX	0D8,028,000,000
+		HEX	0E0,020,000,000
+		HEX	0F0,010,000,000
+		HEX	0F8,008,000,000
+BOAXPD		EQU	$
+		HEX	000,000,0D8,028
+		HEX	000,000,0E0,020
+		HEX	000,000,0F0,010
+		HEX	000,000,0F8,008
+BOAZPD		EQU	$
+		HEX	030,018,010,008
+BLPHMOV		EQU	$
+		PHB
+		PHK
+		PLB
+		STX	ENINDX
+		LDA	HBFLEM,X
+		BNE	BLPH012
+		LDA	YABGCK,X	; hanekaeri ? [NO:BLPH008]
+		BEQ	BLPH008
+		BRL	BLPH300
+BLPH008		EQU	$
+		LDA	<DIEFG
+		BNE	BLPH012
+		LDA	PYDMBT
+		AND	#00000001B
+		BNE	BLPH012
+		LDA	BMZPSL,X
+		BEQ	BLPH010
+		CMP	#0FFH
+		BNE	BLPH012
+;
+BLPH010		EQU	$
+		LDA	BUADSB,X
+		BNE	BLPH012
+		LDA	HIBSTAT,X
+		BNE	BLPH012
+;
+		LDA	<KEYA1
+		AND	#00001111B
+		BNE	BLPH014
+		STA	BUMFLM,X
+		STA	<HANIFG1
+		LDA	#0FFH
+		STA	BUPLYL,X
+		LDA	DASHFG
+		BNE	BLPH01A
+		STZ	<PYSPFG
+BLPH012		EQU	$
+		BRL	BLPH100
+BLPH014		EQU	$
+		CMP	BUMFLM,X
+		BNE	BLPH018
+;
+		LDA	<PYSPFG
+		CMP	#012H
+		BNE	BLPH01A
+		LDA	#081H		; osu porzu set
+		TSB	<HANIFG1
+		BRA	BLPH01A
+BLPH018		EQU	$
+		STA	BUMFLM,X
+		STZ	<PYSPFG
+;
+BLPH01A		EQU	$
+		LDY	#004H
+		JSR	PYHICK		; player hani check
+		BCC	BLPH012
+;
+		LDA	BMPRIO,X
+		CMP	<PLBGCKF
+		BNE	BLPH012
+;
+		LDA	DASHFG
+		BEQ	BLPH01C
+		LDA	DASFLM
+		CMP	#040H
+		BEQ	BLPH01C
+		TXA
+		INC	A
+		CMP	BMCHOK
+		BNE	BLPH01B
+		STZ	BMCHOK
+BLPH01B		EQU	$
+		JSL	>DASCLR1	; dash clear sub
+		LDA	#032H
+		JSR	SDLRB3
+		BRL	BLPH200		; dash sub
+BLPH01C		EQU	$
+		STZ	BMXSPD,X
+		STZ	BMYSPD,X
+		LDA	<KEYA1
+		AND	#00001111B
+		STA	BUMFLM,X
+		AND	#00000011B	; yoko ?
+		BEQ	BLPH040
+		LDY	!BOALSPD+0	; +
+		AND	#00000001B
+		BNE	BLPH020
+		LDY	!BOALSPD+1	; -
+BLPH020		EQU	$
+		TYA
+		STA	BMXSPD,X
+		LDY	#002H
+		CMP	!BOALSPD+0
+		BNE	BLPH080
+		INY
+		BRA	BLPH080
+;
+BLPH040		EQU	$
+		LDY	!BOALSPD+0	; +
+		LDA	<KEYA1
+		AND	#00001000B
+		BEQ	BLPH060
+		LDY	!BOALSPD+1	; -
+BLPH060		EQU	$
+		TYA
+		STA	BMYSPD,X
+		LDY	#000H
+		CMP	!BOALSPD+0
+		BNE	BLPH080
+		INY
+BLPH080		EQU	$
+		TYA
+		STA	BMMUKI,X
+		LDA	<PLYSPD		; naname check !
+		BEQ	BLPH0A0
+		LDA	<PLXSPD
+		BNE	BLPH0F0
+BLPH0A0		EQU	$
+		JSR	BMBGCK3
+		BCS	BLPH0B0
+
+		JSR	BMYCLC		; y-speed set sub
+		JSR	BMXCLC		; x-speed set sub
+;
+		LDA	PYDMBT
+		AND	#10000000B
+		BNE	BLPH0B0
+		INC	BUPLYL,X
+		LDA	BUPLYL,X
+		AND	#00000111B
+		BNE	BLPH0B0
+		LDA	#022H
+		JSR	SDLRB2
+;
+BLPH0B0		EQU	$
+		LDA	#081H		; osu porzu set
+		STA	<HANIFG1
+		LDA	#012H		; speed set
+		STA	<PYSPFG
+BLPH0F0		EQU	$
+		JSL	>PLOTCK		; player hosei sub
+BLPH100		EQU	$
+		PLB
+		RTL
+;
+;************* dash tama hanekaeri shori
+BLPH200		EQU	$
+		LDA	<PLMKCH
+		LSR	A
+		STA	BMMUKI,X
+		TAY
+		LDA	!BOAYPD,Y
+		STA	BMYSPD,X
+		LDA	!BOAXPD,Y
+		STA	BMXSPD,X
+		LDA	!BOAZPD+0
+		STA	BMZSPD,X
+		LDA	#001H
+		STA	YABGCK,X
+		STZ	BMZPSL,X
+BLPH300		EQU	$
+		LDA	BMZSPD,X
+		SEC
+		SBC	#002H
+		STA	BMZSPD,X
+		JSR	BMYCLC		; y-speed set sub
+		JSR	BMXCLC		; x-speed set sub
+		JSR	BMZCLC		; z-speed set sub
+		LDA	BMZPSL,X
+		BEQ	BLPH400
+		CMP	#0FCH
+		BCC	BLPH600
+BLPH400		EQU	$
+		LDA	#021H
+		JSR	SDLRB2
+		STZ	BMZPSL,X
+		LDA	YABGCK,X
+		INC	A
+		STA	YABGCK,X
+		CMP	#004H
+		BNE	BLPH500
+		STZ	BMWRK0,X
+		STZ	YABGCK,X
+		BRA	BLPH600
+BLPH500		EQU	$
+		TAY
+		DEY
+		LDA	!BOAZPD,Y
+		STA	BMZSPD,X
+;
+		LDA	<PLMKCH
+		LSR	A
+		STA	<WORK0
+		TYA
+		ASL	A
+		ASL	A
+		CLC
+		ADC	<WORK0
+		TAY
+;
+		LDY	#000H
+		LDA	BMYSPD,X
+		BPL	BLPH540
+		LDY	#001H
+		EOR	#0FFH
+		INC	A
+BLPH540		EQU	$
+		LSR	A
+		CPY	#001H
+		BNE	BLPH560
+		EOR	#0FFH
+		INC	A
+BLPH560		EQU	$
+		STA	BMYSPD,X
+;
+		LDY	#000H
+		LDA	BMXSPD,X
+		BPL	BLPH580
+		LDY	#001H
+		EOR	#0FFH
+		INC	A
+BLPH580		EQU	$
+		LSR	A
+		CPY	#001H
+		BNE	BLPH5C0
+		EOR	#0FFH
+		INC	A
+BLPH5C0		EQU	$
+		STA	BMXSPD,X
+;
+BLPH600		EQU	$
+;
+		PLB
+		RTL
+;
+;**************************************************************
+;*		boal shometsu  move init.	(BALEDIT)     *
+;**************************************************************
+BLEDYP		EQU	$
+		WORD	0FFFCH,0FFFFH	; (0)
+		WORD	0FFFCH,0FFFCH	; (1)
+		WORD	0FFFCH,0FFFCH	; (2)
+BLEDXP		EQU	$
+		WORD	0FFFCH,0FFFFH	; (0)
+		WORD	0FFF8H,00000H	; (1)
+		WORD	0FFFAH,0FFFEH	; (2)
+BLEDCRD		EQU	$
+		HEX	092,0FF		; (0)
+		HEX	0F9,0F9		; (1)
+		HEX	0F9,0F9		; (2)
+BLEDATD		EQU	$
+		HEX	006,0FF		; (0)
+		HEX	086,0C6		; (1)
+		HEX	086,0C6		; (2)
+BALEDIT		EQU	$
+		LDA	<PYSPFG
+		CMP	#012H
+		BNE	BLEI100
+		STZ	<HANIFG1
+		STZ	<PYSPFG
+BLEI100		EQU	$
+		STZ	!SWCHF1		; swishi on 
+		LDA	#BOLM1
+		STA	BMMODE,X
+		STZ	BMFLFG,X
+		STZ	BMSTAT,X	; damegi count
+		STZ	BMCONT,X
+		STZ	BUMFLM,X
+		STZ	BUMODE,X
+		STZ	BMDEFG,X
+		TXA
+		INC	A
+		CMP	BMCHOK
+		BNE	BALEDMV
+		STZ	BMCHOK
+		LDA	PYDMBT
+		AND	#10000000B
+		STA	PYDMBT
+;
+;**************************************************************
+;*		boal shometsu  move 		(BALEDMV)     *
+;**************************************************************
+BALEDMV		EQU	$
+		DEC	BMFLFG,X
+		BPL	BLED100
+		LDA	#003H
+		STA	BMFLFG,X
+		LDA	BMCONT,X
+		INC	A
+		STA	BMCONT,X
+		CMP	#003H
+		BNE	BLED100
+		STZ	BMMODE,X
+		RTS
+
+BLED100		EQU	$
+		JSR	ITMPST1         ; priority,YX pos set sub
+
+		LDY	#000H
+		LDA	BMZPSL,X
+		CMP	#0FFH
+		BNE	BLED200
+		LDA	#000H
+BLED200		EQU	$
+		STA	<WORK4
+		BPL	BLED400
+		LDY	#0FFH
+BLED400		EQU	$
+		STY	<WORK5
+;
+		MEM16
+		REP	#00100000B
+		LDA	<WORK4
+		EOR	#0FFFFH
+		INC	A
+		CLC
+		ADC	<WORK0
+		STA	<WORK4
+		LDA	<WORK2
+		STA	<WORK6
+		MEM8
+		SEP	#00100000B
+		PHX
+;
+		LDA	BMCONT,X
+		ASL	A
+		TAX
+		LDY	#000H
+		STY	<WORK8
+BLED500		EQU	$
+		LDA	!BLEDCRD,X
+		CMP	#0FFH
+		BEQ	BLED600
+		MEM16
+		REP	#00100000B
+		PHX
+		TXA
+		ASL	A
+		TAX
+		LDA	<WORK4
+		CLC
+		ADC	!BLEDYP,X
+		STA	<WORK0
+		LDA	<WORK6
+		CLC
+		ADC	!BLEDXP,X
+		STA	<WORK2
+		PLX
+		MEM8
+		SEP	#00100000B
+		JSR	BMYXST3
+		LDA	!BLEDCRD,X
+		STA	(<OAMADR),Y
+		INY
+		LDA	!BLEDATD,X
+		AND	#11001111B
+		ORA	<PYBGUN1
+		STA	(<OAMADR),Y
+		INY
+		PHY
+		TYA
+		SEC
+		SBC	#004H
+		LSR	A
+		LSR	A
+		TAY
+		LDA	#000H
+		STA	(<OSBADR),Y
+		PLY
+BLED600		EQU	$
+		INX
+		INC	<WORK8
+		LDA	<WORK8
+		CMP	#002H
+		BNE	BLED500
+;
+		PLX
+BLED700		EQU	$
+		RTS
+;
+;**************************************************************
+;*		boal lift chenge move		(BLLIMOV)     *
+;**************************************************************
+BOALHOR		EQU	$
+		HEX	001,000,003,002
+BLLIMOV		EQU	$
+		DEC	BMFLFG,X
+		BMI	BLLI080
+		RTS
+;
+BLLI080		EQU	$
+		STZ	BMMODE,X
+		LDA	BMYPSL,X
+		STA	<BMWORK+0
+		LDA	BMYPSH,X
+		STA	<BMWORK+1
+		LDA	BMXPSL,X
+		STA	<BMWORK+2
+		LDA	BMXPSH,X
+		STA	<BMWORK+3
+		LDA	BMPRIO,X
+		STA	<WORKZ
+;
+		PHX
+		LDA	#LINE0
+		JSL	>ENIDSH
+		BPL	BLLI240
+		BRL	BLLI400
+;
+BLLI240		EQU	$
+		STZ	PSSTOP		; player hole down flag clear !!
+		LDA	<BMWORK+0	;Y
+		AND	#0F8H
+		ORA	#004H
+		STA	ENYPSL,Y
+		STA	<BMWORK+0
+		LDA	<BMWORK+1
+		STA	ENYPSH,Y
+;
+		LDA	<BMWORK+2	;X
+		AND	#0F8H
+		ORA	#004H
+		STA	ENXPSL,Y
+		STA	<BMWORK+2
+		LDA	<BMWORK+3
+		STA	ENXPSH,Y
+;
+		LDA	<WORKZ
+		CMP	#001H
+		MEM16
+		IDX16
+		REP	#00110000B
+		STZ	<WORK6
+		BCC	BLIT300
+		LDA	#01000H
+		STA	<WORK6
+BLIT300		EQU	$
+		LDA	<BMWORK+2
+		AND	#01FFH
+		LSR	A
+		LSR	A
+		LSR	A
+		STA	<WORK4
+		LDA	<BMWORK+0
+		AND	#01F8H
+		ASL	A
+		ASL	A
+		ASL	A
+		CLC
+		ADC	<WORK4
+		CLC
+		ADC	<WORK6
+		TAX
+		STZ	<WORK6
+		LDA	>READBF-040H,X
+		AND	#00F0H
+		CMP	#00B0H
+		BEQ	BLIT340
+		INC	<WORK6
+		LDA	>READBF+040H,X
+		AND	#00F0H
+		CMP	#00B0H
+		BEQ	BLIT340
+		INC	<WORK6
+		LDA	>READBF-001H,X
+		AND	#00F0H
+		CMP	#00B0H
+		BEQ	BLIT340
+		INC	<WORK6
+BLIT340		EQU	$
+		MEM8
+		IDX8
+		SEP	#00110000B
+		LDX	<WORK6		;MUKI
+		LDA	!BOALHOR,X
+		STA	ENMUKI,Y
+		LDA	#000H		; KAI
+		STA	ENKAIF,Y
+		BRA	BLLI500
+BLLI400		EQU	$
+		JSR	BOMV300		; OAM set sub
+BLLI500		EQU	$
+		PLX
+		RTS
+;
+;**************************************************************
+;*		boal bakuha move init.		(BALBKIT)     *
+;**************************************************************
+;
+;
+;**************************************************************
+;*		boal shometsu  move 		(BALBKMV)     *
+;**************************************************************
+BALBKMV		EQU	$
+		DEC	BMFLFG,X
+		BPL	BLBK100
+		LDA	#003H
+		STA	BMFLFG,X
+		LDA	BMCONT,X
+		INC	A
+		STA	BMCONT,X
+		CMP	#002H
+		BNE	BLBK100
+		STZ	BMMODE,X
+		PHX
+		JSR	SOROBR		; beam set sub
+		PLX
+		RTS
+;
+BLBK100		EQU	$
+		JSR	ITMPST1         ; priority,YX pos set sub
+;
+		LDY	#000H
+		LDA	BUADSB,X
+		CMP	#003H
+		BNE	BLBK200
+		LDA	<PLZPS1
+		CMP	#0FFH
+		BNE	BLBK300
+BLBK200		EQU	$
+		LDA	#000H
+BLBK300		EQU	$
+		CLC
+		ADC	BMZPSL,X
+		STA	<WORK4
+		BPL	BLBK400
+		LDY	#0FFH
+BLBK400		EQU	$
+		STY	<WORK5
+;
+		MEM16
+		REP	#00100000B
+		LDA	<WORK4
+		EOR	#0FFFFH
+		INC	A
+		CLC
+		ADC	<WORK0
+		STA	<WORK4
+		LDA	<WORK2
+		STA	<WORK6
+		MEM8
+		SEP	#00100000B
+		PHX
+;
+		LDA	BMCONT,X
+		ASL	A
+		ASL	A
+		ASL	A
+		TAX
+		LDY	#000H
+		STY	<WORK8
+BLBK500		EQU	$
+		MEM16
+		REP	#00100000B
+		PHX
+		TXA
+		ASL	A
+		TAX
+		LDA	<WORK4
+		CLC
+		ADC	>BLBKYP,X
+		STA	<WORK0
+		LDA	<WORK6
+		CLC
+		ADC	>BLBKXP,X
+		STA	<WORK2
+		PLX
+		MEM8
+		SEP	#00100000B
+		JSR	BMYXST3
+		LDA	>BLBKCRD,X
+		STA	(<OAMADR),Y
+		INY
+		LDA	>BLBKATD,X
+		AND	#11001111B
+		ORA	<PYBGUN1
+		STA	(<OAMADR),Y
+		INY
+		PHY
+		TYA
+		SEC
+		SBC	#004H
+		LSR	A
+		LSR	A
+		TAY
+		LDA	#000H
+		STA	(<OSBADR),Y
+		PLY
+;
+		INX
+		INC	<WORK8
+		LDA	<WORK8
+		CMP	#008H
+		BNE	BLBK500
+;
+		PLX
+		RTS
+;
+;**************************************************************
+;*		kantera fier move 		(KNTEAMV)     *
+;**************************************************************
+KTFLCD		EQU	$
+		HEX	09C,09C,0FF,0FF		; 2
+		HEX	0A4,0A5,0B2,0B3		; 1
+		HEX	0E3,0F3,0FF,0FF		; 0
+KTFYPSL		EQU	$
+		HEX	0FD,000,000,000
+		HEX	000,000,008,008
+		HEX	000,008,000,000
+KTFYPSH		EQU	$
+		HEX	0FF,000,000,000
+		HEX	000,000,000,000
+		HEX	000,000,000,000
+KTFXPSL		EQU	$
+		HEX	004,00A,000,000
+		HEX	001,009,002,007
+		HEX	004,004,000,000
+;
+KNTEAMV		EQU	$
+		JSR	ITMPST1         ; priority,YX pos set sub
+;
+		LDA	<WORK0
+		STA	<WORK6
+		LDA	<WORK1
+		STA	<WORK7
+;
+		LDY	#00H
+		LDA	BMTIM0,X
+		BNE	KNTE040
+		STZ	BMMODE,X
+		RTS
+;
+KNTE040		EQU	$
+		AND	#11111000B
+		LSR     A
+		TAX
+;
+KNTE100		EQU	$
+		LDA	!KTFLCD,X
+		CMP	#0FFH
+		BEQ	KNTE300
+;
+		LDA	!KTFYPSL,X
+		CLC
+		ADC	<WORK6
+		STA	<WORK0
+		LDA	<WORK7
+		ADC	!KTFYPSH,X
+		STA	<WORK1
+		LDA	!KTFXPSL,X
+		CLC
+		ADC	<WORK4
+		STA	<WORK2
+		LDA	<WORK5
+		ADC	#000H
+		STA	<WORK3
+;
+		JSR	BMYXST3
+;
+		LDA	!KTFLCD,X
+		STA	(<OAMADR),Y
+		INY
+		LDA	#00000010B
+		ORA	<PYBGUN1
+		STA	(<OAMADR),Y
+		INY
+		PHY
+		TYA
+		SEC
+		SBC	#004H
+		LSR	A
+		LSR	A
+		TAY
+		LDA	#000H
+		STA	(<OSBADR),Y
+		PLY
+KNTE300		EQU	$
+		INX
+		TXA
+		AND	#00000011B
+		BNE	KNTE100
+;
+		BRL	KBMV900
+;
+;**************************************************************
+;*		taki player hed water move	(TPHDMOV)    *
+;**************************************************************
+TPHDCD		EQU	$
+		HEX	0C0,0FF		;2
+		HEX	0AC,0AC		;0
+		HEX	0AE,0AE		;1
+		HEX	0BF,0BF		;3
+TPHDAT		EQU	$
+		HEX	084,0FF
+		HEX	084,0C4
+		HEX	084,0C4
+		HEX	084,0C4
+TPHDSB		EQU	$
+		HEX	002,0FF
+		HEX	002,002
+		HEX	002,002
+		HEX	000,000
+TPHYPL		EQU	$
+		HEX	0FC,000
+		HEX	0FB,0FB
+		HEX	0FD,0FD
+		HEX	00C,00C
+TPHYPH		EQU	$
+		HEX	0FF,000
+		HEX	0FF,0FF
+		HEX	0FF,0FF
+		HEX	000,000
+TPHXPL		EQU	$
+		HEX	000,000
+		HEX	0FC,004
+		HEX	0F9,007
+		HEX	0F7,011
+TPHXPH		EQU	$
+		HEX	000,000
+		HEX	0FF,000
+		HEX	0FF,000
+		HEX	0FF,000
+TPHDMOV		EQU	$
+		LDY	#000H
+		LDA	<GMMODE
+		BNE	TPHD040
+		LDY	#001H
+TPHD040		EQU	$
+		JSR	PYHICK4
+		BCS	TPHD080
+		STZ	BMMODE,X
+		RTS
+;
+TPHD080		EQU	$
+		LDA	<GAMEMD
+		BNE	TPHD0A0
+;
+		LDA	<FCNT
+		AND	#00000111B
+		BNE	TPHD0A0
+;;;;;;;;		JSL	>SDLRCP		; sound (L,R) check
+;;;;;;;;		ORA	#01CH
+;;;;;;;;		STA	!SOUND2		; <sound>
+		LDA	#01CH
+		JSR	SDLRP2		;<sound>
+;
+TPHD0A0		EQU	$
+		LDA	#001H
+		STA	ASWFLG
+		LDA	<PYCRCH
+		SEC
+		SBC	#006H
+		BMI	TPHD0B0
+		STA	<PYCRCH
+;
+TPHD0B0		EQU	$
+		LDA	BMTIM0,X
+		BNE	TPHD100
+		LDA	#002H
+		STA	BMTIM0,X
+		LDA	BMCONT,X
+		INC	A
+		AND	#00000011B
+		STA	BMCONT,X
+;
+TPHD100		EQU	$
+		LDA	<GMMODE
+		BEQ	TPHD110
+		LDA	<PLYPS1
+		CMP	#038H
+		BCS	TPHD110
+		LDA	#038H
+		STA	BMYPSL,X
+		LDA	#00DH
+		STA	BMYPSH,X
+		BRA	TPHD11C
+TPHD110		EQU	$
+		LDA	<PLYPS1
+		STA	BMYPSL,X
+		LDA	<PLYPS0
+		STA	BMYPSH,X
+TPHD11C		EQU	$
+		LDA	<PLXPS1
+		STA	BMXPSL,X
+		LDA	<PLXPS0
+		STA	BMXPSH,X
+;
+		JSR	ITMPST1         ; priority,YX pos set sub
+;
+		LDA	<PLZPS1
+		BPL	TPHD120
+		LDA	#000H
+TPHD120		EQU	$
+		MEM16
+		REP	#00100000B
+		AND	#000FFH
+		EOR	#0FFFFH
+		INC	A
+		CLC
+		ADC	<WORK0
+		STA	<WORK0
+		STA	<WORK6
+		MEM8
+		SEP	#00100000B
+;
+		LDA	BMCONT,X
+		ASL	A
+		TAX
+		LDY	#000H
+TPHD200		EQU	$
+		LDA	!TPHDCD,X
+		CMP	#0FFH
+		BEQ	TPHD300
+;
+		LDA	!TPHYPL,X
+		CLC
+		ADC	<WORK6
+		STA	<WORK0
+		LDA	!TPHYPH,X
+		ADC	<WORK7
+		STA	<WORK1
+		LDA	!TPHXPL,X
+		CLC
+		ADC	<WORK4
+		STA	<WORK2
+		LDA	!TPHXPH,X
+		ADC	<WORK5
+		STA	<WORK3
+;
+		JSR	BMYXST3
+;
+		LDA	!TPHDCD,X
+		STA	(<OAMADR),Y
+		INY
+		LDA	!TPHDAT,X
+		ORA	#030H		; <PYBGUN1
+		STA	(<OAMADR),Y
+		INY
+;
+		PHY
+		TYA
+		SEC
+		SBC	#004H
+		LSR	A
+		LSR	A
+		TAY
+		LDA	!TPHDSB,X
+		STA	(<OSBADR),Y
+		PLY
+TPHD300		EQU	$
+		INX
+		TXA
+		AND	#00000001B
+		BNE	TPHD200
+;
+		BRL	KBMV900
+;
+;**************************************************************
+;*		HAKA move			(HAKAMOV1)    *
+;**************************************************************
+HAKAMOV1	EQU	$
+		PHB
+		PHK
+		PLB
+;
+		LDA	<GAMEMD		; purzu ?
+		BNE	HAKAF00
+;
+		LDA	#0F8H
+		STA	BMYSPD,X
+		JSR	BMYCLC		; y-speed set sub
+		JSR	HAKHAI		; haka hani check !!
+;
+		LDA	BUPLYL,X
+		STA	<WORK0
+		LDA	BUPLYH,X
+		STA	<WORK1
+		LDA	BMYPSL,X
+		STA	<WORK2
+		LDA	BMYPSH,X
+		STA	<WORK3
+		MEM16
+		REP	#00100000B
+		LDA	<WORK2
+		CMP	<WORK0
+		MEM8
+		SEP	#00100000B
+		BCS	HAKA100
+		STZ	BMMODE,X
+		STZ	HKMVON
+		LDA	<HANIFG1
+		AND	#0FBH
+		STA	<HANIFG1
+		LDA	BCDYPS,X
+		STA	<BMWORK+0
+		LDA	BCDXPS,X
+		STA	<BMWORK+1
+		MEM16
+		REP	#00100000B
+		LDA	<BMWORK+0
+		STA	!GDRBF1		; write address set
+		LDY	#ut4p06
+		CMP	#005B2H-0080H
+		BEQ	HAKA080
+		LDY	#ut4p09
+		CMP	#00508H-0080H
+		BEQ	HAKA080
+		LDY	#ut4p05
+HAKA080		EQU	$
+		TYA
+		AND	#00FFH
+		STA	!DOPCNO		; shurui set
+		MEM8
+		SEP	#00100000B
+		PHX
+		JSR	>UT4RWT
+		PLX
+		BRA	HAKAF00
+HAKA100		EQU	$
+;;;;;;;;		BRL	HKOMST
+;
+HAKAF00		EQU	$
+		PLB
+		RTL
+;
+;**************************************************************
+;*		haka  OAM set		 		      *
+;**************************************************************
+HAKACRD		EQU	$
+		HEX	0C8,0C8,0D8,0D8
+HAKAATD		EQU	$
+		HEX	000,040,000,040
+;
+HAKAMOV		EQU	$
+HKOMST		EQU	$
+		PHX
+;
+		JSR	ITMPST1		; priorty,now y,x pos set
+		MEM16
+		REP	#00100000B
+		LDA	<WORK2
+		STA	<WORK6
+		MEM8
+		SEP	#00100000B
+;
+		LDA	#4*4
+		JSL	>OAMENT2
+;
+		LDY	#000H
+		TYX
+HKOM100		EQU	$
+		JSR	BMYXST3		; Y,X pos oam set sub
+;
+		LDA	!HAKACRD,X
+		STA	(<OAMADR),Y
+		INY
+		LDA	!HAKAATD,X
+		ORA	#00111101B
+;;;;;;;;		ORA	<PYBGUN1
+		STA	(<OAMADR),Y
+		INY
+;
+		PHY
+		TYA
+		SEC
+		SBC	#004H
+		LSR	A
+		LSR	A
+		TAY
+		LDA	#002H
+		STA	(<OSBADR),Y
+		PLY
+		INX
+		MEM16
+		REP	#00100000B
+		LDA	<WORK2
+		CLC
+		ADC	#0010H
+		STA	<WORK2
+		CPX	#002H
+		BNE	HKOM200
+		LDA	<WORK0
+		CLC
+		ADC	#0008H
+		STA	<WORK0
+		LDA	<WORK6
+		STA	<WORK2
+HKOM200		EQU	$
+		MEM8
+		SEP	#00100000B
+		CPX	#004H
+		BNE	HKOM100
+;
+		PLX
+		RTS
+;
+;**************************************************************
+;*		haka,player hani check sub 	(HAKHAI)      *
+;**************************************************************
+HAKHAI		EQU	$
+		LDA	BMYPSL,X
+		STA	<WORK0
+		LDA	BMYPSH,X
+		STA	<WORK1
+		LDA	BMXPSL,X
+		STA	<WORK2
+		LDA	BMXPSH,X
+		STA	<WORK3
+		MEM16
+		REP	#00100000B
+		LDA	<WORK0
+		CLC
+		ADC	#0018H
+		STA	<WORK4
+		LDA	<WORK2
+		CLC
+		ADC	#0020H
+		STA	<WORK6
+;
+		LDA	<PLYPS1
+		CLC
+		ADC	#0008H
+		STA	<WORK8
+		CMP	<WORK0
+		BCC	HAKH100
+		CMP	<WORK4
+		BCS	HAKH100
+		LDA	<PLXPS1
+		CLC
+		ADC	#0008H
+		CMP	<WORK2
+		BCC	HAKH100
+		CMP	<WORK6
+		BCS	HAKH100
+;
+		LDA	<WORK8
+		SEC
+		SBC	<WORK4
+		BPL	HAKH040
+		EOR	#0FFFFH
+		INC	A
+HAKH040		EQU	$
+		STA	<WORKA
+		CLC
+		ADC	<PLYPS1
+		STA	<PLYPS1
+		LDA	<PLYMVC
+		CMP	#0080H
+		BCC	HAKH060
+		ORA	#0FF00H
+HAKH060		EQU	$
+		STA	<WORK8
+		LDA	<WORKA
+		CLC
+		ADC	<WORK8
+		AND	#00FFH
+		STA	<WORK8
+		LDA	<PLYMVC
+		AND	#0FF00H
+		ORA	<WORK8
+		STA	<PLYMVC
+		LDA	#0004H
+		TSB	<HANIFG1
+HAKH100		EQU	$
+		MEM8
+		SEP	#00100000B
+		LDA	<PLMKCH
+		BEQ	HAKH200
+		LDA	<HANIFG1
+		AND	#0FBH
+		STA	<HANIFG1
+HAKH200		EQU	$
+		RTS
+;
+;**************************************************************
+;*		rod bomb move 			(RDDMMOV)     *
+;**************************************************************
+RDDMYDL		EQU	$
+		HEX	000,000,000,0FD
+RDDMYDH		EQU	$
+		HEX	000,000,000,0FF
+RDDMCHR		EQU	$
+		HEX	08E,0A0,0A2,0A4
+RDDMSBD		EQU	$
+		HEX	002,002,002,000
+RDBKCR		EQU	$
+		HEX	086,086,086,0FF,0FF,0FF
+		HEX	086,086,086,086,086,086
+		HEX	08A,08A,08A,08A,08A,08A
+		HEX	09B,09B,09B,09B,09B,09B
+RDBKAT		EQU	$
+		HEX	000,000,000,000,000,000
+		HEX	000,000,000,000,000,000
+		HEX	000,000,000,000,000,000
+		HEX	080,040,040,080,040,000
+RDBKSB		EQU	$
+		HEX	002,002,002,002,001,001
+		HEX	002,002,002,002,002,002
+		HEX	002,002,002,002,002,002
+		HEX	000,000,000,000,000,000
+RDBKYD		EQU	$
+		WORD	0FFE1H,0FFE8H,0FFEAH,0FFFFH,0FFFFH,0FFFFH
+		WORD	0FFDBH,0FFE0H,0FFE0H,0FFE9H,0FFF0H,0FFF2H
+		WORD	0FFDBH,0FFE0H,0FFE0H,0FFE9H,0FFF0H,0FFF2H
+		WORD	0FFDDH,0FFE3H,0FFE4H,0FFECH,0FFF3H,0FFF5H
+RDBKXD		EQU	$
+		WORD	0FFF3H,0FFEBH,0FFF6H,0FFFFH,0FFFFH,0FFFFH
+		WORD	0FFF0H,0FFE5H,0FFFCH,0FFF0H,0FFFAH,0FFE7H
+		WORD	0FFF0H,0FFE5H,0FFFCH,0FFF0H,0FFFAH,0FFE7H
+		WORD	0FFF3H,0FFFBH,0FFE5H,0FFF5H,0FFEAH,0FFFDH
+RDBKIX		EQU	$
+		HEX	000,006,00C,012
+RDDMMOV		EQU	$
+		LDA	>KBMODE		; bomb start ?	[NO:RDDM0E0]
+		BEQ	RDDM0E0
+;
+;************	bomb move
+		LDA	BMCONT,X	; bomb end ? [YES:RDDM0E0]
+		CMP	#004H
+		BEQ	RDDM0E0
+		DEC	BMFLFG,X
+		BPL	RDDM0E0
+		LDA	#005H
+		STA	BMFLFG,X
+		INC	BMCONT,X
+;
+;************	fire move
+RDDM0E0		EQU	$
+		LDX	#003H
+		LDY	#000H
+RDDM100		EQU	$
+		LDA	>KBBMFM,X
+		DEC	A
+		STA	>KBBMFM,X
+		BMI	RDDM11C
+RDDM110		EQU	$
+		BRL	RDDM200
+RDDM11C		EQU	$
+		LDA	#005H		; fire next flem set
+		STA	>KBBMFM,X
+		LDA	>KBBMNO,X
+		CMP	#080H
+		BEQ	RDDM110
+		INC	A
+		STA	>KBBMNO,X
+		BEQ	RDDM120
+		CMP	#004H
+		BNE	RDDM110
+		LDA	#000H
+		STA	>KBBMNO,X
+RDDM120		EQU	$
+		MEM16
+		REP	#00100000B
+		LDA	>KBYPS0
+		SEC
+		SBC	#00008H
+		STA	>KBYPS0
+		CMP	#000C8H
+		BCS	RDDM130
+;
+		LDA	#00098H
+		SEC
+		SBC	<SCCH2
+		STA	<WORK0
+		MEM8
+		SEP	#00100000B
+		LDA	>KBMODE+0
+		CMP	#001H
+		BEQ	RDDM130
+		LDA	#001H
+		STA	>KBMODE+0
+		LDA	<WORK0
+		JSR	SODLRC
+		ORA	#bomb1
+		STA	!SOUND2
+RDDM130		EQU	$
+		MEM16
+		REP	#00100000B
+		LDA	>KBYPS0
+		CMP	#000A8H
+		BCS	RDDM140
+		LDA	>KBBMNO,X
+		AND	#0FF00H
+		ORA	#00080H
+		STA	>KBBMNO,X
+RDDM140		EQU	$
+		PHX
+		TXA
+		ASL	A
+		TAX
+		LDA	>KBXPS0
+		STA	>KABEXP,X
+		LDA	>KBYPS0
+		STA	>KABEYP,X
+		PLX
+		MEM8
+		SEP	#00100000B
+		LDA	!SOUND2
+		BNE	RDDM200
+		LDA	>KBXPS0
+		SEC
+		SBC	<SCCH2
+		JSR	SODLRC
+		ORA	#fires
+		STA	!SOUND2
+;
+;*************  oam set
+RDDM200		EQU	$
+		MEM8
+		SEP	#00100000B
+		PHX
+		LDA	>KBBMNO,X
+		BPL	RDDM300
+		BRL	RDDM800
+RDDM300		EQU	$
+		PHY
+		TAY
+		LDA	!RDDMYDL,Y
+		STA	<WORK4
+		LDA	!RDDMYDH,Y
+		STA	<WORK5
+		LDA	!RDDMCHR,Y
+		STA	<WORK6
+		LDA	!RDDMSBD,Y
+		STA	<WORK7
+		TXA
+		ASL	A
+		TAX
+		MEM16
+		REP	#00100000B
+		LDA	>KABEYP,X
+		SEC
+		SBC	<SCCV2
+		CLC
+		ADC	<WORK4
+		STA	<WORK0
+		LDA	>KABEXP,X
+		SEC
+		SBC	<SCCH2
+		STA	<WORK2
+		CLC
+		ADC	#0008H
+		STA	<WORK8
+		MEM8
+		SEP	#00100000B
+		PLY
+;
+		JSR	BMYXST3		; Y,X pos oam set sub
+;
+		LDA	<WORK6
+		STA	(<OAMADR),Y
+		INY
+		LDA	#00110010B
+		STA	(<OAMADR),Y
+		INY
+		PHY
+		TYA
+		SEC
+		SBC	#004H
+		LSR	A
+		LSR	A
+		TAY
+		LDA	<WORK7
+		STA	(<OSBADR),Y
+		PLY
+;
+		CMP	#002H
+		BEQ	RDDM800
+;
+		MEM16
+		REP	#00100000B
+		LDA	<WORK8
+		STA	<WORK2
+		MEM8
+		SEP	#00100000B
+
+		JSR	BMYXST3		; Y,X pos oam set sub
+;
+		LDA	<WORK6
+		INC	A
+		STA	(<OAMADR),Y
+		INY
+		LDA	#00110010B
+		STA	(<OAMADR),Y
+		INY
+		PHY
+		TYA
+		SEC
+		SBC	#004H
+		LSR	A
+		LSR	A
+		TAY
+		LDA	<WORK7
+		STA	(<OSBADR),Y
+		PLY
+RDDM800		EQU	$
+		PLX
+		DEX
+		BMI	RDDM900
+		BRL	RDDM100
+;
+RDDM900		EQU	$
+		LDX	#003H		; end ? [no:RDDMB00]
+RDDMA00		EQU	$
+		LDA	>KBBMNO,X
+		BPL	RDDMB00
+		DEX
+		BPL	RDDMA00
+		LDX	ENINDX
+		STZ	BMMODE,X
+		RTS
+;
+RDDMB00		EQU	$
+		LDX	ENINDX
+		LDA	>KBMODE
+		BEQ	RDDMF00
+		LDA	BMCONT,X
+		CMP	#004H
+		BEQ	RDDMF00
+		TAX
+		LDA	RDBKIX,X
+		TAX
+		STZ	<WORK8
+RDDMC00		EQU	$
+		LDA	!RDBKCR,X
+		CMP	#0FFH
+		BEQ	RDDMD00
+		PHX
+		TXA
+		ASL	A
+		TAX
+		MEM16
+		REP	#00100000B
+		LDA	#000C8H
+		SEC
+		SBC	<SCCV2
+		CLC
+		ADC	!RDBKYD,X
+		STA	<WORK0
+		LDA	#000A8H
+		SEC
+		SBC	<SCCH2
+		CLC
+		ADC	!RDBKXD,X
+		STA	<WORK2
+		MEM8
+		SEP	#00100000B
+		PLX
+;
+		JSR	BMYXST3
+		LDA	!RDBKCR,X
+		STA	(<OAMADR),Y
+		INY
+		LDA	!RDBKAT,X
+		ORA	#00110000B
+		ORA	#00000010B
+		STA	(<OAMADR),Y
+		INY
+		PHY
+		TYA
+		SEC
+		SBC	#004H
+		LSR	A
+		LSR	A
+		TAY
+		LDA	!RDBKSB,X
+		STA	(<OSBADR),Y
+		PLY
+RDDMD00		EQU	$
+		INX
+		INC	<WORK8
+		LDA	<WORK8
+		CMP	#006H
+		BNE	RDDMC00
+RDDMF00		EQU	$	
+		BRL	KBMV900
+;
+;**************************************************************
+;*		OPTION bomb bakuhatsu move	(OPBKMOV)     *
+;**************************************************************
+OPBKYP		EQU	$
+		WORD	00000H,0FFF0H,0FFE8H,0FFF0H
+		WORD	00000H,00000H,00010H,00018H
+		WORD	00010H
+OPBKXP		EQU	$
+		WORD	00000H,0FFF0H,00000H,00010H
+		WORD	0FFE8H,00018H,0FFF0H,00000H
+		WORD	00010H
+OPBKMOV		EQU	$
+		LDA	<GAMEMD
+		BNE	OPBK500
+;
+		DEC	BUMFLM,X
+		LDA	BUMFLM,X
+		BNE	OPBK500
+		INC	BMCONT,X
+		LDA	BMCONT,X
+		CMP	#002H
+		BNE	OPBK100
+		LDA	#bomb1
+		JSR	SDLRB2
+;
+OPBK100		EQU	$
+		LDA	BMCONT,X
+		CMP	#00BH
+		BNE	OPBK200
+		STZ	BMMODE,X
+		RTS
+OPBK200		EQU	$
+		TAY
+		LDA	!BOBFLM1,Y
+		STA	BUMFLM,X
+;
+OPBK500		EQU	$
+		LDA	#008H
+		STA	<WORK9
+		LDA	#030H
+		STA	<PYBGUN1
+		STZ	<PYBGUN
+		STZ	<WORKA
+		LDA	#00110010B
+		STA	<WORKB
+		LDA	BMCONT,X
+		TAY
+		LDA	!BBENDT,Y
+		STA	<WORK8
+		LDA	!BOMBMD,Y
+		TAY
+		LDA	!BOBINDX,Y
+		ASL	A
+		TAY
+		ASL	A
+		STA	<WORK4
+		STZ	<WORK5
+		TYA
+		STA	BMSTAT,X
+		LDY	#000H
+OPBK600		EQU	$
+		PHX
+		PHY
+		LDA	BMYPSL,X
+		STA	<WORK0
+		LDA	BMYPSH,X
+		STA	<WORK1
+		LDA	BMXPSL,X
+		STA	<WORK2
+		LDA	BMXPSH,X
+		STA	<WORK3
+		LDA	<WORK9
+		ASL	A
+		TAY
+		MEM16
+		REP	#00100000B
+		LDA	<WORK0
+		CLC
+		ADC	!OPBKYP,Y
+		SEC
+		SBC	<SCCV2
+		STA	<WORK0
+		LDA	<WORK2
+		CLC
+		ADC	!OPBKXP,Y
+		SEC
+		SBC	<SCCH2
+		STA	<WORK2
+		MEM8
+		SEP	#00100000B
+		PLY
+		LDA	BMSTAT,X
+		TAX
+;
+		LDA	<WORK1
+		BNE	OPBK680
+		LDA	<WORK3
+		BNE	OPBK680
+		PHX
+		PHY
+		LDA	#4*6
+		JSR	BMOMPT
+;
+		PLY
+		PLX
+		LDA	<WORK0
+		STA	<WORKC
+		LDA	<WORK1
+		STA	<WORKD
+		LDA	<WORK2
+		STA	<WORKE
+		LDA	<WORK3
+		STA	<WORKF
+		STZ	<WORK6
+		STZ	<WORK7
+		JSR	BOMOMST		; bomb oam set sub
+;
+OPBK680		EQU	$
+		PLX
+		DEC	<WORK9
+		BPL	OPBK600
+;
+		LDA	BMCONT,X
+		CMP	#003H
+		BNE	OPBK700
+		LDA	BUMFLM,X
+		CMP	#001H
+		BNE	OPBK700
+;
+		LDA	BMYPSL,X	; Y-pos
+		STA	<WORK0
+		LDA	BMYPSH,X
+		STA	<WORK1
+		LDA	BMXPSL,X	; X-pos
+		STA	<WORK2
+		LDA	BMXPSH,X
+		STA	<WORK3
+		PHX
+		JSL	>BDRCHCK	; bomb door check
+		PLX
+		LDA	#000H
+		STA	>OPMODE+0
+;
+OPBK700		EQU	$
+		RTS
+;
+;**************************************************************
+;*		player yousei fsukatsu demo	  (YOUSMV)    *
+;**************************************************************
+YSIFLM		EQU	$
+		HEX	000,090
+YSICRD		EQU	$
+		HEX	04B,04D,049,047,049
+YOUSMV		EQU	$
+		PHB
+		PHK
+		PLB
+;
+		LDX	#000H
+		LDA	BMSTAT,X
+		BEQ	YOSI080
+		CMP	#003H
+		BNE	YOSI200
+		BRL	YOSID00
+;
+YOSI080		EQU	$
+		DEC	BUMFLM,X	; yousei move 0
+		LDA	BUMFLM,X
+		BNE	YOSI100
+		INC	BMSTAT,X
+		LDY	BMSTAT,X
+		LDA	!YSIFLM,Y
+		STA	BUMFLM,X
+		STZ	BUADSB,X
+		STZ	BMZSPD,X
+		BRL	YOSIB00
+YOSI100		EQU	$
+		JSR	BMZCLC
+		BRL	YOSIB00
+;
+YOSI200		EQU	$
+		CMP	#001H
+		BNE	YOSI600
+;
+YOSI240		EQU	$
+		DEC	BUMFLM,X	; yousei move 1
+		LDA	BUMFLM,X
+		BNE	YOSI300
+		INC	BMSTAT,X
+		STZ	BMZSPD,X
+		STZ	BMXSPD,X
+		BRL	YOSIB00
+YOSI300		EQU	$
+		CMP	#04FH
+		BEQ	YOSI320
+		CMP	#08FH
+		BNE	YOSI340
+YOSI320		EQU	$
+		INC	HIBSTAT,X
+;;;;;;;;		JSL	>SDLRCB
+;;;;;;;;		ORA	#031H
+;;;;;;;;		STA	!SOUND2
+		LDA	#031H
+		JSR	SDLRB2
+;
+YOSI340		EQU	$
+		LDA	HIBSTAT,X
+		BEQ	YOSI3C0
+;
+		DEC	HBFLEM,X
+		BPL	YOSI3C0
+		LDA	#005H
+		STA	HBFLEM,X
+		INC	BMCONT,X
+		LDA	BMCONT,X
+		CMP	#003H
+		BNE	YOSI3C0
+		STZ	BMCONT,X
+		STZ	HIBSTAT,X
+;
+YOSI3C0		EQU	$
+		LDY	#0FFH
+		LDA	BUADSB,X
+		BEQ	YOSI400
+		LDY	#001H
+YOSI400		EQU	$
+		STY	<WORK0
+		LDA	BMZSPD,X
+		CLC
+		ADC	<WORK0
+		STA	BMZSPD,X
+		BPL	YOSI500
+		EOR	#0FFH
+		INC	A
+YOSI500		EQU	$
+		CMP	#008H
+		BNE	YOSI540
+		LDA	BUADSB,X
+		EOR	#001H
+		STA	BUADSB,X
+YOSI540		EQU	$
+		JSR	BMZCLC
+		BRA	YOSIB00
+;
+YOSI600		EQU	$
+		CMP	#002H		; yousei move 2
+		BNE	YOSIB00
+;
+		LDA	BMZSPD,X
+		CMP	#018H
+		BCS	YOSI700
+		CLC
+		ADC	#001H
+		STA	BMZSPD,X
+YOSI700		EQU	$
+		LDA	BMXSPD,X
+		CMP	#010H
+		BCS	YOSI740
+		CLC
+		ADC	#001H
+		STA	BMXSPD,X
+YOSI740		EQU	$
+		JSR	BMXCLC
+		JSR	BMZCLC
+;
+;*************  yousei oam set
+YOSIB00		EQU	$
+		LDA	#4*3
+		JSL	>OAMENT3
+;
+		JSR	ITMPST
+		PHX
+		STZ	<WORKA
+		LDA	BMSTAT,X
+		CMP	#001H
+		BNE	YOSIB80
+		LDA	HIBSTAT,X
+		BEQ	YOSIB80
+		LDA	BMCONT,X
+		INC	A
+		STA	<WORKA
+YOSIB80		EQU	$
+		LDY	#000H
+		MEM16
+		REP	#00100000B
+		LDA	BMZPSL,X
+		AND	#00FFH
+		CMP	#0080H
+		BCC	YOSIC00
+		ORA	#0FF00H
+YOSIC00		EQU	$
+		EOR	#0FFFFH
+		INC	A
+		CLC
+		ADC	<WORK0
+		STA	<WORK0
+		MEM8
+		SEP	#00100000B
+		JSR	BMYXST3
+		LDA	<WORKA
+		BEQ	YOSIC40
+		DEC	A
+		CLC
+		ADC	#002H
+		TAX
+		BRA	YOSIC80
+YOSIC40		EQU	$
+		LDA	<FCNT
+		AND	#00000100B
+		LSR	A
+		LSR	A
+		TAX
+YOSIC80		EQU	$
+		LDA	!YSICRD,X
+		STA	(<OAMADR),Y
+		INY
+		LDA	#01110100B
+		STA	(<OAMADR),Y
+		TYA
+		SEC
+		SBC	#003H
+		LSR	A
+		LSR	A
+		TAY
+		LDA	#002H
+		STA	(<OSBADR),Y
+		PLX
+		LDY	#001H
+		LDA	(<OAMADR),Y
+		CMP	#0F0H
+		BNE	YOSID00
+		LDA	#003H
+		STA	BMSTAT,X
+;
+		INC	<GAMEMD
+		LDA	>BKDPMN
+		STA	<DPMAIN
+;// 03.09.16 //		LDA	>BKDPMN+1
+;// 03.09.16 //		STA	<DPSUB
+YOSID00		EQU	$
+		JSR	KONASET		; kona set
+		JSR	PYFKMV		; player set
+		PLB
+		RTL
+;
+;**************************************************************
+;*		yousei kona move sub 	  	   (KONASET)   *
+;**************************************************************
+KONASET		EQU	$
+		LDA	BMSTAT,X
+		BNE	KNST040
+		RTS
+;
+KNST040		EQU	$
+		LDX	#002H
+		LDA	BMSTAT,X
+		CMP	#002H
+		BEQ	KNST300
+;
+		DEC	BUMFLM,X
+		BPL	KNST300
+		STZ	BUMFLM,X
+		LDA	#4*04H
+		LDY	OAMTYP
+		BNE	KNST080
+		JSL	>OAMENT1
+		BRA	KNST0C0
+KNST080		EQU	$
+		JSL	>OAMENT4
+;
+KNST0C0		EQU	$
+		DEC	BMFLFG,X
+		BPL	KNST200
+		LDA	#003H
+		STA	BMFLFG,X
+		LDY	#003H
+		LDA	!KNDTINX,Y
+		STA	<WORK0
+		LDA	BMCONT,X
+		INC	A
+		CMP	#00AH
+		BNE	KNST100
+		LDA	#020H
+		STA	BUMFLM,X
+		INC	BMSTAT,X
+		LDA	#002H
+		STA	BMCONT,X
+		BRA	KNST300
+KNST100		EQU	$
+		STA	BMCONT,X
+		CLC
+		ADC	<WORK0
+		TAY
+		LDA	!KNMDDAT,Y
+		STA	BCDMNO,X
+KNST200		EQU	$
+		JSR	KONA240		; oam set sub
+
+KNST300		EQU	$
+		RTS
+;
+;**************************************************************
+;*		player futsukatsu move sub	   (PYFKMV)   *
+;**************************************************************
+PYFKMV		EQU	$
+		LDA	>LFITCT		; hart full ?
+		STA	<WORK0
+		LDA	>LFNWCT
+		CMP	<WORK0
+		BEQ	PYFK010
+		CMP	#038H		; hart check 7 ko ? [no:PYFK0C0]
+		BNE	PYFK0C0
+PYFK010		EQU	$
+		LDA	!KAIFLG
+		BNE	PYFK0C0
+;
+		LDY	#LNMD
+		LDA	!WATRFG
+		BEQ	PYFK020
+		LDY	#SWMD
+		LDA	#00000100B
+		STA	SWMUKI
+		BRA	PYFK040
+PYFK020		EQU	$
+		LDA	<RABIFG
+		BEQ	PYFK040
+		LDY	#RABT
+		LDA	#001H
+		STA	!RABFLG
+PYFK040		EQU	$
+		STY	<LNMODE
+		STZ	<DIEFG
+		STZ	DEMOFG
+		STZ	PYDMNO
+		STZ	PYDMMD
+		STZ	<PLZPS1
+		STZ	<HANEFG
+		STZ	BMMODE+0
+		STZ	BMMODE+1
+		STZ	BMMODE+2
+		STZ	BMMODE+3
+		STZ	BMMODE+4
+		RTS
+;
+PYFK0C0		EQU	$
+		LDX	#001H
+		LDA	BMSTAT,X
+		BNE	PYFK200
+		DEC	BUMFLM,X
+		LDA	BUMFLM,X
+		BNE	PYFK100
+		INC	BUMFLM,X
+		LDA	#004H
+		STA	BMZSPD,X
+		JSR	BMZCLC
+		LDA	BMZPSL,X
+		CMP	#010H
+		BCC	PYFK100
+		INC	BMSTAT,X
+		LDA	#002H
+		STA	BMZSPD,X
+PYFK100		EQU	$
+		BRA	PYFK700
+;
+PYFK200		EQU	$
+		DEC	BUADSB,X
+		BPL	PYFK600
+		LDA	#020H
+		STA	BUADSB,X
+		LDA	BMZSPD,X
+		EOR	#0FFH
+		INC	A
+		STA	BMZSPD,X
+PYFK600		EQU	$
+		JSR	BMZCLC
+;
+PYFK700		EQU	$
+		LDA	BMZPSL,X
+		STA	<PLZPS1
+		RTS
+;
+;**************************************************************
+;*		GAME over move sub 	  	   (GMOVMV)   *
+;**************************************************************
+GMOVMV		EQU	$
+		PHB
+		PHK
+		PLB
+;
+		JSR	GMOV100
+;
+		PLB
+		RTL
+;
+;
+GMVTBL		EQU	$
+		BYTE	LOW GMDMFAS		;[0]
+		BYTE	LOW GMDMEND		;[1]
+		BYTE	LOW GOOMST		;[2]
+GMVTBH		EQU	$
+		BYTE	HIGH GMDMFAS		;[0]
+		BYTE	HIGH GMDMEND		;[1]
+		BYTE	HIGH GOOMST		;[2]
+;
+GMOV100		EQU	$
+		LDX	BMMODE
+		BEQ	GMOV200
+		DEX
+		LDA	!GMVTBL,X
+		STA	<WORK0
+		LDA	!GMVTBH,X
+		STA	<WORK1
+		JMP	(WORK0)
+;
+GMOV200		EQU	$
+		INC	<GAMEMD
+		RTS
+;
+;**************************************************************
+;*		GAME over move demo 1	   	(GMDMFAS)   *
+;**************************************************************
+GMPTCK		EQU	$
+;			  G   A   M   E   O   V   E   R
+		HEX	040,050,060,070,088,098,0A8,040
+GMDMFAS		EQU	$
+		LDX	BMRMOV
+		STX	ENINDX
+		LDY	#080H
+		CPX	#007H
+		BNE	GMFS200
+		LDY	#080H
+GMFS200		EQU	$
+		TYA
+		STA	BMXSPD,X
+		JSR	BMXCLC
+;
+		LDA	BMXPSH,X
+		BNE	GMFS400
+;
+		LDA	BMXPSL,X
+		CMP	!GMPTCK,X
+		BCS	GMFS400
+		LDA	!GMPTCK,X
+		STA	BMXPSL,X
+		INX
+		STX	BMRMOV
+		CPX	#008H
+		BNE	GMFS400
+		LDA	#007H
+		STA	BMRMOV
+		INC	BMMODE
+		STZ	HBMUKI
+		LDA	#026H
+		STA	!SOUND3
+		BRA	GMFS800
+;
+GMFS400		EQU	$
+		CPX	#007H
+		BNE	GMFS800
+;
+ 		LDY	#006H
+		CPY	HBMUKI
+		BEQ	GMFS700
+GMFS500		EQU	$
+		LDA	BMXPSL,X
+		STA	BMXPSL,Y
+		DEY
+		CPY	HBMUKI
+		BNE	GMFS500
+;
+GMFS700		EQU	$
+		LDA	BMXPSH,X
+		BNE	GMFS800
+		LDA	BMXPSL,X
+		LDX	HBMUKI
+		CMP	!GMPTCK,X
+		BCS	GMFS800
+		DEC	HBMUKI
+;
+GMFS800		EQU	$
+		BRL	GOOMST
+;
+;**************************************************************
+;*		GAME over move demo 2	   	(GMDMEND)   *
+;**************************************************************
+GMPTCK1		EQU	$
+;			  G   A   M   E   O   V   E   R
+		HEX	058,060,068,070,088,090,098,0A0
+GMDMEND		EQU	$
+		LDX	BMRMOV
+		STX	ENINDX
+		LDA	#060H
+		STA	BMXSPD,X
+		JSR	BMXCLC
+;
+		LDY	HBMUKI
+		LDA	BMXPSL,X
+		CMP	!GMPTCK1,Y
+		BCC	GMED300
+		LDA	!GMPTCK1,Y
+		STA	BMXPSL,Y
+		INC	HBMUKI
+		LDA	HBMUKI
+		CMP	#008H
+		BNE	GMED300
+		INC	<GAMEMD
+		INC	BMMODE
+		BRA	GMED900
+;
+GMED300		EQU	$
+		LDA	HBMUKI
+		DEC	A
+		STA	<WORK0
+		LDX	BMRMOV
+		TXY
+GMED400		EQU	$
+		LDA	BMXPSL,X
+		STA	BMXPSL,Y
+		DEY
+		CPY	<WORK0
+		BNE	GMED400
+;
+GMED900		EQU	$
+		BRA	GOOMST
+;
+;**************************************************************
+;*		GAME over move demo oam set	(GOOMST)     *
+;**************************************************************
+GOCHDT		EQU	$
+		HEX	040,050		;G
+		HEX	041,051		;A
+		HEX	042,052		;M
+		HEX	043,053		;E
+		HEX	044,054		;O
+		HEX	045,055		;V
+		HEX	043,053		;E
+		HEX	046,056		;R
+GOOMST		EQU	$
+		LDA	#LOW OAM
+		STA	<OAMADR
+		LDA	#HIGH OAM
+		STA	<OAMADR+1
+		LDA	#LOW OAMSB
+		STA	<OSBADR
+		LDA	#HIGH OAMSB
+		STA	<OSBADR+1
+;
+		LDX	BMRMOV
+		LDY	#000H
+GOOM100		EQU	$
+		PHX
+		LDA	#057H
+		STA	<WORK0
+		STZ	<WORK1
+		LDA	BMXPSL,X
+		STA	<WORK2
+		LDA	BMXPSH,X
+		STA	<WORK3
+;
+		JSR	BMYXST3
+		TXA
+		ASL	A
+		TAX
+		LDA	!GOCHDT,X
+		STA	(<OAMADR),Y
+		INY
+		LDA	#00111100B
+		STA	(<OAMADR),Y
+		INY
+		LDA	#05FH
+		STA	<WORK0
+		STZ	<WORK1
+		JSR	BMYXST3
+		LDA	!GOCHDT+1,X
+		STA	(<OAMADR),Y
+		INY
+		LDA	#00111100B
+		STA	(<OAMADR),Y
+		INY
+;
+		PHY
+		TYA
+		SEC
+		SBC	#008H
+		LSR	A
+		LSR	A
+		TAY
+		LDA	#000H
+		STA	(<OSBADR),Y
+		INY
+		STA	(<OSBADR),Y
+		PLY
+;
+		PLX
+		DEX
+		BPL	GOOM100
+		RTS
+;
+;
+;**************** COMMON PROGRAM 
+;
+;**************************************************************
+;*		sound (L,R) checl shori		(SODLRC)      *
+;*		(A) <---- x-pos				      *
+;**************************************************************
+SODLRC		EQU	$
+		PHX
+		LSR	A
+		LSR	A
+		LSR	A
+		LSR	A
+		LSR	A
+		TAX
+		LDA	>BMLRDT,X
+		PLX
+		RTS
+;**************************************************************
+;*		Jump item aki ram surch shori	(JPRMSR)      *
+;**************************************************************
+JPRMSR		EQU	$		; aki item ram surch
+		PHA
+;
+		JSL	>BMIDSH
+;
+		PLA
+		TYX
+		BMI	JPRM100
+		STA	BMMODE,X 	; beam mode set
+		TAY
+		LDA	!BMITOC-1,Y	; use kosuu set
+		STA	BMOMNO,X
+		LDA	<PLBGCKF	; BG uusen set
+		STA	BMPRIO,X
+		LDA	CDBGCKF
+		STA	BMCDPR,X
+                STZ     BMYSPD,X         ; y-speed clear
+                STZ     BMXSPD,X         ; x-speed clear
+		STZ	BMCRFG,X	 ; BG no check flag clear
+		STZ	BMCRTM,X	 ; gake sheck timer clear
+		CLC
+		RTS
+JPRM100		EQU	$
+		SEC
+		RTS
+;	
+;**************************************************************
+;*		Jump item aki ram surch shori	(JPRMSR1)      *
+;**************************************************************
+JPRMSR1		EQU	$		; aki item ram surch
+		LDX	#005H
+JPSR100		EQU	$
+		CMP	BMMODE,X	 ; item mode set
+		BEQ	JPSR200
+		DEX
+		BPL	JPSR100
+		CLC
+		RTS
+;
+JPSR200		EQU	$
+		SEC
+		RTS
+;
+;**************************************************************
+;*		priority,beam scrool pos set	(ITMPST)     *
+;**************************************************************
+ITUSNDT		EQU	$		; bg uusen data
+		HEX	020,010,030,020
+ITMPST		EQU	$
+		LDY	BMPRIO,X
+		LDA	!ITUSNDT,Y
+		STA	<PYBGUN1	; bg uusen juni set
+		STZ	<PYBGUN
+;
+		LDA	BMYPSL,X	; Y-pos
+		STA	<WORK0
+		LDA	BMYPSH,X
+		STA	<WORK1
+		LDA	BMXPSL,X	; Y-pos
+		STA	<WORK2
+		LDA	BMXPSH,X
+		STA	<WORK3
+		MEM16
+		REP	#00100000B
+		LDA	<WORK0
+		SEC
+		SBC	<SCCV2		; Y-scr hosei
+		STA	<WORK0
+		LDA	<WORK2
+		SEC
+		SBC	<SCCH2
+		STA	<WORK2
+		STA	<WORK4
+		MEM8
+		SEP	#00100000B
+		RTS
+;
+;**************************************************************
+;*		priority,beam scrool pos set	(ITMPST1)    *
+;**************************************************************
+ITMPST1		EQU	$
+		LDY	BMPRIO,X
+		LDA	!ITUSNDT,Y
+		STA	<PYBGUN1	; bg uusen juni set
+		STZ	<PYBGUN
+;
+		LDA	BMYPSL,X	; Y-pos
+		STA	<WORK0
+		LDA	BMYPSH,X
+		STA	<WORK1
+		LDA	BMXPSL,X	; Y-pos
+		STA	<WORK2
+		LDA	BMXPSH,X
+		STA	<WORK3
+		MEM16
+		REP	#00100000B
+		LDA	<WORK0
+		SEC
+		SBC	!SSCCV2		; Y-scr hosei
+		STA	<WORK0
+		LDA	<WORK2
+		SEC
+		SBC	!SSCCH2
+		STA	<WORK2
+		STA	<WORK4
+		MEM8
+		SEP	#00100000B
+		RTS
+;
+;**************************************************************
+;*		priority,beam scrool pos set	(ITMPSTL)    *
+;**************************************************************
+ITMPSTL		EQU	$
+		PHB
+		PHK
+		PLB
+		JSR	ITMPST
+		PLB
+		RTL
+;
+;**************************************************************
+;*		beam Y,X pos oam set		(BMYXST3)     *
+;**************************************************************
+BMYXST3		EQU	$
+		PHX
+		LDX	#0F0H
+		LDA	<WORK1
+		BNE	BM3Y100
+		LDA	<WORK3
+		BNE	BM3Y100
+		LDA	<WORK2		; X-pos set
+		STA	(<OAMADR),Y
+		LDA	<WORK0		; Y-pos set
+		CMP	#0F0H
+		BCS	BM3Y100
+		TAX
+BM3Y100		EQU	$
+		INY
+		TXA
+		STA	(<OAMADR),Y
+		INY
+		PLX
+		RTS
+;
+;**************************************************************
+;*		beam Y,X pos oam set		(BMYXST31)    *
+;**************************************************************
+BMYXST31	EQU	$
+		JSR	BMYXST3
+		RTL
+;
+;**************************************************************
+;*		beam Y,X pos oam set		(BMYXST4)     *
+;**************************************************************
+BMYXST4		EQU	$
+		MEM16
+		REP	#00100000B
+		LDA	<WORK2
+		STA	(<OAMADR),Y
+		INY
+		CLC
+		ADC	#080H
+		CMP	#0180H
+		BCS	BM4S0C0
+;
+		LDA	<WORK2
+		AND	#0100H
+		STA	<BMWORK+2
+;
+		LDA	<WORK0
+		STA	(<OAMADR),Y
+		CLC
+		ADC	#0010H
+		CMP	#0100H
+		BCC	BM4S100
+BM4S0C0		EQU	$
+		LDA	#00F0H
+		STA	(<OAMADR),Y
+BM4S100		EQU	$
+		MEM8
+		SEP	#00100000B
+		INY
+		RTS
+;
+;**************************************************************
+;*		beam,player hani check 		(PYHICK)      *
+;*		y <---- 0 bomb				      *
+;*			1 tori warp			      *
+;*			2 aitem,okarina			      *
+;*			3 				      *
+;*			4 tama push			      *
+;**************************************************************
+PYBMYD0		EQU	$	; beam center y-pos data 0
+		WORD	00000H,00008H,00008H,00008H,00000H
+PYBMXD0		EQU	$	; beam center x-pos data 0
+		WORD	00000H,00008H,00008H,00008H,00000H
+PYBMYD1		EQU	$	; beam hani y-pos data 1
+		WORD	00014H,00014H,00008H,0001CH,0000EH
+PYBMXD1		EQU	$	; beam hani x-pos data 1
+		WORD	00014H,00003H,00008H,00018H,0000EH
+PYHIYD		EQU	$	; player center y-pos data
+		WORD	0000CH,0000CH,0000CH,0000CH,0000CH
+PYHIXD		EQU	$	; player center x-pos data
+		WORD	00008H,00008H,00008H,0000CH,00008H
+;
+PYHICK		EQU	$
+		TYA
+		ASL	A
+		TAY
+		LDA	BMYPSL,X
+		STA	<WORK0
+		LDA	BMYPSH,X
+		STA	<WORK1
+		LDA	BMXPSL,X
+		STA	<WORK2
+		LDA	BMXPSH,X
+		STA	<WORK3
+PYHI080		EQU	$
+		STZ	<WORKB
+		LDA	BMZPSL,X
+		STA	<WORKA
+		BPL	PYHI100
+		LDA	#0FFH
+		STA	<WORKB
+PYHI100		EQU	$
+		MEM16
+		REP	#00100000B
+		LDA	<WORK0
+		CLC
+		ADC	<WORKA
+		CLC
+		ADC	!PYBMYD0,Y
+		STA	<WORK0
+		LDA	<WORK2
+		CLC
+		ADC	!PYBMXD0,Y
+		STA	<WORK2
+;
+		LDA	<PLYPS1
+		CLC
+		ADC	!PYHIYD,Y
+		SEC
+		SBC	<WORK0
+		STA	<WORK4
+		BPL	PYHI200
+		EOR	#0FFFFH
+		INC	A
+PYHI200		EQU	$
+		STA	<WORK8
+		CMP	!PYBMYD1,Y
+		BCS	PYHI400
+;
+		LDA	<PLXPS1
+		CLC
+		ADC	!PYHIXD,Y
+		SEC
+		SBC	<WORK2
+		STA	<WORK6
+		BPL	PYHI300
+		EOR	#0FFFFH
+		INC	A
+PYHI300		EQU	$
+		STA	<WORKA
+		CMP	!PYBMXD1,Y
+		BCS	PYHI400
+;
+		MEM8
+		SEP	#00100000B
+		SEC
+		RTS
+;
+PYHI400		EQU	$
+		MEM8
+		SEP	#00100000B
+		CLC
+		RTS
+;
+;**************************************************************
+;*		fotshot,player hani check sub	(PYHICK1)     *
+;**************************************************************
+PYHICK1		EQU	$
+		MEM16
+		REP	#00100000B
+		LDA	<WORK0
+		CLC
+		ADC	#0004H
+		STA	<BMWORK+0
+		LDA	<WORK2
+		CLC
+		ADC	#0004H
+		STA	<BMWORK+2
+;
+		LDA	<PLYPS1
+		SEC
+		SBC	<SCCV2
+		CLC
+		ADC	#000CH
+		SEC
+		SBC	<BMWORK+0
+		BPL	P1HI200
+		EOR	#0FFFFH
+		INC	A
+P1HI200		EQU	$
+		CMP	#000CH
+		BCS	P1HI400
+;
+		LDA	<PLXPS1
+		SEC
+		SBC	<SCCH2
+		CLC
+		ADC	#0008H
+		SEC
+		SBC	<BMWORK+2
+		BPL	P1HI300
+		EOR	#0FFFFH
+		INC	A
+P1HI300		EQU	$
+		CMP	#000CH
+		BCS	P1HI400
+;
+		MEM8
+		SEP	#00100000B
+		SEC
+		RTS
+;
+P1HI400		EQU	$
+		MEM8
+		SEP	#00100000B
+		CLC
+		RTS
+;
+;**************************************************************
+;*		player,BG hani check sub	(PYHICK4)     *
+;*		y  <--- 0 hed water (danjon)		      *
+;*		 	1 hed water (chijoo)		      *
+;*		 	2 sunder	 (chijoo nama)	      *
+;*		 	3 jishin	 (chijoo kameiwa)     *
+;**************************************************************
+BGHNIDY		EQU	$		; BG kihon y-pos data
+;			     D      C      C      C
+		WORD	00D40H,00210H,00CFCH,00100H
+BGHNIDX		EQU	$		; BG kihon x-pos data
+		WORD	00D80H,00E68H,00130H,00F10H
+PYBGYD1		EQU	$		; BG hani y-pos data
+		WORD	0000BH,00020H,00010H,0000CH
+PYBGXD1		EQU	$		; BG hani x-pos data
+		WORD	00010H,00010H,00010H,00010H
+PYHICK4		EQU	$
+		TYA
+		ASL	A
+		TAY
+		MEM16
+		REP	#00100000B
+		LDA	<PLYPS1
+		CLC
+		ADC	#0000CH
+		SEC
+		SBC	!BGHNIDY,Y
+		BPL	P4HI200
+		EOR	#0FFFFH
+		INC	A
+P4HI200		EQU	$
+		CMP	!PYBGYD1,Y
+		BCS	P4HI400
+;
+		LDA	<PLXPS1
+		CLC
+		ADC	#00008H
+		SEC
+		SBC	!BGHNIDX,Y
+		BPL	P4HI300
+		EOR	#0FFFFH
+		INC	A
+P4HI300		EQU	$
+		CMP	!PYBGXD1,Y
+		BCS	P4HI400
+;
+		MEM8
+		SEP	#00100000B
+		SEC
+		RTS
+;
+P4HI400		EQU	$
+		MEM8
+		SEP	#00100000B
+		CLC
+		RTS
+;
+;**************************************************************
+;*		kage oam set sub 		(KGOAMSB)     *
+;*		work+0	 y-pos				      *
+;*		work+2	 x-pos				      *
+;*		work+4	 priorty			      *
+;*		x	 type				      *
+;**************************************************************
+KGOAMC		EQU	$		; kage chara set
+		HEX	06C,06C		; kage big	(0)
+		HEX	028,028		; kage middol	(1)
+		HEX	038,0FF		; kage smoll	(2)
+;
+		HEX	0C8,0C8		; kusa 0	(3)
+;
+		HEX	0D8,0D8		; water 0	(4)
+		HEX	0D9,0D9		; water 1	(5)
+		HEX	0DA,0DA		; water 2	(6)
+;
+KGOAMA		EQU	$
+		HEX	028,068
+		HEX	028,068
+		HEX	028,0FF
+;
+		HEX	022,022
+;
+		HEX	024,064
+		HEX	024,064
+		HEX	024,064
+;
+KGOAMSB		EQU	$
+		CPX	#002H		; kage smoll ? [NO:KGSB100]
+		BNE	KGSB100
+		MEM16
+		REP	#00100000B
+		LDA	<WORK2		; kage smoll ichi set
+		CLC
+		ADC	#0004H
+		STA	<WORK2
+		MEM8
+		SEP	#00100000B
+KGSB100		EQU	$
+		TXA
+		ASL	A
+		TAX
+;
+		STZ	<BMWORK+2
+		STZ	<BMWORK+3
+;
+		JSR	BMYXST4
+		LDA	!KGOAMC,X
+		STA	(<OAMADR),Y
+		INY
+		LDA	!KGOAMA,X
+		AND	#11001111B
+		ORA	<WORK4
+		STA	(<OAMADR),Y
+		INY
+		PHY
+		TYA
+		SEC
+		SBC	#004H
+		LSR	A
+		LSR	A
+		TAY
+		LDA	#000H
+		ORA	<BMWORK+3
+		STA	(<OSBADR),Y
+		PLY
+;
+KGSB900		EQU	$
+		MEM16
+		REP	#00100000B
+		LDA	<WORK2
+		CLC
+		ADC	#0008H
+		STA	<WORK2
+		MEM8
+		SEP	#00100000B
+		LDA	!KGOAMC+1,X
+		CMP	#0FFH
+		BEQ	KGSBA00
+		STZ	<BMWORK+2
+		STZ	<BMWORK+3
+		JSR	BMYXST4
+		LDA	!KGOAMC+1,X
+		STA	(<OAMADR),Y
+		INY
+		LDA	!KGOAMA+1,X
+		AND	#11001111B
+		ORA	<WORK4
+		STA	(<OAMADR),Y
+		INY
+		PHY
+		TYA
+		SEC
+		SBC	#003H
+		LSR	A
+		LSR	A
+		TAY
+		LDA	#000H
+		ORA	<BMWORK+3
+		STA	(<OSBADR),Y
+		PLY
+;
+KGSBA00		EQU	$
+		RTS
+;
+;**************************************************************
+;*		OAM pointer under set sub	(OMUNDR)     *
+;**************************************************************
+OMUNDR		EQU	$
+		LDY	OAMTYP
+		BNE	OMDR100
+		JSL	>OAMENT2
+		BRA	OMDR200
+OMDR100		EQU	$
+		JSL	>OAMENT5
+OMDR200		EQU	$
+		RTS
+;
+;**************************************************************
+;*		option player surch sub  ()   *
+;**************************************************************
+OPPLSH		EQU	$
+		PHB
+		PHK
+		PLB
+;
+OPPL080		EQU	$
+		LDX	OPINDX+4
+		LDA	OPYPSL,X
+		STA	BMYPSL+9
+		LDA	OPYPSH,X
+		STA	BMYPSH+9
+		LDA	OPXPSL,X
+		STA	BMXPSL+9
+		LDA	OPXPSH,X
+		STA	BMXPSH+9
+		LDX	#009H
+		LDA	#018H		; speed set
+		JSR	BMPLSH		; player surch sub
+		LDA	<WORK0
+		STA	BMYSPD,X
+		LDA	<WORK1
+		STA	BMXSPD,X
+		JSR	BMYCLC
+		PHX
+		JSR	BMXCLC
+		PLX
+;
+		LDA	BMYPSL,X
+		STA	<WORK0
+		LDA	BMYPSH,X
+		STA	<WORK1
+		LDA	BMXPSL,X
+		STA	<WORK2
+		LDA	BMXPSH,X
+		STA	<WORK3
+;
+		MEM16
+		REP	#00100000B
+		LDA	<WORK0
+		SEC
+		SBC	<PLYPS1
+		BPL	OPPL100
+		EOR	#0FFFFH
+		INC	A
+OPPL100		EQU	$
+		CMP	#0002H
+		BCS	OPPL300
+		LDA	<WORK2
+		SEC
+		SBC	<PLXPS1
+		BPL	OPPL200
+		EOR	#0FFFFH
+		INC	A
+OPPL200		EQU	$
+		CMP	#0002H
+		BCC	OPPL400
+OPPL300		EQU	$
+		MEM8
+		SEP	#00100000B
+		INC	OPINDX+4
+		LDX	OPINDX+4
+		CPX	#012H
+		BEQ	OPPL400
+		LDA	<WORK0
+		STA	OPYPSL,X
+		LDA	<WORK1
+		STA	OPYPSH,X
+		LDA	<WORK2
+		STA	OPXPSL,X
+		LDA	<WORK3
+		STA	OPXPSH,X
+		LDY	<PLBGCKF
+		LDA	!ITUSNDT,Y
+		LSR	A
+		LSR	A
+		ORA	#001H
+		STA	OPMUKI,X
+		BRL	OPPL080
+;
+OPPL400		EQU	$
+		MEM8
+		SEP	#00100000B
+		PLB
+		RTL
+;
+;
+;**************************************************************
+;*		OAM pointer check		(OAMPLCK)     *
+;**************************************************************
+OAMPLCK		EQU	$	; oam point check
+		PHA
+		PHX
+		MEM16
+		REP	#00100000B
+		TYA
+		AND	#00FFH
+		CLC
+		ADC	<OAMADR
+		LDX	OAMTYP
+		BEQ	OMCK600
+;
+		CMP	#OAM+100H
+		BCS	OMCK400
+		CMP	#OAM+00E0H
+		BCC	OMCK700
+		LDA	#OAM+0020H
+		BRA	OMCK680
+;
+OMCK400		EQU	$
+		CMP	#OAM+01D0H
+		BCC	OMCK700
+		LDA	#OAM+0140H
+		BRA	OMCK680
+;
+OMCK600		EQU	$
+		CMP	#OAM+0190H
+		BCC	OMCK700
+		LDA	#OAM+0020H
+;
+OMCK680		EQU	$
+		STA	<OAMADR
+		SEC
+		SBC	#OAM
+		LSR	A
+		LSR	A
+		CLC
+		ADC	#OAMSB
+		STA	<OSBADR
+		LDY	#000H
+OMCK700		EQU	$
+		MEM8
+		SEP	#00100000B
+		PLX
+		PLA
+		RTS
+;
+;**************************************************************
+;*		OAM pointer check 1		(OAMPLC1)     *
+;**************************************************************
+OAMPLC1		EQU	$	; oam point check
+		PHA
+		PHX
+		MEM16
+		REP	#00100000B
+		TYA
+		AND	#00FFH
+		CLC
+		ADC	<OAMADR
+		LDX	OAMTYP
+		BNE	OM1K100
+;
+		CMP	#OAM+01D0H
+		BCC	OM1K100
+		LDA	#OAM+0020H
+		STA	<OAMADR
+		SEC
+		SBC	#OAM
+		LSR	A
+		LSR	A
+		CLC
+		ADC	#OAMSB
+		STA	<OSBADR
+		LDY	#000H
+OM1K100		EQU	$
+		MEM8
+		SEP	#00100000B
+		PLX
+		PLA
+		RTS
+;
+;**************************************************************
+;*		beam Y,X pos scch,v gai check	(BMYXCHK)     *
+;**************************************************************
+BMYXCHK		EQU	$
+		PHX
+		PHY
+
+		LDA	BMYPSL,X
+		STA	<WORK0
+		LDA	BMYPSH,X
+		STA	<WORK1
+		LDA	BMXPSL,X
+		STA	<WORK2
+		LDA	BMXPSH,X
+		STA	<WORK3
+;
+;// 03.05.22 //		LDA	<SLMODE
+;// 03.05.22 //		CMP	#MD_djply
+;// 03.05.22 //		BEQ	BYXCK300
+;// 03.05.22 //;
+		LDA	<GMMODE
+		BNE	BYXCK300	; danjyon ?
+;					; no
+		MEM16
+		REP	#00100000B	; memory 16bit mode
+;
+		LDA	BMMUKI,X
+		AND	#00002H
+		BNE	BYXCK40		; y-move ?
+;					; yes
+		LDX	!PLPTRM
+		LDA	<WORK0
+		SEC
+		SBC	>PLRPDY,X
+		CMP	#00004H
+		BCC	BYXCK80		; up-scroll ?
+;					; no
+		CMP	!GRMSZ1
+		BCS	BYXCK80		; down-scroll ?
+		BRA	BYXCK200	; no
+;
+BYXCK40		EQU	$
+		LDX	!PLPTRM
+		LDA	<WORK2
+		SEC
+		SBC	>PLRPDX,X
+		CMP	#00006H
+		BCC	BYXCK80		; left-scroll ?
+;					; no
+		CMP	!GRMSZ1
+		BCC	BYXCK200	; right-scroll ?
+;					; yes
+BYXCK80		EQU	$
+		MEM8
+		SEP	#00100000B
+		PLY
+		PLX
+		SEC
+		RTS
+;
+BYXCK200	EQU	$
+		MEM8
+		SEP	#00100000B
+		PLY
+		PLX
+		CLC
+		RTS
+;
+BYXCK300	EQU	$		; danjon scrool check !!
+		MEM16
+		REP	#00100000B
+		LDA	BMMUKI,X
+		AND	#0002H
+		BNE	BYXCK400
+		LDA	<WORK0
+		AND	#001FFH
+		CMP	#00004H
+		BCC	BYXCK80
+		CMP	#001E8H
+		BCS	BYXCK80
+		BRA	BYXCK500
+BYXCK400	EQU	$
+		LDA	<WORK2
+		AND	#001FFH
+		CMP	#00004H
+		BCC	BYXCK80
+		CMP	#001F0H
+		BCS	BYXCK80
+		BRA	BYXCK600
+;
+BYXCK500	EQU	$
+		MEM8
+		SEP	#00100000B
+		PLY
+		PLX
+		LDA	<WORK1
+		AND	#002H
+		STA	<WORK1
+		LDA	<PLYPS0
+		AND	#002H
+		CMP	<WORK1
+		BEQ	BYXCK800
+		SEC
+		RTS
+;
+BYXCK600	EQU	$
+		MEM8
+		SEP	#00100000B
+		PLY
+		PLX
+		LDA	<WORK3
+		AND	#002H
+		STA	<WORK3
+		LDA	<PLXPS0
+		AND	#002H
+		CMP	<WORK3
+		BEQ	BYXCK800
+		SEC
+		RTS
+;
+BYXCK800	EQU	$
+		CLC
+		RTS
+;
+;
+;**************************************************************
+;*		EN move shori			     (ENMVSH) *
+;*		(A) ---> mode 				      *
+;**************************************************************
+ENMVSH		EQU	$
+		PHX
+		TAX
+		LDA	>ENCSDT,X
+		STA	4202H
+		LDA	<WORK8		; hankei
+		STA	4203H
+		LDA	>ENYHDT,X	; y-pos (+,-)
+		STA	<WORK2
+		STZ	<WORK3
+		LDA	4216H		; Y-pos anser (L)
+		ASL	A
+		LDA	4217H		; Y-pos anser (H)
+		ADC	#000H
+		STA	<WORK0
+		STZ	<WORK1
+;
+		LDA	>ENSIDT,X
+		STA	4202H
+		LDA	<WORK8		; hankei
+		STA	4203H
+		LDA	>ENXHDT,X	; x-pos (+,-)
+		STA	<WORK6
+		STZ	<WORK7
+		LDA	4216H		; X-pos anser (L)
+		ASL	A
+		LDA	4217H		; X-pos anser (H)
+		ADC	#000H
+		STA	<WORK4
+		STZ	<WORK5
+		PLX
+;
+		RTS
+;
+;**************************************************************
+;*		EN move shori gaibu		     (ENMVSH1)*
+;**************************************************************
+ENMVSH1		EQU	$
+		PHB
+		PHK
+		PLB
+		JSR	ENMVSH
+		PLB
+		RTL
+;	
+;**************************************************************
+;*		beam oam pointer set sub	  (BMOMPT)    *
+;**************************************************************
+BMOMPT		EQU	$
+		LDY	OAMTYP		; oam point type = 0 ? 
+		BNE	BMPM100
+		JSL	>OAMENT1
+		RTS
+;
+BMPM100		EQU	$
+		LDY	BMPRIO,X
+		BNE	BMPT200		; oam uusen = under ?
+		JSL	>OAMENT4		
+		RTS
+;
+BMPT200		EQU	$
+		JSL	>OAMENT6
+		RTS
+;--------------------------------------------
+BMALCK		EQU	$
+		JSR	ALCKSB
+		LDY	#00H
+GSCL00		EQU	$
+		PHY
+		TYA
+		LSR	A
+		LSR	A
+		TAY		
+		LDA	<WORKB
+		BPL	GSCL08
+		LDA	(<OSBADR),Y
+		AND	#00000010B
+GSCL08		EQU	$
+		STA	(<OSBADR),Y
+		PLY
+GSCL09		EQU	$
+;-- X Check ---
+		LDX	#00H
+		LDA	(<OAMADR),Y
+		SEC
+		SBC	<WORK7
+		BPL	GSCL10
+		DEX
+GSCL10		EQU	$
+		CLC
+		ADC	<WORK2
+		STA	<WORK4
+		TXA
+		ADC	<WORK3
+		STA	<WORK5
+		JSR	ONOMCK
+		BCC	GSCL11
+		PHY
+		TYA
+		LSR	A
+		LSR	A
+		TAY
+		LDA	(<OSBADR),Y
+		ORA	#00000001B
+		STA	(<OSBADR),Y
+		PLY
+GSCL11		EQU	$
+;-- Y check --
+		LDX	#00H
+		INY
+		LDA	(<OAMADR),Y
+		SEC
+		SBC	<WORK6
+		BPL	GSCL12
+		DEX
+GSCL12		EQU	$
+		CLC
+		ADC	<WORK0
+		STA	<WORK9
+		TXA
+		ADC	<WORK1
+		STA	<WORKA
+		JSR	ONOMCV
+		BCC	GSCL20
+GSCL18		EQU	$
+		LDA	#0F0H
+		STA	(<OAMADR),Y
+GSCL20		EQU	$
+;;;		INY
+		INY
+		INY
+		INY
+		DEC	<WORK8
+		BPL	GSCL00
+		BRL	KBMV900
+;--------------------------------------------
+;---------------------------------------------
+ALCKSB		EQU	$
+		STY	<WORKB
+		STA	<WORK8
+		LDA	BMYPSL,X
+		STA	<WORK0
+		SEC
+		SBC	<SCCV2
+		STA	<WORK6
+		LDA	BMYPSH,X
+		STA	<WORK1
+		LDA	BMXPSL,X
+		STA	<WORK2
+		SEC
+		SBC	<SCCH2
+		STA	<WORK7
+		LDA	BMXPSH,X
+		STA	<WORK3
+		RTS
+;------------------------------
+ONOMCK		EQU	$
+		MEM16
+		REP	#00100000B
+		LDA	<WORK4
+		SEC
+		SBC	<SCCH2
+		CMP	#0100H
+		MEM8
+		SEP	#00100000B
+		RTS
+;-------------------------------
+ONOMCV		EQU	$
+		MEM16
+		REP	#00100000B
+		LDA	<WORK9
+		PHA
+		CLC
+		ADC	#10H
+		STA	<WORK9
+		SEC
+		SBC	<SCCV2
+		CMP	#0100H
+		PLA
+		STA	<WORK9
+		MEM8
+		SEP	#00100000B
+		RTS
+;
+;
+;
+;
+;**************************************************************
+;*		JISHIN special DATA	(JSNDAT0)(JSNDAT1)    *
+;*		        X         Y VH S    NO                *
+;*		000H+000H,000H+000H,0000 0000B		      *
+;*		S ---> size 00--> smoll 10--> big	      *
+;**************************************************************
+JSNDAT0		EQU	$
+JSN000		EQU	$	; mode A
+		BYTE	000H,0F0H,00000000B
+JSN001		EQU	$
+		BYTE	000H,0F0H,00000001B
+JSN002		EQU	$
+		BYTE	000H,0F0H,00000010B
+JSN003		EQU	$
+		BYTE	000H,0F0H,00000011B
+JSN004		EQU	$
+		BYTE	000H,0F0H,01000011B
+JSN005		EQU	$
+		BYTE	000H,0F0H,01000010B
+JSN006		EQU	$
+		BYTE	000H,0F0H,01000001B
+JSN007		EQU	$
+		BYTE	000H,0F0H,01000000B
+JSN008		EQU	$
+		BYTE	000H,0F0H,01000000B
+		BYTE	00EH,0F8H,10000100B
+JSN009		EQU	$
+		BYTE	01DH,0F8H,01000100B
+		BYTE	00DH,0F9H,10000100B
+JSN00A		EQU	$
+		BYTE	01FH,0F9H,01000100B
+		BYTE	02FH,0FCH,10000100B
+JSN00B		EQU	$
+		BYTE	031H,0F5H,00000110B
+		BYTE	03FH,0FBH,01000100B
+		BYTE	02FH,0FCH,10000100B
+JSN00C		EQU	$
+		BYTE	024H,0EFH,00001000B
+		BYTE	031H,0F5H,00000110B
+		BYTE	03FH,0FBH,01000100B
+		BYTE	04EH,004H,00001000B
+JSN00D		EQU	$
+		BYTE	016H,0E1H,00001000B
+		BYTE	024H,0EFH,00001000B
+		BYTE	04EH,004H,00001000B
+		BYTE	05DH,014H,00001000B
+JSN00E		EQU	$
+		BYTE	007H,0D2H,00001000B
+		BYTE	017H,0D3H,01001000B
+		BYTE	016H,0E1H,00001000B
+		BYTE	05DH,014H,00001000B
+		BYTE	05DH,024H,01001000B
+JSN00F		EQU	$
+		BYTE	0F9H,0C3H,00001000B
+		BYTE	025H,0C5H,01001000B
+		BYTE	007H,0D2H,00001000B
+		BYTE	017H,0D3H,01001000B
+		BYTE	05DH,024H,01001000B
+		BYTE	05DH,034H,00001000B
+JSN010		EQU	$
+		BYTE	0EAH,0B5H,00001000B
+		BYTE	02FH,0B6H,00000001B
+		BYTE	0F8H,0C3H,00001000B
+		BYTE	024H,0C4H,01001000B
+		BYTE	05DH,034H,00001000B
+		BYTE	06CH,043H,00001000B
+JSN011		EQU	$
+		BYTE	0DBH,0A6H,00001000B
+		BYTE	0EAH,0B5H,00001000B
+		BYTE	02FH,0B6H,00000001B
+		BYTE	03BH,0C2H,10000001B
+		BYTE	06CH,043H,00001000B
+		BYTE	079H,050H,00001000B
+JSN012		EQU	$
+		BYTE	0D4H,098H,11001001B
+		BYTE	0DBH,0A6H,00001000B
+		BYTE	049H,0B6H,01001000B
+		BYTE	03BH,0C2H,10000001B
+		BYTE	079H,050H,00001000B
+JSN013		EQU	$
+		BYTE	0D4H,088H,00001001B
+		BYTE	0D4H,098H,11001001B
+		BYTE	057H,0A7H,01001000B
+		BYTE	049H,0B6H,01001000B
+JSN014		EQU	$
+		BYTE	0D4H,088H,00001001B
+		BYTE	066H,098H,01001000B
+		BYTE	057H,0A7H,01001000B
+JSN015		EQU	$
+		BYTE	066H,098H,01001000B
+		BYTE	057H,0A7H,01001000B
+JSN016		EQU	$
+		BYTE	070H,08CH,01001000B
+		BYTE	066H,098H,01001000B
+JSN017		EQU	$
+		BYTE	070H,08CH,01001000B
+;
+JSN040		EQU	$	; mode B
+		BYTE	0F3H,0F0H,00000000B
+JSN041		EQU	$
+		BYTE	0F3H,0F0H,00000001B
+JSN042		EQU	$
+		BYTE	0F3H,0F0H,00000010B
+JSN043		EQU	$
+		BYTE	0F3H,0F0H,00000011B
+JSN044		EQU	$
+		BYTE	0F5H,0F0H,01000011B
+JSN045		EQU	$
+		BYTE	0F5H,0F0H,01000010B
+JSN046		EQU	$
+		BYTE	0F5H,0F0H,01000001B
+JSN047		EQU	$
+		BYTE	0F5H,0F0H,01000000B
+		BYTE	0E8H,0F6H,00000100B
+JSN048		EQU	$
+		BYTE	0DAH,0EEH,00001000B
+		BYTE	0E8H,0F6H,00000100B
+		BYTE	0D8H,0F9H,11000100B
+JSN049		EQU	$
+		BYTE	0D3H,0DFH,11001001B
+		BYTE	0DAH,0EEH,00001000B
+		BYTE	0C7H,0F9H,00000100B
+		BYTE	0D8H,0F9H,11000100B
+JSN04A		EQU	$
+		BYTE	0D0H,0D3H,00000111B
+		BYTE	0D3H,0DFH,11001001B
+		BYTE	0C7H,0F9H,00000100B
+		BYTE	0B9H,002H,01001000B
+JSN04B		EQU	$
+		BYTE	0D0H,0D3H,00000110B
+		BYTE	0B9H,002H,01001000B
+		BYTE	0BAH,012H,00001000B
+JSN04C		EQU	$
+		BYTE	0D0H,0D3H,00000101B
+		BYTE	0BAH,012H,00001000B
+		BYTE	0C8H,021H,00001000B
+JSN04D		EQU	$
+		BYTE	0D0H,0D3H,00000111B
+		BYTE	0CAH,022H,00001000B
+		BYTE	0CAH,031H,10001000B
+JSN04E		EQU	$
+		BYTE	0D0H,0D3H,00000110B
+		BYTE	0CAH,031H,10001000B
+		BYTE	0BBH,040H,10001000B
+JSN04F		EQU	$
+		BYTE	0D0H,0D3H,00000111B
+		BYTE	0BBH,040H,10001000B
+		BYTE	0ABH,049H,11000100B
+JSN050		EQU	$
+		BYTE	0D0H,0D3H,00000101B
+		BYTE	09BH,049H,00000100B
+		BYTE	0ABH,049H,11000100B
+JSN051		EQU	$
+		BYTE	0C4H,0CBH,00001000B
+		BYTE	0D0H,0D3H,00000110B
+		BYTE	09BH,049H,00000100B
+		BYTE	08CH,04DH,11000100B
+JSN052		EQU	$
+		BYTE	0B5H,0BDH,00001000B
+		BYTE	0C4H,0CBH,00001000B
+		BYTE	080H,04CH,00000100B
+		BYTE	08CH,04DH,11000100B
+JSN053		EQU	$
+		BYTE	0A6H,0AEH,00001000B
+		BYTE	0B5H,0BDH,00001000B
+		BYTE	080H,04CH,00000100B
+JSN054		EQU	$
+		BYTE	097H,09FH,00001000B
+		BYTE	0A6H,0AEH,00001000B
+JSN055		EQU	$
+		BYTE	088H,091H,00001000B
+		BYTE	097H,09FH,00001000B
+JSN056		EQU	$
+		BYTE	088H,091H,00001000B
+;
+JSN080		EQU	$	; mode C
+		BYTE	000H,0FBH,00001010B
+JSN081		EQU	$
+		BYTE	000H,0FBH,00001011B
+JSN082		EQU	$
+		BYTE	002H,0FDH,00001100B
+JSN083		EQU	$
+		BYTE	001H,0FDH,00001101B
+JSN084		EQU	$
+		BYTE	000H,0FDH,10001101B
+JSN085		EQU	$
+		BYTE	001H,0FDH,10001100B
+JSN086		EQU	$
+		BYTE	001H,0FDH,10001011B
+JSN087		EQU	$
+		BYTE	001H,0FDH,10001010B
+		BYTE	0FAH,00CH,10001001B
+JSN088		EQU	$
+		BYTE	0FAH,00CH,10001001B
+		BYTE	0F6H,01CH,11001001B
+JSN089		EQU	$
+		BYTE	0F6H,01CH,01001001B
+		BYTE	0F8H,02CH,10001001B
+JSN08A		EQU	$
+		BYTE	0F8H,02CH,10001001B
+		BYTE	0F6H,038H,00000010B
+JSN08B		EQU	$
+		BYTE	0F6H,038H,00000010B
+		BYTE	0E9H,046H,01001000B
+		BYTE	005H,046H,00001000B
+JSN08C		EQU	$
+		BYTE	0E9H,046H,01001000B
+		BYTE	005H,046H,00001000B
+		BYTE	0DAH,055H,01001000B
+		BYTE	013H,055H,00001000B
+JSN08D		EQU	$
+		BYTE	0DAH,055H,01001000B
+		BYTE	013H,055H,00001000B
+		BYTE	0CCH,063H,01001000B
+		BYTE	021H,065H,00001000B
+JSN08E		EQU	$
+		BYTE	0CCH,063H,01001000B
+		BYTE	021H,065H,00001000B
+		BYTE	0BEH,071H,01001000B
+		BYTE	02FH,073H,00001000B
+JSN08F		EQU	$
+		BYTE	0BEH,071H,01001000B
+		BYTE	02FH,073H,00001000B
+JSN0ED		EQU	$
+;
+JSNDAT1		EQU	$
+JSN100		EQU	$		; mode 1
+		BYTE	0F0H+0B0H,0F0H+080H,00100000B
+JSN101		EQU	$
+		BYTE	0F0H+0B0H,0F0H+080H,00100001B
+JSN102		EQU	$
+		BYTE	0F0H+0B0H,0F0H+080H,01100110B
+JSN103		EQU	$
+		BYTE	0F0H+0B0H,0F0H+080H,00100010B
+JSN104		EQU	$
+		BYTE	0F0H+0B0H,0F0H+080H,00100011B
+JSN105		EQU	$
+		BYTE	0F0H+0B0H,0F0H+080H,01100011B
+JSN106		EQU	$
+		BYTE	0F0H+0B0H,0F0H+080H,01100010B
+JSN107		EQU	$
+		BYTE	0F0H+0B0H,0F0H+080H,00100110B
+JSN108		EQU	$
+		BYTE	0F0H+0B0H,0F0H+080H,00100111B
+		BYTE	0FAH+0B0H,0FCH+080H,00101000B
+JSN109		EQU	$
+		BYTE	0FAH+0B0H,0FCH+080H,00101000B
+		BYTE	008H+0B0H,00BH+080H,00101000B
+JSN10A		EQU	$
+		BYTE	008H+0B0H,00BH+080H,00101000B
+		BYTE	015H+0B0H,01AH+080H,10100001B
+JSN10B		EQU	$
+		BYTE	015H+0B0H,01AH+080H,10100001B
+		BYTE	024H+0B0H,00CH+080H,01101000B
+JSN10C		EQU	$
+		BYTE	024H+0B0H,00CH+080H,01101000B
+		BYTE	033H+0B0H,0FEH+080H,01101000B
+JSN10D		EQU	$
+		BYTE	033H+0B0H,0FEH+080H,01101000B
+JSN10E		EQU	$
+		BYTE	03DH+0B0H,0FDH+080H,11000101B
+;
+JSN120		EQU	$	; mode 2
+		BYTE	0F0H+0A0H,000H+060H,00101010B
+JSN121		EQU	$
+		BYTE	0F0H+0A0H,000H+060H,00101011B
+JSN122		EQU	$
+		BYTE	0F0H+0A0H,000H+060H,00101100B
+JSN123		EQU	$
+		BYTE	0F0H+0A0H,000H+060H,00101101B
+JSN124		EQU	$
+		BYTE	0E9H+0A0H,0F2H+060H,00101001B
+		BYTE	0F0H+0A0H,000H+060H,00101010B
+JSN125		EQU	$
+		BYTE	0E5H+0A0H,0E2H+060H,11101001B
+		BYTE	0E9H+0A0H,0F2H+060H,00101001B
+JSN126		EQU	$
+		BYTE	0E7H+0A0H,0D2H+060H,00101001B
+		BYTE	0E5H+0A0H,0E2H+060H,11101001B
+JSN127		EQU	$
+		BYTE	0DEH+0A0H,0C2H+060H,00101000B
+		BYTE	0EDH+0A0H,0C2H+060H,01101000B
+		BYTE	0E7H+0A0H,0D2H+060H,00101001B
+JSN128		EQU	$
+		BYTE	0F6H+0A0H,0B2H+060H,10101001B
+		BYTE	0CFH+0A0H,0B3H+060H,00101000B
+		BYTE	0DEH+0A0H,0C2H+060H,00101000B
+		BYTE	0EDH+0A0H,0C2H+060H,01101000B
+JSN129		EQU	$
+		BYTE	0FCH+0A0H,0A2H+060H,01101000B
+		BYTE	0C6H+0A0H,0A4H+060H,11101001B
+		BYTE	0F6H+0A0H,0B2H+060H,10101001B
+		BYTE	0CFH+0A0H,0B3H+060H,00101000B
+JSN12A		EQU	$
+		BYTE	005H+0A0H,092H+060H,10101001B
+		BYTE	0BFH+0A0H,095H+060H,00101000B
+		BYTE	0FCH+0A0H,0A2H+060H,01101000B
+		BYTE	0C6H+0A0H,0A4H+060H,11101001B
+;;;;;JSN12B		EQU	$
+;;;;;		BYTE	005H+0A0H,082H+060H,01101001B
+;;;;;		BYTE	0B1H+0A0H,086H+060H,00101000B
+;;;;;		BYTE	005H+0A0H,092H+060H,10101001B
+;;;;;		BYTE	0BFH+0A0H,095H+060H,00101000B
+;;;;;JSN12C		EQU	$
+;;;;;		BYTE	005H+0A0H,082H+060H,01101001B
+;;;;;		BYTE	0B1H+0A0H,086H+060H,00101000B
+;;;;;JSN12D		EQU	$
+;;;;;		BYTE	005H+0A0H,082H+060H,00001001B
+;;;;;		BYTE	00DH+0A0H,082H+060H,00001110B
+;;;;;		BYTE	0B1H+0A0H,086H+060H,00001000B
+;
+JSN130		EQU	$	; mode 3
+		BYTE	000H+060H,0F0H+080H,01100000B
+JSN131		EQU	$
+		BYTE	000H+060H,0F0H+080H,01100001B
+JSN132		EQU	$
+		BYTE	000H+060H,0F0H+080H,00100110B
+JSN133		EQU	$
+		BYTE	000H+060H,0F0H+080H,01100010B
+JSN134		EQU	$
+		BYTE	000H+060H,0F0H+080H,01100011B
+JSN135		EQU	$
+		BYTE	000H+060H,0F0H+080H,00100011B
+JSN136		EQU	$
+		BYTE	000H+060H,0F0H+080H,00100010B
+JSN137		EQU	$
+		BYTE	000H+060H,0F0H+080H,01100110B
+JSN138		EQU	$
+		BYTE	0F5H+060H,0EFH+080H,11101000B
+		BYTE	000H+060H,0F0H+080H,01100111B
+JSN139		EQU	$
+		BYTE	0E6H+060H,0E8H+080H,00100100B
+		BYTE	0F5H+060H,0EFH+080H,11101000B
+JSN13A		EQU	$
+		BYTE	0E6H+060H,0E8H+080H,00100100B
+		BYTE	0D6H+060H,0ECH+080H,11100100B
+JSN13B		EQU	$
+		BYTE	0C8H+060H,0E4H+080H,00101000B
+		BYTE	0C6H+060H,0EBH+080H,00100100B
+		BYTE	0D6H+060H,0ECH+080H,11100100B
+JSN13C		EQU	$
+		BYTE	0B9H+060H,0D5H+080H,00101000B
+		BYTE	0C8H+060H,0E4H+080H,00101000B
+		BYTE	0C6H+060H,0EBH+080H,00100100B
+		BYTE	0B6H+060H,0EEH+080H,11100100B
+JSN13D		EQU	$
+		BYTE	0ABH+060H,0C6H+080H,00101000B
+		BYTE	0B9H+060H,0D5H+080H,00101000B
+		BYTE	0A7H+060H,0ECH+080H,00100100B
+		BYTE	0B6H+060H,0EEH+080H,11100100B
+JSN13E		EQU	$
+		BYTE	0ABH+060H,0C6H+080H,00101000B
+		BYTE	0A7H+060H,0ECH+080H,00100100B
+;
+JSN140		EQU	$	; mode 4
+		BYTE	0F0H+080H,000H+070H,00101010B
+JSN141		EQU	$
+		BYTE	0F0H+080H,000H+070H,00101011B
+JSN142		EQU	$
+		BYTE	0F0H+080H,000H+070H,00101100B
+JSN143		EQU	$
+		BYTE	0F0H+080H,000H+070H,00101101B
+JSN144		EQU	$
+		BYTE	0F0H+080H,000H+070H,00101010B
+		BYTE	0ECH+080H,00DH+070H,00101001B
+JSN145		EQU	$
+		BYTE	0ECH+080H,00DH+070H,00101001B
+		BYTE	0F2H+080H,01CH+070H,00101000B
+JSN146		EQU	$
+		BYTE	0F2H+080H,01CH+070H,00101000B
+		BYTE	0FCH+080H,02CH+070H,00101001B
+JSN147		EQU	$
+		BYTE	0FCH+080H,02CH+070H,00101001B
+		BYTE	0FBH+080H,03CH+070H,11101001B
+JSN148		EQU	$
+		BYTE	0FBH+080H,03CH+070H,11101001B
+		BYTE	0F5H+080H,046H+070H,11100100B
+		BYTE	004H+080H,04BH+070H,00101000B
+JSN149		EQU	$
+		BYTE	0F5H+080H,046H+070H,11100100B
+		BYTE	004H+080H,04BH+070H,00101000B
+		BYTE	0E7H+080H,04DH+070H,01101000B
+		BYTE	012H+080H,05AH+070H,00101000B
+JSN14A		EQU	$
+		BYTE	0E7H+080H,04DH+070H,01101000B
+		BYTE	012H+080H,05AH+070H,00101000B
+		BYTE	0DFH+080H,05CH+070H,01101001B
+		BYTE	01AH+080H,069H+070H,00101001B
+JSN14B		EQU	$
+		BYTE	0DFH+080H,05CH+070H,01101001B
+		BYTE	01AH+080H,069H+070H,00101001B
+		BYTE	0E0H+080H,06CH+070H,11101001B
+		BYTE	01AH+080H,078H+070H,11101001B
+JSN14C		EQU	$
+		BYTE	0E0H+080H,06CH+070H,11101001B
+		BYTE	01AH+080H,078H+070H,11101001B
+JSN14D		EQU	$
+		BYTE	005H+080H,082H+070H,00101001B
+		BYTE	00DH+080H,082H+070H,00101110B
+		BYTE	0B1H+080H,084H+070H,00101000B
+JSN1ED		EQU	$
+;
+;**************************************************************
+;*		JISHIN special DATA index  (JSNINX0)(JSNINX1) *
+;**************************************************************
+JSNINX0		EQU	$
+JISN0A		EQU	$
+		WORD	JSN000	; mode A
+		WORD	JSN001
+		WORD	JSN002
+		WORD	JSN003
+		WORD	JSN004
+		WORD	JSN005
+		WORD	JSN006
+		WORD	JSN007
+		WORD	JSN008
+		WORD	JSN009
+		WORD	JSN00A
+		WORD	JSN00B
+		WORD	JSN00C
+		WORD	JSN00D
+		WORD	JSN00E
+		WORD	JSN00F
+		WORD	JSN010
+		WORD	JSN011
+		WORD	JSN012
+		WORD	JSN013
+		WORD	JSN014
+		WORD	JSN015
+		WORD	JSN016
+		WORD	JSN017
+;
+JISN0B		EQU	$
+		WORD	JSN040	; mode B
+		WORD	JSN041
+		WORD	JSN042
+		WORD	JSN043
+		WORD	JSN044
+		WORD	JSN045
+		WORD	JSN046
+		WORD	JSN047
+		WORD	JSN048
+		WORD	JSN049
+		WORD	JSN04A
+		WORD	JSN04B
+		WORD	JSN04C
+		WORD	JSN04D
+		WORD	JSN04E
+		WORD	JSN04F
+		WORD	JSN050
+		WORD	JSN051
+		WORD	JSN052
+		WORD	JSN053
+		WORD	JSN054
+		WORD	JSN055
+		WORD	JSN056
+;
+JISN0C		EQU	$
+		WORD	JSN080	; mode C
+		WORD	JSN081
+		WORD	JSN082
+		WORD	JSN083
+		WORD	JSN084
+		WORD	JSN085
+		WORD	JSN086
+		WORD	JSN087
+		WORD	JSN088
+		WORD	JSN089
+		WORD	JSN08A
+		WORD	JSN08B
+		WORD	JSN08C
+		WORD	JSN08D
+		WORD	JSN08E
+		WORD	JSN08F
+		WORD	JSN0ED
+JISN0D		EQU	$
+;
+JSN0A		EQU	(JISN0B-JISN0A)/2-1
+JSN0B		EQU	(JISN0C-JISN0B)/2-1
+JSN0C		EQU	(JISN0D-JISN0C)/2-1
+;
+JSN0D		EQU	(JISN0A-JISN0A)/2
+JSN0E		EQU	(JISN0B-JISN0A)/2
+JSN0F		EQU	(JISN0C-JISN0A)/2
+;
+JSNINX1		EQU	$
+		WORD	JSN100	; mode 1
+		WORD	JSN101
+		WORD	JSN102
+		WORD	JSN103
+		WORD	JSN104
+		WORD	JSN105
+		WORD	JSN106
+		WORD	JSN107
+		WORD	JSN108
+		WORD	JSN109
+		WORD	JSN10A
+		WORD	JSN10B
+		WORD	JSN10C
+		WORD	JSN10D
+		WORD	JSN10E
+;
+		WORD	JSN120	; mode 2
+		WORD	JSN121
+		WORD	JSN122
+		WORD	JSN123
+		WORD	JSN124
+		WORD	JSN125
+		WORD	JSN126
+		WORD	JSN127
+		WORD	JSN128
+		WORD	JSN129
+		WORD	JSN12A
+;;;;;;;;;		WORD	JSN12B
+;;;;;;;;;		WORD	JSN12C
+;;;;;;;;;		WORD	JSN12D
+;
+		WORD	JSN130	; mode 3
+		WORD	JSN131
+		WORD	JSN132
+		WORD	JSN133
+		WORD	JSN134
+		WORD	JSN135
+		WORD	JSN136
+		WORD	JSN137
+		WORD	JSN138
+		WORD	JSN139
+		WORD	JSN13A
+		WORD	JSN13B
+		WORD	JSN13C
+		WORD	JSN13D
+		WORD	JSN13E
+;
+		WORD	JSN140 ; mode 4
+		WORD	JSN141
+		WORD	JSN142
+		WORD	JSN143
+		WORD	JSN144
+		WORD	JSN145
+		WORD	JSN146
+		WORD	JSN147
+		WORD	JSN148
+		WORD	JSN149
+		WORD	JSN14A
+		WORD	JSN14B
+		WORD	JSN14C
+		WORD	JSN14D
+		WORD	JSN1ED
+JSNINX2		EQU	$
+;
+JSMCT		EQU	(JSNINX2-JSNINX1)/2-1
+;
+;
+;
+;
+;**************************************************************
+;*		sound DATA 				      *
+;**************************************************************
+;************** port 0
+bsfan		EQU	013H		; boss fanfare
+;************** port 1
+jised		EQU	005H		; jishin sound stop
+;************** port 2
+kins0		EQU	005H		; ken chari sound
+tate0		EQU	006H		; tete hanekaeshi sound
+yasd0		EQU	007H		; ya tobutoki
+yasd1		EQU	008H		; ya bg atari
+bumer		EQU	009H		; bumeran tobutoki 
+fotst		EQU	00AH		; fotshot 
+bomb0		EQU	00BH		; bomb set
+bomb1		EQU	00CH		; bakuhatsu 
+kona0		EQU	00DH		; kona set 
+frod0		EQU	00EH		; fire rot 
+frod1		EQU	00FH		; ice rot 
+usag0		EQU	014H		; usagi henshin 
+usag1		EQU	015H		; link henshin 
+hakas		EQU	022H		; haka move sound
+dobn1		EQU	024H		; player water in sound
+watr0		EQU	028H		; water sound
+fires		EQU	02AH		; fire sound 
+jisin		EQU	035H		; jishin sound
+;************** port 3
+knbem		EQU	001H		; ken beam
+coin0		EQU	00AH		; coin sound
+hart0		EQU	00DH		; hart kaifuku sound
+atckh		EQU	00FH		; aitem cachi fanfare
+mono0		EQU	013H		; mono nage sound
+pinpn		EQU	01BH		; nazo seikai sound
+srmbr		EQU	030H		; soromon baria sound
+;
+;	
+		END

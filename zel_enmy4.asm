@@ -1,0 +1,19374 @@
+;
+        	INCLUDE	zel_ram.asm
+;
+;--------------------------------------------------------------------
+;
+;		ZELDA-3		1991.03.08(FRI)
+;
+;--------------------------------------------------------------------
+;
+		ORG	1D8000H
+;
+;=============================================== (zel_enmy4) ===========
+		GLB	ENMY4MV,EYEBSIT,CGFLSH,ENMYSV,HAYABIT,HAYABMV,HAYAMIT
+		GLB	HEIS0CSL,KARASMV,HAGE0MV,NOMOSCT,BARI1MV,BIGSWST,ENFIRE
+		GLB	MOTAMMVJ,NMSHJP,SDEMOIT,EYEBMST,HIREST,HBBKST,BIGSWST2
+		GLB	WANWANITJ,KAMBSIT,CTBOSST,CTBOSIT,MDARMIT,SHBUNST,GANONIT
+		GLB	GANSPST,BABULCSL,MKCK16,TheftCS,ENHOLE2CS
+		GLB	USFAILL,COPYCS,ENMVCLL,NZMZSTL,ENTUCKL,BGCRDT,ENIDSH,ENIDSH2
+		GLB	PLYAFL,BLTSUB,HAYAMCS,WOOD1MV,WOEYEST,HIMITU,HELP1CS,ANAITST
+;========================================= (zel_char) =========
+		EXT     spoj5,spoj0,prnc1
+;=============================================== (zel_enmy3) ===========
+		EXT	ICEFLST,ENALFL,TKTAMST,ASMZST,ENPLATR,KEMRIST
+		EXT	CRHMZR,CHFIRCS,CHFPTD
+;=============================================== (zel_enmy2) ===========
+		EXT	EVCHCKE,ENXSDN,ENYSDN,ENMSG2L,ENMSGEL,ENMSGSL
+		EXT	SETOAML,SETOAML2,ENMKIST,BSITEM,EFLCHK,ENMDST
+		EXT	HEIS0CS2,ASIMZST,Z2TMSTL,SETOAML22,H0SER00L
+;=============================================== (zel_enmy) ============
+		EXT	EPXYCK2,EPXCHK2,EPYCHK2,PLFLSTL,PSSAVE2,PSERC2L,PKNCRS2
+                EXT     EBAKU,EMOVE,RNDSET,BGDTRD2,ENDMST2,CROJCK2,ENCRST2,BIKRST2
+		EXT	ENBGCKL,CRENPLL,CRKNKNL,CRKNENL,OCHECKL,ENCLER,ENMAINL
+		EXT	ALOMCKL,SADWSTL,SADWS2L,CRENPL2L,OAMENT3,OAMENT1,FILSETL
+		EXT	PSERCHL,EN1CSTL,ESERCHL,SSERCH2,CACHCKL,ENBDSBL,ENMOVE2
+		EXT	ENENSET,EN1CSSL,OAMENT2,EFLSST,ENDMST3,ENDMST4,EHOLE,OAMCHKL
+		EXT	CRENPL3L,MSGSET,BOMBST,EEXYCKL,ITGSDT,ENFLIS2
+;--- enmyno --
+		EXT	GAYK0,GAYK1,GAYK2,GAYK3,USAG0
+		EXT	SKHED,SHTAM,HBTAM,BAAR0,BABUL,TEKI0,TEKI1,AMEBA,MDARM
+		EXT	OCTA1,OCTA2,OCTA3,NYORO,OCTBL,OCTSS,CHFIR,BIGKO,TEKTA
+		EXT	TARUH,TARUV,SKEL2,PATA0,PATA1,SDEMO,KAMBS,KAMBR,KAMBB
+		EXT	KWAUS,KWAU1,SHIGE,SEKZ4,PONPK,EYEBS,EYETM,EYEBM
+		EXT	REBA1,ZOOL1,ENMY4,NAMAZ,CTBOS,DOOMO,ZIRAI
+		EXT	JIJII,BABAA,HEITI,PENKI,NOKOG,KUTUU,GAKII,GAKI1
+		EXT	NOPPO,ONNAA,HIGEE,MAJOO,JIJI2,KIANA,BUBUU
+		EXT	YATAM,MURON,MURYA,MURMK,LINE0,LINE1,LINE2,LINE3,BABA1,ESW03,HEIS0
+		EXT	TAIHO,HEIS1,HEYA0,HEYA1,HEYA2,KTOBJ,HEIS2,NEZU0,HEBI0
+		EXT	KOMO0,HEBO0,OYAGI,ZAKO0,HEIS1,PLCHK
+		EXT	HEIS3,SUNA0,USAG0,HEYA3,HANA0,HANA1,TAMA0,DOZOO
+		EXT	BOUSI,SYOBY,HELP0,ESW12,RANEM,ZORAS,NOMOS,KINOK
+		EXT	SUKAS,MJSY1,JITON,ESW04,ZORA2,MEDUS,UTUWA,ARI00,ARI01
+		EXT	JOHBB,ENMY3,HACHI,POLIW,RINGO,BABU2,HELP1,BKFIR,HARI0,D_0_9
+		EXT	MOTAM,MEMER,MAGIC,ICBOS,DOKN0,DOKN1,DOKN2,DOKN3,BEE00,ABATA
+		EXT	SEKBN,TAKAR,BAKDN,SARKK,TEKBB,DARUM,IZUMI,GANON,GANO2
+		EXT	WOOD1,GOST0
+;--------------
+		EXT	HEIT1,RINEL
+;-------------- item
+                EXT     HART1,RUPYR,RUPYY,RUPYB,BOMB1,BOMB2,BOMB3 
+                EXT     TUBO1,TUBO2,UTUBK
+                EXT     YAAA1,YAAA2,YOSEI
+;--------------
+		EXT	HART1,PORT1,PORT2,ICTAM
+		EXT	ESET0,ESET1,ESET2
+		EXT	EFAIL,ECACH,EWATR,EICE,EICFL
+;=============================================== (zel_endt) ============
+									
+		EXT	EXSTRA,ENEMY2,ENBTON,EFLCHK2,ENCLST,ENIDPS
+		EXT	SINDT2,BADBRST
+;=============================================== (zel_main) ============
+;		EXT	DTSAVE
+		EXT	TGBLKWT
+		EXT	GDCHCK,JSRSUB,MGMCGRS2,MGMCGCNG
+;
+		EXT	MD_title,MD_djint,MD_djply,MD_gdint,MD_gdply
+		EXT	MD_fdout,MD_fdin,MD_etcpl
+		EXT	MD_wpout,MD_wpin
+;=============================================== (zel_play) ============
+		EXT 	DASCLR1,DASHON,PLOTCK
+		EXT 	EATSET
+		EXT 	YAMOV
+		EXT	YAIMIT,ITMCBFST
+		EXT	ATMSIT
+		EXT	OMS000
+		EXT	PLOTCK1
+		EXT	WPMSCK
+		EXT	DOKAST
+;///////		EXT	RDCHCK
+;=============================================== (zel_bg3) =============
+		EXT	MTRSUB,ITEM0ST,ICECGCNG,LAMPOFF0,LAMPOFF1
+;=============================================== (grnd) =============
+		EXT	MKDRPLY
+;=============================================== (zel_init) =============
+		EXT	p3_msge,DJEXTCK,PLRSET,RESTTST,THCGCN0,THCGCN1,THCGCN2
+		EXT	KMBBCG0,KMBRCG0
+		EXT	KMBBCG1,KMBRCG1
+;================================================(end2)=================
+		EXT	GRNDCHK,KURORCS,SDLRCE,SDLRCP,MAGICCS,ICMANCS,TEKI0CS,SKEL2CS
+		EXT	MGTAMCS,PBBANCS,PATA0CS,CRHCEN,LIKE0CS,ICBOSCS
+		EXT	SDLRE1,SDLRE2,SDLRE3
+;================================================(endt)=================
+		EXT 	GRENST,EST0SB
+;================================================(char)=================
+		EXT 	OPTCBFST,PWTRCGS2
+;================================================(bms1)=================
+		EXT	PLKTINT
+;================================================(exst)=================
+                EXT     BEAM1,BEAM2,BUME1,BOMBM,YAMOV,DTMOV     ;;;;,BOMBR
+                EXT     DTMV1,DTMV2,OPMOV,WTMV0,HIBA2,SCPMV,DTMV3
+                EXT     RAOPIT,BOGN,KNSP,TPHDIT
+		EXT	nashi,prnce,jjmov,jjwat,jjsmv,mesmv,babaa,bbwat
+		EXT	kajya,hnoji
+;================================================(POLYGON)=================
+;-----< obj_poly >-------------------------------------------------------
+
+		extern		INITIAL_POLYGON
+
+;------------------------------------------------------------------------
+		extern		polygon_flag
+		extern		shading_switch
+		extern		object_size
+		extern		object_type
+		extern		rotate_angle_x
+		extern		rotate_angle_y
+		extern		center_point_x
+		extern		center_point_y
+		extern		center_point_z
+		extern		stack_pointer
+		extern		transfer_flag
+;
+;================================================(msge)=================
+;---------------MSGE NO.-----------------
+		EXT	MS_0490,MS_0491,MS_04D0,MS_04D1,MS_04D2,MS_04D3
+		EXT	MS_0530,MS_0560,MS_0561
+		EXT	MS_0461,MS_0590,MS_05B0
+		EXT	MS_00E0,MS_00E1,MS_00E2,MS_00E3,MS_00E4,MS_00E5
+		EXT	MS_05F4,MS_05F5,MS_05F6,MS_05F7,MS_05F8,MS_05F9
+;
+		EXTEND
+		MEM8
+		IDX8
+;- - - 01,FF tdta - - - - -
+NZTLDT		EQU	$
+IZMYAD		EQU	$
+KIMXAD		EQU	$
+MBTLAD		EQU	$
+CBMXAD		EQU	$
+CBMYAD		EQU	$
+CHMXAD		EQU	$
+GBDXAD		EQU	$
+GBDYAD		EQU	$
+DMSMXA		EQU	$
+JFAADT		EQU	$
+CHMYAD		EQU	$
+WOEYEMK		EQU	$
+		HEX	01,FF
+		HEX	00,FF
+;===============4 way belt BG.revise========================================================
+BLTYAH		EQU	$
+		HEX	FF,00  ;,00,00
+BLTXAL		EQU	$
+		HEX	00,00  ;,FF,01
+BLTYAL		EQU	$
+		HEX	FF,01,00,00
+BLTXAH		EQU	$
+		HEX	00,00,FF,00
+;
+BLTSUB		EQU	$
+		LDA	<FRCNT
+;;		AND	#01H
+		LSR	A
+		BCC	BLS010
+;
+		PHB
+		PHK
+		PLB
+;
+		LDA	ENXPSL,X
+		CLC
+		ADC	BLTXAL-68H,Y
+		STA	ENXPSL,X
+		LDA	ENXPSH,X
+		ADC	BLTXAH-68H,Y
+		STA	ENXPSH,X
+		LDA	ENYPSL,X
+		CLC
+		ADC	BLTYAL-68H,Y
+		STA	ENYPSL,X
+		LDA	ENYPSH,X
+		ADC	BLTYAH-68H,Y
+		STA	ENYPSH,X
+		PLB
+BLS010		EQU	$
+		RTL				
+;=======================================================================
+PLYAFL		EQU	$
+		PHB
+		PHK
+		PLB
+		PHY
+;
+		STZ	BMMODE,X
+;
+		LDA	#YATAM
+		JSL	>ENIDSH
+		BMI	PYFL10
+;
+		LDA	BMXPSL,X
+		STA	ENXPSL,Y
+		LDA	BMXPSH,X
+		STA	ENXPSH,Y
+		LDA	BMYPSL,X
+		STA	ENYPSL,Y
+		LDA	BMYPSH,X
+		STA	ENYPSH,Y
+;
+		LDA	#EFAIL
+		STA	ENMODE,Y
+		LDA	#1FH
+		STA	ENTIM0,Y
+		LDA	BMXSPD,X
+		STA	ENXSPD,Y
+		LDA	BMYSPD,X
+		STA	ENYSPD,Y
+;
+		LDA	<PLBGCKF
+		STA	ENKAIF,Y
+;
+		PHX
+		TYX
+;;		JSL	>SDLRCE
+;;		ORA	#05H
+;;		STA	SOUND2	;(S)
+;
+		JSL	>EFLSST
+;
+		PLX
+;
+PYFL10		EQU	$
+		PLY
+		PLB
+		RTL
+;=======================================================================
+;==================================================
+ENMVCLL		EQU	$
+		PHB
+		PHK
+		PLB
+		JSR	ENMVCL
+		PLB
+		RTL
+;==================================================
+ENBGCK		EQU	$
+		JSL	>ENBGCKL
+		RTS
+;%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+;%		Zirai           	      %
+;%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+ZIRAIMV		EQU	$
+		JSR	ZIRAICS
+		JSR	ENSTCK
+;
+		JSL	>CRHMZR		; Vs hanmmer check !
+		BCS	ZRM011
+;
+		LDA	ENTIM0,X
+		BNE	ZRM010
+;
+		LDA	#04H
+		STA	ENCLOR,X
+;
+		JSL	>CRENPLL
+		BCC	ZRM008
+		LDA	#08H
+		STA	ENTIM0,X
+ZRM008		EQU	$
+		RTS
+;- - - - - - -  - - - - - - - - - - - -- 
+ZRCLDT		EQU	$
+		HEX	4,2,8,2
+;
+ZRM010		EQU	$
+		CMP	#01H
+		BNE	ZRM020
+;
+ZRM011		EQU	$
+		STZ	ENMODE,X
+;
+		JSR	MZBOST
+		BMI	ZRM018
+;
+		LDA	#EFAIL
+		STA	ENMODE,Y
+		LDA	#02H
+		STA	ENWRK2,Y
+		STA	ENCLOR,Y
+		LDA	#09H
+		STA	ENMOD3,Y
+		LDA	#1FH
+		STA	ENTIM1,Y
+		LDA	#03H
+		STA	ENMOD0,Y
+;
+		JSL	>SDLRCE
+		ORA	#0CH
+		STA	SOUND2	;(S)
+;;
+;;;		JSL	>SDLRE2	;(S)
+ZRM018		EQU	$
+		RTS
+ZRM020		EQU	$
+		LSR	A
+		AND	#03H
+		TAY
+		LDA	ZRCLDT,Y
+		STA	ENCLOR,X
+		RTS
+;- - - - - - - - - - - - - - - - - - - -
+ZIRAICD		EQU	$
+		WORD	00000H,00004H
+		HEX	70,00,00,00
+		WORD	00008H,00004H
+		HEX	70,40,00,00
+;
+ZIRAICS		EQU	$
+		LDA	#04H*2
+		JSL	>OAMENT2 
+;
+		LDA	OJBKFG
+		CMP	#03H
+		BCS	ZRC010
+;
+		MEM16
+		REP	#20H
+		LDA	#ZIRAICD
+		STA	<WORK8
+		MEM8
+		SEP	#20H
+		LDA	#02H
+		JSL	>SETOAML22
+ZRC010		EQU	$
+		RTS
+;%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+;%		Gaikotsu Block      	      %
+;%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+;;--------------------------------------------------------
+;ABSMPT		EQU	$
+;		HEX	0,1,2,1
+;
+ABATAMV		EQU	$
+;		LDA	ENWRK0,X
+;		BEQ	AB0000
+;;
+;		LDA	#00001000B
+;		STA	ENCLOR,X
+;		STA	ENNOCR,X
+;;
+;		JSR	ABSMCS
+;;
+;		LDA	<KEYA2
+;		AND	#0CH
+;		BEQ	AB0001
+;;
+;		INC	ENCONT,X
+;		LDA	ENCONT,X
+;		AND	#03H
+;		TAY
+;		LDA	ABSMPT,Y
+;		STA	ENCHPT,X
+;AB0001		EQU	$
+;		RTS
+;;-------------------------------------------------------
+;AB0000		EQU	$
+		LDA	OJBKFG
+		CMP	#03H
+		BCS	AB0010
+;
+		LDA	ENSTAT,X
+		BNE	AB0002
+;
+		LDA	#04H*1
+		JSL	>OAMENT2
+AB0002		EQU	$
+;
+		JSR	ABATACS
+AB0010		EQU	$
+		JSR	ENSTCK
+		JSR	ENHNSB
+;
+		LDA	ENSTAT,X
+		JSL	>JSRSUB
+		WORD	ABMVWT
+		WORD	ABMOVE
+;-------------------------------------------
+ABMVWT		EQU	$
+		LDA	#01H
+		STA	ENNOCR,X
+;
+		JSL	>CRENPL2L
+		BCC	ABST10
+;
+		JSL	>PLOTCK
+		JSL	>DASHON
+;
+		LDA	ENTIM0,X
+		BNE	ABST10
+;
+		LDA	#40H
+		STA	ENTIM0,X
+;
+                LDA     #22H
+                JSL     >SDLRE2 ;(S)
+ABST10		EQU	$
+		LDA	ENTIM0,X
+		BEQ	ABST20
+		DEC	A
+		BEQ	ABST30
+		ORA	#040H
+		STA	ENFLSH,X
+ABST20		EQU	$
+		RTS
+;
+ABST30		EQU	$
+		STZ	ENNOCR,X
+;
+		INC	ENSTAT,X
+		STZ	ENFLSH,X
+		LDA	ENMOD2,X
+		AND	#10111111B
+		STA	ENMOD2,X
+		ASL	ENMOD0,X
+		LSR	ENMOD0,X
+		RTS
+;------------------------------------------------
+ABCHPT		EQU	$
+		HEX	2,2,1,0,1
+;
+ABMOVE 		EQU	$
+		JSR	CREKEK
+;
+		JSR	ENMVCL2
+		JSR	ENBGCK
+		DEC	ENZSPD,X
+		DEC	ENZSPD,X
+		LDA	ENZPSL,X
+		BPL	ABM010
+		STZ	ENZPSL,X
+		LDA	#10H
+		STA	ENZSPD,X
+;
+		LDA	#0CH
+		JSL	>PSERCHL
+ABM010		EQU	$
+		LDA	<FRCNT
+		AND	#03H
+		BNE	ABM020
+;
+		INC	ENCONT,X
+		LDA	ENCONT,X
+		CMP	#05H
+		BNE	ABM020
+		STZ	ENCONT,X
+ABM020		EQU	$
+		LDY	ENCONT,X
+		LDA	ABCHPT,Y
+		STA	ENCHPT,X
+		RTS
+;============================================================================================
+ABATACD		EQU	$
+		WORD	00000H,00000H
+		HEX	44,00,00,02
+		WORD	00004H,0000BH
+		HEX	70,00,00,00
+;
+		WORD	00000H,00000H
+		HEX	44,00,00,02
+		WORD	00004H,0000CH
+		HEX	70,00,00,00
+;
+		WORD	00000H,00000H
+		HEX	44,00,00,02
+		WORD	00004H,0000DH
+		HEX	70,00,00,00
+;- - - - - - - - - - - - - - - - - - - - - - - - -
+ABATACS		EQU	$
+		LDA	#00H
+		XBA
+		LDA	ENCHPT,X
+		MEM16
+		REP	#020H
+;
+		ASL	A
+		ASL	A
+		ASL	A
+;
+		ASL	A
+		ADC	#ABATACD
+		STA	<WORK8
+;
+		MEM8
+		SEP	#20H
+;
+		LDA	#02H
+		LDY	ENSTAT,X
+		BNE	ABCS80
+		DEC	A
+ABCS80		EQU	$
+		JSL	>SETOAML22
+;
+		LDA	ENSTAT,X
+		BEQ	ABCS99
+;
+		JSL	>SADWSTL
+ABCS99		EQU	$
+		RTS
+;%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+;%		Jump fish (not enemy)	      %
+;%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+JFISHMV		EQU	$
+		LDA	OJBKFG
+		CMP	#03H
+		BCS	JFM010
+;
+		JSR	JFISHCS
+JFM010		EQU	$
+		LDA	ENMODE,X
+		CMP	#ECACH
+		BNE	JFM011
+;
+		LDA	#04H
+		STA	ENSTAT,X
+;
+		LDA	<FRCNT
+		LSR	A
+		LSR	A
+		LSR	A
+		AND	#02H
+		LSR	A
+		ADC	#03H		
+		STA	ENCHPT,X
+JFM011		EQU	$
+		JSR	ENSTCK
+;
+;		LDA	<KEYA2
+;		AND	#0CH
+;		BEQ	JFM010
+;;
+;		INC	ENCHPT,X
+;		LDA	ENCHPT,X
+;		CMP	#08H
+;		BNE	JFM010
+;;
+;		STZ	ENCHPT,X
+;JFM010		EQU	$
+		LDA	ENSTAT,X
+;		BNE	JFM012
+;		LDA	#02H
+;		STA	ENSTAT,X
+;JFM012		EQU	$
+		JSL	>JSRSUB
+		WORD	JFCHEK
+		WORD	JFABAR
+;
+		WORD	JFJPWT
+		WORD	JFJUMP
+		WORD	JFSHOT
+;------------------------------------------------------------
+JFSHOT		EQU	$
+		LDA	ENZPSL,X
+		BNE	JFSH10
+;
+		LDA	#01H
+		STA	ENSTAT,X
+JFSH10 		EQU	$
+;
+		JSR	ENMVCL
+		JSL	>ENBDSBL
+		RTS
+;------------------------------------------------------------
+JFJPWT		EQU	$
+		LDA	ENTIM0,X
+		BNE	JFJW10
+;
+		INC	ENSTAT,X
+;
+		LDA	#30H
+		STA	ENZSPD,X
+JFMZST		EQU	$
+;		LDA	ENXPSL,X
+;		PHA
+;		SEC
+;		SBC	#04H
+;		STA	ENXPSL,X
+;		LDA	ENXPSH,X
+;		PHA
+;		SBC	#00H
+;		STA	ENXPSH,X
+		JSL	>ASMZST		; Water up !
+;		PLA
+;		STA	ENXPSH,X
+;		PLA
+;		STA	ENXPSL,X
+JFJW10		EQU	$
+		RTS
+;------------------------------------------------------------
+JFJCPT		EQU	$
+		HEX	5,5,6,6,5,5,4,4,3,7,7,8,8,7,7,8,8
+JFJUMP		EQU	$
+		JSR	ENZCLC
+		DEC	ENZSPD,X
+		DEC	ENZSPD,X
+;
+		BNE	JFJ008
+;
+		LDY	ENWRK0,X
+		BEQ	JFJ008		; Shot water in ?
+;					; yes !
+                LDA     #MS_05B0
+                STA     MSGENOL
+                LDA     #HIGH MS_05B0	; Minnani naishyo !!
+		JSR	MSGSSS		
+JFJ008		EQU	$
+		LDA	ENZPSL,X
+		BPL	JFJ010
+;
+		STZ	ENZPSL,X
+;
+		JSR	JFMZST
+;
+;		STZ	ENCONT,X
+;		LDA	#02H
+;		STA	ENSTAT,X
+;;
+;		LDA	#20H
+;		STA	ENTIM0,X		
+;		STZ	ENCHPT,X
+;		RTS
+		LDA	ENWRK0,X
+		BEQ	JFJ00C
+;
+		LDA	#RUPYB
+		JSL	>ENIDSH		; Red rupy shot !!
+		BMI	JFJ00C
+;
+		JSL	>ENIDPS
+;
+		LDA	<WORK0
+		CLC
+		ADC	#04H
+		STA	ENXPSL,Y 
+		LDA	<WORK1
+		ADC	#00H
+		STA	ENXPSH,Y
+;
+		LDA	#0FFH
+		STA	ENSTTM,Y
+		LDA	#30H
+		STA	ENZSPD,Y
+		STA	ENTUTM,Y
+		PHX
+		TYX
+		LDA	#10H
+		JSL	>PSERCHL
+		PLX
+JFJ00C		EQU	$
+		STZ	ENMODE,X
+JFJ010		EQU	$
+		INC	ENCONT,X
+		LDA	ENCONT,X
+		LSR	A
+		LSR	A
+		TAY
+		LDA	JFJCPT,Y
+		STA	ENCHPT,X
+		RTS		
+;------------------------------------------------------------
+;------------------------------------------------------------
+;------------------------------------------------------------
+;------------------------------------------------------------
+JFCHEK		EQU	$
+		JSR	ENBGCK
+;
+		LDA	UNITNO
+		CMP	#08H
+		BNE	JFCK10
+;
+JFCLER		EQU	$
+		STZ	ENMODE,X
+		RTS
+JFCK10		EQU	$
+		INC	ENSTAT,X
+		RTS		
+;------------------------------------------------------------
+JFABXS		EQU	$
+		HEX	00,0C,10,0C,00,F4,F0,F4
+JFABYS		EQU	$
+		HEX	F0,F4,00,0C,10,0C,00,F4
+JFALMT		EQU	$
+		HEX	02,00
+JFABPT		EQU	$
+		HEX	1,5,3
+;
+JFABAR		EQU	$
+		JSL	>CACHCKL
+;
+		JSR	ENTUCK
+;
+		JSR	ENMVCL2
+		DEC	ENZSPD,X
+		DEC	ENZSPD,X
+;
+		LDA	ENZPSL,X
+		BPL	JFAB10
+;
+		STZ	ENZPSL,X
+;
+		LDA	UNITNO
+		CMP	#09H
+		BEQ	JFAB03
+		CMP	#08H
+		BNE	JFAB08
+;
+		STZ	ENMODE,X
+JFAB03		EQU	$
+		JSR	JFMZST
+JFAB08		EQU	$
+		JSL	>RNDSET
+		AND	#0FH
+		ADC	#10H
+		STA	ENZSPD,X
+;
+		JSL	>RNDSET
+		AND	#07H
+		TAY
+		LDA	JFABXS,Y
+		STA	ENXSPD,X
+		LDA	JFABYS,Y
+		STA	ENYSPD,X
+;
+		INC	ENMUKI,X
+;
+		LDA	#03H
+		STA	ENCONT,X
+JFAB10		EQU	$
+		INC	ENCONT,X
+		LDA	ENCONT,X
+		AND	#07H
+		BNE	JFAB20
+;
+		LDA	ENMUKI,X
+		AND	#01H
+		TAY
+		LDA	ENWRK0,X
+		CMP	JFALMT,Y
+		BEQ	JFAB20
+		CLC
+		ADC	JFAADT,Y
+		STA	ENWRK0,X
+JFAB20		EQU	$
+;;		LDA	ENCONT,X
+		LDA	<FRCNT
+		LSR	A
+		LSR	A
+		LSR	A
+;;		NOP
+		AND	#001H
+		LDY	ENWRK0,X
+		CLC
+		ADC	JFABPT,Y
+		STA	ENCHPT,X
+		RTS
+;=================================================
+JFISHCD		EQU	$
+;0
+		WORD	0FFFCH,00008H
+		HEX	5E,04,00,00
+		WORD	00004H,00008H
+		HEX	5F,04,00,00
+;1
+		WORD	0FFFCH,00008H
+		HEX	5E,84,00,00
+		WORD	00004H,00008H
+		HEX	5F,84,00,00
+;2
+		WORD	0FFFCH,00008H
+		HEX	5F,44,00,00
+		WORD	00004H,00008H
+		HEX	5E,44,00,00
+;3
+		WORD	0FFFCH,00008H
+		HEX	5F,C4,00,00
+		WORD	00004H,00008H
+		HEX	5E,C4,00,00
+;4
+		WORD	00000H,00000H
+		HEX	61,04,00,00
+		WORD	00000H,00008H
+		HEX	71,04,00,00
+;5
+		WORD	00000H,00000H
+		HEX	61,44,00,00
+		WORD	00000H,00008H
+		HEX	71,44,00,00
+;6
+		WORD	00000H,00000H
+		HEX	71,84,00,00
+		WORD	00000H,00008H
+		HEX	61,84,00,00
+;7
+		WORD	00000H,00000H
+		HEX	71,C4,00,00
+		WORD	00000H,00008H
+		HEX	61,C4,00,00
+;- - - Sadow - - - - 
+JFSSWCD		EQU	$
+		WORD	0FFFEH,0000BH
+		HEX	38,04,00,00		
+		WORD	00000H,0000BH
+		HEX	38,04,00,00		
+		WORD	00002H,0000BH
+		HEX	38,04,00,00		
+;
+		WORD	0FFFFH,0000BH
+		HEX	38,04,00,00		
+		WORD	00000H,0000BH
+		HEX	38,04,00,00		
+		WORD	00001H,0000BH
+		HEX	38,04,00,00		
+;
+		WORD	00000H,0000BH
+		HEX	38,04,00,00		
+		WORD	00000H,0000BH
+		HEX	38,04,00,00		
+		WORD	00000H,0000BH
+		HEX	38,04,00,00		
+;- - - - - - - - - - - - - - - - - - - - - - - - - -
+JFC000		EQU	$
+		JSL	>OAMCHKL
+		RTS
+;
+JFISHCS		EQU	$
+		LDA	#00H
+		XBA
+		LDA	ENCHPT,X
+		BEQ	JFC000
+		DEC	A
+		MEM16
+		REP	#020H
+;
+		ASL	A
+		ASL	A
+		ASL	A
+;
+		ASL	A
+		ADC	#JFISHCD
+		STA	<WORK8
+;
+		LDA	ENXP2L
+		CLC
+		ADC	#0004H
+		STA	ENXP2L
+;
+		MEM8
+		SEP	#20H
+;
+		LDA	#02H
+		JSL	>SETOAML22
+;- - Sadow set - -
+		LDA	ENYP2L
+		CLC
+		ADC	ENZPSL,X
+		STA	ENYP2L
+		LDA	ENYP2H
+		ADC	#00H
+		STA	ENYP2H
+;
+		LDA	#00H
+		XBA
+;;		LDA	ENCHPT,X
+;;		LSR	A
+;;		LSR	A
+		LDA	ENZPSL,X
+		LSR	A
+		LSR	A
+		CMP	#02H
+		BCC	JSWC10
+;
+		LDA	#02H
+JSWC10		EQU	$
+		MEM16
+		REP	#20H
+;
+		ASL	A
+		ASL	A
+		ASL	A
+		STA	<WORK0
+;
+		ASL	A
+		ADC	<WORK0
+		ADC	#JFSSWCD
+		STA	<WORK8
+;
+		LDA	<OAMADR
+		CLC
+		ADC	#0008H
+		STA	<OAMADR
+;
+		INC	<OSBADR
+		INC	<OSBADR
+;
+		MEM8
+		SEP	#20H
+;
+		LDA	#03H
+		JSL	>SETOAML22
+;
+		JSL	>PSSAVE2
+		RTS
+;%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+;%	DOOMO	Hazure beam link->usagi	      %
+;%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+ABSMCD		EQU	$
+;
+		WORD	00000H,00000H
+		HEX	86,00,00,00
+		WORD	00008H,00000H
+		HEX	87,00,00,00
+		WORD	00000H,00008H
+		HEX	96,00,00,00
+		WORD	00008H,00008H
+		HEX	97,00,00,00
+;
+		WORD	00001H,00001H
+		HEX	86,00,00,00
+		WORD	00007H,00001H
+		HEX	87,00,00,00
+		WORD	00001H,00007H
+		HEX	96,00,00,00
+		WORD	00007H,00007H
+		HEX	97,00,00,00
+;
+ABSMCS		EQU	$
+		LDA	#00H
+		XBA
+		LDA	ENCHPT,X
+		AND	#01H
+		MEM16
+		REP	#20H
+		ASL	A
+		ASL	A
+		ASL	A
+;
+		ASL	A
+		ASL	A
+		ADC	#ABSMCD
+		STA	<WORK8
+		MEM8
+		SEP	#20H
+;
+		LDA	#04H
+SETO22		EQU	$
+		JSL	>SETOAML22
+		RTS
+;===============================================
+;-----------------------------------------------
+DMSMLM		EQU	$
+		HEX	04,FC
+DM0F80		EQU	$
+		LDA	#30H
+		STA	ENFLCL,X
+;
+		JSR	ABSMCS
+;
+		JSR	ENSTCK
+;
+		JSR	ENMVCL
+;
+		INC	ENCONT,X
+		LDA	ENCONT,X
+		AND	#07H
+		BNE	DM0FA0
+;
+		LDA	ENMUKI,X
+		AND	#01H
+		TAY
+		LDA	ENXSPD,X
+		CLC
+		ADC	DMSMXA,Y
+		STA	ENXSPD,X
+		CMP	DMSMLM,Y
+		BNE	DM0FA0		
+		INC	ENMUKI,X
+DM0FA0		EQU	$
+		LDA	ENCONT,X
+		AND	#01FH
+		BNE	DM0FC0
+;
+		INC	ENCHPT,X
+DM0FC0		EQU	$
+		RTS
+;===============================================
+DOOMOMV		EQU	$
+		LDA	<DJFLG
+		BNE	DM0000
+;
+;;		RTS
+;
+		LDA	#01000000B
+		STA	ENMOD2,X
+		STA	ENNOCR,X
+;
+		LDA	ENSTAT,X
+		BNE	DM0F80
+;
+		JSR	ENSTCK
+;
+		LDA	ENTIM0,X
+		BNE	DM0F00
+;
+		LDA	#43H
+		STA	ENTIM0,X
+;
+		LDA	#DOOMO
+		JSL	>ENIDSH
+		BMI	DM0F00
+;
+		JSL	>ENIDPS
+;
+		LDA	<WORK0
+		CLC
+		ADC	#08H
+		STA	ENXPSL,Y
+		LDA	<WORK2
+		ADC	#04H
+		STA	ENYPSL,Y
+;
+		LDA	#00000100B
+		STA	ENCLOR,Y
+		STA	ENSTAT,Y
+		LDA	#01000011B
+		STA	ENMOD0,Y
+		STA	ENMOD2,Y
+		LDA	DMSMLM+1
+		STA	ENXSPD,Y
+		LDA	#0FAH
+		STA	ENYSPD,Y
+DM0F00		EQU	$
+		RTS
+;-----------------------------------------------
+DM0000		EQU	$
+		LDA	ENSTAT,X
+		BNE	DMM010
+;
+		JSL	>OAMCHKL
+		JSR	ENSTCK
+		JSR	ENBGCK
+		BNE	DMM008		; Tubo noth ?
+;					; yes !
+		INC	ENSTAT,X
+;
+		LDA	#80H
+		STA	ENTIM0,X
+;
+DMM008		EQU	$
+		RTS
+;-------------------------------------------------
+DMCHNO		EQU	$
+		HEX	D7,D7,D7,91,91,91
+;
+DMM010		EQU	$
+		JSL	>BABULCSL
+;
+		LDA	ENDSPL,X
+		BNE	DMC011
+;
+		LDY	ENCHPT,X
+		LDA	DMCHNO,Y
+		STA	<WORK0
+;
+		LDY	#00H
+DMC010		EQU	$
+		INY
+		INY
+		LDA	<WORK0 ;#0B7H
+		STA	(<OAMADR),Y
+		INY
+		LDA	(<OAMADR),Y
+		AND	#11110000B
+		ORA	#00000010B
+		STA	(<OAMADR),Y
+		INY
+		CPY	#14H
+		BCC	DMC010		
+;
+DMC011		EQU	$
+		JSR	ENSTCK
+;
+;;		LDA	<PLBGCKF
+;;		CMP	ENKAIF,X
+;;		BNE	DMM020
+;
+		LDA	ENTIM0,X
+		BNE	DMM020
+;
+		LDA	#00H+20H+10H
+		STA	ENMOD6,X
+;
+		JSL	>CRENPLL
+		BCC	DMM018
+;
+		STZ	ENMODE,X
+;
+		LDA	#80H
+		STZ	USAGTM
+;
+		LDA	#01H
+		STA	USAGTM+1
+DMM018		EQU	$
+		LDA	<PLBGCKF
+		CMP	ENKAIF,X
+		BNE	DMM01C
+;
+		LDA	#010H
+		JSL	>PSERCHL
+DMM01C		EQU	$
+		JSR	ENMVCL	
+		JSR	ENBGCK
+		BEQ	DMM020
+;
+		STZ	ENMODE,X
+;
+		JSL	>KEMRIST
+;
+		LDA	#15H
+		JSL	>SDLRE2	;(S)
+DMM020		EQU	$
+		RTS
+;
+;%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+;%		Rinel			      %
+;%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+RINELMV		EQU	$
+		JSR	RINELCS
+;
+		JSR	ENSTCK
+;
+		JSR	ENHNSB
+;
+;	LDA	<KEYA2
+;	AND	#0CH		
+;	BEQ	RNT010
+;;
+;	INC	ENCHPT,X
+;
+;	LDA	ENCHPT,X
+;	CMP	#0CH
+;	BNE	RNT010
+;
+;	STZ	ENCHPT,X
+;RNT010		EQU	$
+		JSR	EPXYCK
+		TYA
+		STA	ENMUKI,X
+;
+		JSR	CREKEK
+;
+		LDA	ENSTAT,X
+		JSL	>JSRSUB
+		WORD	RNSET
+		WORD	RNSECH
+		WORD	RNSHOT
+;-------------------------------------------------
+RNSHXL		EQU	$
+		HEX	A0,60  ;,00,00
+RNSHYH		EQU	$
+		HEX	00,00,FF,00
+RNSHXH		EQU	$
+		HEX	FF,00,00,00
+RNSHYL		EQU	$
+		HEX	08,08,A0,70
+;--------------------------------------
+RNSET		EQU	$
+		LDA	ENTIM0,X
+		BNE	RNST10
+;
+		LDY	ENMUKI,X
+		LDA	RNSHXL,Y
+		CLC
+		ADC	<PLXPS1
+		STA	ENWRK0,X
+		LDA	RNSHXH,Y
+		ADC	<PLXPS0
+		STA	ENWRK1,X
+		LDA	RNSHYL,Y
+		CLC
+		ADC	<PLYPS1
+		STA	ENWRK2,X
+		LDA	RNSHYH,Y
+		ADC	<PLYPS0
+		STA	ENWRK3,X
+;
+		INC	ENSTAT,X
+;
+		LDA	#050H
+		STA	ENTIM0,X
+;
+;;;		JSR	ENSDCL
+RNST10		EQU	$
+		JMP	RNPTST
+;----------------------------------
+RNWKPT		EQU	$
+		HEX	3,0,6,9
+		HEX	4,1,7,A
+;
+RNSECH		EQU	$
+		LDA	ENTIM0,X
+		BEQ	RNSH05
+;
+		TXA
+		EOR	<FRCNT
+		AND	#03H
+		BNE	RNSH10
+;
+		JSR	ESERSB
+;
+		MEM16
+		REP	#20H
+		LDA	<WORK4
+		SEC
+		SBC	ENXP2L
+		CLC
+		ADC	#05H
+		CMP	#0AH
+		BCS	RNSH08
+;
+		LDA	<WORK6
+		SEC
+		SBC	ENYP2L
+		CLC
+		ADC	#05H
+		CMP	#0AH
+		BCS	RNSH08
+;
+RNSH05		EQU	$
+		MEM8
+		SEP	#20H
+;
+		INC	ENSTAT,X
+;
+		LDA	#20H
+		STA	ENTIM0,X
+		RTS
+RNSH08		EQU	$
+		MEM8
+		SEP	#20H
+;
+		LDA	#18H
+		JSL	>ESERCHL
+		LDA	<WORK0
+		STA	ENYSPD,X
+		LDA	<WORK1
+		STA	ENXSPD,X
+RNSH10		EQU	$
+;
+		JSR	ENMVCL
+;
+		JSR	ENBGCK
+		BNE	RNSH05
+;
+		INC	ENCONT,X
+RNPTST		EQU	$
+		LDA	ENCONT,X
+		AND	#04H
+		ORA	ENMUKI,X
+		TAY
+		LDA	RNWKPT,Y
+		STA	ENCHPT,X
+		RTS
+;================================================
+RNSOPT		EQU	$
+		HEX	5,2,8,A
+;
+RNSHOT		EQU	$
+		LDA	ENTIM0,X
+		BNE	RNSO50
+;
+		JSL	>RNDSET
+		AND	#0FH
+		ADC	#10H
+		STA	ENTIM0,X
+;
+		STZ	ENSTAT,X
+		RTS
+RNSO50		EQU	$
+		CMP	#10H
+		BNE	RNSO60
+;
+		JSL	>TKTAMST
+		BMI	RNSO60
+;
+		LDA	>ITMTBL7
+		CMP	#03H
+		BEQ	RNSO60		; High power tate ?
+;					; no. 
+		LDA	#00H
+		STA	ENMOD4,Y
+RNSO60		EQU	$
+		LDY	ENMUKI,X
+		LDA	RNSOPT,Y
+		STA	ENCHPT,X
+;
+		JSR	ENBGCK
+		RTS
+;================================================
+RINELCD		EQU	$
+;0
+		WORD	0FFFBH,0FFF5H
+		HEX	CC,00,00,02
+		WORD	0FFFCH,0000H
+		HEX	E4,00,00,02
+		WORD	00004H,0000H
+		HEX	E5,00,00,02
+;1
+		WORD	0FFFBH,0FFF6H
+		HEX	CC,00,00,02
+		WORD	0FFFCH,0000H
+		HEX	E7,00,00,02
+		WORD	00004H,0000H
+		HEX	E8,00,00,02
+;2
+		WORD	0FFFBH,0FFF5H
+		HEX	C8,00,00,02
+		WORD	0FFFCH,0000H
+		HEX	E4,00,00,02
+		WORD	00004H,0000H
+		HEX	E5,00,00,02
+;3
+		WORD	00005H,0FFF5H
+		HEX	CC,40,00,02
+		WORD	0FFFCH,0000H
+		HEX	E5,40,00,02
+		WORD	00004H,0000H
+		HEX	E4,40,00,02
+;4
+		WORD	00005H,0FFF6H
+		HEX	CC,40,00,02
+		WORD	0FFFCH,0000H
+		HEX	E8,40,00,02
+		WORD	00004H,0000H
+		HEX	E7,40,00,02
+;5
+		WORD	00005H,0FFF5H
+		HEX	C8,40,00,02
+		WORD	0FFFCH,0000H
+		HEX	E8,40,00,02
+		WORD	00004H,0000H
+		HEX	E7,40,00,02
+;6
+		WORD	00000H,0FFF7H
+		HEX	CE,00,00,02
+		WORD	0FFFCH,0000H
+		HEX	EA,00,00,02
+		WORD	00004H,0000H
+		HEX	EB,00,00,02
+;7
+		WORD	00000H,0FFF7H
+		HEX	CE,00,00,02
+		WORD	0FFFCH,0000H
+		HEX	EB,40,00,02
+		WORD	00004H,0000H
+		HEX	EA,40,00,02
+;8
+		WORD	00000H,0FFF7H
+		HEX	CA,00,00,02
+		WORD	0FFFCH,0000H
+		HEX	EB,40,00,02
+		WORD	00004H,0000H
+		HEX	EB,00,00,02
+;9
+		WORD	00000H,0FFF2H
+		HEX	C6,00,00,02
+		WORD	0FFFCH,00000H
+		HEX	ED,00,00,02
+		WORD	000004H,0000H
+		HEX	EE,00,00,02
+;A
+		WORD	00000H,0FFF2H
+		HEX	C6,00,00,02
+		WORD	0FFFCH,00000H
+		HEX	EE,40,00,02
+		WORD	000004H,0000H
+		HEX	ED,40,00,02
+;
+RINELCS		EQU	$
+		LDA	#00H
+		XBA
+		LDA	ENCHPT,X
+		MEM16
+		REP	#20H
+		ASL	A
+		ASL	A
+		ASL	A
+		STA	<WORK0
+;
+		ASL	A
+		ADC	<WORK0
+		ADC	#RINELCD
+		STA	<WORK8
+;
+		MEM8
+		SEP	#20H
+		LDA	#03H
+;;		JSL	>SETOAML22
+		JSR	SETO22
+;
+		JSL	>SADWSTL
+		RTS		
+;================================================
+GANSPST		EQU	$
+		LDA	#TEKTA
+		JSL	>ENIDSH
+		JSL	>ENIDPS
+		LDA	#02H
+		STA	ENMOD0,Y
+		STA	ENNOCR,Y
+;;		LDA	#01H
+		DEC	A
+		STA	ENCTFG,Y
+		DEC	A
+		STA	ENCLOR,Y
+		RTL
+;%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+;%		Ganon Spook from shsai 		 %
+;%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+GANSPMV		EQU	$
+		LDA	ENSTAT,X
+		BNE	GSPBDMV		; Ganon zanzoo ?
+;					; yes !
+		JSR	GANSPCS
+;
+		JSR	ENSTCK
+;
+		JSR	ENYCLC
+;
+		INC	ENCONT,X
+		LDA	ENCONT,X
+		AND	#1FH
+		BNE	GSP010
+;
+		DEC	ENYSPD,X
+;
+		LDA	ENYSPD,X
+		CMP	#0FCH
+		BNE	GSP008
+;
+		PHA
+		JSR	BIGKEMST
+		LDA	ENYPSL,Y
+		SEC
+		SBC	#14H
+		STA	ENYPSL,Y
+		LDA	ENYPSH,Y
+		SBC	#00H
+		STA	ENYPSH,Y
+		PLA
+GSP008		EQU	$
+		CMP	#0FBH
+		BNE	GSP010
+;
+		INC	ENSTAT,X
+		LDA	#0FFH
+		STA	ENTIM0,X
+;
+		LDA	#0FCH
+		STA	ENYSPD,X
+GSP010		EQU	$
+		RTS
+;----------------------------------------
+GSPBDPT		EQU	$
+		HEX	0,1,2,1
+GBDXLM		EQU	$
+		HEX	20,E0
+GBDYLM		EQU	$
+		HEX	10,F0
+;
+GSPBDMV		EQU	$
+		JSR	GSPBDCS		
+;
+		LDA	ENDSPL,X
+		BEQ	GBD000
+;- - Goto next mode - - -
+;;		LDA	#19H
+;;		STA	SOUND3
+		STZ	ENMODE,X
+		LDA	EMYSTT+1
+		ORA	#80H
+		STA	EMYSTT+1
+GBD000		EQU	$
+		JSR	ENSTCK
+;
+		LDA	<FRCNT
+;		PHA
+;		AND	#0FH
+;		BNE	GBD001
+;;
+;;;		JSL	>SDLRCE
+;;;		ORA	#03H
+;;;		STA	SOUND2	;(S)
+;		LDA	#03H
+;		JSL	>SDLRE2	;(S)
+;GBD001		EQU	$
+;		PLA
+		LSR	A
+		LSR	A
+		AND	#03H
+		TAY
+		LDA	GSPBDPT,Y
+		STA	ENCHPT,X
+;
+		LDA	ENTIM0,X
+		BEQ	GBDAWY		
+;
+		CMP	#0D0H
+		BCS	GBD010
+;
+		LDA	ENCMKI,X
+		AND	#01H
+		TAY
+		LDA	ENYSPD,X
+		CLC
+		ADC	GBDYAD,Y
+		STA	ENYSPD,X
+		CMP	GBDYLM,Y
+		BNE	GBD008
+;
+		INC	ENCMKI,X
+;
+GBD008		EQU	$
+		LDA	ENMUKI,X
+		AND	#01H
+		TAY
+		LDA	ENXSPD,X
+		CLC
+		ADC	GBDXAD,Y
+		STA	ENXSPD,X
+		BNE	GBD00C
+;
+		PHA
+		LDA	#1EH
+		JSL	>SDLRE3	:(S)
+		PLA
+GBD00C		EQU	$
+		CMP	GBDXLM,Y
+		BNE	GBD010
+;
+		INC	ENMUKI,X
+;
+GBD010		EQU	$
+		LDA	#78H
+		STA	<WORK4
+		LDA	#50H
+		STA	<WORK6
+		LDA	<PLXPS0
+		STA	<WORK5
+		LDA	<PLYPS0
+		STA	<WORK7
+		LDA	#05H
+		JSL	>ESERCHL
+;
+		LDA	ENXSPD,X
+		PHA
+		CLC
+		ADC	<WORK1
+		STA	ENXSPD,X
+		LDA	ENYSPD,X
+		PHA
+		CLC
+		ADC	<WORK0
+		STA	ENYSPD,X
+		JSR	ENMVCL
+		PLA
+		STA	ENYSPD,X
+		PLA
+		STA	ENXSPD,X
+;
+		RTS
+;-----------------------------------------------
+GBDAWY		EQU	$
+		JSR	ENMVCL
+;
+		LDA	ENXSPD,X
+		CMP	#40H
+		BEQ	GBDA10
+;
+		INC	ENXSPD,X
+;
+;;		LDA	<FRCNT
+;;		AND	#01H
+;;		BNE	GBDA10
+;
+		DEC	ENYSPD,X
+GBDA10		EQU	$
+		RTS
+;================================================
+GSPBDCD		EQU	$
+;0
+		WORD	0FFF8H,00000H
+		HEX	60,05,00,02
+		WORD	00008H,00000H
+		HEX	60,45,00,02
+;1
+		WORD	0FFF8H,00000H
+		HEX	62,05,00,02
+		WORD	00008H,00000H
+		HEX	62,45,00,02
+;2
+		WORD	0FFF8H,00000H
+		HEX	44,05,00,02
+		WORD	00008H,00000H
+		HEX	44,45,00,02
+GSPBDCS		EQU	$
+		LDA	#00H
+		XBA
+		LDA	ENCHPT,X
+		MEM16
+		REP	#20H
+		ASL	A
+		ASL	A
+		ASL	A
+;
+		ASL	A
+		CLC
+		ADC	#GSPBDCD
+		STA	<WORK8
+		MEM8
+		SEP	#20H
+;
+		LDA	#02H
+		JMP	SETO22
+;;		JSL	>SETOAML22
+;;		RTS
+;================================================
+GANSPCD		EQU	$	
+;0
+		WORD	0FFF0H,0FFF8H
+		HEX	46,0D,00,02
+		WORD	0FFF8H,0FFF8H
+		HEX	47,0D,00,02
+		WORD	00008H,0FFF8H
+		HEX	47,4D,00,02
+		WORD	00010H,0FFF8H
+		HEX	46,4D,00,02
+;
+		WORD	0FFF0H,00008H
+		HEX	69,0D,00,02
+		WORD	0FFF8H,00008H
+		HEX	6A,0D,00,02
+		WORD	00008H,00008H
+		HEX	6A,4D,00,02
+		WORD	00010H,00008H
+		HEX	69,4D,00,02
+;1
+		WORD	0FFF0H,0FFF8H
+		HEX	46,0D,00,02
+		WORD	0FFF8H,0FFF8H
+		HEX	47,0D,00,02
+		WORD	00008H,0FFF8H
+		HEX	47,4D,00,02
+		WORD	00010H,0FFF8H
+		HEX	46,4D,00,02
+;
+		WORD	0FFF0H,00008H
+		HEX	66,0D,00,02
+		WORD	0FFF8H,00008H
+		HEX	67,0D,00,02
+		WORD	00008H,00008H
+		HEX	67,4D,00,02
+		WORD	00010H,00008H
+		HEX	66,4D,00,02
+GANSPCS		EQU	$
+		LDA	#00H
+		XBA
+		LDA	ENCHPT,X
+		MEM16
+		REP	#20H
+		ASL	A
+		ASL	A
+		ASL	A
+;
+		ASL	A
+		ASL	A
+		ASL	A
+		CLC
+		ADC	#GANSPCD
+		STA	<WORK8
+;
+		LDA	#OAM+0150H
+		STA	<OAMADR
+		LDA	#OAMSB+0150H/4
+		STA	<OSBADR
+;
+		MEM8
+		SEP	#20H
+;
+		LDA	#08H
+		JMP	SETO22
+;;		JSL	>SETOAML22
+;;		RTS
+;%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+;%		Ganon Yari move	      		 %
+;;GYSDDT		EQU	$
+;;		HEX	3,4
+;
+GYSDST		EQU	$
+		LDA	<FRCNT
+		AND	#0FH
+		BNE	GYSS00
+;
+;;		LDA	<FRCNT
+;;		LSR	A
+;;		LSR	A
+;;		LSR	A
+;;		LSR	A
+;;		NOP
+;;		NOP
+;;		AND	#01H
+;;		PHA
+;
+;;		JSL	>SDLRCE
+;;		PLY
+;;		ORA	GYSDDT,Y
+;;		LDA	#06H
+;;		STA	SOUND3	;(S)
+		LDA	#06H
+		JSL	>SDLRE3	;(S)
+GYSS00		EQU	$
+		RTS
+;
+;%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+GANYRMV		EQU	$
+		JSR	GANYRCS
+;
+;;		LDA	#04H
+;;		JSL	>OAMENT3
+;;		JSL	>EN1CSTL	; TEST !
+;
+		JSR	ENSTCK
+;
+		JSR	CREKEK
+;
+		JSR	GYSDST		; Sound set !
+;
+		JSR	ENMVCL
+;
+		DEC	ENCONT,X
+		LDA	ENCONT,X
+		LSR	A
+		LSR	A
+		AND	#07H
+;;;		EOR	#07H
+		TAY
+		LDA	YARISP,Y
+		STA	ENCTCT,X
+;
+		LDA	ENTIM0,X
+		BEQ	GYM100
+;===== For player =======
+;;		AND	#01H
+		LSR	A
+		BCS	GYM040
+;
+		LDA	#20H
+		JSL	>PSERC2L
+GYSDCL		EQU	$
+		LDA	<WORK0
+		CMP	ENYSPD,X
+		BEQ	GYM020
+		BPL	GYM010
+		DEC	ENYSPD,X
+		BRA	GYM020
+GYM010		EQU	$
+		INC	ENYSPD,X
+GYM020		EQU	$
+		LDA	<WORK1
+		CMP	ENXSPD,X
+		BEQ	GYM040
+		BPL	GYM030
+		DEC	ENXSPD,X
+		BRA	GYM040
+GYM030		EQU	$
+		INC	ENXSPD,X
+GYM040		EQU	$
+		RTS
+;=======Back return for GANON ========
+GYMXAL		EQU	$
+		HEX	18,F0
+GYMXAH		EQU	$
+		HEX	00,FF
+;
+GYM100		EQU	$
+		LDY	ENMUKI+0
+		LDA	ENXPSL+0
+		CLC
+		ADC	GYMXAL,Y
+		STA	<WORK4		
+		LDA	ENXPSH+0
+		ADC	GYMXAH,Y
+		STA	<WORK5		
+		LDA	ENYPSL+0
+		CLC
+		ADC	#0F0H
+		STA	<WORK6		
+		LDA	ENYPSH+0
+		ADC	#0FFH
+		STA	<WORK7
+;
+		JSR	ECROSCK
+		BCS	GYM110
+;
+		STZ	ENMODE,X
+;
+		LDA	#GCA2
+		STA	ENSTAT+00
+		LDA	#10H
+		STA	ENTIM0+00
+GYM110		EQU	$
+;;		MEM8
+;;		SEP	#20H
+		LDA	#20H
+		JSL	>ESERCHL
+		JMP	GYSDCL		
+;***********************************************************		
+;;GFRXAD		EQU	$
+;;		HEX	01,FF,00,00
+;;GFRXLM		EQU	$
+;;		HEX	20,E0,00,00
+;;GFRYAD		EQU	$
+;;		HEX	00,00,01,FF
+;;GFRYLM		EQU	$
+;;		HEX	00,00,20,E0
+;- - - - - - - - - - - - - - - - - - - - - -
+GANF2MV		EQU	$
+		JSR	GANFBCS
+		JSR	ENSTCK
+		JMP	GFRM99
+;
+GANFRMV		EQU	$
+;;		JSL	>OAMCHKL
+;;		JSL	>EN1CSTL	; TEST !
+		JSR	GANFBCS
+		JSR	ENSTCK
+;
+;;		INC	ENCONT,X
+;;;
+;;		LDA	ENCONT,X
+;;		LSR	A
+;;		LSR	A
+;;		NOP
+;;		AND	#01H
+;;		STA	ENCHPT,X
+;
+		JSR	ESERSB
+;
+		LDA	#02H
+		JSL	>ESERCHL
+		LDA	<WORK0
+		STA	ENYSPD,X
+		LDA	<WORK1
+		STA	ENXSPD,X
+;
+		LDA	#40H+10H
+		JSL	>ESERCHL
+;
+		LDA	ENXSPD,X
+		EOR	#0FFH
+		INC	A
+		CLC
+		ADC	<WORK0
+		STA	ENXSPD,X
+;
+		LDA	ENYSPD,X
+		EOR	#0FFH
+		INC	A
+		STA	<WORK0
+;
+		LDA	<WORK1
+		EOR	#0FFH
+		INC	A
+		CLC
+		ADC	<WORK0
+		STA	ENYSPD,X
+;
+GFRM99		EQU	$
+		JSR	FBPTST
+;
+		JSR	ENMVCL
+;
+;
+;
+;
+;
+;;		LDA	ENTIM0,X
+;;		BNE	GFRM20
+;;;
+;;		LDA	ENCONT,X
+;;		AND	#07H
+;;		BNE	GFRM20
+;
+;
+;;		JSR	EPXYCK
+;;		LDA	ENXSPD,X
+;;		CMP	GFRXLM,Y
+;;		BEQ	GFRM10
+;;		CLC
+;;		ADC	GFRXAD,Y
+;;		STA	ENXSPD,X
+;;GFRM10		EQU	$
+;
+;;		LDA	ENYSPD,X
+;;		CMP	GFRYLM,Y
+;;		BEQ	GFRM20
+;;		CLC
+;;		ADC	GFRYAD,Y
+;;		STA	ENYSPD,X
+;;GFRM20		EQU	$
+		LDA	ENCONT,X
+		AND	#07H
+		BNE	GFRM30
+;
+		LDA	#E2HF-1
+		JSR	ZNZSET
+		LDY	ENCTFG,X
+		PHX
+		LDX	<WORK0
+		LDA	#10H
+		STA	>E2MODE,X
+		LDA	#4FH
+		CPY	#05H
+		BNE	GFRM28
+		LDA	#2FH
+GFRM28		EQU	$
+		STA	>E2TIM0,X
+		PLX
+GFRM30		EQU	$
+		RTS
+;-----------------------------------------
+ESERSB		EQU	$
+		LDA	ENWRK0,X	; Master pos !
+		STA	<WORK4
+		LDA	ENWRK1,X
+		STA	<WORK5
+		LDA	ENWRK2,X
+		STA	<WORK6
+		LDA	ENWRK3,X
+		STA	<WORK7
+		RTS
+;%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+;%		Ganon Fire bad move    		 %
+;%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+FBSPXL		EQU	$
+		HEX	14,EE
+FBSPXH		EQU	$
+		HEX	00,FF
+FBSPYL		EQU	$
+		HEX	EC,EC
+;FBSPYH		EQU	$
+;		HEX	FF,FF
+;
+GANFBMV		EQU	$	; Fire bad
+		JSR	GANFBCS
+;
+		JSR	ENSTCK
+;
+		JSL	>CRENPLL
+		LDA	ENSTAT,X
+		JSL	>JSRSUB
+		WORD	FBSPIN
+		WORD	FBBADC
+		WORD	FBAWAY
+;----------------------------------------------------
+GBSPPS		EQU	$
+		LDY	ENMUKI+00
+		LDA	PTBFXL,X
+		CLC
+		ADC	FBSPXL,Y
+		STA	ENXPSL,X
+		LDA	PTBFXH,X
+		ADC	FBSPXH,Y
+		STA	ENXPSH,X
+		LDA	PTBFYL,X
+		CLC
+		ADC	FBSPYL,Y
+		STA	ENYPSL,X
+		LDA	PTBFYH,X
+;;		ADC	FBSPYH,Y
+		ADC	#0FFH
+		STA	ENYPSH,X
+		RTS
+;------------------------------------
+FBSPIN		EQU	$
+;;		JSR	FBZNZST
+;
+		JSR	GBSPPS
+		LDA	ENTIM0,X
+		BNE	FBSP10
+		INC	ENSTAT,X
+;;		LDA	#17H
+;;		STA	ENTIM0,X
+		RTS
+FBSP10		EQU	$
+		AND	#04H
+		LSR	A
+		LSR	A
+		STA	ENCHPT,X
+		RTS
+;----------------------------------------------------
+FBCNGP		EQU	$
+		HEX	4,4,4,3,3,3,2,2,2
+;;		HEX	4,4,4,4,3,2
+;
+FBFLYP		EQU	$
+		HEX	4,5,6,5
+;
+FBBADC		EQU	$
+;;		JSR	FBZNZST
+;
+		JSR	GBSPPS
+		INC	ENCONT,X
+		LDA	ENCONT,X
+		BRA	FBSP10
+;
+;;		LDA	ENTIM0,X
+;;		BEQ	FBBC10
+;;		LSR	A
+;;		LSR	A
+;;		TAY
+;;		LDA	FBCNGP,Y
+;;		STA	ENCHPT,X
+;;		RTS
+FBBC10		EQU	$
+FBPTST		EQU	$
+		INC	ENCONT,X
+;
+		LDA	ENCONT,X
+		LSR	A
+		LSR	A
+		AND	#03H
+		TAY
+		LDA	FBFLYP,Y
+		STA	ENCHPT,X
+		RTS		
+;----------------------------------------------------
+FBAWAY		EQU	$
+;;		JSR	FBZNZST
+;
+		JSR	ENMVCL
+		LDA	#40H
+		STA	ENMOD5,X	; Display out clear !
+;
+		LDA	ENTIM1,X
+		BEQ	FBAW20
+;
+		CMP	#01H
+		BEQ	FBAW30
+		LSR	A
+		LSR	A
+		TAY
+		LDA	FBCNGP,Y
+		STA	ENCHPT,X
+		RTS
+;
+FBAW20		EQU	$
+		LDA	ENTIM0,X
+		BEQ	FBAW80
+		DEC	A
+		BNE	FBSP10
+;
+		LDA	#23H
+;;		LDA	#17H
+		STA	ENTIM1,X
+		BRA	FBSP10
+;- - - - - - - - - - - - - - - - - - - - -
+FBAW30		EQU	$
+		LDA	#30H
+		JSL	>PSERCHL
+;		
+;;		JSL	>SDLRCE
+;;		ORA	#1EH
+;;		STA	SOUND3	;(S)
+		LDA	#1EH
+		JSL	>SDLRE3	;(S)
+FBAW80		EQU	$
+		JSR	FBPTST
+FBAW90		EQU	$
+		BRA	FBPTST
+;========================================
+;FBZNZST		EQU	$	; Hinoko set !
+;		TXA
+;		EOR	<FRCNT
+;		AND	#1FH
+;		BNE	FBZI30
+;;
+;		JSL	>RNDSET
+;		AND	#0FH
+;		LDY	#00H
+;		SEC
+;		SBC	#03H
+;		STA	<WORK0
+;		BPL	FBZI10
+;		DEY
+;FBZI10		EQU	$
+;		STY	<WORK1
+;;
+;		JSL	>RNDSET
+;		LSR	A
+;		AND	#0FH
+;		LDY	#00H
+;		SEC
+;		SBC	#03H
+;		STA	<WORK2
+;		BPL	FBZI20
+;		DEY
+;FBZI20		EQU	$
+;		STY	<WORK3
+;;
+;		JSL	>ICEFLST
+;;
+;		PHX
+;		LDX	<WORKF
+;		LDA	#0EH
+;		STA	>E2MODE,X
+;		PLX
+;FBZI30		EQU	$
+;		RTS
+;========================================
+GANFBXD		EQU	$
+		WORD	0FFF8H,00008H
+GANFBCD		EQU	$
+		HEX	88,88,8A,8C,68,AA,A8
+GANFBAD		EQU	$
+		HEX	00,C0
+		HEX	80,40
+		HEX	00,40
+		HEX	00,40
+		HEX	00,40
+		HEX	00,40
+		HEX	00,40
+;------------------------------------------------
+GANFBCS		EQU	$
+		JSR	OAMCHK
+;
+		LDA	ENCHPT,X
+		STA	<WORK7
+		ASL	A
+		STA	<WORK6
+		PHX
+		LDX	#01H
+GFBC10		EQU	$
+		PHX
+		TXA
+		ASL	A
+		TAX
+		MEM16
+		REP	#20H
+		LDA	<WORK0
+		CLC
+		ADC	GANFBXD,X
+		STA	(<OAMADR),Y
+		AND	#0100H
+		STA	<WORKE
+;
+		LDA	<WORK2
+		INY
+		STA	(<OAMADR),Y
+		CLC
+		ADC	#0010H		
+		CMP	#0100H
+		MEM8
+		SEP	#20H
+		BCC	GFBC20
+		LDA	#0F0H
+		STA	(<OAMADR),Y
+GFBC20		EQU	$
+		LDX	<WORK7
+		LDA	GANFBCD,X
+		INY
+		STA	(<OAMADR),Y
+		PLA
+		PHA
+		ORA	<WORK6
+		TAX
+;
+		LDA	GANFBAD,X
+		ORA	<WORK5
+		INY
+		STA	(<OAMADR),Y
+;
+		PHY
+		TYA
+		LSR	A
+		LSR	A
+		TAY
+		LDA	#02H
+		ORA	<WORKF
+		STA	(<OSBADR),Y
+;
+		PLY
+		INY
+;
+		PLX
+		DEX
+		BPL	GFBC10
+		PLX
+		RTS
+;================================================
+ECROSCK		EQU	$
+		MEM16
+		REP	#20H
+		LDA	ENXP2L
+		SEC
+		SBC	<WORK4
+		CLC
+		ADC	#04H
+		CMP	#08H
+		BCS	ECR110
+;
+		LDA	ENYP2L
+		SEC
+		SBC	<WORK6
+		CLC
+		ADC	#04H
+		CMP	#08H
+		BCS	ECR110
+ECR110		EQU	$
+		MEM8
+		SEP	#20H
+		RTS
+;
+;%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+;%		Ganon Initial 	      		 %
+;%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+GANONIT		EQU	$
+		PHB
+		PHK
+		PLB
+;
+;;		LDA	#09H
+;;		STA	ENCTCT,X
+;;		LDA	#02H
+;;		STA	ENCHPT,X
+		JSR	KAMAEST
+;
+		LDA	#080H
+		STA	ENTIM0,X
+;
+;;		LDA	GNNCFG
+		LDA	#02H
+		STA	ENGRNO,X
+;
+		LDA	#1EH
+		STA	SOUND0	;(S)
+;
+		PLB
+		RTL
+;================================================
+GBANDT		EQU	$
+		WORD	0000H,0040H,0080H,00C0H
+		WORD	0100H,0140H,0180H,01C0H
+GBCTXS		EQU	$
+		HEX	00,10,18,1C
+		HEX	20,1C,18,10
+		HEX	00,F0,E8,E4
+		HEX	E0,E4,E8,F0
+GBCTYS		EQU	$
+		HEX	20,1C,18,10
+		HEX	00,F0,E8,E4
+		HEX	E0,E4,E8,F0
+		HEX	00,10,18,1C
+;
+GABDCT		EQU	$	; Ganon bad spin adress calc
+		LDA	#0FCH
+		CLC
+		ADC	PTANGL
+		STA	PTANGL
+		LDA	#0FFH
+		ADC	PTANGL+1
+		STA	PTANGL+1
+;
+;- - - - - - - - - -
+		STZ	ENHELP
+;
+		PHX
+GBCT10		EQU	$
+		LDA	ENHELP
+;;		PHA
+		TAX
+		ASL	A
+		TAY
+;
+		MEM16
+		REP	#00100000B
+                LDA	PTANGL
+		CLC
+		ADC	GBANDT,Y
+		AND	#01FFH
+		STA	<WORK0
+		LSR	A
+		LSR	A
+		LSR	A
+		LSR	A
+		LSR	A
+		TAY
+		MEM8
+		SEP	#00100000B
+;
+		LDA	ENSTAT+1,X
+		CMP	#02H
+		BEQ	GBCT11
+;
+		TYA
+		SEC
+		SBC	#04H
+		AND	#0FH
+		TAY
+;
+		LDA	GBCTXS,Y
+		STA	ENXSPD+1,X
+		ASL	A
+		PHP
+		ROR	ENXSPD+1,X
+		PLP
+		ROR	ENXSPD+1,X
+;
+		LDA	GBCTYS,Y
+		STA	ENYSPD+1,X
+		ASL	A
+		PHP
+		ROR	ENYSPD+1,X
+		PLP
+		ROR	ENYSPD+1,X
+GBCT11		EQU	$
+;
+;;		PLY
+		LDA	PTHANK
+		STA	<WORKF		; hankei X
+;
+		PHX
+;
+		MEM16
+		IDX16
+		REP	#00110000B
+;
+		LDA	<WORK0
+		AND	#00FFH
+		ASL	A
+		TAX
+		LDA	>SINDT2,X
+		STA	<WORK4
+;
+		LDA	<WORK0
+		CLC
+		ADC	#0080H
+		STA	<WORK2
+		AND	#00FFH
+		ASL	A
+		TAX
+		LDA	>SINDT2,X
+		STA	<WORK6
+		MEM8
+		IDX8
+		SEP	#00110000B		
+;
+		PLX
+;
+		LDA	<WORK4
+		STA	4202H
+		LDA	<WORKF 	    ; Hankei
+		LDY	<WORK5
+		BNE	GKSF0
+		STA	4203H
+;;		BYTE	0EAH,0EAH,0EAH,0EAH,0EAH,0EAH,0EAH,0EAH
+		JSR	NOPSUB
+		ASL	4216H
+		LDA	4217H
+		ADC	#00H
+GKSF0		EQU	$
+		LSR	<WORK1
+		BCC	GKS00
+		EOR	#0FFH
+		INC	A
+GKS00		EQU	$
+;;		STA	<WORK4		; XAD
+		STZ	<WORKA
+		CMP	#00H
+		BPL	GKS007
+		DEC	<WORKA
+GKS007		EQU	$
+		CLC	
+		ADC	ENXPSL
+;;		LDY	ENHELP
+		STA	PTBFXL+1,X
+		LDA	ENXPSH
+		ADC	<WORKA
+		STA	PTBFXH+1,X
+;
+		LDA	<WORK6
+		STA	4202H
+		LDA	<WORKF
+		LDY	<WORK7
+		BNE	GKS08
+		STA	4203H
+;;		BYTE	0EAH,0EAH,0EAH,0EAH,0EAH,0EAH,0EAH,0EAH
+		JSR	NOPSUB
+		ASL	4216H
+		LDA	4217H
+		ADC	#00H
+GKS08		EQU	$
+		LSR	<WORK3
+		BCC	GKS10
+		EOR	#0FFH
+		INC	A
+GKS10		EQU	$
+;;		STA	<WORK6		; YAD
+;
+		STZ	<WORKA
+		CMP	#00H
+		BPL	GKS012
+		DEC	<WORKA
+GKS012		EQU	$
+		CLC	
+		ADC	ENYPSL
+;;		LDY	ENHELP
+		STA	PTBFYL+1,X
+;
+		LDA	ENYPSH
+		ADC	<WORKA
+		STA	PTBFYH+1,X
+;--------------------------------------------
+		INC	ENHELP
+		LDA	ENHELP
+		CMP	#08H
+		BEQ	GBCTA0
+		JMP	GBCT10
+GBCTA0		EQU	$
+		PLX
+		RTS
+;=================================================		
+NOPSUB		BYTE	0EAH,0EAH,0EAH,0EAH,0EAH,0EAH   ;,0EAH,0EAH
+		RTS
+;=================================================		
+GANFBST		EQU	$
+;- - Bad test - -
+		LDA	#TEKTA
+		LDY	#08H
+		JSL	>ENIDSH2
+		BMI	GTEST0
+		JSL	>ENIDPS
+		LDA	#04H
+		STA	ENCTFG,Y
+		LDA	#03H
+		STA	ENCLOR,Y
+		LDA	#01000000B
+		STA	ENMOD2,Y
+		LDA	#01H
+		STA	ENMOD0,Y
+		LDA	#80H
+		STA	ENMOD5,Y
+		STA	ENYPSH,Y
+		LDA	#030H
+		STA	ENTIM0,Y			
+GAM6ST		EQU	$
+		LDA	#07H
+		STA	ENMOD6,Y
+		STA	ENNOCR,Y
+GTEST0		EQU	$
+		RTS
+;%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+;%		Ganon Move 	      		 %
+;%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+GANONMV		EQU	$
+;;		LDA	#16H
+;;		STA	1CH
+;;		LDA	#01H
+;;		STA	1DH
+;;;- - - 
+;;		LDA	ENLIFE,X
+;;		CMP	#33
+;;		BCS	GANO2MV		; Atack 2 (Chance silver allow )start ?
+;;;					; yes !
+;;		LDA	#GANO2
+;;		STA	ENMYNO,X
+GANO2MV		EQU	$
+;- - Zanzoo - - -
+		LDA	ENSTAT,X
+		BPL	GANON00
+;
+		JSR	ENSTCK
+;
+		LDA	ENTIM0,X
+		BNE	GANONFF
+		STZ	ENMODE,X
+GANONFF		EQU	$
+;;		AND	#01H
+		LSR	A
+		BCS	GANONFE
+;
+		JSR	GANONCS
+;
+GANONFE		EQU	$
+		RTS
+;--------------------------------------------
+GAKBPT		EQU	$
+		HEX	02,00
+;
+GADMPT		EQU	$
+		HEX	10,0A
+;
+GANON00		EQU	$
+		LDA	ENTIM3,X
+		BEQ	GAN110		; Damage ?
+;					; yes !
+		LDY	ENMUKI,X
+		LDA	GADMPT,Y
+		STA	ENCHPT,X
+;
+GAN110		EQU	$
+		LDA	GNNCFG
+		CMP	#02H
+		BNE	GAN1026
+		CMP	ENGRNO,X
+		BEQ	GAN1026		; Kantera Just max ?
+		PHA			; yes ! mabushii set !
+		LDA	#40H
+		STA	ENTIM1,X
+		PLA
+GAN1026		EQU	$
+		STA	ENGRNO,X
+;
+		JSR	GANONCS
+;
+		JSR	ENSTCK
+;- - Tourou clear - -
+		LDA	ENTIM2,X	; 1/27 ver 3
+		BEQ	GAN112
+		CMP	#10H
+		BEQ	GAN111
+		CMP	#01H
+		BNE	GAN112
+		PHX
+		JSL	>LAMPOFF1
+		PLX
+		BRA	GAN112
+GAN111		EQU	$
+		PHX
+		JSL	>LAMPOFF0
+		PLX
+GAN112		EQU	$
+		LDA	ENTIM1,X
+		BEQ	GAN105		; Mabushii !!
+;
+		LDA	#0FH
+		STA	ENCHPT,X
+		JSR	GACHNCK
+		JMP	CREKEK
+;;		RTS
+;
+GAN105		EQU	$
+;		JSR	ENSTCK
+;;- - Tourou clear - -
+;1/27 Ver.3	LDA	ENTIM2,X
+;		BEQ	GAN112
+;		CMP	#10H
+;		BEQ	GAN111
+;		CMP	#01H
+;		BNE	GAN112
+;		PHX
+;		JSL	>LAMPOFF1
+;		PLX
+;		BRA	GAN112
+;GAN111		EQU	$
+;		PHX
+;		JSL	>LAMPOFF0
+;		PLX
+;GAN112		EQU	$
+;- - Kubi muki->player !- -
+		JSR	EPXCHK
+		LDA	<WORKF
+;;;		CLC
+		ADC	#20H
+		CMP	#40H
+		LDA	#01H
+		BCC	GAN106
+		LDA	GAKBPT,Y
+GAN106		EQU	$		
+		STA	ENKBMK,X
+;- - Damege - - -
+		LDA	ENTIM3,X
+		BEQ	GAN107
+;
+		STA	ENNOCR,X
+;;;		JSR	GAMV4ST
+;
+		JSR	ENHNSB
+;
+		STZ	ENTIM0,X
+		RTS
+;- - - - - - - - - - - - - - - - - 
+GAN107		EQU	$
+		LDA	ENNOCR,X
+		ORA	PYALSP
+		BNE	GANON02
+;
+		LDA	GNNCFG
+		CMP	#02H
+		BNE	GANON02		; Tourou all on ?
+;					; yes !
+		JSR	CREKEK
+;
+GANON02		EQU	$
+		STZ	ENNOCR,X
+;
+		LDA	ENSTAT,X
+		JSL	>JSRSUB
+GA00		WORD	GAWAIT	; Start wait
+; - - - Atack 1 - - -
+GA01		WORD	GAATC1	; Yari shot
+GA02		WORD	GACAC1	; Yari cach wait
+GA03		WORD	GACAC2	; Yari cach pause
+GA04		WORD	GAKYO1	; kyoro kyoro
+GA05		WORD	GAMOV1	; Move
+GA06		WORD	GAKYO2	; Kyoro 2
+; - - - Atack 2 - - -
+GA10		WORD	GAATC2	; Fire bad spin !
+GA11		WORD	GAATC21	; Fire bad spin wide!
+GA12		WORD	GAKYO3	; Kyoro 3
+GA13		WORD	GAMOV2	; Move 2
+GA14		WORD	GAWAI2	; Atack 2 wait !
+; - - - Atack 3 - - -
+GA20		WORD	GAATC3	; Fire shot
+GA211		WORD	GAMOV3	; Move 3
+GA22		WORD	GAWAI3	; Shot wait
+GA23		WORD	GAJUMP	; Jump
+GA24		WORD	GADOWN	; Down & tilt 
+; - - - Atack 4 - - -
+GA30		WORD	GAWAI4	; 
+GA31		WORD	GAMOV4	; 
+GA32		WORD	GACHANC	; Silver alow chance !
+;- - - - - - - - - - - - - - - - - - - - - - -
+GAT1		EQU	(GA01-GA00)/2
+GCA1		EQU	(GA02-GA00)/2
+GCA2		EQU	(GA03-GA00)/2
+GKY1		EQU	(GA04-GA00)/2
+GMV1		EQU	(GA05-GA00)/2
+GKY2		EQU	(GA06-GA00)/2
+;
+GAT2		EQU	(GA10-GA00)/2
+GA21		EQU	(GA11-GA00)/2
+GKY3		EQU	(GA12-GA00)/2
+GMV2		EQU	(GA13-GA00)/2
+GWA2		EQU	(GA14-GA00)/2
+;
+GAT3		EQU	(GA20-GA00)/2
+GMV3		EQU	(GA211-GA00)/2
+GWA3		EQU	(GA22-GA00)/2
+GJMP		EQU	(GA23-GA00)/2
+GDOW		EQU	(GA24-GA00)/2
+;
+GWA4		EQU	(GA30-GA00)/2
+GMV4		EQU	(GA31-GA00)/2
+GCHA		EQU	(GA32-GA00)/2
+;==========================================================
+GACHPT		EQU	$
+		HEX	5,D
+;
+GACHANC		EQU	$
+		LDA	#05H
+		STA	ENCLOR,X
+;
+		LDA	#00000010B
+		STA	ENMOD7,X
+;
+		LDA	ENTIM0,X
+		BNE	GACH10
+;
+GAMV4ST		EQU	$
+		LDA	#01H
+		STA	ENCLOR,X
+;
+		LDA	#GMV4
+		JSR	GMV1ST
+;
+		LDA	#GANON
+		STA	ENMYNO,X
+;
+		STZ	ENFLSH,X
+		RTS
+;- - - - - - - - - - - - - - - - - - - - - - - - -
+GACH10		EQU	$
+;;		ORA	#070H
+;;		STA	ENFLSH,X
+;
+		LDY	ENMUKI,X
+		LDA	GACHPT,Y
+		STA	ENCHPT,X
+		RTS
+;==========================================================
+GAW4P1		EQU	$
+		HEX	6,E
+GAW4PT		EQU	$
+		HEX	7,A
+;
+GAWAI4		EQU	$
+		LDY	ENMUKI,X
+		LDA	GAW4P1,Y
+		STA	ENCHPT,X
+;;		JSR	KAMAEST
+;;		STZ	ENCTCT,X
+;
+		LDA	ENTIM0,X
+		BNE	GAW410
+;
+		LDA	#GMV4
+		JSR	GMV1ST
+		RTS
+GAW410		EQU	$
+		CMP	#34H
+		PHP
+		BNE	GACH18
+;
+		JSR	GANF2ST
+;
+GACH18		EQU	$
+		PLP
+		BCS	GAW412
+;
+		LDY	ENMUKI,X
+		LDA	GAW4PT,Y
+		STA	ENCHPT,X
+GAW412		EQU	$
+		LDA	ENTIM0,X
+		CMP	#48H
+		BCS	GAW418
+		CMP	#28H
+		BCS	GAW450
+GAW418		EQU	$
+		INC	ENNOCR,X
+;
+;;		AND	#01H
+		LSR	A
+		BCC	GAW420
+;
+		LDA	#0FFH
+		STA	ENCHPT,X
+GAW420		EQU	$
+;;		RTS
+GAW450		EQU	$
+GACHNCK		EQU	$
+		LDA	ENFLSH,X
+		AND	#7FH
+		CMP	#1AH
+		BNE	GAW460
+;
+		STZ	ENFLSH,X
+;
+		LDA	#GCHA
+		STA	ENSTAT,X
+		LDA	#07FH   
+		STA	ENTIM0,X
+		LDA	#GANO2
+		STA	ENMYNO,X
+GAW460		EQU	$
+		RTS
+;==========================================================
+;==========================================================
+GAJPCP		EQU	$
+		HEX	6,E
+;
+GAJUMP		EQU	$
+		LDA	ENTIM0,X
+		BEQ	GAJ008
+		DEC	A
+		BNE	GAJ010
+;
+		LDA	#GDOW
+		STA	ENSTAT,X
+		LDA	#0A0H
+		STA	ENZSPD,X
+		RTS
+GAJ008		EQU	$
+		JSR	ENZCLC
+		DEC	ENZSPD,X
+		BNE	GAJ010
+		LDA	#20H
+		STA	ENTIM0,X
+GAJ010		EQU	$
+		LDY	ENMUKI,X
+		LDA	GAJPCP,Y
+		STA	ENCHPT,X
+		RTS
+;==========================================================
+GADWCP		EQU	$
+		HEX	2,A
+;;NZTLDT          EQU     $
+  ;;              HEX     01,FF
+    ;;            HEX     00,FF
+;
+GADOWN		EQU	$
+		STZ	YUREYD
+		STZ	YUREYD+1
+;
+		LDA	ENTIM0,X
+		BEQ	GAD008
+		DEC	A
+		BNE	GAD003
+;
+		LDA	#05H
+		STA	SOUND1	;(S) Stop
+		LDA	#GMV3
+		JSR	GMV1ST
+                STZ     PYALSP
+;
+		JSR	GAYKDW		; Yuka down set !
+;
+		LDA	ENCTFG,X
+		CMP	#04H
+		BCC	GAD002
+;
+		LDA	#GMV2
+		JSR	GMV1ST
+;
+		LDA	#96
+		STA	ENLIFE,X
+;
+		LDA	#0E0H
+		STA	ENTIM2,X
+;
+                LDA     #MS_0561
+                STA     MSGENOL
+                LDA     #HIGH MS_0561
+MSGSSS		EQU	$
+                STA     MSGENOH
+                JSL     >MSGSET
+;
+GAD002		EQU	$
+		RTS
+;-----------------------------------------------
+GAD003		EQU	$
+		AND	#01H
+		TAY
+                LDA     NZTLDT,Y
+                STA     YUREYD
+                LDA     NZTLDT+2,Y
+                STA     YUREYD+1
+;
+                LDA     #01H
+                STA     PYALSP
+;
+		RTS				
+GAD008		EQU	$
+		JSR	ENZCLC
+		LDA	ENZPSL,X
+		BPL	GAD010
+;
+		STZ	ENZSPD,X
+		STZ	ENZPSL,X
+;
+		LDA	#60H
+		STA	ENTIM0,X
+;
+		LDA	#07H
+		STA	SOUND1	;(S)
+;;		JSL	>SDLRCE
+;;		ORA	#0CH
+;;		STA	SOUND2	;(S)
+		LDA	#0CH
+		JSL	>SDLRE2	;(S)
+;
+GAD010		EQU	$
+		LDY	ENMUKI,X
+		LDA	GADWCP,Y
+		STA	ENCHPT,X
+		RTS
+;==========================================================
+GAYKNO		EQU	$
+		BYTE	GAYK0,GAYK1,GAYK2,GAYK3
+GAYKXL		EQU	$
+		HEX	18,D8,D8,18
+GAYKYL		EQU	$
+		HEX	28,28,D8,D8
+;;		HEX	18,18,C8,C8
+;
+GAYKDW		EQU	$
+		LDY	#ESNO-1
+GYKS10		EQU	$
+		LDA	ESMODE,Y
+		BEQ	GYKS20
+		DEY
+		BPL	GYKS10
+		RTS
+;- - - - - - - - - -- - - - - - - - - -
+GYKS20		EQU	$
+		LDA	ENCTFG,X
+		CMP	#04H
+		BCS	GYKS30
+;
+		INC	ENCTFG,X
+;
+		PHX
+		TAX
+		LDA	GAYKNO,X
+		STA	ESMODE,Y
+;
+		LDA	GAYKXL,X
+		STA	ESXPSL,Y
+		LDA	<PLXPS0
+		STA	ESXPSH,Y
+;
+		LDA	GAYKYL,X
+		STA	ESYPSL,Y
+		LDA	<PLYPS0
+		STA	ESYPSH,Y
+		LDA	#00H
+		STA	ESSTAT,Y
+		STA	ESTIM0,Y
+		PLX
+GYKS30		EQU	$
+		RTS
+;==========================================================
+;==========================================================
+;==========================================================
+GAA3PT		EQU	$
+		HEX	5,6,7
+		HEX	D,E,A
+;
+GAATC3		EQU	$
+		LDA	ENTIM0,X
+		BNE	GAA310
+;
+GMV3ST		EQU	$
+		LDA	#GMV3
+		JSR	GMV1ST
+		RTS
+GAA310		EQU	$
+		LDY	#00H
+		CMP	#060H
+		BCS	GAA330
+		INY
+		CMP	#048H
+		BCS	GAA330
+		CMP	#042H
+;;		AND	#3FH
+		BNE	GAA320
+		PHY
+		JSR	GANFRST
+		PLY
+GAA320		EQU	$
+		INY
+GAA330		EQU	$
+		LDA	ENMUKI,X
+		BEQ	GAA340
+		INY
+		INY
+		INY
+GAA340		EQU	$
+		LDA	GAA3PT,Y
+		STA	ENCHPT,X
+;
+		LDA	ENFLSH,X
+		AND	#7FH
+		CMP	#01H
+		BNE	GAA350		; Damage ?
+;					; yes !
+		LDA	#GJMP
+		STA	ENSTAT,X	; Jump !
+;
+		LDA	#18H
+		STA	ENZSPD,X
+;
+		STZ	ENTIM0,X
+GAA350		EQU	$
+		RTS
+;---------------------------------------		
+;;GFRSYS		EQU	$
+;;		HEX	10,F0
+;
+GFRSYL		EQU	$
+		HEX	00,F0
+GFRSYH		EQU	$
+		HEX	00,FF
+;
+GANF2ST		EQU	$
+		LDA	#05H
+		BRA	GFRS10
+GANFRST		EQU	$
+		LDA	#03H
+GFRS10		EQU	$
+		STA	ENHELP
+;
+		LDA	#TEKTA
+		LDY	#08H
+		JSL	>ENIDSH2
+		BMI	GFRS90
+;
+;;		JSL	>SDLRCE
+;;		ORA	#2AH
+;;		STA	SOUND2	;(S)
+		LDA	#2AH
+		JSL	>SDLRE2	;(S)
+;
+		JSL	>ENIDPS
+;;;		LDA	#03H
+		LDA	ENHELP
+		STA	ENCTFG,Y
+		STA	ENNOCR,Y
+		LDA	#03H
+		STA	ENCLOR,Y
+		LDA	#01000000B
+		STA	ENMOD2,Y
+		LDA	#00100001B
+		STA	ENMOD0,Y
+		LDA	#40H
+		STA	ENMOD5,Y
+;;		STA	ENNOCR,Y
+		PHX
+		LDA	ENMUKI,X
+		TAX
+		LDA	<WORK2
+		CLC
+		ADC	GFRSYL,X
+		STA	ENYPSL,Y
+		LDA	<WORK3
+		ADC	GFRSYH,X
+		STA	ENYPSH,Y
+;
+		TYX
+		LDA	#20H
+		JSL	>PSERCHL
+		PLX
+;
+		LDA	#10H
+		STA	ENTIM0,Y
+;-- Master pos save ! --
+		LDA	ENXPSL
+		STA	ENWRK0,Y
+		LDA	ENXPSH
+		STA	ENWRK1,Y
+		LDA	ENYPSL
+		STA	ENWRK2,Y
+		LDA	ENYPSH
+		STA	ENWRK3,Y
+;
+		JMP	GAM6ST		; Atack no set & ENNOCR set !
+GFRS90		EQU	$
+		RTS
+;==========================================================
+GAWAI3		EQU	$
+		INC	ENNOCR,X
+;
+		JSR	KAMAEST
+		STZ	ENCTCT,X
+;
+		LDA	ENTIM0,X
+		BNE	GAW310
+;
+		JSL	>RNDSET
+		AND	#01H
+		BEQ	GAW308
+;
+		JMP	GMV3ST
+GAW308		EQU	$
+		LDA	#07FH
+		STA	ENTIM0,X
+		LDA	#GAT3
+		STA	ENSTAT,X
+		RTS
+;
+GAW310		EQU	$
+		AND	#01H
+		BEQ	GAW320
+;
+		LDA	#0FFH
+		STA	ENCHPT,X
+GAW320		EQU	$
+		RTS
+;==========================================================
+GAATC2		EQU	$
+		LDA	ENLIFE,X
+		CMP	#161
+		BCS	GAA208
+;
+		LDA	#160
+		STA	ENLIFE,X
+;
+GAA208		EQU	$
+		LDA	#28H
+		STA	PTHANK
+;
+		LDA	ENTIM0,X
+		BNE	GAA210
+;
+		LDA	#GA21
+		STA	ENSTAT,X
+		LDA	#0FFH
+		STA	ENTIM0,X
+		RTS
+GAA210		EQU	$
+		CMP	#0C0H
+		BCS	GAA220
+		AND	#0FH
+		BNE	GAA220
+;
+		JSR	GANFBST
+GAA220		EQU	$
+		BRA	FIRBDCT
+;==========================================================
+FBHKAD		EQU	$
+		HEX	00,00,00,00,FF,FF,FE,FF
+		HEX	00,00,00,00,01,02,01,01
+FBAWTM		EQU	$
+		HEX	10,30,50,70,90,B0,D0
+;;		HEX	20,30,40,50,60,70,80
+;
+GAATC21		EQU	$
+		LDA	ENLIFE,X
+		CMP	#161
+		BCS	GAA221
+;
+		LDA	#160
+		STA	ENLIFE,X
+;
+GAA221		EQU	$
+		LDA	ENTIM0,X
+		BNE	GA2110
+;
+		LDA	#GKY3
+		STA	ENSTAT,X
+		LDA	#07FH
+		STA	ENTIM0,X
+		JSR	KAMAEST
+;------------------------------------------
+		LDY	#08H
+GA2108		EQU	$
+		LDA	#02H
+		STA	ENSTAT,Y
+		LDA	FBAWTM-1,Y
+		STA	ENTIM0,Y
+		DEY
+		BNE	GA2108
+		RTS
+;-------------------------------------------------
+GA2110		EQU	$
+		LSR	A
+		LSR	A
+		LSR	A
+		LSR	A
+		AND	#0FH
+		TAY
+		LDA	PTHANK
+		CLC
+		ADC	FBHKAD,Y
+		STA	PTHANK
+FIRBDCT		EQU	$
+		JSR	GAYPST
+		JSR	GABDCT
+		RTS
+;==========================================================
+GAKYO3		EQU	$
+		LDA	ENLIFE,X
+		CMP	#161
+		BCS	GKY301
+;
+		LDA	#160
+		STA	ENLIFE,X
+;
+GKY301		EQU	$
+		LDA	ENTIM0,X
+		BNE	GKY310
+;
+		LDA	#GMV2
+		JSR	GMV1ST
+		RTS
+GKY310		EQU	$
+		JSR	GKYRPS
+		RTS
+;==========================================================
+GAWAI2		EQU	$
+		INC	ENNOCR,X
+;
+		JSR	KAMAEST
+;
+		LDA	ENTIM0,X
+		BNE	GAW210
+;
+GAA2ST		EQU	$
+		LDA	#0FFH
+		STA	ENTIM0,X
+		LDA	#GAT2
+		STA	ENSTAT,X
+		RTS
+GAW210		EQU	$
+		AND	#01H
+		BEQ	GAW220
+;
+		LDA	#0FFH
+		STA	ENCHPT,X
+GAW220		EQU	$
+		RTS
+;==========================================================
+;==========================================================
+;==========================================================
+;==========================================================
+;==========================================================
+;==========================================================
+GAWAIT		EQU	$
+		LDA	ENTIM0,X
+		BNE	GAW010
+;
+GAA1ST		EQU	$
+;;		LDA	#GAT3
+		LDA	#GAT1
+		STA	ENSTAT,X
+;
+		LDA	#080H
+;;		LDA	#80H+40H
+		STA	ENTIM0,X
+;
+		RTS
+;- - - - - - - - - - - - - - --
+GAW010		EQU	$
+		CMP	#20H
+		BEQ	GAW030
+;
+		CMP	#40H
+		BNE	GAW020
+;
+;;;		MSG ON !!!
+                LDA     #MS_0560
+                STA     MSGENOL
+                LDA     #HIGH MS_0560
+                STA     MSGENOH
+                JSL     >MSGSET
+;
+GAW020		EQU	$
+		RTS
+;- - - - - - - - - - - - - - - - - - - - -
+GAW030		EQU	$
+		LDA	#1FH
+		STA	SOUND0	;(S)
+		RTS
+;==========================================================
+YARISP		EQU	$
+		HEX	8,7,6,5,4,3,2,1
+		HEX	8,7,6,5,4,3,2,1
+YARIPT		EQU	$
+		HEX	0,0,1,1,0,0,1,1
+		HEX	8,8,9,9,8,8,9,9
+GYSXAL		EQU	$
+		HEX	18,F0
+GYSXAH		EQU	$
+		HEX	00,FF
+GYSYAL		EQU	$
+		HEX	04,04
+GYSYAH		EQU	$
+		HEX	00,00
+GYSXSD		EQU	$
+		HEX	20,1C,18,10
+		HEX	00,F0,E8,E4
+		HEX	E0,E4,E8,F0
+		HEX	00,10,18,1C
+GYSYSD		EQU	$
+		HEX	00,10,18,1C
+		HEX	20,1C,18,10
+		HEX	00,F0,E8,E4
+		HEX	E0,E4,E8,F0
+;
+GAA1PT		EQU	$
+		HEX	2,A
+;
+GAA190		EQU	$
+		CMP	#00H
+		BNE	GAA1A0
+;
+		LDA	#GMV1
+		JMP	GMV1ST
+;
+GAA1A0		EQU	$
+		LDY	ENMUKI,X
+		LDA	GAA1PT,Y
+		STA	ENCHPT,X
+		RTS
+;- - - - - - - - - - - - - - - - - - - - -
+GAATC1		EQU	$
+		LDA	ENLIFE,X
+		CMP	#209
+		BCS	GAA101
+;
+		LDA	#208
+		STA	ENLIFE,X
+;
+GAA101		EQU	$
+;
+		LDA	ENTIM0,X
+		CMP	#40H
+		BCC	GAA190
+		BNE	GAA110
+;
+;;;		INC	ENSTAT,X
+;
+		STZ	ENCTCT,X
+;
+;;		LDA	#02H
+;;		STA	ENCHPT,X
+;;		LDA	#60H
+;;		STA	ENTIM0,X
+;-- Shot yari --
+		LDA	#TEKTA
+		JSL	>ENIDSH
+		PHX
+		LDA	ENMUKI,X
+		TAX
+		LDA	<WORK0
+		CLC
+		ADC	GYSXAL,X
+		STA	ENXPSL,Y
+		LDA	<WORK1
+		ADC	GYSXAH,X
+		STA	ENXPSH,Y
+		LDA	<WORK2
+		CLC
+		ADC	GYSYAL,X
+		STA	ENYPSL,Y
+		LDA	<WORK3
+		ADC	GYSYAH,X
+		STA	ENYPSH,Y
+		PLX
+;
+		PHX
+		PHY
+		LDA	#1FH
+		JSL	>PSERCHL
+		JSL	>MKCK16
+		PLY
+		SEC
+		SBC	#02H
+		AND	#0FH
+		TAX
+		LDA	GYSXSD,X
+		STA	ENXSPD,Y
+		LDA	GYSYSD,X
+		STA	ENYSPD,Y
+		PLX
+;
+		LDA	#70H
+		STA	ENTIM0,Y
+;
+		LDA	#02H
+		STA	ENCTFG,Y
+		LDA	#00000001B
+		STA	ENCLOR,Y
+		LDA	#04H
+		STA	ENMOD0,Y
+;
+		LDA	#84H
+		STA	ENMOD5,Y
+		LDA	#02H
+		STA	ENMUKI,Y
+		JMP	GAM6ST		; Atack no set & ENNOCR set !
+;;		RTS
+;
+GAA110		EQU	$
+GAYPST		EQU	$
+		LDA	ENTIM0,X
+		LSR	A
+		LSR	A
+		AND	#07H
+		LDY	ENMUKI,X
+		BEQ	GAA120
+		CLC
+		ADC	#08H
+GAA120		EQU	$
+		TAY
+		LDA	YARISP,Y
+		STA	ENCTCT,X		
+		LDA	YARIPT,Y
+		STA	ENCHPT,X
+;
+		JSR	GYSDST		; Sound set !
+		RTS
+;==========================================================
+GAC1PT		EQU	$
+		HEX	00,08
+;
+;;		HEX	02,00
+;;		HEX	0D,08
+;
+GACAC1		EQU	$	; Cach !!
+		LDA	ENLIFE,X
+		CMP	#209
+		BCS	GAC101
+;
+		LDA	#208
+		STA	ENLIFE,X
+;
+GAC101		EQU	$
+;;		LDY	#00H
+;;		LDA	ENTIM0,X
+;;		BNE	GAC110
+;;		INY
+;;GAC110		EQU	$
+		LDY	ENMUKI,X
+;;		BEQ	GAC120
+;;		INY
+;;		INY
+GAC120		EQU	$
+		LDA	GAC1PT,Y
+		STA	ENCHPT,X
+;
+		LDA	ENTIM0,X
+		BEQ	GAC139
+		INC	ENNOCR,X
+		AND	#01H
+		BEQ	GAC139
+;
+		LDA	#0FFH
+		STA	ENCHPT,X
+GAC139		EQU	$
+		RTS
+;==========================================================
+KAMAE0		EQU	$
+		HEX	9,A
+KAMAE1		EQU	$
+		HEX	2,A
+;
+GACAC2		EQU	$		; After cach pause !
+		LDA	ENLIFE,X
+		CMP	#209
+		BCS	GAC201
+;
+		LDA	#208
+		STA	ENLIFE,X
+;
+GAC201		EQU	$
+		LDA	ENTIM0,X
+		BNE	GAC210
+;
+;;;		JSR	GAA1ST	;TEST !
+		LDA	#GKY2
+		STA	ENSTAT,X
+;
+		LDA	#7FH
+		STA	ENTIM0,X
+;;;;		RTS
+;
+KAMAEST		EQU	$
+		LDY	ENMUKI,X
+		LDA	KAMAE0,Y
+		STA	ENCTCT,X
+KAMAEST2	EQU	$
+		LDY	ENMUKI,X
+		LDA	KAMAE1,Y
+		STA	ENCHPT,X
+		RTS
+;
+GAC210		EQU	$
+		JSR	GAYPST
+		RTS
+;==========================================================
+GKY1MK		EQU	$
+		HEX	0,0,0,1,2,2,2,1
+		HEX	0,0,0,1,1,1,1,1
+;
+;;GKY1PT		EQU	$
+;;		HEX	3,3,3,2,4,4,4,2
+;;		HEX	3,3,3,2,2,2,2,2
+;;;
+;;		HEX	B,B,B,A,C,C,C,A
+;;		HEX	B,B,B,A,A,A,A,A
+;
+GKY1ID		HEX	00,10
+;
+GAKYO1		EQU	$
+		LDA	ENLIFE,X
+		CMP	#209
+		BCS	GKY101
+;
+		LDA	#208
+		STA	ENLIFE,X
+;
+GKY101		EQU	$
+		LDA	ENTIM0,X
+		BNE	GK1010
+;
+;;		JMP	GAA1ST	;TEST !
+;
+		LDA	#GMV1
+GMV1ST		EQU	$
+		STA	<WORK0
+;
+GK10201		EQU	$
+		LDA	HEMODE,X
+		ASL	A
+		ASL	A
+		STA	<WORK1
+		JSL	>RNDSET
+		AND	#03H
+		ORA	<WORK1
+		TAY
+		LDA	GASTMD,Y
+;;		CMP	HEMODE,X
+;;		BEQ	GK10201
+		STA	HEMODE,X
+		TAY
+		LDA	GASXPL,Y
+		STA	>GASHXL
+		LDA	GASYPL,Y
+		STA	>GASHYL
+;
+;;		LDA	#GMV1
+		LDA	<WORK0
+		STA	ENSTAT,X
+;
+		JSR	ENSDCL
+;
+		LDA	#30H
+		STA	ENTIM0,X
+;
+;;		JSL	>SDLRCE
+;;		ORA	#28H
+;;		STA	SOUND3	;(S)
+		LDA	#28H
+		JSL	>SDLRE3	;(S)
+;
+		RTS
+;
+GK1010		EQU	$
+GKYRPS		EQU	$
+		LSR	A
+		LSR	A
+		LSR	A
+;;		LDY	ENMUKI,X
+;;		CLC
+;;		ADC	GKY1ID,Y
+		TAY
+;;		LDA	GKY1PT,Y
+;;		STA	ENCHPT,X
+		LDA	GKY1MK,Y
+		STA	ENKBMK,X
+GK1020		EQU	$
+		RTS
+;==========================================================
+GASXPL		EQU	$
+		HEX	30,50,A0,C0
+		HEX	40,60,90,B0
+GASYPL		EQU	$
+		HEX	40,30,30,40
+		HEX	B0,C0,C0,B0
+GASTMD		EQU	$
+		HEX	4,5,6,7
+		HEX	4,5,6,7
+		HEX	4,5,6,7
+		HEX	4,5,6,7
+		HEX	0,1,2,3
+		HEX	0,1,2,3
+		HEX	0,1,2,3
+		HEX	0,1,2,3
+;
+GAMOV3		EQU	$
+		LDA	#100
+		STA	ENLIFE,X	; LIfe check noth (tilt count check)
+GAMOV1		EQU	$
+GAMOV2		EQU	$
+GAMOV4		EQU	$
+		INC	ENNOCR,X
+;
+		LDA	>GASHXL
+		STA	<WORK4
+		LDA	ENXPSH,X
+		STA	<WORK5
+		LDA	>GASHYL
+		STA	<WORK6
+		LDA	ENYPSH,X
+		STA	<WORK7
+;
+		JSR	ECROSCK		
+		BCS	GM1010		; Point in ?
+;					; yes !
+;;		JSR	EPYCHK
+;;		TYA
+;;		STA	ENMUKI,X
+		LDA	HEMODE,X
+		LSR	A
+		LSR	A
+		STA	ENMUKI,X
+;
+		LDA	ENSTAT,X
+;;		BRA	GM1003	; TEST TEST TEST
+;;;
+		CMP	#GMV1
+		BEQ	GM1008
+;;		CMP	#GMV2
+;;		BNE	GM1003
+		LDA	ENLIFE,X
+;;		CMP	#209
+;;		BCS	GM1008
+		CMP	#161
+		BCS	GM1005
+		CMP	#97
+		BCS	GM1003
+;;		BRA	GM1003
+;----------------------------------------------
+		LDA	#GWA4	;ATACK4
+		STA	ENSTAT,X
+		LDA	#28H+20H+20H	; Silver alow shot chance !
+		STA	ENTIM0,X
+		RTS		
+;----------------------------------------
+GM1005		EQU	$
+		LDA	#GWA2	;ATACK2
+		STA	ENSTAT,X
+		LDA	#28H
+		STA	ENTIM0,X
+		RTS		
+;		
+;----------------------------------------
+GM1003		EQU	$
+		LDA	#GWA3	;ATACK 3
+		STA	ENSTAT,X
+		LDA	#28H
+		STA	ENTIM0,X
+		RTS		
+;----------------------------------------
+GM1008		EQU	$
+		LDA	#GCA1	;ATACK 1
+		STA	ENSTAT,X
+;
+		LDA	#20H
+		STA	ENTIM0,X
+		RTS
+;
+;;;
+;;		LDA	#GKY2
+;;		STA	ENSTAT,X
+;;		LDA	#7FH+40H
+;;		STA	ENTIM0,X
+;;;
+;;		LDA	#0FFH
+;;		STA	ENCHPT,X
+		RTS
+;====================================================
+GM1010		EQU	$
+		LDA	#20H
+		JSL	>ESERCHL
+		JSR	GYSDCL		; Speed up !
+		JSR	ENMVCL
+;
+		LDA	ENTIM0,X
+		BEQ	GM1030 
+		LDA	<FRCNT
+		AND	#01H
+		BNE	GM1030
+;
+		JSR	KAMAEST2
+;;		STZ	ENCTCT,X
+		BRA	GM1040			
+;
+GM1030		EQU	$
+		LDA	#0FFH
+		STA	ENCHPT,X
+		RTS
+;
+GM1040		EQU	$
+;
+GAZNZST		EQU	$
+		LDA	<FRCNT
+		AND	#07H
+		BNE	GM1020
+;
+		LDA	#GANON
+		JSL	>ENIDSH
+		BMI	GM1020
+;
+		JSL	>ENIDPS
+;
+		LDA	#18H
+		STA	ENNOCR,Y
+		STA	ENTIM0,Y
+		LDA	#0FFH
+		STA	ENSTAT,Y
+		LDA	ENCHPT,X
+		STA	ENCHPT,Y
+		LDA	ENKBMK,X
+		STA	ENKBMK,Y
+;;		PHX
+;;		TYA
+;;		JSR	KAMAEST		; CHPT SET !
+;;		STZ	ENCTCT,X
+;;		PLX
+GM1020		EQU	$
+		RTS
+;==========================================================
+GAKYO2		EQU	$	; Kyoro kyoro 2
+		LDA	ENLIFE,X
+		CMP	#209
+		BCS	GAKY201
+;
+		LDA	#208
+		STA	ENLIFE,X
+;
+GAKY201		EQU	$
+		LDA	ENTIM0,X
+		BNE	GKY210
+;
+		LDA	ENLIFE,X
+		CMP	#209
+		BCC	GKY208
+;
+		JMP	GAA1ST	; Go atack !
+GKY208		EQU	$
+		JMP	GAA2ST	; Atack 2 start !
+;
+GKY210		EQU	$
+;;		CMP	#0A0H
+;;		BCS	GKY250
+;;		CMP	#80H
+;;		BCS	GKY220
+		JMP	GKYRPS	; Paturn set !
+;;GKY220		EQU	$
+;;		INC	ENNOCR,X
+;;;
+;;		AND	#01H
+;;		BNE	GKY230
+;;;
+;;		JSR	KAMAEST
+;;		BRA	GKY240			
+;;;
+;;GKY230		EQU	$
+;;		LDA	#0FFH
+;;		STA	ENCHPT,X
+;;GKY240		EQU	$
+;;		RTS
+;;;- - - - - - - - - - - - - - - - - - - - - - 
+;;GKY250		EQU	$
+;;		JSR	EPYCHK
+;;		TYA
+;;		STA	ENMUKI,X
+;;;
+;;		INC	ENNOCR,X
+;;		RTS
+;==========================================================
+;
+;
+;		LDA	<KEYA2
+;		AND	#0CH
+;		BEQ	G0000
+;		INC	ENCHPT,X
+;		LDA	ENCHPT,X
+;		CMP	#10H 
+;		BCC	G0000
+;		STZ	ENCHPT,X
+;G0000		EQU	$
+;		LDA	<KEYA2
+;		AND	#03H
+;		BEQ	G0001
+;;
+;		INC	ENCTCT,X
+;		LDA	ENCTCT,X
+;		CMP	#0BH
+;		BNE	G0001
+;		LDA	#01H
+;		STA	ENCTCT,X
+;G0001		EQU	$
+;		RTS
+;*********************************************************
+GANONXD		EQU	$
+		HEX	12,F8,08,F8,08,EE,EE,12,F8,08,F8,08	;0
+		HEX	12,F8,08,F8,08,EE,EE,12,F8,08,F8,08	;1
+		HEX	10,F8,08,F8,08,EE,EE,10,F8,08,F5,0B	;2
+		HEX	10,F8,08,F8,08,EE,EE,10,F8,08,F5,0B	;3
+		HEX	10,F8,08,F8,08,EE,EE,10,F8,08,F5,0B	;4
+		HEX	12,F8,08,F8,08,EE,EE,12,F8,08,F8,08	;5
+		HEX	12,F8,08,F8,08,EE,EE,12,F8,08,F8,08	;6
+		HEX	12,F8,08,F8,08,EE,EE,12,F8,08,F5,0B	;7
+		HEX	F8,08,F8,08,F8,08,F8,08,EE,EE,12,12	;8
+		HEX	F8,08,F8,08,F8,08,F8,08,EE,EE,12,12	;9
+		HEX	F8,08,F8,08,F8,08,F6,0A,EE,EE,12,12	;A
+		HEX	F8,08,F8,08,F8,08,F6,0A,EE,EE,12,12	;B
+		HEX	F8,08,F8,08,F8,08,F6,0A,EE,EE,12,12	;C
+		HEX	F8,08,F8,08,F8,08,F8,08,EE,EE,12,12	;D
+		HEX	F8,08,F8,08,F8,08,F8,08,EE,EE,12,12	;E
+		HEX	F9,F8,08,F8,08,F7,08,F2,F2,F8,08,08     ;F   
+		HEX	F8,08,F8,08,EE,EE,12,12,F8,08,F5,0B	;10
+GANONYD		EQU	$
+		HEX	F8,F0,F0,F3,F3,F7,FF,F0,03,03,08,08		
+		HEX	F8,F0,F0,F3,F3,F7,FF,F0,03,03,08,08		
+		HEX	05,F6,F6,F3,F3,F9,01,FD,03,03,08,08		
+		HEX	05,F6,F6,F3,F3,F9,01,FD,03,03,08,08		
+		HEX	05,F6,F6,F3,F3,F9,01,FD,03,03,08,08		
+		HEX	FF,F0,F0,F3,F3,F7,FF,F7,03,03,08,08		
+		HEX	F6,F0,F0,F3,F3,EE,F6,EE,03,03,08,08		
+		HEX	01,F6,F6,F3,F3,F9,01,F9,03,03,08,08		
+		HEX	F4,F4,04,04,EE,EE,0A,0A,F0,F8,FC,04
+		HEX	F4,F4,04,04,EE,EE,0A,0A,F0,F8,FC,04
+		HEX	F4,F4,04,04,F4,F4,0A,0A,FC,04,FC,04
+		HEX	F4,F4,04,04,F4,F4,0A,0A,FC,04,FC,04
+		HEX	F4,F4,04,04,F4,F4,0A,0A,FC,04,FC,04
+		HEX	F4,F4,04,04,EE,EE,0A,0A,FC,04,FC,04
+		HEX	F4,F4,04,04,EE,EE,0A,0A,F0,F8,F0,F8
+		HEX	F9,F4,F4,04,04,07,0D,F5,FC,F0,F0,F0
+		HEX	F6,F6,F3,F3,F9,F9,F9,F9,03,03,08,08		
+GANONCD		EQU	$
+		HEX	16,00,00,02,02,08,18,06,22,22,20,20
+		HEX	46,00,00,02,02,08,18,36,22,22,20,20
+		HEX	1A,00,00,04,04,38,48,0A,24,24,20,20
+		HEX	1A,40,42,04,04,38,48,0A,24,24,20,20
+		HEX	1A,42,40,04,04,38,48,0A,24,24,20,20
+		HEX	18,00,00,02,02,08,18,08,22,22,20,20
+		HEX	16,6A,6A,0E,0E,06,16,06,22,22,20,20
+		HEX	48,00,00,04,04,38,48,38,24,24,20,20
+		HEX	4E,4E,6E,6E,6C,6C,A2,A2,0C,1C,3C,4C
+		HEX	4E,4E,6E,6E,6C,6C,A2,A2,3A,4A,3C,4C
+		HEX	84,84,A4,A4,A0,A0,A2,A2,3C,4C,3C,4C
+		HEX	84,84,A4,A4,80,82,A2,A2,3C,4C,3C,4C
+		HEX	84,84,A4,A4,82,80,A2,A2,3C,4C,3C,4C
+		HEX	4E,4E,6E,6E,6C,6C,A2,A2,3C,4C,3C,4C
+		HEX	4E,4E,6E,6E,6C,6C,A2,A2,0C,1C,0C,1C
+		HEX	E0,C6,C8,E6,E8,20,20,08,18,C0,C2,C2
+		HEX	00,00,CE,CE,EC,EC,EC,EC,EE,EE,C4,C4
+GAKBID		EQU	$
+;;;;			0 1 2 3 4 5 6 7 8 9 A B C D E F 0
+		HEX	1,1,1,1,1,1,F,1,4,4,4,4,4,4,4,F,F
+GANONAD		EQU	$
+		HEX	4C,0C,4C,0A,4A,0C,0C,4C,0A,4A,0C,4C
+		HEX	4C,0C,4C,0A,4A,0C,0C,4C,0A,4A,0C,4C
+		HEX	4C,0C,4C,0A,4A,0C,0C,4C,0A,4A,0C,4C
+		HEX	4C,0C,0C,0A,4A,0C,0C,4C,0A,4A,0C,4C
+		HEX	4C,4C,4C,0A,4A,0C,0C,4C,0A,4A,0C,4C
+		HEX	4C,0C,4C,0A,4A,0C,0C,4C,0A,4A,0C,4C
+		HEX	4C,0C,4C,0A,4A,0C,0C,4C,0A,4A,0C,4C
+		HEX	4C,0C,4C,0A,4A,0C,0C,4C,0A,4A,0C,4C
+		HEX	0A,4A,0A,4A,0C,4C,0C,4C,0C,0C,4C,4C
+		HEX	0A,4A,0A,4A,0C,4C,0C,4C,0C,0C,4C,4C
+		HEX	0A,4A,0A,4A,0C,4C,0C,4C,0C,0C,4C,4C
+		HEX	0A,4A,0A,4A,0C,0C,0C,4C,0C,0C,4C,4C
+		HEX	0A,4A,0A,4A,4C,4C,0C,4C,0C,0C,4C,4C
+		HEX	0A,4A,0A,4A,0C,4C,0C,4C,0C,0C,4C,4C
+		HEX	0A,4A,0A,4A,0C,4C,0C,4C,0C,0C,4C,4C
+		HEX	0C,0A,0A,0A,0A,0C,4C,0C,0C,0C,0C,0C
+		HEX	0C,4C,0A,4A,0C,0C,4C,4C,0A,4A,0C,4C
+;------------------------
+GAWPCD		EQU	$
+;0
+		WORD	0000AH,0FFF6H
+		HEX	64,08,00,00
+		WORD	00005H,0FFF1H
+		HEX	64,08,00,00
+		WORD	00000H,0FFECH
+		HEX	64,08,00,00
+		WORD	0FFFBH,0FFE7H
+		HEX	64,08,00,00
+		WORD	0FFEEH,0FFDAH
+		HEX	44,08,00,02
+;1
+		WORD	00001H,0FFFCH
+		HEX	65,08,00,00
+		WORD	00001H,0FFF5H
+		HEX	65,08,00,00
+		WORD	00001H,0FFEEH
+		HEX	65,08,00,00
+		WORD	00001H,0FFE7H
+		HEX	65,08,00,00
+		WORD	0FFFDH,0FFD8H
+		HEX	62,08,00,02
+;2
+		WORD	0FFF8H,0FFF7H
+		HEX	64,48,00,00
+		WORD	0FFFDH,0FFF2H
+		HEX	64,48,00,00
+		WORD	00003H,0FFECH
+		HEX	64,48,00,00
+		WORD	00009H,0FFE6H
+		HEX	64,48,00,00
+		WORD	0000CH,0FFDBH
+		HEX	44,48,00,02
+;3
+		WORD	0FFF6H,0FFECH
+		HEX	74,48,00,00
+		WORD	0FFFDH,0FFECH
+		HEX	74,48,00,00
+		WORD	00004H,0FFECH
+		HEX	74,48,00,00
+		WORD	0000BH,0FFECH
+		HEX	74,48,00,00
+		WORD	00012H,0FFE9H
+		HEX	60,48,00,02
+;4
+		WORD	0FFF6H,0FFE2H
+		HEX	64,C8,00,00
+		WORD	0FFFCH,0FFE8H
+		HEX	64,C8,00,00
+		WORD	00002H,0FFEEH
+		HEX	64,C8,00,00
+		WORD	00008H,0FFF4H
+		HEX	64,C8,00,00
+		WORD	0000CH,0FFF8H
+		HEX	44,C8,00,02
+;5
+		WORD	00001H,0FFE0H
+		HEX	65,88,00,00
+		WORD	00001H,0FFE7H
+		HEX	65,88,00,00
+		WORD	00001H,0FFEEH
+		HEX	65,88,00,00
+		WORD	00001H,0FFF5H
+		HEX	65,88,00,00
+		WORD	0FFFDH,0FFFBH
+		HEX	62,88,00,02
+;6
+		WORD	0000DH,0FFE2H
+		HEX	64,88,00,00
+		WORD	00008H,0FFE7H
+		HEX	64,88,00,00
+		WORD	00002H,0FFEDH
+		HEX	64,88,00,00
+		WORD	0FFFCH,0FFF3H
+		HEX	64,88,00,00
+		WORD	0FFF0H,0FFF7H
+		HEX	44,88,00,02
+;7
+		WORD	0000EH,0FFECH
+		HEX	74,08,00,00
+		WORD	00007H,0FFECH
+		HEX	74,08,00,00
+		WORD	00000H,0FFECH
+		HEX	74,08,00,00
+		WORD	0FFF9H,0FFECH
+		HEX	74,08,00,00
+		WORD	0FFEBH,0FFE9H
+		HEX	60,08,00,02
+;8- - Kamae use 1 - -
+		WORD	0000DH,0FFE2H
+		HEX	64,88,00,00
+		WORD	00008H,0FFE7H
+		HEX	64,88,00,00
+		WORD	00002H,0FFEDH
+		HEX	64,88,00,00
+		WORD	0FFFCH,0FFF3H
+		HEX	64,88,00,00
+		WORD	0FFF0H,0FFF7H
+		HEX	44,88,00,02
+;9- - Kamae use 2 - -
+		WORD	0FFF6H,0FFE2H
+		HEX	64,C8,00,00
+		WORD	0FFFCH,0FFE8H
+		HEX	64,C8,00,00
+;
+		WORD	0FFFCH,0FFE8H
+		HEX	64,C8,00,00
+		WORD	0FFFCH,0FFE8H
+		HEX	64,C8,00,00
+		WORD	0FFFCH,0FFE8H
+		HEX	64,C8,00,00
+;
+;;		WORD	00002H,0FFEEH
+;;		HEX	64,C8,00,00
+;;		WORD	00008H,0FFF4H
+;;		HEX	64,C8,00,00
+;;		WORD	0000CH,0FFF8H
+;;		HEX	44,C8,00,02
+;---------------------------------------------
+GAWPXD		EQU	$
+		WORD	0018H,0FFF0H,0000H
+		WORD	0010H,0FFF8H
+GAWPYD		EQU	$
+		WORD	0004H,00004H,0010H
+		WORD	0015H,0013H
+;---------------------------------------------
+GAKBCD		EQU	$
+		HEX	40,42
+		HEX	00,00
+		HEX	42,40
+;
+		HEX	82,80
+		HEX	A0,A0
+		HEX	80,82
+GAKBAD		EQU	$
+		HEX	00,00
+		HEX	00,40
+		HEX	40,40
+;
+		HEX	40,40
+		HEX	00,40
+		HEX	00,00
+;---------------------------------------------
+GAHDMSCD	EQU	$	;Kamae hand mask !
+		WORD	0010H,0FFFDH
+		HEX	0A,4C,00,02
+		WORD	0010H,00005H
+		HEX	1A,4C,00,02
+;
+GNCRTS		EQU	$
+		JSR	OAMCHK
+		RTS
+;
+GANONCS		EQU	$
+		LDA	ENCHPT,X
+		BMI	GNCRTS 
+;
+		LDA	ENSTAT,X
+		CMP	#GCHA
+		BEQ	GNC009
+;
+		LDA	ENTIM3,X
+		BNE	GNC009		; Damage ?
+;					; 
+		LDA	GNNCFG
+		BEQ	GNCRTS		; Kantera on ?
+GNC009		EQU	$
+;- -- Wapon set - -			; yes !
+		JSR	GANYRCS
+;- - Body set - -
+		JSR	OAMCHK
+;
+		LDA	ENCHPT,X
+		ASL	A
+		ASL	A
+		ASL	A
+		ADC	ENCHPT,X
+		ADC	ENCHPT,X
+		ADC	ENCHPT,X
+		ADC	ENCHPT,X
+		STA	<WORK6		;*12
+;
+		PHX
+		LDX	#00H
+		LDY	#04H*5		; after Wepon !
+GNC010		EQU	$
+		PHX
+		TXA
+		CLC
+		ADC	<WORK6
+		TAX
+		LDA	<WORK0
+		CLC
+		ADC	GANONXD,X
+		STA	(<OAMADR),Y
+		LDA	<WORK2
+		CLC
+		ADC	GANONYD,X
+		INY
+		STA	(<OAMADR),Y
+		LDA	GANONCD,X
+		INY
+		STA	(<OAMADR),Y
+;
+		LDA	<WORK5
+		AND	#0FH
+		CMP	#05H
+		LDA	GANONAD,X
+		BCC	GNC012		; Ice color ?
+		AND	#0F0H		; yes !
+GNC012		EQU	$
+		ORA	<WORK5
+		INY
+		STA	(<OAMADR),Y
+;
+		PHY
+		TYA
+		LSR	A
+		LSR	A
+		TAY
+		LDA	#02H
+		STA	(<OSBADR),Y
+		PLY
+		INY
+		PLX
+		INX
+		CPX	#0CH
+		BNE	GNC010
+;- - Kubi Set - -
+		PLX
+		LDY	ENCHPT,X
+		LDA	GAKBID,Y
+		CMP	#0FH
+		BEQ	GNC018	; Kubi chenge ok ?
+;				; yes !
+		ASL	A
+		ASL	A
+		CLC
+		ADC	#04H*5
+		TAY
+		INY
+		INY
+;
+		PHX
+		PHY
+		LDA	ENKBMK,X
+		ASL	A
+		LDY	ENMUKI,X
+		BEQ	GNC015
+		CLC
+		ADC	#06H
+GNC015		EQU	$
+		TAX
+		PLY
+		LDA	GAKBCD,X
+		STA	(<OAMADR),Y
+		INY
+		LDA	(<OAMADR),Y
+		AND	#00111111B
+		ORA	GAKBAD,X
+		STA	(<OAMADR),Y
+		INY
+		INY
+		INY
+		LDA	GAKBCD+1,X
+		STA	(<OAMADR),Y
+		INY
+		LDA	(<OAMADR),Y
+		AND	#00111111B
+		ORA	GAKBAD+1,X
+		STA	(<OAMADR),Y
+;
+		PLX
+GNC018		EQU	$
+		LDA	<GAMEMD
+		BEQ	GNC080
+		LDY	#0FFH
+		LDA	#09H
+		JSL	>ALOMCKL
+GNC080		EQU	$
+;- - Hands mask set - - -
+		LDA	ENCTCT,X
+		CMP	#09H
+		BNE	GNC090		; Kamae ?
+;					; yes !
+		MEM16
+		REP	#20H
+		LDA	#GAHDMSCD
+		STA	<WORK8
+		LDA	#OAM+028H
+		STA	<OAMADR
+		LDA	#OAMSB+028H/4
+		STA	<OSBADR
+		MEM8
+		SEP	#20H
+		LDA	#02H
+		JSR	SETO22
+;;		JSL	>SETOAML22
+GNC090		EQU	$
+;- -- Kage set - - -
+		LDA	ENZPSL,X
+		SEC
+		SBC	#0001H
+		STA	<WORKE
+		LDA	#00H
+		SBC	#00H
+		STA	<WORKF
+;
+		LSR	A
+		LSR	A
+		LSR	A
+		TAY
+		CPY	#04H
+		BCC	GSW010
+		LDY	#04H
+GSW010		EQU	$
+		LDA	IWSWCD,Y
+		STA	<WORK0
+		STZ	<WORK1
+;
+		MEM16
+		REP	#20H
+		LDA	ENYP2L
+		CLC
+		ADC	<WORKE
+		STA	ENYP2L
+;
+		LDA	#OAM+01F4H
+		STA	<OAMADR
+		LDA	#OAMSB+1F4H/4 
+		STA	<OSBADR
+;
+		LDA	#IWASWCD
+		CLC
+		ADC	<WORK0
+		STA	<WORK8
+;
+		MEM8
+		SEP	#00100000B
+;
+		LDA	ENCLOR,X
+		PHA
+		STZ	ENCLOR,X
+		LDA	#30H
+		STA	ENFLCL,X
+		LDA	#03H
+		JSR	SETO22
+;;		JSL	>SETOAML22
+		PLA
+		STA	ENCLOR,X
+		JSL	>PSSAVE2
+		RTS
+;****************************************************
+GANYRCS		EQU	$
+		LDA	#00H
+		XBA
+		LDA	ENCTCT,X
+		BEQ	GNC002
+		DEC	A
+                MEM16
+                REP     #00100000B
+                ASL     A
+                ASL     A
+                ASL     A
+		STA	<WORK0
+;
+                ASL     A
+                ASL     A
+		CLC
+		ADC	<WORK0
+		CLC
+                ADC     #GAWPCD 
+                STA     <WORK8
+;
+                MEM8
+                SEP     #00100000B
+;
+		LDY	#06H
+		LDA	ENCTCT,X
+		CMP	#09H
+		BEQ	GNC001
+		LDY	#08H
+		BCS	GNC001
+		LDA	ENMUKI,X
+		ASL	A
+		TAY
+GNC001		EQU	$
+		MEM16
+		REP	#20H
+		LDA	ENXP2L
+		CLC
+		ADC	GAWPXD,Y
+		STA	ENXP2L
+		LDA	ENYP2L
+		CLC
+		ADC	GAWPYD,Y
+		STA	ENYP2L
+		MEM8
+		SEP	#20H
+;
+		LDA	ENFLCL,X
+		PHA
+		AND	#0F0H
+		STA	ENFLCL,X
+;
+		LDA	#05H
+		JSR	SETO22
+;;		JSL	>SETOAML22		
+		PLA
+		STA	ENFLCL,X
+;
+		JSL	>PSSAVE2
+GNC002		EQU	$
+		RTS
+;%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+;%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+;%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+;%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+;==================================================
+MDAIDT		EQU	$
+		HEX	00,20,40,60,80,A0  	; 6 of !
+MDARMIT		EQU	$
+                PHX
+;
+                TXY
+                LDA     MDAIDT,X
+                TAX
+                LDA     #1FH
+                STA     <WORK0
+MDAI10          EQU     $
+                LDA     ENXPSL,Y
+                STA     >MDXBFL,X
+                LDA     ENXPSH,Y
+                STA     >MDXBFH,X
+                LDA     ENYPSL,Y
+                STA     >MDYBFL,X
+                LDA     ENYPSH,Y
+                STA     >MDYBFH,X
+                INX
+                DEC     <WORK0
+                BPL     MDAI10
+;
+                PLX
+		RTL
+;%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+;%		Mordarm 	      		 %
+;%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+MDTXSD		EQU	$
+		HEX	0,10,F0
+;
+MDARMMV		EQU	$
+		LDA	ENSTAT,X
+		BEQ	MD0000
+		BPL	MDF000
+;
+		JMP	MDMIZMV		; Mizu shibuki !
+MDF000		EQU	$
+;
+		JSR	MDARMCS
+MD0000		EQU	$
+		JSL	>PSSAVE2
+;
+		JSR	ENSTCK
+;
+		INC	ENCONT,X
+;
+		JSR	CREKEK
+;
+		LDA	ENYSPD,X
+		PHA
+		CLC
+		ADC	ENZSPD,X
+		STA	ENYSPD,X
+		JSR	ENMVCL
+		PLA
+		STA	ENYSPD,X
+;
+		LDA	ENSTAT,X
+		JSL	>JSRSUB
+		WORD	MDSET
+		WORD	MDUP
+		WORD	MDMOVE
+		WORD	MDDOWN
+		WORD	MDEND 
+;------------------------------------------------
+MDSTXL		EQU	$
+;;		HEX	00,00,26,2C,26,00,DA,D4,DA
+		HEX	00,00,20,20,20,00,E0,E0,E0
+MDSTXH		EQU	$
+		HEX	00,00,00,00,00,00,FF,FF,FF
+MDSTYL		EQU	$
+;;		HEX	00,D4,DA,00,26,2C,26,00,DA
+		HEX	00,E0,E0,00,20,20,20,00,E0
+MDSTYH		EQU	$
+		HEX	00,FF,FF,00,00,00,00,00,FF
+MDSTPS		EQU	$
+		HEX	1,2,3,4,5,6,7,8
+;;		HEX	0,1,2,3,4,5,6,7
+;
+MDSET		EQU	$
+		LDA	ENTIM0,X
+		BNE	MDS010
+;
+		JSL	>RNDSET
+		AND	#07H
+		TAY
+		LDA	MDSTPS,Y
+		CMP	ENMUKI,X
+		BEQ	MDS010		; Aleady set ?
+		TAY			; no.
+		LDA	ENWRK0,X
+		CLC
+		ADC	MDSTXL,Y
+		STA	>MDSHXL,X
+		LDA	ENWRK1,X
+		ADC	MDSTXH,Y
+		STA	>MDSHXH,X
+;
+		LDA	ENWRK2,X
+		CLC
+		ADC	MDSTYL,Y
+		STA	>MDSHYL,X
+		LDA	ENKBMK,X
+		ADC	MDSTYH,Y
+		STA	>MDSHYH,X
+;
+		INC	ENSTAT,X
+;
+;;		LDA	#30H
+;;		STA	ENTIM0,X
+		JSR	ENSDCL
+		LDA	#0F1H
+		STA	ENZSPD,X
+;
+		JSR	MDMZST
+;;		JSR	MDCALC
+MDS010		EQU	$
+		RTS
+;------------------------------------------------
+MDUP		EQU	$
+		LDA	ENCONT,X
+		AND	#03H
+		BNE	MDU010
+;
+		INC	ENZSPD,X
+		BNE	MDU010
+		INC	ENSTAT,X
+MDU010		EQU	$
+		LDA	ENCONT,X
+		AND	#03H
+		BNE	MDU030
+;
+		JSR	MDCAL0
+;
+MDSDCT		EQU	$		
+		LDA	ENYSPD,X	; Speed=>Player!
+		CMP	<WORK0
+		BEQ	MDU020
+		BPL	MDU018
+		INC	ENYSPD,X
+		BRA	MDU020
+MDU018		EQU	$
+		DEC	ENYSPD,X
+MDU020		EQU	$
+		LDA	ENXSPD,X
+		CMP	<WORK1
+		BEQ	MDU030
+		BPL	MDU028
+		INC	ENXSPD,X
+		BRA	MDU030
+MDU028		EQU	$
+		DEC	ENXSPD,X
+MDU030		EQU	$
+;;		LDA	ENTIM0,X
+;;		BNE	MDU010 
+;;;
+;;		INC	ENSTAT,X
+;;;
+;;MDU010		EQU	$
+;;		LDA	#0F8H
+;;		STA	ENZSPD,X
+		RTS
+;
+;------------------------------------------------
+MDMZAD		EQU	$
+		HEX	02,FE
+MDMZLM		EQU	$
+		HEX	0C,F4
+;
+MDMOVE		EQU	$
+		LDA	ENCONT,X
+		AND	#00H
+		BNE	MDMV08
+;
+		LDA	ENCTCT,X
+		AND	#01H
+		TAY
+		LDA	ENZSPD,X
+		CLC
+		ADC	MDMZAD,Y
+		STA	ENZSPD,X
+		CMP	MDMZLM,Y
+		BNE	MDMV08
+;
+		INC	ENCTCT,X
+MDMV08		EQU	$
+		LDA	>MDSHXL,X
+		STA	<WORK4
+		LDA	>MDSHXH,X
+		STA	<WORK5
+		LDA	>MDSHYL,X
+		STA	<WORK6
+		LDA	>MDSHYH,X
+		STA	<WORK7
+;
+		MEM16
+		REP	#20H
+		LDA	ENXP2L
+		SEC
+		SBC	<WORK4
+		CLC
+		ADC	#08H
+		CMP	#10H
+		BCS	MDMV10
+;
+		LDA	ENYP2L
+		SEC
+		SBC	<WORK6
+		CLC
+		ADC	#08H
+		CMP	#10H
+		BCS	MDMV10
+		MEM8
+		SEP	#20H
+;
+		INC	ENSTAT,X
+;;		LDA	#30H
+;;		STA	ENTIM0,X
+MDMV10		EQU	$
+		MEM8
+		SEP	#20H
+;
+;;		STZ	ENZSPD,X
+;;		RTS
+;--------------------------------------------------
+MDCALC		EQU	$
+		JSR	MDCAL0
+		LDA	<WORK0
+		STA	ENYSPD,X
+		LDA	<WORK1
+		STA	ENXSPD,X
+		RTS
+;
+MDCAL0		EQU	$
+		LDA	>MDSHXL,X
+		STA	<WORK4
+		LDA	>MDSHXH,X
+		STA	<WORK5
+		LDA	>MDSHYL,X
+		STA	<WORK6
+		LDA	>MDSHYH,X
+		STA	<WORK7
+		LDA	#0FH
+		JSL	>ESERCHL
+		RTS
+;------------------------------------------------
+MDDOWN 		EQU	$
+		LDA	ENCONT,X
+		AND	#03H
+		BNE	MDD010
+;
+		INC	ENZSPD,X
+		LDA	ENZSPD,X
+		CMP	#010H
+		BNE	MDD010
+;				
+		INC	ENSTAT,X
+;
+		JSR	MDMZST
+;
+		LDA	#80H
+		STA	ENYPSH,X
+		LDA	#50H
+		STA	ENTIM0,X
+MDD010		EQU	$
+		LDA	ENCONT,X
+		AND	#03H
+		BNE	MDD020
+;
+		STZ	<WORK0
+		STZ	<WORK1
+;
+		JSR	MDSDCT	; Speed=>0
+;
+MDD020		EQU	$
+;;		LDA	ENTIM0,X
+;;		BNE	MDD010
+;;;
+;;		INC	ENSTAT,X
+;;;
+;;		LDA	#80H
+;;		STA	ENYPSH,X
+;;		LDA	#50H
+;;		STA	ENTIM0,X
+;;;
+;;MDD010		EQU	$
+;;		LDA	#08H
+;;		STA	ENZSPD,X
+		RTS
+;------------------------------------------------
+MDEND		EQU	$
+		LDA	ENTIM0,X
+		BNE	MDE010
+;
+		JSL	>RNDSET		; Nexst start point set !
+		AND	#07H
+		TAY
+		LDA	MDSTPS,Y
+		STA	ENMUKI,X
+		TAY
+		LDA	ENWRK0,X
+		CLC
+		ADC	MDSTXL,Y
+		STA	ENXPSL,X
+		LDA	ENWRK1,X
+		ADC	MDSTXH,Y
+		STA	ENXPSH,X
+		LDA	ENWRK2,X
+		CLC
+		ADC	MDSTYL,Y
+		STA	ENYPSL,X
+		LDA	ENKBMK,X
+		ADC	MDSTYH,Y
+		STA	ENYPSH,X
+;
+		STZ	ENSTAT,X
+		LDA	#30H
+		STA	ENTIM0,X
+;
+		JSR	ENSDCL
+		STZ	ENZSPD,X
+MDE010		EQU	$
+		RTS
+;------------------------------------------------
+MDMZST		EQU	$
+		LDA	#MDARM
+		JSL	>ENIDSH
+		BMI	MZZ010
+;
+		JSL	>ENIDPS
+;
+		LDA	#80H
+		STA	ENSTAT,Y
+;
+		LDA	#20H
+		STA	ENTIM0,Y
+		LDA	#04H
+		STA	ENCLOR,Y
+		STA	ENNOCR,Y
+		LDA	#00H
+		STA	ENMOD0,Y
+MZZ010		EQU	$
+		RTS
+;------------------------------------------------
+MDMIZMV		EQU	$
+		JSR	MDMIZCS
+		JSR	ENSTCK
+		LDA	ENTIM0,X
+		BNE	MDMZ10
+		STZ	ENMODE,X
+MDMZ10		EQU	$
+		RTS
+;------------------------------------------------
+MDMIZCD		EQU	$
+		WORD	00000H,00004H
+		HEX	D8,00,00,00
+		WORD	00008H,00004H
+		HEX	D8,40,00,00
+;
+		WORD	00000H,00004H
+		HEX	D9,00,00,00
+		WORD	00008H,00004H
+		HEX	D9,40,00,00
+;
+		WORD	00000H,00004H
+		HEX	DA,00,00,00
+		WORD	00008H,00004H
+		HEX	DA,40,00,00
+;
+		WORD	00000H,00004H
+		HEX	D9,00,00,00
+		WORD	00008H,00004H
+		HEX	D9,40,00,00
+;
+MDMIZCS		EQU	$
+		LDA	#04H*2
+		JSL	>OAMENT2
+;
+                LDA     #00H
+                XBA
+                LDA     ENTIM0,X
+		AND	#00001100B
+;;		LSR	A
+;;		LSR	A
+;;		AND	#03H
+;
+                MEM16
+                REP     #00100000B
+;;                ASL     A
+;;                ASL     A
+                ASL     A
+;
+                ASL     A
+		CLC
+                ADC     #MDMIZCD 
+                STA     <WORK8
+;
+                MEM8
+                SEP     #00100000B
+;
+                LDA     #02H
+		JMP	SETO22
+;;                JSL     >SETOAML22
+;;		RTS
+;------------------------------------------------
+;;		LDA	<KEYA1
+;;		AND	#03H
+;;		TAY
+;;		LDA	MDTXSD,Y
+;;		STA	ENXSPD,X
+;;		LDA	<KEYA1
+;;		LSR	A
+;;		LSR	A
+;;		AND	#03H
+;;		TAY
+;;		LDA	MDTXSD,Y
+;;		STA	ENYSPD,X
+;;;		
+;;		JSR	ENMVCL
+;;		RTS
+;====================================================
+MDARMID		EQU	$
+;;		HEX	08,10,18,20
+		HEX	08,10,16,1A
+MDAHCP		EQU	$	; Hed no.
+		HEX	07,06,05,04
+		HEX	03,04,05,06
+		HEX	07,06,05,04
+		HEX	03,04,05,06
+MDAHAD		EQU	$
+		HEX	C0,C0,C0,C0
+		HEX	80,80,80,80
+		HEX	00,00,00,00
+		HEX	00,40,40,40
+MDACPT		EQU	$
+		HEX	0,0,1,2
+;
+MDARMCS		EQU	$
+		LDA	ENXSPD,X
+;;		ASL	A
+		STA	<WORK1
+		LDA	ENYSPD,X
+		CLC
+		ADC	ENZSPD,X
+;;		ASL	A
+		STA	<WORK0
+		JSL	>MKCK16
+		TAY
+		LDA	MDAHCP,Y
+		STA	ENCHPT,X
+		LDA	ENCLOR,X
+		AND	#00111111B
+		ORA	MDAHAD,Y
+		STA	ENCLOR,X
+		JSL	>EN1CSTL
+;
+		PHX
+		TXY
+                LDA     ENCONT,X
+                AND     #1FH
+                CLC
+                ADC     MDAIDT,X
+                TAX
+                LDA     ENXPSL,Y
+                STA     >MDXBFL,X
+                LDA     ENXPSH,Y
+                STA     >MDXBFH,X
+                LDA     ENYPSL,Y
+                STA     >MDYBFL,X
+                LDA     ENYPSH,Y
+                STA     >MDYBFH,X
+		PLX
+;
+		MEM16
+		REP	#20H
+		LDA	#0000H
+		LDY	ENYSPD,X
+		BPL	MDC008
+		LDA	#00014H
+MDC008		EQU	$
+		PHA
+		CLC
+		ADC	<OAMADR
+		STA	<OAMADR
+		PLA
+		LSR	A
+		LSR	A
+		CLC
+		ADC	<OSBADR
+		STA	<OSBADR
+;
+		MEM8
+		SEP	#20H
+;
+		LDA	#00H
+		STA	ENHELP2	; oam index !
+MDC010		EQU	$
+		LDY	ENHELP2
+		LDA	MDACPT,Y
+		STA	ENCHPT,X
+;
+		PHX
+		LDA	ENCONT,X
+		SEC
+		SBC	MDARMID,Y
+		AND	#1FH
+		CLC	
+                ADC     MDAIDT,X
+		TAX
+		LDA	>MDXBFL,X
+		STA	ENXP2L
+		LDA	>MDXBFH,X
+		STA	ENXP2H
+		LDA	>MDYBFL,X
+		STA	ENYP2L
+		LDA	>MDYBFH,X
+		STA	ENYP2H
+;
+		PLX
+;
+		LDA	ENYSPD,X
+		BPL	MDC070
+;
+		MEM16
+		REP	#20H
+		LDA	<OAMADR
+		SEC
+		SBC	#0004H 
+		STA	<OAMADR
+		DEC	<OSBADR
+		BRA	MDC080
+MDC070		EQU	$
+		MEM16
+		REP	#20H
+		LDA	<OAMADR
+		CLC
+		ADC	#0004H 
+		STA	<OAMADR
+		INC	<OSBADR
+MDC080		EQU	$
+		MEM8
+		SEP	#20H
+;
+		JSL	>EN1CSTL
+;
+		INC	ENHELP2
+		LDA	ENHELP2
+		CMP	#04H
+		BNE	MDC010 
+;
+		RTS
+;%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+;%		City bos initial       		 %
+;%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+;==================================================
+CTBOSST		EQU	$
+		LDX	#00H
+		LDA	#EMOVE
+		STA	ENMODE,X
+		LDA	#CTBOS
+		STA	ENMYNO,X
+		LDA	<WORK0
+		STA	ENXPSL,X
+		LDA	<WORK1
+		STA	ENXPSH,X
+		LDA	<WORK2
+		SEC
+		SBC	#17H-08H+1
+		STA	ENYPSL,X
+		LDA	<WORK3
+		STA	ENYPSH,X
+		JSL	>ENMDST
+;
+		LDA	#0C0H
+		STA	ENTIM2,X
+		LDA	#15H
+		STA	ENCHPT,X
+		LDA	#02H
+		STA	ENMUKI,X
+		STA	ENNOCR,X
+;
+		LDA	EMYSTT+1
+		ORA	#00100000B
+		STA	EMYSTT+1	; Set on !
+;
+		STZ	BRMSCT		; Kubi muki count !
+;
+		RTL
+;
+CTBOSIT		EQU	$
+		LDA	>OPMODE
+		CMP	#prnc1
+		BEQ	CTBI10
+;
+		LDA	EMYSTT+1
+		AND	#00100000B
+		BEQ	CTBI10		; Already set ?
+;					; yes !
+		LDA	#60H
+		STA	ENTIM2,X		
+;;		LDA	#80H
+;;		STA	ENTIM2,X
+;;		LDA	#15H
+;;		STA	ENCHPT,X
+		LDA	#01H
+		STA	ENWRK2,X	;
+;
+		LDA	#02H
+		STA	ENMUKI,X
+		LDA	#04H
+		STA	ENKBMK,X
+		LDA	#07H
+		STA	ENCHPT,X
+;;		STA	ENNOCR,X
+;
+		STZ	BRMSCT		; Kubi muki count !
+		RTL
+;
+CTBI10		EQU	$
+		STZ	ENMODE,X
+		RTL
+;=========================================
+CBZNZST		EQU	$
+		LDA	ENCONT,X
+		AND	#00H
+		BNE	CBZS90
+;
+		PHX
+		TXY
+;
+		LDX	#E2NO-1
+CBZS10		EQU	$
+		LDA	>E2MODE,X
+		BEQ	CBZS20
+		DEX
+		BPL	CBZS10
+;
+		DEC	E2STCT
+		BPL	CBZS18
+;
+		LDA	#E2NO-1
+		STA	E2STCT
+CBZS18		EQU	$
+;
+		LDX	E2STCT
+CBZS20		EQU	$
+		LDA	#0FH
+      		STA	>E2MODE,X
+		STA	EN2FLG
+;
+		LDA	ENCHPT,Y
+		STA	>E2CHPT,X
+;
+		TYA
+		STA	>E2STAT,X
+;
+		LDA	ENXPSL,Y
+		STA	>E2XPSL,X
+		LDA	ENXPSH,Y
+		STA	>E2XPSH,X
+		LDA	ENYPSL,Y
+		CLC
+		ADC	#10H
+		STA	>E2YPSL,X
+		LDA	ENYPSH,Y
+		ADC	#00H
+		STA	>E2YPSH,X
+;
+		LDA	#0AH
+		STA	>E2TIM0,X
+;	
+		PLX
+CBZS90		EQU	$
+		RTS
+;%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+;%		City boss   Hed       		 %
+;%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+CHMXLM		EQU	$
+		HEX	20,E0
+CHMXPS		EQU	$
+		HEX	98,58
+CHMYLM		EQU	$
+		HEX	18,E8
+CHMYPS		EQU	$
+		HEX	B0,50
+;
+CBHEDMV		EQU	$
+		LDA	ENFLCL,X
+		ORA	#30H
+		STA	ENFLCL,X
+;
+		JSL	>EN1CSTL
+;
+		PHX
+		LDY	#02H
+		LDA	ENKBMK,X
+		TAX
+		LDA	CTHDCD,X
+		STA	(<OAMADR),Y
+		INY
+;
+		LDA	(<OAMADR),Y
+		AND	#00111111B
+		ORA	CTHDAD,X
+		STA	(<OAMADR),Y
+		PLX
+;
+		JSR	ENSTCK
+;
+		LDA	ENHNFG,X
+		CMP	#0EH
+		BNE	CBH008 
+;
+		LDA	#08H
+		STA	ENHNFG,X
+CBH008		EQU	$
+;
+		JSR	ENHNSB
+;
+		DEC	HEMODE,X
+		BPL	CBH010
+;
+		LDA	#02H
+		STA	HEMODE,X
+;
+		LDA	ENKBMK,X
+		INC	A
+		AND	#0FH
+		STA	ENKBMK,X
+CBH010		EQU	$
+		LDA	ENTIM0,X
+		BEQ	CBH0111
+;
+		JMP	CBH090
+;
+CBH0111		EQU	$
+		JSR	CREKEK		
+;
+		INC	ENCONT,X
+		LDA	#1FH
+		JSR	KBBMST
+		TYA	
+		BMI	CHM011
+;
+		DEC	ENZSDR,X
+		BPL	CHM011
+;
+		LDA	#04H
+		STA	ENZSDR,X
+;
+		PHY
+		LDA	#20H
+		JSL	>PSERC2L
+		PLY
+		LDA	<WORK0
+		STA	ENYSPD,Y
+		LDA	<WORK1
+		STA	ENXSPD,Y
+CHM011		EQU	$
+;
+		LDA	ENCONT,X
+		AND	#00H
+		BNE	CHM020
+;
+		LDA	ENCTCT,X
+		AND	#01H
+		TAY		
+		LDA	ENXSPD,X
+		CMP	CHMXLM,Y
+		BEQ	CHM020
+		CLC
+		ADC	CHMXAD,Y
+		STA	ENXSPD,X
+CHM020		EQU	$
+		LDA	ENXPSL,X
+		AND	#0FEH
+		CMP	CHMXPS,Y
+		BNE	CHM030
+;
+		INC	ENCTCT,X
+CHM030		EQU	$
+		LDA	ENCONT,X
+		AND	#00H
+		BNE	CHM120
+;
+		LDA	ENCTFG,X
+		AND	#01H
+		TAY		
+		LDA	ENYSPD,X
+		CMP	CHMYLM,Y
+		BEQ	CHM120
+		CLC
+		ADC	CHMYAD,Y
+		STA	ENYSPD,X
+CHM120		EQU	$
+		LDA	ENYPSL,X
+		AND	#0FEH
+		CMP	CHMYPS,Y
+		BNE	CHM130
+;
+		INC	ENCTFG,X
+CHM130		EQU	$
+		LDA	ENHNFG,X
+		BNE	CBH090
+;
+		JSR	ENMVCL
+;
+CBH090		EQU	$
+		RTS
+;===========================================
+CBHEDST		EQU	$
+		LDA	#CTBOS
+		JSL	>ENIDSH
+		BMI	CBHS10
+;
+		JSL	>ENIDPS
+;
+		LDA	#01011011B
+		STA	ENMOD2,Y
+		AND	#0FH
+		STA	ENCLOR,Y
+;
+;;		LDA	#24H
+;;		STA	ENLIFE,Y
+		LDA	#00000100B
+		STA	ENMOD5,Y
+;
+		LDA	#02H
+		STA	ENWRK0,Y
+;
+		LDA	#01H
+		STA	ENMOD0,Y
+		DEC	A
+		STA	ENMOD3,Y
+		STA	ENMOD7,Y
+;
+		LDA	#17H
+		STA	ENZPSL,Y
+		CLC
+		ADC	<WORK2
+		STA	ENYPSL,Y		
+;
+		LDA	<WORK0
+		ASL	A
+		ROL	A
+		AND	#01H
+		STA	ENCTCT,Y
+;
+		LDA	<WORK2
+		ASL	A
+		ROL	A
+		AND	#01H
+		STA	ENCTFG,Y
+;
+		LDA	#30H
+		STA	ENTIM0,Y
+CBHS10		EQU	$
+		RTS
+;%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+;%		City boss          		 %
+;%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+CBBMPT		EQU	$
+		HEX	7,7,8,9,A,9,8,7
+		HEX	7,7,8,9,A,9,8,7
+CBBMAD		EQU	$
+		HEX	00,00,00,00,00,40,40,40
+		HEX	40,40,C0,C0,80,80,80,80
+CBKMPT		EQU	$
+		HEX	14,13,12,11,10,0F,0F
+;
+CTBOSMV		EQU	$
+		LDA	ENWRK0,X
+		BPL	CTB0E0		; Beam move ?
+;					; yes !
+		LDY	ENKBMK,X
+		LDA	CBBMPT,Y
+		STA	ENCHPT,X
+		LDA	CBBMAD,Y
+		ORA	#03H
+		STA	ENCLOR,X
+;;		JSL	>EN1CSSL
+		JSL	>OAMCHKL
+		JSR	ENSTCK
+;
+		LDA	ENTIM0,X
+		BEQ	CBBM02
+;
+		CMP	#01H
+		BNE	CBBM01
+;
+		STZ	ENMODE,X
+CBBM01		EQU	$
+		RTS
+;
+CBBM02		EQU	$
+		JSL	>CRENPL2L
+;
+		LDY	#00H
+		LDA	ENXSPD,X
+		BPL	CBBM10
+		DEY
+CBBM10		EQU	$
+		CLC
+		ADC	ENXPSL,X
+		STA	ENXPSL,X
+		TYA
+		ADC	ENXPSH,X
+		STA	ENXPSH,X
+;
+		LDY	#00H
+		LDA	ENYSPD,X
+		BPL	CBBM20
+		DEY
+CBBM20		EQU	$
+		CLC
+		ADC	ENYPSL,X
+		STA	ENYPSL,X
+		TYA
+		ADC	ENYPSH,X
+		STA	ENYPSH,X
+;
+;;		JSL	>ENBGCKL
+;;		LDA	ENCBFG,X
+		JSR	ENBGCK
+		BEQ	CBBM30
+;
+;;		STZ	ENMODE,X
+		LDA	#0CH
+		STA	ENTIM0,X
+CBBM30		EQU	$
+		JSR	CBZNZST
+		
+		RTS
+;
+;===========================================================
+CTB0E0		EQU	$
+		CMP	#02H
+		BNE	CTB0E2		; Hed ?
+;					; yes !
+		JMP	CBHEDMV
+;
+CTB0E2		EQU	$
+		LDA	ENFLCL,X
+		ORA	#30H
+		STA	ENFLCL,X
+		JSR	CTBOSCS
+;
+		LDA	#01H
+		STA	ENCLOR,X
+;
+		JSR	ENSTCK
+;
+		LDA	ENHNFG,X
+		BEQ	CTB0E8		; Damage ?
+;					; yes !
+		DEC	ENHNFG,X
+;;;		STZ	ENHNFG,X
+		CMP	#0BH
+		BNE	CTB0E8
+;;LDA	#10H
+;;STA	ENFLSH,X
+;
+		STZ	ENFLSH,X
+		STZ	ENCBFG,X	 ; spin count reset !
+;
+		LDA	ENTIM3,X
+		BNE	CTB0E8
+;
+		LDA	#80H
+		STA	ENLIFE,X	; No fail !
+;
+		LDA	#30H
+		STA	ENTIM3,X
+;
+		LDA	ENCLOR,X
+		AND	#01H
+		STA	ENCLOR,X
+;
+		INC	ENZSDR,X
+		LDA	ENZSDR,X
+		CMP	#03H
+		BCS	CTB0E5
+;
+		LDA	#60H
+		STA	ENCBFG,X	; Kubi spin beam shot time set !
+;
+;LL		LDA	ENWRK2,X
+;LL		STA	ENZSPD,X
+;LL;
+;LL		LDA	#CSPIN
+;LL		STA	ENWRK2,X
+;LL		LDA	#080H
+;LL		STA	ENTIM2,X
+;LL;
+		LDA	#01H
+		STA	HEMODE,X	; Kubi spin speed !
+;LL;
+;LL		JSR	ENSDCL
+		BRA	CTB0E8
+CTB0E5		EQU	$
+		STZ	ENZSDR,X
+;
+		INC	MDBMCT		; Fail count !
+;
+		LDA	MDBMCT
+		CMP	#03H
+		BNE	CTB0E7		; Last ?
+;					; yes !
+		JSL	>ENALFL
+		JSR	EBAKUST		; fail set !
+		LDA	#0FFH
+		STA	ENTIM0,X
+		STA	ENFLSH,X
+		INC	BSFLFG
+;;                JSL     >SDLRCE
+;;                ORA     #22H
+;;                STA     SOUND3          ; (S)
+		LDA	#22H
+		JSL	>SDLRE3	;(S)
+;
+                RTS
+		
+;
+;--------------------------------------------------
+CTB0E7		EQU	$
+;;		LDA	ENWRK2,X
+;;		STA	ENZSPD,X
+;
+		JSR	ENSDCL
+		LDA	#CDOWN
+		STA	ENWRK2,X
+		LDA	#0FFH
+		STA	ENTIM2,X
+		STA	ENNOCR,X
+;
+		JSR	CBHEDST		; Hed bunri !
+CTB0E8		EQU	$
+		LDA	ENWRK0,X	
+		BEQ	CTB100		; Kemri ?
+;					; yes !
+		LDA	ENTIM0,X
+		BNE	CTB0F0
+;
+		STZ	ENMODE,X
+CTB0F0		EQU	$
+		LSR	A
+		LSR	A
+		LSR	A
+		TAY
+		LDA	CBKMPT,Y
+		STA	ENCHPT,X
+		RTS
+;=========================================================
+CTB100		EQU	$
+		INC	ENCONT,X
+;
+		LDA	ENCONT,X
+		AND	#01H
+		BNE	CTB110
+;
+		INC	ENTIM0,X
+CTB110		EQU	$
+		LDA	ENTIM1,X
+		BEQ	CTB112		; Beam shot time ?
+;;		BNE	CTB120		
+;					; yes !
+		STZ	ENSTAT,X
+;
+		CMP	#08H
+		BNE	CTB111
+;
+		JSR	CBBEMST
+CTB111		EQU	$
+		JMP	CBCBCK		; Cross check !
+;- - - - - - - - - - - - - - - - - - - -
+CTB112		EQU	$
+		INC	BRMSCT		; Kubi muki controle !
+;
+		LDA	ENSTTM,X
+		BNE	CTB120		; Shot ok ?
+;					; yes !
+		LDA	ENSTAT,X
+		BEQ	CTB122		; Found player ?
+;					; yes !
+;;		STZ	ENSTAT,X
+;;		JSR	CBBEMST
+		LDA	#10H
+		STA	ENTIM1,X
+;
+		LDA	#80H
+		STA	ENSTTM,X
+		BRA	CTB121
+CTB120		EQU	$
+		DEC	ENSTTM,X
+CTB121		EQU	$
+		STZ	ENSTAT,X
+CTB122		EQU	$
+		LDA	<PLXPS0
+		STA	ENXPSH,X
+		LDA	<PLYPS0
+		STA	ENYPSH,X
+;
+		LDA	ENWRK2,X
+		JSL	>JSRSUB
+CB0		WORD	CBGIRL	;0
+		WORD	CBRIVS	;1
+CBM		WORD	CBMOVE	;2
+		WORD	CBYMOV	;3
+CBT		WORD	CBTURN	;4
+CBSP		WORD	CBSPIN	;5
+CBDW		WORD	CBDOWN	;6
+CBUPD		WORD	CBUP	;7
+;
+CMOVE		EQU	(CBM-CB0)/2
+CTURN		EQU	(CBT-CB0)/2
+CSPIN		EQU	(CBSP-CB0)/2
+CDOWN		EQU	(CBDW-CB0)/2
+CUP		EQU	(CBUPD-CB0)/2
+;
+;---------------------------------------------
+CBDWPT		EQU	$
+		HEX	E,D,C,A
+
+CBDOWN		EQU	$
+		STZ	ENFLSH,X
+;
+		LDA	#0CH
+		STA	ENKBMK,X
+;
+		LDA	ENTIM2,X
+		BNE	CBD010
+;
+		INC	ENWRK2,X
+		LDA	#27H
+		STA	ENTIM2,X
+;
+		LDA	#13H
+		JSL	>SDLRE1	;(S)
+		RTS
+;
+CBD010		EQU	$
+		CMP	#0E0H
+		BCC	CBD020
+		SBC	#0E0H
+		LSR	A
+		LSR	A
+		LSR	A
+		TAY
+		LDA	CBDWPT,Y
+		STA	ENCHPT,X
+		RTS
+CBD020		EQU	$	
+		LDA	#0EH
+		STA	ENCHPT,X
+		RTS
+;---------------------------------------------
+CBUPPT		EQU	$
+		HEX	A,B,C,D,E
+;
+CBUP		EQU	$
+		LDA	ENTIM2,X
+		BNE	CBU010
+;
+;;		LDA	ENZSPD,X
+		LDA	#CMOVE
+		STA	ENWRK2,X
+;
+		LDA	#080H
+		STA	ENTIM0,X
+;
+		LDA	ENYPSL,X
+		ASL	A
+		ROL	A
+		AND	#01H
+		INC	A
+		INC	A
+		STA	ENMUKI,X
+;
+		LDA	ENXPSL,X
+		ASL	A
+		ROL	A
+;;;;		AND	#01H
+		STA	ENCTCT,X
+;
+		JSR	ENSDCL
+;
+		STZ	ENNOCR,X
+		RTS
+;- - - - - - - - - - - - - - - - - - - - - - - - -
+CBU010		EQU	$
+		LSR	A
+		LSR	A
+		LSR	A
+		TAY
+		LDA	CBUPPT,Y
+		STA	ENCHPT,X
+		RTS
+;---------------------------------------------
+CBSPXS		EQU	$
+		HEX	E0,E4,E8,F0
+		HEX	00,10,18,1C
+		HEX	20,1C,18,10
+		HEX	00,F0,E8,E4
+CBSPYS		EQU	$
+		HEX	00,10,18,1C
+		HEX	20,1C,18,10
+		HEX	00,F0,E8,E4
+		HEX	E0,E4,E8,F0
+;
+CBSPIN		EQU	$
+;LL		JSR	CBCBCK
+;LL;
+;LL;;		JSR	CREKEK
+;LL;;		JSR	CRCBPL		; Body hit check !
+;LL;
+;LL		LDA	ENTIM2,X
+RURURU		EQU	$
+		DEC	ENCBFG,X
+		PHA
+		AND	#00000111B
+		SEC
+		ROL	A
+		STA	ENCLOR,X
+		PLA
+		BNE	CBSP08
+;
+;;		LDA	#01H
+;;		STA	ENCLOR,X
+;
+;;		LDA	#CMOVE
+;lll		LDA	ENZSPD,X
+;lll		STA	ENWRK2,X
+CBSP08		EQU	$
+		DEC	ENWRK3,X
+		BPL	CBSP10
+;
+;;;		LDA	#05H
+		LDA	HEMODE,X
+		STA	ENWRK3,X
+;
+		LDA	ENKBMK,X
+		INC	A
+		AND	#0FH
+		STA	ENKBMK,X
+;
+CBSP10		EQU	$
+		LDA	ENCONT,X
+		AND	#1FH
+		BNE	CBSP20
+;
+		LDA	HEMODE,X
+		CMP	#05H
+		BEQ	CBSP20
+;
+		INC	HEMODE,X
+CBSP20		EQU	$
+		JSR	CBPTST2
+;
+		LDA	#0FH 
+KBBMST		EQU	$
+		LDY	#0FFH
+		AND	ENCONT,X
+		BNE	CBSP30
+;
+		JSL	>Z2TMSTL
+		BMI	CBSP30
+;
+		LDA	#19H
+		JSL	>SDLRE3	;(S)
+;
+		PHX
+		LDA	ENKBMK,X
+		TAX
+		LDA	CBSPXS,X
+		STA	ENXSPD,Y
+		LDA	CBSPYS,X
+		STA	ENYSPD,Y
+;
+		JSR	BBMD5S	; MOD6 & MOD5 set !
+		PLX
+CBSP30		EQU	$
+;
+;;		JSR	CBXSTP		; XSPD Brake
+;;		JSR	CBYSTM		; Y   "    & MVCL
+		RTS		
+;---------------------------------------------
+CBGIRL		EQU	$
+                LDA     #00H                ;OBJ CNG NO SET
+                STA     OPTHPT
+                LDA     #0A0H 
+                STA     OPTBPT
+;		
+		LDA	ENTIM2,X
+		BNE	CBG010
+;
+		INC	ENWRK2,X
+;
+		LDA	#60H
+		STA	ENTIM2,X		
+CBG010		EQU	$
+		CMP	#50H
+		BNE	CBG011
+		PHA
+		LDA	#MS_0461
+		STA	MSGENOL		
+		LDA	#HIGH MS_0461
+		STA	MSGENOH
+		JSL	>MSGSET		
+		PLA
+CBG011		EQU	$
+		CMP	#18H
+		BNE	CBG020	; Kemri set ?
+;				; yes !
+		JSR	BIGKEMST
+;
+CBG020		EQU	$
+		RTS
+;---------------------------------------------
+BIGKEMST	EQU	$
+;;		JSL	>SDLRCE
+;;		ORA	#15H
+;;		STA	SOUND2	;(S)
+		LDA	#0CH
+		STA	SOUND2	;(S)
+;
+		LDA	#CTBOS
+		JSL	>ENIDSH
+		LDA	<WORK0
+		CLC
+		ADC	#010H
+		STA	ENXPSL,Y
+		LDA	<WORK1
+		ADC	#00H
+		STA	ENXPSH,Y
+		LDA	<WORK2
+		CLC
+		ADC	#28H
+		STA	ENYPSL,Y
+		LDA	<WORK3
+		ADC	#00H
+		STA	ENYPSH,Y
+;
+		LDA	#0FH
+		STA	ENCHPT,Y
+		LDA	#01H
+		STA	ENWRK0,Y
+		LDA	#2FH
+		STA	ENTIM0,Y
+		LDA	#09H
+		STA	ENMOD0,Y
+		STA	ENNOCR,Y
+		RTS
+;=========================================
+CBRIVS		EQU	$
+		JSR	CBCBCK
+;
+;;		JSR	CREKEK
+;;		JSR	CRCBPL		; Body hit check !
+;
+		LDA	#09H
+		STA	ENCHPT,X
+;
+		LDA	ENTIM2,X
+		BNE	CBST10
+;
+		INC	ENWRK2,X
+;
+		LDA	#0FFH
+		STA	ENTIM0,X
+;
+		STZ	ENNOCR,X
+CBST10		EQU	$
+;;		CMP	#046H
+;;		BNE	CBST18
+;;;
+;;		PHA
+;;		LDA	#MS_0461
+;;		STA	MSGENOL		
+;;		LDA	#HIGH MS_0461
+;;		STA	MSGENOH
+;;		JSL	>MSGSET		
+;;		PLA
+;;;
+;;CBST18		EQU	$
+		CMP	#40H
+		BCS	CBST20
+;
+		LDA	#0F8H
+		STA	ENYSPD,X
+		JSR	ENYCLC
+CBST20		EQU	$
+		JSR	CBPTST
+		LDA	#04H
+		STA	ENKBMK,X	; Lock !
+		RTS
+;---------------------------------------------
+CBMYLM		EQU	$
+		HEX	12,EE
+CBMXLM		EQU	$
+		HEX	18,E8
+CBMXPS		EQU	$
+		HEX	A4,4C
+;
+CBMOVE		EQU	$
+		JSR	CBCBCK
+;
+;;		JSR	CREKEK
+;;		JSR	CRCBPL		; Body hit check !
+;
+		JSR	CBPTST
+;
+		LDA	ENCONT,X
+		AND	#7FH
+		BNE	CBM001
+;
+		JSR	EPYCHK
+		INY
+		INY
+;
+		TYA
+		CMP	ENMUKI,X
+		BNE	CBM002		; Back player -> Go turn !
+;
+CBM001		EQU	$
+		LDA	ENTIM0,X
+		BNE	CBM008
+;
+CBM002		EQU	$
+		LDA	ENXPSL,X
+		CMP	#078H
+		BCS	CBM008
+;
+		INC	ENWRK2,X
+;
+		LDA	ENYSPD,X
+		AND	#0FEH
+		STA	ENYSPD,X
+		LDA	ENXSPD,X
+		AND	#0FEH
+		STA	ENXSPD,X
+;
+		LDA	#30H
+		STA	ENTIM2,X
+		RTS
+;- - - - - --  - - -
+CBM008		EQU	$
+		LDA	ENWRK1,X
+		AND	#01H
+		TAY
+;
+		LDA	ENYSPD,X
+		CLC
+		ADC	CBMYAD,Y
+		STA	ENYSPD,X
+		CMP	CBMYLM,Y
+		BNE	CBM010
+;
+		INC	ENWRK1,X
+CBM010		EQU	$
+		LDA	ENCTCT,X
+		AND	#01H
+		TAY		
+		LDA	ENXSPD,X
+		CMP	CBMXLM,Y
+		BEQ	CBM020
+		CLC
+		ADC	CBMXAD,Y
+		STA	ENXSPD,X
+CBM020		EQU	$
+		LDA	ENXPSL,X
+		AND	#0FEH
+		CMP	CBMXPS,Y
+		BNE	CBM030
+;
+		INC	ENCTCT,X
+CBM030		EQU	$
+		JSR	ENMVCL
+;
+;;;		LDA	ENTUTM,X
+		LDA	ENCBFG,X
+		BEQ	CBM035		; Spin beam ?
+;					; yes !
+		JMP	RURURU
+;
+CBM035		EQU	$
+		LDA	ENCONT,X
+		AND	#07H
+		BNE	CBM038
+;
+		LDA	ENKBMK,X
+		ASL	A
+		ASL	A
+		STA	<WORKF
+		JSL	>H0SER00L
+CBM038		EQU	$
+		RTS
+;---------------------------------------------
+CBYMAD		EQU	$
+		HEX	02,FE
+CBYMLM		EQU	$
+		HEX	40,C0
+CBYYPS		EQU	$
+		HEX	90,50
+;
+CBYMOV		EQU	$
+		JSR	CBCBCK
+;
+		LDA	ENTIM2,X
+		BEQ	CBY008		; Stop ?
+;					; yes !
+		JSR	CBXSTP
+		JSR	ENXCLC
+		JMP	CBYSTM		; Y   "    & YCLC 
+;- - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+CBY008		EQU	$
+;;		JSR	CREKEK
+;;		JSR	CRCBPL		; Body hit check !
+;
+		LDA	ENMUKI,X
+		DEC	A
+		DEC	A
+		TAY
+		LDA	ENYSPD,X
+		CMP	CBYMLM,Y
+		BEQ	CBY010
+		CLC
+		ADC	CBYMAD,Y
+		STA	ENYSPD,X
+CBY010		EQU	$
+		LDA	ENYPSL,X
+		AND	#0FCH
+		CMP	CBYYPS,Y
+		BNE	CBY030
+;
+		INC	ENWRK2,X
+;
+		LDA	ENMUKI,X
+		SEC
+		SBC	#01
+		STA	ENWRK1,X	; Next swing way !
+CBY030		EQU	$
+		JSR	ENMVCL
+CBXSTP		EQU	$
+		LDA	ENXSPD,X
+		BEQ	CBY040
+		BPL	CBY038
+		CLC
+		ADC	#04H
+CBY038		EQU	$
+		SEC
+		SBC	#02H
+		STA	ENXSPD,X
+CBY040		EQU	$
+		JSR	CBPTST2
+;
+		LDA	ENCBFG,X
+		BEQ	CBY055		; Spin beam ?
+;					; yes !
+		JMP	RURURU
+CBY055		EQU	$
+		RTS
+;---------------------------------------------
+CBTPAD		EQU	$
+		HEX	FF,01
+CBTPLM		EQU	$
+		HEX	00,09
+;
+CBTURN		EQU	$
+		JSR	CBCBCK
+;
+		LDA	ENCONT,X
+		AND	#07H
+		BNE	CBT030
+;
+		LDA	ENMUKI,X
+		DEC	A
+		DEC	A
+		TAY
+		LDA	ENCHPT,X
+		CMP	CBTPLM,Y
+		BNE	CBT010
+;
+		LDA	#0FEH
+		STA	ENTIM0,X
+		LDA	#CMOVE 
+		STA	ENWRK2,X
+;
+		LDA	ENMUKI,X
+		EOR	#01H
+		STA	ENMUKI,X
+;
+		LDA	ENXPSL,X
+		ASL	A
+		ROL	A
+		AND	#01H
+		STA	ENCTCT,X
+;
+		BRA	CBT030
+;
+CBT010		EQU	$
+		CLC
+		ADC	CBTPAD,Y
+		STA	ENCHPT,X
+CBT030		EQU	$
+;;		JSR	CBM008
+CBYSTM		EQU	$
+		LDA	ENYSPD,X
+		BEQ	CBT050
+;
+		BPL	CBT038
+		CLC
+		ADC	#08H
+CBT038		EQU	$
+		SEC
+		SBC	#04H
+		STA	ENYSPD,X
+CBT050		EQU	$
+		JSR	ENYCLC
+;
+		LDA	ENCBFG,X
+		BEQ	CBT055		; Spin beam ?
+;					; yes !
+		JMP	RURURU
+CBT055		EQU	$
+		RTS
+;;		RTS
+;
+;
+;-------------------------------------
+CBCBCK		EQU	$
+		LDA	ENTIM3,X
+		ORA	ENHNFG,X
+		BNE	CBCK10		; Protect time ?
+;					; yes !
+		JSR	CREKEK
+CBCK10		EQU	$
+		JSR	CRCBPL		; Body hit check !
+		RTS
+;
+;
+;
+;
+;
+;======================================
+CBPTDT		EQU	$
+		HEX	7,8,9,8
+		HEX	0,1,2,1
+CBKBMK		EQU	$
+		HEX	0,1,2,3,4,3,2,1
+		HEX	0,F,E,D,C,D,E,F
+;
+;;		HEX	0,1,2,3,4,5,6,7,8,7,6,5,4,3,2,1
+;;		HEX	8,9,A,B,C,D,E,F,0,F,E,D,C,B,A,9
+;
+CBMKAD		EQU	$
+		HEX	0,1,1,2,2,3,3,4
+;
+CBPTST		EQU	$
+		LDA	ENCBFG,X
+		BNE	CBPTST2		; Spin beam ?
+;					; no !
+		LDA	<PLXPS1
+		LSR	A
+		LSR	A
+		LSR	A
+		LSR	A
+		LSR	A
+		TAY
+		LDA	CBMKAD,Y		
+		LDY	ENMUKI,X
+		CPY	#03H
+		BNE	CBPS10
+		EOR	#0FFH
+		INC	A
+CBPS10		EQU	$
+		STA	<WORK1
+;
+		TYA
+		DEC	A
+		DEC	A
+		ASL	A
+		ASL	A
+		ASL	A
+		STA	<WORK0
+;
+;;		LDA	ENCONT,X
+		LDA	BRMSCT
+		LSR	A
+		LSR	A
+		LSR	A
+;;		NOP
+;;		ASL	<WORK0
+;;		ASL	<WORK0
+		AND	#07H
+		ADC	<WORK0
+		TAY
+		LDA	CBKBMK,Y
+		CLC
+		ADC	<WORK1
+		AND	#0FH
+		STA	ENKBMK,X
+;
+CBPTST2		EQU	$
+		LDA	ENMUKI,X
+		DEC	A
+		DEC	A
+		ASL	A
+		ASL	A
+		STA	<WORK0
+		LDA	ENCONT,X
+		LSR	A
+		LSR	A
+		LSR	A
+		AND	#03H
+		CLC
+		ADC	<WORK0
+		TAY
+		LDA	CBPTDT,Y
+		STA	ENCHPT,X
+;
+		RTS		
+;============================================
+CBBSXS		EQU	$
+		HEX	F8,F8,F8,FC,00,04,08,08 
+		HEX	08,08,08,04,00,FC,F8,F8
+CBBSYS		EQU	$
+		HEX	00,00,04,08,08,08,04,00
+		HEX	00,00,FC,F8,F8,F8,FC,00
+;
+CBBEMST		EQU	$
+		LDA	#CTBOS
+		JSL	>ENIDSH
+		BMI	CBBS90
+;
+		JSL	>SDLRCE
+		ORA	#26H
+		STA	SOUND3	;(S)	; yusen !
+;;		LDA	#26H
+;;		JSL	>SDLRE3	;(S)
+;
+		JSL	>ENIDPS
+;
+		LDA	<WORK0
+		CLC
+		ADC	#04H
+		STA	ENXPSL,Y
+;
+		LDA	ENKBMK,X
+		STA	ENKBMK,Y
+		PHX
+		TAX
+		LDA	CBBSXS,X
+		STA	ENXSPD,Y
+		LDA	CBBSYS,X
+		STA	ENYSPD,Y
+		PLX
+;
+		LDA	#80H
+		STA	ENWRK0,Y
+		STA	ENNOCR,Y
+		LDA	#40H
+		STA	ENMOD0,Y
+		LDA	#14H
+		STA	ENMOD3,Y
+CBBS90		EQU	$
+		RTS
+;============================================
+CTBOSCD		EQU	$
+;0
+		WORD	0FFF8H,00007H
+		HEX	8E,0C,00,02
+		WORD	00008H,00007H
+		HEX	8E,4C,00,02
+		WORD	0FFF8H,00017H
+		HEX	A0,0C,00,02
+		WORD	00008H,00017H
+		HEX	A4,4C,00,02
+;
+		WORD	00000H,00000H
+		HEX	8C,0A,00,02
+;
+		WORD	0FFEDH,00003H
+		HEX	A6,0A,00,02
+		WORD	00013H,00003H
+		HEX	A6,4A,00,02
+;1
+		WORD	0FFF8H,00007H
+		HEX	8E,0C,00,02
+		WORD	00008H,00007H
+		HEX	8E,4C,00,02
+		WORD	0FFF8H,00017H
+		HEX	A2,0C,00,02
+		WORD	00008H,00017H
+		HEX	A0,4C,00,02
+;
+		WORD	00000H,00000H
+		HEX	8C,0A,00,02
+;
+		WORD	0FFEDH,00003H
+		HEX	A8,0A,00,02
+		WORD	00013H,00003H
+		HEX	A8,4A,00,02
+;2
+		WORD	0FFF8H,00007H
+		HEX	8E,0C,00,02
+		WORD	00008H,00007H
+		HEX	8E,4C,00,02
+		WORD	0FFF8H,00017H
+		HEX	A4,0C,00,02
+		WORD	00008H,00017H
+		HEX	A2,4C,00,02
+;
+		WORD	00000H,00000H
+		HEX	8C,0A,00,02
+;
+		WORD	0FFEDH,00003H
+		HEX	AA,0A,00,02
+		WORD	00013H,00003H
+		HEX	AA,4A,00,02
+;3
+		WORD	0FFF1H,00005H
+		HEX	A6,0A,00,02
+;
+		WORD	0FFFAH,00007H
+		HEX	8E,0C,00,02
+		WORD	00006H,00007H
+		HEX	8E,4C,00,02
+		WORD	0FFFAH,00017H
+		HEX	A4,0C,00,02
+		WORD	00006H,00017H
+		HEX	A0,4C,00,02
+;
+		WORD	00000H,00000H
+		HEX	8A,0A,00,02
+;
+		WORD	00010H,0FFFFH
+		HEX	A6,4A,00,02
+;4
+		WORD	0FFF5H,00009H
+		HEX	A6,0A,00,02
+;
+		WORD	0FFFCH,00007H
+		HEX	8E,0C,00,02
+		WORD	00005H,00007H
+		HEX	8E,4C,00,02
+		WORD	0FFFCH,00017H
+		HEX	A4,0C,00,02
+		WORD	00005H,00017H
+		HEX	A0,4C,00,02
+;
+		WORD	00000H,00000H
+		HEX	88,0A,00,02
+;
+		WORD	0000AH,0FFFEH
+		HEX	A6,4A,00,02
+;5
+		WORD	00000H,00000H
+		HEX	84,0A,00,02
+;
+		WORD	0000DH,00008H
+		HEX	A6,4A,00,02
+;
+		WORD	0FFF6H,0FFFEH
+		HEX	A6,0A,00,02
+;
+		WORD	0FFFBH,00007H
+		HEX	8E,0C,00,02
+		WORD	00005H,00007H
+		HEX	8E,4C,00,02
+		WORD	0FFFBH,00017H
+		HEX	A0,0C,00,02
+		WORD	00005H,00017H
+		HEX	A4,4C,00,02
+;6
+		WORD	00000H,00000H
+		HEX	82,0A,00,02
+;
+		WORD	00012H,00004H
+		HEX	A6,4A,00,02
+;
+		WORD	0FFF1H,0FFFFH
+		HEX	A6,0A,00,02
+;
+		WORD	0FFFAH,00007H
+		HEX	8E,0C,00,02
+		WORD	00006H,00007H
+		HEX	8E,4C,00,02
+		WORD	0FFFAH,00017H
+		HEX	A0,0C,00,02
+		WORD	00006H,00017H
+		HEX	A4,4C,00,02
+;7
+		WORD	00000H,00000H
+		HEX	80,0A,00,02
+;
+		WORD	0FFEDH,00003H
+		HEX	A6,0A,00,02
+		WORD	00013H,00003H
+		HEX	A6,4A,00,02
+;
+		WORD	0FFF8H,00007H
+		HEX	8E,0C,00,02
+		WORD	00008H,00007H
+		HEX	8E,4C,00,02
+		WORD	0FFF8H,00017H
+		HEX	A0,0C,00,02
+		WORD	00008H,00017H
+		HEX	A4,4C,00,02
+;8
+		WORD	00000H,00000H
+		HEX	80,0A,00,02
+;
+		WORD	0FFEDH,00003H
+		HEX	A8,0A,00,02
+		WORD	00013H,00003H
+		HEX	A8,4A,00,02
+;
+		WORD	0FFF8H,00007H
+		HEX	8E,0C,00,02
+		WORD	00008H,00007H
+		HEX	8E,4C,00,02
+		WORD	0FFF8H,00017H
+		HEX	A2,0C,00,02
+		WORD	00008H,00017H
+		HEX	A0,4C,00,02
+;9
+		WORD	00000H,00000H
+		HEX	80,0A,00,02
+;
+		WORD	0FFEDH,00003H
+		HEX	AA,0A,00,02
+		WORD	00013H,00003H
+		HEX	AA,4A,00,02
+;
+		WORD	0FFF8H,00007H
+		HEX	8E,0C,00,02
+		WORD	00008H,00007H
+		HEX	8E,4C,00,02
+		WORD	0FFF8H,00017H
+		HEX	A0,0C,00,02
+		WORD	00008H,00017H
+		HEX	A4,4C,00,02
+;A
+		WORD	0FFF8H,00009H
+		HEX	8E,0C,00,02
+		WORD	00008H,00009H
+		HEX	8E,4C,00,02
+		WORD	0FFF8H,00017H
+		HEX	AE,0C,00,02
+		WORD	00008H,00017H
+		HEX	AE,4C,00,02
+		WORD	00008H,00017H
+		HEX	AE,4C,00,02
+		WORD	00008H,00017H
+		HEX	AE,4C,00,02
+;
+		WORD	00000H,00002H
+		HEX	8C,0A,00,02
+;B
+		WORD	0FFF8H,00010H
+		HEX	8E,0C,00,02
+		WORD	00008H,00010H
+		HEX	8E,4C,00,02
+		WORD	0FFF8H,00017H
+		HEX	AE,0C,00,02
+		WORD	00008H,00017H
+		HEX	AE,4C,00,02
+		WORD	00008H,00017H
+		HEX	AE,4C,00,02
+		WORD	00008H,00017H
+		HEX	AE,4C,00,02
+;
+		WORD	00000H,00009H
+		HEX	8C,0A,00,02
+;C
+		WORD	0FFF8H,00017H
+		HEX	AE,0C,00,02
+		WORD	00008H,00017H
+		HEX	AE,4C,00,02
+		WORD	00008H,00017H
+		HEX	AE,4C,00,02
+		WORD	00008H,00017H
+		HEX	AE,4C,00,02
+		WORD	00008H,00017H
+		HEX	AE,4C,00,02
+		WORD	00008H,00017H
+		HEX	AE,4C,00,02
+;
+		WORD	00000H,00010H
+		HEX	8C,0A,00,02
+;D
+		WORD	0FFF8H,00017H
+		HEX	AC,0C,00,02
+		WORD	00008H,00017H
+		HEX	AC,4C,00,02
+		WORD	00008H,00017H
+		HEX	AC,4C,00,02
+		WORD	00008H,00017H
+		HEX	AC,4C,00,02
+		WORD	00008H,00017H
+		HEX	AC,4C,00,02
+		WORD	00008H,00017H
+		HEX	AC,4C,00,02
+;
+		WORD	00000H,00014H
+		HEX	8C,0A,00,02
+;E
+		WORD	0FFF8H,00017H
+		HEX	AC,0C,00,02
+		WORD	00008H,00017H
+		HEX	AC,4C,00,02
+		WORD	00008H,00017H
+		HEX	AC,4C,00,02
+		WORD	00008H,00017H
+		HEX	AC,4C,00,02
+		WORD	00008H,00017H
+		HEX	AC,4C,00,02
+		WORD	00008H,00017H
+		HEX	AC,4C,00,02
+;
+		WORD	00000H,00017H
+		HEX	8C,0A,00,02
+;- - - - Kemri data - - - -
+CCKMCD0		EQU	$
+;F		
+		WORD	0FFF0H+00H,0FFECH+00H
+		HEX	86,05,00,02
+;
+CCKMCD1		EQU	$
+;10
+		WORD	0FFF7H-02H,0FFE4H+00H
+		HEX	86,05,00,02
+		WORD	0FFEBH-02H,0FFE6H+00H
+		HEX	86,05,00,02
+		WORD	0FFFAH-02H,0FFEFH+00H
+		HEX	86,05,00,02
+		WORD	0FFEEH-02H,0FFF3H+00H
+		HEX	86,05,00,02
+CCKMCD2		EQU	$
+;11
+		WORD	0FFF0H+00H,0FFDBH+00H
+		HEX	86,05,00,02
+		WORD	0FFE5H+00H,0FFE1H+00H
+		HEX	86,05,00,02
+		WORD	0FFF6H+00H,0FFE4H+00H
+		HEX	86,05,00,02
+		WORD	0FFFBH+00H,0FFE4H+00H
+		HEX	86,05,00,02
+		WORD	0FFECH+00H,0FFE5H+00H
+		HEX	86,05,00,02
+		WORD	0FFE5H+00H,0FFEFH+00H
+		HEX	86,05,00,02
+		WORD	0FFFCH+00H,0FFEFH+00H
+		HEX	86,05,00,02
+		WORD	0FFF0H+00H,0FFF3H+00H
+		HEX	86,05,00,02
+CCKMCD3		EQU	$
+;12
+		WORD	0FFEEH+00H,0FFDBH+00H
+		HEX	8A,45,00,02
+		WORD	0FFFBH+00H,0FFDFH+00H
+		HEX	8A,45,00,02
+		WORD	0FFE0H+00H,0FFE0H+00H
+		HEX	8A,05,00,02
+		WORD	0FFE9H+00H,0FFE1H+00H
+		HEX	8A,45,00,02
+		WORD	0FFF1H+00H,0FFE8H+00H
+		HEX	8A,45,00,02
+		WORD	0FFE9H+00H,0FFE1H+00H
+		HEX	8A,45,00,02
+		WORD	0FFF1H+00H,0FFE8H+00H
+		HEX	8A,45,00,02
+		WORD	0FFE3H+00H,0FFEAH+00H
+		HEX	8A,05,00,02
+		WORD	0FFFBH+00H,0FFEAH+00H
+		HEX	8A,05,00,02
+		WORD	0FFF0H+00H,0FFF2H+00H
+		HEX	8A,05,00,02
+CCKMCD4		EQU	$
+;13
+		WORD	0FFF4H+00H,0FFE0H+00H
+		HEX	8A,45,00,02
+		WORD	0FFE6H+00H,0FFE3H+00H
+		HEX	8A,45,00,02
+		WORD	0FFFAH+00H,0FFEAH+00H
+		HEX	8A,45,00,02
+		WORD	0FFEDH+00H,0FFECH+00H
+		HEX	8A,05,00,02
+		WORD	0FFE6H+00H,0FFE3H+00H
+		HEX	8A,45,00,02
+		WORD	0FFFAH+00H,0FFEAH+00H
+		HEX	8A,45,00,02
+		WORD	0FFEDH+00H,0FFECH+00H
+		HEX	8A,05,00,02
+CCKMCD5		EQU	$
+;14
+		WORD	0FFEFH+00H,0FFE5H+00H
+		HEX	9B,05,00,00
+		WORD	0FFF6H+00H,0FFE6H+00H
+		HEX	9B,05,00,00
+		WORD	00000H+00H,0FFEAH+00H
+		HEX	9B,45,00,00
+		WORD	0FFEDH+00H,0FFF0H+00H
+		HEX	9B,45,00,00
+		WORD	0FFFAH+00H,0FFF4H+00H
+		HEX	9B,05,00,00
+GIRLCD		EQU	$
+;15
+		WORD	00000H,0000DH
+		HEX	20,0B,00,02
+		WORD	00000H,00017H
+		HEX	22,0B,00,02
+;- - - - - 
+CCKMID		EQU	$
+		WORD	CCKMCD0
+		WORD	CCKMCD1
+		WORD	CCKMCD2
+		WORD	CCKMCD3
+		WORD	CCKMCD4
+		WORD	CCKMCD5
+		WORD	GIRLCD
+CCKMNO		EQU	$
+		HEX	01	; F
+		HEX	04	;10
+		HEX	08	;11
+		HEX	0A	;12
+		HEX	07	;13
+		HEX	05	;14
+		HEX	02	;15	;Girl
+;-------------------------------------------------
+CTKEMCS		EQU	$
+		PHA
+		ASL	A
+		TAY
+		MEM16
+		REP	#20H
+		LDA	CCKMID-0FH*2,Y
+		STA	<WORK8
+		MEM8
+		SEP	#20H
+		PLY
+		LDA	CCKMNO-0FH,Y
+		JMP	SETO22
+;;		JSL	>SETOAML22
+;;		RTS
+;-------------------------------------------------
+CTHDID		EQU	$
+;;			00 01 02 03 04 05 06 07 08 09  ; 0A 0B 0C 0D 0E
+		HEX	12,12,12,16,16,02,02,02,02,02  ;,1E,1E,1E,1E,1E
+CTHDCD		EQU	$
+		HEX	86,86,84,82,80,82,84,86
+		HEX	86,86,88,8A,8C,8A,88,86
+;
+CTHDAD		EQU	$
+		HEX	00,00,00,00,00,40,40,40
+		HEX	40,40,40,40,00,00,00,00
+CTBOSCS		EQU	$
+                LDA     #00H
+                XBA
+                LDA     ENCHPT,X
+		CMP	#0FH
+		BCS	CTKEMCS		; Kemri or girl !
+;
+                MEM16
+                REP     #00100000B
+                ASL     A
+                ASL     A
+                ASL     A
+		STA	<WORK0
+;
+                ASL     A
+                ASL     A
+                ASL     A
+		SEC
+		SBC	<WORK0
+		CLC
+                ADC     #CTBOSCD
+                STA     <WORK8
+;
+                MEM8
+                SEP     #00100000B
+;
+                LDA     #07H
+		JSR	SETO22
+;;                JSL     >SETOAML22
+;
+		LDA	ENCBFG,X
+		BNE	CBTC0E		; Kubi spin !!!
+;
+		LDA	ENWRK2,X
+		CMP	#CDOWN
+		BEQ	CTBC20
+		CMP	#CTURN
+		BEQ	CTBC10
+;
+CBTC0E		EQU	$
+		LDY	ENCHPT,X
+		CPY	#0AH
+		BCS	CTBC10
+;
+		LDA	CTHDID,Y
+		TAY
+		PHX
+		LDA	ENKBMK,X
+		TAX
+		LDA	CTHDCD,X
+		STA	(<OAMADR),Y
+		INY
+;
+		LDA	(<OAMADR),Y
+		AND	#00111111B
+		ORA	CTHDAD,X
+		STA	(<OAMADR),Y
+		PLX
+CTBC10		EQU	$
+		RTS	
+;- - Kubi clear - - -
+CTBC20		EQU	$
+		LDY	#18H+1
+		LDA	#0F0H
+		STA	(<OAMADR),Y
+		RTS
+;------------------------------------------	
+CRCBPL		EQU	$
+		MEM16
+		REP	#20H
+		LDA	<PLXPS1
+		SEC
+		SBC	ENXP2L
+		CLC
+		ADC	#000EH
+		CMP	#001CH
+		BCS	CCP010
+;
+		LDA	<PLYPS1
+		SEC
+		SBC	ENYP2L
+		CLC
+		ADC	#0000H
+		CMP	#001CH
+		BCS	CCP010
+;
+		MEM8
+		SEP	#20H
+;
+		LDA	PYFLASH
+		ORA	MRTKFG
+		BNE	CCP010
+;
+                LDA     #01H
+                STA     <DIEFG
+;
+                LDA     #08H
+                STA     DAMEFG
+;
+                LDA     #10H
+                STA     <HANEFG
+;
+		LDA	<PLXSPD
+		EOR	#0FFH
+		STA	<PLXSPD
+		LDA	<PLYSPD
+		EOR	#0FFH
+		STA	<PLYSPD
+CCP010		EQU	$
+		MEM8
+		SEP	#20H
+		RTS
+;##############################################################
+;#							      #
+;##############################################################
+;KEYTEST		EQU	$
+;		LDA	<KEYA2
+;		AND	#01000000B
+;		BEQ	KTEST0
+;;
+;		INC	ENCONT,X
+;		LDA	ENCONT,X
+;		CMP	#09H
+;		BNE	KTEST0
+;		STZ	ENCONT,X
+;KTEST0		EQU	$
+;		PHX
+;		LDA	ENCONT,X
+;		TAX
+;;
+;		LDA	<KEYA1
+;		BMI	KTE10
+;		LDA	<KEYA2
+;KTE10		EQU	$
+;		AND	#03H
+;		TAY
+;		LDA	KBANGL,X
+;		CLC
+;		ADC	KTAGAL,Y
+;		STA	KBANGL,X
+;;;		LDA	KBANGH,X
+;;;		ADC	KTAGAH,Y
+;;;		STA	KBANGH,X
+;;
+;		LDA	<KEYA1
+;		BMI	KTE20
+;		LDA	<KEYA2
+;KTE20		EQU	$
+;		AND	#0CH
+;		LSR	A
+;		LSR	A
+;		TAY
+;		LDA	KBHANK,X
+;		CLC
+;		ADC	KTHKAL,Y
+;		STA	KBHANK,X
+;
+;		PLX
+;		PLA
+;		PLA
+;		RTS
+;##############################################################
+;#							      #
+;##############################################################
+KAMBSIT		EQU	$
+		PHB
+		PHK
+		PLB
+		JSR	KAMBIT
+		PLB
+		RTL
+;--------------------------------------
+KAMBIT		EQU	$
+		LDA	ENMYNO,X
+		SEC
+		SBC	#KAMBS
+		JSL	>JSRSUB
+		WORD	KAMBSI
+		WORD	KAMBRI
+		WORD	KAMBBI
+;---------------------------------------
+KAMBSI		EQU	$
+;		LDY	#09H*3-1
+;		LDA	#00H
+;KBI010		EQU	$
+;		STA	KBANGL,Y
+;		STA	KBANGH,Y
+;		STA	KBHANK,Y
+;		DEY
+;		BPL	KBI010
+;
+		LDA	ENXPSL,X
+		CLC
+		ADC	#08H
+		STA	ENXPSL,X
+		LDA	ENYPSL,X
+		CLC
+		ADC	#10H
+		STA	ENYPSL,X
+;
+		JSR	KBPSSV
+;
+		STZ	KBTLPT		; Tail initial !
+		STZ	KBTLMK
+		STZ	KBTLTM
+		STZ	KBTLYD
+		STZ	KBBSFG
+;
+		LDA	#0FFH
+		STA	KBWTTM		; Move wait time !
+KBRVSE		EQU	$
+		LDA	ENWRK0,X
+		STA	ENXPSL,X
+;
+KBKBYD		EQU	0CH
+;
+		LDA	ENWRK2,X
+		CLC
+		ADC	#KBKBYD  ;#18H
+		STA	ENYPSL,X
+		LDA	ENCTCT,X
+		ADC	#00H
+		STA	ENYPSH,X
+		RTS
+;------------------------------------------
+KAMBRI		EQU	$
+		LDA	#03H
+		STA	ENCHPT,X
+;
+		LDA	#80H
+		BRA	KRI010
+KAMBBI		EQU	$
+		LDA	#0FFH
+KRI010		EQU	$
+		STA	ENTIM0,X
+;
+		LDY	#09H*3-1
+KBI0110		EQU	$
+		LDA	#40H
+		STA	KBANGL,Y
+		LDA	#00H
+		STA	KBANGH,Y
+		STA	KBHANK,Y
+		DEY
+		BPL	KBI0110
+;
+		LDA	#01H
+		STA	ENCONT,X
+;
+KBPSSV		EQU	$
+		LDA	ENXPSL,X
+		STA	ENWRK0,X
+		LDA	ENXPSH,X
+		STA	ENWRK1,X
+		LDA	ENYPSL,X
+		STA	ENWRK2,X
+		LDA	ENYPSH,X
+		STA	ENCTCT,X
+;
+		RTS
+;##############################################################
+;#		Kame boss last snake move !		      #
+;##############################################################
+;K2TXSD		EQU	$
+;		HEX	00,10,F0
+;
+KB2CPT		EQU	$
+		HEX	6,7,0,1,2,3,4,5
+KB2TUC		EQU	$
+		HEX	7,7,1,1,3,3,5,5
+;
+KAMB2MV		EQU	$
+;;		RTS
+		LDA	ENYSPD,X
+		STA	<WORK0
+		LDA	ENXSPD,X
+		STA	<WORK1
+		JSL	>MKCK16
+		LSR	A
+		TAY
+		LDA	KB2CPT,Y
+		STA	ENCHPT,X
+;
+		LDY	ENTIM1,X
+		BEQ	B20D00	
+;
+		TAY
+		LDA	KB2TUC,Y
+		STA	ENCHPT,X
+B20D00		EQU	$
+		JSR	KAMB2CS
+		JSR	ENSTCK
+;
+		LDA	ENSTAT,X
+		BPL	B20E00		; Fail ?
+;					; yes !
+		LDA	ENTIM0,X
+		PHA
+		ORA	#0E0H
+		STA	ENFLSH,X
+		PLA
+		BNE	B2F060
+;
+		LDA	#0CH
+		STA	ENTIM0,X
+;
+		LDA	ENCTFG,X
+;;		CMP	#01H
+		BNE	B2F050
+;
+;;		STZ	ENMODE,X
+		LDA	#0FFH
+		STA	ENFLSH,X
+		JMP	EBAKUST
+B2F050		EQU	$
+		DEC	ENCTFG,X
+;
+		JSL	>HBBKST
+B2F060		EQU	$
+		RTS
+;-----------------------------------------------
+B20E00		EQU	$
+		LDA	<FRCNT
+		AND	#07H
+		BNE	B2D001
+;
+		LDA	#31H
+		JSL	>SDLRE3	;(S)
+B2D001		EQU	$
+;
+		PHX
+		TXY
+		INC	ENCONT,X
+		LDA	ENCONT,X
+		AND	#7FH
+		TAX		
+		LDA	ENXPSL,Y
+		STA	>HBXBFL,X
+		LDA	ENYPSL,Y
+		STA	>HBYBFL,X
+		LDA	ENXPSH,Y
+		STA	>HBXBFH,X
+		LDA	ENYPSH,Y
+		STA	>HBYBFH,X
+		PLX
+;
+		LDA	ENHNFG,X
+		CMP	#0EH
+		BNE	B200020
+;
+		LDA	#08H
+		STA	ENHNFG,X
+;
+		LDA	ENSTAT,X
+		CMP	#00H
+		BNE	B200020
+;
+		LDA	#02H
+		STA	ENSTAT,X
+B200020		EQU	$
+;;;;LLLL		JSR	ENHNSB
+;
+;;		LDA	<KEYA1
+;;		AND	#03H
+;;		TAY
+;;		LDA	K2TXSD,Y
+;;		STA	ENXSPD,X
+;;		LDA	<KEYA1
+;;		LSR	A
+;;		LSR	A
+;;		AND	#03H
+;;		TAY
+;;		LDA	K2TXSD,Y
+;;		STA	ENYSPD,X
+;
+		JSR	ENMVCL
+;
+		JSR	CREKEK
+;
+		LDA	ENSTAT,X
+		JSL	>JSRSUB
+;;		WORD	B2MOVE0
+		WORD	B2MOVE1	;0
+;;		WORD	B2MOVE15
+;;      		WORD	B2MOVE2	;1
+		WORD	B2MOVE3	;2
+;----------------------------------------
+;B2M0XA		EQU	$
+;		HEX	02,FE
+;B2M0XL		EQU	$
+;		HEX	10,F0
+;;
+;B2MOVE0		EQU	$
+;		LDA	#10H
+;		STA	ENYSPD,X
+;;
+;		LDA	ENKBMK,X
+;		AND	#01H
+;		LDA	ENXSPD,X
+;		CLC
+;		ADC	B2M0XA,Y
+;		STA	ENXSPD,X
+;		CMP	B2M0XL,Y
+;		BNE	B20010
+;		INC	ENKBMK,X
+;B20010		EQU	$
+;		JSL	>ENBGCKL
+;		LDA	>ENCBFG,X
+;		BEQ	B20020
+;;
+;		LDA	#000H
+;		STA	ENWRK0,X
+;;
+;		INC	ENSTAT,X
+;		JMP	B21TUR
+;B20020		EQU	$
+;		RTS
+;;----------------------------------------
+;B2M0YA		EQU	$
+;		HEX	02,FE
+;B2M0YL		EQU	$
+;		HEX	10,F0
+;;
+;B2MOVE15	EQU	$
+;		LDA	#0F0H
+;		STA	ENXSPD,X
+;;
+;		LDA	ENKBMK,X
+;		AND	#01H
+;		LDA	ENYSPD,X
+;		CLC
+;		ADC	B2M0YA,Y
+;		STA	ENYSPD,X
+;		CMP	B2M0YL,Y
+;		BNE	B21510
+;		INC	ENKBMK,X
+;B21510		EQU	$
+;		JSL	>ENBGCKL
+;		LDA	>ENCBFG,X 
+;		BEQ	B21520
+;;
+;		INC	ENSTAT,X
+;B21520		EQU	$
+;		RTS
+;----------------------------------------
+B21XSD		EQU	$
+		HEX	00,E1,00,1F
+B21YSD		EQU	$
+		HEX	1F,00,E1,00
+;
+B2MOVE1		EQU	$
+		LDA	ENCONT,X
+		AND	#00H
+		BNE	B21010
+;
+		DEC	ENWRK0,X
+		BNE	B21010
+;
+		INC	ENSTAT,X
+		LDA	#0C0H
+		STA	ENTIM0,X
+B21010		EQU	$
+		JSL	>PSSAVE2
+;;		JSL	>ENBGCKL
+;;		LDA	ENCBFG,X
+		JSR	ENBGCK
+		BEQ	B21020
+;
+B21TUR		EQU	$
+		LDA	ENMUKI,X
+		INC	A
+		AND	#03H
+		STA	ENMUKI,X
+;
+		LDA	#08H
+		STA	ENTIM1,X
+B21020		EQU	$		
+		LDY	ENMUKI,X
+		LDA	B21XSD,Y
+		STA	ENXSPD,X
+		LDA	B21YSD,Y
+		STA	ENYSPD,X
+;
+		RTS
+;----------------------------------------
+B2MOVE2		EQU	$
+;;		LDA	ENCONT,X
+;;		AND	#01H
+;;		BNE	B22010
+;;;
+;;		DEC	ENWRK0,X
+		LDA	ENTIM0,X		
+		BNE	B22010
+;
+		INC	ENSTAT,X
+B22010		EQU	$
+		LDA	#1FH
+		JSL	>PSERC2L
+;
+		LDA	<WORK0
+;;		EOR	#000H
+;;		NOP	
+		STA	ENXSPD,X
+		LDA	<WORK1
+		EOR	#0FFH
+		INC	A
+		STA	ENYSPD,X
+;
+		LDA	<WORKE
+		CLC
+		ADC	#28H
+		CMP	#50H
+		BCS	B2SP90
+		LDA	<WORKF
+		CLC
+		ADC	#28H
+		CMP	#50H
+		BCS	B2SP90
+;
+B2SP80		EQU	$
+		RTS
+B2SP90		EQU	$
+		LDA	<WORK0
+		ASL	<WORK0
+		PHP
+		ROR	A
+		PLP
+		ROR	A
+		CLC
+		ADC	ENYSPD,X		
+		STA	ENYSPD,X
+;
+		LDA	<WORK1
+		ASL	<WORK1
+		PHP
+		ROR	A
+		PLP
+		ROR	A
+		CLC
+		ADC	ENXSPD,X		
+		STA	ENXSPD,X
+		RTS
+;----------------------------------------
+B2MOVE3		EQU	$
+;		LDA	ENCONT,X
+;		AND	#01H
+;		BNE	B23010
+;;
+;		DEC	ENWRK0,X
+;		BNE	B23010
+;;
+;		DEC	ENSTAT,X
+;B23010		EQU	$
+;
+;		JSR	ENBGCK
+;		AND	#0FH
+;		BEQ	B23010
+;		AND	#03H
+;		BEQ	B23008
+;;
+;		LDA	ENXSPD,X
+;		EOR	#0FFH
+;		INC	A
+;		STA	ENXSPD,X
+;		BRA	B23010
+;B23008		EQU	$
+;		LDA	ENYSPD,X
+;		EOR	#0FFH
+;		INC	A
+;		STA	ENYSPD,X
+;		
+B23010		EQU	$
+		LDA	<FRCNT
+		AND	#01H
+		BNE	B2M020
+;
+		LDA	#1FH
+		JSL	>PSERC2L
+;
+		LDA	ENXSPD,X
+		CMP	<WORK1
+		BEQ	B2M010
+;
+		BPL	B2M008
+		INC	ENXSPD,X
+		BRA	B2M010
+B2M008		EQU	$
+		DEC	ENXSPD,X
+B2M010		EQU	$
+		LDA	ENYSPD,X
+		CMP	<WORK0
+		BEQ	B2M020
+;
+		BPL	B2M018
+		INC	ENYSPD,X
+		BRA	B2M020
+B2M018		EQU	$
+		DEC	ENYSPD,X
+B2M020		EQU	$
+		RTS
+;
+;
+;
+;
+;
+;
+;
+;
+;
+;
+;
+;
+;=================================================
+KAMB2ID		EQU	$
+;;			 0  1  2  3  4  5  6  7  8  9  A  B
+		HEX	08,0C,10,18,20,28,30,34,38,3C,40,44
+;;		HEX	08,0C,10,18,20,28,30,34,38,3C,40,44
+		HEX	48,4C,50,54,58,5C,60,64,68,6C,70,74
+;
+KAMB2MD		EQU	$
+		HEX	02,02,02,03,03,03,02,02,01,01,00,00
+		HEX	00,00,00,00,00,00,00,00,00,00,00,00
+;;		HEX	02,02,02,03,03,03,02,02,01,01,00,00
+KAMB2OI		EQU	$
+		WORD	10H,04H,04H,04H,10H,10H,10H,04H,04H,04H,04H,04H
+		WORD	04H,04H,04H,04H,04H,04H,04H,04H,04H,04H,04H,04H
+;;		WORD	10H,04H,04H,04H,10H,10H,10H,04H,10H,10H,10H,10H
+;- - - - - - - - - - - - - - - -
+KAMB2CS		EQU	$
+		LDA	ENFLCL,X
+		ORA	#30H
+		STA	ENFLCL,X
+;
+;		LDA	#84H
+;		STA	ENMOD5,X	; Head katai !
+;
+;		LDA	#01000000B
+;		STA	ENMOD2,X
+		JSR	KBHDCS
+;
+		LDA	#00H
+		STA	ENHELP2
+K2C010		EQU	$
+		LDY	ENHELP2
+		TYA
+		CMP	ENCTFG,X
+		BNE	K2C011	
+;
+		RTS
+K2C011		EQU	$
+		PHX
+		LDA	ENCONT,X
+		SEC
+		SBC	KAMB2ID,Y
+		AND	#7FH
+		TAX
+		LDA	>HBXBFL,X
+		STA	ENXP2L
+		LDA	>HBXBFH,X
+		STA	ENXP2H
+		LDA	>HBYBFL,X
+		STA	ENYP2L
+		LDA	>HBYBFH,X
+		STA	ENYP2H
+;
+		PLX
+;
+		PHY
+		TYA
+		ASL	A
+		TAY
+;
+		MEM16
+		REP	#20H
+;
+		LDA	<PLXPS1
+		SEC
+		SBC	ENXP2L
+		CLC
+		ADC	#08H
+		CMP	#010H
+		BCS	K2C018
+;
+		LDA	<PLYPS1
+		CLC
+		ADC	#008H
+		SEC
+		SBC	ENYP2L
+		CLC
+		ADC	#08H
+		CMP	#010H
+		BCS	K2C018
+;
+		MEM8
+		SEP	#20H
+;
+		LDA	ENSTAT,X
+		BMI	K2C018
+;
+		LDA	PYFLASH
+		ORA	MRTKFG
+		ORA	<GAMEMD
+		ORA	ENSTFG
+		BNE	K2C018
+;
+                LDA     #01H
+                STA     <DIEFG
+;
+                LDA     #08H
+                STA     DAMEFG
+;
+                LDA     #10H
+                STA     <HANEFG
+;
+		LDA	<PLXSPD
+		EOR	#0FFH
+		STA	<PLXSPD
+		LDA	<PLYSPD
+		EOR	#0FFH
+		STA	<PLYSPD
+;
+		MEM16
+		REP	#20H
+K2C018		EQU	$
+		LDA	<OAMADR
+		CLC
+		ADC	KAMB2OI,Y
+		STA	<OAMADR
+		LDA	KAMB2OI,Y
+		LSR	A
+		LSR	A
+		CLC
+		ADC	<OSBADR
+		STA	<OSBADR
+		MEM8
+		SEP	#20H
+;
+		PLY
+;
+		LDA	#01H
+		STA	ENCLOR,X
+;
+		CPY	#04H
+		BNE	K2C019
+;
+		LDA	ENSTAT,X
+		CMP	#02H-1
+		BCC	K2C019
+;
+		PHY
+		JSR	B2KNCK
+		LDA	ENCONT,X
+		AND	#00000110B
+		EOR	ENCLOR,X
+		STA	ENCLOR,X
+		PLY
+;
+K2C019		EQU	$
+		LDA	KAMB2MD,Y
+		STA	ENCHPT,X
+		CMP	#03H
+		BEQ	K2C020	
+;
+		JSL	>EN1CSTL
+		BRA	K2C030
+K2C020		EQU	$
+		LDA	#08H
+		STA	ENCHPT,X
+		JSR	KBHDCS
+K2C030		EQU	$
+		INC	ENHELP2
+		LDA	ENHELP2
+;;		CMP	#0CH
+		CMP	ENCTFG,X
+		BEQ	K2C038
+;
+		JMP	K2C010
+K2C038		EQU	$
+		RTS
+;========================================================
+B2KNCK		EQU	$
+		LDA	ENXPSL,X
+		PHA
+		LDA	ENXPSH,X
+		PHA
+		LDA	ENYPSL,X
+		PHA
+		LDA	ENYPSH,X
+		PHA
+;
+		LDA	ENXP2L
+		STA	ENXPSL,X
+		LDA	ENXP2H
+		STA	ENXPSH,X
+		LDA	ENYP2L
+		STA	ENYPSL,X
+		LDA	ENYP2H
+		STA	ENYPSH,X
+;
+		LDA	#80H
+		STA	ENMOD5,X
+		STZ	ENMOD2,X
+;
+		JSL	>CRKNENL
+;
+		LDA	#84H
+		STA	ENMOD5,X	; Head katai !
+;
+		LDA	#01000000B
+		STA	ENMOD2,X
+;
+		PLA
+		STA	ENYPSH,X
+		PLA
+		STA	ENYPSL,X
+		PLA
+		STA	ENXPSH,X
+		PLA
+		STA	ENXPSL,X
+		RTS
+;##############################################################
+;#							      #
+;##############################################################
+;
+BSKBP0		EQU	$
+		HEX	7,1
+;
+KAMBSMV		EQU	$
+		LDA	KBBSFG
+		BEQ	BSM111		; Last atack ?
+;					; yes !
+		JMP	KAMB2MV
+;++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+BSM111		EQU	$
+		LDA	#17H
+		STA	<DPMAIN
+		STZ	<DPSUB		; BG koura set !
+;
+		JSR	KAMBSCS
+;
+;;		STZ	B1MFLG		; BG body move reset !
+;
+		JSR	ENSTCK
+;
+		LDA	ENSTAT,X
+		BMI	BSM222		; Normal move ?
+;					; yes !
+		JMP	BSM000
+;
+BSM222		EQU	$		; Goto next atack !
+		STA	BSFLFG
+;
+		LDA	ENTIM0,X
+		BNE	BSM0F0
+;
+		INC	KBBSFG
+;
+		JSL	>KAMB2IT
+;
+		STZ	ENCONT,X
+		STZ	ENKBMK,X
+;
+		LDA	ENMOD2,X
+		AND	#10111111B
+		STA	ENMOD2,X
+;
+		LDA	#80H
+		STA	ENMOD5,X
+;
+		STZ	ENSTAT,X
+;
+		STZ	ENMUKI,X
+		LDA	#00H
+		STA	ENWRK0,X
+;
+;;		LDA	<PLXPS1
+;;		STA	ENWRK0,X
+;;		LDA	<PLXPS0
+;;		STA	ENWRK1,X
+;;		LDA	<PLYPS1
+;;		STA	ENWRK2,X
+;;		LDA	<PLYPS0
+;;		STA	ENWRK3,X
+;
+		LDA	#10H
+		STA	ENCTFG,X	; Body count.
+;
+		JSR	ENSDCL
+;
+		LDA	#80H
+		STA	ENWRK0,X
+;
+		LDA	#0FFH
+		STA	BG1VMC+1	; BG koura clear !
+;
+;;;;		STZ	BSFLFG
+		RTS
+;
+BSM0F0		EQU	$
+		CMP	#0FFH
+		BCS	BSM0FF
+		CMP	#0E0H
+		BCC	BSM0FD
+;
+		AND	#03H
+		BNE	BSM0F8
+;
+		LDA	#0FFH
+		STA	BG1VMC+1
+		LDA	#0FFH
+		STA	BG1VMC
+		LDA	#01H
+		STA	B1MFLG
+;
+BSM0F8		EQU	$
+		LDA	#0F8H
+		STA	ENYSPD,X
+		JSR	ENYCLC
+;
+		JSR	KBPSSV
+;
+		LDA	ENYPSL,X
+		SEC
+		SBC	#KBKBYD  ;#18H
+		STA	ENWRK2,X
+;
+		INC	KBTLYD
+		INC	KBTLYD
+;;		RTS
+;
+BSM0FF		EQU	$
+;;		LDA	#0FFH
+;;		STA	ENKBMK,X	; Not C SET !
+		RTS
+;
+BSM0FD		EQU	$
+		PHA
+		AND	#03H
+		BNE	BSM1E0
+		
+;;                JSL     >SDLRCE
+;;                ORA     #0CH
+;;                STA     SOUND2          ;(S)
+		LDA	#0CH
+		JSL	>SDLRE2	;(S)
+BSM1E0		EQU	$
+		PLA
+		AND	#01H
+		BNE	BSM1FF
+;
+		JSL	>RNDSET
+		AND	#07H
+		TAY
+		LDA	ENXPSL,X
+		CLC
+		ADC	BSBKXL,Y
+		STA	ENXP2L		
+		LDA	ENXPSH,X
+		ADC	BSBKXH,Y
+		STA	ENXP2H		
+;
+		JSL	>RNDSET
+		AND	#07H
+		TAY
+		LDA	ENYPSL,X
+		CLC
+		ADC	BSBKYL,Y
+		PHP
+		SEC
+		SBC	#08H
+		STA	ENYP2L		
+		LDA	ENYPSH,X
+		SBC	#00H
+		PLP
+		ADC	BSBKYH,Y
+		STA	ENYP2H		
+;
+		JSL	>HBBKST2
+BSM1FF		EQU	$
+		LDA	#0FFH
+		STA	ENKBMK,X	; Not C SET !
+		RTS
+;--------------------------------------------
+BSBKXL		EQU	$
+	        HEX     00,08,10,18,E8,F0,F8,00
+BSBKXH		EQU	$
+		HEX	00,00,00,00,FF,FF,FF,00
+BSBKYL		EQU	$
+	        HEX     00,08,10,18,E8,F0,F8,00
+BSBKYH		EQU	$
+		HEX	00,00,00,00,FF,FF,FF,00
+;-------------------------------------------------------
+BSM000		EQU	$
+		LDA	ENMODE+1
+		ORA	ENMODE+2
+		BNE	BSM001		; All Kubi fail ?
+;					; yes ! next atack set !
+		LDA	ENSTAT,X
+		CMP	#02H
+		BCS	BSM001
+;
+;;		INC	BSFLFG
+;
+		LDA	#0FFH
+		STA	ENTIM0,X
+		LDA	#0FFH
+		STA	ENSTAT,X
+;
+		LDA	#22H
+		STA	SOUND3	;(S)
+		RTS
+;- - - - - - - - - - - - - - - - - - - -
+BSM001		EQU	$
+		JSR	KBTLCTL
+		JSR	CRKBPL
+		JSR	CREKEK
+;
+		LDA	<FRCNT
+		AND	#3FH
+		BNE	BSM008
+;
+		JSR	EPXCHK
+		LDA	<WORKF
+		CLC
+		ADC	#18H
+		CMP	#30H
+		LDA	#00H
+		BCC	BSM006
+;
+		LDA	BSKBP0,Y
+BSM006		EQU	$
+		STA	ENCHPT,X
+BSM008		EQU	$
+;
+		LDA	KBWTTM
+		BEQ	BSM010
+;
+		LDA	<FRCNT
+		AND	#01H
+		BNE	BSM00A
+;
+		DEC	KBWTTM
+BSM00A		EQU	$
+		RTS
+;- - - - - - - - - - - - - - - - - -
+BSM010		EQU	$
+		LDA	ENMODE+01H
+		BEQ	BSM011
+;
+		LDA	ENSTAT+01H
+		CMP	#03H
+		BEQ	BSMRTS
+BSM011		EQU	$
+		LDA	ENMODE+02H
+		BEQ	BSM012
+;
+		LDA	ENSTAT+02H
+		CMP	#03H
+		BEQ	BSMRTS		; Kubi atack ?
+;					; no.
+BSM012		EQU	$
+		LDA	ENSTAT,X
+		JSL	>JSRSUB
+		WORD	BSSTOP
+		WORD	BSWALK
+		WORD	BSATWT
+		WORD	BSATCK
+BSMRTS		EQU	$
+		RTS
+;-----------------------------------------
+BSWKXP		EQU	$
+		hex	60,78,78,90
+;;		HEX	40,50,60,78,78,90,A0,B0
+BSWKYP		EQU	$
+		hex	80,70,60,80
+;;		hex	80,70,a0,80
+;;		HEX	A0,50,80,60,B0,80,50,A0
+;
+BSSTOP		EQU	$
+		LDA	ENTIM0,X
+		BNE	BSST10
+;
+		LDA	HEMODE,X
+		AND	#7FH
+		STA	<WORK0
+;
+		JSL	>RNDSET
+		AND	#03H
+		TAY
+;;		CMP	HEMODE,X
+		CMP	<WORK0
+		BEQ	BSST10		; Muki chenge ?
+;					; yes !
+		INC	ENCTFG,X
+		LDA	ENCTFG,X
+		CMP	#02H
+		BNE	BSST08		; Atack time?
+;					; yes !
+		STZ	ENCTFG,X
+;
+		LDA	#02H
+		STA	ENSTAT,X
+		LDA	#50H
+		STA	ENTIM0,X
+		RTS
+;
+BSST08		EQU	$
+;		PHY
+;		JSR	EPYCHK
+;		CPY	#00H
+;		BEQ	BSST09
+;
+;		LDA	<PLXPS1
+;		STA	KBSHXP
+;		LDA	<PLYPS1
+;		STA	KBSHYP
+;;
+;		PLY
+;;
+;		LDA	#30H
+;		STA	ENTIM0,X
+;;
+;		LDA	#0FFH
+;		BRA	BSST0A
+;BSST09		EQU	$
+;		PLY
+;
+		LDA	BSWKXP,Y
+		STA	KBSHXP
+		LDA	BSWKYP,Y
+		STA	KBSHYP
+		JSL	>RNDSET
+		AND	#03H
+		CMP	#01H
+		TYA
+		BCS	BSST0A
+		ORA	#80H
+BSST0A		EQU	$
+		STA	HEMODE,X
+;
+		INC	ENSTAT,X
+;
+;;		JSL	>RNDSET
+;;		AND	#3FH
+;;		ADC	#40H
+;;		STA	ENTIM0,X
+BSST10		EQU	$
+		RTS
+;-----------------------------------------
+BSWALK		EQU	$
+		LDA	HEMODE,X
+		CMP	#0FFH
+		BNE	BSWK03
+;
+		LDA	ENTIM0,X
+		BEQ	BSWK02
+;
+		JSR	EPYCHK
+		CPY	#00H
+		BNE	BSWK03
+;
+BSWK02		EQU	$
+		STZ	HEMODE,X
+		JMP	BSWK0B
+BSWK03		EQU	$
+;;		LDA	ENTIM0,X
+;;		BNE	BSWK08
+;;;
+;;		STZ	ENSTAT,X
+;;;
+;;		LDA	#30H
+;;		STA	ENTIM0,X
+BSWK08		EQU	$
+		LDA	KBSHXP
+		STA	<WORK4
+		LDA	ENXPSH,X
+		STA	<WORK5
+		LDA	KBSHYP
+		STA	<WORK6
+		LDA	ENYPSH,X
+		STA	<WORK7
+		LDA	#08H
+		LDY	HEMODE,X
+		BPL	BSWK09
+		LDA	#10H
+BSWK09		EQU	$
+		JSL	>ESERCHL
+;
+		LDA	<WORK0
+		STA	ENYSPD,X
+		LDA	<WORK1
+		STA	ENXSPD,X
+;- - Move balue -> BG body scroll ! --
+		LDA	ENXPSL,X
+		PHA
+		LDA	ENYPSL,X
+		PHA
+		JSR	ENMVCL
+		PLA
+		LDY	#00H
+		SEC
+		SBC	ENYPSL,X
+		STA	BG1VMC
+		BPL	BSWK0A
+		DEY
+BSWK0A		EQU	$
+		STY	BG1VMC+1
+		PLA
+		LDY	#00H
+		SEC
+		SBC	ENXPSL,X
+		STA	BG1HMC
+		BPL	BSWC0C
+		DEY
+BSWC0C		EQU	$
+		STY	BG1HMC+1
+;
+		LDA	#01H
+		STA	B1MFLG
+;- - - - - - - - - - -
+		JSR	KBPSSV
+;
+		LDA	ENYPSL,X
+		SEC
+		SBC	#KBKBYD   ;#18H
+		STA	ENWRK2,X
+;
+		LDA	KBSHXP
+		SEC
+		SBC	ENXPSL,X
+		CLC
+		ADC	#02H
+		CMP	#04H
+		BCS	BSWK0C
+		LDA	KBSHYP
+		SEC
+		SBC	ENYPSL,X
+		CLC
+		ADC	#02H
+		CMP	#04H
+		BCS	BSWK0C
+;
+BSWK0B		EQU	$
+		STZ	ENSTAT,X
+;
+		LDA	#30H
+		STA	ENTIM0,X
+BSWK0C		EQU	$
+		LDA	HEMODE,X
+		BPL	BSWK0E		; High speed ?
+;					; yes !
+		JSR	BSWK0E
+BSWK0E		EQU	$
+		LDA	ENCONT,X
+		LDY	ENXSPD,X
+		BMI	BSWK10
+		SEC
+		SBC	#02H
+BSWK10		EQU	$
+		CLC
+		ADC	#01H
+		STA	ENCONT,X
+		AND	#0FH
+		BNE	BSWK22
+;
+		LDA	#21H
+		JSL	>SDLRE2	;(S)
+BSWK22		EQU	$
+		RTS
+;-----------------------------------------
+BSATWT		EQU	$
+		JSR	KBTLCTL
+		JSR	KBTLCTL
+;
+		LDA	ENTIM0,X
+		BNE	BSAW10
+;
+		INC	ENSTAT,X
+;
+		LDA	#30H
+		JSL	>PSERCHL
+;
+		LDA	#40H
+		STA	ENTIM0,X
+;
+		LDA	#26H
+		STA	SOUND3	;(S)
+BSAW10		EQU	$
+		RTS
+;-----------------------------------------
+BSATCK		EQU	$
+		JSR	ENMVCL
+;
+		LDA	ENTIM0,X
+		BNE	BSAT10
+;
+		JSR	KBRVSE
+;
+		STZ	ENSTAT,X
+		LDA	#30H
+		STA	ENTIM0,X
+		RTS
+BSAT10		EQU	$
+		CMP	#20H
+		BNE	BSAT20
+;
+		LDA	ENXSPD,X
+		EOR	#0FFH
+		INC	A
+		STA	ENXSPD,X
+		LDA	ENYSPD,X
+		EOR	#0FFH
+		INC	A
+		STA	ENYSPD,X
+BSAT20		EQU	$		
+		RTS
+;========================================
+MBTLLM		EQU	$
+		HEX	06,00
+;
+KBTLCTL		EQU	$
+		LDA	KBTLTM
+		BNE	KTCT10
+;
+		INC	KBTLCT
+		LDA	KBTLCT
+		AND	#03H
+		BNE	MBTS10
+;
+		LDA	KBTLMK
+		AND	#01H
+		TAY
+		LDA	KBTLPT
+		CLC
+		ADC	MBTLAD,Y
+		STA	KBTLPT
+		CMP	MBTLLM,Y
+		BNE	MBTS10
+;
+		INC	KBTLMK
+;
+		LDA	#08H
+		STA	KBTLTM
+MBTS10		EQU	$		
+		RTS
+KTCT10		EQU	$
+		DEC	KBTLTM
+		RTS
+;=======================================================
+CRKBPL		EQU	$
+		LDA	ENWRK0,X
+		STA	<WORK4
+		LDA	ENWRK1,X
+		STA	<WORK5
+		LDA	ENWRK2,X
+		STA	<WORK6
+		LDA	ENCTCT,X
+		STA	<WORK7
+		MEM16
+		REP	#20H
+;
+		LDA	<WORK4
+		SEC
+		SBC	<PLXPS1
+		CLC
+		ADC	#0028H
+		CMP	#0050H
+		BCS	CKB010
+;
+		LDA	<WORK6
+		SEC
+		SBC	<PLYPS1
+		CLC
+		ADC	#0010H
+		CMP	#0040H
+		BCS	CKB010
+;
+		MEM8
+		SEP	#20H
+;
+		LDA	PYFLASH
+		ORA	MRTKFG
+		BNE	CKB010
+;
+                LDA     #01H
+                STA     <DIEFG
+;
+                LDA     #08H
+                STA     DAMEFG
+;
+                LDA     #10H
+                STA     <HANEFG
+;
+		LDA	#20H
+		JSL	>PSERC2L
+		LDA	<WORK0
+		STA	<PLYSPD
+		LDA	<WORK1
+		STA	<PLXSPD
+CKB010		EQU	$
+		MEM8
+		SEP	#20H
+		RTS
+;***********************************************************************
+;*		OAM set !					       *
+;***********************************************************************
+KAMBSCD		EQU	$
+;0
+		WORD	0FFF8H,0FFF8H
+		HEX	C0,40,00,02
+		WORD	00008H,0FFF8H
+		HEX	C0,00,00,02
+		WORD	0FFF8H,00008H
+		HEX	E0,40,00,02
+		WORD	00008H,00008H
+		HEX	E0,00,00,02
+;1
+		WORD	0FFF8H,0FFF8H
+		HEX	00,00,00,02
+		WORD	00008H,0FFF8H
+		HEX	02,00,00,02
+		WORD	0FFF8H,00008H
+		HEX	20,00,00,02
+		WORD	00008H,00008H
+		HEX	22,00,00,02
+;2
+		WORD	0FFF8H,0FFF8H
+		HEX	C2,00,00,02
+		WORD	00008H,0FFF8H
+		HEX	C4,00,00,02
+		WORD	0FFF8H,00008H
+		HEX	C2,80,00,02
+		WORD	00008H,00008H
+		HEX	C4,80,00,02
+;3
+		WORD	0FFF8H,0FFF8H
+		HEX	20,80,00,02
+		WORD	00008H,0FFF8H
+		HEX	22,80,00,02
+		WORD	0FFF8H,00008H
+		HEX	00,80,00,02
+		WORD	00008H,00008H
+		HEX	02,80,00,02
+;4
+		WORD	0FFF8H,0FFF8H
+		HEX	E0,C0,00,02
+		WORD	00008H,0FFF8H
+		HEX	E0,80,00,02
+		WORD	0FFF8H,00008H
+		HEX	C0,C0,00,02
+		WORD	00008H,00008H
+		HEX	C0,80,00,02
+;5
+		WORD	0FFF8H,0FFF8H
+		HEX	22,C0,00,02
+		WORD	00008H,0FFF8H
+		HEX	20,C0,00,02
+		WORD	0FFF8H,00008H
+		HEX	02,C0,00,02
+		WORD	00008H,00008H
+		HEX	00,C0,00,02
+;6
+		WORD	0FFF8H,0FFF8H
+		HEX	C4,40,00,02
+		WORD	00008H,0FFF8H
+		HEX	C2,40,00,02
+		WORD	0FFF8H,00008H
+		HEX	C4,C0,00,02
+		WORD	00008H,00008H
+		HEX	C2,C0,00,02
+;7
+		WORD	0FFF8H,0FFF8H
+		HEX	02,40,00,02
+		WORD	00008H,0FFF8H
+		HEX	00,40,00,02
+		WORD	0FFF8H,00008H
+		HEX	22,40,00,02
+		WORD	00008H,00008H
+		HEX	20,40,00,02
+;8
+		WORD	0FFF8H,0FFF8H
+		HEX	26,00,00,02
+		WORD	00008H,0FFF8H
+		HEX	26,40,00,02
+		WORD	0FFF8H,00008H
+		HEX	26,80,00,02
+		WORD	00008H,00008H
+		HEX	26,C0,00,02
+;=============================================
+;=============================================
+KBHDCS		EQU	$
+                LDA     #00H
+                XBA
+                LDA     ENCHPT,X
+                MEM16
+                REP     #00100000B
+                ASL     A
+                ASL     A
+                ASL     A
+;
+                ASL     A
+                ASL     A
+                ADC     #KAMBSCD
+                STA     <WORK8
+;
+                MEM8
+                SEP     #00100000B
+;
+		LDA	ENSTAT,X
+		BMI	KBK001		; Move ?	
+;					; most BG pri.
+		LDA	ENFLCL,X
+		ORA	#30H
+		STA	ENFLCL,X
+;
+KBK001		EQU	$
+                LDA     #04H
+		JSR	SETO22
+;;                JSL     >SETOAML22
+KBCRTS		EQU	$
+		RTS
+;=============================================
+KAMBSCS		EQU	$
+		LDA	ENKBMK,X
+		BMI	KBCRTS		; C SET OK ?
+;					; YES !
+		JSR	KBHDCS
+;
+		LDA	<WORK5
+		AND	#11101111B
+		STA	<WORK5
+;- - - Kubi SET - - -
+		LDA	ENSTAT,X
+		CMP	#03H
+		BEQ	KBK002	; Normal move -> Kubi noth !
+;
+		JMP	BSC000
+;
+KBK002		EQU	$
+		LDA	ENWRK0,X
+		SEC
+		SBC	ENXPSL,X
+		STA	<WORK8
+		BPL	KBK010
+		EOR	#0FFH
+		INC	A
+KBK010		EQU	$
+		STA	<WORKA
+;
+		LDA	ENWRK2,X
+		SEC
+		SBC	ENYPSL,X
+		STA	<WORK9
+		BPL	KBK020
+		EOR	#0FFH
+		INC	A
+KBK020		EQU	$
+		STA	<WORKB
+;
+		LDA	#07H
+		STA	ENHELP
+;
+		LDA	#10H
+		STA	ENHELP2
+KBK030		EQU	$
+;- X AD calc - - -
+		LDY	ENHELP
+;
+		LDA	<WORKA
+		STA	4202H
+		LDA	KBKADT,Y 	    ; 
+		STA	4203H
+		BYTE	0EAH,0EAH,0EAH,0EAH,0EAH,0EAH,0EAH,0EAH
+		ASL	4216H
+		LDA	4217H
+		ADC	#00H
+		LDY	<WORK8
+		BPL	KBK038
+		EOR	#0FFH
+		INC	A
+KBK038		EQU	$
+		CLC
+		ADC	<WORK0
+		LDY	ENHELP2
+		STA	(<OAMADR),Y
+;- Y AD calc - - -
+		LDY	ENHELP
+;
+		LDA	<WORKB
+		STA	4202H
+		LDA	KBKADT,Y 	    ; 
+		STA	4203H
+		BYTE	0EAH,0EAH,0EAH,0EAH,0EAH,0EAH,0EAH,0EAH
+		ASL	4216H
+		LDA	4217H
+		ADC	#00H
+		LDY	<WORK9
+		BPL	KBK03C
+		EOR	#0FFH
+		INC	A
+KBK03C		EQU	$
+		CLC
+		ADC	<WORK2
+		LDY	ENHELP2
+		INY
+		STA	(<OAMADR),Y
+		LDA	#028H
+		INY
+		STA	(<OAMADR),Y
+		LDA	<WORK5
+		INY
+		STA	(<OAMADR),Y
+		PHY
+		TYA
+		LSR	A
+		LSR	A
+		TAY
+		LDA	#02H
+		STA	(<OSBADR),Y
+		PLY
+		INY
+		STY	ENHELP2
+		DEC	ENHELP
+		BPL	KBK030
+BSC000		EQU	$
+;---- Foots set - - - -
+		MEM16
+		REP	#20H
+		LDA	#OAM+01F0H
+		STA	<OAMADR
+		LDA	#OAMSB+01F0H/4
+		STA	<OSBADR
+		MEM8
+		SEP	#20H
+;
+		LDA	ENWRK0,X
+		SEC
+		SBC	<SCCH2
+		STA	<WORK0
+		LDA	ENWRK2,X
+		SEC
+		SBC	<SCCV2
+		STA	<WORK2
+                LDA     ENYPSH,X
+                SBC     <SCCV2+1
+                STA     <WORK3
+;
+;
+		LDA	#01H
+		STA	ENHELP
+;
+		LDA	ENXSPD,X
+		CLC
+		ADC	#03H
+		CMP	#07H
+		LDA	#00H
+		BCC	FTC010
+;
+		LDA	ENCONT,X
+		LSR	A
+		LSR	A
+		AND	#0FH
+FTC010		EQU	$
+		STA	<WORK6
+		CLC
+		ADC	#08H
+		AND	#0FH
+		STA	<WORK7
+;
+		LDA	ENCONT,X
+		LSR	A
+		LSR	A
+		AND	#0FH
+		STA	<WORK8
+		CLC
+		ADC	#08H
+		AND	#0FH
+		STA	<WORK9
+;
+		LDY	#00H
+		PHX
+KFC010		EQU	$
+		LDA	<WORK0
+		CLC
+		ADC	KFCXAD,X
+		PHA
+		LDA	<WORK6,X
+		TAX
+		PLA
+		CLC
+		ADC	KBFTXD,X
+		STA	(<OAMADR),Y		
+		INY
+		INY
+		INY
+		INY
+		STA	(<OAMADR),Y		
+		LDA	<WORK2
+		CLC
+		ADC	#08H-10H
+		PHA
+		LDX	ENHELP
+		LDA	<WORK8,X
+		TAX
+		PLA
+		CLC
+		ADC	KBFTYD,X
+		DEY
+		DEY
+		DEY
+		STA	(<OAMADR),Y		
+		CLC
+		ADC	#010H
+		INY
+		INY
+		INY
+		INY
+		STA	(<OAMADR),Y		
+		LDA	#0CH
+		DEY
+		DEY
+		DEY
+		STA	(<OAMADR),Y
+		LDA	#2AH
+		INY
+		INY
+		INY
+		INY
+		STA	(<OAMADR),Y
+		DEY
+		DEY
+		DEY
+		LDX	ENHELP
+		LDA	<WORK5
+		ORA	KFCADT,X
+		STA	(<OAMADR),Y
+		INY
+		INY
+		INY
+		INY
+		STA	(<OAMADR),Y
+		PHY
+		TYA
+		LSR	A
+		LSR	A
+		TAY
+		LDA	#02H
+		STA	(<OSBADR),Y
+		DEY
+		STA	(<OSBADR),Y
+		PLY
+		INY
+		DEC	ENHELP
+		BPL	KFC010		
+;
+;---- Tail set - - - -
+		LDA	KBTLPT
+		ASL	A
+		ASL	A
+		ADC	KBTLPT
+		STA	<WORK6
+;
+		LDY	#00H
+;
+		LDX	#00H
+MTC010		EQU	$
+		PHX
+		TXA
+		CLC
+		ADC	<WORK6
+		ASL	A
+		TAX
+		MEM16
+		REP	#20H
+;
+		LDA	<WORK0
+		CLC
+		ADC	MTCXAD,X
+		STA	OAM+16CH,Y
+;;		AND	#0100H
+;;		STA	<WORKE
+		LDA	<WORK2
+		SEC
+		SBC	MTCYAD,X
+		SBC	#10H+10H
+		CLC
+		ADC	KBTLYD
+		INY
+		STA	OAM+16CH,Y
+		CLC
+		ADC	#0010H
+		CMP	#0100H
+		MEM8
+		SEP	#20H
+		BCC	MTC020	
+;	
+		LDA	#0F0H
+		STA	OAM+16CH,Y
+MTC020		EQU	$
+		PLX
+		LDA	MTCCDT,X
+		INY
+		STA	OAM+16CH,Y
+		LDA	<WORK5
+		INY
+		STA	OAM+16CH,Y
+		PHY
+		TYA
+		LSR	A
+		LSR	A
+		TAY
+		LDA	#02H
+;;		ORA	<WORKF
+		STA	OAMSB+16CH/4,Y
+		PLY
+		INY
+		INX
+		CPX	#05H
+		BNE	MTC010
+;
+		PLX
+;
+;;		LDA	ENSTAT,X
+;;		CMP	#03H
+;;		BEQ	BSC0A9		; Kubi atack -> hide check !
+;
+		LDA	<GAMEMD
+		BEQ	BSCRTS
+;
+BSC0A9		EQU	$
+		LDY	#02H
+		LDA	#03H
+;;		LDA	#08H
+		JSL	>ALOMCKL
+BSCRTS		EQU	$
+		RTS
+;- - - - - - - - - - - - - - - - - - - - -
+;- - Tail  data - - 
+MTCXAD		EQU	$
+		WORD	000H,003H,009H,010H,018H	;0
+		WORD	000H,002H,007H,00DH,014H	;1
+		WORD	000H,001H,004H,009H,00FH	;2
+		WORD	000H,000H,000H,000H,000H	;3
+		WORD	-00H,-01H,-04H,-09H,-0FH	;4
+		WORD	-00H,-02H,-07H,-0DH,-14H	;5
+		WORD	-00H,-03H,-09H,-10H,-18H	;6
+MTCYAD		EQU	$
+		WORD	018H,020H,025H,025H,021H	;0
+		WORD	018H,020H,027H,02AH,02CH	;1
+		WORD	018H,020H,028H,02FH,034H	;2
+		WORD	018H,021H,02AH,034H,03DH	;3
+		WORD	018H,020H,028H,02FH,034H	;4
+		WORD	018H,020H,027H,02AH,02CH	;5
+		WORD	018H,020H,025H,025H,021H	;6
+;
+MTCCDT		EQU	$
+		HEX	06,28,28,2C,2C
+;- - - - - - -
+KBKADT		EQU	$
+		HEX	FC,E0,C0,A0,80,60,40,20  ;,00
+KFCXAD		EQU	$
+		HEX	E4,1C
+KFCADT		EQU	$
+		HEX	40,00
+;
+KBFTXD		EQU	$
+		HEX	00,02,03,04
+		HEX	04,04,03,02
+		HEX	00,FE,FD,FC
+		HEX	FC,FC,FD,FE
+;
+;;		HEX	00,03,05,07
+;;		HEX	08,07,05,03
+;;		HEX	00,FD,FA,F9
+;;		HEX	F8,F9,FA,FD
+KBFTYD		EQU	$
+		HEX	FC,FC,FD,FE
+		HEX	00,02,03,04
+		HEX	04,04,03,02
+		HEX	00,FE,FD,FC
+;
+;;		HEX	F8,F9,FA,FD
+;;		HEX	00,03,05,07
+;;		HEX	08,07,05,03
+;;		HEX	00,FD,FA,F9
+;##############################################################
+;#							      #
+;##############################################################
+KBSTAL		EQU	$
+		HEX	40,40,40,40,40,40,40,40,40
+		HEX	58,64,6A,6F,74,7A,7E,80,80
+		HEX	39,48,52,5c,65,73,77,7a,80
+		HEX	1e,24,29,2e,34,3a,44,4d,80
+;;			HEX	4f,6b,83,90,8C,7d,67,55,80
+		HEX	0a,11,17,1c,22,2a,36,3a,80
+;;KBSTAH		EQU	$
+;;		HEX	00,00,00,00,00,00,00,00,00
+;;		HEX	00,00,00,00,00,00,00,00,00
+;;		HEX	00,00,00,00,00,00,00,00,00
+;;		HEX	00,00,00,00,00,00,00,00,00
+;;		HEX	00,00,00,00,00,00,00,00,00
+KBSTHK		EQU	$
+		HEX	30,28,23,1E,19,13,0C,06,00
+		HEX	2F,26,21,1D,18,12,0C,06,00
+		HEX	2f,27,22,1d,18,12,0c,06,00
+		HEX	2f,27,22,1d,18,12,0c,06,00
+;;			HEX	27,21,1f,1c,17,13,0f,08,00
+		HEX	48,3a,32,29,22,19,10,07,00
+;
+;
+;
+KRRVXL		EQU	$
+		HEX	F2,0D
+KRRVXH		EQU	$
+		HEX	FF,00
+;
+KTAGAL		EQU	$
+		HEX	00,01,FF
+KTAGAH		EQU	$
+		HEX	00,00,FF
+KTHKAL		EQU	$
+		HEX	00,01,FF
+;
+KAMBRMV		EQU	$
+		LDA	ENWRK3,X
+		BEQ	KR00001
+;
+		JMP	KRFIRMV
+KAMBBMV		EQU	$
+		LDA	ENWRK3,X
+		BEQ	KR00001
+;
+		JMP	KRICEMV
+KR00001		EQU	$
+;- - - Master pos.->Kubi pos. - -
+		LDA	ENMYNO,X	
+		SEC
+		SBC	#KAMBR
+		TAY
+		LDA	ENWRK0+00H
+		CLC
+		ADC	KRRVXL,Y
+		STA	ENWRK0,X	; X pos.
+		LDA	ENWRK1+00H
+		ADC	KRRVXH,Y
+		STA	ENWRK1,X
+;
+		LDA	ENWRK2+00H
+		SEC
+		SBC	#10H+10H
+;;		SBC	#0CH+10H
+		STA	ENWRK2,X	; Y pos.
+		LDA	ENCTCT+00H
+		SBC	#00H
+		STA	ENCTCT,X
+;
+		LDA	ENFLCL,X
+		ORA	#30H
+		STA	ENFLCL,X
+;
+		JSR	KAMBRCS
+;
+		JSR	ENSTCK
+;
+		LDA	ENSTAT,X
+		BPL	KR0002
+;
+		STA	ENNOCR,X
+		JMP	KAMBRFL		; Fail !
+;
+KR0002		EQU	$
+		LDA	ENFLSH,X
+		BEQ	KRDC00		; Danege ?
+;					; yes !
+		LDA	ENSTAT,X
+		CMP	#04H
+		BEQ	KRDC00		; Move ?
+;					; yes !
+		STZ	ENFLSH,X
+		LDA	#080H
+		STA	ENTIM0,X
+		LDA	#04H
+		STA	ENSTAT,X
+;
+		LDA	ENCLOR,X
+		STA	ENZSPD,X
+		LDA	#03H
+		STA	ENCLOR,X
+KRDC00		EQU	$
+;;		JSR	KEYTEST
+;
+		JSR	CREKEK
+;
+		LDA	ENMOD5,X
+		ORA	#00000100B
+		STA	ENMOD5,X
+;
+		LDA	ENSTAT,X
+		JSL	>JSRSUB
+		WORD	KBWAIT
+		WORD	KBSTOP
+		WORD	KBMOVE
+		WORD	KBATCK
+		WORD	KBHELP
+;---------------------------------------------
+KBHELP		EQU	$		; Ken atack chance !
+;		LDA	ENFLSH,X
+;		BEQ	KBH000
+;		BMI	KBH000
+;;
+;		STZ	ENFLSH,X	; Beam protect !
+;KBH000		EQU	$
+;
+		LDA	ENMOD5,X
+		AND	#11111011B
+		STA	ENMOD5,X
+;
+		STZ	HEMODE,X
+;
+		LDA	ENTIM0,X
+;;;;;		STA	ENNOCR,X
+		BNE	KBH060
+		PHA
+		LDA	#01H
+		STA	ENSTAT,X
+		LDA	#20H
+		STA	ENTIM0,X
+		LDA	ENZSPD,X
+		STA	ENCLOR,X
+		STZ	ENFLSH,X
+		PLA
+KBH060		EQU	$		
+		CMP	#15
+		BCC	KRBGCG2
+;
+		CMP	#254-0-0B0H
+		BCS	KBH090
+		CMP	#239-0-0B0H
+		BCC	KBH090
+;- - - - - Chenge  - - - -
+KRBGCG		EQU	$
+		LDA	ENMYNO,X
+		CMP	#KAMBB
+		BNE	KBH080
+;
+		PHX
+		JSL	>KMBBCG0	; BG cg chenge !
+		PLX
+		RTS
+KBH080		EQU	$
+		PHX
+		JSL	>KMBRCG0
+		PLX
+KBH090		EQU	$
+		RTS
+;- - - - - Rsvise - - - -
+KRBGCG2		EQU	$
+		LDA	ENMYNO,X
+		CMP	#KAMBB
+		BNE	KBH0802
+;
+		PHX
+		JSL	>KMBBCG1	; BG cg chenge !
+		PLX
+		RTS
+KBH0802		EQU	$
+		PHX
+		JSL	>KMBRCG1
+		PLX
+		RTS
+;---------------------------------------------
+KBWAIT		EQU	$		; Move wait !
+;;		STZ	ENFLSH,X
+		LDA	ENMOD2,X
+		ORA	#01000000B
+		STA	ENMOD2,X	; Damage protect !
+;
+		LDA	ENTIM0,X
+		BNE	KBW010
+;
+		LDA	#02H
+		STA	ENSTAT,X
+;
+		LDA	#09H
+		STA	ENCONT,X	; Kubi OAM suu +1
+;
+		LDA	ENMOD2,X
+		AND	#10111111B
+		STA	ENMOD2,X	; Damage set !
+KBW010		EQU	$
+		RTS
+;
+;---------------------------------------------
+KBSTOP		EQU	$
+		LDA	ENTIM0,X
+		BNE	KBS010
+;
+;;		LDA	#040H
+;;		STA	ENTIM0,X
+;
+		LDA	ENMUKI,X
+		STA	<WORK0
+;
+		JSL	>RNDSET
+		AND	#07H
+		INC	A
+		CMP	#06H-1
+		BCS	KBS010
+		CMP	ENMUKI,X
+		BEQ	KBS010
+;
+		STA	ENMUKI,X
+;
+		INC	ENSTAT,X
+;
+		LDA	<WORK0
+		CMP	#01H
+		BNE	KBS010
+;
+		JSL	>RNDSET
+		LSR	A
+		BCS	KBS010
+;
+		LDA	ENSTAT+00H
+		CMP	#02H
+		BCS	KBS010		; Master atack ?
+;					; yes ! Not atack check !
+		INC	ENCHPT,X
+		LDA	ENCHPT,X
+		CMP	#06H
+		nop	
+		nop	
+;;		BNE	KBS008		; Atack time ?
+;					; yes !
+		STZ	ENCHPT,X
+		LDA	#03H
+		STA	ENSTAT,X
+		LDA	#07FH
+;;		LDA	#0FFH
+		STA	ENTIM0,X
+;;		RTS
+KBS008		EQU	$
+KBS010		EQU	$
+		RTS
+;---------------------------------------------
+KBMOVE		EQU	$
+;;		LDA	ENTIM0,X
+;;		BNE	KBM008
+;;;
+;;		STZ	ENSTAT,X
+;;		LDA	#20H
+;;		STA	ENTIM0,X
+;;KBM008		EQU	$
+		STZ	<WORK1
+;
+		LDA	ENMUKI,X
+		ASL	A
+		ASL	A
+		ASL	A
+		ADC	ENMUKI,X
+		TAY
+		LDA	KBINDX,X
+		PHX
+		TAX
+		LDA	#08H
+		STA	<WORK0
+KBM010		EQU	$
+;- - - - - - - - - - - - - - - - - - -
+		LDA	KBANGL,X
+		CMP	KBSTAL,Y
+		BEQ	KBM020
+		BPL	KBM018
+		INC	KBANGL,X
+		INC	<WORK1
+		BRA	KBM020
+KBM018		EQU	$
+		DEC	KBANGL,X
+		INC	<WORK1
+KBM020		EQU	$
+;- - - - - - - - - - - - - - - - - - -
+		LDA	KBANGL,X
+		CMP	KBSTAL,Y
+		BEQ	KBM0201
+		BPL	KBM0181
+		INC	KBANGL,X
+		INC	<WORK1
+		BRA	KBM0201
+KBM0181		EQU	$
+		DEC	KBANGL,X
+		INC	<WORK1
+KBM0201		EQU	$
+;- - - - - - - - - - - - - - - - - - -
+		LDA	<FRCNT
+		AND	#00H
+		BNE	KBM03C
+;
+		LDA	KBHANK,X
+		CMP	KBSTHK,Y
+		BEQ	KBM040
+		BPL	KBM038
+		INC	KBHANK,X
+		INC	<WORK1
+		BRA	KBM040
+KBM038		EQU	$
+		DEC	KBHANK,X
+KBM03C		EQU	$
+		INC	<WORK1
+KBM040		EQU	$
+		INX
+		INY
+		DEC	<WORK0
+		BPL	KBM010
+		PLX
+;
+		LDA	<WORK1
+		BNE	KBM050
+;
+		DEC	ENSTAT,X
+;
+;;		LDA	#20H
+		JSL	>RNDSET
+		AND	#0FH
+		STA	ENTIM0,X	; Stop time !
+KBM050		EQU	$
+		RTS
+;
+;
+;
+;;		LDA	ENWRK0,X
+;;		CLC
+;;		ADC	#01H
+;;		STA	ENWRK0,X
+;;		LDA	ENWRK1,X
+;;		ADC	#00H
+;;		STA	ENWRK1,X
+;
+		RTS
+;---------------------------------------------
+KRAIFT		EQU	$
+		HEX	1,1,3,3,7,0F,1F,1F
+;
+KBATCK		EQU	$
+		LDA	ENTIM0,X
+		BNE	KRA010
+;
+		STZ	ENSTAT,X
+		LDA	#20H
+		STA	ENTIM0,X
+		RTS
+;
+KRA010		EQU	$
+		CMP	#40H
+;;		CMP	#80H
+		BNE	KRA018
+		PHA
+		JSR	KRBMST
+		PLA
+KRA018		EQU	$
+		CMP	#08H
+		BCC	KRA020
+		CMP	#079H
+		LDA	#08H
+		BCC	KRA020
+;
+		LDA	ENTIM0,X
+		CLC
+		ADC	#80H
+		EOR	#0FFH		
+KRA020		EQU	$
+		STA	HEMODE,X	; Kuchi pos.
+;
+		LDA	ENTIM0,X
+		CMP	#40H
+;;		CMP	#80H
+		BCC	KRA030
+;
+		SEC
+		SBC	#40H
+;;		SBC	#80H
+;;		LSR	A
+;;		NOP
+		LSR	A
+		LSR	A
+		LSR	A
+		TAY
+		LDA	<FRCNT
+		AND	KRAIFT,Y
+		BNE	KRA030
+;
+		JSL	>RNDSET
+		AND	#0FH
+		LDY	#00H
+		SEC
+		SBC	#03H
+		STA	<WORK0
+		BPL	KRAI10
+		DEY
+KRAI10		EQU	$
+		STY	<WORK1
+;
+		JSL	>RNDSET
+		AND	#0FH
+		CLC
+		ADC	#0CH
+		STA	<WORK2
+		STZ	<WORK3
+;
+		JSL	>ICEFLST
+		LDA	ENMYNO,X
+		CMP	#KAMBR
+		BNE	KRA030
+;
+		PHX
+		LDX	<WORKF
+		LDA	#0EH
+		STA	>E2MODE,X
+		PLX
+KRA030		EQU	$
+		RTS
+;----------------------------------------------
+KISXSD		EQU	$
+		HEX	FE,01
+;
+KRBMST		EQU	$
+		LDA	ENMYNO,X
+		CMP	#KAMBB
+		BNE	KRFIRST
+;
+		STZ	ENHELP2
+;
+		JSR	KRICEST	;1
+;
+		INC	ENHELP2
+;
+		LDA	#KAMBB
+KRICEST		EQU	$	;2
+		JSL	>ENIDSH
+		BMI	KFS090
+;
+		JSL	>ENIDPS
+;
+		PHX
+		LDX	ENHELP2
+		LDA	KISXSD,X
+		STA	ENWRK2,Y	; X speed 2
+		PLX
+;
+;;		JSL	>SDLRCE
+;;		ORA	#19H
+;;		STA	SOUND3	;(S)
+		LDA	#19H
+		JSL	>SDLRE3	;(S)
+;
+		BRA	KBS011
+;
+;;		LDA	<WORK2
+;;		CLC
+;;		ADC	#10H
+;;		STA	ENYPSL,Y
+;;		LDA	<WORK3
+;;		ADC	#00H
+;;		STA	ENYPSH,Y
+;
+;		LDA	#01H
+;		STA	ENWRK3,Y
+;		STA	ENNOCR,Y
+;;
+;		LDA	#18H
+;		STA	ENYSPD,Y
+;;
+;		LDA	#00H
+;		STA	ENMOD0,Y
+;;
+;		LDA	#01000000B
+;		STA	ENMOD2,Y		
+;
+;KIS090		EQU	$
+;		RTS
+;----------------------------------------------
+KRFIRST		EQU	$
+		JSL	>ENIDSH
+		BMI	KFS090
+		JSL	>ENIDPS
+;
+;;		JSL	>SDLRCE
+;;		ORA	#2AH
+;;		STA	SOUND2	;(S)
+		LDA	#2AH
+		JSL	>SDLRE2	;(S)
+;
+;;		LDA	<WORK2
+;;		CLC
+;;		ADC	#10H
+;;		STA	ENYPSL,Y
+;;		LDA	<WORK3
+;;		ADC	#00H
+;;		STA	ENYPSH,Y
+;
+KBS011		EQU	$
+		LDA	#01H
+		STA	ENWRK3,Y
+		STA	ENNOCR,Y
+;
+		LDA	#18H
+		STA	ENYSPD,Y
+;
+		LDA	#00H
+		STA	ENMOD0,Y
+;
+		LDA	#01000000B
+		STA	ENMOD2,Y		
+;
+KFS090		EQU	$
+		RTS
+;FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+KAMBRFL		EQU	$
+		LDA	ENTIM0,X
+		BNE	KRF060
+;
+		LDA	#0CH
+		STA	ENTIM0,X
+;
+		LDA	ENCONT,X
+		CMP	#01H
+		BNE	KRF050
+;
+		STZ	ENMODE,X
+KRF050		EQU	$
+		DEC	ENCONT,X
+;
+		LDA	ENXP2L
+		CLC
+		ADC	<SCCH2
+		STA	ENXP2L
+;
+		LDA	ENYP2L
+		CLC
+		ADC	<SCCV2
+		STA	ENYP2L
+;
+		JSL	>HBBKST
+KRF060		EQU	$
+		RTS
+;		
+;
+;
+;
+;
+;
+;
+;=================================================
+KBINDX		EQU	$
+		BYTE	00,09*1,09*2
+;---TAIL-------------------------------------------
+;;MTTLSB		EQU	$
+;;HEX	FF,E0,C0,A0,80,60,40,20,00
+;
+KAMBRCS		EQU	$
+;- - Pos revise (for c set ) - -
+		LDA	ENWRK0,X
+		STA	ENXPSL,X
+		LDA	ENWRK1,X
+		STA	ENXPSH,X
+		LDA	ENWRK2,X
+		STA	ENYPSL,X
+		LDA	ENCTCT,X
+		STA	ENYPSH,X
+;
+		JSL	>PSSAVE2
+		JSR	OAMCHK
+;- - Angle calc - - -
+		STZ	ENHELP		; Kosu 
+		STZ	ENHELP2		; OAM counter
+;
+MTCT10		EQU	$
+		LDY	ENHELP
+;
+		TYA
+		CLC
+		ADC	KBINDX,X
+		TAY
+		CPX	#02H
+		BEQ	KCT000
+;
+		LDA	KBANGL,Y
+		EOR	#0FFH
+		INC	A
+		STA	<WORK0+6
+		LDA	#01H
+		STA	<WORK1+6	; angle !
+		BRA	KCT010
+KCT000		EQU	$
+		LDA	KBANGL,Y
+		STA	<WORK0+6
+;;;		LDA	KBANGH,Y
+		STZ	<WORK1+6	; angle !
+KCT010		EQU	$
+;
+		LDA	KBHANK,Y
+		STA	<WORKF		; hankei X
+;
+		PHX
+;
+		MEM16
+		IDX16
+		REP	#00110000B
+;
+		LDA	<WORK0+6
+		AND	#00FFH
+		ASL	A
+		TAX
+		LDA	>SINDT2,X
+		STA	<WORK4+6
+;
+		LDA	<WORK0+6
+		CLC
+		ADC	#0080H
+		STA	<WORK2+6
+		AND	#00FFH
+		ASL	A
+		TAX
+		LDA	>SINDT2,X
+		STA	<WORK6+6
+		MEM8
+		IDX8
+		SEP	#00110000B		
+;
+		PLX
+;
+		LDA	<WORK4+6
+		STA	4202H
+		LDA	<WORKF 	    ; Hankei
+		LDY	<WORK5+6
+		BNE	MKSF0
+		STA	4203H
+		BYTE	0EAH,0EAH,0EAH,0EAH,0EAH,0EAH,0EAH,0EAH
+		ASL	4216H
+		LDA	4217H
+		ADC	#00H
+MKSF0		EQU	$
+		LSR	<WORK1+6
+		BCC	MKS00
+		EOR	#0FFH
+		INC	A
+MKS00		EQU	$
+		STA	ENDSXL	; X AD
+;
+		LDA	<WORK6+6
+		STA	4202H
+		LDA	<WORKF
+		LDY	<WORK7+6
+		BNE	MKS08
+		STA	4203H
+		BYTE	0EAH,0EAH,0EAH,0EAH,0EAH,0EAH,0EAH,0EAH
+		ASL	4216H
+		LDA	4217H
+		ADC	#00H
+MKS08		EQU	$
+		LSR	<WORK3+6
+		BCC	MKS10
+		EOR	#0FFH
+		INC	A
+MKS10		EQU	$
+		STA	ENDSYL	; Y AD
+;- C SET -
+		LDA	ENHELP
+		BNE	MKS11
+;
+		JSR	KRHDCS
+		BRA	MKS12
+MKS11		EQU	$
+		LDA	<WORK0
+		CLC
+		ADC	ENDSXL
+		LDY	ENHELP2
+		STA	(<OAMADR),Y
+		STA	ENXP2L
+		LDA	ENDSYL
+		CLC
+		ADC	<WORK2
+		LDY	ENHELP2
+		INY	 
+		STA	(<OAMADR),Y
+		STA	ENYP2L
+		LDA	#08H
+		INY	 
+		STA	(<OAMADR),Y
+;;		LDA	#34H
+		LDA	<WORK5
+		INY	 
+		STA	(<OAMADR),Y
+;;		LDA	ENCONT,X
+;;		CMP	ENHELP
+;;		BNE	MTEST
+;;		LDA	#35H
+;;		STA	(<OAMADR),Y
+;;MTEST		EQU	$
+		PHY
+		TYA
+		LSR	A
+		LSR	A
+		TAY
+		LDA	#02H
+		STA	(<OSBADR),Y
+		PLY
+		INY
+		STY	ENHELP2
+;--------------------------------------------
+MKS12		EQU	$
+		INC	ENHELP
+		LDA	ENHELP
+;;		CMP	#09H
+		CMP	ENCONT,X
+		BEQ	MTCTA0
+		JMP	MTCT10
+MTCTA0		EQU	$
+		LDA	<GAMEMD
+		BEQ	MTCTB0
+;
+		LDY	#02H
+		LDA	#04H
+		JSL	>ALOMCKL
+MTCTB0		EQU	$
+		RTS
+;=============================================================
+KRHXAD		EQU	$
+		HEX	F8,08,F8,08,00
+KRHYAD		EQU	$
+		HEX	F8,F8,08,08,02
+KRHCDT		EQU	$
+		HEX	04,04,24,24,0A
+KRHADT		EQU	$
+		HEX	40,00,40,00,00
+;
+KRHDCS		EQU	$
+;;		LDA	ENCONT,X
+;;		STA	<WORK7	
+;
+		LDA	HEMODE,X
+		STA	<WORK8		; Kuchi y pos !
+;
+		PHX
+		LDX	#00H
+		LDY	ENHELP2
+KRHC10		EQU	$
+		LDA	ENDSXL
+		CLC
+		ADC	<WORK0
+		STA	ENXP2L
+		CLC
+		ADC	KRHXAD,X
+		STA	(<OAMADR),Y
+;
+		LDA	ENDSYL
+		CLC
+		ADC	<WORK2
+		STA	ENYP2L
+		CLC
+		ADC	KRHYAD,X
+		CPX	#04H
+		BNE	KRHC18
+;
+		CLC
+		ADC	<WORK8
+KRHC18		EQU	$
+		INY
+		STA	(<OAMADR),Y				
+;
+		LDA	KRHCDT,X
+		INY
+		STA	(<OAMADR),Y
+;
+		LDA	<WORK5
+		ORA	KRHADT,X
+		INY
+		STA	(<OAMADR),Y
+;
+;;		LDA	<WORK7
+;;;		BNE	KRHC11		; TEST ?
+;;					; YES !
+;;		LDA	(<OAMADR),Y
+;;		AND	#0F0H
+;;		ORA	#005H
+;;		STA	(<OAMADR),Y
+;;KRHC11		EQU	$
+		PHY
+		TYA
+		LSR	A
+		LSR	A
+		TAY
+		LDA	#02H
+		STA	(<OSBADR),Y
+		PLY
+		INY
+		INX
+		CPX	#05H
+		BNE	KRHC10
+;
+		PLX
+;
+		LDA	ENHELP2
+		CLC
+		ADC	#014H
+		STA	ENHELP2
+;-- Pos revise (for beam hit) - -
+		LDY	#00H
+		LDA	ENDSXL
+		BPL	KRHC70
+		DEY
+KRHC70		EQU	$
+		CLC
+		ADC	ENWRK0,X
+		STA	ENXPSL,X
+		TYA
+		ADC	ENWRK1,X
+		STA	ENXPSH,X
+;
+		LDY	#00H
+		LDA	ENDSYL
+		BPL	KRHC80
+		DEY
+KRHC80		EQU	$
+		CLC
+		ADC	ENWRK2,X
+		STA	ENYPSL,X
+		TYA
+		ADC	ENCTCT,X
+		STA	ENYPSH,X
+		RTS
+;=============================================================
+KIMXLM		EQU	$
+		HEX	10,F0
+;- - - - - - - - - - - - - - - - - - - - -
+KRICEMV		EQU	$
+		JSL	>OAMCHKL
+;;;		JSL	>EN1CSTL
+;
+		JSR	ENSTCK
+;
+		LDA	ENXSPD,X
+		PHA
+		CLC
+		ADC	ENWRK2,X
+		STA	ENXSPD,X	; Rivise speed !
+		JSR	ENMVCL
+		PLA
+		STA	ENXSPD,X
+;
+		JSR	KIZNZST
+;
+KIMSUB		EQU	$
+		LDA	<FRCNT
+		AND	#03H
+		BNE	KIM008
+		JSR	EPXCHK
+;
+		LDA	ENXSPD,X
+		CMP	KIMXLM,Y
+		BEQ	KIM008
+		CLC
+		ADC	KIMXAD,Y
+		STA	ENXSPD,X
+KIM008		EQU	$
+;;		JSL	>ENBGCKL
+;;		LDA	ENCBFG,X
+		JSR	ENBGCK
+		BEQ	KIM010
+;
+		STZ	ENMODE,X
+KIM010		EQU	$		
+		RTS
+;----------------------------------------
+KIZNZST		EQU	$
+		INC	ENCONT,X
+		LDA	ENCONT,X
+		AND	#07H
+		BNE	KIZS90
+;
+		LDA	#14H
+		JSL	>SDLRE3	;(S)
+;
+		PHX
+		TXY
+;
+		LDX	#E2NO-1
+KIZS10		EQU	$
+		LDA	>E2MODE,X
+		BEQ	KIZS20
+		DEX
+		BPL	KIZS10
+;
+		DEC	E2STCT
+		BPL	KIZS18
+;
+		LDA	#E2NO-1
+		STA	E2STCT
+KIZS18		EQU	$
+;
+		LDX	E2STCT
+KIZS20		EQU	$
+		LDA	#0CH
+      		STA	>E2MODE,X
+		STA	EN2FLG
+;
+		TYA
+		STA	>E2STAT,X
+;
+		LDA	ENXPSL,Y
+		STA	>E2XPSL,X
+		LDA	ENXPSH,Y
+		STA	>E2XPSH,X
+		LDA	ENYPSL,Y
+		CLC
+		ADC	#10H
+		STA	>E2YPSL,X
+		LDA	ENYPSH,Y
+		ADC	#00H
+		STA	>E2YPSH,X
+;
+		LDA	#07FH
+		STA	>E2TIM0,X
+;	
+		PLX
+KIZS90		EQU	$
+		RTS
+;- - - - - - - - - - - - - - - - - - - - -
+KRFIRMV		EQU	$
+		JSL	>OAMCHKL
+;;;		JSL	>EN1CSTL
+;
+		JSR	ENSTCK
+;
+		JSR	ENMVCL
+		JSR	KFZNZST
+		JMP	KIMSUB
+;
+;----------------------------------------
+KFZNZST		EQU	$
+		INC	ENCONT,X
+		LDA	ENCONT,X
+		AND	#07H
+		BNE	KFZS90
+;
+		LDA	#2AH
+		JSL	>SDLRE2	;(S)
+;
+		LDA	#E2NO-1
+ZNZSET		EQU	$
+		PHX
+		TXY
+;
+;;		LDX	#E2NO-1
+		TAX
+		STA	<WORK0
+KFZS10		EQU	$
+		LDA	>E2MODE,X
+		BEQ	KFZS20
+		DEX
+		BPL	KFZS10
+;
+		DEC	E2STCT
+		BPL	KFZS18
+;
+		LDA	<WORK0
+		STA	E2STCT
+KFZS18		EQU	$
+;
+		LDX	E2STCT
+KFZS20		EQU	$
+		LDA	#10H
+;;		LDA	#0DH
+      		STA	>E2MODE,X
+		STA	EN2FLG
+;
+		TYA
+		STA	>E2STAT,X
+;
+		LDA	ENXPSL,Y
+		STA	>E2XPSL,X
+		LDA	ENXPSH,Y
+		STA	>E2XPSH,X
+		LDA	ENYPSL,Y
+		CLC
+		ADC	#10H
+		STA	>E2YPSL,X
+		LDA	ENYPSH,Y
+		ADC	#00H
+		STA	>E2YPSH,X
+;
+;;		LDA	#0FFH
+		LDA	#07FH
+		STA	>E2TIM0,X
+;	
+		STX	<WORK0
+		PLX
+KFZS90		EQU	$
+		RTS
+;%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+;%						     %
+;%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+WAINDX		EQU	$
+		HEX	00,10,20,30,40,50,60,70
+;
+WANWANITJ	EQU	$
+		PHX
+		LDY	#05H
+;;		LDX	#00H
+		LDA	>WAINDX,X
+		TAX
+		MEM16
+		REP	#20H
+WAI010		EQU	$
+		LDA	ENXP2L
+		STA	>WAXBFL,X
+		LDA	ENYP2L
+		STA	>WAYBFL,X
+		INX
+		INX
+		DEY
+		BPL	WAI010
+		MEM8
+		SEP	#20H
+		PLX
+;
+		LDA	ENXPSL,X
+		STA	ENWRK0,X
+		LDA	ENXPSH,X
+		STA	ENWRK1,X
+		LDA	ENYPSL,X
+		STA	ENWRK2,X
+		LDA	ENYPSH,X
+		STA	ENCTCT,X
+		RTL
+;=============================================================
+;;WATXSD		EQU	$
+;;		HEX	00,10,F0
+;
+WANWANMV	EQU	$
+		JSR	WACSET
+;
+		JSR	ENSTCK
+;
+		JSR	CREKEK
+;
+		JSR	WASUB0
+;
+		TXA
+		EOR	<FRCNT
+		AND	#03H
+		BNE	W00000
+;
+		LDA	ENXSPD,X
+		STA	<WORK1
+		LDA	ENYSPD,X
+		STA	<WORK0
+;
+		ORA	<WORK1
+		BEQ	W00000
+;
+		JSL	>MKCK16
+		AND	#0FH
+		STA	ENMUKI,X
+W00000		EQU	$
+;;		LDA	<KEYA1
+;;		AND	#03H
+;;		TAY
+;;		LDA	WATXSD,Y
+;;		STA	ENXSPD,X
+;;		LDA	<KEYA1
+;;		LSR	A
+;;		LSR	A
+;;		AND	#03H
+;;		TAY
+;;		LDA	WATXSD,Y
+;;		STA	ENYSPD,X
+;
+		JSR	ENMVCL2
+		DEC	ENZSPD,X
+		DEC	ENZSPD,X
+;
+		LDA	ENZPSL,X
+		BPL	W00010
+;
+		STZ	ENZPSL,X
+		STZ	ENZSPD,X
+W00010		EQU	$
+;
+		JSL	>PSSAVE2
+;- - Move Hani check - -
+		LDA	ENWRK0,X
+		STA	<WORK0
+		LDA	ENWRK1,X
+		STA	<WORK1
+		LDA	ENWRK2,X
+		STA	<WORK2
+		LDA	ENCTCT,X
+		STA	<WORK3
+;
+		STZ	ENCTFG,X
+;
+		MEM16
+		REP	#20H
+		LDA	ENXP2L
+		SEC
+		SBC	<WORK0
+		CLC
+		ADC	#0030H
+		CMP	#0060H		
+		BCS	WAM010
+		LDA	ENYP2L
+		SEC
+		SBC	<WORK2
+		CLC
+		ADC	#0030H
+		CMP	#0060H		
+		BCS	WAM010
+;
+		MEM8
+		SEP	#20H
+;
+		INC	ENCTFG,X
+WAM010		EQU	$
+		MEM8
+		SEP	#20H
+;
+;;		JSR	WACONT
+;;		RTS
+;
+WACONT		EQU	$
+		LDA	ENSTAT,X
+		JSL	>JSRSUB
+		WORD	WASTOP
+		WORD	WAWALK
+		WORD	WAATCK
+		WORD	WAMAX
+;-----------------------------------------
+WAWKXS          EQU     $
+                BYTE    000H,008H,00BH,00EH,010H,00EH,00BH,008H
+                BYTE    000H,-08H,-0BH,-0EH,-10H,-0EH,-0BH,-08H
+WAWKYS          EQU     $
+                BYTE    -10H,-0EH,-0BH,-08H,000H,008H,00BH,00EH
+                BYTE    010H,00EH,00BH,008H,000H,-09H,-0BH,-0EH
+;WAWKXS		EQU	$
+;		HEX	10,0C,00,F4,F0,F4,00,0C
+;		HEX	
+;WAWKYS		EQU	$
+;		HEX	00,0C,10,0C,00,F4,F0,F4
+;- - - - - - - - - - - - - - - - - - - - - - - - - -
+WASTOP		EQU	$
+		LDA	ENTIM0,X
+		BNE	WAS010
+;
+		INC	ENCONT,X
+		LDA	ENCONT,X
+		CMP	#04H
+		BNE	WAS008
+;
+		STZ	ENCONT,X
+;
+		LDA	#02H
+		STA	ENSTAT,X
+;
+		JSL	>RNDSET
+		AND	#0FH
+		TAY
+		LDA	WAWKXS,Y
+		ASL	A
+		ASL	A
+		STA	ENXSPD,X
+		LDA	WAWKYS,Y
+		ASL	A
+		ASL	A
+		STA	ENYSPD,X
+;
+		JSL	>RNDSET
+		AND	#00H
+		BNE	WAS001		; Player serch ?
+;					; yes !
+		LDA	#40H
+		JSL	>PSERCHL
+;
+;;		JSL	>SDLRCE
+;;		ORA	#04H
+;;		STA	SOUND3	;(S)
+		LDA	#04H
+		JSL	>SDLRE3	;(S)
+WAS001		EQU	$
+		RTS
+;
+WAS008		EQU	$
+		JSL	>RNDSET
+		AND	#1FH
+		ADC	#10H
+		STA	ENTIM0,X
+;
+		JSL	>RNDSET
+		AND	#0FH
+		TAY
+		LDA	WAWKXS,Y
+		STA	ENXSPD,X
+		LDA	WAWKYS,Y
+		STA	ENYSPD,X
+;
+		INC	ENSTAT,X		
+		RTS
+WAS010		EQU	$
+		JSR	ENSDCL
+		RTS
+;-----------------------------------------
+WAWALK		EQU	$
+		LDA	ENTIM0,X
+		BNE	WAW010
+;
+		LDA	#20H
+		STA	ENTIM0,X
+		STZ	ENSTAT,X
+WAW010		EQU	$		
+		AND	#0FH
+		BNE	WAW020
+;
+		JSR	WARVSE
+WAW020		EQU	$
+		LDA	ENZPSL,X
+		BNE	WAW028
+;
+		LDA	#10H
+		STA	ENZSPD,X
+WAW028		EQU	$
+		LDA	ENCTFG,X
+		BNE	WAW030
+;
+;;		LDA	ENXSPD,X
+;;		EOR	#0FFH
+;;		INC	A
+;;		STA	ENXSPD,X
+;;;
+;;		LDA	ENYSPD,X
+;;		EOR	#0FFH
+;;		INC	A
+;;		STA	ENYSPD,X
+;
+		LDA	ENWRK0,X
+		STA	<WORK4
+		LDA	ENWRK1,X
+		STA	<WORK5
+		LDA	ENWRK2,X
+		STA	<WORK6
+		LDA	ENCTCT,X
+		STA	<WORK7
+		LDA	#10H
+		JSL	>ESERCHL
+		LDA	<WORK0
+		STA	ENYSPD,X
+		LDA	<WORK1
+		STA	ENXSPD,X
+;
+		JSR	ENMVCL
+;
+		LDA	#0CH
+		STA	ENTIM0,X
+WAW030		EQU	$
+		RTS
+;-----------------------------------------
+WAATCK		EQU	$
+		LDA	ENCTFG,X
+		BNE	WAA010
+;
+		LDA	ENXSPD,X
+		EOR	#0FFH
+		INC	A
+		STA	ENXSPD,X
+		LDA	ENYSPD,X
+		EOR	#0FFH
+		INC	A
+		STA	ENYSPD,X
+;
+		JSR	ENMVCL
+		JSR	ENSDCL
+;
+		INC	ENSTAT,X
+		LDA	#30H
+		STA	ENTIM1,X
+WAA010		EQU	$
+		BRA	WAMX10
+;
+;-----------------------------------------
+WAMAX		EQU	$
+		LDA	ENTIM1,X
+		BNE	WAMX10
+;
+		STZ	ENSTAT,X
+		LDA	#30H
+		STA	ENTIM0,X
+WAMX10		EQU	$
+		JSR	WARVSE
+		JSR	WARVSE
+		RTS
+;-----------------------------------------
+WARADT		EQU	$
+		BYTE	205,0,154,0,102,0,51,0,08,0
+;;		BYTE	213,0,171,0,128,0,85,0,42,0
+;- - - - - - - - - - - - - - - - - - - - - -
+WARVSE		EQU	$
+		LDA	ENWRK0,X
+		STA	<WORK0
+		LDA	ENWRK1,X
+		STA	<WORK1
+		LDA	ENWRK2,X
+		STA	<WORK2
+		LDA	ENCTCT,X
+		STA	<WORK3
+;
+		PHX
+;;		LDX	#00H
+		LDA	#05H
+		STA	<WORKD
+;
+		LDA	WAINDX,X
+		TAX
+		LDA	>WAXBFL,X
+		SEC
+		SBC	<WORK0
+		STA	<WORK4
+;
+		LDA	>WAYBFL,X
+		SEC
+		SBC	<WORK2
+		STA	<WORK5
+;
+		INX
+		INX
+WAR008		EQU	$
+		LDA	<WORK4
+		PHP
+		BPL	WAR010
+		EOR	#0FFH
+		INC	A
+WAR010		EQU	$
+		STA	4202H
+		PHX
+		TXA
+		AND	#0FH
+		TAX
+		LDA	WARADT-2,X
+		STA	4203H
+		PLX
+		HEX	EA,EA,EA,EA,EA,EA,EA
+;
+		LDA	4217H
+;
+		LDY	#00H
+		PLP
+		BPL	WAR020
+		EOR	#0FFH
+		DEY
+WAR020		EQU	$				
+		CLC
+		ADC	<WORK0
+;;		STA	>WAXBFL,X
+		STA	<WORK8
+		TYA
+		ADC	<WORK1
+;;		STA	>WAXBFL+1,X
+		STA	<WORK9
+;
+WAR108		EQU	$
+		LDA	<WORK5
+		PHP
+		BPL	WAR110
+		EOR	#0FFH
+		INC	A
+WAR110		EQU	$
+		STA	4202H
+		PHX
+		TXA
+		AND	#0FH
+		TAX
+		LDA	WARADT-2,X
+		STA	4203H
+		PLX
+		HEX	EA,EA,EA,EA,EA,EA,EA
+;
+		LDA	4217H
+;
+		LDY	#00H
+		PLP
+		BPL	WAR120
+		EOR	#0FFH
+		DEY
+WAR120		EQU	$				
+		CLC
+		ADC	<WORK2
+;;		STA	>WAYBFL,X
+		STA	<WORKA
+		TYA
+		ADC	<WORK3
+;;		STA	>WAYBFL+1,X
+		STA	<WORKB
+;
+		MEM16
+		REP	#20H
+		LDA	>WAXBFL,X
+		CMP	<WORK8
+		BEQ	WAR130
+;
+		BPL	WAR128
+		INC	A
+		INC	A
+WAR128		EQU	$
+		DEC	A
+		STA	>WAXBFL,X
+WAR130		EQU	$
+;
+		LDA	>WAYBFL,X
+		CMP	<WORKA
+		BEQ	WAR140
+;
+		BPL	WAR138
+		INC	A
+		INC	A
+WAR138		EQU	$
+		DEC	A
+		STA	>WAYBFL,X
+WAR140		EQU	$
+		MEM8
+		SEP	#20H
+;
+		INX
+		INX
+		DEC	<WORKD
+;;		CPX	#06H*2
+		BMI	WAR800
+;
+		JMP	WAR008
+;
+WAR800		EQU	$
+		PLX
+		RTS
+;-----------------------------------------
+WASUB0		EQU	$
+		PHX
+		LDA	WAINDX,X
+		TAX
+;
+		MEM16
+		REP	#20H
+;
+;;		LDX	#00H
+		STZ	<WORK0
+;
+		LDA	ENXP2L
+		STA	>WAXBFL,X
+		LDA	ENYP2L
+		STA	>WAYBFL,X
+;
+WA0010		EQU	$
+;--------- X calc --------------
+		LDA	>WAXBFL,X
+		SEC
+		SBC	>WAXBFL+2,X
+		CMP	#0008H
+		BPL	WA0020
+		CMP	#0FFF8H
+		BPL	WA0030
+;
+		LDA	>WAXBFL,X
+		CLC
+		ADC	#0008H
+		STA	>WAXBFL+2,X
+;
+		BRA	WA0030
+WA0020		EQU	$
+		LDA	>WAXBFL,X
+		SEC
+		SBC	#0008H
+		STA	>WAXBFL+2,X
+WA0030		EQU	$
+		LDA	>WAYBFL,X
+		SEC
+		SBC	>WAYBFL+2,X
+		CMP	#0008H
+		BPL	WA0120
+		CMP	#0FFF8H
+		BPL	WA0130
+;
+		LDA	>WAYBFL,X
+		CLC
+		ADC	#0008H
+		STA	>WAYBFL+2,X
+;
+		BRA	WA0130
+WA0120		EQU	$
+		LDA	>WAYBFL,X
+		SEC
+		SBC	#0008H
+		STA	>WAYBFL+2,X
+WA0130		EQU	$
+;--------- Y calc --------------
+		INX
+		INX
+		INC	<WORK0
+		LDA	<WORK0
+		CMP	#0006H
+		BCC	WA0010
+;
+		PLX
+;
+		MEM8
+		SEP	#20H
+		RTS
+;====================================================
+WACHPT		EQU	$
+		HEX	0,1,2,3 
+		HEX	3,3,2,1
+		HEX	0,0,0,4
+		HEX	4,4,0,0
+WACLDT		EQU	$
+		HEX	40,40,40,40
+		HEX	00,00,00,00
+		HEX	00,00,00,00
+		HEX	40,40,40,40
+;
+WACSET		EQU	$
+;----- OAM SET ----
+		LDY	ENMUKI,X
+		LDA	WACHPT,Y
+		STA	ENCHPT,X
+		LDA	ENCLOR,X
+		AND	#00111111B
+		ORA	WACLDT,Y
+		STA	ENCLOR,X		
+;
+		JSL	>EN1CSTL
+;;		JSL	>OAMCHKL
+;
+		LDA	ENTIM1,X
+;;		NOP
+		AND	#01H
+		CLC
+		ADC	#04H
+		STA	<WORK8
+		STZ	<WORK9
+;
+		LDA	#05H
+		STA	<WORKD
+;
+		PHX
+;;		LDX	#00H
+		LDA	WAINDX,X
+		TAX
+		LDY	#04H
+WAC010		EQU	$
+		MEM16
+		REP	#20H
+		LDA	>WAXBFL,X
+		CLC
+		ADC	<WORK8
+		SEC
+		SBC	<SCCH2
+		STA	(<OAMADR),Y
+		AND	#0100H
+		STA	<WORKE
+		LDA	>WAYBFL,X
+		CLC
+		ADC	<WORK8
+		SEC
+		SBC	<SCCV2
+		INY
+		STA	(<OAMADR),Y
+		CLC
+		ADC	#0010H
+		CMP	#0100H
+		MEM8
+		SEP	#20H
+		BCC	WAC020
+;
+		LDA	#0F0H
+		STA	(<OAMADR),Y
+WAC020		EQU	$
+		LDA	#8BH
+		INY
+		STA	(<OAMADR),Y
+		LDA	<WORK5
+		AND	#11110000B
+		ORA	#0DH
+		INY
+		STA	(<OAMADR),Y
+		PHY
+		TYA
+		LSR	A
+		LSR	A
+		TAY
+		LDA	<WORKF
+		STA	(<OSBADR),Y
+		PLY
+		INY
+		INX
+		INX
+		DEC	<WORKD
+		BPL	WAC010
+;
+		PLX
+		RTS
+;=============================================================
+;=============================================================
+;=============================================================
+;=============================================================
+;=============================================================
+;=============================================================
+;=============================================================
+;=============================================================
+;=============================================================
+;=============================================================
+CREKEK		EQU	$
+		JSL	>CRKNENL
+		JSL	>CRENPLL
+		RTS
+;=============================================================
+;=============================================================
+ENMY4MV		EQU	$
+		PHB
+		PHK
+		PLB
+		JSR	E40000
+		PLB
+		RTL
+;-----------------------------------
+E40000		EQU	$
+		LDA	ENMYNO,X
+		SEC
+		SBC	#ENMY4
+		MEM16
+		IDX16
+		REP	#00110000B
+		AND	#00FFH
+		ASL	A
+		TAY
+		LDA	E4MVAD,Y
+		DEC	A
+		PHA
+		MEM8
+		IDX8
+		SEP	#00110000B
+		RTS
+;============================================
+E4MVAD		EQU	$
+		WORD	EYEBSMV
+		WORD	EYETMMV
+		WORD	EYEBMMV
+		WORD	NAMAZMV
+		WORD	SDEMOMV
+		WORD	IWAGOMV
+		WORD	AMEBAMV
+		WORD	TheftMV
+		WORD	BGBM0MV
+		WORD	BGBM1MV
+		WORD	DARUMMV
+		WORD	IZUMIMV
+		WORD	TEKTAMV
+		WORD	WANWANMV
+		WORD	KAMBSMV
+		WORD	KAMBRMV
+		WORD	KAMBBMV
+		WORD	CTBOSMV
+		WORD	MDARMMV
+		WORD	RINELMV
+		WORD	DOOMOMV
+		WORD	JFISHMV
+		WORD	ABATAMV
+		WORD	ZIRAIMV
+		WORD	ANAHOMV
+		WORD	GANONMV
+		WORD	GANO2MV		; Dammy (For silver alow)
+;
+;%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+;%		Tektait	(kumo)         		 %
+;%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+TKJPXS		EQU	$
+		HEX	10,F0,10,F0
+TKJPYS		EQU	$
+		HEX	10,10,F0,F0
+;
+TEKTAMV		EQU	$
+		LDA	ENCTFG,X
+		BEQ	TEKT00
+;
+		STA	ENNOCR,X
+;
+		PHA
+		LDA	#30H
+		STA	ENFLCL,X
+		PLA
+;
+		DEC	A
+		JSL	>JSRSUB
+		WORD	GANSPMV		;1 Shisai => Ganon spook
+		WORD	GANYRMV		;2 Ganon yari
+		WORD	GANFRMV		;3 Ganon fire spin ! (atack3)
+		WORD	GANFBMV		;4 Ganon fire bad    (stack2)
+		WORD	GANF2MV		;5 Ganon fire strate!(atack4) 
+;===================================================================
+TEKT00		EQU	$
+		LDA	ENTIM1,X
+		BEQ	TEK0F0
+;
+		STZ	ENCHPT,X
+TEK0F0		EQU	$
+		JSR	TEKTACS
+;
+		JSR	ENSTCK
+;
+		JSR	ENHNSB
+;
+		JSR	CREKEK
+;
+		JSR	ENMVCL2
+;
+		JSR	ENTUCK
+;
+		LDA	ENZSPD,X
+		SEC
+		SBC	#01H
+		STA	ENZSPD,X
+;
+		LDA	ENZPSL,X
+		BPL	TEK000
+;
+		STZ	ENZPSL,X
+		STZ	ENZSPD,X
+TEK000		EQU	$
+		LDA	ENSTAT,X
+		JSL	>JSRSUB
+		WORD	TEKSTOP
+		WORD	TEKJUMP
+		WORD	TEKSERC
+;---------------------------------------------------------
+TEJPMK		EQU	$
+		HEX	3,2,1,0
+;
+TEKSTOP		EQU	$
+		JSR	EPXYCK
+		LDA	<WORKE
+		CLC
+		ADC	#28H
+		CMP	#50H
+		BCS	TECK10
+		LDA	<WORKF
+		CLC
+		ADC	#28H
+		CMP	#50H
+		BCS	TECK10		; Fighting area in ?
+;					; yes !
+		LDA	<KNCRYP
+		CMP	#80H
+		BEQ	TECK10		; Ken cut ?
+;					; yes ! nigeru !
+		LDA	ENZPSL,X
+		ORA	ENDSPL,X
+		BNE	TECK10
+;
+		LDA	<PLBGCKF
+		CMP	ENKAIF,X
+		BNE	TECK10
+;
+		STY	<WORK0
+;
+		LDA	<PLMKCH
+		LSR	A
+		TAY
+		LDA	<WORK0
+		CMP	TEJPMK,Y
+		BEQ	TECK10		;Back player ?
+;					; not !
+		LDA	#20H
+		JSL	>PSERC2L
+;
+		LDA	<WORK1
+		EOR	#0FFH
+		INC	A
+		STA	ENXSPD,X
+;
+		LDA	<WORK0
+		EOR	#0FFH
+		INC	A
+		STA	ENYSPD,X
+;
+		LDA	#10H
+		STA	ENZSPD,X
+		INC	ENSTAT,X
+		RTS
+;
+TECK10		EQU	$
+		LDA	ENTIM0,X
+		BNE	TEKS10
+;
+		INC	ENSTAT,X
+;
+		INC	ENWRK1,X
+		LDA	ENWRK1,X
+		CMP	#04H
+		BNE	TEKS08
+;
+		STZ	ENWRK1,X
+;
+		INC	ENSTAT,X
+;
+		JSL	>RNDSET
+		AND	#3FH
+		ADC	#30H
+		STA	ENTIM0,X
+;
+		LDA	#00CH
+		STA	ENZSPD,X
+;
+                JSR     EPYCHK
+                TYA
+                ASL     A
+                STA     <WORK0
+                JSR     EPXCHK
+                TYA
+                ORA     <WORK0
+                BRA     PKS00C
+PKS008          EQU     $
+TEKS08		EQU	$
+		JSL	>RNDSET
+		AND	#07H
+		ADC	#018H
+		STA	ENZSPD,X
+;
+                JSL     >RNDSET
+                AND     #03H
+PKS00C          EQU     $
+		TAY
+		LDA	TKJPXS,Y
+		STA	ENXSPD,X				
+		LDA	TKJPYS,Y
+		STA	ENYSPD,X				
+		RTS
+;
+TEKS10		EQU	$
+		LSR	A
+		LSR	A
+		LSR	A
+		LSR	A
+		AND	#01H
+		STA	ENCHPT,X
+		RTS
+;---------------------------------------------------------
+TEKJUMP		EQU	$
+		LDA	ENZPSL,X
+		BNE	TEKJ10
+;
+TKSTST		EQU	$
+		STZ	ENSTAT,X
+;
+		JSL	>RNDSET
+		AND	#3FH
+		ADC	#48H
+		STA	ENTIM0,X
+ENSDCL		EQU	$
+		STZ	ENYSPD,X
+		STZ	ENXSPD,X
+		RTS
+TEKJ10		EQU	$
+		LDA	#02H
+		STA	ENCHPT,X
+		RTS
+;---------------------------------------------------------
+TEKSERC		EQU	$
+		LDA	ENTIM0,X
+		BEQ	TKSTST
+;
+		LDA	ENZPSL,X
+		BNE	TKSE10
+;
+		LDA	#0CH
+		STA	ENZSPD,X
+;
+		INC	ENZPSL,X		
+;
+		LDA	#08H
+		STA	ENTIM1,X
+TKSE10		EQU	$
+		LDA	#02H
+		STA	ENCHPT,X		
+		RTS
+;==========================================
+TEKTACD		EQU	$
+		WORD	0FFF8H,00000H
+		HEX	C8,00,00,02
+		WORD	00008H,00000H
+		HEX	C8,40,00,02
+;
+		WORD	0FFF8H,00000H
+		HEX	CA,00,00,02
+		WORD	00008H,00000H
+		HEX	CA,40,00,02
+;
+		WORD	0FFF8H,00000H
+		HEX	EA,00,00,02
+		WORD	00008H,00000H
+		HEX	EA,40,00,02
+;- - - - - - - - - - - - - - - - - - - - - - - - - - 
+TEKTACS		EQU	$
+                LDA     #00H
+                XBA
+                LDA     ENCHPT,X
+                MEM16
+                REP     #00100000B
+                ASL     A
+                ASL     A
+                ASL     A
+;
+                ASL     A
+                ADC     #TEKTACD
+                STA     <WORK8
+;
+                MEM8
+                SEP     #00100000B
+;
+                LDA     #02H
+		JSR	SETO22
+;;                JSL     >SETOAML22
+;
+		JSL	>SADWSTL
+		RTS
+;%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+;%		Fairy izumi         		 %
+;%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+IZMYLM		EQU	$
+		HEX	08,F8
+;
+IZUMIMV		EQU	$
+		LDA	ENKBMK,X
+		BNE	IZSTRMV
+;
+		JMP	IZM0E0
+IZSTRMV		EQU	$
+		JSL	>OAMCHKL
+		JSR	ENSTCK
+;
+		INC	ENCONT,X
+		JSR	ISTARST
+;
+		LDA	ENCONT,X
+		AND	#01FH
+		BNE	ISM000
+;
+;;		JSL	>SDLRCE
+;;		ORA	#31H
+;;		STA	SOUND2	;(S)
+		LDA	#31H
+		JSL	>SDLRE2	;(S)
+ISM000		EQU	$
+		LDA	ENSTAT,X
+		JSL	>JSRSUB
+		WORD	ISMOVE
+		WORD	ISSTOP
+		WORD	ISEND
+;============================================
+ISMOVE		EQU	$
+		LDA	#00H
+		STA	ENWRK0,X
+;
+;
+;;		LDA	ENCONT,X
+;;		AND	#01H
+;;		BNE	IZM210
+;;;
+;;		INC	ENWRK1,X
+;;		LDA	ENWRK1,X
+;;		CMP	#30H	
+;;		BNE	IZM210
+		LDA	#08H
+		JSL	>PSERCHL
+		JSR	ENMVCL
+		JSL	>PSSAVE2
+		MEM16
+		REP	#020H
+		LDA	<PLXPS1
+		SEC
+		SBC	ENXP2L
+		CLC
+		ADC	#0003H
+		CMP	#0006H
+		BCS	IZM210
+		LDA	<PLYPS1
+		SEC
+		SBC	ENYP2L
+		CLC
+		ADC	#0003H+8
+		CMP	#0006H
+		BCS	IZM210
+;
+		LDA	#00A0H
+		CLC
+		ADC	>UPLFCT
+		STA	>UPLFCT
+;
+;;		LDA	>UPLFCT+1
+;;		ADC	#00H
+;;		STA	>UPLFCT+1
+;;;
+		MEM8
+		SEP	#20H
+;
+		INC	ENSTAT,X
+IZM210		EQU	$
+		MEM8
+		SEP	#20H
+		RTS
+;============================================
+ISSTOP		EQU	$
+		LDA	>LFNWCT
+		CMP	>LFITCT
+		BNE	IZM310
+;
+		INC	ENSTAT,X
+;
+		LDA	#40H+30H
+		STA	ENTIM2+00H  ;;,X	; Master clear !
+IZM310		EQU	$
+		RTS
+;============================================
+ISEND		EQU	$
+		LDA	ENCONT,X
+		AND	#0FH
+		BNE	IZM410
+;
+		LDA	ENWRK0,X
+		BMI	IZM410
+;
+		SEC
+		ROL	ENWRK0,X
+		LDA	ENWRK0,X
+		CMP	#80H
+		BCC	IZM410
+;
+		LDA	#0FFH
+		STA	ENWRK0,X
+;
+		STZ	PYALSP
+;
+		STZ	ENMODE,X
+IZM410		EQU	$
+		RTS
+;	
+;
+;***************************************************
+IZM0E0		EQU	$
+		LDA	ENTIM2,X
+		BEQ	IZM0E8		; Clear time ?
+;					; yes !
+		CMP	#40H
+		BCS	IZM0E8
+		DEC	A
+		BNE	IZM0E5
+;
+		STZ	ENMODE,X
+IZM0E5		EQU	$
+		LSR	A
+		BCC	IZM0E8
+		RTS
+;---------------------------------------------------
+IZM0E8		EQU	$
+		JSR	IZUMICS
+;
+		DEC	ENCTCT,X
+		BPL	IZM0F0
+;
+		LDA	#05H
+		STA	ENCTCT,X
+;
+		LDA	ENCHPT,X
+		INC	A
+		AND	#03H
+		STA	ENCHPT,X
+;
+IZM0F0		EQU	$
+;;L		JSR	ISTARST
+;
+		JSR	ENSTCK
+;
+		INC	ENCONT,X
+;
+;		LDA	ENCONT,X
+;		AND	#01H
+;		BNE	IZM000
+;;
+;		LDA	ENMUKI,X
+;		AND	#01H
+;		TAY
+;		LDA	ENZSPD,X
+;		CLC
+;		ADC	IZMYAD,Y
+;;		STA	ENZSPD,X
+;		CMP	IZMYLM,Y
+;		BNE	IZM000
+;;
+;		INC	ENMUKI,X
+;IZM000		EQU	$
+;		JSR	ENZCLC
+;
+;
+		LDA	ENSTAT,X
+		JSL	>JSRSUB
+		WORD	IZMOV1
+		WORD	IZMOV2
+;;		WORD	IZMOV3
+;;		WORD	IZMOV4
+;------------------------------------------
+IZMOV1		EQU	$
+		JSR	ISTARST
+;
+		LDA	#01H
+		STA	ENWRK0,X
+;
+		JSR	EPXYCK
+		LDA	<WORKF
+		CLC
+		ADC	#030H
+		CMP	#060H
+		BCS	IZM010
+;
+		LDA	<WORKE
+		CLC
+		ADC	#030H
+		CMP	#060H
+		BCS	IZM010
+;
+		JSL	>DASCLR1
+;
+		INC	ENSTAT,X
+;
+		LDA	#MS_0530
+		STA	MSGENOL		
+		LDA	#HIGH MS_0530
+		STA	MSGENOH
+		JSL	>MSGSET		
+;
+		LDA	#01H
+		STA	PYALSP
+;
+		LDA	#IZUMI
+		JSL	>ENIDSH
+		JSL	>ENIDPS
+		LDA	#01H
+		STA	ENKBMK,Y
+;
+		LDA	ENYPSL,Y
+		SEC
+		SBC	ENZPSL,X
+		STA	ENYPSL,Y
+;
+		LDA	#00H
+		STA	ENZPSL,Y
+IZM010		EQU	$
+		RTS
+;------------------------------------------------
+IZMOV2		EQU	$
+		RTS
+;
+;
+;
+;K;		LDA	#00H
+;K;		STA	ENWRK0,X
+;;K;
+;K;		LDA	ENCONT,X
+;K;		AND	#01H
+;K;		BNE	IZM210
+;K;;
+;K;		INC	ENWRK1,X
+;K;		LDA	ENWRK1,X
+;K;		CMP	#30H	
+;K;		BNE	IZM210
+;K;;
+;K;		INC	ENSTAT,X
+;K;;
+;K;		LDA	#0A0H
+;K;		CLC
+;K;		ADC	>UPLFCT
+;K;		STA	>UPLFCT
+;K;;
+;K;		LDA	>UPLFCT+1
+;K;		ADC	#00H
+;K;		STA	>UPLFCT+1
+;K;IZM210		EQU	$
+;K;		RTS
+;K;;------------------------------------------------
+;K;IZMOV3		EQU	$
+;K;		LDA	>LFNWCT
+;K;		CMP	>LFITCT
+;K;		BNE	IZM310
+;K;;
+;K;		INC	ENSTAT,X
+;K;IZM310		EQU	$
+;K;		RTS
+;K;;------------------------------------------------
+;K;IZMOV4		EQU	$
+;K;		LDA	ENCONT,X
+;K;		AND	#0FH
+;K;		BNE	IZM410
+;K;;
+;K;		LDA	ENWRK0,X
+;K;		BMI	IZM410
+;K;;
+;K;		SEC
+;K;		ROL	ENWRK0,X
+;K;		LDA	ENWRK0,X
+;K;		CMP	#80H
+;K;		BCC	IZM410
+;K;;
+;K;		LDA	#0FFH
+;K;		STA	ENWRK0,X
+;K;;
+;K;		STZ	PYALSP
+;K;IZM410		EQU	$
+;K;		RTS
+;=====================================================
+IZUMICD		EQU	$
+;
+		WORD	0FFFCH,0FFF8H
+		HEX	8E,00,00,02
+		WORD	00004H,0FFF8H
+		HEX	8E,40,00,02
+		WORD	0FFFCH,00008H
+		HEX	AE,00,00,02
+		WORD	00004H,00008H
+		HEX	AE,40,00,02
+;
+		WORD	0FFFCH,0FFF8H
+		HEX	8C,00,00,02
+		WORD	00004H,0FFF8H
+		HEX	8C,40,00,02
+		WORD	0FFFCH,00008H
+		HEX	AC,00,00,02
+		WORD	00004H,00008H
+		HEX	AC,40,00,02
+;
+		WORD	0FFFCH,0FFF8H
+		HEX	8A,00,00,02
+		WORD	00004H,0FFF8H
+		HEX	8A,40,00,02
+		WORD	0FFFCH,00008H
+		HEX	AA,00,00,02
+		WORD	00004H,00008H
+		HEX	AA,40,00,02
+;
+		WORD	0FFFCH,0FFF8H
+		HEX	8C,00,00,02
+		WORD	00004H,0FFF8H
+		HEX	8C,40,00,02
+		WORD	0FFFCH,00008H
+		HEX	AC,00,00,02
+		WORD	00004H,00008H
+		HEX	AC,40,00,02
+; - - - - - - - - - - - - - - - - - - - - - - - - - -
+IZUMICS		EQU	$
+                LDA     #00H
+                XBA
+                LDA     ENCHPT,X
+                MEM16
+                REP     #00100000B
+                ASL     A
+                ASL     A
+                ASL     A
+;
+                ASL     A
+                ASL     A
+                ADC     #IZUMICD
+                STA     <WORK8
+;
+                MEM8
+                SEP     #00100000B
+;
+                LDA     #04H
+;
+		JSR	SETO22
+;;                JSL     >SETOAML22
+;;		JSL	>EN1CSTL
+		JSL	>SADWSTL
+		RTS
+;=====================================================
+ISSXAL		EQU	$
+ISSYAL		EQU	$
+;;		HEX	F0,F8,00,08,10,18
+		HEX	F4,FA,00,06,0C,12
+		HEX	F7,FD,03,09,0F,15
+ISSXAH		EQU	$
+ISSYAH		EQU	$
+		HEX	FF,FF,00,00,00,00		
+		HEX	FF,FF,00,00,00,00		
+ISSXPT		EQU	$
+ISSYPT		EQU	$
+		HEX	0,1,2,3,4,5,2,3
+		HEX	6,7,8,9,A,B,8,9
+;
+;;		HEX	0,1,2,3,4,5,2,3
+;- - - - - - - - - - - - - - - - - - - - - - - -
+ISTARST		EQU	$
+		LDA	ENWRK0,X
+		BMI	ISS010
+		AND	ENCONT,X
+		BNE	ISS010
+;
+		JSL	>RNDSET
+		AND	#07H
+		TAY
+		LDA	ISSXPT,Y
+		TAY
+		LDA	ISSXAL,Y
+		STA	<WORK0		
+		LDA	ISSXAH,Y
+		STA	<WORK1		
+;
+		JSL	>RNDSET
+		AND	#07H
+		TAY
+		LDA	ISSYPT,Y
+		TAY
+		LDA	ISSYAL,Y
+;;		CLC
+;;		ADC	ENWRK1,X
+		STA	<WORK2		
+		LDA	ISSYAH,Y
+;;		ADC	#00H
+		STA	<WORK3		
+;
+		JSL	>ICEFLST
+;
+ISS010		EQU	$
+		RTS
+;=====================================================
+;=====================================================
+;%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+;%		Daruma otoshi         		 %
+;%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+DARUMMV		EQU	$
+		LDA	ENWRK2,X
+		BEQ	DRM010
+;
+		JSL	>EN1CSTL
+;
+		JSR	ENSTCK
+		JSR	CREKEK
+;
+		JSR	ENMVCL2
+;
+		DEC	ENZSPD,X
+		DEC	ENZSPD,X
+;
+		LDA	ENZPSL,X
+		BPL	DRM008
+		LDA	#10H
+		STA	ENZSPD,X
+		STZ	ENZPSL,X
+DRM008		EQU	$
+		JSR	ENTUCK
+		BEQ	DRM009
+;
+;;		JSL	>SDLRCE
+;;		ORA	#21H
+;;		STA	SOUND2	;(S)
+		LDA	#21H
+		JSL	>SDLRE2	;(S)
+DRM009		EQU	$
+;
+		LDA	ENCTCT,X
+		CMP	#03H
+		BCC	DRM00A
+;
+		LDA	#EFAIL
+		STA	ENMODE,X
+;
+		LDA	#0AH
+		STA	ENTIM0,X
+;
+		STZ	ENMOD4,X
+;
+;;		JSL	>SDLRCE
+;;		ORA	#1EH
+;;		STA	SOUND2	;(S)
+		LDA	#1EH
+		JSL	>SDLRE2	;(S)
+DRM00A		EQU	$
+		RTS
+;======================================		
+DRM010		EQU	$
+		JSR	DARUMCS
+		JSR	ENSTCK
+;
+		LDA	ENHNFG,X
+		BEQ	DRM020		; Damege ?
+;					; yes !
+		LDY	ENWRK0,X
+		BEQ	DRM020		; Body aru ?
+;					; yes !
+		CMP	#0FH
+		BNE	DRM020
+;
+		LDA	#06H
+		STA	ENHNFG,X
+;
+		LDA	ENZPSL,X
+		CLC
+		ADC	ENWRK1,X
+		STA	ENZPSL,X
+;
+		DEC	ENWRK0,X	; 1 ko heru !
+		BNE	DRM012
+;
+		LDA	#11H
+		STA	ENLIFE,X	; Last !!
+DRM012		EQU	$
+		LDA	ENXSPD,X
+		BPL	DRM01C
+		SEC
+		SBC	#08H
+DRM01C		EQU	$		
+		CLC
+		ADC	#04H
+		STA	ENXSPD,X
+;
+		LDA	ENYSPD,X
+		BPL	DRM01D
+		SEC
+		SBC	#08H
+DRM01D		EQU	$		
+		CLC
+		ADC	#04H
+		STA	ENYSPD,X
+;
+		LDA	#DARUM
+		JSL	>ENIDSH
+		BMI	DRM020
+;
+		JSL	>ENIDPS
+		LDA	#01H
+		STA	ENWRK2,Y
+		STA	ENLIFE,Y
+;
+		LDA	ENHNXS,X
+		STA	ENXSPD,Y
+		LDA	ENHNYS,X
+		STA	ENYSPD,Y
+;
+		LDA	#40H
+		STA	ENMOD5,Y
+DRM020		EQU	$
+		JSR	ENHNSB
+;
+		JSR	CREKEK
+;
+		LDA	ENSTAT,X
+		JSL	>JSRSUB
+		WORD	DRSTOP
+		WORD	DRJUMP
+;---------------------------------------------------------
+DRSTYD		EQU	$
+		HEX	8,7,6,5,4,5,6,7
+;
+DRSTOP		EQU	$
+		LDA	ENTIM0,X
+		BNE	DRS010
+;
+		INC	ENSTAT,X
+;
+		LDA	#10H
+		STA	ENZSPD,X
+		RTS
+DRS010		EQU	$
+;;		NOP
+		LSR	A
+		TAY
+		LDA	DRSTYD,Y
+		STA	ENWRK1,X		
+		RTS
+;---------------------------------------------------------
+DRJUMP		EQU	$
+		JSR	ENMVCL2
+;
+		DEC	ENZSPD,X
+		DEC	ENZSPD,X
+;
+		LDA	ENZPSL,X
+		BPL	DRJ010
+;
+		STZ	ENZPSL,X
+		STZ	ENSTAT,X
+		LDA	#0FH
+		STA	ENTIM0,X
+DRJ010		EQU	$
+ENTUCK		EQU	$
+;;		JSL	>ENBGCKL
+;;		LDA	ENCBFG,X
+		JSR	ENBGCK
+		AND	#03H
+		BEQ	DRJ020
+;
+		LDA	ENXSPD,X
+		EOR	#0FFH
+		INC	A
+		STA	ENXSPD,X
+;
+		INC	ENCTCT,X
+DRJ020		EQU	$
+		LDA	ENCBFG,X
+		AND	#0CH
+		BEQ	DRJ030
+;
+		LDA	ENYSPD,X
+		EOR	#0FFH
+		INC	A
+		STA	ENYSPD,X
+;
+		INC	ENCTCT,X
+DRJ030		EQU	$
+		RTS
+;---------------------------------------------------------
+ENTUCKL		EQU	$
+		JSR	ENTUCK
+		RTL
+;---------------------------------------------------------
+;
+;
+;
+		RTS
+;======================================================
+DARUMCS		EQU	$
+		JSR	OAMCHK
+;
+		LDA	ENWRK1,X
+		STA	<WORK6
+		STZ	<WORK7
+;
+		PHX
+		LDA	ENWRK0,X
+		TAX
+;
+		TYA
+		CLC
+		ADC	#0CH
+		TAY
+DRC010		EQU	$
+		MEM16
+		REP	#20H
+		LDA	<WORK0
+		STA	(<OAMADR),Y
+		AND	#0100H
+		STA	<WORKE
+		INY
+		LDA	<WORK2
+		PHA
+		SEC
+		SBC	<WORK6
+		STA	<WORK2
+		PLA
+		STA	(<OAMADR),Y
+		CLC
+		ADC	#0010H
+		CMP	#0100H
+		MEM8
+		SEP	#20H
+		BCC	DRC020
+;
+		LDA	#0F0H
+		STA	(<OAMADR),Y
+DRC020		EQU	$
+		LDA	#0A0H
+		CPX	#00H		
+		BNE	DRC030
+		LDA	#0A2H
+DRC030		EQU	$
+		PHX
+		LDX	<WORK6
+		CPX	#06H+1
+		BCS	DRC050	; Chigimi ?
+		SEC		; yes !
+		SBC	#20H
+DRC050		EQU	$
+		PLX
+		INY
+		STA	(<OAMADR),Y
+		LDA	<WORK5
+		INY
+		STA	(<OAMADR),Y
+		PHY
+		TYA
+		LSR	A
+		LSR	A
+		TAY
+		LDA	#02H
+		ORA	<WORKF
+		STA	(<OSBADR),Y
+		PLA
+		SEC
+		SBC	#07H
+		TAY
+		DEX
+		BPL	DRC010
+		PLX
+;
+		JSL	>SADWSTL
+		RTS
+;
+;
+;
+;
+;
+;
+;
+;
+;%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+;%		BG Beam set 1         		 %
+;%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+BGBM0MV		EQU	$
+		JSL	>OAMCHKL
+;
+		LDA	<DJFLG
+		BNE	BGB0F0
+;- - - - Haka	GOST0 set check - - 
+		LDA	#0FFH
+		STA	ENXSPD,X
+		STA	HEMODE,X
+		JSR	ENBGCK
+		BEQ	GSCK10
+;
+		JSR	ENSTCK
+;
+		LDA	#GOST0
+		STA	ENMYNO,X
+;
+		JSL	>ENMDST
+;
+		INC	ENWRK3,X
+;
+		LDA	ENXPSL,X
+		ADC	#08H
+		STA	ENXPSL,X
+;
+		LDA	ENYPSL,X
+		SBC	#07H
+		STA	ENYPSL,X
+;
+		LDA	#19H
+		JSL	>SDLRE3	;(S)
+;
+		LDA	#80H
+		STA	ENMOD5,X
+GSCK10		EQU	$
+		RTS
+;
+BGB0F0		EQU	$
+		JSR	ENSTCK
+;
+		INC	ENCONT,X
+		LDA	ENCONT,X
+		AND	#07FH
+		BNE	BGB000
+;
+		LDA	ENKAIF,X
+		CMP	<PLBGCKF
+		BNE	BGB000
+;
+		JSL	>Z2TMSTL
+		BMI	BGB000
+;
+BBMD5S		EQU	$
+		LDA	ENMOD5,Y
+		ORA	#00001000B
+		STA	ENMOD5,Y
+;
+		LDA	#04H
+		STA	ENMOD6,Y
+BGB000		EQU	$
+		RTS
+;%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+;%		BG Beam set 2        		 %
+;%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+BGBXAL		EQU	$
+		HEX	0C,F4,00,00
+BGBXAH		EQU	$
+		HEX	00,FF,00,00
+BGBYAL		EQU	$
+		HEX	00,00,0C,F4
+BGBYAH		EQU	$
+		HEX	00,00,00,FF
+;
+BGB1YS		EQU	$
+		HEX	00,00
+BGB1XS		EQU	$
+		HEX	28,D8,00,00
+;
+BGBM1MV		EQU	$
+		JSL	>OAMCHKL
+;
+		JSR	ENSTCK
+;
+		LDA	ENTIM0,X
+		BEQ	BGB110
+;
+		CMP	#18H
+		BNE	BGB100
+;
+		JSL	>Z2TMSTL
+		BMI	BGB100
+;
+		JSR	BBMD5S
+;
+		PHX
+		TYX
+		JSR	EPXYCK
+		LDA	BGB1XS,Y
+		STA	ENXSPD,X
+		LDA	BGB1YS,Y
+		STA	ENYSPD,X
+;
+		LDA	ENXPSL,X
+		CLC
+		ADC	BGBXAL,Y
+		STA	ENXPSL,X
+		LDA	ENXPSH,X
+		ADC	BGBXAH,Y
+		STA	ENXPSH,X
+;
+		LDA	ENYPSL,X
+		CLC
+		ADC	BGBYAL,Y
+		STA	ENYPSL,X
+		LDA	ENYPSH,X
+		ADC	BGBYAH,Y
+		STA	ENYPSH,X
+		PLX
+BGB100		EQU	$
+		RTS
+;
+BGB110		EQU	$
+		LDA	<KENMD
+		BEQ	BGB120
+;
+		LDA	ENKAIF,X
+		CMP	<PLBGCKF
+		BNE	BGB120
+;
+		LDA	#20H
+		STA	ENTIM0,X
+BGB120		EQU	$
+		RTS		
+;
+;%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+;%		Theft	          		 %
+;%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+THCHPT		EQU	$
+		HEX	B,8,2,5
+THWKPT		EQU	$
+		HEX	9,6,0,3
+		HEX	A,7,1,4
+;
+TheftMV		EQU	$
+		JSL	>TheftCS
+;
+		JSR	ENSTCK
+;
+		JSR	ENHNSB
+;
+		JSL	>CRKNENL
+;
+;;		LDA	<FRCNT
+;;		AND	#03H
+;;		BNE	THM010
+;
+		LDA	ENSTAT,X
+		CMP	#03H
+		BEQ	THM010
+;
+		JSR	EPXYCK
+		TYA
+		STA	ENKBMK,X
+		EOR	ENMUKI,X
+		CMP	#01H
+		BNE	THM010
+;
+		TYA
+		STA	ENMUKI,X		
+THM010		EQU	$
+		LDA	ENSTAT,X
+		JSL	>JSRSUB
+		WORD	THWAIT
+		WORD	THREDY
+		WORD	THGO
+		WORD	THCOSH
+;-----------------------------------------------
+THWAIT		EQU	$
+		JSR	CRTHPL
+;
+		LDA	ENTIM0,X
+		BNE	THW030
+;
+		MEM16
+		REP	#20H
+		LDA	<PLXPS1
+		SEC
+		SBC	ENXP2L
+		CLC
+		ADC	#0050H
+		CMP	#0050H*2
+		BCS	THW030
+;
+		LDA	<PLYPS1
+		SEC
+		SBC	ENYP2L
+		CLC
+		ADC	#0050H
+		CMP	#0050H*2
+		BCS	THW030
+;
+		MEM8
+		SEP	#20H
+;
+		INC	ENSTAT,X
+;
+		LDA	#10H
+		STA	ENTIM0,X
+;
+THW030		EQU	$
+		MEM8
+		SEP	#20H
+		LDY	ENMUKI,X
+		LDA	THCHPT,Y
+		STA	ENCHPT,X
+		RTS
+;-----------------------------------------------
+THREDY		EQU	$
+		JSR	CRTHPL
+;
+		JSR	EPXYCK
+		TYA
+		STA	ENKBMK,X
+		STA	ENMUKI,X
+;
+		LDA	ENTIM0,X
+		BNE	THR030
+;
+		INC	ENSTAT,X
+;
+		LDA	#20H
+		STA	ENTIM0,X
+THR030		EQU	$
+THPTST		EQU	$
+		LDA	<FRCNT
+		AND	#1FH
+		BNE	THG010
+;
+		LDA	ENKBMK,X
+		STA	ENMUKI,X
+THG010		EQU	$
+THPTST2		EQU	$
+		INC	ENCONT,X
+		LDA	ENCONT,X
+		AND	#00000100B
+		ORA	ENMUKI,X
+		TAY
+		LDA	THWKPT,Y
+		STA	ENCHPT,X
+;
+		RTS
+;-----------------------------------------------
+THGO		EQU	$
+		LDA	#12H
+		JSL	>PSERCHL
+;
+		LDA	ENCBFG,X
+		BNE	THG020
+;
+		JSR	ENMVCL
+THG020		EQU	$
+;;		JSL	>ENBGCKL
+		JSR	ENBGCK
+;
+		LDA	ENTIM0,X
+		BNE	THG050
+;
+		MEM16
+		REP	#20H
+		LDA	<PLXPS1
+		SEC
+		SBC	ENXP2L
+		CLC
+		ADC	#0050H
+		CMP	#0050H*2
+		BCS	THG030
+;
+		LDA	<PLYPS1
+		SEC
+		SBC	ENYP2L
+		CLC
+		ADC	#0050H
+		CMP	#0050H*2
+		BCC	THG050
+;
+THG030		EQU	$
+		MEM8
+		SEP	#20H
+;
+		STZ	ENSTAT,X
+;
+		LDA	#80H
+		STA	ENTIM0,X
+;
+THG050		EQU	$
+		MEM8
+		SEP	#20H
+;
+		JSL	>CRENPLL
+		BCC	THG070
+;
+		INC	ENSTAT,X
+;
+		LDA	#20H
+		STA	ENTIM0,X
+;
+		JSR	THCOST		; Coin thefting !
+;
+		JSR	THSDST		;(S)
+THG070		EQU	$
+		JSR	THPTST
+		RTS
+;-----------------------------------------------
+THCOSH		EQU	$
+		JSR	CRTHPL
+;
+		JSR	TCSERC
+		PHY
+;
+		LDA	ENTIM0,X
+		BNE	TCS008
+;
+;;		LDA	<FRCNT
+;;		AND	#1FH
+;;		BNE	TCS020
+;
+		JSR	THPTST2
+;
+		LDA	ENCBFG,X
+		BNE	TSE013	
+;
+		JSR	ENMVCL
+TSE013		EQU	$
+;;		JSL	>ENBGCKL
+		JSR	ENBGCK
+;
+		LDA	ENKBMK,X
+		STA	ENMUKI,X
+TCS020		EQU	$
+TCS008		EQU	$
+		PLY
+;
+		TXA
+		EOR	<FRCNT
+		AND	#03H
+		BNE	TCS010
+;
+		LDA	ENXPSL,Y
+		STA	<WORK4
+		LDA	ENXPSH,Y
+		STA	<WORK5
+		LDA	ENYPSL,Y
+		STA	<WORK6
+		LDA	ENYPSH,Y
+		STA	<WORK7
+;
+		JSL	>EEXYCKL
+		TYA
+		STA	ENKBMK,X
+TCS010		EQU	$
+		RTS
+;-----------------------------------------------
+TCSERC		EQU	$
+		LDY	#ENNO-1
+TSE010		EQU	$
+		LDA	ENMODE,Y
+		BEQ	TSE020
+;
+		LDA	ENMYNO,Y
+		CMP	#BOMB1
+		BEQ	TSE011
+		CMP	#YAAA1
+		BEQ	TSE011
+		CMP	#RUPYR
+		BNE	TSE020
+;
+TSE011		EQU	$
+		PHY
+		JSR	TSECHK
+		PLY
+		RTS
+;
+TSE020		EQU	$
+		DEY
+		BPL	TSE010
+;
+		STZ	ENSTAT,X
+;
+		LDA	#40H
+		STA	ENTIM0,X
+		RTS
+;--------------------------------------------
+TSECHK		EQU	$
+		TXA
+		EOR	<FRCNT
+		AND	#03H
+		BNE	TSCK00
+;
+		LDA	ENXPSL,Y
+		STA	<WORK4
+		LDA	ENXPSH,Y
+		STA	<WORK5
+		LDA	ENYPSL,Y
+		STA	<WORK6
+		LDA	ENYPSH,Y
+		STA	<WORK7
+;
+		LDA	#13H
+		JSL	>ESERCHL
+;
+		LDA	<WORK0
+		STA	ENYSPD,X
+		LDA	<WORK1
+		STA	ENXSPD,X
+;
+TSCK00		EQU	$
+		LDY	#ENNO-1
+TSCK01		EQU	$
+		TYA
+		EOR	<FRCNT
+		AND	#03H
+		ORA	ENTIM3,Y
+		BNE	TSCK11
+;
+		LDA	ENMODE,Y
+		BEQ	TSCK11 
+;
+		LDA	ENMYNO,Y
+		CMP	#BOMB1
+		BEQ	TSCK10
+		CMP	#YAAA1
+		BEQ	TSCK10
+		CMP	#RUPYR
+		BNE	TSCK11
+;
+TSCK10		EQU	$
+		JSR	TSCK02
+TSCK11		EQU	$
+		DEY
+		BPL	TSCK01
+		RTS
+;
+TSCK02		EQU	$
+;;		LDA	ENTIM3,Y
+;;		BNE	TSE018
+;;;
+		LDA	ENXPSL,Y
+		STA	<WORK4
+		LDA	ENXPSH,Y
+		STA	<WORK5
+		LDA	ENYPSL,Y
+		STA	<WORK6
+		LDA	ENYPSH,Y
+		STA	<WORK7
+;
+		MEM16
+		REP	#20H
+		LDA	<WORK4
+		SEC
+		SBC	ENXP2L
+		CLC
+		ADC	#008H
+		CMP	#010H
+		BCS	TSE018
+;
+		LDA	<WORK6
+		SEC
+		SBC	ENYP2L
+		CLC
+		ADC	#00CH
+		CMP	#018H
+		BCS	TSE018
+;
+		MEM8
+		SEP	#20H
+;
+		LDA	#00H
+		STA	ENMODE,Y
+;
+		PHX
+		LDA	ENMYNO,Y
+		SEC
+		SBC	#HART1
+		TAX
+;
+;;		JSL	>SDLRCE
+;;		ORA	#0AH
+		LDA	>ITGSDT,X
+;;		STA	SOUND3	;(S)
+		JSL	>SDLRE3	;(S)
+;
+		PLX
+;
+		LDA	#0EH
+		STA	ENTIM0,X
+TSE018		EQU	$
+		MEM8
+		SEP	#20H
+;
+		RTS
+;
+;-----------------------------------------------
+CRTHPL		EQU	$
+		JSL	>CRENPL2L
+		BCC	CTH010
+;
+		LDA	#20H
+		JSL	>PSERC2L
+		LDA	<WORK0
+		STA	<PLYSPD
+		EOR	#0FFH
+		STA	ENHNYS,X
+;
+		LDA	<WORK1
+		STA	<PLXSPD
+		EOR	#0FFH
+		STA	ENHNXS,X
+;
+		LDA	#04H
+		STA	<HANEFG
+		LDA	#0CH
+		STA	ENHNFG,X
+;
+THSDST		EQU	$
+;;		JSL	>SDLRCE
+;;		ORA	#0BH
+;;		STA	SOUND2	;(S)
+		LDA	#0BH
+		JSL	>SDLRE2	;(S)
+CTH010		EQU	$
+		RTS
+;-----------------------------------------------
+TCOSXS		EQU	$
+		HEX	00,18,18,00,E8,E8
+;;		HEX	00,E8,18,E8,00,18
+TCOSYS		EQU	$
+		HEX	E0,F0,10,20,10,F0
+;;		HEX	E0,10,10,F0,20,F0
+TCSSNO		EQU	$
+		BYTE	RUPYR,YAAA1,BOMB1,RUPYR
+;
+THCOST		EQU	$
+		LDA	#05H
+		STA	ENHELP
+;
+TCOS10		EQU	$
+		JSL	>RNDSET
+		AND	#03H
+		STA	ENHELP2
+;
+		DEC	A
+		BEQ	TCOS0C
+		DEC	A
+		BEQ	TCOS0D
+;
+		MEM16
+		REP	#00100000B
+		LDA	>CONCNT
+		MEM8
+		SEP	#00100000B
+		BRA	TCOS0E
+TCOS0C		EQU	$
+		LDA	>ARWCNT
+		BRA	TCOS0E
+;
+TCOS0D		EQU	$
+		LDA	>BMBCNT
+TCOS0E		EQU	$
+		BEQ	TCOSA0
+;
+;;		LDA	#RUPYR
+		LDY	ENHELP2
+		LDA	TCSSNO,Y
+		LDY	#07H
+		JSL	>ENIDSH2
+		BMI	TCOSA0
+;
+		LDA	ENHELP2
+		DEC	A
+		BEQ	TCOS11
+		DEC	A
+		BEQ	TCOS12
+;-------------------------------------------
+		MEM16
+		REP	#20H
+		LDA	>CONCNT
+		DEC	A
+		STA	>CONCNT
+		MEM8
+		SEP	#20H
+		BRA	TCOS13
+;-------------------------------------------
+TCOS11		EQU	$
+		LDA	>ARWCNT
+		DEC	A
+		STA	>ARWCNT
+		BRA	TCOS13
+;-------------------------------------------
+TCOS12		EQU	$
+		LDA	>BMBCNT
+		DEC	A
+		STA	>BMBCNT
+;-------------------------------------------
+TCOS13		EQU	$
+		LDA	<PLXPS1
+		STA	ENXPSL,Y
+		LDA	<PLXPS0
+		STA	ENXPSH,Y
+		LDA	<PLYPS1
+		STA	ENYPSL,Y
+		LDA	<PLYPS0
+		STA	ENYPSH,Y
+;
+		LDA	#18H
+		STA	ENZSPD,Y
+;
+		PHX
+		LDX	ENHELP
+		LDA	TCOSXS,X
+		STA	ENXSPD,Y
+		LDA	TCOSYS,X
+		STA	ENYSPD,Y
+		PLX
+;
+		LDA	#20H
+		STA	ENTIM3,Y
+;
+		LDA	#01H
+		STA	ENKBMK,Y	;1 of yaa !
+;
+		LDA	#0FFH
+		STA	ENSTTM,Y		
+;
+		DEC	ENHELP
+		BMI	TCOSA0
+		JMP	TCOS10
+;
+TCOSA0		EQU	$
+		RTS
+;---------------------------------
+TheftCD		EQU	$
+;0
+		WORD	00000H,0FFFAH
+		HEX	00,00,00,02
+		WORD	00000H,00000H
+		HEX	06,00,00,02
+;1
+		WORD	00000H,0FFFAH
+		HEX	00,00,00,02
+		WORD	00000H,00000H
+		HEX	06,40,00,02
+;2
+		WORD	00000H,0FFFAH
+		HEX	00,00,00,02
+		WORD	00000H,00000H
+		HEX	20,00,00,02
+;3
+		WORD	00000H,0FFF9H
+		HEX	04,00,00,02
+		WORD	00000H,00000H
+		HEX	22,00,00,02
+;4
+		WORD	00000H,0FFF9H
+		HEX	04,00,00,02
+		WORD	00000H,00000H
+		HEX	22,40,00,02
+;5
+		WORD	00000H,0FFF9H
+		HEX	04,00,00,02
+		WORD	00000H,00000H
+		HEX	24,00,00,02
+;6
+		WORD	00000H,0FFF8H
+		HEX	02,00,00,02
+		WORD	00000H,00000H
+		HEX	0A,00,00,02
+;7
+		WORD	00000H,0FFF9H
+		HEX	02,00,00,02
+		WORD	00000H,00000H
+		HEX	0E,00,00,02
+;8
+		WORD	00000H,0FFF9H
+		HEX	02,00,00,02
+		WORD	00000H,00000H
+		HEX	0A,00,00,02
+;9
+		WORD	00000H,0FFF8H
+		HEX	02,40,00,02
+		WORD	00000H,00000H
+		HEX	0A,40,00,02
+;A
+		WORD	00000H,0FFF9H
+		HEX	02,40,00,02
+		WORD	00000H,00000H
+		HEX	0E,40,00,02
+;B
+		WORD	00000H,0FFF9H
+		HEX	02,40,00,02
+		WORD	00000H,00000H
+		HEX	0A,40,00,02
+;-----
+THKBCD		EQU	$
+		HEX	02,02,00,04
+THKBAD		EQU	$
+		HEX	40,00,00,00
+;
+TheftCS		EQU	$
+		PHB
+		PHK
+		PLB
+;
+                LDA     #00H
+                XBA
+                LDA     ENCHPT,X
+                MEM16
+                REP     #00100000B
+                ASL     A
+                ASL     A
+                ASL     A
+;
+                ASL     A
+                ADC     #TheftCD
+                STA     <WORK8
+;
+                MEM8
+                SEP     #00100000B
+;
+                LDA     #02H
+;
+		JSR	SETO22
+;;                JSL     >SETOAML22
+;
+		LDA	ENDSPL,X
+		BNE	THC090
+;
+                PHX
+                LDA     ENKBMK,X
+                TAX
+                LDA     THKBCD,X
+                LDY     #02H
+                STA     (<OAMADR),Y
+                INY
+                LDA     (<OAMADR),Y
+                AND     #10111111B
+                ORA     THKBAD,X
+                STA     (<OAMADR),Y
+                PLX
+;
+                JSL     >SADWSTL
+;
+THC090		EQU	$
+		PLB
+		RTL
+;%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+;%		Amebaa          		 %
+;%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+AMTMCL		EQU	$
+		HEX	00,40,C0,80
+AMTMFC		EQU	$
+		HEX	0B,07
+;
+AMEBAMV		EQU	$
+		LDA	ENWRK1,X
+		BEQ	AMM010
+;---------------- Coor ---------
+		JSL	>EN1CSTL
+		JSR	ENSTCK
+		JSR	CREKEK
+;
+		INC	ENCONT,X
+		LDA	ENCONT,X
+		LSR	A
+		LSR	A
+		AND	#03H
+		TAY
+		LDA	ENCLOR,X
+		AND	#00111111B
+		ORA	AMTMCL,Y
+		STA	ENCLOR,X
+;
+		LDA	ENTIM0,X
+		BEQ	AMM000
+;
+		JSR	ENMVCL
+		JSR	ENTUCK
+AMM000		EQU	$
+		RTS
+;----------------------------------
+AMM010		EQU	$
+;;		LDA	#7FH
+;;		STA	<WD2131
+;;		LDA	#06H
+;;		STA	<DPMAIN
+;;		LDA	#10H
+;;		STA	<DPSUB		; Obj color add.!
+;
+		JSR	AMEBACS
+		JSR	ENSTCK
+;
+		INC	ENCTFG,X
+;
+		LDY	ENKBMK,X
+		LDA	ENMODE,Y
+		CMP	#EFAIL
+		BNE	AMM018
+;
+		STA	ENMODE,X
+		LDA	ENTIM0,Y
+		STA	ENTIM0,X
+;
+		LDA	ENMOD0,X
+		CLC
+		ADC	#04H
+		STA	ENMOD0,X
+		RTS
+;- - - - - - - - - - - - - - - - - - - - - -
+AMM018		EQU	$
+		LDA	<FRCNT
+		LSR	A
+		LSR	A
+		LSR	A
+		AND	#03H
+		STA	ENCONT,X
+;
+		LDA	<FRCNT
+		AND	#3FH
+		BNE	AMM020
+;
+		JSR	EPXCHK
+		TYA
+		ASL	A
+		ASL	A
+		STA	ENMUKI,X
+AMM020		EQU	$
+		JSL	>CRENPLL
+;
+		LDA	ENSTAT,X
+		JSL	>JSRSUB
+		WORD	AMSTOP
+		WORD	AMBUNR
+		WORD	AMCROS
+;--------------------------------------
+AMSTXS		EQU	$
+		HEX	10,10,00,F0,F0,F0,00,10
+AMSTYS		EQU	$
+		HEX	00,00,10,F0,10,10,F0,F0
+;
+;- - - - - - - - - - - - - - - - - - - - - - - - -
+AMSTOP		EQU	$
+		LDA	ENTIM0,X
+		BNE	AMS010
+;
+		INC	ENSTAT,X
+;
+		LDA	#30H
+		STA	ENTIM0,X
+;
+		INC	ENWRK0,X
+;
+		LDA	#AMEBA
+		JSL	>ENIDSH
+		BMI	AMS012
+;
+		JSL	>ENIDPS
+;
+		TYA
+		STA	ENKBMK,X
+;
+		LDA	#01H
+		STA	ENMOD0,Y
+		STA	ENWRK1,Y
+;
+		LDA	#00010000B
+		STA	ENMOD2,Y
+;
+		LDA	ENCTCT,X
+		STA	ENLIFE,Y
+;
+		LDA	#00000111B
+		STA	ENCLOR,Y
+;
+		LDA	#30H
+		STA	ENTIM0,Y
+;
+		PHX
+;
+		INC	ENWRK2,X
+		LDA	ENWRK2,X
+		CMP	#03H
+		BNE	AMSS10
+;
+		STZ	ENWRK2,X
+		PHY
+		JSR	EPXYCK
+		TYX
+		PLY
+		BRA	AMSS20
+AMSS10		EQU	$
+		JSL	>RNDSET
+		AND	#07H
+		TAX
+AMSS20		EQU	$
+		LDA	AMSTXS,X
+		STA	ENXSPD,Y
+		LDA	AMSTYS,X
+		STA	ENYSPD,Y
+		PLX
+;
+AMS012		EQU	$
+		RTS
+AMS010		EQU	$
+		CMP	#20H
+		BNE	AMS020
+;
+		STA	ENTIM1,X
+AMS020		EQU	$
+		RTS
+;--------------------------------------
+AMBUNR		EQU	$
+		LDA	ENTIM0,X
+		BNE	AMB010
+;
+		INC	ENSTAT,X
+;;		LDA	#20H
+;;		STA	ENTIM0,X
+AMB010		EQU	$
+		RTS		
+;--------------------------------------
+AMCROS		EQU	$
+;		LDY	ENKBMK,X
+;		LDA	ENTIM0,X
+;		BNE	AMCR10
+;;
+;		LDA	#00H
+;		STA	ENMODE,Y
+;		STZ	ENWRK0,X
+;		STZ	ENSTAT,X
+;		LDA	ENLIFE,Y
+;		STA	ENCTCT,X
+;;
+;		JSL	>RNDSET
+;		AND	#1FH
+;		ADC	#20H
+;		STA	ENTIM0,X
+;		RTS
+;
+AMCR10		EQU	$
+		TXA
+		EOR	<FRCNT
+		AND	#03H
+		BNE	AMCR90
+;
+		LDA	ENXPSL,Y
+		STA	<WORK4
+		LDA	ENXPSH,Y
+		STA	<WORK5
+		LDA	ENYPSL,Y
+		STA	<WORK6
+		LDA	ENYPSH,Y
+		STA	<WORK7
+;
+		MEM16
+		REP	#20H
+		LDA	ENXP2L
+		SEC
+		SBC	<WORK4
+		CLC
+		ADC	#02H
+		CMP	#04H
+		BCS	AMCR20
+		LDA	ENYP2L
+		SEC
+		SBC	<WORK6
+		CLC
+		ADC	#02H
+		CMP	#04H
+		BCS	AMCR20
+;
+		MEM8
+		SEP	#20H
+;
+		LDY	ENKBMK,X
+;;		LDA	ENTIM0,X
+;;		BNE	AMCR10
+;
+		LDA	#00H
+		STA	ENMODE,Y
+		STZ	ENWRK0,X
+		STZ	ENSTAT,X
+		LDA	ENLIFE,Y
+		STA	ENCTCT,X
+;
+		JSL	>RNDSET
+		AND	#1FH
+		ADC	#20H
+		STA	ENTIM0,X
+		RTS
+;
+AMCR20		EQU	$
+		MEM8
+		SEP	#20H
+;
+		LDA	#10H
+		JSL	>ESERCHL
+		LDA	<WORK0
+		STA	ENYSPD,X
+		LDA	<WORK1
+		STA	ENXSPD,X
+AMCR90		EQU	$
+		JSR	ENMVCL
+		RTS
+;--------------------------------------
+;=======================================
+AMEBACD		EQU	$
+;0
+		WORD	00004H,0FFFCH
+		HEX	8A,40,00,02
+		WORD	0FFFCH,0FFFCH
+		HEX	8F,40,00,00
+		WORD	0000CH,0000CH
+		HEX	8E,40,00,00
+		WORD	0FFFCH,00004H
+		HEX	8C,40,00,02
+;1
+		WORD	00004H,0FFFCH
+		HEX	AA,40,00,02
+		WORD	0FFFCH,0FFFCH
+		HEX	9F,40,00,00
+		WORD	0000CH,0000CH
+		HEX	9E,40,00,00
+		WORD	0FFFCH,00004H
+		HEX	AC,40,00,02
+;2
+		WORD	00003H,0FFFDH
+		HEX	AA,40,00,02
+		WORD	0FFFDH,0FFFDH
+		HEX	9F,40,00,00
+		WORD	0000BH,0000BH
+		HEX	9E,40,00,00
+		WORD	0FFFDH,00003H
+		HEX	AC,40,00,02
+;3
+		WORD	00003H,0FFFDH
+		HEX	8A,40,00,02
+		WORD	0FFFDH,0FFFDH
+		HEX	8F,40,00,00
+		WORD	0000BH,0000BH
+		HEX	8E,40,00,00
+		WORD	0FFFDH,00003H
+		HEX	8C,40,00,02
+;0
+		WORD	0FFFDH,0FFFCH
+		HEX	8A,00,00,02
+		WORD	0000DH,0FFFCH
+		HEX	8F,00,00,00
+		WORD	0FFFDH,0000CH
+		HEX	8E,00,00,00
+		WORD	00005H,00004H
+		HEX	8C,00,00,02
+;1
+		WORD	0FFFDH,0FFFCH
+		HEX	AA,00,00,02
+		WORD	0000DH,0FFFCH
+		HEX	9F,00,00,00
+		WORD	0FFFDH,0000CH
+		HEX	9E,00,00,00
+		WORD	00005H,00004H
+		HEX	AC,00,00,02
+;2
+		WORD	0FFFEH,0FFFDH
+		HEX	AA,00,00,02
+		WORD	0000CH,0FFFDH
+		HEX	9F,00,00,00
+		WORD	0FFFEH,0000BH
+		HEX	9E,00,00,00
+		WORD	00004H,00003H
+		HEX	AC,00,00,02
+;3
+		WORD	0FFFEH,0FFFDH
+		HEX	8A,00,00,02
+		WORD	0000CH,0FFFDH
+		HEX	8F,00,00,00
+		WORD	0FFFEH,0000BH
+		HEX	8E,00,00,00
+		WORD	00004H,00003H
+		HEX	8C,00,00,02
+;------------------------------------------
+AMEBACS		EQU	$
+		LDA	ENWRK0,X
+		BNE	AMC010
+		LDA	ENMOD0,X
+		PHA
+		LDA	#01H
+		STA	ENMOD0,X
+;
+		LDA	ENTIM1,X
+		AND	#04H
+		LSR	A
+		LSR	A
+		STA	<WORK0
+;
+		LDA	ENCTFG,X
+		LSR	A
+		LSR	A
+		AND	#03H
+		TAY
+		LDA	ENCLOR,X
+		PHA
+		LDA	AMTMCL,Y
+		LDY	<WORK0
+		ORA	AMTMFC,Y
+		STA	ENCLOR,X
+;
+		JSL	>EN1CSTL
+;
+		PLA
+		STA	ENCLOR,X
+		PLA
+		STA	ENMOD0,X
+;
+AMC010		EQU	$
+		LDA	#00H
+		XBA
+		LDA	ENCONT,X
+		CLC
+		ADC	ENMUKI,X
+		MEM16
+		REP	#00100000B
+		ASL	A
+		ASL	A
+		ASL	A
+;
+		ASL	A
+		ASL	A
+		ADC	#AMEBACD
+		STA	<WORK8
+;
+		MEM16
+		REP	#20H
+		LDA	<OAMADR
+		CLC
+		ADC	#0008H
+		STA	<OAMADR
+;
+		INC	<OSBADR
+		INC	<OSBADR
+;
+		MEM8
+		SEP	#00100000B
+;
+		LDA	#04H
+		JMP	SETO22
+;;		JSL	>SETOAML22
+;;;
+;;		RTS
+;%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+;%		Iwagororo        		 %
+;%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+IWGZSD		EQU	$
+		HEX	20,30
+IWGYSD		EQU	$
+		HEX	08,20
+IWGXSD		EQU	$
+		HEX	18,10
+		HEX	E8,F0
+;
+IWAGOMV		EQU	$
+		LDA	<DJFLG
+		BEQ	IG0010
+;========== Ranemora koishi ===============
+		LDA	OJBKFG
+		CMP	#03H
+		BCS	RT0010
+;
+		JSL	>EN1CSSL
+;
+RT0010		EQU	$
+		JSR	ENSTCK
+;
+		LDA	<FRCNT
+		ASL	A
+		ASL	A
+		AND	#11000000B
+		ORA	#0000H
+		STA	ENCLOR,X
+;
+		JSR	ENMVCL2
+;
+;;;		JSL	>CRENPLL
+		TXA
+		EOR	<FRCNT
+		AND	#03H
+		BNE	IG0008
+;
+		MEM16
+		REP	#20H
+		LDA	ENXP2L
+		SEC
+		SBC	<PLXPS1
+		CLC
+		ADC	#04H
+		CMP	#010H
+		BCS	IG0002
+;
+		LDA	ENYP2L
+		SEC
+		SBC	<PLYPS1
+		CLC
+		ADC	#0FFFCH 
+		CMP	#00CH
+		BCS	IG0002
+;
+		MEM8
+		SEP	#20H
+;
+		JSL	>PLFLSTL
+IG0002		EQU	$
+		MEM8
+		SEP	#20H
+;
+		TXA
+		EOR	<FRCNT
+		AND	#03H
+		BNE	IG0008
+;
+		JSR	ENBGCK
+		BEQ	IG0008
+;;		DEC	ENZSPD,X
+;;		DEC	ENZSPD,X
+;;;
+;;		LDA	ENZPSL,X
+;;		BPL	IG0008
+;;;
+IG0005		EQU	$
+		STZ	ENMODE,X
+IG0008		EQU	$
+		RTS
+;
+;
+;=========================================
+IG0010		EQU	$
+		LDA	#30H
+		STA	ENFLCL,X
+;
+		JSR	IWAGOCS
+;
+		JSR	ENSTCK
+;
+		LDA	ENCONT,X
+		SEC
+		SBC	ENMUKI,X
+		STA	ENCONT,X
+;
+		JSR	CREKEK
+;
+		JSR	ENMVCL2
+		DEC	ENZSPD,X
+		DEC	ENZSPD,X
+;
+		LDA	ENZPSL,X
+		BPL	IWG020
+;
+		STZ	ENZPSL,X
+;
+;;		JSL	>ENBGCKL
+		JSR	ENBGCK
+;
+		LDY	#00H
+		LDA	ENCBFG,X
+		BEQ	IWG018
+		INY
+IWG018		EQU	$
+		LDA	IWGZSD,Y
+		STA	ENZSPD,X
+		LDA	IWGYSD,Y
+		STA	ENYSPD,X
+		JSL	>RNDSET
+		AND	#01H
+		BEQ	IWG01A
+		INY
+		INY
+IWG01A		EQU	$
+		LDA	IWGXSD,Y
+		STA	ENXSPD,X
+;
+		TYA
+		AND	#02H
+		DEC	A
+		STA	ENMUKI,X
+;
+;;		LDA	SOUND2	;(S)
+;;		BNE	IWG020
+;
+;;		JSL	>SDLRCE
+;;		ORA	#0BH
+;;		STA	SOUND2	;(S)
+		LDA	#0BH
+		JSL	>SDLRE2	;(S)
+IWG020		EQU	$
+		RTS
+;=====================================
+IWAGOCD		EQU	$
+		WORD	0FFF8H,0FFF8H
+		HEX	CC,01,00,02
+		WORD	00008H,0FFF8H
+		HEX	CE,01,00,02
+		WORD	0FFF8H,00008H
+		HEX	EC,01,00,02
+		WORD	00008H,00008H
+		HEX	EE,01,00,02
+;
+		WORD	0FFF8H,0FFF8H
+		HEX	CE,41,00,02
+		WORD	00008H,0FFF8H
+		HEX	CC,41,00,02
+		WORD	0FFF8H,00008H
+		HEX	EE,41,00,02
+		WORD	00008H,00008H
+		HEX	EC,41,00,02
+;
+		WORD	0FFF8H,0FFF8H
+		HEX	EE,C1,00,02
+		WORD	00008H,0FFF8H
+		HEX	EC,C1,00,02
+		WORD	0FFF8H,00008H
+		HEX	CE,C1,00,02
+		WORD	00008H,00008H
+		HEX	CC,C1,00,02
+;
+		WORD	0FFF8H,0FFF8H
+		HEX	EC,81,00,02
+		WORD	00008H,0FFF8H
+		HEX	EE,81,00,02
+		WORD	0FFF8H,00008H
+		HEX	CC,81,00,02
+		WORD	00008H,00008H
+		HEX	CE,81,00,02
+;
+IWASWCD		EQU	$
+		WORD	0FFFAH,00013H
+		HEX	6C,08,00,02
+		WORD	00000H,00013H
+		HEX	6C,08,00,02
+		WORD	00006H,00013H
+		HEX	6C,08,00,02
+;
+		WORD	0FFFBH,00013H
+		HEX	6C,08,00,02
+		WORD	00000H,00013H
+		HEX	6C,08,00,02
+		WORD	00005H,00013H
+		HEX	6C,08,00,02
+;
+		WORD	0FFFCH,00013H
+		HEX	6C,08,00,02
+		WORD	00000H,00013H
+		HEX	6C,08,00,02
+		WORD	00004H,00013H
+		HEX	6C,08,00,02
+;
+		WORD	0FFFDH,00013H
+		HEX	6C,08,00,02
+		WORD	00000H,00013H
+		HEX	6C,08,00,02
+		WORD	00003H,00013H
+		HEX	6C,08,00,02
+;
+		WORD	0FFFEH,00013H
+		HEX	6C,08,00,02
+		WORD	00000H,00013H
+		HEX	6C,08,00,02
+		WORD	00002H,00013H
+		HEX	6C,08,00,02
+;
+IWSWCD		EQU	$
+		BYTE	000H*8*3
+		BYTE	001H*8*3
+		BYTE	002H*8*3
+		BYTE	003H*8*3
+		BYTE	004H*8*3
+;
+IWAGOCS		EQU	$		
+		LDA	#00H
+		XBA
+		LDA	ENCONT,X
+		LSR	A
+		LSR	A
+		LSR	A
+		AND	#03H
+		MEM16
+		REP	#00100000B
+		ASL	A
+		ASL	A
+		ASL	A
+;
+		ASL	A
+		ASL	A
+		ADC	#IWAGOCD
+		STA	<WORK8
+;
+		MEM8
+		SEP	#00100000B
+;
+		LDA	#04H
+;;		STA	<WORK6
+;;		STZ	<WORK7
+;
+		JSR	SETO22
+;;		JSL	>SETOAML22
+;- - - Kage set - - -
+		JSL	>BIGSWST
+		RTS
+;- - - - - - - - - - - - - - - -
+BIGSWST2	EQU	$
+		PHB
+		PHK
+		PLB
+;
+		LDY	#00H
+		BRA	BSS010
+;- - - - - - - - - - - - - - - - - - - - -
+BIGSWST		EQU	$
+		PHB
+		PHK
+		PLB
+;
+		LDA	ENZPSL,X
+		LSR	A
+		LSR	A
+		LSR	A
+		TAY
+		CPY	#04H
+		BCC	BSS010
+		LDY	#04H
+BSS010		EQU	$
+		LDA	ENZPSL,X
+		STA	<WORKE
+		STZ	<WORKF
+;
+		LDA	IWSWCD,Y
+		STA	<WORK0
+		STZ	<WORK1
+;
+		MEM16
+		REP	#20H
+		LDA	ENYP2L
+		CLC
+		ADC	<WORKE
+		STA	ENYP2L
+;
+		LDA	<OAMADR
+		CLC
+		ADC	#004H*4
+		STA	<OAMADR
+		LDA	<OSBADR
+		CLC
+		ADC	#004H
+		STA	<OSBADR
+;
+		LDA	#IWASWCD
+		CLC
+		ADC	<WORK0
+		STA	<WORK8
+;
+		MEM8
+		SEP	#00100000B
+;
+		LDA	#03H
+;;		STA	<WORK6
+;;		STZ	<WORK7
+;
+		JSR	SETO22
+;;		JSL	>SETOAML22
+		JSL	>PSSAVE2
+		PLB
+		RTL		
+;%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+;%		Shisai demo Initial		 %
+;%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+SDEMOIT		EQU	$
+		LDA	ENXPSL,X
+		CLC
+		ADC	#08H
+		STA	ENXPSL,X
+;
+		LDA	ENYPSL,X
+		CLC
+		ADC	#06H
+		STA	ENYPSL,X
+;
+		LDA	#SDEMO
+		JSL	>ENIDSH
+		LDA	#01H
+		STA	ENWRK0,Y
+		STA	ENNOCR,Y
+		JSL	>ENIDPS
+		LDA	<WORK2
+		CLC
+		ADC	#28H
+		STA	ENYPSL,Y
+;
+		LDA	#00H
+		STA	ENMOD0,Y
+;
+		LDA	#00001100B
+		STA	ENCLOR,Y
+		RTL
+;%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+;%		Shisai demo 			 %
+;%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+SDEMOMV		EQU	$
+		LDA	ENWRK0,X
+		JSL	>JSRSUB
+		WORD	SHSAIMV
+		WORD	ZELDAMV
+;==Shsai demo===============================================
+SHSAIMV		EQU	$
+		LDA	ENWRK2,X
+		BEQ	SHM000
+;
+		LDA	ENTIM0,X
+		BNE	SHM0F0
+;
+		STZ	ENMODE,X
+SHM0F0		EQU	$
+		AND	#01H
+		BNE	SHM0F8
+		JSR	SHSAICS
+SHM0F8		EQU	$
+		RTS
+;
+SHM000		EQU	$
+		JSR	SHSAICS
+;
+		JSR	SHBEMCS
+;
+		LDA	ENDSPL,X
+		BEQ	SHM010
+;
+		STZ	ENSTAT,X
+		STZ	ENWRK1,X
+		STZ	ENCHPT,X
+;
+		LDA	#40H
+		STA	ENTIM0,X
+SHM010		EQU	$
+;
+		JSR	ENSTCK
+;
+		LDA	ENSTAT,X
+		JSL	>JSRSUB
+		WORD	SHWAIT
+		WORD	SHZELDUP
+		WORD	SHBEAM
+		WORD	SHZELDCL
+		WORD	SHMSG2
+		WORD	SHBACK
+		WORD	SHEND
+;------------------------------------
+SHWAIT		EQU	$
+		LDA	ENTIM0,X
+		BNE	SHW010
+;		
+		LDA	#01H
+		STA	PYALSP
+;
+                LDA     #MS_04D0
+                STA     MSGENOL
+                LDA     #HIGH MS_04D0
+                STA     MSGENOH
+;
+                JSL     >MSGSET
+;
+		INC	ENSTAT,X
+SHW010		EQU	$
+		RTS
+;------------------------------------
+SHZUPT		EQU	$
+		HEX	2,0,3,0
+;
+SHZELDUP	EQU	$
+		INC	ENWRK1,X
+		LDA	ENWRK1,X
+		PHA
+;;		LDY	#02H
+;;		AND	#00100000B
+;;		BEQ	SZU010
+;;		INY
+;;SZU010		EQU	$
+;;		TYA
+;;		STA	ENCHPT,X
+;
+		LSR	A
+		LSR	A
+		LSR	A
+		LSR	A
+		LSR	A
+		AND	#03H
+		TAY
+		LDA	SHZUPT,Y
+;
+		LDY	ENZPSL+0FH
+		CPY	#10H
+		BCC	SZU012
+;
+		LDA	#01H
+SZU012		EQU	$
+		STA	ENCHPT,X
+		PLA
+;
+		AND	#0FH
+		BNE	SHZ010
+;
+		LDA	#01H
+		STA	ENCHPT+0FH
+;
+		INC	ENZPSL+0FH	; Zelda ypos up !
+		LDA	ENZPSL+0FH
+		CMP	#16H
+		BNE	SHZ010
+;
+		LDY	#27H	
+		STY	SOUND3	;(S)
+;
+		INC	ENSTAT,X
+;;		LDA	#01H
+;;		STA	ENCHPT,X
+;
+		LDA	#0FFH
+		STA	ENTIM0,X
+		LDA	#02H
+		STA	ENCONT,X
+		LDA	#0FFH
+		STA	HEMODE,X
+SHZ010		EQU	$
+		RTS		
+;------------------------------------
+SHBEAM		EQU	$
+		LDA	ENTIM0,X
+		BEQ	SHBM20
+		CMP	#078H
+		BEQ	SHBM10
+		CMP	#080H
+		BCS	SHBM08
+;
+		AND	#03H
+		BNE	SHBM08
+;
+		LDA	#2BH
+		STA	SOUND3	;(S)
+;
+		LDA	ENCONT,X
+		CMP	#0EH
+		BEQ	SHBM08
+		CLC
+		ADC	#04H
+		STA	ENCONT,X
+SHBM08		EQU	$
+		RTS
+SHBM10		EQU	$
+		LDA	#078H
+		STA	CGFLTM
+		RTS
+SHBM20		EQU	$
+		INC	ENSTAT,X
+		LDA	#50H
+		STA	ENTIM0,X
+		RTS
+;------------------------------------
+SHZELDCL	EQU	$
+		LDA	ENTIM0,X
+		BEQ	SHZC10
+;
+		AND	#03H
+		BNE	SHZC20
+;
+		LDA	HEMODE,X
+;;		LDA	ENCONT,X
+		CMP	#09H
+		BEQ	SHZC20
+		CLC
+		ADC	#02H
+;;		BPL	SHZC08
+;;		LDA	#00H
+;;SHZC08		EQU	$
+		STA	HEMODE,X
+;;		STA	ENCONT,X
+		RTS
+;
+SHZC10		EQU	$
+		LDA	#0FH+4
+		STA	ENTIM0+0FH
+;
+		INC	ENSTAT,X
+		LDA	#50H
+		STA	ENTIM0,X
+;
+		STZ	ENCONT,X
+;
+		LDA	#33H
+		STA	SOUND2	;(S)
+SHZC20		EQU	$
+		RTS		
+;--------------------------
+SHMSG2		EQU	$
+		LDA	ENTIM0,X
+		BNE	SHM220
+;
+                LDA     #MS_04D1
+                STA     MSGENOL
+                LDA     #HIGH MS_04D1
+                STA     MSGENOH
+;
+                JSL     >MSGSET
+;
+		INC	ENSTAT,X
+;
+		LDA	#02H
+		STA	ENTIM0,X
+SHM220		EQU	$
+		RTS
+;--------------------------
+SHBACK		EQU	$
+		LDA	ENTIM0,X
+		DEC	A
+		BNE	SHB010
+;
+		LDA	#28H
+		STA	SOUND3	;(S)
+SHB010		EQU	$
+		LDA	#0E0H
+		STA	ENYSPD,X
+		JSR	ENYCLC
+;;		JSL	>ENBGCKL
+;
+		LDA	ENYPSL,X
+		CMP	#30H
+		BCS	SHBK10
+;
+;;		LDA	ENCBFG,X
+;;		BEQ	SHBK10
+;;
+		LDA	#42H
+		STA	ENTIM3,X
+;
+		INC	ENSTAT,X
+SHBK10		EQU	$
+		JSL	>SHBUNST
+		RTS
+;=====================================
+SHBUNST		EQU	$
+		LDY	#00FFH
+		LDA	<FRCNT
+		AND	#03H
+		BNE	SHBK20
+;
+		LDA	#SDEMO
+		JSL	>ENIDSH
+		BMI	SHBK20
+;
+		JSL	>ENIDPS
+;
+		LDA	ENCHPT,X
+		STA	ENCHPT,Y
+;
+		LDA	#20H
+		STA	ENTIM0,Y
+		STA	ENNOCR,Y
+		STA	ENWRK2,Y
+;
+;;		LDA	ENCLOR,X
+;;		AND	#11111110B
+;;		STA	ENCLOR,Y
+SHBK20		EQU	$
+		TYA
+		RTL
+;--------------------------
+SHEND		EQU	$
+		LDA	ENTIM3,X
+		BNE	SHE010
+;
+		STZ	PYALSP
+		STZ	ENMODE,X
+;
+		JSL	>ENBTON
+;
+		LDA	EMYSTT+1
+		ORA	#01000000B
+		STA	EMYSTT+1
+;
+SHE010		EQU	$
+		RTS
+;
+;===========================================
+SHSAICD		EQU	$
+		WORD	0FFF8H,0FFF8H
+		HEX	82,0B,00,02
+		WORD	00008H,0FFF8H
+		HEX	82,4B,00,02
+		WORD	0FFF8H,00008H
+		HEX	A2,0B,00,02
+		WORD	00008H,00008H
+		HEX	A2,4B,00,02
+;
+		WORD	0FFF8H,0FFF8H
+		HEX	80,0B,00,02
+		WORD	00008H,0FFF8H
+		HEX	80,4B,00,02
+		WORD	0FFF8H,00008H
+		HEX	A0,0B,00,02
+		WORD	00008H,00008H
+		HEX	A0,4B,00,02
+;
+		WORD	0FFF8H,0FFF8H
+		HEX	80,0B,00,02
+		WORD	00008H,0FFF8H
+		HEX	82,4B,00,02
+		WORD	0FFF8H,00008H
+		HEX	A0,0B,00,02
+		WORD	00008H,00008H
+		HEX	A2,4B,00,02
+;
+		WORD	0FFF8H,0FFF8H
+		HEX	82,0B,00,02
+		WORD	00008H,0FFF8H
+		HEX	80,4B,00,02
+		WORD	0FFF8H,00008H
+		HEX	A2,0B,00,02
+		WORD	00008H,00008H
+		HEX	A0,4B,00,02
+;
+SHSAICS		EQU	$
+		LDA	ENTIM3,X
+		AND	#01H
+		BNE	SHCS80
+;
+		LDA	ENWRK2,X
+		STA	<WORK0
+		STZ	<WORK1
+;
+		LDA	#00H
+		XBA
+		LDA	ENCHPT,X
+		MEM16
+		REP	#00100000B
+		ASL	A
+		ASL	A
+		ASL	A
+;
+		ASL	A
+		ASL	A
+		ADC	#SHSAICD
+		STA	<WORK8
+;
+		LDA	<WORK0
+		BNE	SHCS70
+;
+		LDA	#100H+OAM
+		STA	<OAMADR
+		LDA	#100H/4+OAMSB
+		STA	<OSBADR
+;
+SHCS70		EQU	$
+		MEM8
+		SEP	#00100000B
+;
+		LDA	#04H
+;;		STA	<WORK6
+;;		STZ	<WORK7
+;
+		JSR	SETO22
+;;		JSL	>SETOAML22
+;
+		LDA	#12H
+		JSL	>SADWS2L
+SHCS80		EQU	$
+		RTS
+;===================================================
+SHBEMCD		EQU	$
+;0
+		HEX	F6,F0,CE,06
+		HEX	12,F0,CE,06
+		HEX	14,F3,26,06
+		HEX	14,FB,36,06
+;
+		HEX	F4,F3,26,46
+		HEX	F4,FB,36,46
+;
+		HEX	12,00,26,06
+		HEX	12,08,36,06
+;
+		HEX	F6,00,26,46
+		HEX	F6,08,36,46
+;
+		HEX	F8,00,22,06
+		HEX	08,00,22,46
+		HEX	F8,10,22,86
+		HEX	08,10,22,C6
+SHBEMC1		EQU	$
+;1
+		HEX	F6,F0,CE,04
+		HEX	12,F0,CE,04
+		HEX	14,F3,26,44
+		HEX	14,FB,36,44
+;
+		HEX	F4,F3,26,04
+		HEX	F4,FB,36,04
+;
+		HEX	12,00,26,44
+		HEX	12,08,36,44
+;
+		HEX	F6,00,26,04
+		HEX	F6,08,36,04
+;
+		HEX	F8,00,20,04
+		HEX	08,00,20,44
+		HEX	F8,10,20,84
+		HEX	08,10,20,C4
+;
+SHBEMSD		EQU	$
+		HEX	0,0,0,0,0,0,0,0,0,0,2,2,2,2
+SBBCID		EQU	$
+		HEX	00,04,08,0C
+		HEX	10,14,18,1C
+		HEX	20,24,28
+;
+SHBEMCS		EQU	$
+		LDA	#0EH*4
+		JSL	>OAMENT1
+;
+;
+		LDA	<FRCNT
+;;		NOP
+;;		NOP
+		LSR	A
+		LSR	A
+;
+		MEM16
+		REP	#20H
+		LDA	#SHBEMCD
+		BCS	SBC000
+		ADC	#SHBEMC1-SHBEMCD
+SBC000		EQU	$
+		STA	<WORK8		
+;
+		LDA	#SHBEMSD
+		STA	<WORKA		
+;
+		MEM8
+		SEP	#20H
+;
+		LDA	ENCONT,X
+		BEQ	SBC008
+;
+		LDY	HEMODE,X
+		STY	<WORKD
+;
+		PHX
+		DEC	A
+		TAX
+;
+		INY
+		LDA	SBBCID,Y
+		TAY
+;
+;;		LDY	#00H
+SBC010		EQU	$	
+		LDA	<WORK0
+		CLC
+		ADC	(<WORK8),Y
+		STA	(<OAMADR),Y
+		LDA	<WORK2
+		CLC
+		ADC	#0F6H+2
+		CLC
+		INY
+		ADC	(<WORK8),Y
+		STA	(<OAMADR),Y
+		INY
+		LDA	(<WORK8),Y
+		STA	(<OAMADR),Y
+		INY
+		LDA	(<WORK8),Y
+		ORA	#31H
+		STA	(<OAMADR),Y	
+;
+		PHY
+		TYA
+		LSR	A
+		LSR	A
+		TAY
+;
+		LDA	#00H
+		CPX	#04H
+		BCS	SBC020
+		LDA	#02H
+SBC020		EQU	$
+		LDA	(<WORKA),Y
+		STA	(<OSBADR),Y
+		PLY
+		INY
+		DEX
+		CPX	<WORKD
+		BNE	SBC010
+		PLX
+SBC008		EQU	$
+		RTS
+;====Princes zelda demo===============================================
+ZELDAMV		EQU	$
+		JSR	ZELDACS
+		RTS
+;===========================================
+ZELDACD		EQU	$
+		WORD	0FFFCH,00000H
+		HEX	03H,01,00,02
+		WORD	00004H,00000H
+		HEX	04H,01,00,02
+;
+		WORD	0FFFCH,00000H
+		HEX	00H,01,00,02
+		WORD	00004H,00000H
+		HEX	01H,01,00,02
+;
+;----------------------------------------
+ZELDACS		EQU	$
+		LDA	ENTIM0,X
+		BEQ	ZLC010
+		PHA
+		JSR	ZLFLST		; Flash set !
+		PLA
+		CMP	#01H
+		BNE	ZLC008
+		STZ	ENMODE,X
+ZLC008		EQU	$
+		CMP	#0CH
+		BCS	ZLC010
+		RTS
+;- - - - - - - - - - - - - - - - - - - - - -
+ZLC010		EQU	$
+		LDA	#02H*4
+		JSL	>OAMENT1
+;
+		LDA	#00H
+		XBA
+		LDA	ENCHPT,X
+		MEM16
+		REP	#00100000B
+		ASL	A
+		ASL	A
+		ASL	A
+;
+		ASL	A
+		ADC	#ZELDACD
+		STA	<WORK8
+;
+		MEM8
+		SEP	#00100000B
+;
+		LDA	#02H
+;;		STA	<WORK6
+;;		STZ	<WORK7
+;
+		JSR	SETO22
+;;		JSL	>SETOAML22
+		JSR	ZLSDST		; Sadow set 
+		RTS
+;-----------------------------------
+ZLSDXD		EQU	$
+		HEX	04,04,03,03
+		HEX	02,02,01,01
+		HEX	00,00,00,00
+		HEX	00,00,00,00
+;
+ZLSDST		EQU	$
+		LDA	#02H*4
+		JSL	>OAMENT1
+;
+		LDA	ENZPSL,X
+		CMP	#1FH
+		BCC	NMC078
+		LDA	#1FH
+NMC078		EQU	$
+		LSR	A
+		TAY
+		LDA	ZLSDXD,Y
+		STA	<WORK7
+;
+		LDA	ENYPSL,X
+		SEC
+		SBC	<SCCV2
+		STA	<WORK2
+		LDA	ENYPSH,X
+		SBC	<SCCV2+1
+		STA	<WORK3
+;
+		LDY	#00H
+		LDA	<WORK0
+		PHA
+		CLC
+		ADC	<WORK7
+		STA	(<OAMADR),Y
+		PLA
+		SEC
+		SBC	<WORK7
+		LDY	#04H
+		STA	(<OAMADR),Y
+		MEM16
+		REP	#20H
+		LDA	<WORK2
+		CLC
+		ADC	#0007H
+		LDY	#01H
+		STA	(<OAMADR),Y
+		LDY	#05H
+		STA	(<OAMADR),Y
+		CLC		
+		ADC	#0010H
+		CMP	#0100H
+		MEM8
+		SEP	#20H
+		BCC	NMC056
+		LDA	#0F0H
+		STA	(<OAMADR),Y
+		LDY	#01H
+		STA	(<OAMADR),Y
+NMC056		EQU	$
+		LDA	#06CH
+		LDY	#02H
+		STA	(<OAMADR),Y
+		LDY	#06H
+		STA	(<OAMADR),Y
+		LDA	#24H
+		LDY	#03H
+		STA	(<OAMADR),Y
+		LDY	#07H
+		STA	(<OAMADR),Y
+		LDA	#02H
+		LDY	#00H/4
+		STA	(<OSBADR),Y
+		INY
+		STA	(<OSBADR),Y
+NMC090		EQU	$
+		RTS
+;=============================
+ZLFLCD		EQU	$
+;4
+		WORD	00004H,00004H
+		HEX	80,04,00,00
+		WORD	00004H,00004H
+		HEX	80,04,00,00
+;3
+		WORD	00004H,00004H
+		HEX	B7,04,00,00
+		WORD	00004H,00004H
+		HEX	B7,04,00,00
+;2
+		WORD	0FFFAH,00000H
+		HEX	24,05,00,02
+		WORD	00006H,00000H
+		HEX	24,45,00,02
+;1
+		WORD	0FFF8H,00000H
+		HEX	24,05,00,02
+		WORD	00008H,00000H
+		HEX	24,45,00,02
+;0
+		WORD	00000H,00000H
+		HEX	C6,05,00,02
+		WORD	00000H,00000H
+		HEX	C6,05,00,02
+;- - - - - - - - - - - - - - - - - - - - - - - - - - - -
+ZLFLST		EQU	$		
+		LDA	#02H*4
+		JSL	>OAMENT1
+;
+		LDA	#00H
+		XBA
+		LDA	ENTIM0,X
+		LSR	A
+		LSR	A
+		MEM16
+		REP	#00100000B
+		ASL	A
+		ASL	A
+		ASL	A
+;
+		ASL	A
+		ADC	#ZLFLCD
+		STA	<WORK8
+;
+		MEM8
+		SEP	#00100000B
+;
+		LDA	#02H
+;;		STA	<WORK6
+;;		STZ	<WORK7
+;
+		JMP	SETO22
+;;		JSL	>SETOAML22
+;;		RTS
+;%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+;%		Buffer initial 		    %
+;%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+HAYABIT		EQU	$
+KAMB2IT		EQU	$
+		PHX
+		TXY
+		LDX	#7FH
+HBI010		EQU	$
+		LDA	ENXPSL,Y
+		STA	>HBXBFL,X
+		LDA	ENXPSH,Y
+		STA	>HBXBFH,X
+		LDA	ENYPSL,Y
+		STA	>HBYBFL,X
+		LDA	ENYPSH,Y
+		STA	>HBYBFH,X
+		DEX
+		BPL	HBI010
+;
+		PLX
+		RTL
+;%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+;%					    %
+;%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+HAYABMV		EQU	$
+		PHB
+		PHK
+		PLB
+		JSR	HAYABMV0
+		PLB
+		RTL
+;==============================================
+HYMXSD		EQU	$
+		HEX	18,16,11,09
+		HEX	00,F7,EF,EA
+		HEX	E8,EA,EF,F7
+		HEX	00,09,11,16
+;
+		HEX	24,21,19,0D
+		HEX	00,F3,E7,DF
+		HEX	DC,DF,E7,F3
+		HEX	00,0D,19,21
+HYMYSD		EQU	$
+		HEX	00,09,11,16
+		HEX	18,16,11,09
+		HEX	00,F7,EF,EA
+		HEX	E8,EA,EF,F7
+;
+		HEX	00,0D,19,21
+		HEX	24,21,19,0D
+		HEX	00,F3,E7,DF
+		HEX	DC,DF,E7,F3
+HYTRMK		EQU	$
+		HEX	8,9,A,B,C,D,E,F,0,1,2,3,4,5,6,7
+;
+;;HBTSXS		EQU	$
+;;HBTSYS		EQU	$
+;;		HEX	00,10,F0
+HYLIMIT		EQU	03H  ;+2
+;------------------------------------
+HAYABMV0	EQU	$
+		JSR	HAYABCS
+		JSR	ENSTCK
+;
+		LDA	ENSTAT,X
+		CMP	#03H
+		BNE	HBM0D0
+;
+		JMP	HAYABFL		; Fail !
+;
+HBM0D0		EQU	$
+;-------------------------------
+;
+;;		JSR	ENHNSB
+;
+		JSL	>CRKNENL
+;
+		LDA	#07H
+;
+		LDY	ENLIFE,X
+		CPY	#HYLIMIT
+		BCS	HBM0D8
+;
+		INC	ENCONT,X
+		LDA	#03H
+HBM0D8		EQU	$
+		INC	ENCONT,X
+;
+		AND	<FRCNT
+		BNE	HBM0DC
+;
+		LDA	#31H
+		JSL	>SDLRE3	;(S)
+HBM0DC		EQU	$
+;
+		LDA	ENHNFG,X
+		BEQ	HBM0F0
+;
+		LDA	#40H
+		STA	ENTIM2,X
+;
+		LDA	<FRCNT
+		AND	#03H
+		BNE	HBM0E0
+;
+		DEC	ENHNFG,X
+HBM0E0		EQU	$
+		RTS
+HBM0F0		EQU	$
+                LDA     <HANEFG
+                BNE     HBM000
+;
+		JSL	>CRENPLL
+		BCC	HBM000
+;
+                JSL     >DASCLR1
+;
+                LDA     #28H
+                JSL     >PSERC2L
+                LDA     <WORK0
+                STA     <PLYSPD
+                LDA     <WORK1
+                STA     <PLXSPD
+                LDA     #18H
+                STA     <HANEFG
+;
+		LDA	#30H
+		STA	ENTIM1,X	; Byoyon time !
+;
+		LDA	#32H
+		JSL	>SDLRCE
+		STA	SOUND3	:(S)
+HBM000		EQU	$
+		LDY	ENMUKI,X
+		LDA	ENLIFE,X
+		CMP	#HYLIMIT
+		BCS	HBM001
+;
+		TYA
+		CLC
+		ADC	#10H
+		TAY
+HBM001		EQU	$
+		LDA	HYMXSD,Y
+		STA	ENXSPD,X
+		LDA	HYMYSD,Y
+		STA	ENYSPD,X
+;
+		JSR	ENMVCL
+;
+;;                JSL     >ENBGCKL
+;;                LDA     ENCBFG,X
+		JSR	ENBGCK
+                BEQ     HYMF00
+;
+;;                LDA     ENKBMK,X
+  ;;              EOR     #0FFH
+    ;;            INC     A
+      ;;          STA     ENKBMK,X
+;
+                LDY     ENMUKI,X
+                LDA     HYTRMK,Y
+                STA     ENMUKI,X
+;
+		LDA	#021H
+		JSL	>SDLRE2	;(S)
+HYMF00          EQU     $
+		LDA	ENSTAT,X
+		JSL	>JSRSUB
+		WORD	HYMOVE
+		WORD	HYTURN
+		WORD	HYPTUR
+;--------------------------------------------
+HYMOVE		EQU	$
+		LDA	ENTIM0,X
+		BNE	HYM010
+;
+		LDA	#01H
+		INC	ENCTCT,X
+		LDY	ENCTCT,X
+		CPY	#03H
+		BNE	HYM008
+;
+		STZ	ENCTCT,X
+		LDA	#02H
+HYM008		EQU	$
+		STA	ENSTAT,X
+;
+		JSL	>RNDSET
+		AND	#02H
+		DEC	A
+		STA	ENKBMK,X
+;
+		JSL	>RNDSET
+		AND	#1FH
+		ADC	#20H
+		STA	ENTIM0,X
+HYM010		EQU	$
+		RTS
+;---------------------------------------------
+HYTURN		EQU	$
+		LDA	ENTIM0,X
+		BNE	HYT010
+;
+		JSL	>RNDSET
+		AND	#0FH
+		ADC	#08H
+		STA	ENTIM0,X
+;
+		STZ	ENSTAT,X
+		RTS
+HYT010		EQU	$
+		AND	#03H
+		BNE	HYT020
+;
+		LDA	ENMUKI,X
+		CLC
+		ADC	ENKBMK,X
+		AND	#0FH
+		STA	ENMUKI,X
+HYT020		EQU	$
+		RTS
+;----------------------------------------------
+HYPTUR		EQU	$
+		TXA
+		EOR	<FRCNT
+		AND	#03H
+		BNE	HYPT50
+;
+		LDA	#1FH
+		JSL	>PSERCHL
+		JSL	>MKCK16
+;;		CLC
+;;		ADC	#0CH
+;;		AND	#0FH
+		CMP	ENMUKI,X
+		BNE	HYPT10			
+;
+		STZ	ENSTAT,X
+		LDA	#30H
+		STA	ENTIM0,X
+		RTS
+;
+HYPT10		EQU	$
+		PHP
+		LDA	ENMUKI,X
+		PLP
+		BMI	HYPT20
+		INC	A
+		INC	A
+HYPT20		EQU	$
+		DEC	A
+HYPT30		EQU	$
+		AND	#0FH
+		STA	ENMUKI,X
+HYPT50		EQU	$
+		RTS
+;%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+;------------------------------------
+HAYABCS		EQU	$
+		JSR	OAMCHK
+;
+		LDA	#0BH
+		STA	ENCLOR,X
+;
+		JSR	HBEYECS
+;
+                MEM16
+                REP     #20H
+                LDA     <OAMADR
+                CLC
+                ADC     #0008H
+                STA     <OAMADR
+                INC     <OSBADR
+                INC     <OSBADR
+                MEM8
+                SEP     #20H
+;
+		PHX
+		TXY
+		LDA	ENCONT,X
+		AND	#7FH
+		TAX		
+		LDA	ENXPSL,Y
+		STA	>HBXBFL,X
+		LDA	ENYPSL,Y
+		STA	>HBYBFL,X
+		LDA	ENXPSH,Y
+		STA	>HBXBFH,X
+		LDA	ENYPSH,Y
+		STA	>HBYBFH,X
+		PLX
+;
+		JSR	HBHEDCS
+;
+		LDA	ENWRK1,X
+		CMP	#04H
+		BCS	HBC900
+;
+		JSR	HBBD0CS
+;
+		LDA	ENWRK1,X
+		CMP	#03H
+		BCS	HBC900
+;
+		JSR	HBBD1CS
+;
+		LDA	ENWRK1,X
+		CMP	#02H
+		BCS	HBC900
+;
+		JSR	HBTL0CS
+;
+		LDA	ENWRK1,X
+		BNE	HBC900
+;
+		JSR	HBTL1CS
+HBC900		EQU	$
+		JSR	HBBKCK
+;
+		JSL	>PSSAVE2
+		RTS
+;============================================
+HBBKCK		EQU	$
+		LDA	ENMODE,X
+		CMP	#EMOVE
+		BNE	HBF020
+;
+		LDA	ENTIM3,X	; Fail time
+		BEQ	HBF020
+		CMP	#050H
+		BCS	HBF020
+		AND	#0FH
+		ORA	<GAMEMD
+		ORA	ENSTFG
+		BNE	HBF020
+;
+		INC	ENWRK1,X	; 1 of bakuhatsu !
+;
+		JSL	>HBBKST
+HBF020		EQU	$
+		RTS
+;=====================================
+HBHEDCD		EQU	$
+;0
+		WORD	0FFF8H,0FFF8H
+		HEX	80,00,00,02
+		WORD	00008H,0FFF8H
+		HEX	82,00,00,02
+		WORD	0FFF8H,00008H
+		HEX	A0,00,00,02
+		WORD	00008H,00008H
+		HEX	A2,00,00,02
+;1
+		WORD	0FFF8H,0FFF8H
+		HEX	82,40,00,02
+		WORD	00008H,0FFF8H
+		HEX	80,40,00,02
+		WORD	0FFF8H,00008H
+		HEX	A2,40,00,02
+		WORD	00008H,00008H
+		HEX	A0,40,00,02
+;0'
+		WORD	0FFFAH,0FFFAH
+		HEX	80,00,00,02
+		WORD	00006H,0FFFAH
+		HEX	82,00,00,02
+		WORD	0FFFAH,00006H
+		HEX	A0,00,00,02
+		WORD	00006H,00006H
+		HEX	A2,00,00,02
+;1'
+		WORD	0FFFAH,0FFFAH
+		HEX	82,40,00,02
+		WORD	00006H,0FFFAH
+		HEX	80,40,00,02
+		WORD	0FFFAH,00006H
+		HEX	A2,40,00,02
+		WORD	00006H,00006H
+		HEX	A0,40,00,02
+;-- - - - - - - - - - --
+HBHEDCS		EQU	$
+		LDA	#00H
+		XBA
+		LDA	ENTIM1,X
+		AND	#02H
+;;		NOP	
+		STA	<WORK0
+		LDA	ENCONT,X
+		LSR	A
+		AND	#01H
+		ORA	<WORK0
+		MEM16
+		REP	#00100000B
+		ASL	A
+		ASL	A
+		ASL	A
+;
+		ASL	A
+		ASL	A
+		ADC	#HBHEDCD
+		STA	<WORK8
+;
+		MEM8
+		SEP	#00100000B
+;
+		LDA	#04H
+;;		STA	<WORK6
+;;		STZ	<WORK7
+;
+		JMP	SETO22
+;;		JSL	>SETOAML22
+;;		RTS
+;=====================================
+HBBD0CD		EQU	$
+;0
+		WORD	0FFF8H,0FFF8H
+		HEX	84,00,00,02
+		WORD	00008H,0FFF8H
+		HEX	86,00,00,02
+		WORD	0FFF8H,00008H
+		HEX	A4,00,00,02
+		WORD	00008H,00008H
+		HEX	A6,00,00,02
+;1
+		WORD	0FFF8H,0FFF8H
+		HEX	86,40,00,02
+		WORD	00008H,0FFF8H
+		HEX	84,40,00,02
+		WORD	0FFF8H,00008H
+		HEX	A6,40,00,02
+		WORD	00008H,00008H
+		HEX	A4,40,00,02
+;-- - - - - - - - - - --
+HBBD0CS		EQU	$
+		TXY
+		PHX
+		LDA	ENCONT,X
+		SEC
+		SBC	#10H
+HBBD0SB		EQU	$
+		AND	#07FH
+		TAX
+		LDA	>HBXBFL,X
+		STA	ENXP2L		
+		LDA	>HBXBFH,X
+		STA	ENXP2H		
+		LDA	>HBYBFL,X
+		STA	ENYP2L		
+		LDA	>HBYBFH,X
+		STA	ENYP2H
+		PLX		
+;
+		LDA	#00H
+		XBA
+		LDA	ENCONT,X
+		LSR	A
+		AND	#01H
+		MEM16
+		REP	#00100000B
+		ASL	A
+		ASL	A
+		ASL	A
+;
+		ASL	A
+		ASL	A
+		ADC	#HBBD0CD
+		STA	<WORK8
+;
+		MEM16
+		REP	#20H
+		LDA	<OAMADR
+		CLC
+		ADC	#0004H*4
+		STA	<OAMADR
+		LDA	<OSBADR
+		CLC
+		ADC	#00004H
+		STA	<OSBADR
+		MEM8
+		SEP	#20H
+;
+		MEM8
+		SEP	#00100000B
+;
+		LDA	#04H
+;;		STA	<WORK6
+;;		STZ	<WORK7
+;
+		JMP	SETO22
+;;		JSL	>SETOAML22
+;;		RTS
+;=====================================
+HBBD1CS		EQU	$
+		TXY
+		PHX
+		LDA	ENCONT,X
+		SEC
+		SBC	#1CH
+		JMP	HBBD0SB
+;=====================================
+HBTLAD		EQU	$
+		HEX	00,40,C0,80
+HBTL0CS		EQU	$
+		STZ	ENCHPT,X
+;
+		MEM16
+		REP	#20H
+		LDA	<OAMADR
+		CLC
+		ADC	#0004H*4
+		STA	<OAMADR
+		LDA	<OSBADR
+		CLC
+		ADC	#0004H
+		STA	<OSBADR
+		MEM8
+		SEP	#20H
+;
+		TXY
+		PHX
+		LDA	ENCONT,X
+		SEC
+		SBC	#28H
+HBTL0SB		EQU	$
+		AND	#07FH
+		TAX
+		LDA	>HBXBFL,X
+		STA	ENXP2L		
+		LDA	>HBXBFH,X
+		STA	ENXP2H		
+		LDA	>HBYBFL,X
+		STA	ENYP2L		
+		LDA	>HBYBFH,X
+		STA	ENYP2H
+		PLX		
+;
+		LDA	ENCONT,X
+		LSR	A
+		AND	#03H
+		TAY
+;
+		LDA	ENCLOR,X
+		PHA
+		AND	#00111111B
+		ORA	HBTLAD,Y
+		STA	ENCLOR,X
+		JSL	>EN1CSTL
+		PLA
+		STA	ENCLOR,X
+		RTS
+;=====================================
+HBTL1CS		EQU	$
+		JSR	HBTL1S
+;
+		LDA	ENTIM2,X
+		BNE	HBT110
+;
+		LDA	#01H
+		STA	ENWRK0,X
+		STZ	ENMOD3,X
+		STZ	ENMOD5,X
+;
+		LDA	ENXPSL,X
+		PHA
+		LDA	ENXPSH,X
+		PHA
+		LDA	ENYPSL,X
+		PHA
+		LDA	ENYPSH,X
+		PHA
+;
+		LDA	ENXP2L
+		STA	ENXPSL,X
+		LDA	ENXP2H
+		STA	ENXPSH,X
+		LDA	ENYP2L
+		STA	ENYPSL,X
+		LDA	ENYP2H
+		STA	ENYPSH,X
+;
+		JSL	>CRKNENL
+;
+		STZ	ENWRK0,X
+		LDA	#09H
+		STA	ENMOD3,X
+		LDA	#00000100B
+		STA	ENMOD5,X
+;
+		PLA
+		STA	ENYPSH,X
+		PLA
+		STA	ENYPSL,X
+		PLA
+		STA	ENXPSH,X
+		PLA
+		STA	ENXPSL,X
+;
+HBT110		EQU	$
+		RTS
+;
+HBTL1S		EQU	$
+		MEM16
+		REP	#20H
+		LDA	<OAMADR
+		CLC
+		ADC	#0001H*4
+		STA	<OAMADR
+		LDA	<OSBADR
+		CLC
+		ADC	#0001H
+		STA	<OSBADR
+		MEM8
+		SEP	#20H
+;
+		INC	ENCHPT,X
+;
+		LDA	#0DH
+		STA	ENCLOR,X
+;
+		TXY
+		PHX
+		LDA	ENCONT,X
+		SEC
+		SBC	#30H
+		JMP	HBTL0SB
+;- - - - - - -
+HECXAD		EQU	$
+		WORD	014H-4,013H-4,010H-4,00AH-4
+		WORD	004H-4,0FFFEH-4,0FFF8H-4,0FFF7H-4
+		WORD	0FFF4H-4,0FFF7H-4,0FFF8H-4,0FFFEH-4
+		WORD	004H-4,00AH-4,010H-4,013H-4
+HECYAD		EQU	$
+		WORD	004H-4,00AH-4,010H-4,013H-4
+		WORD	014H-4,013H-4,010H-4,00AH-4
+		WORD	004H-4,0FFFEH-4,0FFF8H-4,0FFF7H-4
+		WORD	0FFF4H-4,0FFF7H-4,0FFF8H-4,0FFFEH-4
+HECCDT		EQU	$
+		HEX	AA,AA,A8,A8
+		HEX	8A,8A,A8,A8
+		HEX	AA,AA,A8,A8
+		HEX	8A,8A,A8,A8
+HECADT		EQU	$
+		HEX	00,00,00,00
+		HEX	80,80,40,40
+		HEX	40,40,C0,C0
+		HEX	00,00,80,80
+;
+;=====================================
+HBEYECS		EQU	$
+		STZ	<WORK7
+;
+		LDA	ENHNFG,X
+		BEQ	HEC000
+;
+		LDA	<FRCNT
+		STA	<WORK7
+;
+HEC000		EQU	$
+		LDA	ENMUKI,X
+		CLC
+		ADC	#0FFH
+		STA	<WORK6
+;
+		PHX
+		LDX	#01H
+HEC010		EQU	$
+		LDA	<WORK6
+		AND	#0FH
+		ASL	A
+		PHX
+		TAX
+		MEM16
+		REP	#20H
+		LDA	<WORK0
+		CLC
+		ADC	HECXAD,X
+		STA	(<OAMADR),Y
+		AND	#0100H
+		STA	<WORKE
+		LDA	<WORK2
+		CLC
+		ADC	HECYAD,X
+		INY
+		STA	(<OAMADR),Y
+		ADC	#0010H
+		CMP	#0100H
+		MEM8
+		SEP	#20H
+		BCC	HEC020
+		LDA	#0F0H
+		STA	(<OAMADR),Y
+HEC020		EQU	$
+		LDA	<WORK6
+		CLC
+		ADC	<WORK7
+		AND	#0FH
+		TAX
+		LDA	HECCDT,X
+		INY
+		STA	(<OAMADR),Y
+		LDA	HECADT,X
+		ORA	<WORK5
+		INY
+		STA	(<OAMADR),Y
+		PHY
+		TYA
+		LSR	A
+		LSR	A
+		TAY
+		LDA	<WORKF
+		ORA	#02H
+		STA	(<OSBADR),Y
+;
+		LDA	<WORK6
+		CLC
+		ADC	#02H
+		STA	<WORK6
+;
+		PLY
+		INY
+		PLX
+		DEX
+		BPL	HEC010
+;
+		PLX
+		RTS
+;==========================================
+HAYABFL		EQU	$
+		LDA	ENTIM3,X
+		BNE	HBF010
+;
+EBAKUST		EQU	$
+                LDA     #EBAKU
+                STA     ENMODE,X
+                STZ     ENWRK0,X
+;
+;;              JSL     >SDLRCE
+;;              ORA     #22H
+;;              STA     SOUND3          ; (S)
+;
+                LDA     #0E0H
+                STA     ENTIM0,X
+;
+		RTS
+HBF010		EQU	$
+		ORA	#0E0H
+		STA	ENFLSH,X		
+		RTS
+;==========================================
+HBBKST		EQU	$
+;;                JSL     >SDLRCE
+  ;;              ORA     #0CH
+    ;;            STA     SOUND2          ;(S)
+		LDA	#0CH
+		JSL	>SDLRE2	;(S)
+;
+HBBKST2		EQU	$
+                LDA     #00H
+                JSL     >ENIDSH
+                BMI     EBS010
+;
+                LDA     #spoj5
+                STA     SPOJFG          ; OBJ bank set !
+;
+                LDA     #EBAKU
+                STA     ENMODE,Y
+;
+                LDA     #03H
+                STA     ENMOD0,Y
+                LDA     #0CH
+                STA     ENCLOR,Y
+;
+		LDA	ENXP2L
+                STA     ENXPSL,Y
+		LDA	ENXP2H
+                STA     ENXPSH,Y
+;
+		LDA	ENYP2L
+                STA     ENYPSL,Y
+		LDA	ENYP2H
+                STA     ENYPSH,Y
+;
+                LDA     #1FH
+                STA     ENTIM0,Y
+                STA     ENWRK0,Y
+;
+		LDA	#02H
+		STA	ENKAIF,Y
+EBS010          EQU     $
+                RTL
+;%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+;%					    %
+;%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+HAGE0MV		EQU	$
+		PHB
+		PHK
+		PLB
+		JSR	HAGE0MV0
+		PLB
+		RTL
+;=====================================
+HAGE0MV0	EQU	$
+		LDA	ENFLCL,X
+		ORA	#00110000B
+		STA	ENFLCL,X
+;
+;;		LDA	#03H*4
+;;		JSL	>OAMENT3
+;
+		JSR	HAGE0CS
+;
+		JSR	ENSTCK
+;
+		JSR	ENHNSB
+;
+		JSR	CREKEK
+;
+;		LDA	ENSTAT,X
+;		BEQ	HGS060
+;
+		JSR	ENMVCL
+;
+;		LDA	#02H
+;		STA	ENSTAT,X
+;
+;		JSR	EPXYCK
+;		LDA	<WORKE
+;		CLC
+;		ADC	#0020H
+;		CMP	#0040H
+;		BCS	HGS060
+;		LDA	<WORKF
+;		CLC
+;		ADC	#0020H
+;		CMP	#0040H
+;		BCS	HGS060
+;;
+;;;		INC	ENSTAT,X
+;		HEX	EA,EA,EA
+;;
+;HGS060		EQU	$
+;
+		LDA	ENSTAT,X
+		JSL	>JSRSUB
+		WORD	HGWAIT
+;;		WORD	HGFLY
+		WORD	HGSPIN
+;-----------------------------------------
+HGWAIT		EQU	$
+		INC	ENCONT,X
+		LDA	ENCONT,X
+		CMP	#0A0H
+		BNE	HGW020
+;
+		INC	ENSTAT,X
+;
+;;		JSL	>SDLRCE
+;;		ORA	#1EH
+;;		STA	SOUND3		;(S)
+		LDA	#1EH
+		JSL	>SDLRE3	;(S)
+;
+		LDA	#10H
+		STA	ENTIM0,X
+;
+HGW020		EQU	$
+		RTS
+;--------------------------------
+;HGFLY		EQU	$
+;		LDA	<FRCNT
+;		AND	#01H
+;		BNE	HGS050
+;;
+;		LDA	#10H
+;		JSL	>PSERC2L
+;;
+;		LDA	ENYSPD,X
+;		CMP	<WORK0
+;		BEQ	HGS030
+;		BPL	HGS010
+;		INC	ENYSPD,X
+;		BRA	HGS030
+;HGS010		EQU	$
+;		DEC	ENYSPD,X
+;HGS030		EQU	$
+;		LDA	ENXSPD,X
+;		CMP	<WORK1
+;		BEQ	HGS050
+;		BPL	HGS040
+;		INC	ENXSPD,X
+;		BRA	HGS050
+;HGS040		EQU	$
+;		DEC	ENXSPD,X
+;HGS050		EQU	$
+;HGPTST		EQU	$
+;		LDA	<FRCNT
+;		LSR	A
+;		AND	#03H
+;		TAY
+;		LDA	HGPTDT,Y
+;		STA	ENCHPT,X
+;		RTS
+;--------------------------------
+HGPTDT		EQU	$
+		HEX	1,2,3,2
+;
+HGSPIN		EQU	$
+		LDA	<FRCNT
+		LSR	A
+		AND	#03H
+		TAY
+		LDA	HGPTDT,Y
+		STA	ENCHPT,X
+;
+		LDA	ENTIM0,X
+		BEQ	HGSP01
+;
+		INC	ENZPSL,X
+		RTS
+;
+HGSP01		EQU	$
+		TXA
+		EOR	<FRCNT
+		AND	#01H
+		BNE	HGSP80
+;
+		TXA
+		AND	#0FH
+		CLC
+		ADC	#18H
+		JSL	>PSERC2L
+;
+		LDA	<WORK0
+		EOR	#0FFH
+		INC	A
+		STA	ENXSPD,X
+		LDA	<WORK1
+;;		EOR	#00H
+;;		NOP
+		STA	ENYSPD,X
+;
+		LDA	<WORKE
+		CLC
+		ADC	#28H
+		CMP	#50H
+		BCS	HGSP90
+		LDA	<WORKF
+		CLC
+		ADC	#28H
+		CMP	#50H
+		BCS	HGSP90
+;
+HGSP80		EQU	$
+		RTS
+HGSP90		EQU	$
+		LDA	<WORK0
+		ASL	<WORK0
+		PHP
+		ROR	A
+		PLP
+		ROR	A
+		CLC
+		ADC	ENYSPD,X		
+		STA	ENYSPD,X
+;
+		LDA	<WORK1
+		ASL	<WORK1
+		PHP
+		ROR	A
+		PLP
+		ROR	A
+		CLC
+		ADC	ENXSPD,X		
+		STA	ENXSPD,X
+		RTS
+;
+;------------------------------------------------
+HAGE0CD		EQU	$
+;0
+		WORD	0FFF8H,00000H
+		HEX	86,00,00,02
+		WORD	00008H,00000H
+		HEX	86,40,00,02
+;1
+		WORD	0FFF8H,00000H
+		HEX	80,00,00,02
+		WORD	00008H,00000H
+		HEX	80,40,00,02
+;2
+		WORD	0FFF8H,00000H
+		HEX	82,00,00,02
+		WORD	00008H,00000H
+		HEX	82,40,00,02
+;3
+		WORD	0FFF8H,00000H
+		HEX	84,00,00,02
+		WORD	00008H,00000H
+		HEX	84,40,00,02
+;
+HAGE0CS		EQU	$
+		LDA	#00H
+		XBA
+		LDA	ENCHPT,X
+		MEM16
+		REP	#00100000B
+		ASL	A
+		ASL	A
+		ASL	A
+;
+		ASL	A
+		ADC	#HAGE0CD
+		STA	<WORK8
+;
+		MEM8
+		SEP	#00100000B
+;
+		LDA	#02H
+;;		STA	<WORK6
+;;		STZ	<WORK7
+;
+		JSR	SETO22
+;;		JSL	>SETOAML22
+;
+;;		LDA	ENSTAT,X
+;;		BEQ	HGC090
+;
+		JSL	>SADWSTL
+HGC090		EQU	$
+		RTS
+;		
+;%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+;%					    %
+;%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+KARASMV		EQU	$
+		PHB
+		PHK
+		PLB
+		JSR	KARASMV0
+		PLB
+		RTL
+;======================================
+KAMKDT		EQU	$
+		HEX	00,40
+;
+KARASMV0	EQU	$
+		LDA	ENFLCL,X
+		ORA	#00110000B
+		STA	ENFLCL,X
+		JSL	>EN1CSTL
+;
+		JSR	ENSTCK
+;
+;		LDA	ENHNFG,X
+;		BEQ	SHM011
+;;
+;		STZ	ENXSPD,X
+;		STZ	ENYSPD,X
+;SHM011		EQU	$
+		JSR	ENHNSB
+;
+		JSR	CREKEK
+;
+		JSR	ENMVCL
+;
+		LDA	ENSTAT,X
+		JSL	>JSRSUB
+		WORD	KAWAIT
+		WORD	KAUP
+		WORD	KAFLY
+		WORD	KAAWAY
+;----------------------------------------------
+KAFTMD		EQU	$
+		HEX	10,F8
+;
+KAWAIT		EQU	$
+		JSR	EPXCHK
+;
+		JSR	KACLST
+;
+;;		JSR	EPYCHK
+;;		LDA	<WORKE
+;;		CLC
+;;		ADC	#30H
+;;		CMP	#60H
+;;		BCS	KAW010
+;;		LDA	<WORKF
+;;		CLC
+;;		ADC	#30H
+;;		CMP	#60H
+;;		BCS	KAW010
+		MEM16
+		REP	#20H
+		LDA	<PLXPS1
+		SEC
+		SBC	ENXP2L
+;;		CLC
+		ADC	#0050H
+		CMP	#00A0H
+		BCS	KAW010
+		LDA	<PLYPS1
+;		CLC
+;		ADC	#0008H
+		SEC
+		SBC	ENYP2L
+;;;		CLC
+		ADC	#0058H
+		CMP	#00A0H
+		BCS	KAW010
+;
+		MEM8
+		SEP	#20H
+;
+		INC	ENSTAT,X
+;
+		LDA	#18H
+		STA	ENTIM0,X
+;
+;;		LDA	ENMOD2,X	; Kage set !
+;;		ORA	#00010000B
+;;		STA	ENMOD2,X
+;
+;;		JSL	>SDLRCE
+;;		ORA	#1EH
+;;		STA	SOUND3	;(S)
+		LDA	#1EH
+		JSL	>SDLRE3	;(S)
+KAW010		EQU	$
+		MEM8
+		SEP	#20H
+		RTS		
+;-----------------------------------------------
+KAUP		EQU	$
+		LDA	ENTIM0,X
+		BNE	KAU010
+;
+		INC	ENSTAT,X
+;
+		LDY	ENWRK0,X
+		LDA	KAFTMD,Y
+		STA	ENTIM0,X
+;
+		LDA	#20H
+		JSL	>PSERCHL
+;
+KAU010		EQU	$
+		INC	ENZPSL,X
+		LDA	<FRCNT
+		LSR	A
+		AND	#01H
+		INC	A
+		STA	ENCHPT,X
+		RTS
+;-----------------------------------------------
+KAFLY		EQU	$
+		LDA	ENTIM0,X
+		BNE	KAF010
+;
+		LDA	URAFLG
+		BEQ	KAF002	; Ura ?
+;				; yes !
+		LDA	ENWRK0,X
+		BNE	KAF010		; Not away !
+;
+KAF002		EQU	$
+		INC	ENSTAT,X
+KAF010		EQU	$
+		TXA
+		EOR	<FRCNT
+		LSR	A	;AND	#01H
+		BCS	SHM020
+;
+		LDA	#20H
+		JSL	>PSERC2L
+;
+SHS00C		EQU	$
+		LDA	ENYSPD,X
+		CMP	<WORK0
+		BEQ	SHS030
+		BPL	SHS010
+		INC	ENYSPD,X
+		BRA	SHS030
+SHS010		EQU	$
+		DEC	ENYSPD,X
+SHS030		EQU	$
+		LDA	ENXSPD,X
+		CMP	<WORK1
+		BEQ	SHS050
+		BPL	SHS040
+		INC	ENXSPD,X
+		BRA	SHS050
+SHS040		EQU	$
+		DEC	ENXSPD,X
+SHS050		EQU	$
+SHM020		EQU	$
+KAPTST		EQU	$
+		LDA	<FRCNT
+		LSR	A
+		AND	#01H
+		INC	A
+		STA	ENCHPT,X
+;
+		LDA	ENXSPD,X
+		ASL	A
+		ROL	A
+		AND	#01H
+		TAY
+;
+KACLST		EQU	$
+		LDA	ENCLOR,X
+		AND	#10111111B
+		ORA	KAMKDT,Y
+		STA	ENCLOR,X
+;
+		RTS
+;-----------------------------------------------
+KAAWAY		EQU	$
+;- - - Go away - -
+		TXA
+		EOR	<FRCNT
+		LSR	A  ;AND	#01H
+		BCS	SHM020
+;
+		LDA	#30H
+		JSL	>PSERC2L
+		LDA	<WORK0
+		EOR	#0FFH
+		INC	A
+		STA	<WORK0
+		LDA	<WORK1
+		EOR	#0FFH
+		INC	A
+		STA	<WORK1
+		BRA	SHS00C
+;-------------------------------------------------------
+
+;=============================================================
+EYEBSIT		EQU	$
+		PHB
+		PHK
+		PLB
+		JSR	EYEBSI0
+		PLB
+		RTL
+;----------------------------------------
+EBIXAL		EQU	$
+;Ura
+		HEX	08,16  ;,22
+		HEX	F8,EA  ;,DE
+;Omote
+		HEX	00,0E,13,21,1A
+		HEX	   F2,ED,DF,E6
+EBIXAH		EQU	$
+		HEX	00,00  ;,00
+		HEX	FF,FF  ;,FF
+;
+		HEX	00,00,00,00,00
+		HEX	   FF,FF,FF,FF
+EBIYAL		EQU	$
+		HEX	F8,F4  ;,E8
+		HEX	F8,F4  ;,E8
+;
+		HEX	00,EC,FF,F4,E8 ;,DC
+		HEX	   EC,FF,F4,E8 ;,DC
+EBIYAH		EQU	$
+		HEX	FF,FF  ;,FF
+		HEX	FF,FF  ;,FF
+;
+		HEX	00,FF,FF,FF,FF
+		HEX	   FF,FF,FF,FF
+;- - - - - - - - - - - - - - - - - - - - -
+EBICHP		EQU	$
+		HEX	1,1  ;,1
+		HEX	1,1  ;,1
+		HEX	0,0,0,0,0
+		HEX	  0,0,0,0
+;;EBID2D		EQU	$
+;;		HEX	00,40	;40(Life not dec)
+;- - - - - - - - - - - - - - - - - - - -	
+EYEBSI0		EQU	$
+		LDA	#09H
+		STA	ENCTCT,X
+		LDA	#04H
+		STA	ENCHPT,X
+;
+		LDY	#0DH
+		JSL	>ENIDSH2
+;
+		LDY	#0EH-2
+EBI010		EQU	$
+		LDA	#EMOVE
+		STA	ENMODE+1,Y
+;
+		LDA	#EYETM
+		STA	ENMYNO+1,Y
+;
+		PHX
+		TYX
+		INX
+		JSL	>ENMDST
+		PLX
+;
+		LDA	#00H
+		STA	ENKAIF+1,Y
+;
+		LDA	<WORK0
+		CLC
+		ADC	EBIXAL,Y
+		STA	ENXPSL+1,Y
+		STA	ENWRK0+1,Y
+		LDA	<WORK1
+		ADC	EBIXAH,Y
+		STA	ENXPSH+1,Y
+		STA	ENWRK1+1,Y
+;
+		LDA	<WORK2
+		CLC
+		ADC	EBIYAL,Y
+		PHP
+		CLC
+		ADC	#20H
+		STA	ENYPSL+1,Y
+		STA	ENWRK2+1,Y
+		LDA	<WORK3
+		ADC	#00H
+		PLP
+		ADC	EBIYAH,Y
+		STA	ENYPSH+1,Y
+		STA	ENMUKI+1,Y
+;
+		LDA	EBICHP,Y
+		STA	ENCHPT+1,Y		
+		STA	ENNOCR+1,Y
+;
+;;		PHY
+;;		TAY
+;;		LDA	EBID2D,Y
+;;		PLY
+;;		STA	ENMOD2+1,Y
+;
+		TYA
+		ASL	A
+		ASL	A
+		ASL	A
+		STA	<WORKF
+		JSL	>RNDSET
+		ADC	<WORKF
+		STA	ENCONT+1,Y
+		DEY
+		BPL	EBI010
+;
+EBI090		EQU	$
+		RTS		
+;%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+;%		Namazu				 %
+;%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+MDBNDD		EQU	$
+		HEX	20,10,08,00
+;
+NAMAZMV		EQU	$
+		LDA	ENWRK0,X
+		BPL	MDM000
+;- - Mizu shibuki - -
+		JSR	NZMZ2CS
+		RTS
+;
+MDM000		EQU	$
+		BEQ	NZM010		; Medar or Ashihire  move ? 
+;					; yes
+		LDA	ENZPSL,X
+		BNE	MDM002
+;
+		JSL	>ASIMZST	; Mizu set
+;
+;;;;		JSR	ENSTCK
+;
+		LDA	<GAMEMD
+		BNE	MDM020
+;
+		JSL	>CRENPL2L
+		BCC	MDM020
+;
+		STZ	ENMODE,X
+;
+		STZ	ITMVFG
+;;		LDY	#11H
+		LDY	ENWRK0,X
+		PHX
+		JSL	>ATMSIT
+		PLX
+MDM020		EQU	$
+MDM002		EQU	$
+		LDA	ENTUTM,X
+		BEQ	MDM003
+;
+		LDA	#02H*4
+		JSL	>OAMENT3
+MDM003		EQU	$
+		JSL	>EN1CSTL
+;
+		JSR	ENSTCK
+;
+		JSR	ENMVCL2
+;
+		DEC	ENZSPD,X
+		DEC	ENZSPD,X
+;
+		LDA	ENZPSL,X
+		BPL	MDM010
+;
+		STZ	ENZPSL,X
+;
+		LDA	ENXSPD,X
+		ASL	A
+		ROR	ENXSPD,X
+		LDA	ENYSPD,X
+		ASL	A
+		ROR	ENYSPD,X
+;
+		LDY	ENSTAT,X
+		CPY	#04H
+		BNE	MDM008
+		STZ	ENXSPD,X
+		STZ	ENYSPD,X
+		STZ	ENZSPD,X
+		BRA	MDM010
+MDM008		EQU	$
+		INC	ENSTAT,X
+		LDA	MDBNDD,Y
+		STA	ENZSPD,X
+;
+		CPY	#02H
+		BCS	MDM010
+;
+		JSR	NZMZST2
+		BMI	MDM010
+;
+		LDA	#10H
+		STA	ENTIM0,Y
+;
+MDM010		EQU	$
+		RTS
+;
+;================================================
+;- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+NZM010		EQU	$
+		JSR	NAMAZCS
+;
+		JSR	ENSTCK
+;
+		LDA	ENSTAT,X
+		JSL	>JSRSUB
+		WORD	NZCHEK
+		WORD	NZTILT
+		WORD	NZJUMP
+		WORD	NZMSGE
+;--------------------------------------------------
+NZCHEK		EQU	$
+;;		LDA	<KEYA2
+;;		BMI	NZTEST
+;
+		LDY	#ENNO-1
+NZCK10		EQU	$
+		CPY	ENINDX
+		BEQ	NZCK20
+;
+		LDA	ENMODE,Y
+		CMP	#EWATR
+		BNE	NZCK20
+;
+		LDA	ENXPSL,Y
+		STA	<WORK0
+		LDA	ENXPSH,Y
+		STA	<WORK1
+		LDA	ENYPSL,Y
+		STA	<WORK2
+		LDA	ENYPSH,Y
+		STA	<WORK3
+;
+		MEM16
+		REP	#20H
+		LDA	ENXP2L
+		SEC
+		SBC	<WORK0
+		CLC
+		ADC	#0020H
+		CMP	#0040H
+		BCS	NZCK20
+;
+		LDA	ENYP2L
+		SEC
+		SBC	<WORK2
+		CLC
+		ADC	#0020H
+		CMP	#0040H
+		BCS	NZCK20		; Katugi obj hit ?
+		MEM8
+		SEP	#20H
+;
+NZTEST		EQU	$		; yes ! move start !
+		INC	ENSTAT,X
+		LDA	#0FFH
+		STA	ENTIM0,X
+;
+;
+		RTS
+;
+NZCK20		EQU	$
+		MEM8
+		SEP	#20H
+		DEY
+		BPL	NZCK10
+		RTS
+;
+;--------------------------------------------------
+;
+NZTILT		EQU	$
+		LDA	ENTIM0,X
+		BNE	NZW010
+;
+		JSR	NZTEST
+;;		LDA	#0FFH
+;;		STA	ENTIM0,X
+;;;
+;;		INC	ENSTAT,X
+;
+		STZ	YUREXD
+		STZ	YUREXD+1
+;
+		LDA	#05H
+		STA	SOUND1	;(S)	Sound stop !
+;
+		LDA	#30H
+		STA	ENZSPD,X
+;
+		LDA	#00H
+		STA	ENXSPD,X
+;
+		JSR	NZMZST
+		RTS
+;
+NZW010		EQU	$
+		CMP	#0C0H
+		BCS	NZW020
+;
+		CMP	#0BFH
+		BNE	NZW011
+;
+		LDY	#07H
+		STY	SOUND1	;(S)    Zishin sound !
+NZW011		EQU	$
+		AND	#01H
+		TAY
+		LDA	NZTLDT,Y
+		STA	YUREXD
+		LDA	NZTLDT+2,Y
+		STA	YUREXD+1
+;
+		LDA	#01H
+		STA	PYALSP		; Player stop !
+NZW020		EQU	$
+		RTS
+;--------------------------------------------------
+NZJPCP		EQU	$
+		HEX	1,2,2,2,2,3,3,3
+		HEX	4,4,4,5,0,0,0,0
+;
+;		HEX	0,1,1,1,1,1,1,1
+;		HEX	2,1,3,3,3,3,3,4
+;
+NZJUMP		EQU	$
+		INC	ENCONT,X
+;
+		JSR	ENMVCL2
+;
+		LDA	ENZSPD,X
+		SEC
+		SBC	#02H
+		STA	ENZSPD,X
+		CMP	#0D0H
+		BNE	NZJ008
+;
+		JSR	NZMZST
+;
+NZJ008		EQU	$
+		LDA	ENZPSL,X
+		BPL	NZJ010
+;
+		STZ	ENZPSL,X
+;
+		INC	ENSTAT,X
+;
+		LDA	#0FFH
+		STA	ENTIM0,X
+NZJ010		EQU	$
+		LDA	ENCONT,X
+		LSR	A
+		LSR	A
+		TAY
+		LDA	NZJPCP,Y
+		STA	ENCHPT,X
+		RTS
+;--------------------------------------------------
+MZMSCP		EQU	$
+		HEX	0,6,7,7
+		HEX	7,7,7,7
+		HEX	7,7,7,7
+		HEX	7,7,7,7
+		HEX	7,7,6,6
+;
+NZMSGE		EQU	$
+		LDA	ENTIM0,X
+		BNE	MZMS00
+;
+		STZ	ENMODE,X	
+;;;;		STZ	ENCONT,X
+		RTS
+MZMS00		EQU	$
+		CMP	#0A0H
+		BNE	MZMS01
+		PHA
+		JSR	NZMZST2
+		PLA
+MZMS01		EQU	$
+		BCS	NZMS10
+		CMP	#0AH
+		BNE	MZMS02
+;
+		PHA
+		JSR	NZMZST
+		PLA
+MZMS02		EQU	$
+		CMP	#04H
+		BNE	MZMS03
+		PHA
+		JSR	NZMZST2
+		PLA
+MZMS03		EQU	$
+		CMP	#060H
+		BNE	MZMS08
+;
+		STZ	PYALSP		; Player stop reset !
+;
+                LDY     #MS_0490
+;
+		LDA	>ITEMR10
+		BEQ	MZMS05		; Already have ?
+;					; yes !
+                LDY     #MS_0491
+MZMS05		EQU	$
+                STY     MSGENOL
+;
+                LDA     #HIGH MS_0491
+                STA     MSGENOH
+                JSL     >MSGSET
+		RTS
+;- - - - - - - - - - - - - - - - - - - - - - - -
+MZMS08		EQU	$
+		CMP	#050H
+		BNE	MZMS0C
+;
+		PHA
+		LDA	>ITEMR10
+		BEQ	MZMS0A		; Already have ?
+;					; yes ! beam shot !
+		JSL	>RNDSET
+		AND	#01H
+		BEQ	MZMS09
+;
+		JSR	MZBOST
+		BRA	MZMS0B
+MZMS09		EQU	$
+		JSL	>Z2TMSTL
+		BRA	MZMS0B
+MZMS0A		EQU	$
+		JSR	MEDARST		; Medal set !
+MZMS0B		EQU	$
+		PLA
+;
+MZMS0C		EQU	$
+		LSR	A
+		LSR	A
+		LSR	A
+		TAY
+		LDA	MZMSCP,Y
+		STA	ENCHPT,X
+		RTS
+;---------------------------------
+MZBOST		EQU	$
+                LDA     #HEBO0
+                JSL     >ENIDSH
+                BMI     NBS010
+;
+		JSL	>ENIDPS
+;
+                JSL     >BOMBST
+;
+		LDA	#50H
+		STA	ENTIM1,Y
+;
+		LDA	#18H
+		STA	ENXSPD,Y
+;
+		LDA	#30H
+		STA	ENZSPD,Y
+NBS010		EQU	$
+		RTS
+;- - - - - - - - - - - - - - - - - - -
+NZMS10		EQU	$
+		CMP	#0FCH
+		BNE	MZMS90
+;
+		JSR	NZMZST2
+MZMS90		EQU	$
+		RTS
+;==========================================
+;	Zishin medar set 
+;==========================================
+MEDARST		EQU	$
+		LDA	#NAMAZ
+		JSL	>ENIDSH
+		BMI	MDS090
+;
+		JSL	>ENIDPS
+;
+		PHX
+		TYX
+		LDA	#18H
+		STA	ENXSPD,X
+;
+		LDA	#30H
+		STA	ENZSPD,X
+		LDA	#11H
+		STA	ENWRK0,X	; Item set no !
+;
+;;		JSL	>SDLRCE
+;;		ORA	#20H
+;;		STA	SOUND2	;(S)
+		LDA	#20H
+		JSL	>SDLRE2	;(S)
+;
+		LDA	#10000011B
+		STA	ENMOD0,X
+		LDA	#01011000B
+		STA	ENMOD2,X
+		AND	#0FH
+		STA	ENCLOR,X
+;
+		PLX
+;
+                PHX
+                PHY
+                LDA     #1CH
+                JSL     >ITMCBFST       ;Medal character TR.
+                PLY
+                PLX
+MDS090		EQU	$
+		RTS
+;==========================================
+;	Zora hire set 
+;==========================================
+HIREST		EQU	$
+		LDA	#NAMAZ
+		JSL	>ENIDSH
+		BMI	HRS090
+;
+		JSL	>ENIDPS
+;
+		PHX
+		TYX
+;
+		LDA	#20H
+		STA	ENZSPD,X
+		LDA	#10H
+		STA	ENYSPD,X
+		LDA	#1EH		
+		STA	ENWRK0,X	; Item set no !
+;
+;;		JSL	>SDLRCE
+;;		ORA	#20H
+;;		STA	SOUND2	;(S)
+		LDA	#20H
+		JSL	>SDLRE2	;(S)
+;
+		LDA	#10000011B
+		STA	ENMOD0,X
+		LDA	#01010100B
+		STA	ENMOD2,X
+		AND	#0FH
+		STA	ENCLOR,X
+;
+		LDA	#30H
+		STA	ENTUTM,X
+		PLX
+;
+                PHX
+                PHY
+                LDA     #11H
+                JSL     >ITMCBFST       ;Hire  character TR.
+                PLY
+                PLX
+HRS090		EQU	$
+		RTL
+;================================================
+NZMZST		EQU	$
+		LDA	#KTOBJ
+		JSL	>ENIDSH
+		BMI	NZU022
+;
+		JSL	>ENIDPS
+;
+                LDA     #EWATR			
+                STA     ENMODE,Y
+                LDA     #00001111B
+                STA     ENTIM0,Y
+		LDA	#00H
+                STA     ENSTAT,Y
+;
+                LDA     #03H
+                STA     ENMOD0,Y
+;
+;;		JSL	>SDLRCE
+;;		ORA	#28H
+;;		STA	SOUND2	; (S)
+		LDA	#28H
+		JSL	>SDLRE2	;(S)
+NZU022		EQU	$
+                RTS
+;==========================================
+NZMZSTL		EQU	$
+		PHB
+		PHK
+		PLB
+		JSR	NZMZST2
+		PLB
+		RTL
+;======================================
+NZMZST2		EQU	$
+		LDA	#NAMAZ
+		JSL	>ENIDSH
+		BMI	NZ2022
+;
+		JSL	>ENIDPS
+;
+		LDA	#80H
+		STA	ENWRK0,Y
+;
+                LDA     #02H
+                STA     ENMOD0,Y
+                STA     ENNOCR,Y
+;
+		LDA	#00000100B
+		STA	ENCLOR,Y
+;
+		LDA	#1FH
+		STA	ENTIM0,Y
+NZ2022		EQU	$
+                RTS
+;=====================================
+NAMAZCD		EQU	$
+;0
+		WORD	0FFFCH,00004H
+		HEX	8C,00,00,02
+		WORD	00004H,00004H
+		HEX	8D,00,00,02
+		WORD	0FFFCH,00004H
+		HEX	8C,00,00,02
+		WORD	00004H,00004H
+		HEX	8D,00,00,02
+;1
+		WORD	0FFFCH,0FFFCH
+		HEX	8C,00,00,02
+		WORD	00004H,0FFFCH
+		HEX	8D,00,00,02
+		WORD	0FFFCH,00004H
+		HEX	9C,00,00,02
+		WORD	00004H,00004H
+		HEX	9D,00,00,02
+;2
+		WORD	0FFFCH,0FFFCH
+		HEX	8D,40,00,02
+		WORD	00004H,0FFFCH
+		HEX	8C,40,00,02
+		WORD	0FFFCH,00004H
+		HEX	9D,40,00,02
+		WORD	00004H,00004H
+		HEX	9C,40,00,02
+;3
+		WORD	0FFFCH,0FFFCH
+		HEX	9D,C0,00,02
+		WORD	00004H,0FFFCH
+		HEX	9C,C0,00,02
+		WORD	0FFFCH,00004H
+		HEX	8D,C0,00,02
+		WORD	00004H,00004H
+		HEX	8C,C0,00,02
+;4
+		WORD	0FFFCH,00004H
+		HEX	9D,C0,00,02
+		WORD	00004H,00004H
+		HEX	9C,C0,00,02
+		WORD	0FFFCH,00004H
+		HEX	9D,C0,00,02
+		WORD	00004H,00004H
+		HEX	9C,C0,00,02
+;5
+		WORD	00000H,00008H
+		HEX	BD,00,00,00
+		WORD	00008H,00008H
+		HEX	BD,40,00,00
+		WORD	00008H,00008H
+		HEX	BD,40,00,00
+		WORD	00008H,00008H
+		HEX	BD,40,00,00
+;6
+		WORD	0FFF8H,00000H
+		HEX	86,00,00,02
+		WORD	00008H,00000H
+		HEX	86,40,00,02
+		WORD	00008H,00000H
+		HEX	86,40,00,02
+		WORD	00008H,00000H
+		HEX	86,40,00,02
+;- - - - - - - - - - - - - - - - - - - - - - - -
+NAMAZCS		EQU	$
+		LDA	#00H
+		XBA
+		LDA	ENCHPT,X
+		BEQ	NZC010
+		DEC	A
+		MEM16
+		REP	#00100000B
+		ASL	A
+		ASL	A
+		ASL	A
+;
+		ASL	A
+		ASL	A
+		ADC	#NAMAZCD
+		STA	<WORK8
+;
+		MEM8
+		SEP	#00100000B
+;
+		LDA	#04H
+;;		STA	<WORK6
+;;		STZ	<WORK7
+;
+		JMP	SETO22
+;;		JSL	>SETOAML22
+;
+NZC010		EQU	$
+		RTS
+;===============================================
+NZMZ2CD		EQU	$
+;0
+		WORD	0FFF8H,00000H-4
+		HEX	80,00,00,00
+		WORD	00012H,0FFFDH-4
+		HEX	80,00,00,00
+;1
+		WORD	0FFFBH,00002H-4
+		HEX	BF,00,00,00
+		WORD	0000FH,00000H-4
+		HEX	AF,40,00,00
+;2
+		WORD	00000H,00000H-4
+		HEX	E7,00,00,02
+		WORD	00000H,00000H-4
+		HEX	E7,00,00,02
+;3
+		WORD	00000H,00000H-4
+		HEX	C0,00,00,02
+		WORD	00000H,00000H-4
+		HEX	C0,00,00,02
+;=====================================================
+NZMZ2CS		EQU	$
+		LDA	#00H
+		XBA
+		LDA	ENTIM0,X
+		BNE	NM2C10
+		STZ	ENMODE,X
+NM2C10		EQU	$
+		LSR	A
+		LSR	A
+		LSR	A
+		MEM16
+		REP	#00100000B
+		ASL	A
+		ASL	A
+		ASL	A
+;
+		ASL	A
+		ADC	#NZMZ2CD
+		STA	<WORK8
+;
+		MEM8
+		SEP	#00100000B
+;
+		LDA	#02H
+;;		STA	<WORK6
+;;		STZ	<WORK7
+;
+		JMP	SETO22
+;;		JSL	>SETOAML22
+;;;
+;;		RTS
+;%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+;%						 %
+;%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+EBMCHP		EQU	$
+		HEX	0,1,2,3,0,1,2,3
+EBMMKD		EQU	$
+		HEX	0,0,0,0,40,40,40,40
+;
+EBMZXX		EQU	$
+;;;	     Next way    0  1  2  3  4  5  6  7   Now way
+		HEX	F1,00,00,F1,00,F1,F1,00	; 0
+		HEX	F1,00,00,F1,00,F1,F1,00	; 1
+		HEX	00,0F,0F,00,0F,00,00,0F	; 2 
+		HEX	00,0F,0F,00,0F,00,00,0F	; 3 
+		HEX	00,0F,0F,00,0F,00,00,0F	; 4 
+		HEX	00,0F,0F,00,0F,00,00,0F	; 5 
+		HEX	F1,00,00,F1,00,F1,F1,00	; 6 
+		HEX	F1,00,00,F1,00,F1,F1,00	; 7
+;- - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+EYEBMMV		EQU	$
+		LDA	<FRCNT
+		ASL	A
+		AND	#00001110B
+		STA	<WORK0
+;
+		LDY	ENWRK0,X
+		LDA	ENCLOR,X
+		AND	#10110001B
+		ORA	EBMMKD,Y
+		ORA	<WORK0
+		STA	ENCLOR,X
+;
+		LDA	EBMCHP,Y
+		LDY	ERXYCT
+		CPY	#20H
+		BNE	EBMM00		; Shisai room ?
+		CLC
+		ADC	#04H		; yes ! bank revise !
+EBMM00		EQU	$
+		STA	ENCHPT,X
+		JSL	>EN1CSTL
+;
+		JSR	ENSTCK
+;
+		LDA	ENTIM0,X
+		BNE	EBM010
+;
+		JSR	EBZNZST		; Zanzoo set !
+;
+		LDA	#02H
+		STA	ENTIM0,X
+;
+		LDA	ENYPSL,X
+		CLC
+		ADC	#10H
+		STA	ENYPSL,X
+		PHA
+		LDA	ENYPSH,X
+		ADC	#00H
+		STA	ENYPSH,X
+;
+		PLA
+		SEC
+		SBC	<SCCV2
+		CMP	#0D0H
+		BCC	EBMM08		; Limit ?
+;					; yes !
+		STZ	ENMODE,X
+		RTS
+;
+EBMM08		EQU	$
+		JSL	>RNDSET
+		AND	#07H
+		STA	<WORK0
+		LDA	ENWRK0,X
+		ASL	A
+		ASL	A
+		ASL	A
+		ORA	<WORK0
+		TAY
+		STZ	<WORK1
+		LDA	EBMZXX,Y
+		BPL	EBM018
+		DEC	<WORK1
+EBM018		EQU	$
+		CLC
+		ADC	ENXPSL,X
+		STA	ENXPSL,X
+		LDA	ENXPSH,X
+		ADC	<WORK1
+		STA	ENXPSH,X
+;
+		LDA	<WORK0
+		STA	ENWRK0,X
+EBM010		EQU	$
+		RTS
+;=========================================================
+EBZNZST		EQU	$
+		PHX
+		TXY
+;
+		LDX	#E2NO-1
+EBZS10		EQU	$
+		LDA	>E2MODE,X
+		BEQ	EBZS20
+		DEX
+		BPL	EBZS10
+;
+		DEC	E2STCT
+		BPL	EBZS18
+;
+		LDA	#E2NO-1
+		STA	E2STCT
+EBZS18		EQU	$
+;
+		LDX	E2STCT
+EBZS20		EQU	$
+		LDA	#09H
+		STA	>E2MODE,X
+		STA	EN2FLG
+;
+		LDA	ENWRK0,Y
+		STA	>E2STAT,X
+;
+		LDA	ENXPSL,Y
+		STA	>E2XPSL,X
+		LDA	ENXPSH,Y
+		STA	>E2XPSH,X
+		LDA	ENYPSL,Y
+		CLC
+		ADC	#10H
+		STA	>E2YPSL,X
+		LDA	ENYPSH,Y
+		ADC	#00H
+		STA	>E2YPSH,X
+;
+		LDA	#020H
+		STA	>E2TIM0,X
+;	
+		PLX
+		RTS
+;%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+;%						 %
+;%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+;
+EYEBSMV		EQU	$
+;==================================
+		LDA	ENTIM3,X
+		BEQ	EB0000		; Half eye ?
+;					; yes !
+		LDA	#03H
+		STA	ENCHPT,X
+EB0000		EQU	$
+		JSR	EYEBSCS
+		JSR	ENSTCK
+		JSR	EYETMCT
+;
+;;		JSL	>CRENPLL
+;;		JSL	>CRKNENL
+		JSR	CREKEK
+;
+		LDA	ENSTAT,X
+		JSL	>JSRSUB
+		WORD	EBPROT
+		WORD	EBATCK
+		WORD	EBJUMP		
+;------------------------------------------------
+EBPROT		EQU	$
+		STZ	E2STCT
+;
+		STZ	ENHNFG,X
+;
+		LDA	ENMOD2,X
+		ORA	#01000000B
+		STA	ENMOD2,X
+;
+		LDA	<FRCNT
+		AND	#01H
+		BNE	EBP010
+;
+		DEC	ENWRK0,X
+		BNE	EBP010
+;
+		LDA	ENMOD2,X
+		AND	#10111111B
+		STA	ENMOD2,X
+;
+		LDA	#10H
+		STA	ENTIM3,X		
+;
+		INC	ENSTAT,X
+;
+		LDA	#80H
+		STA	ENTIM0,X
+;
+		LDA	ENCTCT,X
+		BNE	EBP008		; EYETM end ?
+;					; yes ! jump atack !
+		INC	ENSTAT,X
+		LDA	#40H
+		STA	ENTIM0,X
+;
+		STZ	ENNOCR,X
+;
+		LDA	#35H
+		STA	SOUND2	;(S)
+		RTS
+;
+EBP008		EQU	$
+EBP010		EQU	$
+		LDY	#04H
+		LDA	<FRCNT
+		AND	#00110000B
+		BNE	EBP020
+		INY
+EBP020		EQU	$
+		TYA
+		STA	ENCHPT,X
+		RTS
+;------------------------------------------------
+EBACHP		EQU	$
+		HEX	02,01
+EBATTM		EQU	$
+;;;			 0  1  2  3  4  5  6  7  8  9
+		HEX	20,20,20,40,60,80,A0,C0,E0,00
+;
+EBATCK		EQU	$
+		STZ	ENHNFG,X
+;
+		LDA	ENTIM0,X
+		BNE	EBA010
+;
+		LDA	#10H
+		STA	ENTIM3,X
+;
+		STZ	ENSTAT,X
+		LDY	ENCTCT,X
+		LDA	EBATTM,Y
+		STA	ENWRK0,X
+		RTS
+EBA010		EQU	$
+EBACPS		EQU	$
+		CMP	#40H		; 3 of baem set !
+		BEQ	EBA020
+		CMP	#41H
+		BEQ	EBA020
+		CMP	#42H
+		BNE	EBA030
+;
+EBA020		EQU	$
+		JSL	>EYEBMST
+EBA030		EQU	$
+		STZ	ENCHPT,X
+		JSR	EPXCHK
+		LDA	<WORKF
+		CLC
+		ADC	#10H
+		CMP	#20H
+		BCC	EBA090
+;
+		LDA	EBACHP,Y
+		STA	ENCHPT,X
+EBA090		EQU	$
+		RTS
+;------------------------------------------------
+EBJXAD		EQU	$
+		HEX	08,F8
+;
+EBJUMP	 	EQU	$
+		JSR	EBACPS
+;
+		JSR	ENHNSB
+;
+		LDA	ENTIM0,X
+		BEQ	EBJ010
+		AND	#02H
+		LSR	A
+		TAY
+		LDA	EBJXAD,Y
+		STA	ENXSPD,X
+		JSR	ENXCLC
+		RTS
+EBJ010		EQU	$
+		JSR	ENMVCL2
+;;		JSL	>ENBGCKL
+		JSR	ENBGCK
+		DEC	ENZSPD,X
+		DEC	ENZSPD,X
+;
+		LDA	ENZPSL,X
+		BPL	EBJ020
+;
+		STZ	ENZPSL,X
+		LDA	#20H
+		STA	ENZSPD,X
+		LDA	#10H
+		JSL	>PSERCHL
+;
+;;		JSL	>SDLRCE
+;;		ORA	#21H
+;;		STA	SOUND2	;(S)
+		LDA	#21H
+		JSL	>SDLRE2	;(S)
+EBJ020		EQU	$
+		RTS
+;=========================================
+EYCTDT		EQU	$
+		HEX	5,6,7,8,9,A,B,C
+		HEX	D,5,6,7,8,9,A,B
+;
+;;		HEX	7,8,9,A,B,C,D,E
+;;		HEX	F,7,8,9,A,B,C,D
+;
+EYETMCT		EQU	$
+		INC	ENCONT,X
+		LDA	ENCONT,X
+		AND	#03FH
+		BNE	EYCT10
+;
+		JSL	>RNDSET
+		AND	#0FH
+		TAY
+		LDA	EYCTDT,Y
+		TAY
+		LDA	ENSTAT,Y
+		BNE	EYCT08
+		INC	A
+		STA	ENSTAT,Y
+;
+		LDA	#15H
+		STA	SOUND2	;(S)
+EYCT10		EQU	$
+		RTS
+;
+EYCT08		EQU	$
+		DEC	ENCONT,X
+		RTS
+;========== Beam shot ============
+EBMSXD		EQU	$
+		HEX	F8,08,08,F8
+		HEX	08,F8,F8,08
+EBMSXH		EQU	$
+		HEX	FF,00,00,FF
+		HEX	00,FF,FF,00
+;
+EYEBMST		EQU	$
+		PHB
+		PHK
+		PLB
+;
+		LDA	#EYEBM
+		JSL	>ENIDSH
+		BMI	ETS010
+;
+		LDA	#26H
+		STA	SOUND3	;(S)
+;
+		JSL	>ENIDPS
+;
+		JSL	>RNDSET
+		AND	#07H
+		STA	ENWRK0,Y
+		PHX
+		TAX
+		LDA	<WORK0
+		CLC
+		ADC	EBMSXD,X
+		STA	ENXPSL,Y
+		LDA	<WORK1
+		ADC	EBMSXH,X
+		STA	ENXPSH,Y
+;
+		LDA	<WORK2
+		ADC	#0CH
+		STA	ENYPSL,Y
+		PLX
+;
+		LDA	#02H
+		STA	ENTIM0,Y
+;
+		LDA	#20H
+		STA	CGFLTM
+ETS010		EQU	$
+		PLB
+		RTL
+;==============================================================
+EYEBSCD		EQU	$
+;0
+		WORD	0FFF8H,0FFF8H
+		HEX	C0,01,00,02
+		WORD	00008H,0FFF8H
+		HEX	C0,41,00,02
+		WORD	0FFF8H,00008H
+		HEX	E0,01,00,02
+		WORD	00008H,00008H
+		HEX	E0,41,00,02
+;1
+		WORD	0FFF8H,0FFF8H
+		HEX	C8,01,00,02
+		WORD	00008H,0FFF8H
+		HEX	CA,01,00,02
+		WORD	0FFF8H,00008H
+		HEX	E8,01,00,02
+		WORD	00008H,00008H
+		HEX	EA,01,00,02
+;2
+		WORD	0FFF8H,0FFF8H
+		HEX	CA,41,00,02
+		WORD	00008H,0FFF8H
+		HEX	C8,41,00,02
+		WORD	0FFF8H,00008H
+		HEX	EA,41,00,02
+		WORD	00008H,00008H
+		HEX	E8,41,00,02
+;3
+		WORD	0FFF8H,0FFF8H
+		HEX	C2,01,00,02
+		WORD	00008H,0FFF8H
+		HEX	C2,41,00,02
+		WORD	0FFF8H,00008H
+		HEX	E2,01,00,02
+		WORD	00008H,00008H
+		HEX	E2,41,00,02
+;4
+		WORD	0FFF8H,0FFF8H
+		HEX	C4,01,00,02
+		WORD	00008H,0FFF8H
+		HEX	C4,41,00,02
+		WORD	0FFF8H,00008H
+		HEX	E4,01,00,02
+		WORD	00008H,00008H
+		HEX	E4,41,00,02
+;5
+		WORD	0FFF9H,0FFF9H
+		HEX	C4,01,00,02
+		WORD	00007H,0FFF9H
+		HEX	C4,41,00,02
+		WORD	0FFF9H,00007H
+		HEX	E4,01,00,02
+		WORD	00007H,00007H
+		HEX	E4,41,00,02
+;	
+EYEBSCS		EQU	$
+		LDA	#00H
+		XBA
+		LDA	ENCHPT,X
+		MEM16
+		REP	#00100000B
+		ASL	A
+		ASL	A
+		ASL	A
+;
+		ASL	A
+		ASL	A
+		ADC	#EYEBSCD
+		STA	<WORK8
+;
+		LDA	ENSTAT,X
+		AND	#00FFH
+		CMP	#0002H
+		BNE	EBC010
+;
+		LDA	ENMODE,X
+		AND	#00FFH
+		CMP	#EMOVE
+		BNE	EBC010
+;
+		LDA	#OAM+000H
+		STA	<OAMADR
+		LDA	#OAMSB+000H
+		STA	<OSBADR
+;
+EBC010		EQU	$
+		MEM8
+		SEP	#00100000B
+;
+		LDA	#04H
+;;		STA	<WORK6
+;;		STZ	<WORK7
+;
+		JSR	SETO22
+;;		JSL	>SETOAML22
+;
+		LDA	ENSTAT,X
+		CMP	#02H
+		BNE	EBC090
+;- - Kage set - - 
+		LDA	ENFLCL,X
+		AND	#11110001B
+		STA	ENFLCL,X
+		JSL	>BIGSWST
+;
+;		LDA	<WORK0
+;		SEC
+;		SBC	#03H
+;		STA	OAM+160H
+;		SEC
+;		SBC	#03H
+;		STA	OAM+164H
+;		CLC
+;		ADC	#09H
+;		STA	OAM+168H
+;		CLC
+;		ADC	#03H
+;		STA	OAM+16CH
+;;
+;		LDA	ENYPSL,X
+;;;		SEC
+;;;		SBC	#10H
+;;;		PHP
+;		SEC
+;		SBC	<SCCV2
+;;;		STA	<WORKD
+;;;		LDA	ENYPSH,X
+;;;		SBC	<SCCV2+1
+;;;		PLP
+;;;		SBC	#00H
+;;;		BNE	PTRC98
+;;
+;;;		LDA	<WORKD
+;		CLC
+;		ADC	#10H
+;		STA	OAM+161H		
+;		STA	OAM+165H
+;		STA	OAM+169H
+;		STA	OAM+16DH
+;		LDA	#6CH
+;		STA	OAM+162H		
+;		STA	OAM+166H
+;		STA	OAM+16AH
+;		STA	OAM+16EH
+;		LDA	#034H
+;		STA	OAM+163H		
+;		STA	OAM+167H		
+;		STA	OAM+16BH		
+;		STA	OAM+16FH		
+;;
+;		LDA	#02H
+;		STA	OAMSB+160H/4
+;		STA	OAMSB+164H/4
+;		STA	OAMSB+168H/4
+;		STA	OAMSB+16CH/4
+;;
+EBC090		EQU	$
+		RTS
+;%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+;%						 %
+;%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+EYTXAL		EQU	$
+		WORD	01H,00H,0FFFFH,00H
+EYTYAL		EQU	$
+		WORD	00H,01H,00H,0FFFFH
+;- - - - - - - - - - - - -
+EYETMMV		EQU	$
+		LDA	ENCONT,X
+		LSR	A
+		LSR	A
+		LSR	A
+		AND	#00000110B
+		TAY
+		MEM16
+		REP	#20H
+		LDA	ENXP2L
+		CLC
+		ADC	EYTXAL,Y
+		STA	ENXP2L
+		LDA	ENYP2L
+		CLC
+		ADC	EYTYAL,Y
+		STA	ENYP2L
+		MEM8
+		SEP	#20H
+;		
+		JSL	>EN1CSTL
+		JSR	ENSTCK
+		INC	ENCONT,X
+;
+		LDA	ENCHPT,X
+		BEQ	EYT010
+		RTS
+;- - - - - - - - - - - - - - - - - - - - -
+EYT010		EQU	$
+		JSL	>CRKNENL
+		JSL	>CRENPLL
+;
+		LDA	ENHNFG,X
+		CMP	#0EH
+		BNE	EYT018
+;
+		LDA	#05H
+		STA	ENHNFG,X
+EYT018		EQU	$
+		LDA	ENSTAT,X
+		BEQ	ETSTOP
+		CMP	#01H
+		BEQ	ETSERC
+		JMP	ETBACK
+;
+;;		JSL	>JSRSUB
+;;		WORD	ETSTOP
+;;		WORD	ETSERC
+;;		WORD	ETBACK
+;--------------------------------------------
+ETSTOP		EQU	$
+		LDA	<PLXPS1
+		STA	ENCTCT,X
+		LDA	<PLXPS0
+		STA	ENKBMK,X
+		LDA	<PLYPS1
+		STA	ENCTFG,X
+		LDA	<PLYPS0
+		STA	HEMODE,X
+		RTS
+;--------------------------------------------
+ETSERC		EQU	$
+		JSR	ENHNSB
+;
+		TXA
+		EOR	<FRCNT
+		AND	#01H
+		BNE	ETSR00
+;
+		LDA	ENCTCT,X
+		STA	<WORK4
+		LDA	ENKBMK,X
+		STA	<WORK5
+		LDA	ENCTFG,X
+		STA	<WORK6
+		LDA	HEMODE,X
+		STA	<WORK7
+		LDA	#10H
+		JSL	>ESERCHL
+		LDA	<WORK0
+		STA	ENYSPD,X
+		LDA	<WORK1
+		STA	ENXSPD,X
+;
+ETSR00		EQU	$
+		JSR	ENMVCL
+;
+		LDA	ENCTCT,X
+		SEC
+		SBC	ENXPSL,X
+		CLC
+		ADC	#04H
+		CMP	#08H
+		BCS	ETSR90
+;
+		LDA	ENCTFG,X
+		SEC
+		SBC	ENYPSL,X
+		CLC
+		ADC	#04H
+		CMP	#08H
+		BCS	ETSR90
+;
+		INC	ENSTAT,X
+;
+ETSR90		EQU	$
+		RTS		
+;--------------------------------------------
+ETBACK		EQU	$
+		JSR	ENHNSB
+;
+		TXA
+		EOR	<FRCNT
+		AND	#01H
+		BNE	ETBK00
+;
+		LDA	ENWRK0,X
+		STA	<WORK4
+		LDA	ENWRK1,X
+		STA	<WORK5
+		LDA	ENWRK2,X
+		STA	<WORK6
+		LDA	ENMUKI,X
+		STA	<WORK7
+		LDA	#10H
+		JSL	>ESERCHL
+		LDA	<WORK0
+		STA	ENYSPD,X
+		LDA	<WORK1
+		STA	ENXSPD,X
+;
+ETBK00		EQU	$
+		JSR	ENMVCL
+;
+		LDA	ENWRK0,X
+		SEC
+		SBC	ENXPSL,X
+		CLC
+		ADC	#04H
+		CMP	#08H
+		BCS	ETBK90
+;
+		LDA	ENWRK2,X
+		SEC
+		SBC	ENYPSL,X
+		CLC
+		ADC	#04H
+		CMP	#08H
+		BCS	ETBK90
+;
+		LDA	ENWRK0,X
+		STA	ENXPSL,X
+		LDA	ENWRK1,X
+		STA	ENXPSH,X
+		LDA	ENWRK2,X
+		STA	ENYPSL,X
+		LDA	ENMUKI,X
+		STA	ENYPSH,X
+;
+		STZ	ENSTAT,X
+ETBK90		EQU	$
+		RTS
+;===================================
+;---------------------------------------
+EPXYCK		EQU	$
+		JSL	>EPXYCK2
+		RTS
+;================================================================
+EPXCHK		EQU	$
+		JSL	>EPXCHK2
+		RTS
+;- - - - - - - -
+;=================================================================
+EPYCHK		EQU	$
+		JSL	>EPYCHK2
+		RTS
+;===========================================
+ENSTCK		EQU	$
+		LDA	ENMODE,X
+		CMP	#EMOVE
+		BNE	ESTC08
+ENSTCK2		EQU	$
+;;		JSR	PLHNCK		; player hani flag set 
+;
+		LDA	ENSTFG
+		BNE	ESTC08		; enemy all stop !
+;
+		LDA	<GAMEMD
+		BNE	ESTC08
+;
+		LDA	ENMOD5,X
+		BMI	ESTC10
+;
+		LDA	ENDSPL,X
+		BEQ	ESTC10		; game stop ?
+;
+ESTC08		EQU	$
+		PLA			; yes ! don't sub return 
+		PLA
+ESTC10		EQU	$
+		RTS
+;=====================================================
+;@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+;@		Enemy hanakairi sub 		       @
+;@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+TNHNTM		EQU	$
+		BYTE	03,01,00,00
+HBCKBT		EQU	$
+		BYTE	00001100B
+		BYTE	00000011B
+;- - - - - - - - - - - - - - - - - - - - - -
+ENHNSB		EQU	$	
+		LDA	ENHNFG,X
+		BEQ	ENHB90
+		AND	#7FH
+		BEQ	ENHB99
+;
+		LDA	ENYSPD,X
+		PHA
+		LDA	ENXSPD,X
+		PHA
+		DEC	ENHNFG,X
+		BNE	EHB001		; End ?
+;					; yes !
+		LDA	ENHNXS,X
+		CLC
+		ADC	#20H
+		CMP	#40H
+		BCS	EHB0FF
+;
+		LDA	ENHNYS,X
+		CLC
+		ADC	#20H
+		CMP	#40H
+		BCC	EHB001
+;
+EHB0FF		EQU	$
+		LDA	#080H+10H	; Stop !
+		STA	ENHNFG,X
+EHB001		EQU	$
+		LDA	ENHNFG,X
+		BMI	ENHB08
+;
+;;		LSR 	A
+		LSR 	A
+		LSR 	A
+		TAY
+		LDA	<FRCNT
+		AND	TNHNTM,Y
+		BNE	ENHB08																
+		LDA	ENHNYS,X
+		STA	ENYSPD,X
+		LDA	ENHNXS,X
+		STA	ENXSPD,X
+;
+		LDA	ENMOD6,X
+		BMI	ENHB10		; BG check ?
+;
+;;		LDA	ENMOD4,X
+;;		BMI	ENHB10		; BG check ?
+; 					; Yes !
+;
+;; 		JSL	>ENBGCKL
+;;		LDA	ENCBFG,X
+		JSR	ENBGCK
+		AND	#00001111B
+		BEQ	ENHB10
+;
+		CMP	#00000100B
+		BCS	ENHB01
+;
+		STZ	ENHNXS,X
+		STZ	ENXSPD,X
+		BRA	ENHB02
+ENHB01		EQU	$
+		STZ	ENHNYS,X
+		STZ	ENYSPD,X
+ENHB02		EQU	$
+;		LDA	ENXSPD,X
+;		BPL	ENHB01
+;		EOR	#0FFH
+;		INC	A
+;ENHB01		EQU	$
+;		STA	<WORK0
+;		LDA	ENYSPD,X
+;		BPL	ENHB02
+;		EOR	#0FFH
+;		INC	A
+;ENHB02		EQU	$
+;		LDY	#00H
+;		CMP	<WORK0
+;		BCS	ENHB03
+;;
+;		INY
+;ENHB03		EQU	$
+;		LDA	ENCBFG,X
+;		AND	HBCKBT,Y
+;		BEQ	ENHB04
+;		STZ	ENHNFG,X
+;ENHB04		EQU	$
+;		CPY	#00H
+;		BNE	ENHB05
+;		STZ	ENHNXS,X
+		BRA	ENHB08
+;ENHB05		EQU	$
+;		STZ	ENHNYS,X
+;		BRA	ENHB08
+ENHB10		EQU	$
+		JSR	ENMVCL
+ENHB08		EQU	$
+		PLA
+		STA	ENXSPD,X
+		PLA
+		STA	ENYSPD,X
+;
+		LDA	ENMYNO,X
+		CMP	#CTBOS
+		BEQ	ENHB90		; Cyty boss head -> return for move !
+;
+		PLA
+		PLA
+ENHB90		EQU	$
+		RTS
+ENHB99		EQU	$
+		STZ	ENHNFG,X
+		RTS
+;;@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+;;@		Enemy hanakairi sub 		       @
+;;@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+;TNHNTM		EQU	$
+;		BYTE	03,01,00,00
+;;;HBCKBT		EQU	$
+;;;		BYTE	00001100B
+;;;		BYTE	00000011B
+;;- - - - - - - - - - - - - - - - - - - - - -
+;ENHNSB		EQU	$	
+;		LDA	ENHNFG,X
+;		BEQ	ENHB90
+;;
+;		LDA	ENYSPD,X
+;		PHA
+;		LDA	ENXSPD,X
+;		PHA
+;		DEC	ENHNFG,X
+;		LDA	ENHNFG,X
+;;;		LSR 	A
+;		LSR 	A
+;		LSR 	A
+;;		TAY
+;		LDA	<FRCNT
+;		AND	TNHNTM,Y
+;		BNE	ENHB08																
+;		LDA	ENHNYS,X
+;		STA	ENYSPD,X
+;		LDA	ENHNXS,X
+;		STA	ENXSPD,X
+;;
+;;;		LDA	ENMOD4,X
+;;;		BMI	ENHB10		; BG check ?
+; 					; Yes !
+;		LDA	HEMODE,X
+;		CMP	#0FEH
+;		BEQ	ENHB10
+;;
+ ;		JSL	>ENBGCKL
+;		LDA	ENCBFG,X
+;		AND	#00001111B
+;		BEQ	ENHB10
+;;
+;		CMP	#00000100B
+;		BCS	ENHB01
+;;
+;		STZ	ENHNXS,X
+;		STZ	ENXSPD,X
+;		BRA	ENHB02
+;ENHB01		EQU	$
+;		STZ	ENHNYS,X
+;		STZ	ENYSPD,X
+;ENHB02		EQU	$
+;		BRA	ENHB08
+;ENHB10		EQU	$
+;		JSR	ENMVCL
+;ENHB08		EQU	$
+;		PLA
+;		STA	ENXSPD,X
+;		PLA
+;		STA	ENYSPD,X
+;		PLA
+;		PLA
+;ENHB90		EQU	$
+;		RTS
+;=========================================================
+ENMVCL2		EQU	$
+		JSR	ENZCLC
+ENMVCL		EQU	$
+		JSR	ENXCLC
+		JSR	ENYCLC
+ENMC00		EQU	$
+		RTS
+;
+ENXCLC		EQU	$
+		PHX
+		TXA
+		CLC
+		ADC	#10H
+		TAX
+		JSR	ENYCLC
+		PLX
+       	        RTS
+;============================================
+ENYCLC		EQU	    $
+		LDA	ENYSPD,X
+		BEQ	EYCRTS
+		ASL	A
+		ASL	A
+		ASL	A
+		ASL	A
+		CLC
+		ADC	ENYSDR,X
+		STA	ENYSDR,X
+;
+		LDA	ENYSPD,X
+		PHP
+		LSR	A
+		LSR	A
+		LSR	A
+		LSR	A
+		LDY	#00H
+		PLP
+		BPL	ENCY60
+;
+		ORA	#11110000B
+		DEY
+ENCY60		EQU	$
+		ADC	ENYPSL,X
+		STA	ENYPSL,X
+;
+		TYA
+		ADC	ENYPSH,X
+		STA	ENYPSH,X
+EYCRTS		EQU	$
+		RTS
+;============================================
+ENZCLC		EQU	    $
+		LDA	ENZSPD,X
+		ASL	A
+		ASL	A
+		ASL	A
+		ASL	A
+		CLC
+		ADC	ENZSDR,X
+		STA	ENZSDR,X
+;
+		LDA	ENZSPD,X
+		PHP
+		LSR	A
+		LSR	A
+		LSR	A
+		LSR	A
+		PLP
+		BPL	ENCZ60
+;
+		ORA	#11110000B
+ENCZ60		EQU	$
+		ADC	ENZPSL,X
+		STA	ENZPSL,X
+;
+		RTS
+;%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+;%	                                      		  %
+;%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+O2TEST		EQU	$	; oam set paramater set & display out check !
+OAMCHK		EQU	$
+		JSL	>OAMCHKL
+		BCC	O2010
+		PLA
+		PLA
+O2010		EQU	$
+		RTS
+;%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+;%	 	BG CG FLASH                    		  %
+;%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+CGFLSH		EQU	$
+		LDA	CGFLTM
+		BEQ	CGF090
+;
+		LDY	<GAMEMD
+		BNE	CGF090	
+;
+		DEC	CGFLTM
+		BNE	CGF010
+;
+		JSL	>THCGCN2
+		RTL
+;
+CGF010		EQU	$
+		AND	#01H
+		BEQ	CGF020
+		JSL	>THCGCN0
+		BRA	CGF030
+CGF020		EQU	$
+		JSL	>THCGCN1
+CGF030		EQU	$
+		INC	<CGVMAF
+CGF090		EQU	$
+		RTL
+;%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+;%	 	Danjton enemy sroll oam set (save)	  %
+;%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+ENMYSV		EQU	$
+		LDA	<DJFLG
+		BEQ	ESV090
+;
+		LDA	<GAMEMD
+		BEQ	ESV090		; In game !
+		CMP	#0EH
+		BEQ	ESV090		; Kaidan not set !
+;
+		LDA	ESVFLG
+		BEQ	ESV090
+;
+		LDX	#ENNO-1
+ESV010		EQU	$
+		STX	ENINDX
+;
+		LDA	ENMODES,X
+		BEQ	ESV030
+;
+		JSR	ESVSUB
+;
+ESV030		EQU	$
+		DEX	
+		BPL	ESV010
+;
+		RTL
+;
+ESV090		EQU	$
+		STZ	ESVFLG
+		RTL
+;======================================
+ESVSUB		EQU	$
+		LDA	ENMODE,X
+		PHA
+		LDA	ENMYNO,X
+		PHA
+		LDA	ENXPSL,X
+		PHA
+		LDA	ENXPSH,X
+		PHA
+		LDA	ENYPSL,X
+		PHA
+		LDA	ENYPSH,X
+		PHA
+		LDA	ENCHPT,X
+		PHA
+		LDA	ENWRK0,X
+		PHA
+		LDA	ENKBMK,X
+		PHA
+		LDA	ENCLOR,X
+		PHA
+		LDA	ENFLCL,X
+		PHA
+		LDA	ENMUKI,X
+		PHA
+		LDA	ENMOD0,X
+		PHA
+		LDA	ENKAIF,X
+		PHA
+		LDA	ENSTAT,X
+		PHA
+		LDA	ENMOD2,X
+		PHA
+		LDA	ENWRK1,X
+		PHA
+		LDA	ENWRK2,X
+		PHA
+		LDA	ENWRK3,X
+		PHA
+		LDA	ENCONT,X
+		PHA
+		LDA	ENZPSL,X
+		PHA
+		LDA	ENTIM0,X
+		PHA
+		LDA	>ENFRNO,X
+		PHA
+		LDA	ENNOCR,X
+		PHA
+;
+		LDA	ENMODES,X
+		STA	ENMODE,X
+		LDA	ENMYNOS,X
+		STA	ENMYNO,X
+		LDA	ENXPSLS,X
+		STA	ENXPSL,X
+		LDA	ENXPSHS,X
+		STA	ENXPSH,X
+		LDA	ENYPSLS,X
+		STA	ENYPSL,X
+		LDA	ENYPSHS,X
+		STA	ENYPSH,X
+		LDA	ENCHPTS,X
+		STA	ENCHPT,X
+		LDA	ENWRK0S,X
+		STA	ENWRK0,X
+		LDA	ENKBMKS,X
+		STA	ENKBMK,X
+		LDA	ENCLORS,X
+		STA	ENCLOR,X
+		LDA	ENFLCLS,X
+		STA	ENFLCL,X
+		LDA	ENMUKIS,X
+		STA	ENMUKI,X
+		LDA	ENMOD0S,X
+		STA	ENMOD0,X
+		LDA	ENKAIFS,X
+		STA	ENKAIF,X
+		LDA	ENSTATS,X
+		STA	ENSTAT,X
+		LDA	ENMOD2S,X
+		STA	ENMOD2,X
+		LDA	>ENWRK1S,X
+		STA	ENWRK1,X
+		LDA	>ENWRK2S,X
+		STA	ENWRK2,X
+		LDA	>ENWRK3S,X
+		STA	ENWRK3,X
+		LDA	>ENCONTS,X
+		STA	ENCONT,X
+		LDA	>ENZPSLS,X
+		STA	ENZPSL,X
+		LDA	>ENTIM0S,X
+		STA	ENTIM0,X
+		LDA	>ENFRNOS,X
+		STA	>ENFRNO,X
+		LDA	>ENNOCRS,X
+		STA	ENNOCR,X
+;
+		JSL	>ENMAINL
+;
+		LDA	ENDSPL,X
+		BEQ	ESVS28
+;
+		STZ	ENMODES,X
+ESVS28		EQU	$
+		PLA
+		STA	ENNOCR,X
+		PLA
+		STA	>ENFRNO,X
+		PLA
+		STA	ENTIM0,X
+		PLA
+		STA	ENZPSL,X
+		PLA
+		STA	ENCONT,X
+		PLA
+		STA	ENWRK3,X
+		PLA
+		STA	ENWRK2,X
+		PLA
+		STA	ENWRK1,X
+		PLA
+		STA	ENMOD2,X
+		PLA
+		STA	ENSTAT,X
+		PLA		
+		STA	ENKAIF,X
+		PLA		
+		STA	ENMOD0,X
+		PLA		
+		STA	ENMUKI,X
+		PLA		
+		STA	ENFLCL,X
+		PLA		
+		STA	ENCLOR,X
+		PLA		
+		STA	ENKBMK,X
+		PLA		
+		STA	ENWRK0,X
+		PLA		
+		STA	ENCHPT,X
+		PLA		
+		STA	ENYPSH,X
+		PLA		
+		STA	ENYPSL,X
+		PLA		
+		STA	ENXPSH,X
+		PLA		
+		STA	ENXPSL,X
+		PLA		
+		STA	ENMYNO,X
+		PLA
+		STA	ENMODE,X
+		RTS
+;- - - - - - - - - - - - - - - - - -
+;====Opening title heishi character set====================================================
+H0SPTD		EQU	$
+		HEX	0B,04,00,07
+H0CIDT		EQU	$
+		WORD	800H,820H,840H,860H,880H,8A0H
+H0CSDT		EQU	$
+		WORD	0A20H,0A28H,0A30H,0A38H,0A40H,0A48H
+;
+HEIS0CSL	EQU	$
+		PHB
+		PHK
+		PLB
+;
+;		MEM16
+;		REP	#20H
+;		LDA	<WORK0
+;		STA	ENXP2L
+;		LDA	<WORK2
+;		STA	ENYP2L
+;		MEM8
+;		SEP	#20H
+;
+		LDA	<WORK0
+		STA	ENXPSL,X
+		LDA	<WORK1
+		STA	ENXPSH,X
+		LDA	<WORK2	
+		STA	ENYPSL,X
+		LDA	<WORK3
+		STA	ENYPSH,X
+;
+		JSL	>PSSAVE2
+;
+		LDA	<WORK4
+		STA	ENMUKI,X
+		STA	ENKBMK,X
+		TAY
+		LDA	H0SPTD,Y
+		CLC
+		ADC	<WORK6
+		STA	ENCHPT,X
+;
+		STZ	ENFLCL,X
+		LDA	<WORK5
+		ORA	#00110000B
+		STA	ENCLOR,X
+		LDA	#00010000B
+		STA	ENMOD2,X
+		STZ	ENZPSL,X
+;
+		LDY	#HEIS0
+		CMP	#00111001B
+		BEQ	HC100
+		LDY	#HEIS1
+HC100		EQU	$
+		TYA
+		STA	ENMYNO,X
+;
+		LDA	#00000111B
+		STA	ENMOD0,X
+;;		LDA	#08H*4
+;;		JSL	>OAMENT3
+		TXA
+		ASL	A
+		TAY
+		MEM16
+		REP	#20H
+		LDA	H0CIDT,Y
+		STA	<OAMADR
+		LDA	H0CSDT,Y
+		STA	<OSBADR
+		MEM8
+		SEP	#20H
+;
+		JSL	>HEIS0CS2
+		PLB
+		RTL
+;--------------------------------------------------
+NOMOSCT		EQU	$
+		PHB
+		PHK
+		PLB
+		JSR	NCT000
+		PLB
+		RTL
+;----------------------------------------------------
+NCT000		EQU	$
+		LDA	ESTIM0,X
+		BEQ	NCT010
+;
+		DEC	ESTIM0,X
+NCT010		EQU	$
+		LDA	ESSTAT,X
+		JSL	>JSRSUB
+		WORD	NCINIT	;0
+		WORD	NCWAIT	;1
+		WORD	NCSPN0	;2 Spin
+		WORD	NCSPN1	;3 Spin zoom down
+		WORD	NCSPN0	;4 Spin
+		WORD	NCSPN2	;5 Spin zoom up 
+		WORD	NCYKST	;6 Yoko set 
+		WORD	NCYKDW	;7 Yoko Down move 
+;--------------------------------------------
+NCINIT		EQU	$
+		LDA	ENWRK0+00H
+		BEQ	NCIT20		; NOMOS move start ?
+;					; yes !
+		LDA	#78H
+		STA	ESXPSL,X
+;
+		LDA	#0FFH
+		STA	ESKAIF,X
+;
+		LDA	#40H
+		STA	PTHANK
+;
+		LDA	#0C0H
+		STA	PTANGL
+		LDA	#01H
+		STA	PTANGL+1
+;
+		JSR	NCSPN0
+;;		INC	ESSTAT,X
+NCIT20		EQU	$
+		RTS
+;--------------------------------------------
+NCWAIT		EQU	$
+		JSR	NCLCCK
+		BCC	NCW010
+;
+		INC	ESSTAT,X
+;
+		LDA	#0FFH
+		STA	ESTIM0,X
+NCW010		EQU	$
+		RTS
+;--------------------------------------------
+NCYKXL		EQU	$
+		HEX	31,4D,69,83,9F,BB
+;;		HEX	2B,49,67,85,A3,C1
+;NCYKYL		EQU	$
+;		HEX	20,40,60,80,A0,C0
+;
+NCYKST		EQU	$
+		LDA	ESTIM0,X
+		BNE	NCYS20
+;
+		JSR	NCLCCL
+;
+		LDY	#05H
+NCYS10		EQU	$
+		LDA	NCYKXL,Y
+		STA	PTBFXL,Y
+		LDA	#30H
+		STA	PTBFYL,Y
+		DEY
+		BPL	NCYS10
+;
+		INC	ESSTAT,X
+;
+		LDA	#0FFH
+		STA	ESTIM0,X
+NCYS20		EQU	$
+		RTS
+;--------------------------------------------
+NCYKDW		EQU	$
+		LDA	ESTIM0,X
+		BNE	NCYD10
+;
+		LDY	#05H
+NCYD08		EQU	$
+		LDA	PTBFYL,Y
+		INC	A
+		STA	PTBFYL,Y
+		CPY	#00H
+		CMP	#0C0H
+		BNE	NCYD0A
+;
+		LDA	#01H
+		STA	ESSTAT,X
+;
+		LDA	ESKAIF,X
+		EOR	#0FFH
+		INC	A
+		STA	ESKAIF,X
+;
+		JSR	NCLCCL
+;
+		JSR	NCS000
+		RTS
+;
+NCYD0A		EQU	$
+		DEY
+		BPL	NCYD08
+;
+NCYD10		EQU	$
+		RTS		
+;--------------------------------------------
+NCSPN1		EQU	$
+		LDA	PTHANK
+		DEC	A
+		STA	PTHANK
+		CMP	#20H
+		BNE	NCS100
+;
+		INC	ESSTAT,X
+;
+		LDA	#40H
+		STA	ESTIM0,X
+NCS100		EQU	$
+		BRA	NCS000
+;--------------------------------------------
+NCSPN2		EQU	$
+		LDA	PTHANK
+		INC	A
+		STA	PTHANK
+		CMP	#40H
+		BNE	NCS200
+;
+		INC	ESSTAT,X
+;
+		LDA	#40H
+		STA	ESTIM0,X
+NCS200		EQU	$
+		BRA	NCS000
+;--------------------------------------------
+NCANDT		EQU	$
+		WORD	000H,1A9H,154H,0FFH,00AAH,0055H
+;;		WORD	000H,055H,0AAH,0FFH,0154H,01A9H
+NCSPN0		EQU	$
+		LDA	ESTIM0,X
+		BNE	NCS000
+;
+		INC	ESSTAT,X
+NCS000		EQU	$
+;- Tama Angle set - - -
+		LDY	#00H
+		LDA	ESKAIF,X
+		BPL	NCS001
+		DEY
+NCS001		EQU	$
+		CLC
+		ADC	PTANGL
+		STA	PTANGL
+		TYA
+		ADC	PTANGL+1
+		STA	PTANGL+1
+;- - - - - - - - - -
+		STZ	ENHELP
+;
+PTCT10		EQU	$
+		LDA	ENHELP
+		PHA
+		ASL	A
+		TAY
+;
+		MEM16
+		REP	#00100000B
+                LDA	PTANGL
+		CLC
+		ADC	NCANDT,Y
+		STA	<WORK0
+		MEM8
+		SEP	#00100000B
+;
+		PLY
+		LDA	PTHANK
+		STA	<WORKF		; hankei X
+;
+		PHX
+;
+		MEM16
+		IDX16
+		REP	#00110000B
+;
+		LDA	<WORK0
+		AND	#00FFH
+		ASL	A
+		TAX
+		LDA	>SINDT2,X
+		STA	<WORK4
+;
+		LDA	<WORK0
+		CLC
+		ADC	#0080H
+		STA	<WORK2
+		AND	#00FFH
+		ASL	A
+		TAX
+		LDA	>SINDT2,X
+		STA	<WORK6
+		MEM8
+		IDX8
+		SEP	#00110000B		
+;
+		PLX
+;
+		LDA	<WORK4
+		STA	4202H
+		LDA	<WORKF 	    ; Hankei
+		LDY	<WORK5
+		BNE	PKSF0
+		STA	4203H
+		BYTE	0EAH,0EAH,0EAH,0EAH,0EAH,0EAH,0EAH,0EAH
+		ASL	4216H
+		LDA	4217H
+		ADC	#00H
+PKSF0		EQU	$
+		LSR	<WORK1
+		BCC	PKS00
+		EOR	#0FFH
+		INC	A
+PKS00		EQU	$
+;;		STA	<WORK4		; XAD
+		STZ	<WORKA
+		CMP	#00H
+		BPL	PKS007
+		DEC	<WORKA
+PKS007		EQU	$
+		CLC	
+		ADC	ESXPSL,X
+		LDY	ENHELP
+		STA	PTBFXL,Y
+		LDA	ESXPSH,X
+		ADC	<WORKA
+		STA	PTBFXH,Y
+;
+		LDA	<WORK6
+		STA	4202H
+		LDA	<WORKF
+		LDY	<WORK7
+		BNE	PKS08
+		STA	4203H
+		BYTE	0EAH,0EAH,0EAH,0EAH,0EAH,0EAH,0EAH,0EAH
+		ASL	4216H
+		LDA	4217H
+		ADC	#00H
+PKS08		EQU	$
+		LSR	<WORK3
+		BCC	PKS10
+		EOR	#0FFH
+		INC	A
+PKS10		EQU	$
+;;		STA	<WORK6		; YAD
+;
+		STZ	<WORKA
+		CMP	#00H
+		BPL	PKS012
+		DEC	<WORKA
+PKS012		EQU	$
+		CLC	
+		ADC	ESYPSL,X
+		LDY	ENHELP
+		STA	PTBFYL,Y
+;
+		LDA	ESYPSH,X
+		ADC	<WORKA
+		STA	PTBFYH,Y
+;--------------------------------------------
+		INC	ENHELP
+		LDA	ENHELP
+		CMP	#06H
+		BEQ	PTCTA0
+		JMP	PTCT10
+PTCTA0		EQU	$
+		RTS
+;==============================================
+NCLCCK		EQU	$	; Nomos lock check !
+		LDY	#05H
+NLCK10		EQU	$
+		LDA	ENMODE,Y
+		BEQ	NLCK20
+;
+		LDA	ENSTAT,Y
+		BNE	NLCK20
+;
+		CLC
+		RTS
+;	
+NLCK20		EQU	$
+		DEY
+		BPL	NLCK10
+;
+		SEC
+		RTS
+;==============================================
+NCLCCL		EQU	$	; Nomos lock Reset !
+		LDY	#05H
+NLCL10		EQU	$
+		LDA	#00H
+		STA	ENSTAT,Y
+		DEY
+		BPL	NLCL10
+		RTS
+;
+;
+;==========================================
+MOTAMMVJ	EQU	$
+		PHB
+		PHK
+		PLB
+		JSR	MTA00
+;
+		PLB
+		RTL
+;===========================================
+MOTAMCD		EQU	$
+		HEX	CC,CC,CA
+MTMADT		EQU	$
+		HEX	33,73
+;
+MTA00		EQU	$
+		INC	ENCONT,X
+		LDA	ENCONT,X
+		LSR	A
+		LSR	A
+		AND	#00000001B
+		TAY
+		LDA	MTMADT,Y
+		STA	<WORK5
+;
+;		LDA	ENCHPT,X
+;		BNE	MTM010
+;;
+;		LDA	ENXP2L
+;		CLC
+;		ADC	#04H
+;		STA	ENXP2L
+;		LDA	ENXP2H
+;		ADC	#00H
+;		STA	ENXP2H
+;		LDA	ENYP2L
+;		CLC
+;		ADC	#04H
+;		STA	ENYP2L
+;		LDA	ENYP2H
+;		ADC	#00H
+;		STA	ENYP2H
+;;
+;		JSL	>EN1CSSL
+;;
+;		JSL	>PSSAVE2
+;		BRA	MTM020
+;- - - - - - - - - - - - - - - - -
+MTM010		EQU	$
+;;		JSL	>EN1CSTL
+		LDY	#00H
+		LDA	ENXPSL,X
+		SEC
+		SBC	<SCCH2
+		STA	(<OAMADR),Y
+		CLC
+		ADC	#20H
+		CMP	#40H
+		BCC	MTM012
+		LDA	ENYPSL,X
+		SEC
+		SBC	<SCCV2
+		INY
+		STA	(<OAMADR),Y
+		CLC
+		ADC	#010H
+		CMP	#020H
+		BCS	MTM015
+;
+MTM012		EQU	$
+		STZ	ENMODE,X
+		RTS
+;
+MTM015		EQU	$
+		PHX
+		LDA	ENCHPT,X
+		TAX
+		LDA	MOTAMCD,X
+		PLX
+		INY
+		STA	(<OAMADR),Y
+		LDA	<WORK5
+		INY
+		STA	(<OAMADR),Y
+;
+		LDA	#02H
+		STA	(<OSBADR)
+MTM020		EQU	$
+		JSR	ENSTCK
+;
+;;		JSL	>CRENPLL
+;
+		TXA
+		EOR	<FRCNT
+		AND	#03H
+		BNE	MTM022
+;
+		MEM16
+		REP	#20H
+		LDA	<PLXPS1
+		SEC
+		SBC	ENXP2L
+		CLC
+		ADC	#08H
+		CMP	#10H
+		BCS	MTM022
+;
+		LDA	<PLYPS1
+		SEC
+		SBC	ENYP2L
+		CLC
+		ADC	#0008H+08H
+		CMP	#10H
+		BCS	MTM022
+;
+		MEM8
+		SEP	#20H
+;
+		JSL	>PLFLSTL
+MTM022		EQU	$
+		MEM8
+		SEP	#20H
+;
+		LDA	ENSTAT,X
+		CMP	#04H
+		BEQ	MTSML1
+		DEC	A
+		BEQ	MTGO
+		DEC	A
+		BEQ	MTCHG
+		DEC	A
+		BEQ	MTSML0
+		JMP	MTSTOP
+;
+;;		JSL	>JSRSUB
+;;		WORD	MTSTOP
+;;		WORD	MTGO
+;;		WORD	MTCHG
+;;		WORD	MTSML0
+;;		WORD	MTSML1
+;=================================================
+MTSTOP		EQU	$
+		LDA	ENTIM0,X
+		BNE	MTS080
+;
+		LDA	#12H
+		STA	ENTIM0,X
+		INC	ENSTAT,X
+		LDA	#24H
+		STA	ENYSPD,X
+MTS080		EQU	$
+		RTS
+;=================================================
+MTGO		EQU	$
+		LDA	ENTIM0,X
+		BNE	MTG010
+;
+		INC	ENSTAT,X
+		LDA	#1FH
+		STA	ENTIM0,X
+MTG010		EQU	$
+		DEC	ENYSPD,X
+		DEC	ENYSPD,X
+		JSR	ENYCLC
+		RTS
+;=================================================
+MTCGPT		EQU	$
+		HEX	2,2,1,0
+;
+MTCHG		EQU	$
+		LDA	ENTIM0,X
+		BNE	MTCG10
+;
+		JMP	MTS0ST		
+MTCG10		EQU	$
+		LSR	A
+		LSR	A
+		LSR	A
+;;		LSR	A
+		TAY
+		LDA	MTCGPT,Y
+		STA	ENCHPT,X
+		RTS
+;=================================================
+MTSML0		EQU	$
+		LDA	ENTIM0,X
+		BNE	MTS000
+;
+		JMP	MTS1ST
+MTS000		EQU	$
+		LDA	ENKBMK,X
+		CMP	#14H
+		BCS	MTS020
+;
+		INC	ENKBMK,X
+		JSR	ENMVCL
+MTS020		EQU	$
+		RTS
+;=================================================
+MTSML1		EQU	$
+		JSR	ENMVCL
+		RTS
+;=================================================
+MS0XSD		EQU	$
+		HEX	00,1C,E4
+MS0YSD		EQU	$
+		HEX	E0,18,18
+;
+MTS0ST		EQU	$
+		LDA	#36H
+		JSL	>SDLRE3	;(S)
+;
+		STZ	ENMODE,X
+;
+		LDA	#02H
+		STA	ENHELP
+		JSL	>RNDSET
+		STA	ENHELP2
+MS0010		EQU	$
+		LDA	#MOTAM
+		JSL	>ENIDSH
+		BMI	MS0090
+;
+		JSL	>ENIDPS
+;		LDA	<WORK0
+;		STA	ENXPSL,Y
+;		LDA	<WORK1
+;		STA	ENXPSH,Y
+;		LDA	<WORK2
+;		STA	ENYPSL,Y
+;		LDA	<WORK3
+;		STA	ENYPSH,Y
+		PHX
+		LDX	ENHELP
+		LDA	MS0XSD,X
+		STA	ENXSPD,Y
+		LDA	MS0YSD,X
+		STA	ENYSPD,Y
+;
+		LDA	#03H
+		STA	ENSTAT,Y
+		STA	ENNOCR,Y
+;
+;;		JSL	>RNDSET
+;;		AND	#0FH
+;;		ADC	#10H
+;;		STA	ENTIM0,Y
+;;		JSL	>RNDSET
+;;		STA	<WORKE
+;
+		LDA	ENHELP2
+		AND	#03H
+		CLC
+		ADC	ENHELP
+		TAX
+		LDA	MT2TMD,X
+		STA	ENTIM0,Y
+;
+		LDA	#00H
+		STA	ENKBMK,Y
+;
+		LDA	#01H
+		STA	ENCHPT,Y
+		PLX
+MS0090		EQU	$
+		DEC	ENHELP
+		BPL	MS0010
+		RTS
+;-------------------
+MT2TMD		EQU	$
+		HEX	20,50,80,20,50,80,20,50
+;=================================================
+MS1XSD		EQU	$
+		HEX	20,20,E0,E0
+MS1YSD		EQU	$
+		HEX	E0,20,E0,20
+;
+MTS1ST		EQU	$
+		LDA	#36H
+		JSL	>SDLRE3	;(S)
+;
+		STZ	ENMODE,X
+;
+		LDA	#03H
+		STA	ENHELP
+MS1010		EQU	$
+		LDA	#MOTAM
+		JSL	>ENIDSH
+		BMI	MS1090
+;
+		JSL	>ENIDPS
+;
+;		LDA	<WORK0
+;		STA	ENXPSL,Y
+;		LDA	<WORK1
+;		STA	ENXPSH,Y
+;		LDA	<WORK2
+;		STA	ENYPSL,Y
+;		LDA	<WORK3
+;		STA	ENYPSH,Y
+		PHX
+		LDX	ENHELP
+		LDA	MS1XSD,X
+		STA	ENXSPD,Y
+		LDA	MS1YSD,X
+		STA	ENYSPD,Y
+		PLX
+;
+		LDA	#04H
+		STA	ENSTAT,Y
+		STA	ENNOCR,Y
+MS1090		EQU	$
+		DEC	ENHELP
+		BPL	MS1010
+		RTS
+;
+;%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+;%					    %
+;%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+NMSHJP		EQU	$
+		PHB
+		PHK
+		PLB
+;
+		JSR	NSH010
+		PLB
+		RTL
+;----------------------------------------
+NSH010		EQU	$
+		LDA	#07H
+		STA	ENCLOR,X
+;
+		STZ	YUREYD
+		STZ	YUREYD+1
+;
+		LDA	ENTIM3,X
+		BEQ	NSH020
+;
+		AND	#01H
+		TAY
+		LDA	NZTLDT,Y
+		STA	YUREYD
+		LDA	NZTLDT+2,Y
+		STA	YUREYD+1
+NSH020		EQU	$
+		LDA	ENCTCT,X
+		JSL	>JSRSUB
+		WORD	NMSTOP
+		WORD	NMJUMP
+		WORD	NMDWWT
+		WORD	NMDOWN
+;------------------------------------------------
+NMSTOP		EQU	$
+		JSR	CREKEK
+;
+		LDA	ENTIM0,X
+		ORA	ENZPSL,X
+		BNE	NMST10
+;
+		LDA	#20H
+		JSL	>PSERCHL
+;
+		LDA	#20H
+		STA	ENZSPD,X
+		INC	ENCTCT,X
+;
+		LDA	<PLXPS1
+		STA	ENWRK1,X
+		LDA	<PLXPS0
+		STA	ENWRK2,X
+		LDA	<PLYPS1
+		STA	ENWRK3,X
+		LDA	<PLYPS0
+		STA	ENKBMK,X
+;
+;;		JSL	>SDLRCE
+;;		ORA	#20H
+;;		STA	SOUND2	;(S)
+		LDA	#20H
+		JSL	>SDLRE2	;(S)
+NMST10		EQU	$
+		RTS
+;-----------------------------------------------
+NMJUMP		EQU	$
+		LDA	ENZSPD,X
+		CLC
+		ADC	#03H
+		STA	ENZSPD,X
+;
+;;		JSL	>ENBGCKL
+;;		LDA	ENCBFG,X
+		JSR	ENBGCK
+		BNE	NMJ020
+;
+		JSL	>PSSAVE2
+		LDA	ENWRK1,X
+		STA	<WORK0
+		LDA	ENWRK2,X
+		STA	<WORK1
+		LDA	ENWRK3,X
+		STA	<WORK2
+		LDA	ENKBMK,X
+		STA	<WORK3
+;
+		MEM16
+		REP	#20H
+;
+		LDA	<WORK0
+		SEC
+		SBC	ENXP2L
+		CLC
+		ADC	#10H
+		CMP	#20H
+		BCS	NMJ030
+		LDA	<WORK2
+		SEC
+		SBC	ENYP2L
+		CLC
+		ADC	#10H
+		CMP	#20H
+		BCS	NMJ030
+;
+		MEM8
+		SEP	#20H
+;
+NMJ020		EQU	$
+		INC	ENCTCT,X
+;
+		LDA	#10H
+		STA	ENTIM0,X
+;
+		STZ	ENXSPD,X
+		STZ	ENYSPD,X
+NMJ030		EQU	$
+		MEM8
+		SEP	#20H
+		RTS
+;-----------------------------------------------
+NMDWWT		EQU	$
+		STZ	ENZSPD,X
+;
+		LDA	ENTIM0,X
+		BNE	NMWW10
+;
+		INC	ENCTCT,X
+;
+NMWW10		EQU	$
+		RTS		
+;-----------------------------------------------
+NMDOWN		EQU	$
+		LDA	#098H
+		STA	ENZSPD,X
+;
+		LDA	ENZPSL,X
+		BMI	NMD010
+;
+		LDA	#20H
+		STA	ENTIM0,X
+;
+		STZ	ENCTCT,X
+;
+;;		JSL	>SDLRCE
+;;		ORA	#0CH
+;;		STA	SOUND2	;(S)
+		LDA	#0CH
+		JSL	>SDLRE2	;(S)
+;
+		LDA	#20H
+		STA	ENTIM3,X
+NMD010		EQU	$
+		RTS
+;
+;===================================================
+BARI1MV		EQU	$
+		PHB
+		PHK
+		PLB
+		JSR	BARI1M0
+		PLB
+		RTL
+;---------------------------------
+BARI1M0		EQU	$
+		JSR	BARI1CS
+;;;;		JSR	ENSTCK
+;
+		LDA	ENCHPT,X
+		CMP	#04H
+		BEQ	BF0018
+;
+		LDA	<FRCNT
+		LSR	A
+		AND	#03H
+		STA	ENCHPT,X
+;
+		JSR	ENSTCK
+;
+		JSL	>CRKNENL
+		BCC	BF0010
+;
+		LDA	>ITMTBL6
+		CMP	#02H
+		BCS	BF0010		; Ken high power ?
+;					; yes ! damage check !
+		STZ	ENFLSH,X
+;
+     		JSL	>PLFLSTL
+;
+		LDA	PYFLASH
+		BNE	BF0010
+;
+                LDA     #40H
+                STA     PIPIFG
+BF0010		EQU	$
+		MEM16
+		REP	#20H
+		LDA	<PLYPS1
+		SEC
+		SBC	ENYP2L
+		CLC
+		ADC	#0008H  
+		CMP	#0018H    
+		BCS	BF0018
+		LDA	<PLXPS1
+		SEC
+		SBC	ENXP2L
+		CLC
+		ADC	#0020H
+		CMP	#0040H
+		BCS	BF0018
+;
+		MEM8
+		SEP	#20H
+;
+BF0013		EQU	$
+;;		LDA	<HANEFG
+;;		BNE	BF0018
+		LDA	<PLYSPD
+		DEC	A
+		BPL	BF0018
+;
+                LDA     #40H
+                STA     PIPIFG
+;;;		JSL	>PLFLSTL
+;
+		LDA	#0CH
+		STA	<HANEFG
+		LDA	#01H
+		STA	<DIEFG
+		LDA	#02H
+		STA	DAMEFG
+;
+		STZ	<PLXSPD
+		LDA	#30H
+		STA	<PLYSPD
+BF0018		EQU	$
+		MEM8
+		SEP	#20H
+		RTS
+;=====================================
+BARI1CD		EQU	$
+;0
+		WORD	00000H,00000H
+		HEX	E8,00,00,02
+;
+		WORD	0FFE3H,00003H
+		HEX	CA,00,00,00
+		WORD	0FFE3H,0000BH
+		HEX	DA,00,00,00
+;
+		WORD	00025H,00003H
+		HEX	CA,40,00,00
+		WORD	00025H,0000BH
+		HEX	DA,40,00,00
+;
+		WORD	0FFE8H,0FFFEH
+		HEX	E6,00,00,02
+		WORD	0FFF8H,0FFFEH
+		HEX	E6,00,00,02
+		WORD	00008H,0FFFEH
+		HEX	E6,40,00,02
+		WORD	00018H,0FFFEH
+		HEX	E6,40,00,02
+;3
+		WORD	00000H,00000H
+		HEX	CC,00,00,02
+;
+		WORD	0FFE3H,00003H
+		HEX	CB,00,00,00
+		WORD	0FFE3H,0000BH
+		HEX	DB,00,00,00
+;
+		WORD	00025H,00003H
+		HEX	CB,40,00,00
+		WORD	00025H,0000BH
+		HEX	DB,40,00,00
+;
+		WORD	00000H,00000H
+		HEX	CC,00,00,02
+		WORD	00000H,00000H
+		HEX	CC,00,00,02
+		WORD	00000H,00000H
+		HEX	CC,00,00,02
+		WORD	00000H,00000H
+		HEX	CC,00,00,02
+;1
+		WORD	00000H,00000H
+		HEX	CC,00,00,02
+;
+		WORD	0FFE3H,00003H
+		HEX	CB,00,00,00
+		WORD	0FFE3H,0000BH
+		HEX	DB,00,00,00
+;
+		WORD	00025H,00003H
+		HEX	CB,40,00,00
+		WORD	00025H,0000BH
+		HEX	DB,40,00,00
+;
+		WORD	0FFE8H,0FFFEH
+		HEX	E6,80,00,02
+		WORD	0FFF8H,0FFFEH
+		HEX	E6,80,00,02
+		WORD	00008H,0FFFEH
+		HEX	E6,C0,00,02
+		WORD	00018H,0FFFEH
+		HEX	E6,C0,00,02
+;2
+		WORD	00000H,00000H
+		HEX	E8,00,00,02
+;
+		WORD	0FFE3H,00003H
+		HEX	CA,00,00,00
+		WORD	0FFE3H,0000BH
+		HEX	DA,00,00,00
+;
+		WORD	00025H,00003H
+		HEX	CA,40,00,00
+		WORD	00025H,0000BH
+		HEX	DA,40,00,00
+;
+		WORD	00000H,00000H
+		HEX	E8,00,00,02
+		WORD	00000H,00000H
+		HEX	E8,00,00,02
+		WORD	00000H,00000H
+		HEX	E8,00,00,02
+		WORD	00000H,00000H
+		HEX	E8,00,00,02
+;4
+		WORD	0FFE3H,00003H
+		HEX	CB,00,00,00
+		WORD	0FFE3H,0000BH
+		HEX	DB,00,00,00
+;
+		WORD	00025H,00003H
+		HEX	CB,40,00,00
+		WORD	00025H,0000BH
+		HEX	DB,40,00,00
+;
+		WORD	00025H,0000BH
+		HEX	DB,40,00,00
+		WORD	00025H,0000BH
+		HEX	DB,40,00,00
+		WORD	00025H,0000BH
+		HEX	DB,40,00,00
+		WORD	00025H,0000BH
+		HEX	DB,40,00,00
+		WORD	00025H,0000BH
+		HEX	DB,40,00,00
+;-----------------------------------
+BARI1CS		EQU	$
+		LDA	#00H
+		XBA
+		LDA	ENCHPT,X
+		MEM16
+		REP	#00100000B
+		ASL	A
+		ASL	A
+		ASL	A
+		STA	<WORK0
+;
+		ASL	A
+		ASL	A
+		ASL	A
+		CLC
+		ADC	<WORK0
+		ADC	#BARI1CD
+		STA	<WORK8
+;
+		LDA	ENYP2L
+		CLC
+		ADC	#0008H
+		STA	ENYP2L
+;
+		MEM8
+		SEP	#00100000B
+;
+		LDA	#09H
+;;		STA	<WORK6
+;;		STZ	<WORK7
+;
+		JSR	SETO22
+;;		JSL	>SETOAML22
+		JSL	>PSSAVE2
+		RTS
+;**********************************************
+;HYCIDT		EQU	$
+;		HEX	00,20,40,60
+HAYAMIT		EQU	$
+
+		PHX
+;
+		TXY
+		LDA	>HYCIDT,X
+		TAX
+		LDA	#1FH
+		STA	<WORK0
+HYMI10		EQU	$
+		LDA	ENXPSL,Y
+		STA	>HYXBFL,X
+		LDA	ENXPSH,Y
+		STA	>HYXBFH,X
+		LDA	ENYPSL,Y
+		STA	>HYYBFL,X
+		LDA	ENYPSH,Y
+		STA	>HYYBFH,X
+		INX
+		DEC	<WORK0
+		BPL	HYMI10
+;
+		PLX
+		RTL
+;
+BABULCD		EQU	$
+;0
+		WORD	0FFF4H+10H,0FFF2H+10H
+		HEX	E1,02,00,00
+		WORD	0FFF4H+10H,0FFEDH+10H
+		HEX	E3,02,00,00
+		WORD	0FFEFH+10H,0FFF2H+10H
+		HEX	E3,02,00,00
+		WORD	0FFF9H+10H,0FFF2H+10H
+		HEX	E3,02,00,00
+		WORD	0FFF4H+10H,0FFF7H+10H
+		HEX	E3,02,00,00
+;1
+		WORD	0FFF4H+10H,0FFF2H+10H
+		HEX	E1,02,00,00
+		WORD	0FFF3H+10H,0FFEDH+10H
+		HEX	E3,02,00,00
+		WORD	0FFF9H+10H,0FFF1H+10H
+		HEX	E3,02,00,00
+		WORD	0FFEFH+10H,0FFF3H+10H
+		HEX	E3,02,00,00
+		WORD	0FFF5H+10H,0FFF7H+10H
+		HEX	E3,02,00,00
+;2
+		WORD	0FFF4H+10H,0FFF2H+10H
+		HEX	E1,02,00,00
+		WORD	0FFF1H+10H,0FFEDH+10H
+		HEX	E3,02,00,00
+		WORD	0FFF9H+10H,0FFEFH+10H
+		HEX	E3,02,00,00
+		WORD	0FFEFH+10H,0FFF5H+10H
+		HEX	E3,02,00,00
+		WORD	0FFF7H+10H,0FFF7H+10H
+		HEX	E3,02,00,00
+;3
+		WORD	0FFF4H+10H,0FFF2H+10H
+		HEX	E1,02,00,00
+		WORD	0FFF0H+10H,0FFEEH+10H
+		HEX	E3,02,00,00
+		WORD	0FFF8H+10H,0FFEEH+10H
+		HEX	E3,02,00,00
+		WORD	0FFF0H+10H,0FFF6H+10H
+		HEX	E3,02,00,00
+		WORD	0FFF8H+10H,0FFF6H+10H
+		HEX	E3,02,00,00
+;4
+		WORD	0FFF4H+10H,0FFF2H+10H
+		HEX	E1,02,00,00
+		WORD	0FFF7H+10H,0FFEDH+10H
+		HEX	E3,02,00,00
+		WORD	0FFEFH+10H,0FFEFH+10H
+		HEX	E3,02,00,00
+		WORD	0FFF9H+10H,0FFF5H+10H
+		HEX	E3,02,00,00
+		WORD	0FFF1H+10H,0FFF7H+10H
+		HEX	E3,02,00,00
+;5
+		WORD	0FFF4H+10H,0FFF2H+10H
+		HEX	E1,02,00,00
+		WORD	0FFF5H+10H,0FFEDH+10H
+		HEX	E3,02,00,00
+		WORD	0FFEFH+10H,0FFF1H+10H
+		HEX	E3,02,00,00
+		WORD	0FFF9H+10H,0FFF3H+10H
+		HEX	E3,02,00,00
+		WORD	0FFF3H+10H,0FFF7H+10H
+		HEX	E3,02,00,00
+;
+BABULCSL	EQU	$
+		PHB
+		PHK
+		PLB
+;
+                INC     ENCONT,X
+                LDA     ENCONT,X
+                AND     #01H
+		ORA	GAMEMD
+		ORA	ENSTFG
+                BNE     BBM0111
+;
+                INC     ENCHPT,X
+                LDA     ENCHPT,X
+                CMP     #06H
+                BNE     BBM0111
+                STZ     ENCHPT,X
+BBM0111         EQU     $
+
+;
+		LDA	#00H
+		XBA
+		LDA	ENCHPT,X
+		MEM16
+		REP	#20H
+		ASL	A
+		ASL	A
+		ASL	A
+		STA	<WORK0
+;
+		ASL	A
+		ASL	A
+		ADC	<WORK0
+		ADC	#BABULCD
+		STA	<WORK8
+;
+;		LDA	ENXP2L
+;		CLC
+;		ADC	#10H
+;		STA	ENXP2L
+;;
+;		LDA	ENYP2L
+;		CLC	
+;		ADC	#12H
+;		STA	ENYP2L
+;
+		MEM8
+		SEP	#20H
+;
+		LDA	#05H
+		JSR	SETO22
+;;		JSL	>SETOAML22
+;;;		JSL	>PSSAVE2
+		PLB
+		RTL
+;========================================
+USFAILL		EQU	$
+		PHB
+		PHK
+		PLB
+;
+		LDA	#10000010B
+		STA	ENMOD0,X
+		STA	ENNOCR,X
+		LDA	#01001001B
+		STA	ENMOD2,X
+;
+		LDA	HEMODE,X
+		BNE	USF010
+;
+		JSL	>CRENPLL
+		BCC	USF020
+;
+		INC	HEMODE,X
+;
+                LDA     #MS_0590
+                STA     MSGENOL
+                LDA     #HIGH MS_0590
+                STA     MSGENOH
+                JSL     >MSGSET
+;
+		BRA	USF020
+;
+USF010		EQU	$
+		CMP	#10H
+		BCC	USF018
+		BNE	USF020
+;
+		STZ	ENMOD4,X
+;
+		LDA	#EFAIL
+		STA	ENMODE,X
+		LDA	#0FH
+		STA	ENTIM0,X
+		LDA	ENMOD0,X
+		CLC
+		ADC	#04H
+		STA	ENMOD0,X
+;
+;;		JSL	>SDLRCE
+;;		ORA	#15H
+;;		STA	SOUND2	;(S)
+		LDA	#15H
+		JSL	>SDLRE2	;(S)
+;
+		LDA	#USAG0
+		JSL	>ENIDSH
+		BMI	USF018
+;
+		JSL	>ENIDPS
+;
+		PHX
+		TYX
+		LDY	#06H
+		JSL	>ENFLIS2	; Item chenge !
+		PLX
+;
+USF018		EQU	$
+		INC	HEMODE,X
+USF020		EQU	$
+                INC     ENCONT,X
+                LDA     ENCONT,X
+                AND     #04H
+                LSR     A
+                LSR     A
+                ADC     #03H
+                STA     ENCHPT,X
+;
+		PLB
+		RTL
+;========================================
+COPYCD		EQU	$
+;0
+COPYC0		EQU	$
+		WORD	0FFFCH,0FFF8H
+		HEX	44,00,00,02
+		WORD	0000CH,0FFF8H
+		HEX	44,40,00,00
+		WORD	0FFFCH,00008H
+		HEX	64,00,00,00
+		WORD	00004H,00000H
+		HEX	54,40,00,02
+;1
+COPYC1		EQU	$
+		WORD	0FFFCH,0FFF8H
+		HEX	44,00,00,02
+		WORD	0000CH,0FFF8H
+		HEX	44,40,00,00
+		WORD	0FFFCH,00008H
+		HEX	74,40,00,00
+		WORD	00004H,00000H
+		HEX	62,40,00,02
+;2
+COPYC2		EQU	$
+		WORD	0FFFCH,0FFF8H
+		HEX	44,00,00,00
+		WORD	00004H,0FFF8H
+		HEX	44,40,00,02
+		WORD	0FFFCH,00000H
+		HEX	62,00,00,02
+		WORD	0000CH,00008H
+		HEX	64,40,00,00
+;3
+COPYC3		EQU	$
+		WORD	0FFFCH,0FFF8H
+		HEX	46,00,00,02
+		WORD	0000CH,0FFF8H
+		HEX	46,40,00,00
+		WORD	0FFFCH,00008H
+		HEX	66,00,00,00
+		WORD	00004H,00000H
+		HEX	56,40,00,02
+;4
+COPYC4		EQU	$
+		WORD	0FFFCH,0FFF8H
+		HEX	46,00,00,02
+		WORD	0000CH,0FFF8H
+		HEX	46,40,00,00
+		WORD	0FFFCH,00008H
+		HEX	75,40,00,00
+		WORD	00004H,00000H
+		HEX	6A,40,00,02
+;5
+COPYC5		EQU	$
+		WORD	0FFFCH,0FFF8H
+		HEX	46,00,00,00
+		WORD	00004H,0FFF8H
+		HEX	46,40,00,02
+		WORD	0FFFCH,00000H
+		HEX	6A,00,00,02
+		WORD	0000CH,00008H
+		HEX	75,00,00,00
+;6
+COPYC6		EQU	$
+		WORD	0FFFEH,0FFF8H
+		HEX	4E,00,00,02
+		WORD	00000H,00000H
+		HEX	6C,00,00,02
+;7
+COPYC7		EQU	$
+		WORD	0FFFEH,0FFF9H
+		HEX	4E,00,00,02
+		WORD	00000H,00000H
+		HEX	6E,00,00,02
+;8
+COPYC8		EQU	$
+		WORD	00002H,0FFF8H
+		HEX	4E,40,00,02
+		WORD	00000H,00000H
+		HEX	6C,40,00,02
+;9
+COPYC9		EQU	$
+		WORD	00002H,0FFF9H
+		HEX	4E,40,00,02
+		WORD	00000H,00000H
+		HEX	6E,40,00,02
+;- - - Kuchi ake - -
+CPKCHICD	EQU	$
+CPKCD0		WORD	0000AH,00004H
+		HEX	77,40,00,00
+;
+CPKCD1		WORD	0FFFEH,00004H
+		HEX	77,00,00,00
+;
+CPKCD2		WORD	00004H,00004H
+		HEX	76,00,00,00
+;
+CPKCHIID	EQU	$
+		WORD	CPKCD0
+		WORD	CPKCD1
+		WORD	CPKCD2
+;;A
+;COPYCA		EQU	$
+;		WORD	00004H,00004H
+;		HEX	76,00,00,00
+;		WORD	0FFFCH,0FFF8H
+;		HEX	44,00,00,02
+;		WORD	0000CH,0FFF8H
+;		HEX	44,40,00,00
+;		WORD	0FFFCH,00008H
+;		HEX	64,00,00,00
+;		WORD	00004H,00000H
+;		HEX	54,40,00,02
+;;B
+;COPYCB		EQU	$
+;		WORD	0FFFEH,00004H
+;		HEX	77,00,00,00
+;		WORD	0FFFEH,0FFF8H
+;		HEX	4E,00,00,02
+;		WORD	00000H,00000H
+;		HEX	6C,00,00,02
+;;C
+;COPYCC		EQU	$
+;		WORD	00002H,00004H
+;		HEX	77,40,00,00
+;		WORD	00002H,0FFF8H
+;		HEX	4E,40,00,02
+;		WORD	00000H,00000H
+;		HEX	6C,40,00,02
+;- - - - - - - - - - - - - - - - - - - - - - - - - -
+COPYID		EQU	$
+		WORD	COPYC0
+		WORD	COPYC1
+		WORD	COPYC2
+		WORD	COPYC3
+		WORD	COPYC4
+		WORD	COPYC5
+		WORD	COPYC6
+		WORD	COPYC7
+		WORD	COPYC8
+		WORD	COPYC9
+;		WORD	COPYCA
+;		WORD	COPYCB
+;		WORD	COPYCC
+COPYNO		EQU	$
+		HEX	4,4,4,4,4,4,2,2,2,2    ;,5,3,3
+;
+COPYCS		EQU	$
+		PHB
+		PHK
+		PLB
+;
+		LDA	ENTIM1,X
+		BEQ	CPC000
+;
+		LDA	ENMUKI,X
+		CMP	#03H
+		BEQ	CPC000
+		ASL	A
+		TAY
+		MEM16
+		REP	#20H
+		LDA	CPKCHIID,Y
+		STA	<WORK8
+		MEM8
+		SEP	#20H
+		LDA	#01H
+		JSR	SETO22
+;;		JSL	>SETOAML22
+CPC000		EQU	$
+		LDA	ENCHPT,X
+		PHA
+		ASL	A
+		TAY
+		MEM16
+		REP	#20H
+		LDA	COPYID,Y
+		STA	<WORK8
+;
+		LDA	<OAMADR
+		CLC
+		ADC	#0004H
+		STA	<OAMADR
+		INC	<OSBADR
+;
+		MEM8
+		SEP	#20H
+		PLY
+		LDA	COPYNO,Y
+		JSR	SETO22
+;;		JSL	>SETOAML22
+;
+		DEC	ENMOD0,X
+		JSL	>SADWSTL
+		INC	ENMOD0,X
+;
+		PLB
+		RTL
+;========================================
+RMCKDT		EQU	$
+		HEX	00,00,01,01,01,02,02,02
+;
+		HEX	00,00,0F,0F,0F,0E,0E,0E
+;
+		HEX	08,08,07,07,07,06,06,06
+;
+		HEX	08,08,09,09,09,0A,0A,0A
+;
+RMCKD2		EQU	$
+		HEX	04,04,03,03,03,02,02,02
+;
+		HEX	0C,0C,0D,0D,0D,0E,0E,0E
+;
+		HEX	04,04,05,05,05,06,06,06
+;
+		HEX	0C,0C,0B,0B,0B,0A,0A,0A
+;======16 Ways muki check===========================================
+MKCK16		EQU	$
+		PHB
+		PHK
+		PLB
+;
+;;		LDA	ENYSPD,X
+;;		SEC
+;;		SBC	ENZSPD,X
+		LDA	<WORK0
+		ASL	A
+		ROL	A
+		STA	<WORK0+8
+;;		LDA	ENXSPD,X
+		LDA	<WORK1
+		ASL	A
+                ROL	A
+		ASL	A
+		ORA	<WORK0+8
+		AND	#03H
+		ASL	A
+		ASL	A
+		ASL	A
+		STA	<WORK2+8
+;
+;;		LDA	ENXSPD,X
+		LDA	<WORK1
+		BPL	RMC001
+		EOR	#0FFH
+		INC	A
+RMC001		EQU	$
+		STA	<WORK0+8
+;
+;;		LDA	ENYSPD,X
+;;		SEC
+;;		SBC	ENZSPD,X
+		LDA	<WORK0
+		BPL	RMC002
+		EOR	#0FFH
+		INC	A
+RMC002		EQU	$
+		STA	<WORK1+8
+;
+		LDA	<WORK0+8
+		CMP	<WORK1+8
+		BCC	RMC003
+;
+		LDA	<WORK1+8
+		LSR	A
+		LSR	A
+		CLC
+		ADC	<WORK2+8
+		TAY
+		LDA	RMCKDT,Y
+		BRA	RMC005
+RMC003		EQU	$
+		LDA	<WORK0+8
+		LSR	A
+		LSR	A
+		CLC
+		ADC	<WORK2+8
+		TAY
+		LDA	RMCKD2,Y
+RMC005		EQU	$
+		PLB
+		RTL
+;00000000000000000000000000000000
+;===============================================
+ENIDSH		EQU	$
+		LDY	#ENNO-1
+ENIDSH2		EQU	$
+		PHA
+;;      	LDY	#08H
+EIDS08		EQU	$
+		LDA	ENMODE,Y
+		BEQ	EIDS10
+		DEY
+		BPL	EIDS08
+		PLA
+		TYA
+		RTL
+EIDS10		EQU	$
+		PLA
+		STA	ENMYNO,Y
+		LDA	#EMOVE
+		STA	ENMODE,Y
+		LDA	ENXPSL,X
+		STA	<WORK0
+		LDA	ENXPSH,X
+		STA	<WORK1
+		LDA	ENYPSL,X
+		STA	<WORK2
+		LDA	ENYPSH,X
+		STA	<WORK3
+		LDA	ENZPSL,X
+		STA	<WORK4
+;
+		LDA	ESXPSL,X
+		STA	<WORK5
+		LDA	ESXPSH,X
+		STA	<WORK6
+		LDA	ESYPSL,X
+		STA	<WORK7
+		LDA	ESYPSH,X
+		STA	<WORK8
+;
+		PHX
+		TYX
+		JSL	>ENMDST
+		LDA	<DJFLG
+		BNE	EIDS98
+		TXA
+		ASL	A
+		TAX
+		LDA	#0FFH
+		STA	ENSWAD+1,X
+EIDS98		EQU	$
+		LDA	#0FFH
+		STA	ENSWAD,X
+		PLX
+		LDA	ENKAIF,X
+		STA	ENKAIF,Y
+        	LDA	ENMUKI,X
+		STA	ENMUKI,Y
+		LDA	#00H
+		STA	KAGIFG,Y
+		STA	HEMODE,Y
+		TYA
+		RTL
+;=================================================================================================
+FF		EQU	0FFH
+;
+BGCRDT		EQU	$
+;;;                     0 1 2 3 4 5 6 7 8 9 A B C D E F
+		BYTE	0,1,2,3,2,0,0,0,0,1,0,1,0,0,0,0	;0
+		BYTE	1,1,1,1,1,1,1,1,1,1,1,1,0,1,1,1 ;1
+		BYTE	1,1,1,0,0,0,1,2,FF,FF,FF,FF,FF,FF,FF,FF ;2
+		BYTE	1,1,1,1,1,1,1,1,1,1,0,0,1,1,1,1 ;3
+		BYTE	0,1,1,1,1,1,0,1,0,1,0,0,FF,FF,FF,FF     ;4
+		BYTE	1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1 ;5
+		BYTE	0,0,0,0,0,1,0,2,0,0,0,0,1,1,1,1 ;6
+		BYTE	1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1 ;7
+		BYTE	1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1 ;8
+		BYTE	1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1 ;9
+		BYTE	1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1 ;A
+		BYTE	1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1 ;B
+		BYTE	1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1 ;C
+		BYTE	1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1 ;D
+		BYTE	1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1 ;E
+		BYTE	1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1 ;F
+;;;;; ENDEND
+;=====================================================
+HYCIDT		EQU	$
+		HEX	00,20,40,60
+HYCCDT		EQU	$
+		HEX	5D,62,60
+HYCXAD		EQU	$
+HYCYAD		EQU	$
+		WORD	04,00,00
+HYCSBD		EQU	$
+		HEX	00,02,02
+HYCIAD		EQU	$
+		BYTE	015H,01AH,000H
+;- - - - - - -
+HECXAD2		EQU	$
+		WORD	0FH-4,0EH-4,0DH-4,0AH-4
+		WORD	07H-4,04H-4,02H-4,01H-4
+		WORD	00H-4,01H-4,02H-4,05H-4
+		WORD	08H-4,0BH-4,0DH-4,0EH-4
+HECYAD2		EQU	$
+		WORD	08H-4,0AH-4,0DH-4,0EH-4
+		WORD	0FH-4,0EH-4,0DH-4,0AH-4
+		WORD	07H-4,04H-4,02H-4,01H-4
+		WORD	00H-4,01H-4,02H-4,05H-4
+;
+HAYAMCS		EQU	$
+		JSL	>OAMCHKL
+		BCC	HEC0101
+;
+		RTL
+;
+HEC0101		EQU	$
+		PHB
+		PHK
+		PLB
+;
+		LDA	ENMUKI,X
+		CLC
+		ADC	#0FFH
+		STA	<WORK6
+;
+		PHX
+		LDX	#01H
+HEC0102		EQU	$
+		LDA	<WORK6
+		AND	#0FH
+		ASL	A
+		PHX
+		TAX
+		MEM16
+		REP	#20H
+		LDA	<WORK0
+		CLC
+		ADC	HECXAD2,X
+		STA	(<OAMADR),Y
+		AND	#0100H
+		STA	<WORKE
+		LDA	<WORK2
+		CLC
+		ADC	HECYAD2,X
+		INY
+		STA	(<OAMADR),Y
+		ADC	#0010H
+		CMP	#0100H
+		MEM8
+		SEP	#20H
+		BCC	HEC0202
+		LDA	#0F0H
+		STA	(<OAMADR),Y
+HEC0202		EQU	$
+		LDA	#4DH
+		INY
+		STA	(<OAMADR),Y
+		LDA	<WORK5
+		INY
+		STA	(<OAMADR),Y
+		PHY
+		TYA
+		LSR	A
+		LSR	A
+		TAY
+		LDA	<WORKF
+		STA	(<OSBADR),Y
+;
+		LDA	<WORK6
+		CLC
+		ADC	#02H
+		STA	<WORK6
+;
+		PLY
+		INY
+		PLX
+		DEX
+		BPL	HEC0102
+;
+		PLX
+;
+		MEM16
+		REP	#20H
+		LDA	<OAMADR
+		CLC
+		ADC	#0008H
+		STA	<OAMADR
+		INC	<OSBADR
+		INC	<OSBADR
+		MEM8
+		SEP	#20H
+;
+		TXY
+;
+		LDA	ENCONT,X
+		AND	#1FH
+		CLC
+		ADC	HYCIDT,X
+		TAX
+		LDA	ENXPSL,Y
+		STA	>HYXBFL,X
+		LDA	ENXPSH,Y
+		STA	>HYXBFH,X
+		LDA	ENYPSL,Y
+		STA	>HYYBFL,X
+		LDA	ENYPSH,Y
+		STA	>HYYBFH,X
+;
+		LDA	#02H
+		STA	<WORK6
+;
+		LDY	#00H
+HYC0102		EQU	$
+		PHY
+		LDY	<WORK6
+		LDX	ENINDX
+		LDA	ENCONT,X
+		CLC
+		ADC	HYCIAD,Y
+		AND	#1FH
+		CLC
+		ADC	HYCIDT,X
+		TAX
+		LDA	>HYXBFL,X
+		STA	<WORK0
+		LDA	>HYXBFH,X
+		STA	<WORK1
+		LDA	>HYYBFL,X
+		STA	<WORK2
+		LDA	>HYYBFH,X
+		STA	<WORK3
+;
+		TYA
+		PLY
+		PHA
+		ASL	A
+		TAX
+;
+		MEM16
+		REP	#20H
+		LDA	<WORK0
+		SEC
+		SBC	<SCCH2
+		CLC
+		ADC	HYCXAD,X
+		STA	(<OAMADR),Y
+		AND	#0100H
+		STA	<WORKE
+		LDA	<WORK2
+		SEC
+		SBC	<SCCV2
+		CLC
+		ADC	HYCYAD,X
+		INY
+		STA	(<OAMADR),Y		
+		CLC
+		ADC	#0010H
+		CMP	#0100H
+		MEM8
+		SEP	#20H
+		BCC	HYC0502
+		LDA	#0F0H
+		STA	(<OAMADR),Y
+HYC0502		EQU	$
+		PLX
+		LDA	HYCCDT,X
+		INY
+		STA	(<OAMADR),Y
+		LDA	<WORK5
+		INY
+		STA	(<OAMADR),Y
+		PHY
+		TYA
+		LSR	A
+		LSR	A
+		TAY
+		LDA	HYCSBD,X
+		ORA	<WORKF
+		STA	(<OSBADR),Y
+		PLY
+		INY
+		DEC	<WORK6
+		BPL	HYC0102
+;
+		LDX	ENINDX
+		PLB
+		RTL
+;%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+;%	WOOD1 move	                    		  %
+;%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+WOOD1MV		EQU	$
+		PHB
+		PHK
+		PLB
+		JSR	WOOD1_M
+		PLB
+		RTL
+;========================================
+WOOD1_M		EQU	$
+		LDA	ENCONT,X
+		JSL	>JSRSUB
+		WORD	WOOD100
+		WORD	WOODEYE
+;========================================
+WOOD100		EQU	$		;WOOD1
+		JSR	WOOD1CS
+		JSR	ENSTCK
+;
+		STZ	ENMOD3,X	;OBJ HIT HANI
+;
+		LDA	ENSTAT,X
+		JSL	>JSRSUB
+		WORD	WOOD1M0
+		WORD	WOOD1M1
+		WORD	WOOD1M2
+		WORD	WOOD1M3
+;----------------------------------------
+WOOD1M0		EQU	$
+		STZ	ENCHPT,X	;E SET
+;
+		JSL	>CRENPL2L
+		BCC	WO1M010		;? ATARI
+		JSL	>DASCLR1
+		LDA	#010H		;HANEKAERU
+		STA	<HANEFG
+		LDA	#030H
+		JSL	>PSERC2L
+		LDA	<WORK0
+		STA	<PLYSPD
+		LDA	<WORK1
+		STA	<PLXSPD
+;
+		LDA	#032H		;OTO
+		JSL	>SDLRE3
+;
+		INC	ENSTAT,X	;NEXT MOVE
+		LDA	#030H
+		STA	ENTIM0,X
+WO1M010		EQU	$
+		RTS
+;----------------------------------------
+WOOD1M1		EQU	$
+		LDA	ENTIM0,X
+		BNE	WO1M110
+		INC	ENSTAT,X	;NEXT MOVE
+		LDA	#004H*2*1	;NEXT E PATAN
+		STA	ENTIM0,X
+WO1M110		EQU	$
+		LSR	A
+		AND	#003H
+		STA	ENCHPT,X
+		RTS
+;----------------------------------------
+WO1M2DT		EQU	$
+		BYTE	000H,002H,003H,001H
+WOOD1M2		EQU	$
+		LDA	ENTIM0,X
+		LSR	A
+		TAY
+		LDA	WO1M2DT,X
+		STA	ENCHPT,X
+;
+		LDA	ENTIM0,X
+		CMP	#007H
+		BNE	WO1M220
+		JSR	WOOD1BM		;BOMB SET
+;
+WO1M220		EQU	$
+		LDA	ENTIM0,X
+		BNE	WO1M210
+		INC	ENSTAT,X
+WO1M210		EQU	$
+		RTS
+;----------------------------------------
+WO1M3CD		EQU	$
+		BYTE	001,002,003,001,003,001,002,003
+WO1M3TD		EQU	$
+		BYTE	00DH,00DH,00DH,00BH,00BH,006H,010H,008H
+;		BYTE	005,005,005,002,002,005,016,003
+;
+WOOD1M3		EQU	$
+		JSR	WOOD1MS		;MSGE SET
+;
+		LDA	ENTIM0,X
+		BNE	WO1M310
+		LDA	ENWRK1,X
+		INC	A
+		AND	#007H
+		STA	ENWRK1,X
+;
+		TAY
+		LDA	WO1M3CD,Y
+		STA	ENCHPT,X
+		LDA	WO1M3TD,Y
+		STA	ENTIM0,X
+;
+WO1M310		EQU	$
+		RTS
+;----------------------------------------
+WO1MSML		EQU	$
+		BYTE	LOW  MS_00E5,LOW  MS_00E0
+;
+WOOD1MS		EQU	$		;WOOD1 MSGE
+		LDA	#007H		; OBJ HANI
+		STA	ENMOD3,X 
+;
+		LDA	ENWRK0,X
+		BNE	WO1MS20
+;
+		LDA	ENXPSL,X
+		LSR	A
+		LSR	A
+		LSR	A
+		LSR	A
+		AND	#001H
+		EOR	#001H
+		STA	ENWRK0,X
+		TAY
+		LDA	WO1MSML,Y
+		LDY	#000H
+		JSL	>ENMSGEL	;MSGE SET
+		BCS	WO1MS10
+		STZ	ENWRK0,X
+WO1MS10		EQU	$
+		RTS
+;
+W1S20ML		EQU	$
+		BYTE	LOW  MS_00E1
+		BYTE	LOW  MS_00E2
+		BYTE	LOW  MS_00E3
+		BYTE	LOW  MS_00E4
+;
+W1S20DT		EQU	$
+		BYTE	058H,05DH,072H,06BH
+;
+WO1MS20		EQU	$
+		LDY	#000H
+		LDA	<MPDTNO
+WO1MS40		EQU	$
+		CMP	W1S20DT,Y
+		BEQ	WO1MS30
+		INY
+		BEQ	WO1MS30
+		BRA	WO1MS40
+WO1MS30		EQU	$
+		LDA	W1S20ML,Y
+		LDY	#000H
+		JSL	>ENMSGSL	;MSGE SET
+		STZ	ENWRK0,X
+		RTS
+;----------------------------------------
+WOOD1BM		EQU	$		;WOOD1 BOMB
+		LDA	#HEBO0
+		JSL	>ENIDSH
+		BMI	WO1BM10
+		JSL	>BOMBST
+		JSL	>ENIDPS
+		LDA	<WORK2
+		CLC
+		ADC	#028H
+		STA	<WORK8
+		LDA	<WORK3
+		ADC	#000H
+		STA	<WORK3
+		LDA	#040H
+		STA	ENTIM1,Y
+		LDA	#018H
+		STA	ENYSPD,Y
+		LDA	#012H
+		STA	ENZSPD,Y
+WO1BM10		EQU	$
+		RTS
+;----------------------------------------
+WOOD1CY		EQU	-1
+WOOD1CD		EQU	$
+		WORD	00001,00000+WOOD1CY
+		BYTE	0E8H,000H,000H,000H
+		WORD	00001,00008+WOOD1CY
+		BYTE	0F8H,000H,000H,000H
+		WORD	00007,00000+WOOD1CY
+		BYTE	0E8H,040H,000H,000H
+		WORD	00007,00008+WOOD1CY
+		BYTE	0F8H,040H,000H,000H
+;
+		WORD	00000,00000+WOOD1CY
+		BYTE	0E8H,000H,000H,000H
+		WORD	00000,00008+WOOD1CY
+		BYTE	0F8H,000H,000H,000H
+		WORD	00008,00000+WOOD1CY
+		BYTE	0E8H,040H,000H,000H
+		WORD	00008,00008+WOOD1CY
+		BYTE	0F8H,040H,000H,000H
+;
+		WORD	00000,00001+WOOD1CY
+		BYTE	0E8H,000H,000H,000H
+		WORD	00000,00008+WOOD1CY
+		BYTE	0F8H,000H,000H,000H
+		WORD	00008,00001+WOOD1CY
+		BYTE	0E8H,040H,000H,000H
+		WORD	00008,00008+WOOD1CY
+		BYTE	0F8H,040H,000H,000H
+;
+WOOD1CS		EQU	$
+		LDA	ENCHPT,X
+		DEC	A
+		BMI	WO1CS10
+;
+		ASL	A
+		ASL	A
+		ASL	A
+		ASL	A
+		ASL	A
+		ADC	#LOW  WOOD1CD
+		STA	<WORK8
+		LDA	#HIGH WOOD1CD
+		ADC	#000H
+		STA	<WORK9
+;
+		LDA	#004H
+		STA	<WORK6
+		STZ	<WORK7
+		JSL	>SETOAML
+WO1CS10		EQU	$
+		RTS
+;========================================
+WOEESPL		EQU	$
+		BYTE	009,-09
+WOEESPH		EQU	$
+		BYTE	000,-01
+;
+;WOEYEMK		EQU	$
+;		BYTE	001H,0FFH
+;
+WOEYEXL		EQU	$
+		BYTE	-02,-01,000,001,002
+WOEYEXH		EQU	$
+		BYTE	-01			;,-01,000,000,000
+;			0   1   2   3   4
+WOEYEYL		EQU	$
+WOEYEYH		EQU	$
+		BYTE	-01,000,000,000,-01
+;
+WOODEYE		EQU	$
+		JSL	>EN1CSSL
+		JSR	ENSTCK
+;
+		LDY	ENCMKI,X
+		LDA	ENWRK0,X
+		CLC
+		ADC	WOEESPL,Y
+		STA	ENXPSL,X
+		LDA	ENWRK1,X
+		ADC	WOEESPH,Y
+		STA	ENXPSH,X
+		LDA	ENWRK2,X
+		STA	ENYPSL,X
+		LDA	ENWRK3,X
+		STA	ENYPSH,X
+;
+		LDA	#002H
+		JSL	>PSERC2L
+		LDA	<WORK0
+		BMI	WOEYE20
+;
+		LDA	<WORK1		;PL. LOOK
+		CLC
+		ADC	#002H
+		STA	ENMUKI,X
+		BRA	WOEYE10
+;
+WOEYE20		EQU	$
+		LDA	ENMUKI,X	;PL. NOT LOOK
+		CMP	#002H
+		BEQ	WOEYE10
+		ROL	A
+		AND	#001H
+		TAY
+		LDA	ENMUKI,X
+		CLC
+		ADC	WOEYEMK,Y
+		STA	ENMUKI,X
+WOEYE10		EQU	$
+		LDY	ENMUKI,X
+		LDA	ENWRK0,X
+		CLC
+		ADC	WOEYEXL,Y
+		STA	ENXPSL,X
+		LDA	ENWRK1,X
+		ADC	WOEYEXH,Y
+		STA	ENXPSH,X
+;
+		LDA	ENWRK2,X
+		CLC
+		ADC	WOEYEYL,Y
+		STA	ENYPSL,X
+		LDA	ENWRK3,X
+		ADC	WOEYEYH,Y
+		STA	ENYPSH,X
+;
+		RTS
+;----------------------------------------
+WEESTXL		EQU	$
+		BYTE	-04,014
+WEESTXH		EQU	$
+		BYTE	-01,000
+WEESTYL		EQU	-11
+WEESTYH		EQU	-01
+;
+WOEYEST		EQU	$
+		PHX
+		PHA
+		LDA	#WOOD1
+		JSL	>ENIDSH
+		PLA
+		STA	ENCMKI,Y	;RIGHT OR LEFT
+		TAX
+		LDA	<WORK0
+		CLC
+		ADC	>WEESTXL,X
+		STA	ENXPSL,Y
+		STA	ENWRK0,Y
+		LDA	<WORK1
+		ADC	>WEESTXH,X
+		STA	ENXPSH,Y
+		STA	ENWRK1,Y
+		LDA	<WORK2
+		CLC
+		ADC	#WEESTYL
+		STA	ENYPSL,Y
+		STA	ENWRK2,Y
+		LDA	<WORK3
+		ADC	#WEESTYH
+		STA	ENYPSH,Y
+		STA	ENWRK3,Y
+;
+		LDA	#001H
+		STA	ENCONT,Y	;WOOD1 EYES MODE
+;
+		PLX
+		RTL
+;========================================
+;*******************************************************
+;*		Himitsu sekzoo item set 	       *
+;*******************************************************
+HIMIXS		EQU	$
+		HEX	EE,F4,0C,12
+HIMIYS		EQU	$
+		HEX	10,18,18,10
+HIMINO		EQU	$
+		BYTE	RUPYR,RUPYY,RUPYB
+HIMITU		EQU	$
+		PHB
+		PHK
+		PLB
+;
+		LDA	HIMICT
+		BEQ	HIMI90		; Teki fail count !
+;
+		LDY	#00H
+		CMP	#04H
+		BCC	HIMI20
+		INY
+		LDA	HIMIFG
+		BNE	HIMI20		; No damage ?
+		INY			; yes !
+HIMI20		EQU	$
+		LDA	#03H
+		STA	ENHELP
+		STY	ENHELP2
+HIMI10		EQU	$
+		LDY	ENHELP2
+		LDA	HIMINO,Y
+		JSL	>ENIDSH
+		BMI	HIMI90
+;
+		LDA	#30H
+		JSL	>SDLRE3		;(S)
+;
+		JSL	>ENIDPS
+		PHX
+		LDX	ENHELP
+		LDA	HIMIXS,X
+		STA	ENXSPD,Y
+		LDA	HIMIYS,X
+		STA	ENYSPD,Y
+		PLX
+		LDA	#0FFH
+		STA	ENSTTM,Y
+		LDA	#20H
+		STA	ENTIM3,Y
+		STA	ENTUTM,Y
+;;		LDA	#20H
+		STA	ENZSPD,Y
+		DEC	ENHELP
+		BPL	HIMI10
+;
+HIMI90		EQU	$
+		STZ	HIMICT
+		STZ	HIMIFG
+		PLB
+		RTL
+;========================================
+;	ANAHO MOVE
+;========================================
+ANAHOMV		EQU	$
+		JSR	ANAHOCS
+		JSR	ENSTCK
+		JSL	>ENPLATR
+		JSR	ENMVCL
+;
+		STZ	ENXSPD,X
+;
+		LDA	ENSTAT,X
+		JSL	>JSRSUB
+		WORD	ANAHOM0
+		WORD	ANAHOM1
+		WORD	ANAHOM2
+		WORD	ANAHOM3
+		WORD	ANAHOM4
+		WORD	ANAHOM5
+;----------------------------------------
+ANAHOM0		EQU	$
+;
+		LDA	ENYPSL,X
+		CLC
+		ADC	#007H
+		CMP	<PLYPS1
+		BCS	AAOM010
+;
+		JSR	EPXYCK		;pl muki set
+		CPY	#002H
+		BNE	AAOM010
+;
+		LDA	>OPMODE
+		BNE	AAOM020
+;
+		LDA	#LOW  MS_05F4
+		LDY	#HIGH MS_05F4
+		JSL	>ENMSGEL
+		BCC	AAOM010
+		INC	ENSTAT,X
+AAOM010		EQU	$
+		RTS
+AAOM020		EQU	$
+		LDA	#LOW  MS_05F9
+		LDY	#HIGH MS_05F9
+		JSL	>ENMSGEL
+		RTS
+;----------------------------------------
+ANAHOYN		EQU	00080
+;
+ANAHOM1		EQU	$
+		LDA	MSG_RTS
+		BNE	AAOM110
+;--
+		MEM16
+		IDX8
+		REP	#00100000B
+		LDA	>CONCNT
+		CMP	#ANAHOYN
+		BCC	AAOM110
+		SBC	#ANAHOYN
+		STA	>CONCNT
+		MEM8
+		IDX8
+		SEP	#00110000B
+;
+		LDA	#LOW  MS_05F5
+		LDY	#HIGH MS_05F5
+		JSL	>ENMSGSL
+		INC	ENSTAT,X
+		LDA	#001H
+		STA	ENCHPT,X
+		LDA	#050H		;YOKO MOVE TIME
+		STA	ENTIM0,X
+		LDA	#000H
+		STA	>KRXBUF		;HART BK CNT CLS
+		STA	>KRXBUF+1	;HART CNT CLS
+		LDA	#005H
+		STA	ENTIM1,X
+;
+		LDA	#001H		;DOKATA ON
+		JSL	>DOKAST
+;
+		LDA	#00EH		;OTO
+		STA	SOUND0
+;
+		RTS
+;--
+AAOM110		EQU	$
+		MEM8
+		IDX8
+		SEP	#00110000B
+		LDA	#LOW  MS_05F6
+		LDY	#HIGH MS_05F6
+		JSL	>ENMSGSL
+		STZ	ENSTAT,X
+		RTS
+;----------------------------------------
+ANAHOM2		EQU	$
+		LDA	ENTIM0,X
+		BNE	AAOM210
+		INC	ENSTAT,X
+		LDA	#001H
+		STA	ENCHPT,X
+		RTS
+AAOM210		EQU	$
+		LDA	ENTIM1,X
+		BNE	AAOM220
+		LDA	ENCHPT,X
+		EOR	#003H
+		STA	ENCHPT,X
+		AND	#001H
+		BEQ	AAOM230
+		LDA	#0F0H
+		STA	ENXSPD,X
+AAOM230		EQU	$
+		LDA	#005H
+		STA	ENTIM1,X
+AAOM220		EQU	$
+		RTS
+;----------------------------------------
+ANAHOM3		EQU	$
+		INC	ENSTAT,X
+;
+		LDA	#000		;TIME(S)
+		STA	BMTMCT
+;
+		LDA	#030		;TIME
+		STA	BMTMER
+;
+		RTS
+;----------------------------------------
+ANAHOM4		EQU	$
+		LDA	BMTMER
+		BEQ	AAOM410
+		BMI	AAOM410
+		RTS
+;
+AAOM410		EQU	$
+		LDA	AITMBT1
+		AND	#001H
+		BNE	AAOM420
+		LDA	#009H
+		STA	SOUND0
+		INC	ENSTAT,X
+		STZ	DOKATA		;DOKATA OFF
+;;		LDA	#LOW  MS_05F7
+;;		LDY	#HIGH MS_05F7
+;;		JSL	>ENMSGSL
+;
+		LDA	#MS_05F7
+		STA	MSGENOL
+		LDA	#HIGH MS_05F7
+		JSR	MSGSSS		
+;;		STA	MSGENOH
+;;		JSL     >MSGSET		;10/5 !!! naoseyooooo !!
+;
+		LDA	#0FEH		;CLS TIME
+		STA	BMTMER
+AAOM420		EQU	$
+		RTS
+;----------------------------------------
+ANAHOM5		EQU	$
+		LDA	#LOW  MS_05F8
+		LDY	#HIGH MS_05F8
+		JSL	>ENMSGEL
+		RTS
+;----------------------------------------
+ANAITST		EQU	$
+		PHB
+		PHK
+		PLB
+		LDA	>KRXBUF+1
+		INC	A
+		STA	>KRXBUF+1
+		JSR	AATSTSB
+		PLB
+		RTL
+;----------------------------------------
+AATSTSB		EQU	$
+		MEM16
+		IDX8
+		REP	#00100000B
+		LDA	<PLYPS1
+		CMP	#00B18H
+		MEM8
+		IDX8
+		SEP	#00110000B
+		BCS	AATST70
+		JSL	>RNDSET
+		AND	#007H
+		TAY
+		JSL	>JSRSUB
+		WORD	AATST00
+		WORD	AATST10
+		WORD	AATST20
+		WORD	AATST30
+		WORD	AATST40
+		WORD	AATST50
+		WORD	AATST60
+		WORD	AATST70
+;----------------------------------------
+ATBSBSX		EQU	$
+		BYTE	-16,016
+;
+ABSBPXL		EQU	$
+		BYTE	000H,013H
+;----------------------------------------
+AAENNO		EQU	$
+		BYTE	RUPYB,RUPYY,RUPYR,TUBO1
+;----------------------------------------
+AATST00		EQU	$
+;----------------------------------------
+AATST10		EQU	$
+;----------------------------------------
+AATST20		EQU	$
+;----------------------------------------
+AATST30		EQU	$
+		LDA	AAENNO,Y
+		BRA	ATTSBSB
+;----------------------------------------
+AATST50		EQU	$
+;----------------------------------------
+AATST60		EQU	$
+;----------------------------------------
+AATST70		EQU	$
+		RTS
+;----------------------------------------
+AATST40		EQU	$
+		LDA	>KRXBUF+1
+		CMP	#025
+		BCC	AATST70
+		LDA	>KRXBUF
+		BNE	AATST70
+		JSL	>RNDSET
+		AND	#003H
+		BNE	AATST70
+		LDA	#UTUBK
+		STA	>KRXBUF
+;----------------------------------------
+ATTSBSB		EQU	$
+		JSL	>ENIDSH
+		LDX	#000H
+		LDA	<PLMKCH
+		CMP	#004H
+		BEQ	ATBSB10
+		INX
+ATBSB10		EQU	$
+		LDA	ATBSBSX,X	;X S
+		STA	ENXSPD,Y
+		LDA	#000H
+		STA	ENYSPD,Y	;Y S
+		LDA	#018H		;Z S
+		STA	ENZSPD,Y
+;
+		LDA	#0FFH		;KILL TIME
+		STA	ENSTTM,Y
+;
+		LDA	#030H		;NOT TUCH TIME
+		STA	ENTIM3,Y
+;
+		LDA	<PLXPS1		;X P
+		CLC
+		ADC	ABSBPXL,X
+		AND	#0F0H
+		STA	ENXPSL,Y
+		LDA	<PLXPS0
+		ADC	#000H
+		STA	ENXPSH,Y
+		LDA	<PLYPS1		;Y P
+		CLC
+		ADC	#016H
+		AND	#0F0H
+		STA	ENYPSL,Y
+		LDA	<PLYPS0
+		ADC	#000H
+		STA	ENYPSH,Y
+;
+		LDA	#000H		;KAI SU SET
+		STA	ENKAIF,Y
+;
+		TYX
+		LDA	#030H		;OTO
+		JSL	>SDLRE3
+;
+		RTS
+;----------------------------------------
+ANAHOCD		EQU	$
+		WORD	00000,-0008
+		BYTE	040H,00AH,000H,002H
+		WORD	00004,00009
+		BYTE	056H,00CH,000H,000H
+		WORD	00000,00000
+		BYTE	042H,00AH,000H,002H
+;
+		WORD	00000,-0008
+		BYTE	040H,00AH,000H,002H
+		WORD	00000,00000
+		BYTE	042H,00AH,000H,002H
+		WORD	00000,00000
+		BYTE	042H,00AH,000H,002H
+;
+		WORD	-0001,-0007
+		BYTE	040H,00AH,000H,002H
+		WORD	-0001,00000
+		BYTE	044H,00AH,000H,002H
+		WORD	-0001,00000
+		BYTE	044H,00AH,000H,002H
+;
+ANAHOCS		EQU	$
+		LDA	#003H
+		STA	<WORK6
+		STZ	<WORK7
+;
+		LDA	ENCHPT,X
+		ASL	A
+		ADC	ENCHPT,X
+		ASL	A
+		ASL	A
+		ASL	A
+		ADC	#LOW  ANAHOCD
+		STA	<WORK8
+		LDA	#HIGH ANAHOCD
+		ADC	#000H
+		STA	<WORK9
+;
+		JSL	>SETOAML
+		JSL	>SADWSTL
+;
+		RTS
+;========================================
+;	HELP1 C SET
+;========================================
+HELP1D1		EQU	$
+		WORD	00000,00000		;1
+		BYTE	0ACH,000H,000H,002H
+		WORD	00000,00008
+		BYTE	0AEH,000H,000H,002H
+;
+;
+HELP1CD		EQU	$
+		WORD	00000,00000		;0
+		BYTE	020H,001H,000H,002H
+		WORD	00000,00008
+		BYTE	022H,001H,000H,002H
+		WORD	00000,00001
+		BYTE	020H,001H,000H,002H
+		WORD	00000,00009
+		BYTE	022H,041H,000H,002H
+;
+		WORD	00000,00000		;1
+		BYTE	020H,001H,000H,002H
+		WORD	00000,00008
+		BYTE	022H,001H,000H,002H
+		WORD	00000,00001
+		BYTE	020H,001H,000H,002H
+		WORD	00000,00009
+		BYTE	022H,041H,000H,002H
+;
+		WORD	-0002,00000		;2
+		BYTE	020H,001H,000H,002H
+		WORD	00000,00008
+		BYTE	022H,001H,000H,002H
+		WORD	-0002,00001
+		BYTE	020H,001H,000H,002H
+		WORD	00000,00009
+		BYTE	022H,001H,000H,002H
+;
+		WORD	00002,00000		;3
+		BYTE	020H,041H,000H,002H
+		WORD	00000,00008
+		BYTE	022H,041H,000H,002H
+		WORD	00002,00001
+		BYTE	020H,041H,000H,002H
+		WORD	00000,00009
+		BYTE	022H,041H,000H,002H
+;
+HELP1CN		EQU	$
+		BYTE	020H,0C0H		;0
+		BYTE	020H,0C0H
+;
+		BYTE	000H,0A0H		;1
+		BYTE	000H,0A0H
+;
+		BYTE	040H,080H		;2
+		BYTE	040H,060H
+;
+		BYTE	040H,080H		;3
+		BYTE	040H,060H
+;
+HELP1CS		EQU	$
+		PHB
+		PHK
+		PLB
+;
+		LDA	ENCONT,X
+		CMP	#002H
+		BEQ	HELP1C1
+;
+		LDA	#002H
+		STA	<WORK6
+		STZ	<WORK7
+;
+		LDA	ENMUKI,X
+		ASL	A
+		ADC	ENCHPT,X
+		ASL	A
+		TAY
+;
+		LDA	HELP1CN,Y		;OBJ CNG NO SET
+		STA	OPTHPT
+		LDA	HELP1CN+1,Y
+		STA	OPTBPT
+;
+		TYA
+		ASL	A
+		ASL	A
+		ASL	A
+		ADC	#LOW HELP1CD
+		STA	<WORK8
+		LDA	#HIGH HELP1CD
+		ADC	#000H
+		STA	<WORK9
+;
+		JSL	>SETOAML
+;
+		PLB
+		RTL
+;----------------------------------------
+HELP1C1		EQU	$
+		LDA	#002H
+		STA	<WORK6
+		STZ	<WORK7
+;
+		LDA	#LOW  HELP1D1
+		STA	<WORK8
+		LDA	#HIGH HELP1D1
+		STA	<WORK9
+;
+		JSL	>SETOAML
+;
+		PLB
+		RTL
+;----------------------------------------
+;%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+;%					    %
+;%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+;;		JSR	ENFR00
+;--------------------------------------
+ENFIRE		EQU	$
+ENFR00		EQU	$
+		PHB
+		PHK
+		PLB
+		STZ	ENFLSH,X
+;
+		LDA	ENTIM0,X
+		DEC	A
+		BNE	EFR000
+;;		STZ	ENMODE,X
+		JSL	>FILSETL
+		PLB
+		RTL
+EFR000		EQU	$
+		LDY	ENCHPT,X
+		PHY
+		LSR	A
+		LSR	A
+		LSR	A
+		PHX
+		TAX
+		LDA	>CHFPTD,X
+		PLX
+		STA	ENCHPT,X
+;
+		LDA	ENCLOR,X
+		PHA
+		LDA	#03H
+		STA	ENCLOR,X
+		JSL	>CHFIRCS
+		PLA
+		STA	ENCLOR,X
+		PLA
+		STA	ENCHPT,X
+;
+		MEM16
+		REP	#00100000B
+		LDA	<OAMADR
+		CLC
+		ADC	#0008H
+		STA	<OAMADR
+		INC	<OSBADR
+		INC	<OSBADR
+		MEM8
+		SEP	#00100000B
+;
+		LDA	ENTIM0,X
+		CMP	#10H
+		BCC	EFR020
+;
+		LDA	ENMOD0,X
+		PHA
+		DEC	A
+		DEC	A
+		STA	ENMOD0,X
+;;		STZ	ENCHPT,X
+;;		JSL	>ENMY3MV
+		JSL	>ENMOVE2
+		PLA
+		STA	ENMOD0,X
+;
+;		JSR	ENSTCK
+;
+;		LDA	<GAMEMD
+;		ORA	ENSTFG
+;		BNE	EFR019
+;;
+;		JSR	ENZCLC
+;		LDA	ENZSPD,X
+;		CMP	#08H
+;		BEQ	EFR019
+;		DEC	ENZSPD,X
+;EFR019		EQU	$
+;		LDA	ENZPSL,X
+;		BPL	EFR020
+;		STZ	ENZPSL,X
+;		STZ	ENZSPD,X
+EFR020		EQU	$
+		PLB
+		RTL
+;;;		RTS
+;=====================================================
+;;  Enemy hole down (small) c set !
+;--------------------------------------------
+EH2CDT		EQU	$
+		HEX	83,83,83,80,80,80,B7,B7
+;
+ENHOLE2CS	EQU	$
+		PHB
+		PHK
+		PLB
+;
+;
+		LDA	<WORK0
+		CLC
+		ADC	#04H
+		STA	(<OAMADR),Y
+		LDA	<WORK2
+		CLC
+		ADC	#04H
+		INY
+		STA	(<OAMADR),Y
+		LDA	ENTIM0,X
+		LSR	A
+		LSR	A
+		PHX
+		TAX
+		LDA	EH2CDT,X
+		INY
+		STA	(<OAMADR),Y
+		LDA	<WORK5
+		AND	#00110000B
+		ORA	#04H
+		INY
+		STA	(<OAMADR),Y
+		PLX
+		LDY	#00H
+		LDA	#00H
+		JSL	>ALOMCKL
+		PLB
+		RTL
+;9999999999999999999999999999999999999999999
+		END
+;
+B2MOVE		EQU	$
+		LDA	ENWRK0,X
+		STA	<WORK4
+		LDA	ENWRK1,X
+		STA	<WORK5
+		LDA	ENWRK2,X
+		STA	<WORK6
+		LDA	ENWRK3,X
+		STA	<WORK7
+;
+		MEM16
+		REP	#20H
+		LDA	ENXP2L
+		SEC
+		SBC	<WORK4
+		CLC
+		ADC	#0008H
+		CMP	#0010H
+		BCS	B2M003
+;
+		LDA	ENYP2L
+		SEC
+		SBC	<WORK6
+		CLC
+		ADC	#0008H
+		CMP	#0010H
+		BCS	B2M003
+;
+		MEM8
+		SEP	#20H
+		INC	ENSTAT,X
+		LDA	#00H
+		STA	ENTIM0,X
+B2M003		EQU	$
+		MEM8
+		SEP	#20H
+;
+		LDA	#10H
+		JSL	>ESERCHL
+;
+		LDA	<FRCNT
+		AND	#00H
+		BNE	B2M020
+;
+		LDA	ENXSPD,X
+		CMP	<WORK1
+		BEQ	B2M010
+;
+		BPL	B2M008
+		INC	ENXSPD,X
+		BRA	B2M010
+B2M008		EQU	$
+		DEC	ENXSPD,X
+B2M010		EQU	$
+		LDA	ENYSPD,X
+		CMP	<WORK0
+		BEQ	B2M020
+;
+		BPL	B2M018
+		INC	ENYSPD,X
+		BRA	B2M020
+B2M018		EQU	$
+		DEC	ENYSPD,X
+B2M020		EQU	$
+;
+		RTS
+;----------------------------------------
+B2MVXP		EQU	$
+		HEX	78,88,98,A8,68,58,48,38
+B2MVYP		EQU	$
+		HEX	78,88,98,A8,68,58,48,38
+;
+B2STOP		EQU	$
+		LDA	ENTIM0,X
+		BNE	B2S010
+;
+		STZ	ENSTAT,X
+;
+		JSL	>RNDSET
+		AND	#07H
+		TAY
+		LDA	B2MVXP,Y
+		STA	ENWRK0,X
+		JSL	>RNDSET
+		AND	#07H
+		TAY
+		LDA	B2MVYP,Y
+		STA	ENWRK2,X
+;
+B2S010		EQU	$
+		RTS
